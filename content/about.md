@@ -15,7 +15,7 @@ summary: InfoNet is a web-based data/case management system used by over 100
   Chicago Department of Family & Support Services.
 section: root
 createdAt: 2023-04-02T15:04:25.519Z
-updatedAt: 2023-06-26T16:45:45.780Z
+updatedAt: 2023-07-12T20:48:06.437Z
 publishedAt: 2023-04-02T15:04:26.918Z
 searchMeta: null
 category: page
@@ -174,7 +174,7 @@ markdown: >-
   <div class="text-center mt-8 mb-8">
 
 
-  <iframe class="video" src="https://www.youtube.com/embed/rZ73MJVD_YU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;"></iframe>
+  <iframe loading="lazy" class="video" src="https://www.youtube.com/embed/rZ73MJVD_YU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;"></iframe>
 
 
   </div>
@@ -277,7 +277,7 @@ ICJIA recently completed the InfoNet 2.0 Project, an effort to completely rebuil
 
 <div class="text-center mt-8 mb-8">
 
-<iframe class="video" src="https://www.youtube.com/embed/rZ73MJVD_YU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;"></iframe>
+<iframe loading="lazy" class="video" src="https://www.youtube.com/embed/rZ73MJVD_YU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;"></iframe>
 
 </div>
 
