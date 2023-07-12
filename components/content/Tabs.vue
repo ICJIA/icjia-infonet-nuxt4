@@ -134,6 +134,11 @@ const _tabContent = tabs.value.filter((tab) => {
     return tab;
   }
 });
+
+// TODO: Sort by ranking here
+
+console.log("Tabs: ", _tabContent);
+
 const tabContent = toRaw(_tabContent);
 
 const { mobile } = useDisplay();
