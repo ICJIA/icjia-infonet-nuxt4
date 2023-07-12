@@ -35,19 +35,21 @@ https://localhost:8000
 yarn preview
 ```
 
-## Manually generate static site and serve local (port 3000):
+## Manually generate static site and serve locally (port 3000):
 
 ```bash
 yarn generate:serve
 ```
 
-## Manually run build scripts for remote API
+> Note: Vercel's 'Serve' must be installed globally: `npm install -g serve`
+
+## Manually run build scripts for a remote API (i.e., a headless CMS such as Strapi)
 
 ```bash
 yarn scripts
 ```
 
-## Manually run build scripts for local API
+## Manually run build scripts for a local API (i.e., no backend -- all local data)
 
 ```bash
 yarn scripts:local
