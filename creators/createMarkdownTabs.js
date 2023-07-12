@@ -78,8 +78,9 @@ axios
     const site = tabs.map((tab) => {
       let obj = { ...tab };
 
-      obj.attributes.path = `/tabs/${obj.attributes.sectionID}/${obj.attributes.slug}`;
-      //console.log("Markdown tabs content created: ", obj.attributes.path);
+      obj.attributes.path = `/tabs/${obj.attributes.sectionID}-${obj.attributes.slug}`;
+      obj.attributes.url = `${SITE_URL}${obj.attributes.path}`;
+      obj.attributes.markdown = tab.attributes.body;
       return obj;
     });
     jsonfile.writeFileSync(`./public/tabs.json`, site, function (err) {
@@ -93,5 +94,21 @@ axios
         console.error(err);
       }
     });
-    console.log("tabs.json created in /assets/json/");
+    console.log("tabs.json created in /public/");
+
+    tabs.forEach((item) => {
+      const basename = item.attributes.slug;
+      const sectionID = item.attributes.sectionID;
+      const filePath = path.join(
+        contentDir,
+        `tabs/${sectionID}-${basename}.md`
+      );
+      const directoryPath = path.join(contentDir, `tabs`);
+      if (!fs.existsSync(directoryPath)) {
+        fs.mkdirSync(directoryPath);
+      }
+
+      const content = formatMarkdown(item.attributes);
+      fs.writeFileSync(filePath, content);
+    });
   });

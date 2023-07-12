@@ -7,7 +7,7 @@ showTableOfContents: true
 summary: Summary for the user info & resources page.
 section: root
 createdAt: 2023-06-28T13:48:17.718Z
-updatedAt: 2023-07-12T15:16:51.502Z
+updatedAt: 2023-07-12T19:25:31.222Z
 publishedAt: 2023-06-28T13:48:20.104Z
 searchMeta: null
 category: page
@@ -66,7 +66,7 @@ markdown: >+
   - **Request technical assistance**: cja.infonethelp@illinois.gov (preferred) or call 312-793-8550. 
 
 
-  ## Agency-specific resources
+  ## Agency-specific Resources
 
 
   ::LazyTabs
@@ -114,7 +114,7 @@ While no personally identifying information is entered into InfoNet, the system 
 
 - **Request technical assistance**: cja.infonethelp@illinois.gov (preferred) or call 312-793-8550. 
 
-## Agency-specific resources
+## Agency-specific Resources
 
 ::LazyTabs
 ---

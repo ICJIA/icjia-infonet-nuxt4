@@ -12,7 +12,10 @@
               Click tab to view agency info
             </div>
 
-            <v-card v-if="props.sectionID && props.sectionID.length > 0">
+            <v-card
+              v-if="props.sectionID && props.sectionID.length > 0"
+              class="elevation-0"
+            >
               <v-tabs v-model="tab" bg-color="grey-darken-2" grow center-active>
                 <v-tab
                   :value="tab.attributes.slug"
@@ -24,7 +27,7 @@
                 </v-tab>
               </v-tabs>
 
-              <v-window v-model="tab">
+              <v-window v-model="tab" style="background: #eee">
                 <v-window-item
                   v-for="tab in tabContent"
                   :key="`tabContent-${tab.id}`"
@@ -134,18 +137,6 @@ const _tabContent = tabs.value.filter((tab) => {
     return tab;
   }
 });
-
-// TODO: Sort by ranking here
-
-// function sortByKey(array, key) {
-//   return array.sort(function (a, b) {
-//     var x = a[key];
-//     var y = b[key];
-//     return x < y ? -1 : x > y ? 1 : 0;
-//   });
-// }
-
-//console.log("Tabs: ", _tabContent);
 
 const tabContent = toRaw(_tabContent);
 
