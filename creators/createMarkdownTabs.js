@@ -13,7 +13,7 @@ const SITE_URL = process.env.NUXT_PUBLIC_BASE_URL;
 const API = process.env.NUXT_PUBLIC_API_BASE_URL;
 
 const query = `query {
-   tabs {
+   tabs (sort: "ranking:asc") {
     data {
       id
       attributes {
@@ -23,6 +23,7 @@ const query = `query {
         summary
         body
         sectionID
+        ranking
         page {
           data {
             id

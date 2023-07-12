@@ -29,10 +29,10 @@ let caption = ref("");
 let dialog = ref(false);
 let thumbnail = ref();
 let modal = ref(null);
-console.log("ImageModal.vue loaded.");
+//console.log("ImageModal.vue loaded.");
 useListen("modal:gallery", (e) => {
-  console.log("Event data: ", e);
-  console.log(e.url, e.caption);
+  //console.log("Event data: ", e);
+  //console.log(e.url, e.caption);
   url.value = e.url;
   caption.value = e.caption || null;
   thumbnail.value = e.thumbnail;
@@ -45,11 +45,11 @@ onUnmounted(() => {
   caption = null;
 });
 onMounted(() => {
-  console.log("Mounted");
+  //console.log("ImageModal Mounted");
   dialog.value = true;
   modal = document.getElementById("myModal");
   //modal.style.display = "block";
-  console.log("myModal: ", modal);
+  //console.log("myModal: ", modal);
 });
 
 const closeModal = () => {
