@@ -44,7 +44,10 @@ const renderer = new md({
 }).use(attrs);
 
 const { data } = await useAsyncData("faqs", () =>
-  queryContent("/faqs/").sort({ ranking: -1 }).find()
+  queryContent("/faqs/")
+    .where({ category: "default" })
+    .sort({ ranking: -1 })
+    .find()
 );
 
 const formatDate = (dateString) => {
