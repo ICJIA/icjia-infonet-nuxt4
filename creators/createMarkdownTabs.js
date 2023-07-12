@@ -96,6 +96,22 @@ axios
     });
     console.log("tabs.json created in /public/");
 
+    const tabRoutes = site.map((item) => {
+      return `${item.attributes.path}`;
+    });
+
+    console.log(tabRoutes);
+
+    jsonfile.writeFileSync(
+      `./public/routesTabs.json`,
+      tabRoutes,
+      function (err) {
+        if (err) {
+          console.error(err);
+        }
+      }
+    );
+
     tabs.forEach((item) => {
       const basename = item.attributes.slug;
       const sectionID = item.attributes.sectionID;
