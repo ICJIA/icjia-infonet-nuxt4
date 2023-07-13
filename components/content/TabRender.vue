@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="data">
-      <ContentRenderer :value="data" :key="uuidv4" />
+      <ContentRenderer :value="data" :key="uuidv4" class="markdown-body" />
     </div>
   </div>
 </template>

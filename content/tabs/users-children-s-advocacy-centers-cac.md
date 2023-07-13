@@ -15,19 +15,80 @@ images:
   data: []
 path: /tabs/users-children-s-advocacy-centers-cac
 url: https://infonet.icjia.dev/tabs/users-children-s-advocacy-centers-cac
-markdown: |-
-  Children's Advocacy Centers (CAC) user info and resources here
+markdown: >-
+  Sit cantibus Eumelique partu. Et nomina etsi ingeniis plumbo audita pennae non
+  toto dentibus ille et exaudire enim: credi nunc relinquar filius glacies.
+
+
+  ### User Manuals
+
+
+  - Link here
+
+
+  ### Definitions
+
+
+  - Link here
+
+
+  ### Trainings
+
+
+  **(Coming Soon)**
+
+
+  ### Data Collection/Entry Forms
+
+
+  - Link 1 here
+
+  - Link 2 here
+
+  - Link 3 here
+
+
+
+  ### Frequently Asked Questions (FAQs)
+
 
   ::display-faqs
+
   ---
+
   showHeading: false
+
   strapiCategory: "cac"
+
   key: "cac"
+
   ---
+
   ::
 ---
 
-Children's Advocacy Centers (CAC) user info and resources here
+Sit cantibus Eumelique partu. Et nomina etsi ingeniis plumbo audita pennae non toto dentibus ille et exaudire enim: credi nunc relinquar filius glacies.
+
+### User Manuals
+
+- Link here
+
+### Definitions
+
+- Link here
+
+### Trainings
+
+**(Coming Soon)**
+
+### Data Collection/Entry Forms
+
+- Link 1 here
+- Link 2 here
+- Link 3 here
+
+
+### Frequently Asked Questions (FAQs)
 
 ::display-faqs
 ---

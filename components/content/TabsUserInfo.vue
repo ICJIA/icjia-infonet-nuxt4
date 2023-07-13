@@ -11,15 +11,15 @@
 
       <v-card-text>
         <v-window v-model="tab">
-          <v-window-item value="one">
+          <v-window-item value="one" style="min-height: 75vh !important">
             <TabRender tabPath="/tabs/users-domestic-violence-dv"></TabRender>
           </v-window-item>
 
-          <v-window-item value="two">
+          <v-window-item value="two" style="min-height: 75vh !important">
             <TabRender tabPath="/tabs/users-sexual-assault-sa"></TabRender>
           </v-window-item>
 
-          <v-window-item value="three">
+          <v-window-item value="three" style="min-height: 75vh !important">
             <TabRender
               tabPath="/tabs/users-children-s-advocacy-centers-cac"
             ></TabRender>
