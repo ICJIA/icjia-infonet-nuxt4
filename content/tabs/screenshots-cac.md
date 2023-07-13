@@ -5,6 +5,7 @@ agency: CAC
 summary: This is the summary for test tab 3
 sectionID: screenshots
 ranking: 600
+searchMeta: "tab  "
 page:
   data:
     id: "3"
@@ -718,7 +719,6 @@ images:
 path: /tabs/screenshots-cac
 url: https://infonet.icjia.dev/tabs/screenshots-cac
 markdown: "## Children's Advocacy Centers (CAC)"
-searchMeta: "tab  "
 ---
 
 ## Children's Advocacy Centers (CAC)

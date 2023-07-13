@@ -5,6 +5,7 @@ agency: CAC
 summary: Children's Advocacy Centers (CAC) User information
 sectionID: users
 ranking: 600
+searchMeta: "tab definitions trainings "
 page:
   data:
     id: "8"
@@ -27,7 +28,6 @@ markdown: >+
 
   - **(Coming Soon)**
 
-searchMeta: "tab  "
 ---
 
 ### Definitions

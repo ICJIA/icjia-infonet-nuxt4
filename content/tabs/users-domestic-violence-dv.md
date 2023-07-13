@@ -5,6 +5,7 @@ agency: DV
 summary: Domestic Violence (DV) user info
 sectionID: users
 ranking: 500
+searchMeta: tab manuals definitions trainings data collection entry faq
 page:
   data:
     id: "8"
@@ -61,7 +62,6 @@ markdown: >+
   ::
 
 
-searchMeta: "tab  "
 ---
 
 

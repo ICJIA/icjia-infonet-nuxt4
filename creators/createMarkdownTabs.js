@@ -24,6 +24,7 @@ const query = `query {
         body
         sectionID
         ranking
+        searchMeta
         page {
           data {
             id
@@ -83,7 +84,7 @@ axios
       obj.attributes.slug = `${obj.attributes.sectionID}-${obj.attributes.slug}`;
       obj.attributes.markdown = tab.attributes.body;
       if (tab.attributes.searchMeta) {
-        obj.attributes.searchMeta = "tab " + item.attributes.searchMeta;
+        obj.attributes.searchMeta = "tab " + tab.attributes.searchMeta;
       } else {
         obj.attributes.searchMeta = "tab  ";
       }

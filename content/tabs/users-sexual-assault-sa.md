@@ -5,6 +5,7 @@ agency: SA
 summary: Sexual Assault (SA) user information
 sectionID: users
 ranking: 550
+searchMeta: "tab manuals definitions trainings data collection entry faq "
 page:
   data:
     id: "8"
@@ -62,7 +63,6 @@ markdown: >-
   ---
 
   ::
-searchMeta: "tab  "
 ---
 
 

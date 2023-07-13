@@ -5,6 +5,7 @@ agency: SA
 summary: This is the summary for test tab 2
 sectionID: screenshots
 ranking: 550
+searchMeta: "tab  "
 page:
   data:
     id: "3"
@@ -131,7 +132,6 @@ markdown: >-
 
 
   Hic tunc, par, aut caelo ille deus nos. Pontus praebet novem, alium caput terras mores, undique addit pugnavimus animae tantorum. 
-searchMeta: "tab  "
 ---
 
 ## Sexual Assault (SA) 
