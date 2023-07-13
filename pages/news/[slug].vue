@@ -11,6 +11,7 @@ let sections = ref([]);
 let myToc = [];
 
 // const error = useError();
+console.log("news path", path);
 const { data } = await useAsyncData(`content-${path}`, async () => {
   const item = await queryContent().where({ _path: path }).findOne();
   return item;

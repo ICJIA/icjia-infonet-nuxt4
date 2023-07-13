@@ -1,6 +1,6 @@
 ---
 title: Domestic Violence (DV)
-slug: dv
+slug: screenshots-dv
 agency: DV
 summary: This is the summary for test tab 1
 sectionID: screenshots

@@ -1,6 +1,6 @@
 ---
 title: Children's Advocacy Centers (CAC)
-slug: cac
+slug: screenshots-cac
 agency: CAC
 summary: This is the summary for test tab 3
 sectionID: screenshots

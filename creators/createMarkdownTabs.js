@@ -80,6 +80,7 @@ axios
 
       obj.attributes.path = `/tabs/${obj.attributes.sectionID}-${obj.attributes.slug}`;
       obj.attributes.url = `${SITE_URL}${obj.attributes.path}`;
+      obj.attributes.slug = `${obj.attributes.sectionID}-${obj.attributes.slug}`;
       obj.attributes.markdown = tab.attributes.body;
       return obj;
     });
@@ -115,10 +116,7 @@ axios
     tabs.forEach((item) => {
       const basename = item.attributes.slug;
       const sectionID = item.attributes.sectionID;
-      const filePath = path.join(
-        contentDir,
-        `tabs/${sectionID}-${basename}.md`
-      );
+      const filePath = path.join(contentDir, `tabs/${basename}.md`);
       const directoryPath = path.join(contentDir, `tabs`);
       if (!fs.existsSync(directoryPath)) {
         fs.mkdirSync(directoryPath);

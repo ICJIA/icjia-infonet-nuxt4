@@ -1,6 +1,6 @@
 ---
 title: Sexual Assault (SA)
-slug: sa
+slug: screenshots-sa
 agency: SA
 summary: This is the summary for test tab 2
 sectionID: screenshots

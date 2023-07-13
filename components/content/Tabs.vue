@@ -14,9 +14,9 @@
 
             <v-card
               v-if="props.sectionID && props.sectionID.length > 0"
-              class="elevation-0"
+              class="elevation-2"
             >
-              <v-tabs v-model="tab" bg-color="grey-darken-2" grow center-active>
+              <v-tabs v-model="tab" bg-color="grey-darken-3" grow center-active>
                 <v-tab
                   :value="tab.attributes.slug"
                   v-for="tab in tabContent"
@@ -27,7 +27,7 @@
                 </v-tab>
               </v-tabs>
 
-              <v-window v-model="tab" style="background: #eee">
+              <v-window v-model="tab" style="background: #fafafa">
                 <v-window-item
                   v-for="tab in tabContent"
                   :key="`tabContent-${tab.id}`"
