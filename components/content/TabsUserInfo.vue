@@ -9,30 +9,27 @@
         >
       </v-tabs>
 
-      <v-card-text>
+      <v-card-text class="tab-window">
         <v-window v-model="tab">
-          <v-window-item value="one" class="tab-window">
-            <ContentRenderer
-              :value="dv"
-              :key="uuidv4()"
-              class="markdown-body"
-            />
+          <v-window-item value="one">
+            <div v-if="dv">
+              <ContentRenderer :value="dv" key="dv" class="markdown-body" />
+            </div>
+            <div v-else>Loading...</div>
           </v-window-item>
 
-          <v-window-item value="two" class="tab-window">
-            <ContentRenderer
-              :value="sa"
-              :key="uuidv4()"
-              class="markdown-body"
-            />
+          <v-window-item value="two">
+            <div v-if="sa">
+              <ContentRenderer :value="sa" key="sa" class="markdown-body" />
+            </div>
+            <div v-else>Loading...</div>
           </v-window-item>
 
-          <v-window-item value="three" class="tab-window">
-            <ContentRenderer
-              :value="cac"
-              :key="uuidv4()"
-              class="markdown-body"
-            />
+          <v-window-item value="three">
+            <div v-if="cac">
+              <ContentRenderer :value="cac" key="cac" class="markdown-body" />
+            </div>
+            <div v-else>Loading...</div>
           </v-window-item>
         </v-window>
       </v-card-text>
@@ -62,6 +59,6 @@ const { data: cac } = await useAsyncData(`tab-${uuidv4()}`, () =>
   font-size: inherit;
 }
 .tab-window {
-  min-height: 20vh !important;
+  min-height: 30vh !important;
 }
 </style>
