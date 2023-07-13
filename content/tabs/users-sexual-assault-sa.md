@@ -15,50 +15,67 @@ images:
   data: []
 path: /tabs/users-sexual-assault-sa
 url: https://infonet.icjia.dev/tabs/users-sexual-assault-sa
-markdown: |-
+markdown: >-
   
   ### User Manuals
 
-  - Link here
+
+  - [InfoNet Manual for SA](https://infonet.icjia-api.cloud/uploads/Info_Net_Manual_for_SA_3c883f6965.pdf)
+
 
   ### Definitions
 
-  - Link here
+
+  - [SA InfoNet Definitions](https://infonet.icjia-api.cloud/uploads/3_4_2_SA_INFONET_DEFINITIONS_f81d776023.docx)
+
 
   ### Trainings
 
-  **(Coming Soon)**
+
+  - **(Coming Soon)**
+
 
   ### Data Collection/Entry Forms
 
+
   - Link 1 here
+
   - Link 2 here
+
   - Link 3 here
+
 
 
   ### Frequently Asked Questions (FAQs)
 
+
   ::display-faqs
+
   ---
+
   showHeading: false
+
   strapiCategory: "sa"
+
   key: "sa"
+
   ---
+
   ::
 ---
 
 
 ### User Manuals
 
-- Link here
+- [InfoNet Manual for SA](https://infonet.icjia-api.cloud/uploads/Info_Net_Manual_for_SA_3c883f6965.pdf)
 
 ### Definitions
 
-- Link here
+- [SA InfoNet Definitions](https://infonet.icjia-api.cloud/uploads/3_4_2_SA_INFONET_DEFINITIONS_f81d776023.docx)
 
 ### Trainings
 
-**(Coming Soon)**
+- **(Coming Soon)**
 
 ### Data Collection/Entry Forms
 

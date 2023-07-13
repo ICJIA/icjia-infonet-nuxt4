@@ -15,34 +15,51 @@ images:
   data: []
 path: /tabs/users-domestic-violence-dv
 url: https://infonet.icjia.dev/tabs/users-domestic-violence-dv
-markdown: |+
+markdown: >+
   
   ### User Manuals
 
-  - Link here
+
+  - [InfoNet Manual for DV](https://infonet.icjia-api.cloud/uploads/Info_Net_Manual_for_DV_87e639d5ba.pdf)
+
 
   ### Definitions
 
-  - Link here
+
+  - [DV InfoNet Definitions](https://infonet.icjia-api.cloud/uploads/3_4_1_DV_INFONET_DEFINITIONS_7d2040c692.docx)
+
 
   ### Trainings
 
-  **(Coming Soon)**
+
+  - **(Coming Soon)**
+
 
   ### Data Collection/Entry Forms
 
+
   - Link 1 here
+
   - Link 2 here
+
   - Link 3 here
+
 
   ### Frequently Asked Questions (FAQs)
 
+
   ::display-faqs
+
   ---
+
   showHeading: false
+
   strapiCategory: "dv"
+
   key: "dv"
+
   ---
+
   ::
 
 
@@ -51,15 +68,15 @@ markdown: |+
 
 ### User Manuals
 
-- Link here
+- [InfoNet Manual for DV](https://infonet.icjia-api.cloud/uploads/Info_Net_Manual_for_DV_87e639d5ba.pdf)
 
 ### Definitions
 
-- Link here
+- [DV InfoNet Definitions](https://infonet.icjia-api.cloud/uploads/3_4_1_DV_INFONET_DEFINITIONS_7d2040c692.docx)
 
 ### Trainings
 
-**(Coming Soon)**
+- **(Coming Soon)**
 
 ### Data Collection/Entry Forms
 
