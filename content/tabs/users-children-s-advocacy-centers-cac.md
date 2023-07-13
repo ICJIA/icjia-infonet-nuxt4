@@ -18,9 +18,21 @@ url: https://infonet.icjia.dev/tabs/users-children-s-advocacy-centers-cac
 markdown: |-
   Children's Advocacy Centers (CAC) user info and resources here
 
-  :Test
+  ::display-faqs
+  ---
+  showHeading: false
+  strapiCategory: "cac"
+  key: "cac"
+  ---
+  ::
 ---
 
 Children's Advocacy Centers (CAC) user info and resources here
 
-:Test
+::display-faqs
+---
+showHeading: false
+strapiCategory: "cac"
+key: "cac"
+---
+::
