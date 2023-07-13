@@ -11,18 +11,20 @@
 
       <v-card-text>
         <v-window v-model="tab">
-          <v-window-item value="one" style="min-height: 25vh !important">
-            <TabRender tabPath="/tabs/users-domestic-violence-dv"></TabRender>
+          <v-window-item value="one">
+            <ContentRenderer
+              :value="dv"
+              :key="uuidv4()"
+              class="markdown-body"
+            />
           </v-window-item>
 
-          <v-window-item value="two" style="min-height: 25vh !important">
-            <TabRender tabPath="/tabs/users-sexual-assault-sa"></TabRender>
+          <v-window-item value="two">
+            /tabs/users-sexual-assault-sa
           </v-window-item>
 
-          <v-window-item value="three" style="min-height: 25vh !important">
-            <TabRender
-              tabPath="/tabs/users-children-s-advocacy-centers-cac"
-            ></TabRender>
+          <v-window-item value="three">
+            /tabs/users-children-s-advocacy-centers-cac
           </v-window-item>
         </v-window>
       </v-card-text>
@@ -33,6 +35,10 @@
 <script setup>
 import { v4 as uuidv4 } from "uuid";
 let tab = ref(null);
+
+const { data: dv } = await useAsyncData(`tab-${uuidv4()}`, () =>
+  queryContent(`/tabs/users-domestic-violence-dv`).findOne()
+);
 </script>
 
 <style lang="scss" scoped>
