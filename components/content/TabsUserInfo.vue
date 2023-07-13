@@ -11,7 +11,7 @@
 
       <v-card-text>
         <v-window v-model="tab">
-          <v-window-item value="one">
+          <v-window-item value="one" class="tab-window">
             <ContentRenderer
               :value="dv"
               :key="uuidv4()"
@@ -19,7 +19,7 @@
             />
           </v-window-item>
 
-          <v-window-item value="two">
+          <v-window-item value="two" class="tab-window">
             <ContentRenderer
               :value="sa"
               :key="uuidv4()"
@@ -27,7 +27,7 @@
             />
           </v-window-item>
 
-          <v-window-item value="three">
+          <v-window-item value="three" class="tab-window">
             <ContentRenderer
               :value="cac"
               :key="uuidv4()"
@@ -60,5 +60,8 @@ const { data: cac } = await useAsyncData(`tab-${uuidv4()}`, () =>
 <style lang="scss" scoped>
 .tabs {
   font-size: inherit;
+}
+.tab-window {
+  min-height: 20vh !important;
 }
 </style>
