@@ -18,7 +18,7 @@ path: /tabs/users-domestic-violence-dv
 url: https://infonet.icjia.dev/tabs/users-domestic-violence-dv
 markdown: >+
   
-  ### User Manuals
+  ### Domestic Violence (DV) User Manuals
 
 
   - [InfoNet Manual for DV](https://infonet.icjia-api.cloud/uploads/Info_Net_Manual_for_DV_87e639d5ba.pdf)
@@ -65,7 +65,7 @@ markdown: >+
 ---
 
 
-### User Manuals
+### Domestic Violence (DV) User Manuals
 
 - [InfoNet Manual for DV](https://infonet.icjia-api.cloud/uploads/Info_Net_Manual_for_DV_87e639d5ba.pdf)
 

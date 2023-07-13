@@ -97,7 +97,16 @@ const options = {
   useExtendedSearch: false,
   ignoreLocation: false,
   ignoreFieldNorm: false,
-  keys: ["title", "slug", "summary", "searchMeta", "rawText", "category"],
+  keys: [
+    "title",
+    "slug",
+    "summary",
+    "searchMeta",
+    "rawText",
+    "category",
+    "question",
+    "answer",
+  ],
 };
 const router = useRouter();
 
