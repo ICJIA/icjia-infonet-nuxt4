@@ -5,6 +5,24 @@ export default defineAppConfig({
   root: "https://infonet.icjia.dev",
   isTranslationEnabled: true,
   homeNewsLimit: 2,
+  faqCategoryMap: {
+    default: {
+      category: "default",
+      heading: "General",
+    },
+    dv: {
+      category: "dv",
+      heading: "Domestic Violence (DV)",
+    },
+    sa: {
+      category: "sa",
+      heading: "Sexual Assault (SA)",
+    },
+    cac: {
+      category: "cac",
+      heading: "Children's Advocacy Center (CAC)",
+    },
+  },
   footerMenu: [
     {
       main: "Debug",

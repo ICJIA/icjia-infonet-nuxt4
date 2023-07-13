@@ -1,10 +1,12 @@
 <template>
   <div>
-    <v-container
-      ><v-row
-        ><v-col cols="12">
-          <TheHomeBarGraph /> </v-col></v-row
-    ></v-container>
+    <DisplayFaqs strapiCategory="default" key="default"></DisplayFaqs>
+
+    <DisplayFaqs strapiCategory="dv" key="dv"></DisplayFaqs>
+
+    <DisplayFaqs strapiCategory="sa" key="sa"></DisplayFaqs>
+
+    <DisplayFaqs strapiCategory="cac" key="cac"></DisplayFaqs>
   </div>
 </template>
 

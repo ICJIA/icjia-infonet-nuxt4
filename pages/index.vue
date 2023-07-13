@@ -180,8 +180,14 @@
           </div> </v-col
         ><v-col cols="12" md="6"
           ><h2>Frequently Asked Questions (FAQs)</h2>
+          <DisplayFaqs
+            strapiCategory="default"
+            key="default"
+            color="#fff"
+            :showHeading="false"
+          ></DisplayFaqs>
 
-          <v-expansion-panels>
+          <!-- <v-expansion-panels>
             <v-expansion-panel
               v-for="item in faqs"
               :key="item._path"
@@ -202,7 +208,7 @@
                   v-html="renderer.render(item.answer)"
                 ></span> </v-expansion-panel-text
             ></v-expansion-panel>
-          </v-expansion-panels>
+          </v-expansion-panels> -->
         </v-col>
       </v-row>
     </v-container>

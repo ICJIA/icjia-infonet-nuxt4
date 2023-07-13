@@ -9,7 +9,7 @@
     <NuxtLoadingIndicator color="blue" />
 
     <v-main class="markdown-body" style="min-height: 90vh !important">
-      <LazyTheBreadcrumbBar v-if="!isHome"></LazyTheBreadcrumbBar>
+      <TheBreadcrumbBar v-if="!isHome"></TheBreadcrumbBar>
       <NuxtPage></NuxtPage>
     </v-main>
     <!-- <div style="height: 75px"></div> -->

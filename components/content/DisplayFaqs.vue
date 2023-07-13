@@ -1,18 +1,31 @@
 <template>
-  <div class="pb-12" data-aos="fade-in" style="margin-top: -10px">
-    <v-container fluid
+  <div class="pb-12" data-aos="fade-in">
+    <v-container fluid style="margin: 0; padding: 0"
       ><v-row>
         <v-col>
-          <DisplayFaqs strapiCategory="default" key="default"></DisplayFaqs>
+          <!-- <h1 class="mb-8">Frequently Asked Questions (FAQs)</h1> -->
+          <h2 class="mb-10" v-if="props.showHeading">
+            {{ getTitle(props.strapiCategory) }}
+          </h2>
 
-          <DisplayFaqs strapiCategory="dv" key="dv"></DisplayFaqs>
-
-          <DisplayFaqs strapiCategory="sa" key="sa"></DisplayFaqs>
-
-          <DisplayFaqs
-            strapiCategory="cac"
-            key="cac"
-          ></DisplayFaqs> </v-col></v-row
+          <v-expansion-panels>
+            <v-expansion-panel
+              v-for="(item, index) in data"
+              :key="item._path"
+              class="mb-2"
+            >
+              <v-expansion-panel-title
+                expand-icon="mdi-plus"
+                collapse-icon="mdi-minus"
+                :style="`font-weight: 700; background: ${props.color}; color: #000`"
+              >
+                {{ item.question }}
+              </v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <span v-html="renderer.render(item.answer)"></span>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels> </v-col></v-row
     ></v-container>
   </div>
 </template>
@@ -34,9 +47,28 @@ const renderer = new md({
   quotes: "“”‘’",
 }).use(attrs);
 
-const { data } = await useAsyncData("faqs", () =>
+const props = defineProps({
+  strapiCategory: {
+    type: String,
+    default: "sa",
+  },
+  color: {
+    type: String,
+    default: "#fafafa",
+  },
+  showHeading: {
+    type: Boolean,
+    default: true,
+  },
+});
+
+// let strapiCategory = ref("sa");
+
+console.log("faq category: ", props.strapiCategory);
+
+const { data } = await useAsyncData(`faqs-${props.strapiCategory}`, () =>
   queryContent("/faqs/")
-    .where({ category: "default" })
+    .where({ category: props.strapiCategory })
     .sort({ ranking: -1 })
     .find()
 );
@@ -44,6 +76,19 @@ const { data } = await useAsyncData("faqs", () =>
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
+const { faqCategoryMap } = useAppConfig();
+
+const getTitle = (category) => {
+  let heading;
+  if (faqCategoryMap[category] === undefined) {
+    heading = "Other";
+  } else {
+    heading = faqCategoryMap[category].heading;
+  }
+
+  return heading;
 };
 
 const niceBytes = (bytes, si = false, dp = 1) => {
