@@ -27,6 +27,7 @@ markdown: >+
 
   - **(Coming Soon)**
 
+searchMeta: "tab  "
 ---
 
 ### Definitions

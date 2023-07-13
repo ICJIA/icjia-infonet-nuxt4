@@ -82,6 +82,11 @@ axios
       obj.attributes.url = `${SITE_URL}${obj.attributes.path}`;
       obj.attributes.slug = `${obj.attributes.sectionID}-${obj.attributes.slug}`;
       obj.attributes.markdown = tab.attributes.body;
+      if (tab.attributes.searchMeta) {
+        obj.attributes.searchMeta = "tab " + item.attributes.searchMeta;
+      } else {
+        obj.attributes.searchMeta = "tab  ";
+      }
       return obj;
     });
     jsonfile.writeFileSync(`./public/tabs.json`, site, function (err) {

@@ -718,6 +718,7 @@ images:
 path: /tabs/screenshots-cac
 url: https://infonet.icjia.dev/tabs/screenshots-cac
 markdown: "## Children's Advocacy Centers (CAC)"
+searchMeta: "tab  "
 ---
 
 ## Children's Advocacy Centers (CAC)

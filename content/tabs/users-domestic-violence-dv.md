@@ -38,11 +38,9 @@ markdown: >+
   ### Data Collection/Entry Forms
 
 
-  - Link 1 here
+  - [DVAdult_RESIDENTIAL_7-2020.pdf](https://infonet.icjia-api.cloud/uploads/DV_Adult_RESIDENTIAL_7_2020_90287bdc22.pdf)
 
-  - Link 2 here
-
-  - Link 3 here
+  - [DVAdult_NONResidential_7-2020.pdf](https://infonet.icjia-api.cloud/uploads/DV_Adult_NON_Residential_7_2020_1a4f0c325a.pdf)
 
 
   ### Frequently Asked Questions (FAQs)
@@ -63,6 +61,7 @@ markdown: >+
   ::
 
 
+searchMeta: "tab  "
 ---
 
 
@@ -80,9 +79,8 @@ markdown: >+
 
 ### Data Collection/Entry Forms
 
-- Link 1 here
-- Link 2 here
-- Link 3 here
+- [DVAdult_RESIDENTIAL_7-2020.pdf](https://infonet.icjia-api.cloud/uploads/DV_Adult_RESIDENTIAL_7_2020_90287bdc22.pdf)
+- [DVAdult_NONResidential_7-2020.pdf](https://infonet.icjia-api.cloud/uploads/DV_Adult_NON_Residential_7_2020_1a4f0c325a.pdf)
 
 ### Frequently Asked Questions (FAQs)
 

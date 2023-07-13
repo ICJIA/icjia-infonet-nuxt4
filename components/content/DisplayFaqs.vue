@@ -163,7 +163,6 @@ let myTocObj = ref({ title: "", searchDepth: 2, depth: 2, links: myTocLinks });
 console.log("links: ", myTocLinks);
 
 useHead({
-  title: "Frequently Asked Questions (FAQs)",
   meta: [
     {
       hid: "og-image",

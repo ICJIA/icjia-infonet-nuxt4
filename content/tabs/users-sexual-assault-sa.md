@@ -62,6 +62,7 @@ markdown: >-
   ---
 
   ::
+searchMeta: "tab  "
 ---
 
 
