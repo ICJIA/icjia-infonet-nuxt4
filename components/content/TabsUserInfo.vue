@@ -20,11 +20,19 @@
           </v-window-item>
 
           <v-window-item value="two">
-            /tabs/users-sexual-assault-sa
+            <ContentRenderer
+              :value="sa"
+              :key="uuidv4()"
+              class="markdown-body"
+            />
           </v-window-item>
 
           <v-window-item value="three">
-            /tabs/users-children-s-advocacy-centers-cac
+            <ContentRenderer
+              :value="cac"
+              :key="uuidv4()"
+              class="markdown-body"
+            />
           </v-window-item>
         </v-window>
       </v-card-text>
@@ -38,6 +46,14 @@ let tab = ref(null);
 
 const { data: dv } = await useAsyncData(`tab-${uuidv4()}`, () =>
   queryContent(`/tabs/users-domestic-violence-dv`).findOne()
+);
+
+const { data: sa } = await useAsyncData(`tab-${uuidv4()}`, () =>
+  queryContent(`/tabs/users-sexual-assault-sa`).findOne()
+);
+
+const { data: cac } = await useAsyncData(`tab-${uuidv4()}`, () =>
+  queryContent(`/tabs/users-children-s-advocacy-centers-cac`).findOne()
 );
 </script>
 
