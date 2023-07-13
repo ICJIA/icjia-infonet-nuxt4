@@ -1,13 +1,5 @@
 <template>
-  <div>
-    <DisplayFaqs strapiCategory="default" key="default"></DisplayFaqs>
-
-    <DisplayFaqs strapiCategory="dv" key="dv"></DisplayFaqs>
-
-    <DisplayFaqs strapiCategory="sa" key="sa"></DisplayFaqs>
-
-    <DisplayFaqs strapiCategory="cac" key="cac"></DisplayFaqs>
-  </div>
+  <div>Debug info here</div>
 </template>
 
 <script setup></script>

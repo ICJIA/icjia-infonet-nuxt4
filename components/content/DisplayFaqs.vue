@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-12" data-aos="fade-in">
+  <div class="pb-12">
     <v-container fluid style="margin: 0; padding: 0"
       ><v-row>
         <v-col>
