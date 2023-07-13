@@ -59,6 +59,6 @@ const { data: cac } = await useAsyncData(`tab-${uuidv4()}`, () =>
   font-size: inherit;
 }
 .tab-window {
-  min-height: 30vh !important;
+  min-height: 20vh !important;
 }
 </style>
