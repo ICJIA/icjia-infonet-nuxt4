@@ -180,12 +180,12 @@
           </div> </v-col
         ><v-col cols="12" md="6"
           ><h2>Frequently Asked Questions (FAQs)</h2>
-          <DisplayFaqs
-            strapiCategory="default"
-            key="default"
+          <FaqsDisplay
+            strapiCategory="general"
+            key="general"
             color="#fff"
             :showHeading="false"
-          ></DisplayFaqs>
+          ></FaqsDisplay>
 
           <!-- <v-expansion-panels>
             <v-expansion-panel
