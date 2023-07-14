@@ -13,21 +13,33 @@
         <v-window v-model="tab">
           <v-window-item value="one">
             <div v-if="dv">
-              <ContentRenderer :value="dv" key="dv" class="markdown-body" />
+              <ContentRenderer
+                :value="dv"
+                key="dv"
+                class="markdown-body tab-body"
+              />
             </div>
             <div v-else>Loading...</div>
           </v-window-item>
 
           <v-window-item value="two">
             <div v-if="sa">
-              <ContentRenderer :value="sa" key="sa" class="markdown-body" />
+              <ContentRenderer
+                :value="sa"
+                key="sa"
+                class="markdown-body tab-body"
+              />
             </div>
             <div v-else>Loading...</div>
           </v-window-item>
 
           <v-window-item value="three">
             <div v-if="cac">
-              <ContentRenderer :value="cac" key="cac" class="markdown-body" />
+              <ContentRenderer
+                :value="cac"
+                key="cac"
+                class="markdown-body tab-body"
+              />
             </div>
             <div v-else>Loading...</div>
           </v-window-item>
@@ -60,5 +72,9 @@ const { data: cac } = await useAsyncData(`tab-${uuidv4()}`, () =>
 }
 .tab-window {
   min-height: 20vh !important;
+}
+
+.tab-body {
+  font-size: 12px;
 }
 </style>

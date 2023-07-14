@@ -23,6 +23,22 @@ export default defineAppConfig({
       heading: "Children's Advocacy Center (CAC)",
     },
   },
+  strapiEnumMap: {
+    faqs: {
+      general: {
+        heading: "General",
+      },
+      dv: {
+        heading: "Domestic Violence (DV)",
+      },
+      sa: {
+        heading: "Sexual Assault (SA)",
+      },
+      cac: {
+        heading: "Children's Advocacy Center (CAC)",
+      },
+    },
+  },
   footerMenu: [
     {
       main: "Debug",

@@ -10,8 +10,9 @@ ranking: 1000
 slug: how-do-agencies-use-the-data
 category: default
 createdAt: 2023-06-14T14:17:02.520Z
-updatedAt: 2023-06-14T14:17:03.501Z
+updatedAt: 2023-07-14T12:03:28.758Z
 publishedAt: 2023-06-14T14:17:03.495Z
+agency: general
 rawText: "infonet includes a comprehensive set of reporting tools that
   facilitate data mining and analysis these tools include standard reports that
   meet most state and federal reporting requirements as well as management

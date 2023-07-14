@@ -19,8 +19,9 @@ ranking: 1000
 slug: what-information-is-collected-with-info-net
 category: default
 createdAt: 2023-06-14T14:10:56.879Z
-updatedAt: 2023-06-14T14:10:57.986Z
+updatedAt: 2023-07-14T12:03:05.497Z
 publishedAt: 2023-06-14T14:10:57.981Z
+agency: general
 rawText: "basic information about all victims clients who receive services from
   a community based service provider is entered into infonet including
   demographics health insurance employment education marital status income

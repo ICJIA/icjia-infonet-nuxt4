@@ -14,8 +14,9 @@ ranking: 500
 slug: who-uses-info-net
 category: default
 createdAt: 2023-06-14T14:18:01.777Z
-updatedAt: 2023-06-14T15:18:58.399Z
+updatedAt: 2023-07-14T12:03:42.398Z
 publishedAt: 2023-06-14T14:18:02.570Z
+agency: general
 rawText: "three types of service providers use infonet child advocacy domestic
   violence and sexual assault cetners data from all three types are maintained
   in one system but user interfaces are tailored to the unique needs of each

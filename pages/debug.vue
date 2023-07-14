@@ -1,6 +1,11 @@
 <template>
   <div>
-    <TabsUserInfo></TabsUserInfo>
+    <FaqsDisplay
+      strapiAgency="general"
+      key="general"
+      color="#fff"
+      :showHeading="true"
+    ></FaqsDisplay>
   </div>
 </template>
 

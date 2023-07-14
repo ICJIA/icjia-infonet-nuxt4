@@ -5,8 +5,9 @@ ranking: 1000
 slug: test-question-for-sa
 category: sa
 createdAt: 2023-07-13T12:12:06.254Z
-updatedAt: 2023-07-13T12:12:07.282Z
+updatedAt: 2023-07-14T12:03:52.862Z
 publishedAt: 2023-07-13T12:12:07.278Z
+agency: sa
 rawText: test answer for sa
 draft: false
 title: Test Question for SA

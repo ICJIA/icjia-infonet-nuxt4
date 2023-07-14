@@ -6,8 +6,9 @@ ranking: 1000
 slug: how-much-data-have-been-entered-into-info-net-to-date
 category: default
 createdAt: 2023-06-14T14:17:35.523Z
-updatedAt: 2023-06-14T14:17:36.217Z
+updatedAt: 2023-07-14T12:03:35.370Z
 publishedAt: 2023-06-14T14:17:36.213Z
+agency: general
 rawText: as of july 2015 infonet contains nearly 18 years of data totaling more
   than 900 000 client records and 15 million service contacts
 draft: false
