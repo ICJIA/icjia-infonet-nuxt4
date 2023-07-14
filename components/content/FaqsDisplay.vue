@@ -23,16 +23,19 @@
                 <span
                   style="color: #2e618c; font-weight: 900"
                   v-if="item.cat !== 'none'"
-                  >[{{
+                  >[{{ props.strapiAgency.toUpperCase() }} -
+                  {{
                     getStrapiEnum(item.cat).toUpperCase()
                   }}]&nbsp;&nbsp;|&nbsp;</span
                 >&nbsp;<span
-                  style="color: #333; font-weight: 900"
+                  style="color: #2f4c63; font-weight: 900"
                   v-if="item.cat !== 'none'"
                   >{{
                     getStrapiEnum(item.subcat).toUpperCase()
                   }}&nbsp;&nbsp;|&nbsp;&nbsp;</span
-                ><span style="font-weight: 900">{{ item.question }}</span>
+                ><span style="font-weight: 900; color: #666">{{
+                  item.question
+                }}</span>
               </v-expansion-panel-title>
               <v-expansion-panel-text
                 :style="`font-weight: 400; color: #000; font-size: ${props.fontSize}`"
