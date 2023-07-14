@@ -5,7 +5,7 @@
         <v-col>
           <!-- <h1 class="mb-8">Frequently Asked Questions (FAQs)</h1> -->
           <h2 class="mb-10" v-if="props.showHeading">
-            {{ getTitle(props.strapiAgency) }}
+            {{ getAgencyTitle(props.strapiAgency) }}
           </h2>
 
           <v-expansion-panels>
@@ -20,7 +20,19 @@
                 :style="`font-weight: 700; background: ${props.color}; color: #000; `"
                 class="test"
               >
-                {{ item.question }}11
+                <span
+                  style="color: #2e618c; font-weight: 900"
+                  v-if="item.cat !== 'none'"
+                  >[{{
+                    getStrapiEnum(item.cat).toUpperCase()
+                  }}]&nbsp;&nbsp;|&nbsp;</span
+                >&nbsp;<span
+                  style="color: #333; font-weight: 900"
+                  v-if="item.cat !== 'none'"
+                  >{{
+                    getStrapiEnum(item.subcat).toUpperCase()
+                  }}&nbsp;&nbsp;|&nbsp;&nbsp;</span
+                ><span style="font-weight: 900">{{ item.question }}</span>
               </v-expansion-panel-title>
               <v-expansion-panel-text
                 :style="`font-weight: 400; color: #000; font-size: ${props.fontSize}`"
@@ -53,7 +65,7 @@ const renderer = new md({
 const props = defineProps({
   strapiCategory: {
     type: String,
-    default: "sa",
+    default: "default",
   },
   strapiAgency: {
     type: String,
@@ -81,6 +93,8 @@ const { data } = await useAsyncData(`faqs-${props.strapiCategory}`, () =>
   queryContent("/faqs/")
     .where({ agency: props.strapiAgency })
     .sort({ ranking: -1 })
+    .sort({ cat: 1 })
+    .sort({ subcat: 1 })
     .find()
 );
 
@@ -89,10 +103,9 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-const { faqCategoryMap } = useAppConfig();
 const { strapiEnumMap } = useAppConfig();
 
-const getTitle = (agency) => {
+const getAgencyTitle = (agency) => {
   let heading;
   if (strapiEnumMap["faqs"][agency] === undefined) {
     heading = "Other";
@@ -100,6 +113,18 @@ const getTitle = (agency) => {
     heading = strapiEnumMap["faqs"][agency].heading;
   }
 
+  return heading;
+};
+
+const getStrapiEnum = (strapiEnum) => {
+  console.log("strapiEnum: ", strapiEnum);
+  let heading;
+  if (strapiEnumMap["faqs"][strapiEnum] === undefined) {
+    heading = "Other";
+  } else {
+    heading = strapiEnumMap["faqs"][strapiEnum].heading;
+  }
+  console.log(strapiEnum, heading);
   return heading;
 };
 
@@ -209,7 +234,7 @@ useHead({
 /* Summary/details */
 
 button.v-expansion-panel-title {
-  font-weight: 900 !important;
+  font-weight: 400 !important;
   font-size: 14px !important;
 }
 </style>

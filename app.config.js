@@ -37,6 +37,19 @@ export default defineAppConfig({
       cac: {
         heading: "Children's Advocacy Center (CAC)",
       },
+      saAdministration: { heading: "Administration" },
+      saClient: { heading: "Client" },
+      saServices: { heading: "Services" },
+      saReports: { heading: "Reports" },
+      saMisc: { heading: "Miscellaneous" },
+      saAgencyAdministration: {
+        heading: "Agency Administration",
+      },
+      saOffenderCriminalCaseInformation: {
+        heading: "Offender Criminal Case Information",
+      },
+      saAgencyInformation: { heading: "Agency Information" },
+      saIntakeData: { heading: "Intake Data" },
     },
   },
   footerMenu: [

@@ -1,8 +1,8 @@
 <template>
   <div>
     <FaqsDisplay
-      strapiAgency="general"
-      key="general"
+      strapiAgency="sa"
+      key="myKey"
       color="#fff"
       :showHeading="true"
     ></FaqsDisplay>

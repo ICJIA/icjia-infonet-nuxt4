@@ -5,9 +5,11 @@ ranking: 1000
 slug: test-question-for-dv
 category: dv
 createdAt: 2023-07-13T12:11:42.622Z
-updatedAt: 2023-07-14T12:03:47.795Z
+updatedAt: 2023-07-14T15:05:48.056Z
 publishedAt: 2023-07-13T12:11:43.519Z
 agency: dv
+cat: none
+subcat: none
 rawText: test answer for dv
 draft: false
 title: Test Question for DV

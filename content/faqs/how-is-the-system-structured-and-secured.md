@@ -13,9 +13,11 @@ ranking: 1000
 slug: how-is-the-system-structured-and-secured
 category: default
 createdAt: 2023-06-14T14:11:29.415Z
-updatedAt: 2023-07-14T12:03:14.269Z
+updatedAt: 2023-07-14T15:06:27.142Z
 publishedAt: 2023-06-14T14:11:30.339Z
 agency: general
+cat: none
+subcat: none
 rawText: "remote users access infonet via the internet several levels of
   security have been built into the system including password protection at the
   organizational individual and device levels infonet uses a virtual private
