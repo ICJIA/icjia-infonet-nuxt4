@@ -181,10 +181,11 @@
         ><v-col cols="12" md="6"
           ><h2>Frequently Asked Questions (FAQs)</h2>
           <FaqsDisplay
-            strapiCategory="general"
+            strapiAgency="general"
             key="general"
             color="#fff"
             :showHeading="false"
+            fontSize="16px"
           ></FaqsDisplay>
 
           <!-- <v-expansion-panels>

@@ -17,7 +17,7 @@
               <v-expansion-panel-title
                 expand-icon="mdi-plus"
                 collapse-icon="mdi-minus"
-                :style="`font-weight: 700; background: ${props.color}; color: #000; `"
+                :style="`font-weight: 700; background: ${props.color}; color: #000; font-size: ${props.fontSize} `"
                 class="test"
               >
                 <span
@@ -239,6 +239,5 @@ useHead({
 
 button.v-expansion-panel-title {
   font-weight: 400 !important;
-  font-size: 14px !important;
 }
 </style>
