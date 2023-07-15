@@ -53,9 +53,13 @@ markdown: >+
 
   showHeading: false
 
+  strapiAgency: "dv"
+
   strapiCategory: "dv"
 
-  key: "dv"
+  key: "dv1"
+
+  fontSize: "12px"
 
   ---
 
@@ -87,8 +91,10 @@ markdown: >+
 ::display-faqs
 ---
 showHeading: false
+strapiAgency: "dv"
 strapiCategory: "dv"
-key: "dv"
+key: "dv1"
+fontSize: "12px"
 ---
 ::
 

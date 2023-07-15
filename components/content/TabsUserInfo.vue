@@ -53,15 +53,15 @@
 import { v4 as uuidv4 } from "uuid";
 let tab = ref(null);
 
-const { data: dv } = await useAsyncData(`tab-${uuidv4()}`, () =>
+const { data: dv } = await useAsyncData(`tab-dv-${uuidv4()}`, () =>
   queryContent(`/tabs/users-domestic-violence-dv`).findOne()
 );
 
-const { data: sa } = await useAsyncData(`tab-${uuidv4()}`, () =>
+const { data: sa } = await useAsyncData(`tab-sa-${uuidv4()}`, () =>
   queryContent(`/tabs/users-sexual-assault-sa`).findOne()
 );
 
-const { data: cac } = await useAsyncData(`tab-${uuidv4()}`, () =>
+const { data: cac } = await useAsyncData(`tab-cac-${uuidv4()}`, () =>
   queryContent(`/tabs/users-children-s-advocacy-centers-cac`).findOne()
 );
 </script>

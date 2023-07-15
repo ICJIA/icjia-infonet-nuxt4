@@ -23,8 +23,9 @@
                 <span
                   style="color: #2e618c; font-weight: 900"
                   v-if="item.cat !== 'none'"
-                  >[{{ props.strapiAgency.toUpperCase() }} -
-                  {{
+                  >[<span v-if="props.showAgencyPrefix"
+                    >{{ props.strapiAgency.toUpperCase() }} - </span
+                  >{{
                     getStrapiEnum(item.cat).toUpperCase()
                   }}]&nbsp;&nbsp;|&nbsp;</span
                 >&nbsp;<span
@@ -66,10 +67,6 @@ const renderer = new md({
 }).use(attrs);
 
 const props = defineProps({
-  strapiCategory: {
-    type: String,
-    default: "default",
-  },
   strapiAgency: {
     type: String,
     default: "general",
@@ -85,6 +82,10 @@ const props = defineProps({
   showHeading: {
     type: Boolean,
     default: true,
+  },
+  showAgencyPrefix: {
+    type: Boolean,
+    default: false,
   },
 });
 

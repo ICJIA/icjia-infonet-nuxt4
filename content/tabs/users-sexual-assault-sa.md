@@ -56,9 +56,13 @@ markdown: >-
 
   showHeading: false
 
+  strapiAgency: "sa"
+
   strapiCategory: "sa"
 
-  key: "sa"
+  key: "sa1"
+
+  fontSize: "12px"
 
   ---
 
@@ -90,7 +94,9 @@ markdown: >-
 ::display-faqs
 ---
 showHeading: false
+strapiAgency: "sa"
 strapiCategory: "sa"
-key: "sa"
+key: "sa1"
+fontSize: "12px"
 ---
 ::

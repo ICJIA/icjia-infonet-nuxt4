@@ -64,7 +64,7 @@ const props = defineProps({
 
 // let strapiCategory = ref("sa");
 
-console.log("faq category: ", props.strapiCategory);
+//console.log("faq category: ", props.strapiCategory);
 
 const { data } = await useAsyncData(`faqs-${props.strapiCategory}`, () =>
   queryContent("/faqs/")
