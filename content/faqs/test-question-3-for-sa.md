@@ -1,11 +1,11 @@
 ---
 question: Test Question 3 for SA
 answer: Test Answer 3 for SA
-ranking: 300
+ranking: 1000
 slug: test-question-3-for-sa
 category: sa
 createdAt: 2023-07-14T16:23:33.025Z
-updatedAt: 2023-07-14T16:26:00.499Z
+updatedAt: 2023-07-15T17:24:13.783Z
 publishedAt: 2023-07-14T16:24:01.320Z
 agency: sa
 cat: saMisc
