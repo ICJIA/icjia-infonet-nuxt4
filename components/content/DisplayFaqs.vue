@@ -25,16 +25,14 @@
                   v-if="item.cat !== 'none'"
                   >[<span v-if="props.showAgencyPrefix"
                     >{{ props.strapiAgency.toUpperCase() }} - </span
-                  >{{
-                    getStrapiEnum(item.cat).toUpperCase()
-                  }}]&nbsp;&nbsp;|&nbsp;</span
+                  >{{ getStrapiEnum(item.cat).toUpperCase() }}]&nbsp;</span
                 >&nbsp;<span
                   style="color: #2f4c63; font-weight: 900"
                   v-if="item.cat !== 'none'"
                   >{{
-                    getStrapiEnum(item.subcat).toUpperCase()
+                    getStrapiEnum(item.subcat)
                   }}&nbsp;&nbsp;|&nbsp;&nbsp;</span
-                ><span style="font-weight: 900; color: #666">{{
+                ><span style="font-weight: 900; color: #888">{{
                   item.question
                 }}</span>
               </v-expansion-panel-title>
