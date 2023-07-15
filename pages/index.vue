@@ -104,44 +104,8 @@
             ><v-row
               ><v-col cols="12" class="mt-5">
                 <TheHomeBarGraph v-if="isMounted" /> </v-col></v-row
-          ></v-container>
-          <!-- <div class="flex-container">
-            <div class="flex-row px-10">
-              <div class="chart-container">
-                <TheHomeBarGraph class="graph hidden-md-and-down" />
-              </div>
-
-              <v-tooltip location="bottom">
-                <template v-slot:activator="{ props }">
-                  <v-img
-                    v-bind="props"
-                    class="splash hover hidden-lg-and-up elevation-2"
-                    cover
-                    max-height="600"
-                    alt="InfoNet graphic: Domestic and Sexual Violence Victims who received services, 2018-2022"
-                    src="/home-splash-v3.jpg"
-                    lazy-src="https://infonet.icjia-api.cloud/uploads/home_splash_v3_11c9ca82eb.jpg"
-                    @click="$router.push('/about')"
-                  >
-                    <template v-slot:placeholder>
-                      <div
-                        class="d-flex align-center justify-center fill-height"
-                      >
-                        <v-progress-circular
-                          color="grey-lighten-4"
-                          indeterminate
-                        ></v-progress-circular>
-                      </div> </template
-                  ></v-img>
-                </template>
-                <span class="mt-3"
-                  >Click chart for more information about InfoNet</span
-                >
-              </v-tooltip>
-            </div>
-          </div> -->
-        </v-col></v-row
-      >
+          ></v-container> </v-col
+      ></v-row>
     </v-container>
 
     <HomeBoxes v-if="isMounted"></HomeBoxes>
@@ -180,36 +144,13 @@
           </div> </v-col
         ><v-col cols="12" md="6"
           ><h2>Frequently Asked Questions (FAQs)</h2>
-          <FaqsDisplay
+          <DisplayFaqs
             strapiAgency="general"
             key="general"
             color="#fff"
             :showHeading="false"
             fontSize="16px"
-          ></FaqsDisplay>
-
-          <!-- <v-expansion-panels>
-            <v-expansion-panel
-              v-for="item in faqs"
-              :key="item._path"
-              class="mb-3"
-              ><v-expansion-panel-title
-                expand-icon="mdi-plus"
-                collapse-icon="mdi-minus"
-                style="
-                  font-weight: 700;
-                  background: #fff !important;
-                  color: #000;
-                "
-              >
-                {{ item.question }}
-              </v-expansion-panel-title>
-              <v-expansion-panel-text>
-                <span
-                  v-html="renderer.render(item.answer)"
-                ></span> </v-expansion-panel-text
-            ></v-expansion-panel>
-          </v-expansion-panels> -->
+          ></DisplayFaqs>
         </v-col>
       </v-row>
     </v-container>

@@ -5,7 +5,7 @@
         <v-col>
           <!-- <h1 class="mb-8">Frequently Asked Questions (FAQs)</h1> -->
           <h2 class="mb-10" v-if="props.showHeading">
-            {{ getTitle(props.strapiCategory) }}
+            {{ getStrapiEnum(props.strapiAgency) }}
           </h2>
 
           <v-expansion-panels>
@@ -17,9 +17,26 @@
               <v-expansion-panel-title
                 expand-icon="mdi-plus"
                 collapse-icon="mdi-minus"
-                :style="`font-weight: 700; background: ${props.color}; color: #000`"
+                :style="`font-weight: 700; background: ${props.color}; color: #000; font-size: ${props.fontSize} `"
+                class="test"
               >
-                {{ item.question }}
+                <span
+                  style="color: #2e618c; font-weight: 900"
+                  v-if="item.cat !== 'none'"
+                  >[<span v-if="props.showAgencyPrefix"
+                    >{{ props.strapiAgency.toUpperCase() }} - </span
+                  >{{
+                    getStrapiEnum(item.cat).toUpperCase()
+                  }}]&nbsp;&nbsp;|&nbsp;</span
+                >&nbsp;<span
+                  style="color: #2f4c63; font-weight: 900"
+                  v-if="item.cat !== 'none'"
+                  >{{
+                    getStrapiEnum(item.subcat).toUpperCase()
+                  }}&nbsp;&nbsp;|&nbsp;&nbsp;</span
+                ><span style="font-weight: 900; color: #666">{{
+                  item.question
+                }}</span>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <span v-html="renderer.render(item.answer)"></span>
@@ -50,7 +67,15 @@ const renderer = new md({
 const props = defineProps({
   strapiCategory: {
     type: String,
-    default: "sa",
+    default: "general",
+  },
+  strapiAgency: {
+    type: String,
+    default: "general",
+  },
+  fontSize: {
+    type: String,
+    default: "14px",
   },
   color: {
     type: String,
@@ -60,15 +85,19 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  showAgencyPrefix: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // let strapiCategory = ref("sa");
 
 //console.log("faq category: ", props.strapiCategory);
 
-const { data } = await useAsyncData(`faqs-${props.strapiCategory}`, () =>
+const { data } = await useAsyncData(`faqs-${props.strapiAgency}`, () =>
   queryContent("/faqs/")
-    .where({ category: props.strapiCategory })
+    .where({ agency: props.strapiAgency })
     .sort({ ranking: -1 })
     .find()
 );
@@ -79,6 +108,7 @@ const formatDate = (dateString) => {
 };
 
 const { faqCategoryMap } = useAppConfig();
+const { strapiEnumMap } = useAppConfig();
 
 const getTitle = (category) => {
   let heading;
@@ -88,6 +118,18 @@ const getTitle = (category) => {
     heading = faqCategoryMap[category].heading;
   }
 
+  return heading;
+};
+
+const getStrapiEnum = (strapiEnum) => {
+  console.log("strapiEnum: ", strapiEnum);
+  let heading;
+  if (strapiEnumMap["faqs"][strapiEnum] === undefined) {
+    heading = "Other";
+  } else {
+    heading = strapiEnumMap["faqs"][strapiEnum].heading;
+  }
+  console.log(strapiEnum, heading);
   return heading;
 };
 
