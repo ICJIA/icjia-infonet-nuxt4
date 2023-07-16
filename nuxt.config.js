@@ -8,6 +8,7 @@ import appRoutes from "./public/appRoutes.json";
 export default defineNuxtConfig({
   experimental: {
     viewTransition: true,
+    payloadExtraction: true,
   },
   devtools: true,
   app: {
