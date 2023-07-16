@@ -1,11 +1,12 @@
 <template>
   <div>
-    <v-card>
+    <v-card v-if="isMounted">
       <v-tabs v-model="tab" bg-color="grey-darken-3" grow center-active>
-        <v-tab value="one" class="tabs">Domestic Violence (DV)</v-tab>
-        <v-tab value="two" class="tabs">Sexual Assault (SA)</v-tab>
-        <v-tab value="three" class="tabs"
-          >Children's Advocacy Centers (CAC)</v-tab
+        <v-tab value="one" class="tabs" v-if="dv"> {{ getTitle(dv) }}</v-tab>
+        <v-tab value="two" class="tabs" v-if="sa"> {{ getTitle(sa) }}</v-tab>
+
+        <v-tab value="three" class="tabs" v-if="cac">
+          {{ getTitle(cac) }}</v-tab
         >
       </v-tabs>
 
@@ -46,6 +47,9 @@
         </v-window>
       </v-card-text>
     </v-card>
+    <v-card v-else style="min-height: 30vh" class="mt-12"
+      ><TheLoader></TheLoader
+    ></v-card>
   </div>
 </template>
 
@@ -53,6 +57,7 @@
 import { useDisplay } from "vuetify";
 import { v4 as uuidv4 } from "uuid";
 let tab = ref(null);
+let isMounted = ref(false);
 
 const { data: dv } = await useAsyncData(`tab-dv-${uuidv4()}`, () =>
   queryContent(`/tabs/users-domestic-violence-dv`).findOne()
@@ -68,15 +73,18 @@ const { data: cac } = await useAsyncData(`tab-cac-${uuidv4()}`, () =>
 
 const { mobile } = useDisplay();
 
-const getTitle = (attributes) => {
+const getTitle = (item) => {
   let title;
-  if (mobile.value === true) {
-    title = attributes.agency;
+  if (item?.title && !mobile.value) {
+    return item.title;
   } else {
-    title = attributes.title;
+    return item.agency;
   }
-  return title;
 };
+
+onMounted(() => {
+  isMounted.value = true;
+});
 </script>
 
 <style lang="scss" scoped>
