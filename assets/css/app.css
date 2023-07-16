@@ -183,3 +183,21 @@ ul.cohort-list li {
      }
  }
 
+
+
+
+ .gallery {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+     grid-gap: 1rem;
+     max-width: 100rem;
+     margin: 3rem auto;
+     padding: 0 3rem;
+ }
+
+ .gallery-panel img {
+     width: 300px;
+     height: 200px;
+     object-fit: cover !important;
+     border-radius: 0.35rem;
+ }

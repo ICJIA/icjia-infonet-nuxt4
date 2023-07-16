@@ -50,6 +50,7 @@
 </template>
 
 <script setup>
+import { useDisplay } from "vuetify";
 import { v4 as uuidv4 } from "uuid";
 let tab = ref(null);
 
@@ -64,12 +65,24 @@ const { data: sa } = await useAsyncData(`tab-sa-${uuidv4()}`, () =>
 const { data: cac } = await useAsyncData(`tab-cac-${uuidv4()}`, () =>
   queryContent(`/tabs/users-children-s-advocacy-centers-cac`).findOne()
 );
+
+const { mobile } = useDisplay();
+
+const getTitle = (attributes) => {
+  let title;
+  if (mobile.value === true) {
+    title = attributes.agency;
+  } else {
+    title = attributes.title;
+  }
+  return title;
+};
 </script>
 
 <style lang="scss" scoped>
-.tabs {
-  //font-size: inherit;
-}
+// .tabs {
+//   //font-size: inherit;
+// }
 .tab-window {
   min-height: 20vh !important;
 }
