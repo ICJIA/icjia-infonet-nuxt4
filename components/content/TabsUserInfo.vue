@@ -68,13 +68,13 @@ const { data: cac } = await useAsyncData(`tab-cac-${uuidv4()}`, () =>
 
 <style lang="scss" scoped>
 .tabs {
-  font-size: inherit;
+  //font-size: inherit;
 }
 .tab-window {
   min-height: 20vh !important;
 }
 
 .tab-body {
-  font-size: 12px;
+  font-size: 14px;
 }
 </style>

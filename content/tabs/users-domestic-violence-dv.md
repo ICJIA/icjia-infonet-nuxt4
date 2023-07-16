@@ -59,8 +59,6 @@ markdown: >+
 
   key: "dv1234"
 
-  fontSize: "12px"
-
   ---
 
   ::
@@ -93,7 +91,6 @@ showHeading: false
 strapiAgency: "dv"
 strapiCategory: "dv"
 key: "dv1234"
-fontSize: "12px"
 ---
 ::
 

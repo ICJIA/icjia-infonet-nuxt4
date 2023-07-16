@@ -17,7 +17,7 @@
               <v-expansion-panel-title
                 expand-icon="mdi-plus"
                 collapse-icon="mdi-minus"
-                :style="`font-weight: 700; background: ${props.color}; color: #000; font-size: ${props.fontSize} `"
+                :style="`font-weight: 700; background: ${props.color}; color: #000; font-size: ${props.fontQuestionSize} `"
                 class="test"
               >
                 <span
@@ -33,13 +33,13 @@
                     getStrapiEnum(item.subcat)
                   }}&nbsp;&nbsp;|&nbsp;&nbsp;</span
                 ><span
-                  :style="`font-weight: 900; color: #555; font-size: ${props.fontSize}`"
+                  :style="`font-weight: 900; color: #555; font-size: ${props.fontQuestionSize}`"
                   >{{ item.question }}</span
                 >
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <span
-                  :style="`font-size: ${props.fontSize};`"
+                  :style="`font-size: ${props.fontAnswerSize};`"
                   v-html="renderer.render(item.answer)"
                 ></span>
               </v-expansion-panel-text>
@@ -75,7 +75,12 @@ const props = defineProps({
     type: String,
     default: "general",
   },
-  fontSize: {
+
+  fontQuestionSize: {
+    type: String,
+    default: "14px",
+  },
+  fontAnswerSize: {
     type: String,
     default: "14px",
   },
@@ -126,14 +131,14 @@ const getTitle = (category) => {
 };
 
 const getStrapiEnum = (strapiEnum) => {
-  console.log("strapiEnum: ", strapiEnum);
+  //console.log("strapiEnum: ", strapiEnum);
   let heading;
   if (strapiEnumMap["faqs"][strapiEnum] === undefined) {
     heading = "Other";
   } else {
     heading = strapiEnumMap["faqs"][strapiEnum].heading;
   }
-  console.log(strapiEnum, heading);
+  //console.log(strapiEnum, heading);
   return heading;
 };
 
@@ -206,7 +211,7 @@ let myTocLinks = years.map((year) => {
 
 let myTocObj = ref({ title: "", searchDepth: 2, depth: 2, links: myTocLinks });
 
-console.log("links: ", myTocLinks);
+//console.log("links: ", myTocLinks);
 
 useHead({
   meta: [
@@ -242,7 +247,7 @@ useHead({
 <style scoped>
 /* Summary/details */
 
-summary {
+/* summary {
   cursor: pointer;
   font-weight: 900;
   font-size: 16px;
@@ -272,5 +277,5 @@ summary > * {
   font-weight: 400;
   text-align: left;
   font-size: 0.65rem;
-}
+} */
 </style>

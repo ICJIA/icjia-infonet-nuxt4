@@ -62,8 +62,6 @@ markdown: >-
 
   key: "sa5555"
 
-  fontSize: "12px"
-
   ---
 
   ::
@@ -97,6 +95,5 @@ showHeading: false
 strapiAgency: "sa"
 strapiCategory: "sa"
 key: "sa5555"
-fontSize: "12px"
 ---
 ::

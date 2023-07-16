@@ -149,7 +149,6 @@
             key="general"
             color="#fff"
             :showHeading="false"
-            fontSize="16px"
           ></DisplayFaqs>
         </v-col>
       </v-row>
