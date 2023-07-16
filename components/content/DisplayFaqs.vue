@@ -32,12 +32,15 @@
                   >{{
                     getStrapiEnum(item.subcat)
                   }}&nbsp;&nbsp;|&nbsp;&nbsp;</span
-                ><span style="font-weight: 900; color: #888">{{
+                ><span style="font-weight: 900; color: #555">{{
                   item.question
                 }}</span>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <span v-html="renderer.render(item.answer)"></span>
+                <span
+                  v-html="renderer.render(item.answer)"
+                  style="font-size: 14px"
+                ></span>
               </v-expansion-panel-text>
             </v-expansion-panel>
           </v-expansion-panels> </v-col></v-row
