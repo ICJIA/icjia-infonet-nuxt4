@@ -4,7 +4,7 @@
       ><v-row>
         <v-col>
           <!-- <h1 class="mb-8">Frequently Asked Questions (FAQs)</h1> -->
-          <h2 class="mb-10" v-if="props.showHeading">
+          <h2 class="mb-10" v-if="props.showHeading" :id="props.strapiAgency">
             {{ getAgencyTitle(props.strapiAgency) }}
           </h2>
 
@@ -39,7 +39,7 @@
                 }}</span>
               </v-expansion-panel-title>
               <v-expansion-panel-text
-                :style="`font-weight: 400; color: #000; font-size: ${props.fontSize}`"
+                style="font-weight: 400; color: #000; font-size: 12px"
               >
                 <span v-html="renderer.render(item.answer)"></span>
               </v-expansion-panel-text>

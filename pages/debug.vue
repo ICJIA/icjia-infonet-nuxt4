@@ -1,11 +1,11 @@
 <template>
   <div>
-    <FaqsDisplay
+    <DisplayFaqs
       strapiAgency="general"
       key="general"
       color="#fff"
       :showHeading="true"
-    ></FaqsDisplay>
+    ></DisplayFaqs>
   </div>
 </template>
 
