@@ -7,14 +7,14 @@ showTableOfContents: false
 summary: Screenshots from InfoNet
 section: root
 createdAt: 2023-06-28T14:47:13.480Z
-updatedAt: 2023-06-28T14:47:15.914Z
+updatedAt: 2023-07-17T11:54:28.499Z
 publishedAt: 2023-06-28T14:47:15.909Z
 searchMeta: null
 category: page
-rawText: " lazytabs sectionid screenshots "
+rawText: " tabs sectionid screenshots "
 draft: false
 markdown: |-
-  ::LazyTabs
+  ::Tabs
   ---
   sectionID: "screenshots"
   ---
@@ -24,7 +24,7 @@ path: /screenshots
 url: https://infonet.icjia.dev/screenshots
 ---
 
-::LazyTabs
+::Tabs
 ---
 sectionID: "screenshots"
 ---

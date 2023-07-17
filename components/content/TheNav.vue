@@ -205,12 +205,6 @@
             </template>
 
             <v-list>
-              <v-list-item exact to="/contact">
-                <v-list-item-title style="font-size: 16px; font-weight: 700"
-                  ><v-icon size="x-small" icon="mdi-mail" left></v-icon
-                  >&nbsp;&nbsp;Contact</v-list-item-title
-                >
-              </v-list-item>
               <v-list-item exact to="/search">
                 <v-list-item-title style="font-size: 16px; font-weight: 700"
                   ><v-icon size="x-small" icon="mdi-magnify" left></v-icon
@@ -226,6 +220,13 @@
                 <v-list-item-title style="font-size: 16px; font-weight: 700"
                   ><v-icon size="x-small" icon="mdi-web" left></v-icon
                   >&nbsp;&nbsp;Translate</v-list-item-title
+                >
+              </v-list-item>
+              <v-divider></v-divider>
+              <v-list-item exact to="/contact">
+                <v-list-item-title style="font-size: 16px; font-weight: 700"
+                  ><v-icon size="x-small" icon="mdi-mail" left></v-icon
+                  >&nbsp;&nbsp;Contact</v-list-item-title
                 >
               </v-list-item>
             </v-list>
