@@ -10,7 +10,7 @@
         >
       </v-tabs>
 
-      <v-card-text class="tab-window">
+      <v-card-text class="tab-window elevation-0" style="background: #fbfbfb">
         <v-window v-model="tab">
           <v-window-item value="one">
             <div v-if="dv">

@@ -37,6 +37,7 @@ export default defineAppConfig({
       cac: {
         heading: "Children's Advocacy Center (CAC)",
       },
+      saVolunteerInformation: { heading: "Staff/Volunteer Information" },
       saAdministration: { heading: "Administration" },
       saClient: { heading: "Client" },
       saServices: { heading: "Services" },

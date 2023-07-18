@@ -40,7 +40,7 @@ axios
       obj.attributes.title = obj.attributes.question;
       obj.attributes.summary = obj.attributes.question;
       obj.attributes.body = obj.attributes.answer;
-      obj.attributes.path = `/faqs/${item.attributes.slug}`;
+      obj.attributes.path = `/faqs/${item.attributes.agency}-${item.attributes.slug}`;
       obj.attributes.url = `${SITE_URL}${obj.attributes.path}`;
       obj.attributes.markdown = item.attributes.body;
 
@@ -63,7 +63,7 @@ axios
     });
 
     const faqRoutes = faqs.map((item) => {
-      return `/faqs/${item.attributes.slug}`;
+      return `/faqs/${item.attributes.agency}-${item.attributes.slug}`;
     });
 
     jsonfile.writeFileSync(
@@ -81,7 +81,8 @@ axios
       section = "faqs";
 
       const basename = item.attributes.slug;
-      const filePath = path.join(contentDir, `${section}/${basename}.md`);
+      const fileName = `${section}/${item.attributes.agency}-${basename}.md`;
+      const filePath = path.join(contentDir, fileName);
       const directoryPath = path.join(contentDir, `${section}`);
       if (!fs.existsSync(directoryPath)) {
         fs.mkdirSync(directoryPath);

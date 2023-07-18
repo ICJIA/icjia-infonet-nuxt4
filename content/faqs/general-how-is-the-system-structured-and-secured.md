@@ -31,8 +31,8 @@ rawText: "remote users access infonet via the internet several levels of
 draft: false
 title: How is the system structured and secured?
 summary: How is the system structured and secured?
-path: /faqs/how-is-the-system-structured-and-secured
-url: https://infonet.icjia.dev/faqs/how-is-the-system-structured-and-secured
+path: /faqs/general-how-is-the-system-structured-and-secured
+url: https://infonet.icjia.dev/faqs/general-how-is-the-system-structured-and-secured
 markdown: >-
   Remote users access InfoNet via the Internet. Several levels of security have
   been built into the system, including password protection at the

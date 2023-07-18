@@ -11,7 +11,7 @@ let myToc = [];
 
 const route = useRoute();
 // console.log(route);
-
+console.log("Test route.path: ", route.path.split("/")[1]);
 // const error = useError();
 const { data } = await useAsyncData(`content-${path}`, async () => {
   const post = await queryContent().where({ _path: path }).findOne();
@@ -98,7 +98,14 @@ useHead({
             <div v-if="route.path === '/partners'" class="text-center mt-12">
               <nuxt-link to="/about">More about Infonet&nbsp;&raquo;</nuxt-link>
             </div>
+            <div
+              v-if="route.path.split('/')[1] === 'faqs'"
+              class="text-center mt-12"
+            >
+              <nuxt-link to="/faqs">See all FAQs&nbsp;&raquo;</nuxt-link>
+            </div>
           </div>
+
           <div v-else>{{ redirect() }}</div>
         </v-col>
 

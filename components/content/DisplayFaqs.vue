@@ -14,13 +14,16 @@
               :key="item._path"
               class="mb-5"
             >
+              <!-- <div class="pl-3">
+                {{ getStrapiEnum(item.cat).toUpperCase() }}
+              </div> -->
               <v-expansion-panel-title
                 expand-icon="mdi-plus"
                 collapse-icon="mdi-minus"
                 :style="`font-weight: 700; background: ${props.color}; color: #000; font-size: ${props.fontQuestionSize} `"
                 class="test"
               >
-                <span
+                <!-- <span
                   style="color: #2e618c; font-weight: 900"
                   v-if="item.cat !== 'none'"
                   >[<span v-if="props.showAgencyPrefix"
@@ -32,12 +35,28 @@
                   >{{
                     getStrapiEnum(item.subcat)
                   }}&nbsp;&nbsp;|&nbsp;&nbsp;</span
-                ><span
+                > -->
+
+                <div
                   :style="`font-weight: 900; color: #555; font-size: ${props.fontQuestionSize}`"
-                  >{{ item.question }}</span
                 >
+                  {{ item.question }}
+                </div>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
+                <!-- <span
+                  style="color: #2e618c; font-weight: 900"
+                  v-if="item.cat !== 'none'"
+                  >[<span v-if="props.showAgencyPrefix"
+                    >{{ props.strapiAgency.toUpperCase() }} - </span
+                  >{{ getStrapiEnum(item.cat).toUpperCase() }}]&nbsp;</span
+                >&nbsp;<span
+                  style="color: #2f4c63; font-weight: 900"
+                  v-if="item.cat !== 'none'"
+                  >{{
+                    getStrapiEnum(item.subcat)
+                  }}&nbsp;&nbsp;|&nbsp;&nbsp;</span
+                > -->
                 <span
                   :style="`font-size: ${props.fontAnswerSize};`"
                   v-html="renderer.render(item.answer)"
@@ -53,7 +72,7 @@ import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 const { path } = useRoute();
 const router = useRouter();
-
+import { useDisplay } from "vuetify";
 import md from "markdown-it";
 import attrs from "markdown-it-attrs";
 const renderer = new md({
@@ -65,6 +84,10 @@ const renderer = new md({
   typographer: true,
   quotes: "“”‘’",
 }).use(attrs);
+
+const { mobile, name: screenSize } = useDisplay();
+
+console.log("Mobile: ", mobile.value, " ScreenSize: ", screenSize.value);
 
 const props = defineProps({
   strapiCategory: {
