@@ -40,6 +40,9 @@
                 <div
                   :style="`font-weight: 900; color: #555; font-size: ${props.fontQuestionSize}`"
                 >
+                  <span v-if="!mobile"
+                    >[{{ getStrapiEnum(item.cat).toUpperCase() }}]&nbsp</span
+                  >
                   {{ item.question }}
                 </div>
               </v-expansion-panel-title>
