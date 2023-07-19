@@ -40,7 +40,7 @@
                 <div
                   :style="`font-weight: 900; color: #555; font-size: ${props.fontQuestionSize}`"
                 >
-                  <span v-if="!mobile"
+                  <span v-if="!mobile && isMounted && showCategory"
                     >[{{ getStrapiEnum(item.cat).toUpperCase() }}]&nbsp</span
                   >
                   {{ item.question }}
@@ -88,15 +88,7 @@ const renderer = new md({
   quotes: "“”‘’",
 }).use(attrs);
 
-const { mobile, name: screenSize } = useDisplay();
-
-console.log("Mobile: ", mobile.value, " ScreenSize: ", screenSize.value);
-
 const props = defineProps({
-  strapiCategory: {
-    type: String,
-    default: "general",
-  },
   strapiAgency: {
     type: String,
     default: "general",
@@ -119,6 +111,10 @@ const props = defineProps({
     default: true,
   },
   showAgencyPrefix: {
+    type: Boolean,
+    default: false,
+  },
+  showCategory: {
     type: Boolean,
     default: false,
   },
@@ -146,10 +142,10 @@ const formatDate = (dateString) => {
 const { strapiEnumMap } = useAppConfig();
 
 const getStrapiEnum = (strapiEnum) => {
-  //console.log("strapiEnum: ", strapiEnum);
+  console.log("strapiEnum: ", strapiEnum);
   let heading;
   if (strapiEnumMap["faqs"][strapiEnum] === undefined) {
-    heading = "Other";
+    heading = "General";
   } else {
     heading = strapiEnumMap["faqs"][strapiEnum].heading;
   }
@@ -214,6 +210,13 @@ let testData = ref(
     '{ "title": "", "searchDepth": 2, "depth": 2, "links": [ { "id": "year-2023", "depth": 2, "text": "2023 Meetings" }, { "id": "year-2022", "depth": 2, "text": "2022 Meetings" }] }'
   )
 );
+const { mobile: _mobile, name: screenSize } = useDisplay();
+const isMounted = ref(false);
+const mobile = ref(_mobile);
+onMounted(() => {
+  console.log("Mobile: ", mobile.value, " ScreenSize: ", screenSize.value);
+  isMounted.value = true;
+});
 
 useHead({
   meta: [

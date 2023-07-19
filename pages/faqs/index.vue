@@ -7,23 +7,27 @@
             strapi-agency="general"
             color="#fff"
             :show-heading="true"
+            :showCategory="true"
             key="general"
           ></DisplayFaqs>
           <DisplayFaqs
             strapi-agency="dv"
             color="#fff"
             :show-heading="true"
+            :showCategory="true"
           ></DisplayFaqs>
           <DisplayFaqs
             strapi-agency="sa"
             color="#fff"
             :show-heading="true"
+            :showCategory="true"
             key="sa"
           ></DisplayFaqs>
           <DisplayFaqs
             strapi-agency="cac"
             color="#fff"
             :show-heading="true"
+            :showCategory="true"
             key="cac"
           ></DisplayFaqs>
         </v-col>
