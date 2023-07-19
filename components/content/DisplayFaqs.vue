@@ -129,7 +129,7 @@ const { data } = await useAsyncData(`faqs-${props.strapiAgency}`, () =>
     .where({ agency: props.strapiAgency })
     .sort({ ranking: -1 })
     .sort({ cat: 1 })
-    .sort({ subcat: 1 })
+    // .sort({ subcat: 1 })
     .find()
 );
 
