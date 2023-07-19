@@ -8,6 +8,10 @@
             {{ getStrapiEnum(props.strapiAgency) }}
           </h2>
 
+          <div v-if="data && data.length === 0">
+            <p class="pl-3">No FAQs found.</p>
+          </div>
+
           <v-expansion-panels>
             <v-expansion-panel
               v-for="(item, index) in data"
@@ -128,8 +132,9 @@ const { data } = await useAsyncData(`faqs-${props.strapiAgency}`, () =>
   queryContent("/faqs/")
     .where({ agency: props.strapiAgency })
     .sort({ ranking: -1 })
+    .sort({ subcat: 1 })
     .sort({ cat: 1 })
-    // .sort({ subcat: 1 })
+
     .find()
 );
 

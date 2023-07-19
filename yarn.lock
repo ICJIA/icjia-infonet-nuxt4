@@ -750,7 +750,7 @@
     read-package-json-fast "^3.0.0"
     which "^3.0.0"
 
-"@nuxt/content@^2.7.0":
+"@nuxt/content@^2.7.1":
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/@nuxt/content/-/content-2.7.1.tgz#c8e0cb7c9b00ae60d4f027c7ed9f9c12f4b3c29f"
   integrity sha512-v7PozrJncWgo4FhjPSGz2hjcVlKYStZhazA2f2WxocKSpMWShR/bEnukn+7Ns+0oP7Llo53Nlw0LZs/nFL/XIg==
@@ -8095,7 +8095,7 @@ vue@^3.3.4:
     "@vue/server-renderer" "3.3.4"
     "@vue/shared" "3.3.4"
 
-vuetify@^3.3.8:
+vuetify@^3.3.9:
   version "3.3.9"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.3.9.tgz#31c097738ef5d13bcf3ab329536a2a298d382d9e"
   integrity sha512-Oh7iLYvhd99MyVqH8nrK5rai7t2R9ivuiZAZKE0sfP4x0MSYthXRPBqXi4Vy98R7MggNFaoMBDJ/hPscuRxnQA==
