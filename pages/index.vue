@@ -142,8 +142,28 @@
           <div v-for="post in posts" :key="post._path" class="mb-5">
             <NewsCard :item="post" background="#fff"></NewsCard>
           </div> </v-col
-        ><v-col cols="12" md="6"
-          ><h2>Frequently Asked Questions (FAQs)</h2>
+        ><v-col cols="12" md="6">
+          <v-container style="margin-top: -20px"
+            ><v-row>
+              <v-col cols="12" md="8"
+                ><h2 style="border: none">Frequently Asked Questions</h2>
+              </v-col>
+              <v-col cols="12" md="4" class="text-right hidden-sm-and-down"
+                ><div style="border: none" class="pt-8 pr-3">
+                  <v-btn
+                    color="#0D4474"
+                    to="/faqs"
+                    size="x-small"
+                    style="font-weight: 700; color: #fff"
+                    >All FAQs&nbsp;&raquo;</v-btn
+                  >
+                </div>
+              </v-col>
+            </v-row></v-container
+          >
+          <h2 style="margin-top: -35px"></h2>
+
+          <!-- <h2>Frequently Asked Questions (FAQs)</h2> -->
           <DisplayFaqs
             strapiAgency="general"
             key="general"
