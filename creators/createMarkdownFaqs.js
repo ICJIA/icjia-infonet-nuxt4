@@ -76,6 +76,7 @@ axios
       }
     );
 
+    console.log("Total FAQs: ", faqs.length);
     let section;
     faqs.forEach((item) => {
       section = "faqs";
