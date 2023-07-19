@@ -137,7 +137,13 @@
               </v-col>
             </v-row></v-container
           >
-          <h2 style="margin-top: -35px"></h2>
+          <div
+            style="
+              margin-top: -20px;
+              border-top: 1px solid #222;
+              padding-bottom: 30px;
+            "
+          ></div>
 
           <div v-for="post in posts" :key="post._path" class="mb-5">
             <NewsCard :item="post" background="#fff"></NewsCard>
@@ -161,7 +167,13 @@
               </v-col>
             </v-row></v-container
           >
-          <h2 style="margin-top: -35px"></h2>
+          <div
+            style="
+              margin-top: -20px;
+              border-top: 1px solid #222;
+              padding-bottom: 30px;
+            "
+          ></div>
 
           <!-- <h2>Frequently Asked Questions (FAQs)</h2> -->
           <DisplayFaqs
