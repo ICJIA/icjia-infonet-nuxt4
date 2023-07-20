@@ -13,16 +13,18 @@
       <NuxtPage></NuxtPage>
     </v-main>
     <!-- <div style="height: 75px"></div> -->
-    <the-context-footer></the-context-footer>
+
+    <the-context-footer v-if="!mobile"></the-context-footer>
 
     <TheFooter></TheFooter>
   </v-app>
 </template>
 
 <script setup>
+import { useDisplay } from "vuetify";
 import { is } from "@babel/types";
 import tabMeta from "~/assets/json/tabs.json";
-
+const { mobile } = useDisplay();
 const tabs = useState("tabs", () => tabMeta);
 console.log("Tabs loaded.");
 const { isTranslationEnabled } = useAppConfig();
@@ -30,7 +32,7 @@ const isHome = ref(true);
 const route = useRoute();
 const isMounted = ref(false);
 watchEffect(() => {
-  console.log("route.path: ", route.path);
+  // console.log("route.path: ", route.path);
   if (route.path === "/") {
     isHome.value = true;
   } else {
