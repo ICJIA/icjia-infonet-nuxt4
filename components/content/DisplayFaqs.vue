@@ -3,7 +3,6 @@
     <v-container fluid style="margin: 0; padding: 0"
       ><v-row>
         <v-col>
-          <!-- <h1 class="mb-8">Frequently Asked Questions (FAQs)</h1> -->
           <h2 class="mb-10" v-if="props.showHeading" :id="props.strapiAgency">
             {{ getStrapiEnum(props.strapiAgency) }}
           </h2>
@@ -16,7 +15,7 @@
             <v-expansion-panel
               v-for="(item, index) in data"
               :key="item._path"
-              class="mb-5"
+              class="mb-2"
             >
               <!-- <div class="pl-3">
                 {{ getStrapiEnum(item.cat).toUpperCase() }}
@@ -25,7 +24,7 @@
                 expand-icon="mdi-plus"
                 collapse-icon="mdi-minus"
                 :style="`font-weight: 700; background: ${props.color}; color: #000; font-size: ${props.fontQuestionSize} `"
-                class="test"
+                class=""
               >
                 <!-- <span
                   style="color: #2e618c; font-weight: 900"

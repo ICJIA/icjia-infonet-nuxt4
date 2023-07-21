@@ -27,20 +27,29 @@ export default defineAppConfig({
     faqs: {
       general: {
         heading: "General",
+        level: 0,
+        fileDownload: "",
       },
       dv: {
         heading: "Domestic Violence (DV)",
+        level: 0,
+        fileDownload: "",
       },
       sa: {
         heading: "Sexual Assault (SA)",
+        level: 0,
+        fileDownload: "",
       },
       cac: {
         heading: "Children's Advocacy Center (CAC)",
+        level: 0,
+        fileDownload: "",
       },
       saVolunteerInformation: { heading: "Staff/Volunteer Information" },
       saAdministration: { heading: "Administration" },
       saClient: { heading: "Client" },
       saServices: { heading: "Services" },
+
       saReports: { heading: "Reports" },
       saMisc: { heading: "Miscellaneous" },
       saAgencyAdministration: {
@@ -49,8 +58,15 @@ export default defineAppConfig({
       saOffenderCriminalCaseInformation: {
         heading: "Offender Criminal Case Information",
       },
+      saCommunityAndInstitutionalServices: {
+        heading: "Community and Institutional Services",
+      },
       saAgencyInformation: { heading: "Agency Information" },
       saIntakeData: { heading: "Intake Data" },
+      saGroupServices: { heading: "Group Services" },
+      saNonClientCrisisIntervention: {
+        heading: "Non-Client Crisis Intervention",
+      },
     },
   },
   footerMenu: [
