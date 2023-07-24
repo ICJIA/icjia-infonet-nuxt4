@@ -33,10 +33,10 @@
   },
   "devDependencies": {
     "@nuxt/content": "^2.7.1",
-    "@nuxt/devtools": "^0.7.0",
+    "@nuxt/devtools": "^0.7.1",
     "@nuxt/image-edge": "1.0.0-rc.1-28110023.6b8ab9c",
     "@nuxtjs/apollo": "^5.0.0-alpha.6",
-    "@nuxtjs/google-fonts": "^3.0.1",
+    "@nuxtjs/google-fonts": "^3.0.2",
     "@vueuse/nuxt": "^10.2.1",
     "consola": "^3.2.3",
     "font-awesome": "4.7.0",
