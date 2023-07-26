@@ -9,10 +9,10 @@ answer: Once you save the record, a message will appear asking you if you want
   for the correct group session record. Click on the Attendees tab and add your
   attendees from the Available Clients list.
 ranking: 1000
-slug: after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients-how-do-i-enter-client-id-numbers-of-those-who-attended-the-group
+slug: after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients
 category: default
 createdAt: 2023-07-21T16:18:49.470Z
-updatedAt: 2023-07-21T16:18:50.661Z
+updatedAt: 2023-07-25T14:13:47.073Z
 publishedAt: 2023-07-21T16:18:50.656Z
 agency: sa
 cat: saServices
@@ -30,8 +30,8 @@ title: After I enter group session information and staff hours spent on
 summary: After I enter group session information and staff hours spent on
   providing the group session to clients, how do I enter client ID numbers of
   those who attended the group?
-path: /faqs/sa-after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients-how-do-i-enter-client-id-numbers-of-those-who-attended-the-group
-url: https://infonet.icjia.dev/faqs/sa-after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients-how-do-i-enter-client-id-numbers-of-those-who-attended-the-group
+path: /faqs/sa-after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients
+url: https://infonet.icjia.dev/faqs/sa-after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients
 markdown: Once you save the record, a message will appear asking you if you want
   to add attendees. Click OK and the Attendees tab will open. If you have
   entered and saved the group session information and then left that section of
