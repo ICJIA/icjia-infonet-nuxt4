@@ -41,7 +41,8 @@
                 > -->
 
                 <div
-                  :style="`font-weight: 900; color: #555; font-size: ${props.fontQuestionSize}`"
+                  class="px-2"
+                  :style="`font-weight: 900; color: #555; font-size: ${props.fontQuestionSize}; line-height: 1.4`"
                 >
                   <span v-if="!mobile && isMounted && showCategory"
                     >[{{ getStrapiEnum(item.cat).toUpperCase() }}]&nbsp</span

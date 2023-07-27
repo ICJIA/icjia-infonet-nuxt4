@@ -30,9 +30,11 @@ console.log("Tabs loaded.");
 const { isTranslationEnabled } = useAppConfig();
 const isHome = ref(true);
 const route = useRoute();
+const routePath = ref(route.path);
 const isMounted = ref(false);
 watchEffect(() => {
-  // console.log("route.path: ", route.path);
+  routePath.value = route.path;
+  console.log("route.path: ", routePath.value);
   if (route.path === "/") {
     isHome.value = true;
   } else {
@@ -40,6 +42,7 @@ watchEffect(() => {
   }
 });
 useHead({
+  meta: [{ name: "og:url", content: routePath }],
   htmlAttrs: {
     lang: "en",
   },

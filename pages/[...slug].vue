@@ -11,7 +11,7 @@ let myToc = [];
 
 const route = useRoute();
 // console.log(route);
-console.log("Test route.path: ", route.path.split("/")[1]);
+//console.log("Test route.path: ", route.path.split("/")[1]);
 // const error = useError();
 const { data } = await useAsyncData(`content-${path}`, async () => {
   const post = await queryContent().where({ _path: path }).findOne();
