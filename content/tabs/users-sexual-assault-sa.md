@@ -16,7 +16,7 @@ images:
   data: []
 path: /tabs/users-sexual-assault-sa
 url: https://infonet.icjia.dev/tabs/users-sexual-assault-sa
-markdown: >-
+markdown: >
   
   ### Sexual Assault (SA) User Manuals
 
@@ -50,21 +50,9 @@ markdown: >-
   ### Frequently Asked Questions (FAQs)
 
 
-  ::display-faqs
+  - [SA FAQs](https://infonet.icjia-api.cloud/uploads/3_3_2_SA_INFONET_Frequently_Asked_Questions_7_7_23_7c737ee0ff.docx)
 
-  ---
-
-  showHeading: false
-
-  strapiAgency: "sa"
-
-  strapiCategory: "sa"
-
-  key: "sa5555"
-
-  ---
-
-  ::
+  - [All FAQs](https://infonet.icjia.dev/faqs)
 ---
 
 
@@ -89,11 +77,6 @@ markdown: >-
 
 ### Frequently Asked Questions (FAQs)
 
-::display-faqs
----
-showHeading: false
-strapiAgency: "sa"
-strapiCategory: "sa"
-key: "sa5555"
----
-::
+- [SA FAQs](https://infonet.icjia-api.cloud/uploads/3_3_2_SA_INFONET_Frequently_Asked_Questions_7_7_23_7c737ee0ff.docx)
+- [All FAQs](https://infonet.icjia.dev/faqs)
+

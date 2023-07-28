@@ -1,6 +1,9 @@
 <template>
   <div class="pb-12">
-    <v-container fluid style="margin: 0; padding: 0"
+    <v-container
+      fluid
+      style="margin: 0; padding: 0"
+      v-if="data && data.length !== 0"
       ><v-row>
         <v-col>
           <h2 class="mb-10" v-if="props.showHeading" :id="props.strapiAgency">

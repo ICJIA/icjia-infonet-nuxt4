@@ -47,21 +47,9 @@ markdown: >+
   ### Frequently Asked Questions (FAQs)
 
 
-  ::display-faqs
+  - [DV FAQs](https://infonet.icjia-api.cloud/uploads/3_3_1_DV_INFONET_Frequently_Asked_Questions_7_7_23_5b58b1a47b.docx)
 
-  ---
-
-  showHeading: false
-
-  strapiAgency: "dv"
-
-  strapiCategory: "dv"
-
-  key: "dv1234"
-
-  ---
-
-  ::
+  - [All FAQs](https://infonet.icjia.dev/faqs)
 
 ---
 
@@ -85,13 +73,7 @@ markdown: >+
 
 ### Frequently Asked Questions (FAQs)
 
-::display-faqs
----
-showHeading: false
-strapiAgency: "dv"
-strapiCategory: "dv"
-key: "dv1234"
----
-::
+- [DV FAQs](https://infonet.icjia-api.cloud/uploads/3_3_1_DV_INFONET_Frequently_Asked_Questions_7_7_23_5b58b1a47b.docx)
+- [All FAQs](https://infonet.icjia.dev/faqs)
 
 

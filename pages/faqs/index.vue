@@ -3,12 +3,27 @@
     <v-container fluid>
       <v-row>
         <v-col cols="12" :md="cols">
+          <div v-if="data">
+            <h1 class="brand-color">
+              {{ data.title.toUpperCase() }}
+            </h1>
+            <ContentDoc
+              :key="data?.title"
+              :value="data"
+              class="markdown-body"
+              style="margin-top: -10px"
+            >
+              <template #empty>Document not found</template>
+              <template #not-found>Document not found</template>
+            </ContentDoc>
+          </div>
           <DisplayFaqs
             strapi-agency="general"
             color="#fff"
             :show-heading="true"
             :showCategory="true"
             key="general"
+            class="mt-12"
           ></DisplayFaqs>
           <DisplayFaqs
             strapi-agency="dv"
@@ -63,7 +78,13 @@ let sections = ref([]);
 let myToc = [];
 let myTocObj = {};
 
-const route = useRoute();
+const { path } = useRoute();
+
+const { data } = await useAsyncData(`faqs-${path}`, async () => {
+  const post = await queryContent().where({ _path: path }).findOne();
+  return post;
+});
+
 onMounted(() => {
   showTOC.value = true;
   cols.value = 9;
