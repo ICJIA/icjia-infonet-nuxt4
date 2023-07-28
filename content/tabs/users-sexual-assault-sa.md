@@ -52,7 +52,8 @@ markdown: >
 
   - [Download  Sexual Assault (SA) FAQs (Word)](https://infonet.icjia-api.cloud/uploads/3_3_2_SA_INFONET_Frequently_Asked_Questions_7_7_23_7c737ee0ff.docx)
 
-  - [All FAQs](https://infonet.icjia.dev/faqs)&nbsp;&raquo;
+
+  - [View All FAQs Online](https://infonet.icjia.dev/faqs)&nbsp;&raquo;
 ---
 
 
@@ -78,5 +79,6 @@ markdown: >
 ### Frequently Asked Questions (FAQs)
 
 - [Download  Sexual Assault (SA) FAQs (Word)](https://infonet.icjia-api.cloud/uploads/3_3_2_SA_INFONET_Frequently_Asked_Questions_7_7_23_7c737ee0ff.docx)
-- [All FAQs](https://infonet.icjia.dev/faqs)&nbsp;&raquo;
+
+- [View All FAQs Online](https://infonet.icjia.dev/faqs)&nbsp;&raquo;
 

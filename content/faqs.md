@@ -7,16 +7,20 @@ showTableOfContents: false
 summary: InfoNet Frquently Asked Questions (FAQs)
 section: root
 createdAt: 2023-07-28T12:19:46.063Z
-updatedAt: 2023-07-28T12:27:44.251Z
+updatedAt: 2023-07-28T14:08:45.132Z
 publishedAt: 2023-07-28T12:19:47.084Z
 searchMeta: null
 category: page
-rawText: "download printer friendly faqs domestic violence dv https infonet
-  icjia api cloud uploads 3 3 1 dv infonet frequently asked questions 7 7 23
-  5b58b1a47b docx sexual assault sa https infonet icjia api cloud uploads 3 3 2
-  sa infonet frequently asked questions 7 7 23 7c737ee0ff docx "
+rawText: " faq downloads download printer friendly faqs domestic violence dv
+  https infonet icjia api cloud uploads 3 3 1 dv infonet frequently asked
+  questions 7 7 23 5b58b1a47b docx sexual assault sa https infonet icjia api
+  cloud uploads 3 3 2 sa infonet frequently asked questions 7 7 23 7c737ee0ff
+  docx "
 draft: false
 markdown: >-
+  ## FAQ Downloads
+
+
   Download printer-friendly FAQs:
 
 
@@ -27,6 +31,8 @@ navigation: true
 path: /faqs
 url: https://infonet.icjia.dev/faqs
 ---
+
+## FAQ Downloads
 
 Download printer-friendly FAQs:
 

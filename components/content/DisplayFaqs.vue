@@ -7,7 +7,7 @@
       ><v-row>
         <v-col>
           <h2 class="mb-10" v-if="props.showHeading" :id="props.strapiAgency">
-            {{ getStrapiEnum(props.strapiAgency) }}
+            {{ getStrapiEnum(props.strapiAgency) }} FAQs
           </h2>
 
           <div v-if="data && data.length === 0">
@@ -29,20 +29,6 @@
                 :style="`font-weight: 700; background: ${props.color}; color: #000; font-size: ${props.fontQuestionSize} `"
                 class=""
               >
-                <!-- <span
-                  style="color: #2e618c; font-weight: 900"
-                  v-if="item.cat !== 'none'"
-                  >[<span v-if="props.showAgencyPrefix"
-                    >{{ props.strapiAgency.toUpperCase() }} - </span
-                  >{{ getStrapiEnum(item.cat).toUpperCase() }}]&nbsp;</span
-                >&nbsp;<span
-                  style="color: #2f4c63; font-weight: 900"
-                  v-if="item.cat !== 'none'"
-                  >{{
-                    getStrapiEnum(item.subcat)
-                  }}&nbsp;&nbsp;|&nbsp;&nbsp;</span
-                > -->
-
                 <div
                   class="px-2"
                   :style="`font-weight: 900; color: #555; font-size: ${props.fontQuestionSize}; line-height: 1.4`"
@@ -54,19 +40,6 @@
                 </div>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <!-- <span
-                  style="color: #2e618c; font-weight: 900"
-                  v-if="item.cat !== 'none'"
-                  >[<span v-if="props.showAgencyPrefix"
-                    >{{ props.strapiAgency.toUpperCase() }} - </span
-                  >{{ getStrapiEnum(item.cat).toUpperCase() }}]&nbsp;</span
-                >&nbsp;<span
-                  style="color: #2f4c63; font-weight: 900"
-                  v-if="item.cat !== 'none'"
-                  >{{
-                    getStrapiEnum(item.subcat)
-                  }}&nbsp;&nbsp;|&nbsp;&nbsp;</span
-                > -->
                 <span
                   :style="`font-size: ${props.fontAnswerSize};`"
                   v-html="renderer.render(item.answer)"
@@ -134,9 +107,12 @@ const props = defineProps({
 const { data } = await useAsyncData(`faqs-${props.strapiAgency}`, () =>
   queryContent("/faqs/")
     .where({ agency: props.strapiAgency })
-    .sort({ ranking: -1 })
+
+    .sort({ ranking: 1 })
+
     .sort({ subcat: 1 })
     .sort({ cat: 1 })
+    // .sort({ id: 1 })
 
     .find()
 );
@@ -150,7 +126,7 @@ const formatDate = (dateString) => {
 const { strapiEnumMap } = useAppConfig();
 
 const getStrapiEnum = (strapiEnum) => {
-  console.log("strapiEnum: ", strapiEnum);
+  //console.log("strapiEnum: ", strapiEnum);
   let heading;
   if (strapiEnumMap["faqs"][strapiEnum] === undefined) {
     heading = "General";
