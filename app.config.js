@@ -28,23 +28,22 @@ export default defineAppConfig({
       general: {
         heading: "General",
         level: 0,
-        fileDownload: "",
       },
       dv: {
         heading: "Domestic Violence (DV)",
         level: 0,
-        fileDownload: "",
       },
       sa: {
         heading: "Sexual Assault (SA)",
         level: 0,
-        fileDownload: "",
       },
       cac: {
         heading: "Children's Advocacy Center (CAC)",
         level: 0,
-        fileDownload: "",
       },
+      dvIntakeAndClient: { heading: "Intake/Client", level: 1 },
+      dvServices: { heading: "Services", level: 1 },
+      dvReporting: { heading: "Reporting", level: 1 },
       saVolunteerInformation: { heading: "Staff/Volunteer Information" },
       saAdministration: { heading: "Administration" },
       saClient: { heading: "Client" },
