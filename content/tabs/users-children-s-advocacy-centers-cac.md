@@ -28,6 +28,27 @@ markdown: >+
 
   - **(Coming Soon)**
 
+
+  ### Requests
+
+
+  **Custom data report:**
+
+
+  - Please send request to cja.infonethelp@illinois.gov and include the following information:
+
+      - Time period(s)
+      - Summary (aggregate) or record level
+
+          - If record level, define what you want to see as one record, or row of information. For example, a client, client case, or service?
+      
+      - Any desired filters, e.g. age, client’s resident county, service type
+
+  **Technical assistance:**
+
+
+  - cja.infonethelp@illinois.gov (preferred) or call 312-793-8550. 
+
 ---
 
 ### Children's Advocacy Centers (CAC) Definitions
@@ -37,5 +58,22 @@ markdown: >+
 ### Trainings
 
 - **(Coming Soon)**
+
+### Requests
+
+**Custom data report:**
+
+- Please send request to cja.infonethelp@illinois.gov and include the following information:
+
+    - Time period(s)
+    - Summary (aggregate) or record level
+
+        - If record level, define what you want to see as one record, or row of information. For example, a client, client case, or service?
+    
+    - Any desired filters, e.g. age, client’s resident county, service type
+
+**Technical assistance:**
+
+- cja.infonethelp@illinois.gov (preferred) or call 312-793-8550. 
 
 

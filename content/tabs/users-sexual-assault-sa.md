@@ -16,7 +16,7 @@ images:
   data: []
 path: /tabs/users-sexual-assault-sa
 url: https://infonet.icjia.dev/tabs/users-sexual-assault-sa
-markdown: >
+markdown: >+
   
   ### Sexual Assault (SA) User Manuals
 
@@ -66,6 +66,29 @@ markdown: >
 
 
   - [View All FAQs Online](https://infonet.icjia.dev/faqs)&nbsp;&raquo;
+
+
+  ### Requests
+
+
+  **Custom data report:**
+
+
+  - Please send request to cja.infonethelp@illinois.gov and include the following information:
+
+      - Time period(s)
+      - Summary (aggregate) or record level
+
+          - If record level, define what you want to see as one record, or row of information. For example, a client, client case, or service?
+      
+      - Any desired filters, e.g. age, client’s resident county, service type
+
+  **Technical assistance:**
+
+
+  - cja.infonethelp@illinois.gov (preferred) or call 312-793-8550. 
+
+
 ---
 
 
@@ -99,4 +122,23 @@ markdown: >
 - [Download  Sexual Assault (SA) FAQs (Word)](https://infonet.icjia-api.cloud/uploads/3_3_2_SA_INFONET_Frequently_Asked_Questions_7_7_23_7c737ee0ff.docx)
 
 - [View All FAQs Online](https://infonet.icjia.dev/faqs)&nbsp;&raquo;
+
+### Requests
+
+**Custom data report:**
+
+- Please send request to cja.infonethelp@illinois.gov and include the following information:
+
+    - Time period(s)
+    - Summary (aggregate) or record level
+
+        - If record level, define what you want to see as one record, or row of information. For example, a client, client case, or service?
+    
+    - Any desired filters, e.g. age, client’s resident county, service type
+
+**Technical assistance:**
+
+- cja.infonethelp@illinois.gov (preferred) or call 312-793-8550. 
+
+
 

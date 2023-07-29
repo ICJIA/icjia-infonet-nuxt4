@@ -80,6 +80,27 @@ markdown: >+
 
   - [View All FAQs Online](https://infonet.icjia.dev/faqs)&nbsp;&nbsp;&raquo;
 
+
+  ### Requests
+
+
+  **Custom data report:**
+
+
+  - Please send request to cja.infonethelp@illinois.gov and include the following information:
+
+      - Time period(s)
+      - Summary (aggregate) or record level
+
+          - If record level, define what you want to see as one record, or row of information. For example, a client, client case, or service?
+      
+      - Any desired filters, e.g. age, client’s resident county, service type
+
+  **Technical assistance:**
+
+
+  - cja.infonethelp@illinois.gov (preferred) or call 312-793-8550. 
+
 ---
 
 
@@ -119,5 +140,22 @@ markdown: >+
 - [Download Domestic Violence (DV) FAQs (Word)](https://infonet.icjia-api.cloud/uploads/3_3_1_DV_INFONET_Frequently_Asked_Questions_7_7_23_5b58b1a47b.docx)
 
 - [View All FAQs Online](https://infonet.icjia.dev/faqs)&nbsp;&nbsp;&raquo;
+
+### Requests
+
+**Custom data report:**
+
+- Please send request to cja.infonethelp@illinois.gov and include the following information:
+
+    - Time period(s)
+    - Summary (aggregate) or record level
+
+        - If record level, define what you want to see as one record, or row of information. For example, a client, client case, or service?
+    
+    - Any desired filters, e.g. age, client’s resident county, service type
+
+**Technical assistance:**
+
+- cja.infonethelp@illinois.gov (preferred) or call 312-793-8550. 
 
 
