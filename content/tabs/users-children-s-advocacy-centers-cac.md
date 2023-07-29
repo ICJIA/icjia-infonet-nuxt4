@@ -29,6 +29,12 @@ markdown: >+
   - **(Coming Soon)**
 
 
+  ### Definitions
+
+
+  - [CAC InfoNet Service Definitions.xlsx](https://infonet.icjia-api.cloud/uploads/3_4_3_CAC_Info_Net_Service_Definitions_fad41c74ab.xlsx)
+
+
   ### Requests
 
 
@@ -58,6 +64,10 @@ markdown: >+
 ### Trainings
 
 - **(Coming Soon)**
+
+### Definitions
+
+- [CAC InfoNet Service Definitions.xlsx](https://infonet.icjia-api.cloud/uploads/3_4_3_CAC_Info_Net_Service_Definitions_fad41c74ab.xlsx)
 
 ### Requests
 
