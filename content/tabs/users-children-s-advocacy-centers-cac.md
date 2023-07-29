@@ -23,16 +23,16 @@ markdown: >+
   - [CAC InfoNet Service Definitions](https://infonet.icjia-api.cloud/uploads/3_4_3_CAC_Info_Net_Service_Definitions_4f038e8085.xlsx)
 
 
-  ### Trainings
-
-
-  - **(Coming Soon)**
-
-
   ### Definitions
 
 
   - [CAC InfoNet Service Definitions.xlsx](https://infonet.icjia-api.cloud/uploads/3_4_3_CAC_Info_Net_Service_Definitions_fad41c74ab.xlsx)
+
+
+  ### Trainings
+
+
+  - **(Coming Soon)**
 
 
   ### Requests
@@ -61,13 +61,13 @@ markdown: >+
 
 - [CAC InfoNet Service Definitions](https://infonet.icjia-api.cloud/uploads/3_4_3_CAC_Info_Net_Service_Definitions_4f038e8085.xlsx)
 
-### Trainings
-
-- **(Coming Soon)**
-
 ### Definitions
 
 - [CAC InfoNet Service Definitions.xlsx](https://infonet.icjia-api.cloud/uploads/3_4_3_CAC_Info_Net_Service_Definitions_fad41c74ab.xlsx)
+
+### Trainings
+
+- **(Coming Soon)**
 
 ### Requests
 
