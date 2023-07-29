@@ -10,7 +10,7 @@ page:
   data:
     id: "3"
     attributes:
-      title: About
+      title: About InfoNet
       slug: about
 images:
   data:

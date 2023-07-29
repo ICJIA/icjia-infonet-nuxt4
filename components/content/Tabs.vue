@@ -107,7 +107,7 @@
     ></v-container>
   </div>
 </template>
- 
+
 <script setup>
 import { useDisplay } from "vuetify";
 import md from "markdown-it";
@@ -165,7 +165,7 @@ const getImageCaption = (caption) => {
 const openGalleryModal = ({ url, caption, thumbnail }) => {
   let myURL = `https://infonet.icjia-api.cloud${url}`;
   let thumbnailURL = `https://infonet.icjia-api.cloud${thumbnail}`;
-  console.log("Modal: ", myURL, caption);
+  //console.log("Modal: ", myURL, caption);
   useEvent("modal:gallery", {
     url: myURL,
     caption: caption,
@@ -180,6 +180,4 @@ onMounted(() => {
 
 <style scoped>
 /* CSS GRID */
-
-
 </style>

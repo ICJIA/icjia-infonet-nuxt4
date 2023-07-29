@@ -1,5 +1,5 @@
 ---
-title: About
+title: About InfoNet
 slug: about
 hideFromSearch: false
 hideFromSitemap: false
@@ -15,7 +15,7 @@ summary: InfoNet is a web-based data/case management system used by over 100
   Chicago Department of Family & Support Services.
 section: root
 createdAt: 2023-04-02T15:04:25.519Z
-updatedAt: 2023-07-12T20:48:06.437Z
+updatedAt: 2023-07-28T19:32:38.703Z
 publishedAt: 2023-04-02T15:04:26.918Z
 searchMeta: null
 category: page
