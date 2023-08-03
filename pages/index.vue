@@ -360,7 +360,7 @@ const renderer = new md({
   typographer: true,
   quotes: "“”‘’",
 }).use(attrs);
-import hubArticles from "~/assets/json/hub.json";
+import hubArticles from "~/src/hub.json";
 import { useDisplay } from "vuetify";
 const { mobile } = useDisplay();
 const isMobile = ref(mobile);

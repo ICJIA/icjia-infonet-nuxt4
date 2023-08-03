@@ -23,7 +23,7 @@
 <script setup>
 import { useDisplay } from "vuetify";
 import { is } from "@babel/types";
-import tabMeta from "~/assets/json/tabs.json";
+import tabMeta from "~/src/tabs.json";
 const { mobile } = useDisplay();
 const tabs = useState("tabs", () => tabMeta);
 console.log("Tabs loaded.");

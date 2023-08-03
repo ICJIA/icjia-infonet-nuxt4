@@ -122,7 +122,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/content",
     "@nuxtjs/apollo",
-    "nuxt-link-checker",
+    // "nuxt-link-checker",
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async (options, nuxt) => {

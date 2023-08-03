@@ -90,18 +90,18 @@ axios
       }
       return obj;
     });
-    jsonfile.writeFileSync(`./public/tabs.json`, site, function (err) {
+    jsonfile.writeFileSync(`src/tabs.json`, site, function (err) {
       if (err) {
         console.error(err);
       }
     });
 
-    jsonfile.writeFileSync(`./assets/json/tabs.json`, site, function (err) {
-      if (err) {
-        console.error(err);
-      }
-    });
-    console.log("tabs.json created in /public/");
+    // jsonfile.writeFileSync(`./assets/json/tabs.json`, site, function (err) {
+    //   if (err) {
+    //     console.error(err);
+    //   }
+    // });
+    console.log("tabs.json created in /src/");
 
     const tabRoutes = site.map((item) => {
       return `${item.attributes.path}`;

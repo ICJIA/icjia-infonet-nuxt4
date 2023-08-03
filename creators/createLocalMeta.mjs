@@ -98,10 +98,10 @@ markdown.forEach((file) => {
 const searchIndex = [...content];
 // console.log(searchIndex);
 
-saveJson(searchIndex, "./public/siteMeta.json");
-console.log(`Created: /public/siteMeta.json`);
-saveJson(searchIndex, "./assets/json/searchIndex.json");
-console.log(`Created: /assets/json/searchIndex.json`);
+saveJson(searchIndex, "./src/siteMeta.json");
+console.log(`Created: /src/siteMeta.json`);
+saveJson(searchIndex, "./public/searchIndex.json");
+console.log(`Created: /public/searchIndex.json`);
 
 // --------------------------------------------------  App Routes
 

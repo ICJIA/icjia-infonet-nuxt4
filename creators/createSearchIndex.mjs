@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const jsonfile = require("jsonfile");
 const pages = require("../public/pages.json");
 const faqs = require("../public/faqs.json");
-const tabs = require("../public/tabs.json");
+const tabs = require("../src/tabs.json");
 const manualPages = require("../public/manualPages.json");
 // const meetings = require("../public/meetings.json");
 const posts = require("../public/posts.json");
@@ -35,20 +35,15 @@ const siteMeta = site.map((item) => {
   return obj;
 });
 
-jsonfile.writeFileSync(
-  `./assets/json/searchIndex.json`,
-  searchIndex,
-  function (err) {
-    if (err) {
-      console.error(err);
-    }
+jsonfile.writeFileSync(`src/searchIndex.json`, searchIndex, function (err) {
+  if (err) {
+    console.error(err);
   }
-);
-jsonfile.writeFileSync(`public/siteMeta.json`, siteMeta, function (err) {
+});
+jsonfile.writeFileSync(`src/siteMeta.json`, siteMeta, function (err) {
   if (err) {
     console.error(err);
   }
 });
 
-console.log("searchIndex.json created in /assets/json/");
-console.log("siteMeta.json created in ../public/siteMeta.json");
+console.log("siteMeta.json created in ../src/siteMeta.json");

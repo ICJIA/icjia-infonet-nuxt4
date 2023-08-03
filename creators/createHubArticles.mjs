@@ -29,12 +29,12 @@ axios
     //     console.error(err);
     //   }
     // });
-    jsonfile.writeFileSync(`assets/json/hub.json`, articles, function (err) {
+    jsonfile.writeFileSync(`src/hub.json`, articles, function (err) {
       if (err) {
         console.error(err);
       }
     });
 
-    console.log("hub.json created in /assets/json/");
+    console.log("hub.json created in /src/json/");
   })
   .catch((err) => console.error(err));
