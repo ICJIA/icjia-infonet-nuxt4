@@ -360,7 +360,14 @@ const renderer = new md({
   typographer: true,
   quotes: "“”‘’",
 }).use(attrs);
-import hubArticles from "~/src/hub.json";
+
+let hubArticles = ref("");
+import(`~/src/hub.json`).then((module) => {
+  hubArticles.value = module.default; // modify var1 by assigning to var1.value
+  console.log("hub.json loaded");
+});
+
+// import hubArticles from "~/src/hub.json";
 import { useDisplay } from "vuetify";
 const { mobile } = useDisplay();
 const isMobile = ref(mobile);
