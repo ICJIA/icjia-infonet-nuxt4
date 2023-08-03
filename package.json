@@ -45,7 +45,7 @@
     "nuxt-link-checker": "^2.0.2"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.0",
+    "@fortawesome/fontawesome-free": "^6.4.2",
     "@mdi/font": "^7.2.96",
     "@vueuse/components": "^10.3.0",
     "@vueuse/core": "^10.3.0",
@@ -53,7 +53,7 @@
     "@vueuse/router": "^10.3.0",
     "aos": "^3.0.0-beta.6",
     "axios": "^1.4.0",
-    "chart.js": "^4.3.2",
+    "chart.js": "^4.3.3",
     "dompurify": "^3.0.5",
     "fuse.js": "^6.6.2",
     "loading-attribute-polyfill": "^2.1.1",
