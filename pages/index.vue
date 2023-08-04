@@ -265,7 +265,7 @@
                             {{ formatDate(article.date) }}
                           </div>
                           <div class="my-6" style="font-weight: 900">
-                            {{ article.title }} {{ article._id }}
+                            {{ article.title }}
                           </div>
                           <v-img
                             :src="`/images/${article._id}-splash.jpeg`"
