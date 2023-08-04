@@ -265,10 +265,10 @@
                             {{ formatDate(article.date) }}
                           </div>
                           <div class="my-6" style="font-weight: 900">
-                            {{ article.title }}
+                            {{ article.title }} {{ article._id }}
                           </div>
                           <v-img
-                            :src="article.splash"
+                            :src="`/images/${article._id}-splash.jpeg`"
                             cover
                             height="200"
                             class="mb-5"
@@ -360,14 +360,7 @@ const renderer = new md({
   typographer: true,
   quotes: "“”‘’",
 }).use(attrs);
-
-let hubArticles = ref("");
-import(`~/src/hub.json`).then((module) => {
-  hubArticles.value = module.default; // modify var1 by assigning to var1.value
-  console.log("hub.json loaded");
-});
-
-// import hubArticles from "~/src/hub.json";
+import hubArticles from "~/assets/json/hub.json";
 import { useDisplay } from "vuetify";
 const { mobile } = useDisplay();
 const isMobile = ref(mobile);
