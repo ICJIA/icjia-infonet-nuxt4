@@ -29,12 +29,13 @@ const tabs = useState("tabs", () => tabMeta);
 console.log("Tabs loaded.");
 const { isTranslationEnabled } = useAppConfig();
 const isHome = ref(true);
+const isMounted = ref(false);
 const route = useRoute();
 const routePath = ref(route.path);
-const isMounted = ref(false);
 watchEffect(() => {
   routePath.value = route.path;
-  console.log("route.path: ", routePath.value);
+  console.log("routePath: ", routePath.value);
+
   if (route.path === "/") {
     isHome.value = true;
   } else {
@@ -57,7 +58,7 @@ const handleMounted = () => {
   isMounted.value = true;
 };
 
-const page = useCurrentPage({ slug: "slug-here" });
+//const page = useCurrentPage({ slug: "slug-here" });
 // console.log(page);
 </script>
 <style>
