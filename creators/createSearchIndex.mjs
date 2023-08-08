@@ -41,6 +41,7 @@ const search = site.map((item) => {
   obj.id = item.id;
   obj.idUnique = uuidv4();
   delete obj.body;
+  delete obj.markdown;
   return obj;
 });
 
