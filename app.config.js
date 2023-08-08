@@ -140,7 +140,11 @@ export default defineAppConfig({
         },
 
         {
-          title: "Infonet Partners",
+          title: "User Agencies",
+          link: "/agencies",
+        },
+        {
+          title: "Partners",
           link: "/partners",
         },
         {

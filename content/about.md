@@ -15,7 +15,7 @@ summary: InfoNet is a web-based data/case management system used by over 100
   Chicago Department of Family & Support Services.
 section: root
 createdAt: 2023-04-02T15:04:25.519Z
-updatedAt: 2023-08-08T11:46:47.449Z
+updatedAt: 2023-08-08T17:29:35.740Z
 publishedAt: 2023-04-02T15:04:26.918Z
 searchMeta: null
 category: page
@@ -52,7 +52,9 @@ rawText: " indent margin left 25px ul member list webkit columns 1 moz columns 1
   infonet developer kirthi writes code for infonet to create new functions and
   tools for users ziaul z hasan infonet developer z writes code for infonet to
   create new functions and tools for users infonet partners partners infonet
-  user agencies coming soon national webinar illinois infonet gathering
+  user agencies view list of user agencies agencies download list of user
+  agencies word https infonet icjia api cloud uploads infonet about user
+  agencies 2 4 0a645f865b docx national webinar illinois infonet gathering
   statewide victim services data provides an overview of infonet and lessons
   learned in its development the system is supported by the illinois criminal
   justice information authority icjia while system use and requirements are
@@ -198,7 +200,9 @@ markdown: >2-
   <div class="indent">
 
 
-  **Coming Soon**
+  - [View list of user agencies](/agencies)
+
+  - [Download list of user agencies (Word)](https://infonet.icjia-api.cloud/uploads/Infonet_ABOUT_User_Agencies_2_4_0a645f865b.docx)
 
 
   </div>
@@ -341,7 +345,8 @@ The primary purposes of InfoNet are to:
 
 <div class="indent">
 
-**Coming Soon**
+- [View list of user agencies](/agencies)
+- [Download list of user agencies (Word)](https://infonet.icjia-api.cloud/uploads/Infonet_ABOUT_User_Agencies_2_4_0a645f865b.docx)
 
 </div>
 

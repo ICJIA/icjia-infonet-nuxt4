@@ -98,6 +98,11 @@ useHead({
             <div v-if="route.path === '/partners'" class="text-center mt-12">
               <nuxt-link to="/about">More about Infonet&nbsp;&raquo;</nuxt-link>
             </div>
+
+            <div v-if="route.path === '/agencies'" class="text-center mt-12">
+              <nuxt-link to="/about">More about Infonet&nbsp;&raquo;</nuxt-link>
+            </div>
+
             <div
               v-if="route.path.split('/')[1] === 'faqs'"
               class="text-center mt-12"
