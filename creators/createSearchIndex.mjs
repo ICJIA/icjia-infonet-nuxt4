@@ -35,15 +35,25 @@ const siteMeta = site.map((item) => {
   return obj;
 });
 
-jsonfile.writeFileSync(`src/searchIndex.json`, searchIndex, function (err) {
+const search = site.map((item) => {
+  // console.log(item.attributes);
+  const obj = { ...item.attributes };
+  obj.id = item.id;
+  obj.idUnique = uuidv4();
+  delete obj.body;
+  return obj;
+});
+
+jsonfile.writeFileSync(`./src/searchIndex.json`, search, function (err) {
   if (err) {
     console.error(err);
   }
 });
-jsonfile.writeFileSync(`src/siteMeta.json`, siteMeta, function (err) {
+jsonfile.writeFileSync(`./public/siteMeta.json`, siteMeta, function (err) {
   if (err) {
     console.error(err);
   }
 });
 
-console.log("siteMeta.json created in ../src/siteMeta.json");
+console.log("siteMeta.json created in ../public/siteMeta.json");
+console.log("searchIndex.json created in ../src/searchIndex.json");

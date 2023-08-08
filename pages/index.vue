@@ -399,6 +399,12 @@ const gotoArticle = (slug) => {
   return window.open(hubArticle, "_blank");
 };
 
+/**
+ * Formats a given date string into a human-readable format.
+ *
+ * @param {string} dateString - The date string to be formatted.
+ * @return {string} The formatted date string.
+ */
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
