@@ -103,7 +103,7 @@
           <v-container fluid
             ><v-row
               ><v-col cols="12" class="mt-5">
-                <TheHomeBarGraph v-if="isMounted" /> </v-col></v-row
+                <HomeBarGraph v-if="isMounted" /> </v-col></v-row
           ></v-container> </v-col
       ></v-row>
     </v-container>

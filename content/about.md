@@ -15,37 +15,43 @@ summary: InfoNet is a web-based data/case management system used by over 100
   Chicago Department of Family & Support Services.
 section: root
 createdAt: 2023-04-02T15:04:25.519Z
-updatedAt: 2023-07-28T19:32:38.703Z
+updatedAt: 2023-08-08T11:46:47.449Z
 publishedAt: 2023-04-02T15:04:26.918Z
 searchMeta: null
 category: page
-rawText: " indent margin left 25px infonet overview infonet is a web based data
-  case management system used by over 100 domestic and sexual violence service
-  providers in illinois the system is nationally recognized for facilitating
-  standardized data collection and reporting at the statewide level initial
-  development of infonet began in the mid 90s as a collaborative effort between
-  the illinois criminal justice information authority the illinois coalition
-  against domestic violence and the illinois coalition against sexual assault
-  since then infonet has grown to include partnerships with the illinois
-  department of human services and the chicago department of family support
-  services the primary purposes of infonet are to standardize data collection
-  and reporting improving the ability to analyze information statewide and
-  locally provide a central repository for statewide victim service data ease
-  reporting for victim service providers that receive grants from multiple
-  funding agencies which often require different types of information facilitate
-  continuous strategic planning for improving services and system response to
-  victims infonet team jennifer hiselman infonet manager jennifer oversees
-  infonet s operation provides training and assistance to users and works with
-  users and other stakeholders to improve and maximize infonet s utility ming
-  xie lead infonet developer ming leads infonet s development work overseeing
-  all infonet maintenance and upgrades l fernanda gonzalez research scientist
-  fernanda assists with training and user requests for data and or assistance
-  and conducts research using infonet data caleb schaffner research scientist
-  caleb assists with training and user requests for data and or assistance
-  conducts research using infonet data and helps test infonet upgrades kirthi
-  ravi infonet developer kirthi writes code for infonet to create new functions
-  and tools for users ziaul z hasan infonet developer z writes code for infonet
-  to create new functions and tools for users infonet partners partners infonet
+rawText: " indent margin left 25px ul member list webkit columns 1 moz columns 1
+  columns 1 padding left 0 list style type none ul member list li list style
+  position inside webkit column break inside avoid page break inside avoid break
+  inside avoid padding 10px media only screen and min width 768px ul member list
+  webkit columns 2 moz columns 2 columns 2 padding left 0 media only screen and
+  min width 1024px ul member list webkit columns 3 moz columns 3 columns 3
+  padding left 0 infonet overview infonet is a web based data case management
+  system used by over 100 domestic and sexual violence service providers in
+  illinois the system is nationally recognized for facilitating standardized
+  data collection and reporting at the statewide level initial development of
+  infonet began in the mid 90s as a collaborative effort between the illinois
+  criminal justice information authority the illinois coalition against domestic
+  violence and the illinois coalition against sexual assault since then infonet
+  has grown to include partnerships with the illinois department of human
+  services and the chicago department of family support services the primary
+  purposes of infonet are to standardize data collection and reporting improving
+  the ability to analyze information statewide and locally provide a central
+  repository for statewide victim service data ease reporting for victim service
+  providers that receive grants from multiple funding agencies which often
+  require different types of information facilitate continuous strategic
+  planning for improving services and system response to victims infonet team
+  jennifer hiselman infonet manager jennifer oversees infonet s operation
+  provides training and assistance to users and works with users and other
+  stakeholders to improve and maximize infonet s utility ming xie lead infonet
+  developer ming leads infonet s development work overseeing all infonet
+  maintenance and upgrades l fernanda gonzalez research scientist fernanda
+  assists with training and user requests for data and or assistance and
+  conducts research using infonet data caleb schaffner research scientist caleb
+  assists with training and user requests for data and or assistance conducts
+  research using infonet data and helps test infonet upgrades kirthi ravi
+  infonet developer kirthi writes code for infonet to create new functions and
+  tools for users ziaul z hasan infonet developer z writes code for infonet to
+  create new functions and tools for users infonet partners partners infonet
   user agencies coming soon national webinar illinois infonet gathering
   statewide victim services data provides an overview of infonet and lessons
   learned in its development the system is supported by the illinois criminal
@@ -66,18 +72,57 @@ rawText: " indent margin left 25px infonet overview infonet is a web based data
   and law enforcement based victim service providers infonet screenshots
   lazytabs sectionid screenshots "
 draft: false
-markdown: >-
-  <style>
+markdown: >2-
+   <style>
 
    .indent {
    
    margin-left: 25px
    
    }
-   
+
+  ul.member-list {
+    -webkit-columns: 1;
+    -moz-columns: 1;
+    columns: 1;
+    padding-left: 0;
+    list-style-type: none;
 
     
-   </style>
+  }
+
+  ul.member-list li {
+    list-style-position: inside;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    padding: 10px;
+  }
+
+
+  @media only screen and (min-width: 768px) {
+    ul.member-list {
+      -webkit-columns: 2;
+      -moz-columns: 2;
+      columns: 2;
+      padding-left: 0;
+    }
+  }
+
+
+  @media only screen and (min-width: 1024px) {
+    ul.member-list {
+      -webkit-columns: 3;
+      -moz-columns: 3;
+      columns: 3;
+      padding-left: 0;
+    }
+  }
+
+
+  </style>
+
+
 
 
 
@@ -200,17 +245,50 @@ path: /about
 url: https://infonet.icjia.dev/about
 ---
 
-<style>
+ <style>
 
  .indent {
  
  margin-left: 25px
  
  }
- 
 
+ul.member-list {
+  -webkit-columns: 1;
+  -moz-columns: 1;
+  columns: 1;
+  padding-left: 0;
+  list-style-type: none;
   
- </style>
+}
+ul.member-list li {
+  list-style-position: inside;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  padding: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  ul.member-list {
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    columns: 2;
+    padding-left: 0;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  ul.member-list {
+    -webkit-columns: 3;
+    -moz-columns: 3;
+    columns: 3;
+    padding-left: 0;
+  }
+}
+
+</style>
+
 
 
 
