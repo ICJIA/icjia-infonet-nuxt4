@@ -102,7 +102,8 @@
         <v-col cols="12" md="6" class="mb-8">
           <v-container fluid
             ><v-row
-              ><v-col cols="12" class="mt-5"> <HomeBarGraph /> </v-col></v-row
+              ><v-col cols="12" class="mt-5">
+                <LazyHomeBarGraph v-if="isMounted" /> </v-col></v-row
           ></v-container> </v-col
       ></v-row>
     </v-container>
