@@ -23,12 +23,14 @@
 <script setup>
 import { useDisplay } from "vuetify";
 import { is } from "@babel/types";
-import tabMeta from "~/src/tabs.json";
 
 const { mobile } = useDisplay();
 // Load tabs into global state
+// import tabMeta from "~/src/tabs.json";
+// const tabs = useState("tabs", () => tabMeta);
+const { data: tabMeta } = await useFetch("/api/tabs");
 const tabs = useState("tabs", () => tabMeta);
-console.log("useState: tags.json.");
+console.log("useState: tabs.json loaded.");
 
 // Load searchIndex into global state
 const { data: searchMeta } = await useFetch("/api/search");

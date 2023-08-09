@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-const { data } = await useFetch("/api/test");
+const { data } = await useFetch("/api/search");
 </script>
 
 <style lang="scss" scoped></style>
