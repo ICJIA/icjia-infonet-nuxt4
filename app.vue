@@ -24,9 +24,12 @@
 import { useDisplay } from "vuetify";
 import { is } from "@babel/types";
 import tabMeta from "~/src/tabs.json";
+const { data: searchMeta } = await useFetch("/api/test");
 const { mobile } = useDisplay();
 const tabs = useState("tabs", () => tabMeta);
 console.log("Tabs loaded.");
+const searchIndex = useState("search", () => searchMeta);
+console.log("Search index loaded.");
 const { isTranslationEnabled } = useAppConfig();
 const hideBreadcrumbs = ref(true);
 const isMounted = ref(false);

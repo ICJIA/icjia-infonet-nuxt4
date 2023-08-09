@@ -78,8 +78,10 @@
 
 <script setup>
 import Fuse from "fuse.js";
-import searchIndex from "~/src/searchIndex.json";
-
+// import searchIndex from "~/src/searchIndex.json";
+const searchIdx = useState("search");
+// const mySearch = ref(searchIdx.value.content);
+// console.log(mySear)
 useHead({
   title: "Search",
 });
@@ -119,7 +121,7 @@ if (route.query && route.query.q) {
   query.value = "";
 }
 
-const fuse = new Fuse(searchIndex, options);
+const fuse = new Fuse(searchIdx.value.content, options);
 
 const result = ref(fuse.search(query.value.toLowerCase));
 
