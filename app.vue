@@ -3,13 +3,13 @@
     <LazyImageModal></LazyImageModal>
     <TheNav></TheNav>
 
-    <ThePageLoader v-if="!isMounted && isHome"> </ThePageLoader>
+    <ThePageLoader v-if="!isMounted && hideBreadcrumbs"> </ThePageLoader>
     <TheSidebar></TheSidebar>
 
     <NuxtLoadingIndicator color="blue" />
 
     <v-main class="markdown-body" style="min-height: 90vh !important">
-      <TheBreadcrumbBar v-if="!isHome"></TheBreadcrumbBar>
+      <TheBreadcrumbBar v-if="!hideBreadcrumbs"></TheBreadcrumbBar>
       <NuxtPage></NuxtPage>
     </v-main>
     <!-- <div style="height: 75px"></div> -->
@@ -28,7 +28,7 @@ const { mobile } = useDisplay();
 const tabs = useState("tabs", () => tabMeta);
 console.log("Tabs loaded.");
 const { isTranslationEnabled } = useAppConfig();
-const isHome = ref(true);
+const hideBreadcrumbs = ref(true);
 const isMounted = ref(false);
 const route = useRoute();
 const routePath = ref(route.path);
@@ -37,9 +37,9 @@ watchEffect(() => {
   console.log("routePath: ", routePath.value);
 
   if (route.path === "/" || route.path === "/debug") {
-    isHome.value = true;
+    hideBreadcrumbs.value = true;
   } else {
-    isHome.value = false;
+    hideBreadcrumbs.value = false;
   }
 });
 useHead({
