@@ -36,7 +36,7 @@ watchEffect(() => {
   routePath.value = route.path;
   console.log("routePath: ", routePath.value);
 
-  if (route.path === "/") {
+  if (route.path === "/" || route.path === "/debug") {
     isHome.value = true;
   } else {
     isHome.value = false;

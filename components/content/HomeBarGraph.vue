@@ -30,7 +30,6 @@ import {
   Chart as ChartJS,
   Title,
   Tooltip,
-  Legend,
   BarElement,
   CategoryScale,
   LinearScale,
@@ -39,7 +38,7 @@ import { ref } from "vue";
 ChartJS.register(
   Title,
   Tooltip,
-  Legend,
+
   BarElement,
   CategoryScale,
   LinearScale

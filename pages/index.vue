@@ -146,8 +146,7 @@
           ></div>
 
           <div v-for="post in posts" :key="post._path" class="mb-5">
-            <NewsCard :item="post" background="#fff"></NewsCard>
-          </div> </v-col
+            <NewsCard :item="post" background="#fff"></NewsCard></div></v-col
         ><v-col cols="12" md="6">
           <v-container style="margin-top: -20px"
             ><v-row>
