@@ -5,7 +5,9 @@
         ><v-col>
           <h1 class="brand-color">Search</h1>
           <div v-if="!pending">
-            <div class="text-right">Found: {{ result.length }}</div>
+            <div class="text-right" v-if="result.length > 0">
+              Found: {{ result.length }}
+            </div>
 
             <v-form class="pl-2 mt-4" style="margin-top: -15px">
               <v-text-field
@@ -13,6 +15,7 @@
                 ref="textfield"
                 v-model="query"
                 clearable
+                focused
                 label="Search Infonet"
                 placeholder="Enter search term"
                 style="font-weight: 900"
@@ -157,7 +160,7 @@ const clearAll = () => {
   result.value = [];
   showIndex.value = false;
 
-  if (!pending.value) {
+  if (pending.value === false) {
     const el = document.getElementById("textfield");
     el.focus();
   }
