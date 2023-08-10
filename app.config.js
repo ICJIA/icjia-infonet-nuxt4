@@ -73,10 +73,7 @@ export default defineAppConfig({
       main: "Debug",
       link: "/debug",
     },
-    {
-      main: "Home",
-      link: "/",
-    },
+
     {
       main: "About",
       link: "/about",
@@ -97,6 +94,11 @@ export default defineAppConfig({
       main: "Resources",
       link: "/resources",
     },
+    {
+      main: "Research",
+      link: "/research",
+    },
+
     {
       main: "Upgrades",
       link: "/upgrades",
@@ -172,6 +174,10 @@ export default defineAppConfig({
           link: "/publications",
         },
         {
+          title: "Research",
+          link: "/research",
+        },
+        {
           title: "Upgrades",
           link: "/upgrades",
         },
@@ -232,6 +238,10 @@ export default defineAppConfig({
         {
           title: "Data & Publications",
           link: "/publications",
+        },
+        {
+          title: "Research",
+          link: "/research",
         },
         {
           title: "Upgrades",
