@@ -24,17 +24,17 @@ const appRoutes = Array.from(
   ])
 );
 
-jsonfile.writeFileSync(`public/appRoutes.json`, appRoutes, function (err) {
-  if (err) {
-    console.error(err);
-  }
-});
+// jsonfile.writeFileSync(`public/appRoutes.json`, appRoutes, function (err) {
+//   if (err) {
+//     console.error(err);
+//   }
+// });
 
-jsonfile.writeFileSync(`assets/json/appRoutes.json`, appRoutes, function (err) {
-  if (err) {
-    console.error(err);
-  }
-});
+// jsonfile.writeFileSync(`assets/json/appRoutes.json`, appRoutes, function (err) {
+//   if (err) {
+//     console.error(err);
+//   }
+// });
 
 jsonfile.writeFileSync(`./src/appRoutes.json`, appRoutes, function (err) {
   if (err) {

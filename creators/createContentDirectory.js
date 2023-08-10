@@ -11,7 +11,7 @@ console.log("Content directory cleared");
 
 const publicDir = path.join(__dirname, "../public");
 const assetsDir = path.join(__dirname, "../assets/json");
-const srcDir = path.join(__dirname, "../src/json");
+const srcDir = path.join(__dirname, "../src");
 
 const PUBLIC_FILES_TO_REMOVE = [
   "site.json",
@@ -27,8 +27,11 @@ const PUBLIC_FILES_TO_REMOVE = [
   "hub.json",
   "biographies.json",
   "tabs.json",
+  "appRoutes.json",
   "publications.json",
   "meetings.json",
+  "searchIndex.json",
+  "siteMeta.json",
 ];
 
 PUBLIC_FILES_TO_REMOVE.forEach((fileName) => {

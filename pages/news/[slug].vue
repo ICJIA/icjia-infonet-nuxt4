@@ -1,5 +1,8 @@
 <script setup>
-import appRoutes from "assets/json/appRoutes.json";
+// import appRoutes from "assets/json/appRoutes.json";
+const { pending, data: routes } = await useFetch("/api/routes");
+const appRoutes = routes.value.content;
+
 const { path } = useRoute();
 const router = useRouter();
 const isMounted = ref(false);
