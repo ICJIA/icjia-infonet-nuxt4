@@ -36,6 +36,12 @@ jsonfile.writeFileSync(`assets/json/appRoutes.json`, appRoutes, function (err) {
   }
 });
 
-console.log("public/appRoutes.json created:\n", appRoutes);
+jsonfile.writeFileSync(`./src/appRoutes.json`, appRoutes, function (err) {
+  if (err) {
+    console.error(err);
+  }
+});
+
+console.log("appRoutes.json created in /src/appRoutes.json:", appRoutes);
 
 console.log("Total app routes: ", appRoutes.length);

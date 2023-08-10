@@ -3,7 +3,7 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config\
 
 import vuetify from "vite-plugin-vuetify";
-import appRoutes from "./public/appRoutes.json";
+import appRoutes from "./src/appRoutes.json";
 
 export default defineNuxtConfig({
   experimental: {
