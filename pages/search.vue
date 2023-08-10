@@ -1,10 +1,10 @@
 <template>
   <div data-aos="fade-in">
-    <keep-alive>
-      <v-container class="mb-12"
-        ><v-row
-          ><v-col>
-            <h1 class="brand-color">Search</h1>
+    <v-container class="mb-12"
+      ><v-row
+        ><v-col>
+          <h1 class="brand-color">Search</h1>
+          <div v-if="!pending">
             <div class="text-right">Found: {{ result.length }}</div>
 
             <v-form class="pl-2 mt-4" style="margin-top: -15px">
@@ -69,10 +69,11 @@
                 </v-card>
               </div>
             </div>
-          </v-col></v-row
-        ></v-container
-      >
-    </keep-alive>
+          </div>
+          <div v-else>Loading...</div>
+        </v-col></v-row
+      ></v-container
+    >
   </div>
 </template>
 
@@ -80,7 +81,11 @@
 import Fuse from "fuse.js";
 // import searchIndex from "~/src/searchIndex.json";
 // const searchIdx = useState("search");
-const { data: searchIdx } = await useFetch("/api/search");
+const { pending, data: searchIdx } = await useLazyFetch("/api/search");
+console.log("pending: ", pending.value);
+// watch(searchIdx, (newSearchIdx) => {
+//   console.log("newSearchIdx: ", newSearchIdx.value);
+// });
 // const searchIdx = useState("search", () => searchMeta);
 console.log("searchIndex.json loaded from api.");
 // console.log(mySear)
@@ -151,13 +156,15 @@ const clearAll = () => {
   query.value = "";
   result.value = [];
   showIndex.value = false;
-  const el = document.getElementById("textfield");
-  el.focus();
+
+  if (!pending.value) {
+    const el = document.getElementById("textfield");
+    el.focus();
+  }
 };
 
 onMounted(() => {
-  const el = document.getElementById("textfield");
-  el.focus();
+  clearAll();
   instantSearch();
 });
 </script>
