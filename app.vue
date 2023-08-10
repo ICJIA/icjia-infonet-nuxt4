@@ -33,9 +33,14 @@ const tabs = useState("tabs", () => tabMeta);
 console.log("useState: tabs.json loaded.");
 
 // Load searchIndex into global state
-const { data: searchMeta } = await useFetch("/api/search");
-const searchIndex = useState("search", () => searchMeta);
-console.log("useState: searchIndex.json loaded.");
+// const { data: searchMeta } = await useFetch("/api/search");
+// const searchIndex = useState("search", () => searchMeta);
+// console.log("useState: searchIndex.json loaded.");
+
+// Load appRoutes into global state
+const { data: routes } = await useFetch("/api/routes");
+const appRoutes = useState("routes", () => routes);
+console.log("useState: appRoutes.json loaded.");
 
 const { isTranslationEnabled } = useAppConfig();
 const hideBreadcrumbs = ref(true);

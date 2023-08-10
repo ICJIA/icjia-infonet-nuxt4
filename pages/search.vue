@@ -79,8 +79,10 @@
 <script setup>
 import Fuse from "fuse.js";
 // import searchIndex from "~/src/searchIndex.json";
-const searchIdx = useState("search");
-// const mySearch = ref(searchIdx.value.content);
+// const searchIdx = useState("search");
+const { data: searchIdx } = await useFetch("/api/search");
+// const searchIdx = useState("search", () => searchMeta);
+console.log("searchIndex.json loaded from api.");
 // console.log(mySear)
 useHead({
   title: "Search",
