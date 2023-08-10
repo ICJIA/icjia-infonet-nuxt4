@@ -257,7 +257,7 @@
                           class="px-5 py-5 info-card mb-5 mt-4 mr-2"
                           outlined
                           min-height="200"
-                          style="width: 100%"
+                          style="max-width: 700px"
                           @click="gotoArticle(article.slug)"
                         >
                           <div>
@@ -288,8 +288,8 @@
                               </v-row>
                             </template>
                           </v-img>
-                          <div style="max-width: 500px">
-                            {{ article.abstract }}
+                          <div>
+                            {{ truncateString(article.abstract, 350) }}
                           </div>
                         </v-card>
                       </v-slide-group-item>
@@ -314,9 +314,9 @@
                       {{ article.title }}
                     </div>
                     <v-img
-                      :src="article.splash"
+                      :src="`/images/${article._id}-splash.jpeg`"
                       cover
-                      height="200"
+                      height="250"
                       class="mb-5"
                       :ref="'img_' + article._id"
                       style="border: 1px solid #fafafa"
@@ -335,7 +335,7 @@
                         </v-row>
                       </template>
                     </v-img>
-                    <div style="max-width: 500px">{{ article.abstract }}</div>
+                    <div>{{ truncateString(article.abstract, 350) }}</div>
                   </v-card>
                 </div>
               </div>
@@ -407,6 +407,16 @@ const gotoArticle = (slug) => {
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
+const truncateString = (str, num = 250) => {
+  // If the length of str is less than or equal to num
+  // just return str--don't truncate it.
+  if (str.length <= num) {
+    return str;
+  }
+  // Return str truncated with '...' concatenated to the end of str.
+  return str.slice(0, num) + "...";
 };
 </script>
 

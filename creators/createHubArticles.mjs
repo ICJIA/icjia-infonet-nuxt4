@@ -5,7 +5,7 @@ const fs = require("fs");
 const axios = require("axios");
 
 const query = `query {
-  articles(limit: 200, sort: "date:desc", where: { tags_contains: "infonet" }) {
+  articles(limit: 200, sort: "date:desc", where: { tags_contains: ["infonet"] }) {
     _id
     title
     date
@@ -36,5 +36,6 @@ axios
     });
 
     console.log("hub.json created in /assets/json/");
+    console.log("Hub articles found: ", articles.length);
   })
   .catch((err) => console.error(err));

@@ -19,7 +19,7 @@ if (!fs.existsSync(dirpath)) {
 }
 
 const query = `query {
-  articles(limit: 200, sort: "date:desc", where: { tags_contains: "infonet" }) {
+  articles(limit: 200, sort: "date:desc", where: { tags_contains: ["infonet"] }) {
     _id
     splash
   }
@@ -42,6 +42,7 @@ const writeImage = (item, attr) => {
   const base64 = item[attr];
   const data = base64.split(";base64,").pop();
   const ext = base64.split("data:image/")[1].split(";")[0];
+  //console.log("ext", ext);
   const path = `${dirpath}/${item._id}-${attr}.${ext}`;
 
   fs.writeFile(path, data, "base64", (err) => {
