@@ -125,43 +125,6 @@
                 </v-card-actions>
               </v-card></v-col
             >
-            <!-- <v-col cols="12"> -->
-            <!-- {{ selectedTag }}<br /> -->
-            <!-- <div v-for="article in filteredArticles" :key="article._id"> -->
-            <!-- <div class="pl-5 mb-5">
-                  {{ article.title }}<br />
-                  <span
-                    v-for="tag in getInfoNetSpecificTags(article.tags)"
-                    :key="article._id"
-                  >
-                    <v-chip
-                      size="x-small"
-                      style="font-weight: 700"
-                      @click="setTagFilter(tag)"
-                    >
-                      &nbsp;{{ tag.toUpperCase() }}&nbsp;</v-chip
-                    >
-                    &nbsp;
-                  </span>
-                </div> -->
-
-            <!-- </div> -->
-            <!-- <v-container fluid>
-                <v-row align="stretch"> -->
-
-            <!-- <v-col
-                    v-for="tag in getInfoNetSpecificTags(article.tags)"
-                    :key="article._id"
-                    class="mb-8"
-                    cols="12"
-                    md="6"
-                    style="display: flex; flex-direction: column"
-                  >
-                    card here</v-col
-                  > -->
-            <!-- </v-row></v-container
-              > -->
-            <!-- </v-col> -->
           </v-row></v-container
         >
       </v-col>
