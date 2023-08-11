@@ -1,6 +1,5 @@
 <template>
   <v-container fluid>
-    {{ tagFilter }}
     <v-row>
       <v-col>
         <h1>InfoNet Research</h1>
@@ -150,6 +149,7 @@ const articles = ref(hubArticles);
 let filteredArticles = ref([]);
 const route = useRoute();
 const tagFilter = route.query.tag;
+const tagIndex = route.query.tagIndex;
 if (tagFilter && tagFilter.length > 0) {
   filteredArticles = articles.value.filter(
     (article) => article.tags.includes(tagFilter) === true
@@ -182,14 +182,20 @@ const truncateString = (str, num = 250) => {
 let selectedTag = ref([]);
 
 onMounted(() => {
-  selectedTag.value = [0];
+  if (tagIndex && tagIndex.length > 0) {
+    selectedTag.value = [tagIndex];
+  } else {
+    selectedTag.value = [0];
+  }
+
   isMounted.value = true;
   filteredArticles = articles;
+  //console.log(tagFilter, tagIndex);
 });
 
 watch(selectedTag, (newSelectedTag) => {
   if (newSelectedTag) {
-    console.log("new watch tag: ", convertIndexToTag(newSelectedTag));
+    //console.log("new watch tag: ", convertIndexToTag(newSelectedTag));
     if (convertIndexToTag(newSelectedTag) === "all research") {
       filteredArticles = articles.value;
     } else {
@@ -201,13 +207,17 @@ watch(selectedTag, (newSelectedTag) => {
 
     // filteredArticles = articles;
   } else {
-    console.log("watch tag: ", convertIndexToTag(selectedTag.value));
+    //console.log("watch tag: ", convertIndexToTag(selectedTag.value));
     filteredArticles = articles;
   }
 });
 
 const convertIndexToTag = (index) => {
   return infonetTags.value[index];
+};
+
+const convertTagToIndex = (tag) => {
+  return infonetTags.value.indexOf(tag);
 };
 
 const setTagFilter = (tag) => {

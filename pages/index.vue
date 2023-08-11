@@ -438,8 +438,9 @@ const { data } = await useAsyncData(`content-home`, async () => {
 
 const gotoInfoNetResearchPage = (tag) => {
   const url = `/research/?tag=${tag}`;
-  console.log("goto URL: ", url);
-  router.push({ path: url, query: { tag } });
+  //console.log("goto URL: ", url);
+  const tagIndex = infonetTags.value.indexOf(tag);
+  router.push({ path: url, query: { tag, tagIndex } });
 };
 
 const { data: faqs } = await useAsyncData("content-faqs", () =>
