@@ -445,10 +445,6 @@ const { data: faqs } = await useAsyncData("content-faqs", () =>
 );
 
 const getInfoNetSpecificTags = (tagArr) => {
-  // write a function that compares tagArr to infonetTags
-  // and returns only the tags that are in both arrays
-  // console.log("tagArr: ", tagArr);
-  // console.log("infonetTags: ", infonetTags.value);
   let tagArrFiltered = [];
   for (let i = 0; i < tagArr.length; i++) {
     for (let j = 0; j < infonetTags.value.length; j++) {
