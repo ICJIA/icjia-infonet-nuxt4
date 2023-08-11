@@ -304,7 +304,23 @@
                             {{ truncateString(article.abstract, 350) }}
                           </div>
                           <div class="mt-5">
-                            {{ getInfoNetSpecificTags(article.tags) }}
+                            <!-- {{ getInfoNetSpecificTags(article.tags) }} -->
+                            <span
+                              v-for="tag in getInfoNetSpecificTags(
+                                article.tags
+                              )"
+                              :key="article._id"
+                            >
+                              <v-chip
+                                size="x-small"
+                                style="font-weight: 700"
+                                @click.prevent.stop="
+                                  gotoInfoNetResearchPage(tag)
+                                "
+                                >&nbsp;{{ tag.toUpperCase() }}&nbsp;</v-chip
+                              >
+                              &nbsp;
+                            </span>
                           </div>
                         </v-card>
                       </v-slide-group-item>
@@ -387,6 +403,7 @@ const isMounted = ref(false);
 const articles = ref(hubArticles);
 const limit = ref(2);
 let model = ref(null);
+const router = useRouter();
 const displayAuthors = (arr) => {
   console.log(arr);
 };
@@ -401,6 +418,12 @@ const { data } = await useAsyncData(`content-home`, async () => {
   const post = await queryContent().where({ _path: "/" }).findOne();
   return post;
 });
+
+const gotoInfoNetResearchPage = (tag) => {
+  const url = `/research/?tag=${tag}`;
+  console.log("goto URL: ", url);
+  router.push({ path: url, query: { tag } });
+};
 
 const { data: faqs } = await useAsyncData("content-faqs", () =>
   queryContent("/faqs/").find()
