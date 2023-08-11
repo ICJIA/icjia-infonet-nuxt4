@@ -25,7 +25,7 @@ const query = `query {
   articles(limit: 100, sort: "date:desc", where: {status: "published", tags_contains: ${tagsArray} }) {
     _id
     splash
-    tags
+    thumbnail
   }
  
 }`;
@@ -36,6 +36,7 @@ axios
   .then((res) => {
     const articles = res.data.data.articles;
     writeImages(res.data.data.articles, ["splash"]);
+    writeImages(res.data.data.articles, ["thumbnail"]);
   })
   .catch((err) => console.error(err));
 

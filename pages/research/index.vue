@@ -57,6 +57,7 @@
                 </div>
                 <v-img
                   :src="`/images/${article._id}-splash.jpeg`"
+                  :lazy-src="`/images/${article._id}-thumbnail.jpeg`"
                   cover
                   height="200"
                   class="mb-5"
@@ -81,6 +82,7 @@
                     <!-- TODO: Fix this hacky fallback to PNG if error on image -->
                     <v-img
                       :src="`/images/${article._id}-splash.png`"
+                      :lazy-src="`/images/${article._id}-thumbnail.png`"
                       cover
                       height="200"
                       class="mb-5"
