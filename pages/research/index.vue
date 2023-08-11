@@ -1,5 +1,18 @@
 <template>
   <v-container fluid>
+    <!-- <v-snackbar v-model="snackbar" :timeout="timeout">
+      <span class="text-center">
+        Filter by:&nbsp;
+        <span style="font-weight: 700; text-transform: uppercase">{{
+          snackbarText
+        }}</span>
+      </span>
+      <template v-slot:actions>
+        <v-btn color="blue" variant="text" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar> -->
     <v-row>
       <v-col>
         <h1>InfoNet Research</h1>
@@ -183,10 +196,15 @@ const truncateString = (str, num = 250) => {
 };
 
 let selectedTag = ref([]);
+let snackbar = ref(false);
+let snackbarText = ref("");
+let timeout = 3000;
 
 onMounted(() => {
   if (tagIndex && tagIndex.length > 0) {
     selectedTag.value = [tagIndex];
+    snackbarText = "Test from home page";
+    snackbar.value = true;
   } else {
     selectedTag.value = [0];
   }
@@ -227,6 +245,8 @@ const setTagFilter = (tag) => {
   console.log("tag: ", tag, " index: ", infonetTags.value.indexOf(tag));
   selectedTag.value = [infonetTags.value.indexOf(tag)];
   window.scrollTo(0, 0);
+  snackbarText = tag;
+  snackbar.value = true;
 };
 
 const getInfoNetSpecificTags = (tagArr) => {
