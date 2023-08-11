@@ -4,7 +4,10 @@ const jsonfile = require("jsonfile");
 const fs = require("fs");
 const axios = require("axios");
 const dirpath = "./public/images";
-
+// import tags from "../src/tags.json";
+const tags = require("../src/tags.json");
+let tagsArray = JSON.stringify(tags);
+console.log("tags: ", tagsArray);
 if (!fs.existsSync(dirpath)) {
   fs.mkdirSync(dirpath);
 } else {
@@ -19,9 +22,10 @@ if (!fs.existsSync(dirpath)) {
 }
 
 const query = `query {
-  articles(limit: 200, sort: "date:desc", where: { tags_contains: ["infonet"] }) {
+  articles(limit: 100, sort: "date:desc", where: {status: "published", tags_contains: ${tagsArray} }) {
     _id
     splash
+    tags
   }
  
 }`;

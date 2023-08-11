@@ -223,11 +223,10 @@
                           >
                             <v-btn
                               color="#0D4474"
-                              href="https://icjia.illinois.gov/researchhub/"
-                              target="_blank"
+                              to="/research"
                               size="x-small"
                               style="font-weight: 700; color: #fff"
-                              >All ICJIA Research&nbsp;&raquo;</v-btn
+                              >All InfoNet Research&nbsp;&raquo;</v-btn
                             >
                           </div>
                         </v-col>
@@ -273,8 +272,9 @@
                             class="mb-5"
                             :ref="'img_' + article._id"
                             style="border: 1px solid #fafafa"
-                            alt="ICJIA News image"
-                            ><template #placeholder>
+                            alt="InfoNet article splash image"
+                          >
+                            <template #placeholder>
                               <v-row
                                 class="fill-height ma-0"
                                 align="center"
@@ -287,9 +287,24 @@
                                 ></v-progress-circular>
                               </v-row>
                             </template>
+                            <template v-slot:error>
+                              <!-- TODO: Fix this hacky fallback to PNG if error on image -->
+                              <v-img
+                                :src="`/images/${article._id}-splash.png`"
+                                cover
+                                height="200"
+                                class="mb-5"
+                                :ref="'img_' + article._id"
+                                style="border: 1px solid #fafafa"
+                                alt="InfoNet article splash image"
+                              ></v-img>
+                            </template>
                           </v-img>
                           <div>
                             {{ truncateString(article.abstract, 350) }}
+                          </div>
+                          <div class="mt-5">
+                            {{ getInfoNetSpecificTags(article.tags) }}
                           </div>
                         </v-card>
                       </v-slide-group-item>
@@ -348,6 +363,7 @@
 </template>
 
 <script setup>
+import _ from "lodash";
 import md from "markdown-it";
 import attrs from "markdown-it-attrs";
 const renderer = new md({
@@ -361,8 +377,11 @@ const renderer = new md({
 }).use(attrs);
 import hubArticles from "~/assets/json/hub.json";
 import { useDisplay } from "vuetify";
+import { get } from "@vueuse/core";
 const { mobile } = useDisplay();
 const isMobile = ref(mobile);
+const infonetTags = useState("tags");
+console.log(infonetTags.value);
 // const router = useRouter();
 const isMounted = ref(false);
 const articles = ref(hubArticles);
@@ -387,6 +406,23 @@ const { data: faqs } = await useAsyncData("content-faqs", () =>
   queryContent("/faqs/").find()
 );
 
+const getInfoNetSpecificTags = (tagArr) => {
+  // write a function that compares tagArr to infonetTags
+  // and returns only the tags that are in both arrays
+  // console.log("tagArr: ", tagArr);
+  // console.log("infonetTags: ", infonetTags.value);
+  let tagArrFiltered = [];
+  for (let i = 0; i < tagArr.length; i++) {
+    for (let j = 0; j < infonetTags.value.length; j++) {
+      if (tagArr[i].toLowerCase() === infonetTags.value[j].toLowerCase()) {
+        tagArrFiltered.push(tagArr[i].toLowerCase());
+        break;
+      }
+    }
+  }
+  return tagArrFiltered;
+};
+
 onMounted(() => {
   isMounted.value = true;
   // fire an event
@@ -407,6 +443,12 @@ const gotoArticle = (slug) => {
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
+const getFileExtension = (filename) => {
+  // get file extension
+  const extension = filename.split(".").pop();
+  return extension;
 };
 
 const truncateString = (str, num = 250) => {
