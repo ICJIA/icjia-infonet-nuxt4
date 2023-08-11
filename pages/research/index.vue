@@ -23,13 +23,15 @@
 
         <div class="text-center mb-12" style="font-size: 14px">
           <span v-if="selectedTag === 0">Displaying </span>
-          {{ filteredArticles.length }} articles
-          <span v-if="selectedTag !== 0"
-            >tagged with
-            <span style="font-weight: 700">{{
-              convertIndexToTag(selectedTag).toUpperCase()
-            }}</span></span
+          {{ filteredArticles.length }} article<span
+            v-if="filteredArticles.length > 1"
+            >s</span
           >
+          <span v-if="selectedTag !== 0"></span>
+          tagged with
+          <span style="font-weight: 700; text-transform: uppercase">{{
+            convertIndexToTag(selectedTag)
+          }}</span>
         </div>
 
         <v-container fluid
@@ -229,7 +231,7 @@ watch(selectedTag, (newSelectedTag) => {
 });
 
 const convertIndexToTag = (index) => {
-  return infonetTags.value[index].toLowerCase();
+  return infonetTags.value[index];
 };
 
 const setTagFilter = (tag) => {
