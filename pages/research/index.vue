@@ -60,9 +60,16 @@ onMounted(() => {
 watch(selectedTag, (newSelectedTag) => {
   if (newSelectedTag) {
     console.log("new watch tag: ", convertIndexToTag(newSelectedTag));
-    // filteredArticles = articles.value.filter(
-    //   (article) => article.tags.includes(newSelectedTag.value) === true
-    // );
+    if (convertIndexToTag(newSelectedTag) === "all articles") {
+      filteredArticles = articles.value;
+    } else {
+      filteredArticles = articles.value.filter(
+        (article) =>
+          article.tags.includes(convertIndexToTag(newSelectedTag)) === true
+      );
+    }
+
+    // filteredArticles = articles;
   } else {
     console.log("watch tag: ", convertIndexToTag(selectedTag.value));
     filteredArticles = articles;
