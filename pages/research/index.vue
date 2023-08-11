@@ -1,37 +1,69 @@
 <template>
-  <div>
-    <pre v-if="tagFilter && tagFilter.length > 0">Filter: {{ tagFilter }}</pre>
-    <h2 class="text-h6 mb-2">Filter InfoNet Research:</h2>
-    <div class="text-center">
-      <v-chip-group v-model="selectedTag" column mandatory>
-        <v-chip
-          filter
-          variant="outlined"
-          v-for="index in infonetTags.length"
-          :key="index"
+  <v-container fluid>
+    <v-row>
+      <v-col>
+        <v-chip-group
+          v-model="selectedTag"
+          column
+          mandatory
+          class="mb-10 justify-center"
+          selected-class="chip-text"
         >
-          {{ infonetTags[index - 1] }}
-        </v-chip>
-      </v-chip-group>
-    </div>
-    <div v-if="articles">
-      <div v-for="article in filteredArticles" :key="article._id">
-        <div class="pl-5 mb-5">
-          {{ article.title }}<br />
-
-          <span
-            v-for="tag in getInfoNetSpecificTags(article.tags)"
-            :key="article._id"
+          <v-chip
+            style="font-weight: 700; text-transform: uppercase"
+            filter
+            size="small"
+            v-for="index in infonetTags.length"
+            :key="index"
           >
-            <v-chip size="x-small" style="font-weight: 700"
-              >&nbsp;{{ tag.toUpperCase() }}&nbsp;</v-chip
+            {{ infonetTags[index - 1] }}
+          </v-chip>
+        </v-chip-group>
+
+        <v-container fluid
+          ><v-row>
+            <v-col cols="12">
+              <!-- {{ selectedTag }}<br /> -->
+              <div v-for="article in filteredArticles" :key="article._id">
+                <div class="pl-5 mb-5">
+                  {{ article.title }}<br />
+                  <span
+                    v-for="tag in getInfoNetSpecificTags(article.tags)"
+                    :key="article._id"
+                  >
+                    <v-chip
+                      size="x-small"
+                      style="font-weight: 700"
+                      @click="setTagFilter(tag)"
+                    >
+                      &nbsp;{{ tag.toUpperCase() }}&nbsp;</v-chip
+                    >
+                    &nbsp;
+                  </span>
+                </div>
+              </div>
+            </v-col></v-row
+          ></v-container
+        >
+
+        <!-- <div v-for="article in filteredArticles" :key="article._id">
+          <div class="pl-5 mb-5">
+            {{ article.title }}<br />
+
+            <span
+              v-for="tag in getInfoNetSpecificTags(article.tags)"
+              :key="article._id"
             >
-            &nbsp;
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
+              <v-chip size="x-small" style="font-weight: 700"
+                >&nbsp;{{ tag.toUpperCase() }}&nbsp;</v-chip
+              >
+              &nbsp;
+            </span>
+          </div>
+        </div> -->
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup>
@@ -80,6 +112,11 @@ const convertIndexToTag = (index) => {
   return infonetTags.value[index];
 };
 
+const setTagFilter = (tag) => {
+  console.log("tag: ", tag, " index: ", infonetTags.value.indexOf(tag));
+  selectedTag.value = [infonetTags.value.indexOf(tag)];
+};
+
 const getInfoNetSpecificTags = (tagArr) => {
   let tagArrFiltered = [];
   for (let i = 0; i < tagArr.length; i++) {
@@ -94,4 +131,16 @@ const getInfoNetSpecificTags = (tagArr) => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.chip-text {
+  color: rgb(8, 8, 171);
+}
+
+.mdi-check {
+  font-size: 20px !important;
+}
+
+// .v-icon--size-default {
+//   font-size: calc(var(--v-icon-size-multiplier) * 1.5em) !important;
+// }
+</style>
