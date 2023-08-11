@@ -85,11 +85,8 @@ import Fuse from "fuse.js";
 // import searchIndex from "~/src/searchIndex.json";
 // const searchIdx = useState("search");
 const { pending, data: searchIdx } = await useFetch("/api/search");
-console.log("pending: ", pending.value);
-// watch(searchIdx, (newSearchIdx) => {
-//   console.log("newSearchIdx: ", newSearchIdx.value);
-// });
-// const searchIdx = useState("search", () => searchMeta);
+console.log("searchIdx pending: ", pending.value);
+
 console.log("searchIndex.json loaded from api.");
 // console.log(mySear)
 useHead({

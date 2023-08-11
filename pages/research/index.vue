@@ -142,10 +142,13 @@
 </template>
 
 <script setup>
-import hubArticles from "~/assets/json/hub.json";
+// import hubArticles from "~/assets/json/hub.json";
+const { pending, data: hubArticles } = await useFetch("/api/hub");
+console.log("hub pending: ", pending.value);
+console.log("hub.json loaded from api.");
 let infonetTags = useState("tags");
 let isMounted = ref(false);
-const articles = ref(hubArticles);
+const articles = ref(hubArticles.value.content);
 let filteredArticles = ref([]);
 const route = useRoute();
 const tagFilter = route.query.tag;

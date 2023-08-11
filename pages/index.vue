@@ -408,7 +408,10 @@ const renderer = new md({
   typographer: true,
   quotes: "“”‘’",
 }).use(attrs);
-import hubArticles from "~/assets/json/hub.json";
+// import hubArticles from "~/assets/json/hub.json";
+const { pending, data: hubArticles } = await useFetch("/api/hub");
+console.log("hub pending: ", pending.value);
+console.log("hub.json loaded from api.");
 import { useDisplay } from "vuetify";
 import { get } from "@vueuse/core";
 const { mobile } = useDisplay();
@@ -417,7 +420,7 @@ const infonetTags = useState("tags");
 console.log(infonetTags.value);
 // const router = useRouter();
 const isMounted = ref(false);
-const articles = ref(hubArticles);
+const articles = ref(hubArticles.value.content);
 const limit = ref(2);
 let model = ref(null);
 const router = useRouter();

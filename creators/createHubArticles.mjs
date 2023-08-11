@@ -37,7 +37,13 @@ axios
       article.tags = article.tags.map((tag) => tag.toLowerCase());
     });
 
-    jsonfile.writeFileSync(`assets/json/hub.json`, articles, function (err) {
+    // jsonfile.writeFileSync(`assets/json/hub.json`, articles, function (err) {
+    //   if (err) {
+    //     console.error(err);
+    //   }
+    // });
+
+    jsonfile.writeFileSync(`./src/hub.json`, articles, function (err) {
       if (err) {
         console.error(err);
       }
