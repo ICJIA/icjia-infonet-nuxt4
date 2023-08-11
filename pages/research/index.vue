@@ -2,11 +2,12 @@
   <v-container fluid>
     <v-row>
       <v-col>
+        <h1>InfoNet Research</h1>
         <v-chip-group
           v-model="selectedTag"
           column
           mandatory
-          class="mb-10 justify-center"
+          class="mt-3 mb-2 justify-center"
           selected-class="chip-text"
         >
           <v-chip
@@ -19,6 +20,17 @@
             {{ infonetTags[index - 1] }}
           </v-chip>
         </v-chip-group>
+
+        <div class="text-center mb-12" style="font-size: 14px">
+          <span v-if="selectedTag === 0">Displaying </span>
+          {{ filteredArticles.length }} articles
+          <span v-if="selectedTag !== 0"
+            >tagged with
+            <span style="font-weight: 700">{{
+              convertIndexToTag(selectedTag).toUpperCase()
+            }}</span></span
+          >
+        </div>
 
         <v-container fluid
           ><v-row>
@@ -78,7 +90,7 @@
                 </v-img>
 
                 <div>
-                  {{ truncateString(article.abstract, 350) }}
+                  {{ truncateString(article.abstract, 850) }}
                 </div>
                 <div class="mt-5">
                   <!-- {{ getInfoNetSpecificTags(article.tags) }} -->
