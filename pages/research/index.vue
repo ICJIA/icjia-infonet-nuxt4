@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    {{ tagFilter }}
     <v-row>
       <v-col>
         <h1>InfoNet Research</h1>
@@ -28,12 +29,14 @@
           class="text-center mb-12"
           style="font-size: 14px; margin-top: 15px"
         >
-          <span v-if="selectedTag === 0">Displaying </span>
+          <span v-if="filteredArticles.length === articles.length"
+            >Displaying
+          </span>
           {{ filteredArticles.length }} article<span
             v-if="filteredArticles.length > 1"
             >s</span
           >
-          <span v-if="selectedTag !== 0">
+          <span v-if="filteredArticles.length !== articles.length">
             tagged with
             <span style="font-weight: 700; text-transform: uppercase">{{
               convertIndexToTag(selectedTag)
@@ -142,7 +145,7 @@
 <script setup>
 import hubArticles from "~/assets/json/hub.json";
 let infonetTags = useState("tags");
-
+let isMounted = ref(false);
 const articles = ref(hubArticles);
 let filteredArticles = ref([]);
 const route = useRoute();
@@ -180,6 +183,7 @@ let selectedTag = ref([]);
 
 onMounted(() => {
   selectedTag.value = [0];
+  isMounted.value = true;
   filteredArticles = articles;
 });
 
