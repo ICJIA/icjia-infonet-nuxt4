@@ -1,12 +1,17 @@
 <template>
   <div>
-    <pre>{{ query }}</pre>
+    <pre>{{ tagFilter }}</pre>
   </div>
 </template>
 
 <script setup>
 const route = useRoute();
-const query = route.query.tag;
+const tagFilter = route.query.tag;
+if (tagFilter && tagFilter.length > 0) {
+  console.log("tagFilter: ", tagFilter);
+} else {
+  console.log("no tagFilter");
+}
 //console.log("tag value: ", route.query.tag);
 </script>
 

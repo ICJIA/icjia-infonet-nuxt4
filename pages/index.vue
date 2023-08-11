@@ -253,16 +253,19 @@
                       >
                         <v-card
                           elevation="5"
-                          class="px-5 py-5 info-card mb-5 mt-4 mr-2"
+                          class="px-5 py-5 mb-5 mt-4 mr-2"
                           outlined
                           min-height="200"
                           style="max-width: 700px"
-                          @click="gotoArticle(article.slug)"
                         >
                           <div>
                             {{ formatDate(article.date) }}
                           </div>
-                          <div class="my-6" style="font-weight: 900">
+                          <div
+                            class="my-6 hover"
+                            style="font-weight: 900"
+                            @click="gotoArticle(article.slug)"
+                          >
                             {{ article.title }}
                           </div>
                           <v-img
@@ -322,6 +325,18 @@
                               &nbsp;
                             </span>
                           </div>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              size="small"
+                              class="mt-5"
+                              variant="text"
+                              style="font-weight: 700"
+                              @click="gotoArticle(article.slug)"
+                            >
+                              Read Article&nbsp;&raquo;
+                            </v-btn>
+                          </v-card-actions>
                         </v-card>
                       </v-slide-group-item>
                     </v-slide-group>
