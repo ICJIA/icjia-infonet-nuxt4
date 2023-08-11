@@ -3,6 +3,9 @@
     <v-row>
       <v-col>
         <h1>InfoNet Research</h1>
+        <h2 class="text-center" style="border: none; font-size: 22px">
+          Filter by tag:
+        </h2>
         <v-chip-group
           v-model="selectedTag"
           column
@@ -21,17 +24,21 @@
           </v-chip>
         </v-chip-group>
 
-        <div class="text-center mb-12" style="font-size: 14px">
+        <div
+          class="text-center mb-12"
+          style="font-size: 14px; margin-top: 15px"
+        >
           <span v-if="selectedTag === 0">Displaying </span>
           {{ filteredArticles.length }} article<span
             v-if="filteredArticles.length > 1"
             >s</span
           >
-          <span v-if="selectedTag !== 0"></span>
-          tagged with
-          <span style="font-weight: 700; text-transform: uppercase">{{
-            convertIndexToTag(selectedTag)
-          }}</span>
+          <span v-if="selectedTag !== 0">
+            tagged with
+            <span style="font-weight: 700; text-transform: uppercase">{{
+              convertIndexToTag(selectedTag)
+            }}</span></span
+          >
         </div>
 
         <v-container fluid
@@ -47,7 +54,7 @@
               <v-card
                 height="100%"
                 style="position: relative"
-                class="px-5 py-5"
+                class="px-5 py-5 elevation-5"
               >
                 <div>
                   {{ formatDate(article.date) }}
