@@ -31,6 +31,12 @@ axios
     //     console.error(err);
     //   }
     // });
+
+    // convert array of tags in each article to lowercase
+    articles.forEach((article) => {
+      article.tags = article.tags.map((tag) => tag.toLowerCase());
+    });
+
     jsonfile.writeFileSync(`assets/json/hub.json`, articles, function (err) {
       if (err) {
         console.error(err);

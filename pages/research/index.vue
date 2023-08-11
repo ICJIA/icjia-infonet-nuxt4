@@ -109,7 +109,7 @@ watch(selectedTag, (newSelectedTag) => {
 });
 
 const convertIndexToTag = (index) => {
-  return infonetTags.value[index];
+  return infonetTags.value[index].toLowerCase();
 };
 
 const setTagFilter = (tag) => {
