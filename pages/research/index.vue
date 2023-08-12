@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-snackbar
+    <!-- <v-snackbar
       v-model="snackbar"
       :timeout="timeout"
       location="top"
@@ -24,7 +24,7 @@
           Close
         </v-btn>
       </template>
-    </v-snackbar>
+    </v-snackbar> -->
 
     <v-row>
       <v-col>
@@ -258,7 +258,7 @@ const convertTagToIndex = (tag) => {
 };
 
 const setTagFilter = (tag) => {
-  console.log("tag: ", tag, " index: ", infonetTags.value.indexOf(tag));
+  //console.log("tag: ", tag, " index: ", infonetTags.value.indexOf(tag));
   selectedTag.value = [infonetTags.value.indexOf(tag)];
   window.scrollTo(0, 0);
   snackbarText = tag;
