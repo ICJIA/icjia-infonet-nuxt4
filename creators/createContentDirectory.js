@@ -16,7 +16,7 @@ const srcDir = path.join(__dirname, "../src");
 const PUBLIC_FILES_TO_REMOVE = [
   "site.json",
   "sitemap.xml",
-  "siteMeta.json",
+  "sitemeta.json",
   "routesPages.json",
   "routesFaqs.json",
   "routesPosts.json",

@@ -50,11 +50,11 @@ jsonfile.writeFileSync(`./src/searchIndex.json`, search, function (err) {
     console.error(err);
   }
 });
-jsonfile.writeFileSync(`./public/siteMeta.json`, siteMeta, function (err) {
+jsonfile.writeFileSync(`./public/sitemeta.json`, siteMeta, function (err) {
   if (err) {
     console.error(err);
   }
 });
 
-console.log("siteMeta.json created in ../public/siteMeta.json");
+console.log("sitemeta.json created in ../public/sitemeta.json");
 console.log("searchIndex.json created in ../src/searchIndex.json");
