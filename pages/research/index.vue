@@ -1,18 +1,31 @@
 <template>
   <v-container fluid>
-    <!-- <v-snackbar v-model="snackbar" :timeout="timeout">
-      <span class="text-center">
-        Filter by:&nbsp;
-        <span style="font-weight: 700; text-transform: uppercase">{{
-          snackbarText
-        }}</span>
-      </span>
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      location="top"
+      elevation="6"
+      class="mt-3"
+    >
+      <div class="text-left" style="font-size: 12px">
+        <div class="mb-3">Selected filter:</div>
+        <div style="font-weight: 700; text-transform: uppercase; color: #fff">
+          {{ snackbarText }}
+        </div>
+      </div>
+
       <template v-slot:actions>
-        <v-btn color="blue" variant="text" @click="snackbar = false">
+        <v-btn
+          color="blue"
+          variant="text"
+          @click="snackbar = false"
+          style="font-size: 12px"
+        >
           Close
         </v-btn>
       </template>
-    </v-snackbar> -->
+    </v-snackbar>
+
     <v-row>
       <v-col>
         <h1>InfoNet Research</h1>
@@ -32,6 +45,7 @@
             size="small"
             v-for="index in infonetTags.length"
             :key="index"
+            @click="openSnackbar(infonetTags[index - 1])"
           >
             {{ infonetTags[index - 1] }}
           </v-chip>
@@ -197,16 +211,18 @@ const truncateString = (str, num = 250) => {
 
 let selectedTag = ref([]);
 let snackbar = ref(false);
-let snackbarText = ref("");
-let timeout = 3000;
+let snackbarText = ref("test");
+let timeout = 2000;
 
 onMounted(() => {
   if (tagIndex && tagIndex.length > 0) {
     selectedTag.value = [tagIndex];
-    snackbarText.value = "Test from home page";
+    snackbarText.value = infonetTags.value[tagIndex];
     snackbar.value = true;
   } else {
     selectedTag.value = [0];
+    // snackbar.value = true;
+    // snackbarText.value = "Test from default";
   }
 
   isMounted.value = true;
@@ -265,6 +281,11 @@ const getInfoNetSpecificTags = (tagArr) => {
 const gotoArticle = (slug) => {
   let hubArticle = `https://icjia.illinois.gov/researchhub/articles/${slug}`;
   return window.open(hubArticle, "_blank");
+};
+
+const openSnackbar = (str = "All Research") => {
+  snackbarText.value = str;
+  snackbar.value = true;
 };
 </script>
 
