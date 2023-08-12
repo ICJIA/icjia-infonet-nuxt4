@@ -157,7 +157,7 @@
 <script setup>
 // import hubArticles from "~/assets/json/hub.json";
 const { pending, data: hubArticles } = await useFetch("/api/hub");
-console.log("hub pending: ", pending.value);
+// console.log("hub pending: ", pending.value);
 console.log("hub.json loaded from api.");
 let infonetTags = useState("tags");
 let isMounted = ref(false);
@@ -203,7 +203,7 @@ let timeout = 3000;
 onMounted(() => {
   if (tagIndex && tagIndex.length > 0) {
     selectedTag.value = [tagIndex];
-    snackbarText = "Test from home page";
+    snackbarText.value = "Test from home page";
     snackbar.value = true;
   } else {
     selectedTag.value = [0];
