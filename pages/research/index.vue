@@ -188,30 +188,22 @@ if (tagFilter && tagFilter.length > 0) {
   filteredArticles = articles;
 }
 
-/**
- * Formats a given date string into a human-readable format.
- *
- * @param {string} dateString - The date string to be formatted.
- * @return {string} The formatted date string.
- */
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
 const truncateString = (str, num = 250) => {
-  // If the length of str is less than or equal to num
-  // just return str--don't truncate it.
   if (str.length <= num) {
     return str;
   }
-  // Return str truncated with '...' concatenated to the end of str.
+
   return str.slice(0, num) + "...";
 };
 
 let selectedTag = ref([]);
 let snackbar = ref(false);
-let snackbarText = ref("test");
+let snackbarText = ref("");
 let timeout = 2000;
 
 onMounted(() => {
