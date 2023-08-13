@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <!-- <v-snackbar
+    <v-snackbar
       v-model="snackbar"
       :timeout="timeout"
       location="top"
@@ -24,7 +24,7 @@
           Close
         </v-btn>
       </template>
-    </v-snackbar> -->
+    </v-snackbar>
 
     <v-row>
       <v-col>
@@ -45,7 +45,6 @@
             size="small"
             v-for="index in infonetTags.length"
             :key="index"
-            @click="openSnackbar(infonetTags[index - 1])"
           >
             {{ infonetTags[index - 1] }}
           </v-chip>
@@ -210,7 +209,7 @@ onMounted(() => {
   if (tagIndex && tagIndex.length > 0) {
     selectedTag.value = [tagIndex];
     snackbarText.value = infonetTags.value[tagIndex];
-    snackbar.value = true;
+    // snackbar.value = true;
   } else {
     selectedTag.value = [0];
     // snackbar.value = true;
