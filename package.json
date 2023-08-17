@@ -68,7 +68,7 @@
     "uuid": "^9.0.0",
     "vite-plugin-vuetify": "^1.0.2",
     "vue-chartjs": "^5.2.0",
-    "vuetify": "^3.3.12",
+    "vuetify": "^3.3.13",
     "yaml": "^2.3.1"
   }
 }
