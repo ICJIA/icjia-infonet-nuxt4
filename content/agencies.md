@@ -3,11 +3,11 @@ title: InfoNet User Agencies
 slug: agencies
 hideFromSearch: false
 hideFromSitemap: false
-showTableOfContents: false
+showTableOfContents: true
 summary: List of InfoNet User Agencies
 section: root
 createdAt: 2023-08-08T17:24:52.609Z
-updatedAt: 2023-08-08T17:43:15.530Z
+updatedAt: 2023-08-18T12:19:42.619Z
 publishedAt: 2023-08-08T17:24:53.445Z
 searchMeta: null
 category: page
@@ -16,11 +16,13 @@ rawText: " ul member list webkit columns 1 moz columns 1 columns 1 padding left
   column break inside avoid page break inside avoid break inside avoid padding
   10px media only screen and min width 768px ul member list webkit columns 2 moz
   columns 2 columns 2 padding left 0 media only screen and min width 1024px ul
-  member list webkit columns 3 moz columns 3 columns 3 padding left 0 agency
-  name here line 1 line 2 agency name here line 1 line 2 agency name here line 1
-  line 2 agency name here line 1 line 2 agency name here line 1 line 2 agency
-  name here line 1 line 2 agency name here line 1 line 2 agency name here line 1
-  line 2 agency name here line 1 line 2 "
+  member list webkit columns 3 moz columns 3 columns 3 padding left 0 domestic
+  violence anew building beyond violence and abuse info anewdv org homewood
+  illinois https anewdv org a safe place lake county crisis center info
+  asafeplaceforhelp org zion illinois www asafeplaceforhelp org apna ghar inc
+  help apnaghar org chicago illinois https www apnaghar org arab american family
+  services no email worth illinois https aafsil org ascend justice 312 971 5932
+  chicago illinois https www ascendjustice org "
 draft: false
 markdown: |
   <style>
@@ -63,98 +65,64 @@ markdown: |
 
 
 
-
+  ## Domestic Violence
 
   <ul class="member-list text-center">
-   
-   <li>
-    
-    **Agency Name here**
-    
-   Line 1
-   
-   Line 2
-   
-  </li>
 
-   <li>
-    
-    **Agency Name here**
-    
-   Line 1
-   
-   Line 2
-   
-  </li>
+  <li>
+  	
+  **ANEW: BUILDING BEYOND VIOLENCE AND ABUSE**
 
-   <li>
-    
-    **Agency Name here**
-    
-   Line 1
-   
-   Line 2
-   
-  </li>
+  Info@anewdv.org
 
-   <li>
-    
-    **Agency Name here**
-    
-   Line 1
-   
-   Line 2
-   
-  </li>
+  Homewood, Illinois
 
-   <li>
-    
-    **Agency Name here**
-    
-   Line 1
-   
-   Line 2
-   
-  </li>
+  https://anewdv.org/
 
-   <li>
-    
-    **Agency Name here**
-    
-   Line 1
-   
-   Line 2
-   
   </li>
+  	
+  <li>
+  	
+  **A Safe Place/Lake County Crisis Center**
 
-   <li>
-    
-    **Agency Name here**
-    
-   Line 1
-   
-   Line 2
-   
+  info@asafeplaceforhelp.org
+
+  Zion, Illinois
+
+  www.asafeplaceforhelp.org
   </li>
+  	
+  <li>
+  	
+  **APNA GHAR, INC**
 
-   <li>
-    
-    **Agency Name here**
-    
-   Line 1
-   
-   Line 2
-   
+  help@apnaghar.org
+
+  Chicago, Illinois
+
+  https://www.apnaghar.org/
   </li>
+  	
+  <li>
+  	
+  **ARAB AMERICAN FAMILY SERVICES**
 
-   <li>
-    
-    **Agency Name here**
-    
-   Line 1
-   
-   Line 2
-   
+  (no email)
+
+  Worth, Illinois
+
+  https://aafsil.org/
+  </li>
+  	
+  <li>
+  	
+  **ASCEND JUSTICE**
+
+  312-971-5932
+
+  Chicago, Illinois
+
+  https://www.ascendjustice.org/
   </li>
    
    
@@ -204,98 +172,64 @@ ul.member-list li {
 
 
 
-
+## Domestic Violence
 
 <ul class="member-list text-center">
- 
- <li>
-  
-  **Agency Name here**
-  
- Line 1
- 
- Line 2
- 
-</li>
 
- <li>
-  
-  **Agency Name here**
-  
- Line 1
- 
- Line 2
- 
-</li>
+<li>
+	
+**ANEW: BUILDING BEYOND VIOLENCE AND ABUSE**
 
- <li>
-  
-  **Agency Name here**
-  
- Line 1
- 
- Line 2
- 
-</li>
+Info@anewdv.org
 
- <li>
-  
-  **Agency Name here**
-  
- Line 1
- 
- Line 2
- 
-</li>
+Homewood, Illinois
 
- <li>
-  
-  **Agency Name here**
-  
- Line 1
- 
- Line 2
- 
-</li>
+https://anewdv.org/
 
- <li>
-  
-  **Agency Name here**
-  
- Line 1
- 
- Line 2
- 
 </li>
+	
+<li>
+	
+**A Safe Place/Lake County Crisis Center**
 
- <li>
-  
-  **Agency Name here**
-  
- Line 1
- 
- Line 2
- 
+info@asafeplaceforhelp.org
+
+Zion, Illinois
+
+www.asafeplaceforhelp.org
 </li>
+	
+<li>
+	
+**APNA GHAR, INC**
 
- <li>
-  
-  **Agency Name here**
-  
- Line 1
- 
- Line 2
- 
+help@apnaghar.org
+
+Chicago, Illinois
+
+https://www.apnaghar.org/
 </li>
+	
+<li>
+	
+**ARAB AMERICAN FAMILY SERVICES**
 
- <li>
-  
-  **Agency Name here**
-  
- Line 1
- 
- Line 2
- 
+(no email)
+
+Worth, Illinois
+
+https://aafsil.org/
+</li>
+	
+<li>
+	
+**ASCEND JUSTICE**
+
+312-971-5932
+
+Chicago, Illinois
+
+https://www.ascendjustice.org/
 </li>
  
  
