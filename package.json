@@ -63,7 +63,7 @@
     "mitt": "^3.0.1",
     "moment": "^2.29.4",
     "request": "^2.88.2",
-    "sass": "^1.65.1",
+    "sass": "^1.66.1",
     "sitemap": "^7.1.1",
     "uuid": "^9.0.0",
     "vite-plugin-vuetify": "^1.0.2",
