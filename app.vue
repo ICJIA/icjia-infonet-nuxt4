@@ -38,7 +38,7 @@ console.log("useState: appRoutes.json loaded.");
 // Load tags into global state
 import tagMeta from "~/src/tags.json";
 const tags = useState("tags", () => tagMeta);
-console.log("useState: tags.json loaded:", tags.value);
+//console.log("useState: tags.json loaded:", tags.value);
 
 const { isTranslationEnabled } = useAppConfig();
 const hideBreadcrumbs = ref(true);

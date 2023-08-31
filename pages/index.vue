@@ -417,7 +417,7 @@ import { get } from "@vueuse/core";
 const { mobile } = useDisplay();
 const isMobile = ref(mobile);
 const infonetTags = useState("tags");
-console.log(infonetTags.value);
+// console.log(infonetTags.value);
 // const router = useRouter();
 const isMounted = ref(false);
 const articles = ref(hubArticles.value.content);
