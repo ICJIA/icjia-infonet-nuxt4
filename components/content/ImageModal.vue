@@ -2,7 +2,7 @@
   <div class="text-center">
     <div id="myModal" class="modal" @click="closeModal">
       <div class="modal-content">
-        <v-img :src="url" :lazy-src="thumbnail" :alt="`Image: ${caption}`" cover
+        <v-img :src="url" :lazy-src="thumbnail" :alt="`Image: ${caption}`"
           ><template v-slot:placeholder>
             <div class="d-flex align-center justify-center fill-height">
               <v-progress-circular
@@ -94,7 +94,7 @@ const constructURL = (f) => {
   margin: 2% auto;
   padding: 10px;
   border: 1px solid #888;
-  width: 60%; /* Could be more or less, depending on screen size */
+  width: 80%; /* Could be more or less, depending on screen size */
 }
 
 .modal-content img {
