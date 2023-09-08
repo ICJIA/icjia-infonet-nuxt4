@@ -80,7 +80,7 @@ attachments:
         url: /uploads/INFONET_HOME_PAGE_Comms_Reviewed_851c563882.docx
         ext: .docx
         size: 1654.27
-postDate: 2023-06-30T00:00:00-05:00
+postDate: 2023-06-30T00:00:00-04:00
 markdown: >-
   Lorem markdownum insequitur reddique victorque vocum. Petit velut. Manus et
   locoque fallis.

@@ -27,12 +27,12 @@
                 </v-tab>
               </v-tabs>
 
-              <v-window v-model="tab" style="background: #fafafa">
+              <v-window v-model="tab" style="background: #fafafa" class="px-0">
                 <v-window-item
                   v-for="tab in tabContent"
                   :key="`tabContent-${tab.id}`"
                   :value="tab.attributes.slug"
-                  class=""
+                  class="px-3"
                 >
                   <div
                     class="px-5 py-5"
@@ -53,7 +53,8 @@
 
                   <div class="gallery mt-12" style="margin-left: 0px">
                     <div
-                      class="gallery-panel hover"
+                      class="gallery-panel hover my-5"
+                      style=""
                       v-for="(image, index) in tab.attributes.images.data"
                       :key="`images-${index}`"
                       @click="
@@ -71,9 +72,7 @@
                       "
                     >
                       <v-img
-                        :src="
-                          getImageURL(image.attributes.formats.thumbnail.url)
-                        "
+                        :src="getImageURL(image.attributes.formats.small.url)"
                         :lazy-src="
                           getImageURL(image.attributes.formats.thumbnail.url)
                         "
@@ -87,7 +86,10 @@
                             ></v-progress-circular>
                           </div> </template
                       ></v-img>
-                      <div style="font-size: 11px" class="text-left pl-1">
+                      <div
+                        style="font-size: 11px; font-weight: 900"
+                        class="text-center pl-1 pt-2"
+                      >
                         {{ image.attributes?.caption }}
                       </div>
                     </div>
