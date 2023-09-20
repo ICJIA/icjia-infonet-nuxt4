@@ -40,6 +40,10 @@ const { data: query } = await useAsyncData("news", () =>
 
     .find()
 );
+
+useHead({
+  title: "News and Updates",
+});
 </script>
 
 <style lang="scss" scoped>

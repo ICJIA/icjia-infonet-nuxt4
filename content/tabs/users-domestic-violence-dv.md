@@ -14,6 +14,7 @@ page:
       slug: resources
 images:
   data: []
+imageURL: https://test.com/[object Object]
 path: /tabs/users-domestic-violence-dv
 url: https://infonet.icjia.dev/tabs/users-domestic-violence-dv
 markdown: >+

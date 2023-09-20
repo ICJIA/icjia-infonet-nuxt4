@@ -1580,6 +1580,7 @@ images:
         previewUrl: null
         createdAt: 2023-09-19T21:04:30.961Z
         updatedAt: 2023-09-20T14:05:03.651Z
+imageURL: https://test.com/[object Object]
 path: /tabs/screenshots-dv
 url: https://infonet.icjia.dev/tabs/screenshots-dv
 markdown: >

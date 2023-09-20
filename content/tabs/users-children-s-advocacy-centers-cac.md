@@ -14,6 +14,7 @@ page:
       slug: resources
 images:
   data: []
+imageURL: https://test.com/[object Object]
 path: /tabs/users-children-s-advocacy-centers-cac
 url: https://infonet.icjia.dev/tabs/users-children-s-advocacy-centers-cac
 markdown: >+
