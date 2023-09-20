@@ -58,21 +58,21 @@
                       v-for="(image, index) in tab.attributes.images.data"
                       :key="`images-${index}`"
                       @click="
-                        image?.attributes?.formats?.medium
+                        image?.attributes?.formats?.large
                           ? openGalleryModal({
-                              url: image.attributes.formats.medium.url,
+                              url: image.attributes.formats.large.url,
                               caption: image.attributes?.caption || null,
                               thumbnail: image.attributes.formats.thumbnail.url,
                             })
                           : openGalleryModal({
-                              url: image.attributes.formats.small.url,
+                              url: image.attributes.formats.medium.url,
                               caption: image.attributes?.caption || null,
                               thumbnail: image.attributes.formats.thumbnail.url,
                             })
                       "
                     >
                       <v-img
-                        :src="getImageURL(image.attributes.formats.small.url)"
+                        :src="getImageURL(image.attributes.formats.medium.url)"
                         :lazy-src="
                           getImageURL(image.attributes.formats.thumbnail.url)
                         "
