@@ -4499,9 +4499,9 @@ linkify-it@^4.0.1:
     uc.micro "^1.0.1"
 
 listhen@^1.2.2, listhen@^1.4.4, listhen@^1.4.8:
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/listhen/-/listhen-1.5.4.tgz#b104b6b4f50d0f8d8b2601696c7df1c1ad8b56ff"
-  integrity sha512-7jY6x/cv2Ki7KdNSbR6qdTzhAVZXrNx3jMeg/+tMdDYT5DyHDN9V4ySrMs3gBZbDtLKLKG350apxKIlpWb4lBw==
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/listhen/-/listhen-1.5.5.tgz#58915512af70f770aa3e9fb19367adf479bb58c4"
+  integrity sha512-LXe8Xlyh3gnxdv4tSjTjscD1vpr/2PRpzq8YIaMJgyKzRG8wdISlWVWnGThJfHnlJ6hmLt2wq1yeeix0TEbuoA==
   dependencies:
     "@parcel/watcher" "^2.3.0"
     "@parcel/watcher-wasm" "2.3.0"
@@ -5948,9 +5948,9 @@ nth-check@^2.0.1:
     boolbase "^1.0.0"
 
 nuxi@^3.8.3:
-  version "3.8.4"
-  resolved "https://registry.yarnpkg.com/nuxi/-/nuxi-3.8.4.tgz#2dd7ba18b41d0eab9c7ca28c7c70f2f5b80034bf"
-  integrity sha512-YQAH2msfL1PeaDuk880jQAJdtF1hpuYaTQ7j8Ombl+SyyamcB9VTx0gbkNyZj7wmJQYxfiV6a42nlGQ7cJDO+g==
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/nuxi/-/nuxi-3.9.0.tgz#1f463977eeacaeb7195100286dcef432ed1ef71b"
+  integrity sha512-roCfCnQsp/oaHm6PL3HFvvGrwm1d2y1n7G9KzIx+i91eiO4P7fBuaVKibB2e8uqEJBgTwN52KxFha6MJnDykJQ==
   optionalDependencies:
     fsevents "~2.3.3"
 
@@ -7616,9 +7616,9 @@ tar@^6.1.11, tar@^6.1.13, tar@^6.1.2:
     yallist "^4.0.0"
 
 terser@^5.17.4:
-  version "5.19.4"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-5.19.4.tgz#941426fa482bf9b40a0308ab2b3cd0cf7c775ebd"
-  integrity sha512-6p1DjHeuluwxDXcuT9VR8p64klWJKo1ILiy19s6C9+0Bh2+NWTX6nD9EPppiER4ICkHDVB1RkVpin/YW2nQn/g==
+  version "5.20.0"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-5.20.0.tgz#ea42aea62578703e33def47d5c5b93c49772423e"
+  integrity sha512-e56ETryaQDyebBwJIWYB2TT6f2EZ0fL0sW/JRXNMN26zZdKi2u/E/5my5lG6jNxym6qsrVXfFRmOdV42zlAgLQ==
   dependencies:
     "@jridgewell/source-map" "^0.3.3"
     acorn "^8.8.2"
