@@ -94,12 +94,12 @@ const constructURL = (f) => {
   margin: 2% auto;
   padding: 10px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 70%; /* Could be more or less, depending on screen size */
 }
 
 .modal-content img {
   width: 100%;
-  max-height: 700px;
+  max-height: 600px;
 }
 
 /* The Close Button */

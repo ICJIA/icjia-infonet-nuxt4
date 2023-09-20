@@ -18,7 +18,7 @@ images:
       attributes:
         name: 01-SA Victim Demographics.jpg
         alternativeText: null
-        caption: null
+        caption: Victim Demographics
         width: 1006
         height: 646
         formats:
@@ -67,7 +67,7 @@ images:
         url: /uploads/01_SA_Victim_Demographics_561ed44d7c.jpg
         previewUrl: null
         createdAt: 2023-09-20T13:58:02.402Z
-        updatedAt: 2023-09-20T13:58:02.402Z
+        updatedAt: 2023-09-20T14:05:20.569Z
     - id: "118"
       attributes:
         name: 17-SA Client Closeout.jpg
