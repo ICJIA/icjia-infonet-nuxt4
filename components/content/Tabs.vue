@@ -52,7 +52,7 @@
                   ></div>
 
                   <div class="gallery mt-12" style="margin-left: 0px">
-                    <div
+                    <!-- <div
                       class="gallery-panel hover my-5"
                       style=""
                       v-for="(image, index) in tab.attributes.images.data"
@@ -70,7 +70,29 @@
                               thumbnail: image.attributes.formats.thumbnail.url,
                             })
                       "
+                    > -->
+                    <div
+                      class="gallery-panel hover my-5"
+                      style=""
+                      v-for="(image, index) in tab.attributes.images.data"
+                      :key="`images-${index}`"
+                      @click="
+                        image?.attributes?.formats?.large
+                          ? openGalleryModal({
+                              url: `${image.attributes.url}`,
+                              caption: image.attributes?.caption || null,
+                              thumbnail: image.attributes.formats.thumbnail.url,
+                            })
+                          : openGalleryModal({
+                              url: `${image.attributes.url}`,
+                              caption: image.attributes?.caption || null,
+                              thumbnail: image.attributes.formats.thumbnail.url,
+                            })
+                      "
                     >
+                      <!-- {{
+                        `https://infonet.icjia-api.cloud${image.attributes.url}`
+                      }} -->
                       <v-img
                         :src="getImageURL(image.attributes.formats.medium.url)"
                         :lazy-src="

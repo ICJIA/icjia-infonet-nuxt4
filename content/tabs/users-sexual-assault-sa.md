@@ -14,7 +14,6 @@ page:
       slug: resources
 images:
   data: []
-imageURL: https://test.com/[object Object]
 path: /tabs/users-sexual-assault-sa
 url: https://infonet.icjia.dev/tabs/users-sexual-assault-sa
 markdown: >+

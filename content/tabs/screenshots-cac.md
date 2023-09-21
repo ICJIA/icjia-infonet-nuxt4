@@ -716,7 +716,6 @@ images:
         previewUrl: null
         createdAt: 2023-06-24T20:28:11.312Z
         updatedAt: 2023-06-24T20:28:11.312Z
-imageURL: https://test.com/[object Object]
 path: /tabs/screenshots-cac
 url: https://infonet.icjia.dev/tabs/screenshots-cac
 markdown: "## Children's Advocacy Centers (CAC)"

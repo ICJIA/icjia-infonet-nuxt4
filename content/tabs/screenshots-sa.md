@@ -1354,7 +1354,6 @@ images:
         previewUrl: null
         createdAt: 2023-09-20T13:58:05.882Z
         updatedAt: 2023-09-20T13:58:05.882Z
-imageURL: https://test.com/[object Object]
 path: /tabs/screenshots-sa
 url: https://infonet.icjia.dev/tabs/screenshots-sa
 markdown: >-

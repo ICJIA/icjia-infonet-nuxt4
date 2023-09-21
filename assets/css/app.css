@@ -188,7 +188,7 @@ ul.cohort-list li {
 
  .gallery {
      display: grid;
-     grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+     grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
      grid-gap: 1.4rem;
      max-width: 200rem;
      margin: 3rem auto;
