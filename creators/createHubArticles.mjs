@@ -35,6 +35,8 @@ axios
     // convert array of tags in each article to lowercase
     articles.forEach((article) => {
       article.tags = article.tags.map((tag) => tag.toLowerCase());
+      article.pubType = "article";
+      article.source = "hub";
     });
 
     // jsonfile.writeFileSync(`assets/json/hub.json`, articles, function (err) {
