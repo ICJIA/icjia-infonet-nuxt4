@@ -35,6 +35,14 @@ axios
   .then((res) => {
     const publications = res.data.data.publications;
     console.log("Publist publications found: ", publications.length);
+
+    publications.forEach((item) => {
+      item.tags = item.tags.map((tag) => tag.toLowerCase());
+      item.pubType = "publist";
+      item.source = "publist";
+      item.authors = null;
+    });
+
     jsonfile.writeFileSync(`./src/publist.json`, publications, function (err) {
       if (err) {
         console.error(err);
