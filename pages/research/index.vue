@@ -99,6 +99,7 @@
                   :ref="'img_' + article._id"
                   style="border: 1px solid #fafafa"
                   alt="InfoNet article splash image"
+                  v-if="article.source === 'hub'"
                 >
                   <template #placeholder>
                     <v-row
@@ -116,6 +117,7 @@
                   <template v-slot:error>
                     <!-- TODO: Fix this hacky fallback to PNG if error on image -->
                     <v-img
+                      v-if="article.source === 'hub'"
                       :src="`/images/${article._id}-splash.png`"
                       :lazy-src="`/images/${article._id}-thumbnail.png`"
                       cover

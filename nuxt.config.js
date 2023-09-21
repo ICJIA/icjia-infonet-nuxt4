@@ -66,7 +66,7 @@ export default defineNuxtConfig({
 
       script: [
         {
-          src: "https://code.jquery.com/jquery-3.7.1.slim.min.js",
+          src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js",
           type: "text/javascript",
         },
         // {
