@@ -26,7 +26,7 @@
     "create:hub": "node ./creators/createHubArticles.mjs",
     "create:hubImages": "node ./creators/createHubImages.mjs",
     "create:publistPublications": "node ./creators/createPublistPublications.mjs",
-    "create:mergedPublications": "node ./creators/createMergedPublications.mjs",
+    "create:mergedPublications": "node ./creators/mergeHubAndPublistPublications.mjs",
     "create:local": "yarn clear:cache && node ./creators/createLocalMeta.mjs",
     "create:sitemap": "node ./creators/createSitemap.mjs",
     "scripts:local": "yarn create:local",
