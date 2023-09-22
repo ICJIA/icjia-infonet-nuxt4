@@ -37,6 +37,8 @@ axios
       article.tags = article.tags.map((tag) => tag.toLowerCase());
       article.pubType = "article";
       article.source = "hub";
+      article.fileURL = null;
+      article.ext = "html";
     });
 
     // jsonfile.writeFileSync(`assets/json/hub.json`, articles, function (err) {

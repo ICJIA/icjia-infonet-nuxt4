@@ -32,6 +32,10 @@ const query = `query {
  
 }`;
 
+function get_url_extension(url) {
+  return url.split(/[#?]/)[0].split(".").pop().trim();
+}
+
 axios
   .create({ baseURL: "https://agency.icjia-api.cloud" })
   .post("/graphql", { query, validateStatus: (status) => status === 200 })
@@ -45,9 +49,11 @@ axios
         return null;
       } else {
         obj.tags = item.tags.map((tag) => tag.toLowerCase());
-        obj.pubType = "publist";
+        obj.pubType = item.pubType;
         obj.source = "publist";
         obj.authors = null;
+        obj.fileURL = item.fileURL;
+        obj.ext = get_url_extension(item.fileURL);
         return obj;
       }
     });
