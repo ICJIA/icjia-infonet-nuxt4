@@ -85,11 +85,31 @@
                 class="px-5 py-5 elevation-5"
               >
                 <div>
-                  {{ formatDate(article.date) }}
+                  <span
+                    style="
+                      font-weight: 700;
+                      color: #000;
+                      text-transform: uppercase;
+                    "
+                  >
+                    {{ formatDate(article.date) }}</span
+                  >
+                  |
+                  <span
+                    style="
+                      font-weight: 400;
+                      color: #555;
+                      text-transform: uppercase;
+                    "
+                  >
+                    {{ getPublicationType(article.pubType) }}</span
+                  >
                 </div>
-                <div class="my-6 hover" style="font-weight: 900">
+                <div class="mt-6 mb-3 hover" style="font-weight: 900">
                   {{ article.title }}
                 </div>
+                <!-- <div class="text-right mt-1 mb-5">{{ article.pubType }}</div> -->
+
                 <v-img
                   :src="`/images/${article._id}-splash.jpeg`"
                   :lazy-src="`/images/${article._id}-thumbnail.jpeg`"
@@ -182,6 +202,70 @@
 </template>
 
 <script setup>
+const getPublicationType = function (type) {
+  let cleanType;
+  switch (type) {
+    case "researchReport":
+      cleanType = "Research Report";
+      break;
+    case "researchBulletin":
+      cleanType = "Research Bulletin";
+      break;
+    case "researchAtAGlance":
+      cleanType = "Research At A Glance";
+      break;
+    case "trendsAndIssuesUpdate":
+      cleanType = "Trends and Issues Update";
+      break;
+    case "motorVehicleTheftPublications":
+      cleanType = "Motor Vehicle Theft Publication";
+      break;
+    case "barj":
+      cleanType = "BARJ";
+      break;
+    case "compiler":
+      cleanType = "Compiler";
+      break;
+    case "dataset":
+      cleanType = "Dataset";
+      break;
+    case "getTheFacts":
+      cleanType = "GET THE FACTS";
+      break;
+    case "programEvaluationSummary":
+      cleanType = "Program Evaluation Summary";
+      break;
+    case "megProfiles":
+      cleanType = "MEG Profiles";
+      break;
+    case "annualReport":
+      cleanType = "Annual Report";
+      break;
+    case "article":
+      cleanType = "Article";
+      break;
+    case "report":
+      cleanType = "Report";
+      break;
+    case "evaluation":
+      cleanType = "Evaluation";
+      break;
+    case "toolkit":
+      cleanType = "Toolkit";
+      break;
+    case "onGoodAuthority":
+      cleanType = "On Good Authority";
+      break;
+    case "application":
+      cleanType = "Application";
+      break;
+
+    default:
+      cleanType = "General";
+  }
+  return cleanType;
+};
+
 // import hubArticles from "~/assets/json/hub.json";
 const { pending, data: hubArticles } = await useFetch("/api/research");
 // console.log("hub pending: ", pending.value);
