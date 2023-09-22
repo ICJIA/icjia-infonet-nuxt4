@@ -263,7 +263,7 @@ const getPublicationType = function (type) {
       break;
 
     default:
-      cleanType = "General";
+      cleanType = "Publication";
   }
   return cleanType;
 };
