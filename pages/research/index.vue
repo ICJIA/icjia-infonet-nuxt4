@@ -189,7 +189,9 @@
                     style="font-weight: 700"
                     @click="gotoPublication(article.fileURL)"
                   >
-                    Read Publication ({{ article.ext }})&nbsp;&raquo;
+                    Read {{ getPublicationType(article.pubType) }} ({{
+                      article.ext
+                    }})&nbsp;&raquo;
                   </v-btn>
                 </v-card-actions>
               </v-card></v-col
