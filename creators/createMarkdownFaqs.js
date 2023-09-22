@@ -49,7 +49,7 @@ axios
       } else {
         obj.attributes.searchMeta = "faq  ";
       }
-      console.log("Markdown faq created: ", obj.attributes.path);
+      //console.log("Markdown faq created: ", obj.attributes.path);
       return obj;
     });
 

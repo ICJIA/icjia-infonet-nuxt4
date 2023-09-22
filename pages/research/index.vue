@@ -158,7 +158,7 @@
                     style="font-weight: 700"
                     @click="gotoArticle(article.slug)"
                   >
-                    Read Web Article&nbsp;&raquo;
+                    Read Article (Web)&nbsp;&raquo;
                   </v-btn>
 
                   <v-btn

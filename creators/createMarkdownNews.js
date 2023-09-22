@@ -117,7 +117,7 @@ axios
         obj.attributes.url = `${SITE_URL}`;
       }
 
-      console.log("Markdown posts content created: ", obj.attributes.path);
+      //console.log("Markdown posts content created: ", obj.attributes.path);
       return obj;
     });
 

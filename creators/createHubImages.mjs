@@ -15,7 +15,7 @@ if (!fs.existsSync(dirpath)) {
     if (err) {
       throw err;
     }
-    console.log(`./public/images is deleted!`);
+    //console.log(`./public/images is deleted!`);
     fs.mkdirSync(dirpath);
     console.log(`./public/images is created!`);
   });
@@ -53,5 +53,5 @@ const writeImage = (item, attr) => {
   fs.writeFile(path, data, "base64", (err) => {
     if (err) throw err;
   });
-  console.log(path);
+  //console.log(path);
 };

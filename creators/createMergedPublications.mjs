@@ -13,8 +13,9 @@ const publications = [...publist, ...hub];
 
 const sortedPublications = _.orderBy(publications, ["date"], ["desc"]);
 
-console.log(JSON.stringify(sortedPublications));
+//console.log(JSON.stringify(sortedPublications));
 
+console.log("Research items: ", sortedPublications.length);
 //TODO: Make this directory path
 
 jsonfile.writeFileSync(

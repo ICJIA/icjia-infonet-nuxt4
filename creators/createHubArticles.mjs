@@ -5,7 +5,7 @@ const fs = require("fs");
 const axios = require("axios");
 const tags = require("../src/tags.json");
 let tagsArray = JSON.stringify(tags);
-console.log("tags: ", tagsArray);
+//console.log("tags: ", tagsArray);
 const query = `query {
   articles(limit: 100, sort: "date:desc", where: { status: "published", tags_contains: ${tagsArray} }) {
     _id

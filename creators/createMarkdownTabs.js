@@ -107,7 +107,7 @@ axios
       return `${item.attributes.path}`;
     });
 
-    console.log(tabRoutes);
+    //console.log(tabRoutes);
 
     jsonfile.writeFileSync(
       `./public/routesTabs.json`,

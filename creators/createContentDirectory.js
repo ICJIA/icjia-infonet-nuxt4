@@ -32,6 +32,8 @@ const PUBLIC_FILES_TO_REMOVE = [
   "meetings.json",
   "searchIndex.json",
   "siteMeta.json",
+  "publist.json",
+  "research.json",
 ];
 
 PUBLIC_FILES_TO_REMOVE.forEach((fileName) => {
