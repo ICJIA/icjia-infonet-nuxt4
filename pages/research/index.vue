@@ -57,7 +57,7 @@
           <span v-if="filteredArticles.length === articles.length"
             >Displaying
           </span>
-          {{ filteredArticles.length }} article<span
+          {{ filteredArticles.length }} item<span
             v-if="filteredArticles.length > 1"
             >s</span
           >
@@ -115,7 +115,6 @@
                     </v-row>
                   </template>
                   <template v-slot:error>
-                    <!-- TODO: Fix this hacky fallback to PNG if error on image -->
                     <v-img
                       v-if="article.source === 'hub'"
                       :src="`/images/${article._id}-splash.png`"
@@ -150,14 +149,27 @@
                 </div>
                 <v-card-actions>
                   <v-spacer></v-spacer>
+
                   <v-btn
+                    v-if="article.source === 'hub'"
                     size="small"
                     class="mt-5"
                     variant="text"
                     style="font-weight: 700"
                     @click="gotoArticle(article.slug)"
                   >
-                    Read Article&nbsp;&raquo;
+                    Read Web Article&nbsp;&raquo;
+                  </v-btn>
+
+                  <v-btn
+                    v-if="article.source === 'publist'"
+                    size="small"
+                    class="mt-5"
+                    variant="text"
+                    style="font-weight: 700"
+                    @click="gotoPublication(article.fileURL)"
+                  >
+                    Read Publication ({{ article.ext }})&nbsp;&raquo;
                   </v-btn>
                 </v-card-actions>
               </v-card></v-col
@@ -171,7 +183,7 @@
 
 <script setup>
 // import hubArticles from "~/assets/json/hub.json";
-const { pending, data: hubArticles } = await useFetch("/api/hub");
+const { pending, data: hubArticles } = await useFetch("/api/research");
 // console.log("hub pending: ", pending.value);
 console.log("hub.json loaded from api.");
 let infonetTags = useState("tags");
@@ -274,6 +286,10 @@ const getInfoNetSpecificTags = (tagArr) => {
 const gotoArticle = (slug) => {
   let hubArticle = `https://icjia.illinois.gov/researchhub/articles/${slug}`;
   return window.open(hubArticle, "_blank");
+};
+
+const gotoPublication = (url) => {
+  return window.open(url, "_blank");
 };
 
 const openSnackbar = (str = "All Research") => {
