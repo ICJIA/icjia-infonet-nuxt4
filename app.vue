@@ -28,12 +28,12 @@ const { mobile } = useDisplay();
 
 const { data: tabMeta } = await useFetch("/api/tabs");
 const tabs = useState("tabs", () => tabMeta);
-console.log("useState: tabs.json loaded.");
+//console.log("useState: tabs.json loaded.");
 
 // Load appRoutes into global state
 const { data: routes } = await useFetch("/api/routes");
 const appRoutes = useState("routes", () => routes);
-console.log("useState: appRoutes.json loaded.");
+//console.log("useState: appRoutes.json loaded.");
 
 // Load tags into global state
 import tagMeta from "~/src/tags.json";
@@ -47,7 +47,7 @@ const route = useRoute();
 const routePath = ref(route.path);
 watchEffect(() => {
   routePath.value = route.path;
-  console.log("routePath: ", routePath.value);
+  //console.log("routePath: ", routePath.value);
 
   if (route.path === "/" || route.path === "/debug") {
     hideBreadcrumbs.value = true;
