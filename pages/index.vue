@@ -247,7 +247,7 @@
                       show-arrows
                     >
                       <v-slide-group-item
-                        v-for="article in articles"
+                        v-for="(article, index) in articles"
                         :key="article._id"
                         v-slot="{ isSelected, toggle, selectedClass }"
                       >
@@ -347,6 +347,7 @@
               </div>
               <div v-if="isMobile && isMounted">
                 <h2 class="px-5 py-5 mb-10">Recent InfoNet Research</h2>
+                \{{ articles.length }}
                 <div v-for="article in articles" :key="article._id">
                   <v-card
                     elevation="2"
@@ -410,8 +411,9 @@ const renderer = new md({
 }).use(attrs);
 // import hubArticles from "~/assets/json/hub.json";
 const { pending, data: hubArticles } = await useFetch("/api/hub");
-console.log("hub pending: ", pending.value);
-console.log("hub.json loaded from api.");
+//console.log("hub articles: ", hubArticles);
+// console.log("hub pending: ", pending.value);
+// console.log("hub.json loaded from api.");
 import { useDisplay } from "vuetify";
 import { get } from "@vueuse/core";
 const { mobile } = useDisplay();
