@@ -52,29 +52,12 @@
                   ></div>
 
                   <div class="gallery mt-12" style="margin-left: 0px">
-                    <!-- <div
-                      class="gallery-panel hover my-5"
-                      style=""
-                      v-for="(image, index) in tab.attributes.images.data"
-                      :key="`images-${index}`"
-                      @click="
-                        image?.attributes?.formats?.large
-                          ? openGalleryModal({
-                              url: image.attributes.formats.large.url,
-                              caption: image.attributes?.caption || null,
-                              thumbnail: image.attributes.formats.thumbnail.url,
-                            })
-                          : openGalleryModal({
-                              url: image.attributes.formats.medium.url,
-                              caption: image.attributes?.caption || null,
-                              thumbnail: image.attributes.formats.thumbnail.url,
-                            })
-                      "
-                    > -->
                     <div
                       class="gallery-panel hover my-5"
                       style=""
-                      v-for="(image, index) in tab.attributes.images.data"
+                      v-for="(image, index) in sortImagesByFilename(
+                        tab.attributes.images.data
+                      )"
                       :key="`images-${index}`"
                       @click="
                         image?.attributes?.formats?.large
@@ -82,11 +65,13 @@
                               url: `${image.attributes.url}`,
                               caption: image.attributes?.caption || null,
                               thumbnail: image.attributes.formats.thumbnail.url,
+                              filename: image.attributes.name,
                             })
                           : openGalleryModal({
                               url: `${image.attributes.url}`,
                               caption: image.attributes?.caption || null,
                               thumbnail: image.attributes.formats.thumbnail.url,
+                              filename: image.attributes.name,
                             })
                       "
                     >
@@ -112,7 +97,8 @@
                         style="font-size: 11px; font-weight: 900"
                         class="text-center pl-1 pt-2"
                       >
-                        {{ image.attributes?.caption }}
+                        {{ image.attributes?.caption }}<br />
+                        Debug: {{ image.attributes.name }}
                       </div>
                     </div>
                   </div>
@@ -186,7 +172,19 @@ const getImageCaption = (caption) => {
   }
 };
 
-const openGalleryModal = ({ url, caption, thumbnail }) => {
+const sortImagesByFilename = (images) => {
+  return images.sort((a, b) => {
+    if (a.attributes.name < b.attributes.name) {
+      return -1;
+    }
+    if (a.attributes.name > b.attributes.name) {
+      return 1;
+    }
+    return 0;
+  });
+};
+
+const openGalleryModal = ({ url, caption, thumbnail, filename }) => {
   let myURL = `https://infonet.icjia-api.cloud${url}`;
   let thumbnailURL = `https://infonet.icjia-api.cloud${thumbnail}`;
   //console.log("Modal: ", myURL, caption);
@@ -194,6 +192,7 @@ const openGalleryModal = ({ url, caption, thumbnail }) => {
     url: myURL,
     caption: caption,
     thumbnail: thumbnailURL,
+    filename: filename,
   });
 };
 
