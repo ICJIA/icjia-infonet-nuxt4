@@ -269,6 +269,7 @@
                             {{ article.title }}
                           </div>
                           <v-img
+                            v-if="article.source === 'hub'"
                             :src="`/images/${article._id}-splash.jpeg`"
                             :lazy-src="`/images/${article._id}-thumbnail.jpeg`"
                             cover
@@ -294,6 +295,7 @@
                             <template v-slot:error>
                               <!-- TODO: Fix this hacky fallback to PNG if error on image -->
                               <v-img
+                                v-if="article.source === 'hub'"
                                 :src="`/images/${article._id}-splash.png`"
                                 :lazy-src="`/images/${article._id}-thumbnail.png`"
                                 cover
@@ -330,13 +332,27 @@
                           <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn
+                              v-if="article.source === 'hub'"
                               size="small"
                               class="mt-5"
                               variant="text"
-                              style="font-weight: 700"
+                              style="font-weight: 900; font-size: 11px"
                               @click="gotoArticle(article.slug)"
                             >
-                              Read Article&nbsp;&raquo;
+                              Read Article (Web)&nbsp;&raquo;
+                            </v-btn>
+
+                            <v-btn
+                              v-if="article.source === 'publist'"
+                              size="small"
+                              class="mt-5"
+                              variant="text"
+                              style="font-weight: 900; font-size: 11px"
+                              @click="gotoPublication(article.fileURL)"
+                            >
+                              Read {{ getPublicationType(article.pubType) }} ({{
+                                article.ext
+                              }})&nbsp;&raquo;
                             </v-btn>
                           </v-card-actions>
                         </v-card>
@@ -410,7 +426,7 @@ const renderer = new md({
   quotes: "“”‘’",
 }).use(attrs);
 // import hubArticles from "~/assets/json/hub.json";
-const { pending, data: hubArticles } = await useFetch("/api/hub");
+const { pending, data: hubArticles } = await useFetch("/api/research");
 //console.log("hub articles: ", hubArticles);
 // console.log("hub pending: ", pending.value);
 // console.log("hub.json loaded from api.");
@@ -431,6 +447,70 @@ const displayAuthors = (arr) => {
 };
 
 let isServer = ref(process.server);
+
+const getPublicationType = function (type) {
+  let cleanType;
+  switch (type) {
+    case "researchReport":
+      cleanType = "Research Report";
+      break;
+    case "researchBulletin":
+      cleanType = "Research Bulletin";
+      break;
+    case "researchAtAGlance":
+      cleanType = "Research At A Glance";
+      break;
+    case "trendsAndIssuesUpdate":
+      cleanType = "Trends and Issues Update";
+      break;
+    case "motorVehicleTheftPublications":
+      cleanType = "Motor Vehicle Theft Publication";
+      break;
+    case "barj":
+      cleanType = "BARJ";
+      break;
+    case "compiler":
+      cleanType = "Compiler";
+      break;
+    case "dataset":
+      cleanType = "Dataset";
+      break;
+    case "getTheFacts":
+      cleanType = "GET THE FACTS";
+      break;
+    case "programEvaluationSummary":
+      cleanType = "Program Evaluation Summary";
+      break;
+    case "megProfiles":
+      cleanType = "MEG Profiles";
+      break;
+    case "annualReport":
+      cleanType = "Annual Report";
+      break;
+    case "article":
+      cleanType = "Article";
+      break;
+    case "report":
+      cleanType = "Report";
+      break;
+    case "evaluation":
+      cleanType = "Evaluation";
+      break;
+    case "toolkit":
+      cleanType = "Toolkit";
+      break;
+    case "onGoodAuthority":
+      cleanType = "On Good Authority";
+      break;
+    case "application":
+      cleanType = "Application";
+      break;
+
+    default:
+      cleanType = "Publication";
+  }
+  return cleanType;
+};
 
 // const error = useError();
 const { data: posts } = await useAsyncData("content-news", () =>
@@ -474,6 +554,10 @@ onMounted(() => {
 const gotoArticle = (slug) => {
   let hubArticle = `https://icjia.illinois.gov/researchhub/articles/${slug}`;
   return window.open(hubArticle, "_blank");
+};
+
+const gotoPublication = (url) => {
+  return window.open(url, "_blank");
 };
 
 const formatDate = (dateString) => {
