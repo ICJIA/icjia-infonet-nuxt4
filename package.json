@@ -37,7 +37,7 @@
   "devDependencies": {
     "@nuxt/content": "^2.8.5",
     "@nuxt/devtools": "1.0.0-beta.0",
-    "@nuxt/image-edge": "1.0.0-rc.2-28270637.bfb25c8",
+    "@nuxt/image-edge": "1.0.0-rc.3-28270967.9815055",
     "@nuxtjs/apollo": "^5.0.0-alpha.6",
     "@nuxtjs/google-fonts": "^3.0.2",
     "@vueuse/nuxt": "^10.4.1",

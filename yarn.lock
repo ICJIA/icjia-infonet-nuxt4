@@ -877,10 +877,10 @@
     which "^3.0.1"
     ws "^8.14.2"
 
-"@nuxt/image-edge@1.0.0-rc.2-28270637.bfb25c8":
-  version "1.0.0-rc.2-28270637.bfb25c8"
-  resolved "https://registry.yarnpkg.com/@nuxt/image-edge/-/image-edge-1.0.0-rc.2-28270637.bfb25c8.tgz#1df73b1959869bd9230705036c547696fc8833c2"
-  integrity sha512-xkOtc9VUTCtwL0YT9KSgaG8kkwGl70jPB8twEAdwtrtdNY4ChmnE8LgEWlR0MenCkQoMCVnu6ZQy8EmZvoq6Sg==
+"@nuxt/image-edge@1.0.0-rc.3-28270967.9815055":
+  version "1.0.0-rc.3-28270967.9815055"
+  resolved "https://registry.yarnpkg.com/@nuxt/image-edge/-/image-edge-1.0.0-rc.3-28270967.9815055.tgz#b1e8d8ad82518cf44213653eec3c9d360b7f665f"
+  integrity sha512-Qg/YxmVNtpWzBkB564qpapJlqr+6qcOLY9GTJp2PauRn42utveWD88w55y+GzclBlFCqewqvnESX1aLCiDyTEw==
   dependencies:
     "@nuxt/kit" "^3.7.4"
     consola "^3.2.3"
@@ -1502,9 +1502,9 @@
     "@vue/babel-plugin-jsx" "^1.1.5"
 
 "@vitejs/plugin-vue@^4.3.4":
-  version "4.3.4"
-  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-4.3.4.tgz#a289dff38e01949fe7be581d5542cabaeb961dec"
-  integrity sha512-ciXNIHKPriERBisHFBvnTbfKa6r9SAesOYXeGDzgegcvy9Q4xdScSHAmKbNT0M3O0S9LKhIf5/G+UYG4NnnzYw==
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-4.4.0.tgz#8ae96573236cdb12de6850a6d929b5537ec85390"
+  integrity sha512-xdguqb+VUwiRpSg+nsc2HtbAUSGak25DXYvpQQi4RVU1Xq1uworyoH/md9Rfd8zMmPR/pSghr309QNcftUVseg==
 
 "@vue-macros/common@^1.8.0":
   version "1.8.0"
