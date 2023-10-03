@@ -363,7 +363,7 @@
               </div>
               <div v-if="isMobile && isMounted">
                 <h2 class="px-5 py-5 mb-10">Recent InfoNet Research</h2>
-                \{{ articles.length }}
+
                 <div v-for="article in articles" :key="article._id">
                   <v-card
                     elevation="2"
