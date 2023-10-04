@@ -138,6 +138,10 @@ export default defineNuxtConfig({
     documentDriven: false,
     markdown: {
       mdc: true,
+      remarkExternalLinks: {
+        target: "_self",
+        rel: "nofollow",
+      },
       anchorLinks: {
         depth: 0,
         exclude: [1, 2, 3, 4, 5, 6],
