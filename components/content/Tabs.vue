@@ -98,7 +98,7 @@
                         class="text-center pl-1 pt-2"
                       >
                         {{ image.attributes?.caption }}<br />
-                        Debug: {{ image.attributes.name }}
+                        <!-- Debug: {{ image.attributes.name }} -->
                       </div>
                     </div>
                   </div>

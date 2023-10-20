@@ -120,10 +120,11 @@ export default defineNuxtConfig({
     // "@nuxtjs/google-fonts",
     // "@nuxtjs/apollo",
     // "@pinia/nuxt",
-    "@nuxt/image-edge",
+    //"@nuxt/image-edge",
     "@vueuse/nuxt",
     "@nuxt/content",
     "@nuxtjs/apollo",
+    "@nuxt/image",
     // "nuxt-link-checker",
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
