@@ -247,7 +247,7 @@
                       show-arrows
                     >
                       <v-slide-group-item
-                        v-for="(article, index) in articles"
+                        v-for="(article, index) in filteredArticles()"
                         :key="article._id"
                         v-slot="{ isSelected, toggle, selectedClass }"
                       >
@@ -258,6 +258,7 @@
                           min-height="200"
                           style="max-width: 700px"
                         >
+                          <!-- Test: {{ article.homePage }} -->
                           <div>
                             {{ formatDate(article.date) }}
                           </div>
@@ -441,6 +442,20 @@ const infonetTags = useState("tags");
 // const router = useRouter();
 const isMounted = ref(false);
 const articles = ref(hubArticles.value.content);
+//filter out homepage only
+// filter articles marked with homePage: true key
+
+const filteredArticles = () => {
+  return articles.value.filter((article) => {
+    return article.homePage === true;
+  });
+};
+// console.log("filtered: ", filteredArticles());
+
+// console.log("articles.length: ", articles.length);
+// console.log("filteredArticles.length: ", filteredArticles.length);
+
+// console.log(JSON.stringify(hubArticles.value.content));
 const limit = ref(2);
 let model = ref(null);
 const router = useRouter();

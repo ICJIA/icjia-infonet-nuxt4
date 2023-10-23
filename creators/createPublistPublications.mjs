@@ -54,6 +54,11 @@ axios
         obj.authors = null;
         obj.fileURL = item.fileURL;
         obj.ext = get_url_extension(item.fileURL);
+        if (obj.tags.includes("infonet")) {
+          obj.homePage = true;
+        } else {
+          obj.homePage = false;
+        }
         return obj;
       }
     });

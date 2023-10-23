@@ -39,6 +39,11 @@ axios
       article.source = "hub";
       article.fileURL = null;
       article.ext = "html";
+      if (article.tags.includes("infonet")) {
+        article.homePage = true;
+      } else {
+        article.homePage = false;
+      }
     });
 
     // jsonfile.writeFileSync(`assets/json/hub.json`, articles, function (err) {
