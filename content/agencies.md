@@ -7,7 +7,7 @@ showTableOfContents: true
 summary: List of InfoNet User Agencies
 section: root
 createdAt: 2023-08-08T17:24:52.609Z
-updatedAt: 2023-08-18T15:10:57.115Z
+updatedAt: 2023-10-23T15:13:58.918Z
 publishedAt: 2023-08-08T17:24:53.445Z
 searchMeta: null
 category: page
@@ -61,7 +61,54 @@ rawText: " ul member list webkit columns 1 moz columns 1 columns 1 padding left
   that was provided park ridge illinois http kanwin org kankakee county
   coalition against domestic violence same as harbor house 815 932 5814 kankakee
   illinois www harborhousedv org laf sjones legalaidchicago org chicago illinois
-  www lafchicago org "
+  www lafchicago org lake county crisis center for the prevention treatment of
+  domestic violence dba a safe place info asafeplaceforhelp org zion illinois
+  https asafeplaceforhelp org lester and rosalie anixter center askchs anixter
+  org chicago illinois www chicagohearingsociety org life span 312 408 1210 main
+  312 408 1210 chicago branch 847 824 0382 des plaines branch chicago illinois
+  and des plaines illinois https life span org mercer county family crisis
+  center 309 582 7233 hotline aledo illinois no website metropolitan family
+  services contactus metrofamily org chicago illinois https www metrofamily org
+  mid central community action inc neville house 309 829 0691 bloomington
+  illinois https mccainc org mujeres latinas en accion mail mujereslat org
+  general fcano mujereslat org media chicago illinois https
+  mujereslatinasenaccion org mutual ground inc 630 897 0084 aurora illinois
+  https mutualground org neopolitan lighthouse 312 964 5056 chicago illinois
+  http neopolitanlighthouse org oasis women s center 618 465 1978 alton illinois
+  no website pillars community health constance morris house 708 485 5254
+  hotline lagrange park illinois https pillarscommunityhealth org polish
+  american association 773 282 8206 chicago illinois https www polish org
+  quanada info quanada org general jvancil quanada org chief operating officer
+  for domestic violence quincy illinois https www quanada org remedies renewing
+  lives 815 962 6102 rockford 815 544 1866 belvidere rockford illinois and
+  belvidere illinois https www remediesrenewinglives org riverview center inc
+  815 777 8167 galena 815 244 7704 mt carroll galena illinois https
+  riverviewcenter org safe harbor family crisis center info safeharbordv org
+  galesburg illinois http www safeharbordv org safe journeys susanb
+  safejourneysillinois org streator illinois http www safejourneysillinois org
+  safe passage 815 756 5054 dekalb illinois https safepassagedv org sarah s inn
+  info sarahsinn org forest park illinois https sarahsinn org sojourn shelter
+  and services inc 217 726 5200 hotline springfield illinois no website south
+  suburban family shelter inc 708 794 2140 homewood illinois www ssfs1 org
+  stopping woman abuse now swan 618 879 2214 olney illinois https www swandvhl
+  org survivor empowerment center execassistant empoweringsurvivors org marion
+  illinois and carbondale illinois and franklin illinois https www
+  empoweringsurvivors org swedish hospital 773 878 8200 chicago illinois https
+  swedishcovenant org community pathways program the resurrection project 312
+  666 1323 chicago illinois https resurrectionproject org turning point inc
+  sponitz turnpt org executive director sarah ponitz woodstock illinois https
+  turnpt org the women s center inc execassistant empoweringsurvivors org
+  carbondale illinois http www firstcircuitil org womens center universal family
+  connection inc info ufcinc org chicago illinois http universalfamilyconnection
+  com violence prevention center of southwestern illinois 618 236 2531
+  belleville illinois https www vpcswi org voices of stephenson county voices
+  voicesofsc org freeport illinois https voicesofsc org western illinois
+  regional council community action agency victim services wirc caa wirc wirpc
+  org macomb illinois https wirpc org wings program inc wings wingsprogram com
+  rolling meadows illinois chicago illinois and palatine illinois https
+  wingsprogram com ywca of evanston north shore info ywca ens org evanston
+  illinois https www ywca ens org ywca of the sauk valley 815 625 0333 sterling
+  815 288 1232 dixon sterling illinois and dixon illinois https www ywsauk org "
 draft: false
 markdown: >
   <style>
@@ -679,9 +726,475 @@ markdown: >
   Chicago, Illinois
 
 
+
   www.lafchicago.org
 
   </li>
+  	
+  <li>
+  	
+  **LAKE COUNTY CRISIS CENTER FOR THE PREVENTION & TREATMENT OF DOMESTIC VIOLENCE (DBA A SAFE PLACE)**
+  	
+  info@asafeplaceforhelp.org
+  	
+  Zion, Illinois
+  	
+  https://asafeplaceforhelp.org/
+  	
+  </li>
+  	
+
+  <li>
+  	
+  **Lester and Rosalie Anixter Center**
+
+  AskCHS@anixter.org
+  	
+  Chicago, Illinois
+  	
+  www.chicagohearingsociety.org
+  	
+  </li>	
+  	
+  <li>
+  	
+  **LIFE SPAN**
+  	
+  (312) 408-1210 (Main)
+  	
+  (312) 408-1210 (Chicago Branch)
+  	
+  (847) 824-0382 (Des Plaines Branch)
+  	
+  Chicago, Illinois and Des Plaines, Illinois
+  	
+  https://life-span.org/
+  	
+  </li>
+  	
+
+  	
+  <li>
+
+
+  **MERCER COUNTY FAMILY CRISIS CENTER**
+  	
+  (309) 582-7233 (Hotline)
+  	
+  Aledo, Illinois
+  	
+  (no website)
+  	
+  </li>
+  	
+
+  	
+
+  	
+  <li>
+
+
+  **METROPOLITAN FAMILY SERVICES**
+  	
+  contactus@metrofamily.org
+  	
+  Chicago, Illinois
+  	
+  https://www.metrofamily.org/
+
+
+  </li>
+  	
+  <li>
+
+
+  **MID CENTRAL COMMUNITY ACTION, INC. (NEVILLE HOUSE)**
+  	
+  309-829-0691
+  	
+  Bloomington, Illinois
+  	
+  https://mccainc.org/
+
+
+  </li>
+  	
+  <li>
+
+
+  **MUJERES LATINAS EN ACCION**
+  	
+  mail@mujereslat.org (General)
+  	
+  fcano@mujereslat.org (Media)
+  	
+  Chicago, Illinois
+  	
+  https://mujereslatinasenaccion.org/
+
+
+  </li>
+  	
+
+  	
+  <li>
+  	
+  **MUTUAL GROUND, INC.**
+  	
+  630.897.0084
+  	
+  Aurora, Illinois
+  	
+  https://mutualground.org/
+  	
+
+  </li>
+  	
+  <li>
+  	
+  **NEOPOLITAN LIGHTHOUSE**
+  	
+  (312) 964-5056
+  	
+  Chicago, Illinois
+  	
+  http://neopolitanlighthouse.org/
+  	
+
+  </li>
+  	
+  <li>
+  	
+  **OASIS WOMEN'S CENTER**
+  	
+  (618) 465-1978
+  	
+  Alton, Illinois
+  	
+  (no website)
+  	
+  </li>
+  	
+  <li>
+  	
+  **PILLARS COMMUNITY HEALTH (CONSTANCE MORRIS HOUSE)**
+  	
+  (708) 485-5254 (Hotline)
+  	
+  LaGrange Park, Illinois
+  	
+  https://pillarscommunityhealth.org/
+  	
+  </li>
+  	
+  <li>
+  	
+  **Polish American Association**
+  	
+  (773) 282-8206
+  	
+  Chicago, Illinois
+  	
+  https://www.polish.org
+  	
+  </li>
+  	
+
+  	
+  <li>	
+  	
+  **QUANADA**
+  	
+  info@quanada.org (General)
+  	
+  jvancil@quanada.org (Chief Operating Officer for Domestic Violence)
+  	
+  Quincy, Illinois
+  	
+  https://www.quanada.org/
+
+
+  <li>
+
+  **REMEDIES RENEWING LIVES**
+  	
+  815.962.6102 (Rockford)
+  	
+  (815) 544-1866 (Belvidere)
+  	
+  Rockford, Illinois and Belvidere, Illinois
+  	
+  https://www.remediesrenewinglives.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **RIVERVIEW CENTER, INC.**
+  	
+  815-777-8167 (Galena)
+  	
+  815-244-7704 (Mt Carroll)
+  	
+  Galena, Illinois
+  	
+  https://riverviewcenter.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **SAFE HARBOR FAMILY CRISIS CENTER**
+  	
+  info@safeharbordv.org
+  	
+  Galesburg, Illinois
+  	
+  http://www.safeharbordv.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **SAFE JOURNEYS**
+  	
+  susanb@safejourneysillinois.org
+  	
+  Streator, Illinois
+  	
+  http://www.safejourneysillinois.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **SAFE PASSAGE**
+  	
+  (815) 756-5054
+  	
+  DeKalb, Illinois
+  	
+  https://safepassagedv.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **SARAH'S INN**
+  	
+  INFO@SARAHSINN.ORG
+  	
+  Forest Park, Illinois
+  	
+  https://sarahsinn.org/
+
+  </li>
+
+
+  <li>
+  	
+  **SOJOURN SHELTER AND SERVICES, INC.**
+  	
+  (217) 726-5200 (Hotline)
+  	
+  Springfield, Illinois
+  	
+  (no website)
+  	
+  </li>
+
+
+  <li>
+  	
+  South Suburban Family Shelter, Inc
+  	
+  (708) 794-2140
+  	
+  Homewood, Illinois
+  	
+  www.ssfs1.org
+  	
+  </li>
+  	
+
+  <li>
+  	
+  **STOPPING WOMAN ABUSE NOW (SWAN)**
+  	
+  618-879-2214
+  	
+  Olney, Illinois
+  	
+  https://www.swandvhl.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **SURVIVOR EMPOWERMENT CENTER**
+  	
+  execassistant@empoweringsurvivors.org
+  	
+  Marion, Illinois and Carbondale, Illinois (and Franklin, Illinois?)
+  	
+  https://www.empoweringsurvivors.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **SWEDISH HOSPITAL**
+  	
+  773-878-8200
+  	
+  Chicago, Illinois
+  	
+  https://swedishcovenant.org/community/pathways-program
+  	
+  </li>
+
+
+  <li>
+  	
+  **THE RESURRECTION PROJECT**
+  	
+  (312) 666-1323
+  	
+  Chicago, Illinois
+  	
+  https://resurrectionproject.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **TURNING POINT, INC.**
+  	
+  sponitz@turnpt.org (Executive Director Sarah Ponitz)
+  	
+  Woodstock, Illinois
+  	
+  https://turnpt.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **The Women's Center, Inc**
+  	
+  execassistant@empoweringsurvivors.org
+  	
+  Carbondale, Illinois
+  	
+  http://www.firstcircuitil.org/womens-center
+  	
+  </li>
+
+
+  <li>
+
+  UNIVERSAL FAMILY CONNECTION INC
+
+  info@ufcinc.org
+
+  Chicago, Illinois
+
+  http://universalfamilyconnection.com/
+
+  </li>
+
+
+  <li>
+  	
+  **VIOLENCE PREVENTION CENTER OF SOUTHWESTERN ILLINOIS**
+  	
+  618-236-2531
+  	
+  Belleville, Illinois
+  	
+  https://www.vpcswi.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **VOICES OF STEPHENSON COUNTY**
+  	
+  voices@voicesofsc.org
+  	
+  Freeport, Illinois
+  	
+  https://voicesofsc.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **WESTERN ILLINOIS REGIONAL COUNCIL - COMMUNITY ACTION AGENCY VICTIM SERVICES (WIRC-CAA)**
+  	
+  wirc@wirpc.org
+  	
+  Macomb, Illinois
+  	
+  https://wirpc.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **WINGS PROGRAM,INC.**
+  	
+  wings@wingsprogram.com
+  	
+  Rolling Meadows, Illinois, Chicago, Illinois, and Palatine, Illinois
+  	
+  https://wingsprogram.com/
+  	
+  </li>
+
+
+  <li>
+  	
+  **YWCA OF EVANSTON/NORTH SHORE**
+  	
+  info@ywca-ens.org
+  	
+  Evanston, Illinois
+  	
+  https://www.ywca-ens.org/
+  	
+  </li>
+
+
+  <li>
+  	
+  **YWCA OF THE SAUK VALLEY**
+  	
+  815.625.0333 (Sterling)
+  	
+  815.288.1232 (Dixon)
+  	
+  Sterling, Illinois and Dixon, Illinois
+  	
+  https://www.ywsauk.org/
+  	
+  </li>
+
+
+  	
+  	
 
 
    
@@ -1126,8 +1639,434 @@ sjones@legalaidchicago.org
 
 Chicago, Illinois
 
+
 www.lafchicago.org
 </li>
+	
+<li>
+	
+**LAKE COUNTY CRISIS CENTER FOR THE PREVENTION & TREATMENT OF DOMESTIC VIOLENCE (DBA A SAFE PLACE)**
+	
+info@asafeplaceforhelp.org
+	
+Zion, Illinois
+	
+https://asafeplaceforhelp.org/
+	
+</li>
+	
+
+<li>
+	
+**Lester and Rosalie Anixter Center**
+AskCHS@anixter.org
+	
+Chicago, Illinois
+	
+www.chicagohearingsociety.org
+	
+</li>	
+	
+<li>
+	
+**LIFE SPAN**
+	
+(312) 408-1210 (Main)
+	
+(312) 408-1210 (Chicago Branch)
+	
+(847) 824-0382 (Des Plaines Branch)
+	
+Chicago, Illinois and Des Plaines, Illinois
+	
+https://life-span.org/
+	
+</li>
+	
+	
+<li>
+
+**MERCER COUNTY FAMILY CRISIS CENTER**
+	
+(309) 582-7233 (Hotline)
+	
+Aledo, Illinois
+	
+(no website)
+	
+</li>
+	
+	
+	
+<li>
+
+**METROPOLITAN FAMILY SERVICES**
+	
+contactus@metrofamily.org
+	
+Chicago, Illinois
+	
+https://www.metrofamily.org/
+
+</li>
+	
+<li>
+
+**MID CENTRAL COMMUNITY ACTION, INC. (NEVILLE HOUSE)**
+	
+309-829-0691
+	
+Bloomington, Illinois
+	
+https://mccainc.org/
+
+</li>
+	
+<li>
+
+**MUJERES LATINAS EN ACCION**
+	
+mail@mujereslat.org (General)
+	
+fcano@mujereslat.org (Media)
+	
+Chicago, Illinois
+	
+https://mujereslatinasenaccion.org/
+
+</li>
+	
+	
+<li>
+	
+**MUTUAL GROUND, INC.**
+	
+630.897.0084
+	
+Aurora, Illinois
+	
+https://mutualground.org/
+	
+
+</li>
+	
+<li>
+	
+**NEOPOLITAN LIGHTHOUSE**
+	
+(312) 964-5056
+	
+Chicago, Illinois
+	
+http://neopolitanlighthouse.org/
+	
+
+</li>
+	
+<li>
+	
+**OASIS WOMEN'S CENTER**
+	
+(618) 465-1978
+	
+Alton, Illinois
+	
+(no website)
+	
+</li>
+	
+<li>
+	
+**PILLARS COMMUNITY HEALTH (CONSTANCE MORRIS HOUSE)**
+	
+(708) 485-5254 (Hotline)
+	
+LaGrange Park, Illinois
+	
+https://pillarscommunityhealth.org/
+	
+</li>
+	
+<li>
+	
+**Polish American Association**
+	
+(773) 282-8206
+	
+Chicago, Illinois
+	
+https://www.polish.org
+	
+</li>
+	
+	
+<li>	
+	
+**QUANADA**
+	
+info@quanada.org (General)
+	
+jvancil@quanada.org (Chief Operating Officer for Domestic Violence)
+	
+Quincy, Illinois
+	
+https://www.quanada.org/
+
+<li>
+**REMEDIES RENEWING LIVES**
+	
+815.962.6102 (Rockford)
+	
+(815) 544-1866 (Belvidere)
+	
+Rockford, Illinois and Belvidere, Illinois
+	
+https://www.remediesrenewinglives.org/
+	
+</li>
+
+<li>
+	
+**RIVERVIEW CENTER, INC.**
+	
+815-777-8167 (Galena)
+	
+815-244-7704 (Mt Carroll)
+	
+Galena, Illinois
+	
+https://riverviewcenter.org/
+	
+</li>
+
+<li>
+	
+**SAFE HARBOR FAMILY CRISIS CENTER**
+	
+info@safeharbordv.org
+	
+Galesburg, Illinois
+	
+http://www.safeharbordv.org/
+	
+</li>
+
+<li>
+	
+**SAFE JOURNEYS**
+	
+susanb@safejourneysillinois.org
+	
+Streator, Illinois
+	
+http://www.safejourneysillinois.org/
+	
+</li>
+
+<li>
+	
+**SAFE PASSAGE**
+	
+(815) 756-5054
+	
+DeKalb, Illinois
+	
+https://safepassagedv.org/
+	
+</li>
+
+<li>
+	
+**SARAH'S INN**
+	
+INFO@SARAHSINN.ORG
+	
+Forest Park, Illinois
+	
+https://sarahsinn.org/
+</li>
+
+<li>
+	
+**SOJOURN SHELTER AND SERVICES, INC.**
+	
+(217) 726-5200 (Hotline)
+	
+Springfield, Illinois
+	
+(no website)
+	
+</li>
+
+<li>
+	
+South Suburban Family Shelter, Inc
+	
+(708) 794-2140
+	
+Homewood, Illinois
+	
+www.ssfs1.org
+	
+</li>
+	
+
+<li>
+	
+**STOPPING WOMAN ABUSE NOW (SWAN)**
+	
+618-879-2214
+	
+Olney, Illinois
+	
+https://www.swandvhl.org/
+	
+</li>
+
+<li>
+	
+**SURVIVOR EMPOWERMENT CENTER**
+	
+execassistant@empoweringsurvivors.org
+	
+Marion, Illinois and Carbondale, Illinois (and Franklin, Illinois?)
+	
+https://www.empoweringsurvivors.org/
+	
+</li>
+
+<li>
+	
+**SWEDISH HOSPITAL**
+	
+773-878-8200
+	
+Chicago, Illinois
+	
+https://swedishcovenant.org/community/pathways-program
+	
+</li>
+
+<li>
+	
+**THE RESURRECTION PROJECT**
+	
+(312) 666-1323
+	
+Chicago, Illinois
+	
+https://resurrectionproject.org/
+	
+</li>
+
+<li>
+	
+**TURNING POINT, INC.**
+	
+sponitz@turnpt.org (Executive Director Sarah Ponitz)
+	
+Woodstock, Illinois
+	
+https://turnpt.org/
+	
+</li>
+
+<li>
+	
+**The Women's Center, Inc**
+	
+execassistant@empoweringsurvivors.org
+	
+Carbondale, Illinois
+	
+http://www.firstcircuitil.org/womens-center
+	
+</li>
+
+<li>
+UNIVERSAL FAMILY CONNECTION INC
+info@ufcinc.org
+Chicago, Illinois
+http://universalfamilyconnection.com/
+</li>
+
+<li>
+	
+**VIOLENCE PREVENTION CENTER OF SOUTHWESTERN ILLINOIS**
+	
+618-236-2531
+	
+Belleville, Illinois
+	
+https://www.vpcswi.org/
+	
+</li>
+
+<li>
+	
+**VOICES OF STEPHENSON COUNTY**
+	
+voices@voicesofsc.org
+	
+Freeport, Illinois
+	
+https://voicesofsc.org/
+	
+</li>
+
+<li>
+	
+**WESTERN ILLINOIS REGIONAL COUNCIL - COMMUNITY ACTION AGENCY VICTIM SERVICES (WIRC-CAA)**
+	
+wirc@wirpc.org
+	
+Macomb, Illinois
+	
+https://wirpc.org/
+	
+</li>
+
+<li>
+	
+**WINGS PROGRAM,INC.**
+	
+wings@wingsprogram.com
+	
+Rolling Meadows, Illinois, Chicago, Illinois, and Palatine, Illinois
+	
+https://wingsprogram.com/
+	
+</li>
+
+<li>
+	
+**YWCA OF EVANSTON/NORTH SHORE**
+	
+info@ywca-ens.org
+	
+Evanston, Illinois
+	
+https://www.ywca-ens.org/
+	
+</li>
+
+<li>
+	
+**YWCA OF THE SAUK VALLEY**
+	
+815.625.0333 (Sterling)
+	
+815.288.1232 (Dixon)
+	
+Sterling, Illinois and Dixon, Illinois
+	
+https://www.ywsauk.org/
+	
+</li>
+
+
+	
+	
 
 
  
