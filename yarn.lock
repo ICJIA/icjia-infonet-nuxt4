@@ -899,7 +899,7 @@
   optionalDependencies:
     ipx "^2.0.0"
 
-"@nuxt/kit@3.8.0", "@nuxt/kit@^3.3.1", "@nuxt/kit@^3.6.5", "@nuxt/kit@^3.7.4":
+"@nuxt/kit@3.8.0", "@nuxt/kit@^3.3.1", "@nuxt/kit@^3.6.5", "@nuxt/kit@^3.7.1", "@nuxt/kit@^3.7.4":
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.8.0.tgz#cd8a32981c2fe151e0acde7145f7e4ca38920f24"
   integrity sha512-oIthQxeMIVs4ESVP5FqLYn8tj0S1sLd+eYreh+dNYgnJ2pTi7+THR12ONBNHjk668jqEe7ErUJ8UlGwqBzgezg==
@@ -1070,6 +1070,16 @@
     unified "^11.0.3"
     unist-builder "^4.0.0"
     unist-util-visit "^5.0.0"
+
+"@nuxtjs/plausible@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/plausible/-/plausible-0.2.3.tgz#40ddef763589f86043cae360834b912fe8d31095"
+  integrity sha512-HGZA70ad6IgaP0bN2N3sEsBxURZfUb8HMMxQ7s/Iqw1U8snBsByAEaIxD0eafWLOvwNckHMTYzCIl+Xs6ZiXSA==
+  dependencies:
+    "@nuxt/kit" "^3.7.1"
+    defu "^6.1.2"
+    pathe "^1.1.1"
+    plausible-tracker "^0.3.8"
 
 "@parcel/watcher-android-arm64@2.3.0":
   version "2.3.0"
@@ -6119,6 +6129,11 @@ pkg-types@^1.0.3:
     jsonc-parser "^3.2.0"
     mlly "^1.2.0"
     pathe "^1.1.0"
+
+plausible-tracker@^0.3.8:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/plausible-tracker/-/plausible-tracker-0.3.8.tgz#9b8b322cc41e0e1d6473869ef234deea365a5a40"
+  integrity sha512-lmOWYQ7s9KOUJ1R+YTOR3HrjdbxIS2Z4de0P/Jx2dQPteznJl2eX3tXxKClpvbfyGP59B5bbhW8ftN59HbbFSg==
 
 postcss-calc@^9.0.0:
   version "9.0.1"
