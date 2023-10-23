@@ -15,11 +15,21 @@ const sortedPublications = _.orderBy(publications, ["date"], ["desc"]);
 
 //console.log(JSON.stringify(sortedPublications));
 
-console.log("Research items: ", sortedPublications.length);
+console.log("data and publications items: ", sortedPublications.length);
 //TODO: Make this directory path
 
+// jsonfile.writeFileSync(
+//   `./src/research.json`,
+//   sortedPublications,
+//   function (err) {
+//     if (err) {
+//       console.error(err);
+//     }
+//   }
+// );
+
 jsonfile.writeFileSync(
-  `./src/research.json`,
+  `./src/dataAndPublications.json`,
   sortedPublications,
   function (err) {
     if (err) {

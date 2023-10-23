@@ -183,7 +183,9 @@
 
 <script setup>
 // import hubArticles from "~/assets/json/hub.json";
-const { pending, data: hubArticles } = await useFetch("/api/research");
+const { pending, data: hubArticles } = await useFetch(
+  "/api/dataAndPublications"
+);
 // console.log("hub pending: ", pending.value);
 console.log("hub.json loaded from api.");
 let infonetTags = useState("tags");

@@ -426,7 +426,9 @@ const renderer = new md({
   quotes: "“”‘’",
 }).use(attrs);
 // import hubArticles from "~/assets/json/hub.json";
-const { pending, data: hubArticles } = await useFetch("/api/research");
+const { pending, data: hubArticles } = await useFetch(
+  "/api/dataAndPublications"
+);
 //console.log("hub articles: ", hubArticles);
 // console.log("hub pending: ", pending.value);
 // console.log("hub.json loaded from api.");

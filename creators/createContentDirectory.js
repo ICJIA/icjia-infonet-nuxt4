@@ -34,6 +34,7 @@ const PUBLIC_FILES_TO_REMOVE = [
   "siteMeta.json",
   "publist.json",
   "research.json",
+  "dataAndPublications.json",
 ];
 
 PUBLIC_FILES_TO_REMOVE.forEach((fileName) => {
