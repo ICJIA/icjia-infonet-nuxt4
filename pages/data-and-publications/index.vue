@@ -204,6 +204,10 @@
 </template>
 
 <script setup>
+useHead({
+  title: "InfoNet & Other Victim Services Research",
+});
+
 const getPublicationType = function (type) {
   let cleanType;
   switch (type) {
