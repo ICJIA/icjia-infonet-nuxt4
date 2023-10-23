@@ -28,7 +28,7 @@
 
     <v-row>
       <v-col>
-        <h1>InfoNet Research</h1>
+        <h1>InfoNet & Other Victim Services Research</h1>
         <h2 class="text-center" style="border: none; font-size: 22px">
           Filter by tag:
         </h2>

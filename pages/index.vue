@@ -223,7 +223,7 @@
                           >
                             <v-btn
                               color="#0D4474"
-                              to="/research"
+                              to="/data-and-publications"
                               size="x-small"
                               style="font-weight: 700; color: #fff"
                               >All InfoNet Research&nbsp;&raquo;</v-btn

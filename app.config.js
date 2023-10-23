@@ -95,18 +95,15 @@ export default defineAppConfig({
       link: "/resources",
     },
     {
-      main: "Research",
-      link: "/research",
+      main: "Data & Publications",
+      link: "/data-and-publications",
     },
 
     {
       main: "Upgrades",
       link: "/upgrades",
     },
-    {
-      main: "Data & Publications",
-      link: "/publications",
-    },
+
     // {
     //   main: "Meetings",
     //   link: "/meetings",
@@ -171,12 +168,9 @@ export default defineAppConfig({
       children: [
         {
           title: "Data & Publications",
-          link: "/publications",
+          link: "/data-and-publications",
         },
-        {
-          title: "Research",
-          link: "/research",
-        },
+
         {
           title: "Upgrades",
           link: "/upgrades",
@@ -237,12 +231,9 @@ export default defineAppConfig({
       children: [
         {
           title: "Data & Publications",
-          link: "/publications",
+          link: "/data-and-publications",
         },
-        {
-          title: "Research",
-          link: "/research",
-        },
+
         {
           title: "Upgrades",
           link: "/upgrades",
