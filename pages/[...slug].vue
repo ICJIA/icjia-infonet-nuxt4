@@ -26,17 +26,18 @@ const redirect = () => {
 let myTocObj = {};
 
 onBeforeMount(() => {
-  // const currentPath = router.currentRoute.value.path;
-  // // console.log("Current route path: ", router.currentRoute.value.path);
-  // // console.table(appRoutes);
-  // const isValidRoute = appRoutes.includes(currentPath);
+  const currentPath = router.currentRoute.value.path;
+  // console.log("Current route path: ", router.currentRoute.value.path);
+  // console.table(appRoutes);
+  const isValidRoute = appRoutes.includes(currentPath);
+  console.log("isValidRoute: ", isValidRoute);
   // if (!isValidRoute) {
   //   throw showError({ statusCode: 404, statusMessage: "Page Not Found" });
   // }
 }),
   onMounted(() => {
-    const isValidRoute = appRoutes.includes(currentPath);
-    console.log("isValidRoute: ", isValidRoute);
+    // const isValidRoute = appRoutes.includes(currentPath);
+    // console.log("isValidRoute: ", isValidRoute);
     if (data.value.showTableOfContents) {
       showTOC.value = true;
       cols.value = 9;

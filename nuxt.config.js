@@ -74,11 +74,7 @@ export default defineNuxtConfig({
           "data-domain": "infonet.illinois.gov",
           defer: true,
         },
-        // {
-        //   src: "https://analytics.icjia-api.cloud/js/plausible.js",
-        //   "data-domain": "infonet.illinois.gov",
-        //   defer: true,
-        // },
+
         // {
         //   src: "https://www.googletagmanager.com/gtag/js?id=G-xxxxxxx",
         //   async: true,
