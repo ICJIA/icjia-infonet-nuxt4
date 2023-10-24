@@ -162,7 +162,7 @@
                     <v-chip
                       size="x-small"
                       style="font-weight: 700"
-                      @click="setTagFilter(tag)"
+                      @click.prevent.stop="setTagFilter(tag)"
                       >&nbsp;{{ tag.toUpperCase() }}&nbsp;</v-chip
                     >
                     &nbsp;
