@@ -69,6 +69,11 @@ export default defineNuxtConfig({
           src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js",
           type: "text/javascript",
         },
+        {
+          src: "https://plausible.icjia.cloud/js/script.js",
+          "data-domain": "infonet.illinois.gov",
+          defer: true,
+        },
         // {
         //   src: "https://analytics.icjia-api.cloud/js/plausible.js",
         //   "data-domain": "infonet.illinois.gov",
