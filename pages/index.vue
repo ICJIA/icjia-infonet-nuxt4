@@ -257,6 +257,7 @@
                           outlined
                           min-height="200"
                           style="max-width: 700px"
+                          @click="gotoArticle(article.slug)"
                         >
                           <!-- Test: {{ article.homePage }} -->
                           <div>
@@ -313,7 +314,7 @@
                           </div>
                           <div class="mt-5">
                             <!-- {{ getInfoNetSpecificTags(article.tags) }} -->
-                            <span
+                            <!-- <span
                               v-for="tag in getInfoNetSpecificTags(
                                 article.tags
                               )"
@@ -328,7 +329,7 @@
                                 >&nbsp;{{ tag.toUpperCase() }}&nbsp;</v-chip
                               >
                               &nbsp;
-                            </span>
+                            </span> -->
                           </div>
                           <v-card-actions>
                             <v-spacer></v-spacer>

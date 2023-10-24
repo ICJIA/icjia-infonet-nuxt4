@@ -82,7 +82,8 @@
               <v-card
                 height="100%"
                 style="position: relative"
-                class="px-5 py-5 elevation-5"
+                class="px-5 py-5 elevation-5 hover info-card"
+                @click.prevent.stop="gotoArticle(article.slug)"
               >
                 <div>
                   <span

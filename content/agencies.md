@@ -7,7 +7,7 @@ showTableOfContents: true
 summary: List of InfoNet User Agencies
 section: root
 createdAt: 2023-08-08T17:24:52.609Z
-updatedAt: 2023-10-23T18:27:22.165Z
+updatedAt: 2023-10-23T20:25:47.835Z
 publishedAt: 2023-08-08T17:24:53.445Z
 searchMeta: null
 category: page
@@ -45,8 +45,8 @@ rawText: " ul member list webkit columns 1 moz columns 1 columns 1 padding left
   family shelter service of metropolitan family services dupage wheaton illinois
   https www metrofamily org fssofmfsd freedom house inc info
   freedomhouseillinois com princeton illinois https www freedomhouseillinois org
-  fulton mason crisis service 309 647 2964 canton illinois no website guardian
-  angel community services groundwork info gacsprograms org general ikutlesa
+  fulton mason crisis service 309 647 2964 canton illinois guardian angel
+  community services groundwork info gacsprograms org general ikutlesa
   gacsprograms org chief executive officer joliet illinois https www
   gacsprograms org harbor house kankakee illinois https www harborhousedv org
   safety alert hana center info hanacenter org chicago illinois and prospect
@@ -163,11 +163,12 @@ rawText: " ul member list webkit columns 1 moz columns 1 columns 1 padding left
   sexual abuse center http www zcenter org gurnee illinois and skokie illinois
   child advocacy centers children s advocacy center of mchenry county mmarinier
   mchenrycac org crystal lake illinois https mchenrycac org fulton county
-  children s advocacy center knox county children s advocacy center director
-  paladincac org galesburg illinois https www paladincac org mercer county
-  family crisis center child advocacy center 309 582 7233 aledo illinois https
-  mcfcc com child advocacy center of dekalb county info fsadekalbcounty org
-  dekalb illinois https fsadekalbcounty org programs childrens advocacy center "
+  children s advocacy center canton illinois 309 647 7487 knox county children s
+  advocacy center director paladincac org galesburg illinois https www
+  paladincac org mercer county family crisis center child advocacy center 309
+  582 7233 aledo illinois https mcfcc com child advocacy center of dekalb county
+  info fsadekalbcounty org dekalb illinois https fsadekalbcounty org programs
+  childrens advocacy center "
 draft: false
 markdown: >
   <style>
@@ -586,10 +587,7 @@ markdown: >
 
 
   Canton, Illinois
-
-
-  (no website)
-
+  	
   </li>
 
 
@@ -1672,23 +1670,25 @@ markdown: >
 
 
   <li>
-
-  Children’s Advocacy Center of McHenry County
-
+  	
+  **Children’s Advocacy Center of McHenry County**
+  	
   mmarinier@mchenrycac.org
-
+  	
   Crystal Lake, Illinois
-
+  	
   https://mchenrycac.org/
-
+  	
   </li>
   	
   <li>
-
-  Fulton County Children’s Advocacy Center
-
-  ???
-
+  	
+  **Fulton County Children’s Advocacy Center**
+  	
+  Canton, Illinois
+  	
+  309-647-7487
+  	
   </li>
   	
   <li>
@@ -2037,8 +2037,7 @@ https://www.freedomhouseillinois.org/
 (309) 647-2964
 
 Canton, Illinois
-
-(no website)
+	
 </li>
 
 <li>
@@ -3019,15 +3018,25 @@ Gurnee, Illinois and Skokie, Illinois
 <ul class="member-list text-center">
 
 <li>
-Children’s Advocacy Center of McHenry County
+	
+**Children’s Advocacy Center of McHenry County**
+	
 mmarinier@mchenrycac.org
+	
 Crystal Lake, Illinois
+	
 https://mchenrycac.org/
+	
 </li>
 	
 <li>
-Fulton County Children’s Advocacy Center
-???
+	
+**Fulton County Children’s Advocacy Center**
+	
+Canton, Illinois
+	
+309-647-7487
+	
 </li>
 	
 <li>
