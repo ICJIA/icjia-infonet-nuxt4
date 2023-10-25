@@ -97,7 +97,7 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
   nitro: {
-    compressPublicAssets: true,
+    // compressPublicAssets: true,
   },
   vite: {},
   runtimeConfig: {

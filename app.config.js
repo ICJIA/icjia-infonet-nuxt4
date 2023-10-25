@@ -69,10 +69,10 @@ export default defineAppConfig({
     },
   },
   footerMenu: [
-    {
-      main: "Debug",
-      link: "/debug",
-    },
+    // {
+    //   main: "Debug",
+    //   link: "/debug",
+    // },
 
     {
       main: "About",

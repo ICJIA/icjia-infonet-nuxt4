@@ -34,7 +34,6 @@ Start the development server on http://localhost:8000
 
 ```bash
 yarn dev
-https://localhost:8000
 ```
 
 ## Preview

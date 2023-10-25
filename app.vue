@@ -45,7 +45,7 @@ const hideBreadcrumbs = ref(true);
 const isMounted = ref(false);
 const route = useRoute();
 const routePath = ref(route.path);
-watchEffect(() => {
+watchEffect(async () => {
   routePath.value = route.path;
   //console.log("routePath: ", routePath.value);
 
@@ -53,6 +53,24 @@ watchEffect(() => {
     hideBreadcrumbs.value = true;
   } else {
     hideBreadcrumbs.value = false;
+  }
+  await nextTick();
+  await nextTick();
+  if (!process.server) {
+    // const links = document.querySelectorAll('a[href^="https://"]');
+    // console.log("All https links:");
+    // for (const link of links) {
+    //   console.log(link.href);
+    //   //TODO: Add window to notify users that they're being redirected
+    // }
+    const links = document.querySelectorAll('a[href^="https://"]');
+
+    for (const link of links) {
+      link.addEventListener("click", (event) => {
+        // event.preventDefault();
+        console.log("Click: external link");
+      });
+    }
   }
 });
 useHead({
@@ -64,6 +82,17 @@ useHead({
 
 onMounted(() => {
   isMounted.value = true;
+});
+
+onUnmounted(() => {
+  isMounted.value = false;
+  const links = document.querySelectorAll('a[href^="https://"]');
+
+  for (const link of links) {
+    link.removeEventListener("click", (e) => {
+      // e.preventDefault();
+    });
+  }
 });
 
 const handleMounted = () => {

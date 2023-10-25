@@ -31,14 +31,14 @@
               </div>
 
               <div class="pb-6" style="margin-top: -0px">
-                <v-btn
+                <!-- <v-btn
                   variant="text"
                   style="color: #fff !important; font-size: 20px"
                   aria-label="Link to ICJIA on Twitter"
                   href="https://twitter.com/icjia_illinois"
                   target="_blank"
                   ><v-icon>mdi-twitter</v-icon>
-                </v-btn>
+                </v-btn> -->
 
                 <v-btn
                   variant="text"

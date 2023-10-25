@@ -169,6 +169,11 @@
                   </span>
                 </div>
                 <v-card-actions>
+                  <!-- <a
+                    :href="`https://icjia.illinois.gov/researchhub/articles/${article.slug}`"
+                    target="_blank"
+                    >External link</a
+                  > -->
                   <v-spacer></v-spacer>
 
                   <v-btn
