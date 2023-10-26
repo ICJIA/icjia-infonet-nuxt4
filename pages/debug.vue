@@ -1,13 +1,11 @@
 <template>
   <div>
-    <div v-if="data">
-      {{ data }}
+    <div class="mt-12">
+      <NuxtLink href="https://www.amazon.com">Sample External link</NuxtLink>
     </div>
   </div>
 </template>
 
-<script setup>
-const { data } = await useFetch("/api/search");
-</script>
+<script setup></script>
 
 <style lang="scss" scoped></style>

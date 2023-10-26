@@ -1,6 +1,7 @@
 <template>
   <v-app id="appTop">
     <LazyImageModal></LazyImageModal>
+    <LazyTextModal></LazyTextModal>
     <TheNav></TheNav>
 
     <ThePageLoader v-if="!isMounted && hideBreadcrumbs"> </ThePageLoader>
@@ -67,8 +68,12 @@ watchEffect(async () => {
 
     for (const link of links) {
       link.addEventListener("click", (event) => {
-        // event.preventDefault();
-        console.log("Click: external link");
+        event.preventDefault();
+        console.log("Click: external link", event);
+        // useEvent("modal:text", {
+        //   url: "test.html",
+        //   bodyText: "Body text here for " + link.href,
+        // });
       });
     }
   }

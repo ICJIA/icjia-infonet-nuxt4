@@ -99,6 +99,7 @@ export default defineNuxtConfig({
   nitro: {
     // compressPublicAssets: true,
   },
+  devtools: { timeline: { enabled: true } },
   vite: {},
   runtimeConfig: {
     // The private keys which are only available within server-side
