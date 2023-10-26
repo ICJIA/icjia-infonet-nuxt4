@@ -1,7 +1,7 @@
 <template>
   <v-app id="appTop">
-    <ImageModal></ImageModal>
-    <TextModal></TextModal>
+    <LazyImageModal></LazyImageModal>
+    <LazyTextModal></LazyTextModal>
     <TheNav></TheNav>
 
     <ThePageLoader v-if="!isMounted && hideBreadcrumbs"> </ThePageLoader>
@@ -76,7 +76,7 @@ watchEffect(async () => {
         // console.log("Click: external link", event);
         useEvent("modal:text", {
           url: link,
-          bodyText: `You've clicked on an external link. If you proceed, you will leave the InfoNet website.<br/><br/> You're about to be redirected to: <strong>${link.getAttribute(
+          bodyText: `You've clicked on an external link. If you proceed, you will leave the InfoNet website.<br/><br/> You're about to be redirected to: <br/><strong>${link.getAttribute(
             "href"
           )}</strong>`,
         });
