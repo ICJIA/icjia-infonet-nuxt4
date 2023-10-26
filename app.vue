@@ -1,7 +1,7 @@
 <template>
   <v-app id="appTop">
-    <LazyImageModal></LazyImageModal>
-    <LazyTextModal></LazyTextModal>
+    <ImageModal></ImageModal>
+    <TextModal></TextModal>
     <TheNav></TheNav>
 
     <ThePageLoader v-if="!isMounted && hideBreadcrumbs"> </ThePageLoader>
@@ -46,6 +46,14 @@ const hideBreadcrumbs = ref(true);
 const isMounted = ref(false);
 const route = useRoute();
 const routePath = ref(route.path);
+function uuidv4() {
+  return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  );
+}
 watchEffect(async () => {
   routePath.value = route.path;
   //console.log("routePath: ", routePath.value);
@@ -58,22 +66,20 @@ watchEffect(async () => {
   await nextTick();
   await nextTick();
   if (!process.server) {
-    // const links = document.querySelectorAll('a[href^="https://"]');
-    // console.log("All https links:");
-    // for (const link of links) {
-    //   console.log(link.href);
-    //   //TODO: Add window to notify users that they're being redirected
-    // }
     const links = document.querySelectorAll('a[href^="https://"]');
 
     for (const link of links) {
       link.addEventListener("click", (event) => {
+        //console.log("EventTarget: ", event.target);
+        console.log("Link: ", link.getAttribute("href"));
         event.preventDefault();
-        console.log("Click: external link", event);
-        // useEvent("modal:text", {
-        //   url: "test.html",
-        //   bodyText: "Body text here for " + link.href,
-        // });
+        // console.log("Click: external link", event);
+        useEvent("modal:text", {
+          url: link,
+          bodyText: `You've clicked on an external link. If you proceed, you will leave the InfoNet website.<br/><br/> You're about to be redirected to: <strong>${link.getAttribute(
+            "href"
+          )}</strong>`,
+        });
       });
     }
   }
