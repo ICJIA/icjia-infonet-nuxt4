@@ -65,24 +65,24 @@ watchEffect(async () => {
   }
   await nextTick();
   await nextTick();
-  if (!process.server) {
-    const links = document.querySelectorAll('a[href^="https://"]');
+  // if (!process.server) {
+  //   const links = document.querySelectorAll('a[href^="https://"]');
 
-    for (const link of links) {
-      link.addEventListener("click", (event) => {
-        //console.log("EventTarget: ", event.target);
-        console.log("Link: ", link.getAttribute("href"));
-        event.preventDefault();
-        // console.log("Click: external link", event);
-        useEvent("modal:text", {
-          url: link,
-          bodyText: `You've clicked on an external link. If you proceed, you will leave the InfoNet website.<br/><br/> You're about to be redirected to: <br/><strong>${link.getAttribute(
-            "href"
-          )}</strong>`,
-        });
-      });
-    }
-  }
+  //   for (const link of links) {
+  //     link.addEventListener("click", (event) => {
+  //       //console.log("EventTarget: ", event.target);
+  //       console.log("Link: ", link.getAttribute("href"));
+  //       event.preventDefault();
+  //       // console.log("Click: external link", event);
+  //       useEvent("modal:text", {
+  //         url: link,
+  //         bodyText: `You've clicked on an external link. If you proceed, you will leave the InfoNet website.<br/><br/> You're about to be redirected to: <br/><strong>${link.getAttribute(
+  //           "href"
+  //         )}</strong>`,
+  //       });
+  //     });
+  //   }
+  // }
 });
 useHead({
   meta: [{ name: "og:url", content: routePath }],

@@ -182,7 +182,6 @@
                     class="mt-5"
                     variant="text"
                     style="font-weight: 900; font-size: 11px"
-                    @click="gotoArticle(article.slug)"
                   >
                     Read Article (Web)&nbsp;&raquo;
                   </v-btn>
@@ -193,7 +192,6 @@
                     class="mt-5"
                     variant="text"
                     style="font-weight: 900; font-size: 11px"
-                    @click="gotoPublication(article.fileURL)"
                   >
                     Read {{ getPublicationType(article.pubType) }} ({{
                       article.ext
