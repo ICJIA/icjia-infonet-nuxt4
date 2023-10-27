@@ -153,14 +153,14 @@ export default defineAppConfig({
         //   title: "News & Updates",
         //   link: "/news",
         // },
-        // {
-        //   title: "Screenshots",
-        //   link: "/screenshots",
-        // },
         {
-          title: "Frequently Asked Questions (FAQs)",
-          link: "/faqs",
+          title: "Screenshots",
+          link: "/screenshots",
         },
+        // {
+        //   title: "Frequently Asked Questions (FAQs)",
+        //   link: "/faqs",
+        // },
       ],
     },
     {
@@ -211,18 +211,18 @@ export default defineAppConfig({
           title: "Infonet Partners",
           link: "/partners",
         },
-        {
-          title: "FAQs",
-          link: "/faqs",
-        },
+        // {
+        //   title: "FAQs",
+        //   link: "/faqs",
+        // },
         {
           title: "News & Updates",
           link: "/news",
         },
-        // {
-        //   title: "Screenshots",
-        //   link: "/screenshots",
-        // },
+        {
+          title: "Screenshots",
+          link: "/screenshots",
+        },
       ],
     },
 
