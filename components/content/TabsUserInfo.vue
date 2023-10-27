@@ -2,7 +2,7 @@
   <div>
     <v-card v-if="isMounted">
       <v-tabs v-model="tab" bg-color="grey-darken-3" grow center-active>
-        <v-tab value="one" class="tabs" v-if="dv"> {{ getTitle(dv) }}</v-tab>
+        <v-tab value="one" class="tabs" v-if="dv"> {{ getTitle(dv) }} </v-tab>
         <v-tab value="two" class="tabs" v-if="sa"> {{ getTitle(sa) }}</v-tab>
 
         <v-tab value="three" class="tabs" v-if="cac">

@@ -153,10 +153,10 @@ export default defineAppConfig({
         //   title: "News & Updates",
         //   link: "/news",
         // },
-        {
-          title: "Screenshots",
-          link: "/screenshots",
-        },
+        // {
+        //   title: "Screenshots",
+        //   link: "/screenshots",
+        // },
         {
           title: "Frequently Asked Questions (FAQs)",
           link: "/faqs",
@@ -219,10 +219,10 @@ export default defineAppConfig({
           title: "News & Updates",
           link: "/news",
         },
-        {
-          title: "Screenshots",
-          link: "/screenshots",
-        },
+        // {
+        //   title: "Screenshots",
+        //   link: "/screenshots",
+        // },
       ],
     },
 

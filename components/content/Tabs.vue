@@ -9,7 +9,7 @@
               class="text-center mb-4 pr-2"
               style="font-size: 12px; font-weight: 900; color: #777"
             >
-              Click tab to view agency info
+              Click tab to view agency info.
             </div>
 
             <v-card
@@ -34,6 +34,16 @@
                   :value="tab.attributes.slug"
                   class="px-3"
                 >
+                  <div
+                    class="text-center mt-8 mb-5"
+                    style="
+                      font-weight: 700;
+                      color: blue;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Note: All displays contain mock data.
+                  </div>
                   <div
                     class="px-5 py-5"
                     v-if="tab.attributes.body && tab.attributes.body.length > 0"
