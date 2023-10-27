@@ -257,7 +257,11 @@
                           outlined
                           min-height="200"
                           style="max-width: 700px"
-                          @click="gotoArticle(article.slug)"
+                          @click.prevent.stop="
+                            article.source === 'hub'
+                              ? gotoArticle(article.slug)
+                              : gotoPublication(article.fileURL)
+                          "
                         >
                           <!-- Test: {{ article.homePage }} -->
                           <div>
@@ -266,7 +270,11 @@
                           <div
                             class="my-6 hover"
                             style="font-weight: 900"
-                            @click="gotoArticle(article.slug)"
+                            @click.prevent.stop="
+                              article.source === 'hub'
+                                ? gotoArticle(article.slug)
+                                : gotoPublication(article.fileURL)
+                            "
                           >
                             {{ article.title }}
                           </div>
@@ -339,7 +347,7 @@
                               class="mt-5"
                               variant="text"
                               style="font-weight: 900; font-size: 11px"
-                              @click="gotoArticle(article.slug)"
+                              @click.stop.prevent="gotoArticle(article.slug)"
                             >
                               Read Article (Web)&nbsp;&raquo;
                             </v-btn>
@@ -350,7 +358,9 @@
                               class="mt-5"
                               variant="text"
                               style="font-weight: 900; font-size: 11px"
-                              @click="gotoPublication(article.fileURL)"
+                              @click.stop.prevent="
+                                gotoPublication(article.fileURL)
+                              "
                             >
                               Read {{ getPublicationType(article.pubType) }} ({{
                                 article.ext

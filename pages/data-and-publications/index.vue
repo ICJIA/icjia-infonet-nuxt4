@@ -83,7 +83,11 @@
                 height="100%"
                 style="position: relative"
                 class="px-5 py-5 elevation-5 hover info-card"
-                @click.prevent.stop="gotoArticle(article.slug)"
+                @click.prevent.stop="
+                  article.source === 'hub'
+                    ? gotoArticle(article.slug)
+                    : gotoPublication(article.fileURL)
+                "
               >
                 <div>
                   <span
