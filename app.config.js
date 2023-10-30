@@ -2,7 +2,7 @@ export default defineAppConfig({
   title: "InfoNet",
   description: "InfoNet",
   api: "https://infonet.icjia-api.cloud",
-  root: "https://infonet.icjia.dev",
+  root: "https://infonet.icjia.illinois.gov",
   isTranslationEnabled: true,
   homeNewsLimit: 2,
   faqCategoryMap: {
