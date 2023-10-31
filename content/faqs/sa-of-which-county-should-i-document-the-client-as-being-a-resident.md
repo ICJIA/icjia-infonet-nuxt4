@@ -21,7 +21,7 @@ draft: false
 title: Of which county should I document the client as being a resident?
 summary: Of which county should I document the client as being a resident?
 path: /faqs/sa-of-which-county-should-i-document-the-client-as-being-a-resident
-url: https://infonet.icjia.dev/faqs/sa-of-which-county-should-i-document-the-client-as-being-a-resident
+url: https://infonet.icjia.illinois.gov/faqs/sa-of-which-county-should-i-document-the-client-as-being-a-resident
 markdown: The county in which the client resides at the time of intake. For
   example, if your client is from Christian County but moves to Sangamon County
   upon intake, you would document Sangamon County as the client’s county of

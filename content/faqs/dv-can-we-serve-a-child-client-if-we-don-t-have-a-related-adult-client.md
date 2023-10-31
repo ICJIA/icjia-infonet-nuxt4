@@ -20,7 +20,7 @@ draft: false
 title: Can we serve a child client if we don’t have a related adult client?
 summary: Can we serve a child client if we don’t have a related adult client?
 path: /faqs/dv-can-we-serve-a-child-client-if-we-don-t-have-a-related-adult-client
-url: https://infonet.icjia.dev/faqs/dv-can-we-serve-a-child-client-if-we-don-t-have-a-related-adult-client
+url: https://infonet.icjia.illinois.gov/faqs/dv-can-we-serve-a-child-client-if-we-don-t-have-a-related-adult-client
 markdown: >-
   Yes. 
 

@@ -29,7 +29,7 @@ title: Is time spent entering dv client data and service data into InfoNet
 summary: Is time spent entering dv client data and service data into InfoNet
   considered a direct client service?
 path: /faqs/dv-is-time-spent-entering-dv-client-data-and-service-data-into-info-net-considered-a-direct-client-service
-url: https://infonet.icjia.dev/faqs/dv-is-time-spent-entering-dv-client-data-and-service-data-into-info-net-considered-a-direct-client-service
+url: https://infonet.icjia.illinois.gov/faqs/dv-is-time-spent-entering-dv-client-data-and-service-data-into-info-net-considered-a-direct-client-service
 markdown: >-
   No. Entering data into InfoNet is an operational activity and should not be
   included in hours of services provided to clients. However, time

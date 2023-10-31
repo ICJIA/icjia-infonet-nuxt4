@@ -27,7 +27,7 @@ summary: Q I have a child client who has not received direct services under her
   ID number, but she has been in child care at the program while her mother
   receives services. Do I close her case?
 path: /faqs/dv-q-i-have-a-child-client-who-has-not-received-direct-services-under-her-id-number
-url: https://infonet.icjia.dev/faqs/dv-q-i-have-a-child-client-who-has-not-received-direct-services-under-her-id-number
+url: https://infonet.icjia.illinois.gov/faqs/dv-q-i-have-a-child-client-who-has-not-received-direct-services-under-her-id-number
 markdown: No, keep the case open. However, depending on the age of the child,
   the agency should consider whether the child may benefit from more meaningful
   interaction with staff such as counseling while the parent is receiving

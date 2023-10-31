@@ -34,7 +34,7 @@ title: If we use the List Editor to personalize our drop-down menu of Other
 summary: If we use the List Editor to personalize our drop-down menu of Other
   Staff Activities, will we be able to change the list later?
 path: /faqs/sa-if-we-use-the-list-editor-to-personalize-our-drop-down-menu-of-other-staff-activities-will-we-be-able-to-change-the-list-later
-url: https://infonet.icjia.dev/faqs/sa-if-we-use-the-list-editor-to-personalize-our-drop-down-menu-of-other-staff-activities-will-we-be-able-to-change-the-list-later
+url: https://infonet.icjia.illinois.gov/faqs/sa-if-we-use-the-list-editor-to-personalize-our-drop-down-menu-of-other-staff-activities-will-we-be-able-to-change-the-list-later
 markdown: "You may edit existing entries, but it becomes increasingly difficult
   to do as time passes. Before doing so, you must consider previous records tied
   to that entry before editing. Editing to correct spelling of an entry is fine,

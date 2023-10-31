@@ -21,7 +21,7 @@ markdown: |-
   ::
 navigation: true
 path: /screenshots
-url: https://infonet.icjia.dev/screenshots
+url: https://infonet.icjia.illinois.gov/screenshots
 ---
 
 ::Tabs

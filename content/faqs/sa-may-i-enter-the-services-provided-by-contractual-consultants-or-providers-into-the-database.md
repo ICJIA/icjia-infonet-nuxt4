@@ -33,7 +33,7 @@ title: May I enter the services provided by contractual consultants or providers
 summary: May I enter the services provided by contractual consultants or
   providers into the database?
 path: /faqs/sa-may-i-enter-the-services-provided-by-contractual-consultants-or-providers-into-the-database
-url: https://infonet.icjia.dev/faqs/sa-may-i-enter-the-services-provided-by-contractual-consultants-or-providers-into-the-database
+url: https://infonet.icjia.illinois.gov/faqs/sa-may-i-enter-the-services-provided-by-contractual-consultants-or-providers-into-the-database
 markdown: Yes, but first you must enter the contractual person in the
   Administration > Staff Information section of the database using their own
   first and last names. If you want it to be displayed that this is a

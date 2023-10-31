@@ -35,7 +35,7 @@ summary: If a client leaves shelter for a couple of nights and later returns, do
   we give her a shelter end date when she leaves and open a new shelter record
   when she returns?
 path: /faqs/dv-if-a-client-leaves-shelter-for-a-couple-of-nights-and-later-returns-do-we-give-her-a-shelter-end-date-when-she-leaves-and-open-a-new-shelter-record-when-she-returns
-url: https://infonet.icjia.dev/faqs/dv-if-a-client-leaves-shelter-for-a-couple-of-nights-and-later-returns-do-we-give-her-a-shelter-end-date-when-she-leaves-and-open-a-new-shelter-record-when-she-returns
+url: https://infonet.icjia.illinois.gov/faqs/dv-if-a-client-leaves-shelter-for-a-couple-of-nights-and-later-returns-do-we-give-her-a-shelter-end-date-when-she-leaves-and-open-a-new-shelter-record-when-she-returns
 markdown: Sometimes. If you have a client in shelter and the client leaves for
   1-3 nights with plans to return, AND you are holding space for this client, do
   not close the shelter service record. If your client leaves shelter for more

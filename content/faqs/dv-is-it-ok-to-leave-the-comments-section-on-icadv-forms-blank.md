@@ -21,7 +21,7 @@ draft: false
 title: Is it OK to leave the Comments section on ICADV forms blank?
 summary: Is it OK to leave the Comments section on ICADV forms blank?
 path: /faqs/dv-is-it-ok-to-leave-the-comments-section-on-icadv-forms-blank
-url: https://infonet.icjia.dev/faqs/dv-is-it-ok-to-leave-the-comments-section-on-icadv-forms-blank
+url: https://infonet.icjia.illinois.gov/faqs/dv-is-it-ok-to-leave-the-comments-section-on-icadv-forms-blank
 markdown: No. The Comments section must be completed with client-specific
   information. As these are paper files kept at your agency, they fall under a
   different set of security policies than InfoNet, which avoids open text fields

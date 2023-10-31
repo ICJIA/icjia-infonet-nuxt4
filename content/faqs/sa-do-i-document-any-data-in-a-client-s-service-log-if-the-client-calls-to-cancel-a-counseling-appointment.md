@@ -26,7 +26,7 @@ title: Do I document any data in a client’s service log if the client calls to
 summary: Do I document any data in a client’s service log if the client calls to
   cancel a counseling appointment?
 path: /faqs/sa-do-i-document-any-data-in-a-client-s-service-log-if-the-client-calls-to-cancel-a-counseling-appointment
-url: https://infonet.icjia.dev/faqs/sa-do-i-document-any-data-in-a-client-s-service-log-if-the-client-calls-to-cancel-a-counseling-appointment
+url: https://infonet.icjia.illinois.gov/faqs/sa-do-i-document-any-data-in-a-client-s-service-log-if-the-client-calls-to-cancel-a-counseling-appointment
 markdown: "If you wish to track no shows and cancellations for services, you may
   do this on the Services > Direct Client Services > No Show/Cancellation tab.
   Do not document hours of service for the time you waited for the client if a

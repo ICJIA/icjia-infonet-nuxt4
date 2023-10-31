@@ -27,7 +27,7 @@ title: Is time spent entering client data and service data into InfoNet
 summary: Is time spent entering client data and service data into InfoNet
   considered a direct client service?
 path: /faqs/sa-is-time-spent-entering-client-data-and-service-data-into-info-net-considered-a-direct-client-service
-url: https://infonet.icjia.dev/faqs/sa-is-time-spent-entering-client-data-and-service-data-into-info-net-considered-a-direct-client-service
+url: https://infonet.icjia.illinois.gov/faqs/sa-is-time-spent-entering-client-data-and-service-data-into-info-net-considered-a-direct-client-service
 markdown: >-
   If you wish to track no shows and cancellations for services, you may do this
   on the **Services > Direct Client Services > No Show/Cancellation** tab. 

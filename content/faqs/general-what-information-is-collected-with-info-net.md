@@ -45,7 +45,7 @@ draft: false
 title: What information is collected with InfoNet?
 summary: What information is collected with InfoNet?
 path: /faqs/general-what-information-is-collected-with-info-net
-url: https://infonet.icjia.dev/faqs/general-what-information-is-collected-with-info-net
+url: https://infonet.icjia.illinois.gov/faqs/general-what-information-is-collected-with-info-net
 markdown: >-
   Basic information about all victims (clients) who receive services from a
   community based service provider is entered into InfoNet, including

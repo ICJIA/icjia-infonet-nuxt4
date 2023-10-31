@@ -38,7 +38,7 @@ title: How do I enter a Child Care session when I am caring for children from
 summary: How do I enter a Child Care session when I am caring for children from
   more than one family?
 path: /faqs/dv-how-do-i-enter-a-child-care-session-when-i-am-caring-for-children-from-more-than-one-family
-url: https://infonet.icjia.dev/faqs/dv-how-do-i-enter-a-child-care-session-when-i-am-caring-for-children-from-more-than-one-family
+url: https://infonet.icjia.illinois.gov/faqs/dv-how-do-i-enter-a-child-care-session-when-i-am-caring-for-children-from-more-than-one-family
 markdown: >
   Start by entering the Group Service information. Enter the number of children
   cared for as the number of participants. Then, on the attendees tab, enter the

@@ -45,7 +45,7 @@ draft: false
 title: What fields on the client intake are mandatory?
 summary: What fields on the client intake are mandatory?
 path: /faqs/dv-what-fields-on-the-client-intake-are-mandatory
-url: https://infonet.icjia.dev/faqs/dv-what-fields-on-the-client-intake-are-mandatory
+url: https://infonet.icjia.illinois.gov/faqs/dv-what-fields-on-the-client-intake-are-mandatory
 markdown: >
   Only Client ID, Age, Race, Sex, First Contact Date, and Primary Presenting
   Issue are mandatory before you can enter a client in InfoNet. However, you

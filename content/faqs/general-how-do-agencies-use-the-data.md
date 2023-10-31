@@ -26,7 +26,7 @@ draft: false
 title: How do agencies use the data?
 summary: How do agencies use the data?
 path: /faqs/general-how-do-agencies-use-the-data
-url: https://infonet.icjia.dev/faqs/general-how-do-agencies-use-the-data
+url: https://infonet.icjia.illinois.gov/faqs/general-how-do-agencies-use-the-data
 markdown: InfoNet includes a comprehensive set of reporting tools that
   facilitate data mining and analysis. These tools include standard reports that
   meet most state and federal reporting requirements, as well as management

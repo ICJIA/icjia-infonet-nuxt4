@@ -29,7 +29,7 @@ draft: false
 title: How do I remove a person from a funding statement?
 summary: How do I remove a person from a funding statement?
 path: /faqs/sa-how-do-i-remove-a-person-from-a-funding-statement
-url: https://infonet.icjia.dev/faqs/sa-how-do-i-remove-a-person-from-a-funding-statement
+url: https://infonet.icjia.illinois.gov/faqs/sa-how-do-i-remove-a-person-from-a-funding-statement
 markdown: First you must terminate the staff/volunteer in the
   AdministrationStaff Information (or Volunteer Information) section of the
   database. Then, add a new funding statement (AdministrationFunding for

@@ -41,7 +41,7 @@ summary: When I review my Client Information Report, I notice that there are
   some “adult” records in the “child” age categories of the report. What may
   cause this?
 path: /faqs/dv-when-i-review-my-client-information-report-i-notice-that-there-are-some-adult-records-in-the-child-age-categories-of-the-report-what-may-cause-this
-url: https://infonet.icjia.dev/faqs/dv-when-i-review-my-client-information-report-i-notice-that-there-are-some-adult-records-in-the-child-age-categories-of-the-report-what-may-cause-this
+url: https://infonet.icjia.illinois.gov/faqs/dv-when-i-review-my-client-information-report-i-notice-that-there-are-some-adult-records-in-the-child-age-categories-of-the-report-what-may-cause-this
 markdown: >
   If you have a primary victim of domestic violence who is a teen, you may have
   opened that client as an adult even if she was only 13, 14, 15, etc. She would

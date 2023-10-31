@@ -27,7 +27,7 @@ title: What is the difference between Public Education Services and Training
 summary: What is the difference between Public Education Services and Training
   Services in the Community and Institutional Services section?
 path: /faqs/dv-what-is-the-difference-between-public-education-services-and-training-services
-url: https://infonet.icjia.dev/faqs/dv-what-is-the-difference-between-public-education-services-and-training-services
+url: https://infonet.icjia.illinois.gov/faqs/dv-what-is-the-difference-between-public-education-services-and-training-services
 markdown: >-
   Public Education is raising awareness of participants to domestic violence
   issues (DV101). 

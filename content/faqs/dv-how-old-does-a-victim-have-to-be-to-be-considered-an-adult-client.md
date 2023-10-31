@@ -23,7 +23,7 @@ draft: false
 title: How old does a victim have to be to be considered an adult client?
 summary: How old does a victim have to be to be considered an adult client?
 path: /faqs/dv-how-old-does-a-victim-have-to-be-to-be-considered-an-adult-client
-url: https://infonet.icjia.dev/faqs/dv-how-old-does-a-victim-have-to-be-to-be-considered-an-adult-client
+url: https://infonet.icjia.illinois.gov/faqs/dv-how-old-does-a-victim-have-to-be-to-be-considered-an-adult-client
 markdown: Clients aged 18 and older are considered adults. However, if you have
   a teen who is the primary victim of domestic violence (e.g. teen dating
   violence), you may open him or her as an adult. If the teen is not

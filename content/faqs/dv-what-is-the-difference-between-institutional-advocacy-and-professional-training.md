@@ -31,7 +31,7 @@ title: What is the difference between Institutional Advocacy and Professional
 summary: What is the difference between Institutional Advocacy and Professional
   Training?
 path: /faqs/dv-what-is-the-difference-between-institutional-advocacy-and-professional-training
-url: https://infonet.icjia.dev/faqs/dv-what-is-the-difference-between-institutional-advocacy-and-professional-training
+url: https://infonet.icjia.illinois.gov/faqs/dv-what-is-the-difference-between-institutional-advocacy-and-professional-training
 markdown: >
   Institutional Advocacy is advocating on behalf of a class of domestic violence
   victims to improve how the system responds to them.

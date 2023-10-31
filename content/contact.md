@@ -16,7 +16,7 @@ draft: false
 markdown: Contact page and form goes here.
 navigation: true
 path: /contact
-url: https://infonet.icjia.dev/contact
+url: https://infonet.icjia.illinois.gov/contact
 ---
 
 Contact page and form goes here.

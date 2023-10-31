@@ -66,7 +66,7 @@ markdown: >-
   </div>
 navigation: true
 path: /
-url: https://infonet.icjia.dev
+url: https://infonet.icjia.illinois.gov
 ---
 
 InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois. The system is nationally recognized for facilitating standardized data collection and reporting at the statewide level. Initial development of InfoNet began in the mid-90s as a collaborative effort between the Illinois Criminal Justice Information Authority, the Illinois Coalition Against Sexual Assault, and the Illinois Coalition Against Domestic Violence. Since then, InfoNet has grown to include partnerships with the Illinois Department of Human Services and the Children’s Advocacy Centers of Illinois.

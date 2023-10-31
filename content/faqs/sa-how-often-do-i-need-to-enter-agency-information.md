@@ -19,7 +19,7 @@ draft: false
 title: How often do I need to enter agency Information?
 summary: How often do I need to enter agency Information?
 path: /faqs/sa-how-often-do-i-need-to-enter-agency-information
-url: https://infonet.icjia.dev/faqs/sa-how-often-do-i-need-to-enter-agency-information
+url: https://infonet.icjia.illinois.gov/faqs/sa-how-often-do-i-need-to-enter-agency-information
 markdown: Agency information is entered as part of the initial connection to
   InfoNet. After that, only major information, such as name or address changes,
   will need updating.

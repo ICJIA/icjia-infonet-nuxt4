@@ -26,7 +26,7 @@ title: Do I enter Print Media, Radio, and TV on the Activities data entry tab or
 summary: Do I enter Print Media, Radio, and TV on the Activities data entry tab
   or the Media/Publications data entry tab?
 path: /faqs/sa-do-i-enter-print-media-radio-and-tv-on-the-activities-data-entry-tab-or-the-media-publications-data-entry-tab
-url: https://infonet.icjia.dev/faqs/sa-do-i-enter-print-media-radio-and-tv-on-the-activities-data-entry-tab-or-the-media-publications-data-entry-tab
+url: https://infonet.icjia.illinois.gov/faqs/sa-do-i-enter-print-media-radio-and-tv-on-the-activities-data-entry-tab-or-the-media-publications-data-entry-tab
 markdown: "If your agency is creating a product, such as print ad, PSA; etc., it
   should be entered on the Media/Publications tab of the database. If staff are
   presenting on a TV show or answering questions on a radio show, those

@@ -17,7 +17,7 @@ draft: false
 title: How much data have been entered into InfoNet to date?
 summary: How much data have been entered into InfoNet to date?
 path: /faqs/general-how-much-data-have-been-entered-into-info-net-to-date
-url: https://infonet.icjia.dev/faqs/general-how-much-data-have-been-entered-into-info-net-to-date
+url: https://infonet.icjia.illinois.gov/faqs/general-how-much-data-have-been-entered-into-info-net-to-date
 markdown: "As of October 2023, InfoNet contains 26 years of data, totaling more
   than 2.3 million client records and 25 million service contacts.  "
 searchMeta: "faq  "

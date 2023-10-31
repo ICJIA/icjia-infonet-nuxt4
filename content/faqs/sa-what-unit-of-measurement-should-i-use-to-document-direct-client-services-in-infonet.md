@@ -20,7 +20,7 @@ title: What unit of measurement should I use to document direct client services
 summary: What unit of measurement should I use to document direct client
   services in Infonet?
 path: /faqs/sa-what-unit-of-measurement-should-i-use-to-document-direct-client-services-in-infonet
-url: https://infonet.icjia.dev/faqs/sa-what-unit-of-measurement-should-i-use-to-document-direct-client-services-in-infonet
+url: https://infonet.icjia.illinois.gov/faqs/sa-what-unit-of-measurement-should-i-use-to-document-direct-client-services-in-infonet
 markdown: You should use .25-hour increments. 15 minutes equals .25-hours; 30
   minutes equals .5-hours; 45 minutes equals .75 hours.
 searchMeta: "faq  "

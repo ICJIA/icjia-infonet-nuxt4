@@ -41,7 +41,7 @@ draft: false
 title: How do I delete a client?
 summary: How do I delete a client?
 path: /faqs/sa-how-do-i-delete-a-client
-url: https://infonet.icjia.dev/faqs/sa-how-do-i-delete-a-client
+url: https://infonet.icjia.illinois.gov/faqs/sa-how-do-i-delete-a-client
 markdown: >
   You cannot delete a client; however, you can edit the Client ID number to
   indicate that it is a bad record. First, edit the Client ID number by clicking

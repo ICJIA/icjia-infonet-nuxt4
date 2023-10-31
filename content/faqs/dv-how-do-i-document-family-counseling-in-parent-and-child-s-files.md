@@ -15,7 +15,7 @@ draft: false
 title: How do I document Family Counseling in parent and child’s files?
 summary: How do I document Family Counseling in parent and child’s files?
 path: /faqs/dv-how-do-i-document-family-counseling-in-parent-and-child-s-files
-url: https://infonet.icjia.dev/faqs/dv-how-do-i-document-family-counseling-in-parent-and-child-s-files
+url: https://infonet.icjia.illinois.gov/faqs/dv-how-do-i-document-family-counseling-in-parent-and-child-s-files
 markdown: Use Group Services and add both parent and child to the attendees.
 searchMeta: "faq  "
 ---

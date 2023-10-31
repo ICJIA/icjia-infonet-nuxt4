@@ -27,7 +27,7 @@ title: May I enter an entire month’s worth of community and institutional
 summary: May I enter an entire month’s worth of community and institutional
   services in one record if the service was the same?
 path: /faqs/dv-may-i-enter-an-entire-month-s-worth-of-community-and-institutional-services-in-one-record-if-the-service-was-the-same
-url: https://infonet.icjia.dev/faqs/dv-may-i-enter-an-entire-month-s-worth-of-community-and-institutional-services-in-one-record-if-the-service-was-the-same
+url: https://infonet.icjia.illinois.gov/faqs/dv-may-i-enter-an-entire-month-s-worth-of-community-and-institutional-services-in-one-record-if-the-service-was-the-same
 markdown: Yes, you may enter aggregate monthly data. However, remember that if
   you aggregate your data entry, you will not be able to extract weekly or daily
   data—only monthly aggregate totals. If you decide to aggregate monthly, be

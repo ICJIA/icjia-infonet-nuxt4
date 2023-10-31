@@ -60,7 +60,7 @@ summary: When do I update or enter a new intake/case for a client into InfoNet?
   Does her first contact date change to the current date or remain the same as
   the first contact date on the first intake?
 path: /faqs/dv-when-do-i-update-or-enter-a-new-intake-case
-url: https://infonet.icjia.dev/faqs/dv-when-do-i-update-or-enter-a-new-intake-case
+url: https://infonet.icjia.illinois.gov/faqs/dv-when-do-i-update-or-enter-a-new-intake-case
 markdown: >
   _Updating an intake_: 
 

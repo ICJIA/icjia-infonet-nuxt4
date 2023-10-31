@@ -40,7 +40,7 @@ title: On the Standard Report > Client Information Report, should the total
 summary: On the Standard Report > Client Information Report, should the total
   clients and total cases reflected on the report be identical?
 path: /faqs/dv-on-the-standard-report-client-information-report
-url: https://infonet.icjia.dev/faqs/dv-on-the-standard-report-client-information-report
+url: https://infonet.icjia.illinois.gov/faqs/dv-on-the-standard-report-client-information-report
 markdown: >
   Yes, if the report’s timeframe is for one year or less. If the report is for
   one year or less, and you see a greater number of cases than number of

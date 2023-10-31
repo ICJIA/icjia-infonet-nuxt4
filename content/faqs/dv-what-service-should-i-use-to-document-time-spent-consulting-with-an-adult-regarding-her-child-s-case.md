@@ -18,7 +18,7 @@ title: What service should I use to document time spent consulting with an adult
 summary: What service should I use to document time spent consulting with an
   adult regarding her child’s case?
 path: /faqs/dv-what-service-should-i-use-to-document-time-spent-consulting-with-an-adult-regarding-her-child-s-case
-url: https://infonet.icjia.dev/faqs/dv-what-service-should-i-use-to-document-time-spent-consulting-with-an-adult-regarding-her-child-s-case
+url: https://infonet.icjia.illinois.gov/faqs/dv-what-service-should-i-use-to-document-time-spent-consulting-with-an-adult-regarding-her-child-s-case
 markdown: Other Advocacy is entered under the child client’s record.
 searchMeta: "faq  "
 ---

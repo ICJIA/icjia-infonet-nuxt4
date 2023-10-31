@@ -74,7 +74,7 @@ markdown: >+
 
 navigation: true
 path: /resources
-url: https://infonet.icjia.dev/resources
+url: https://infonet.icjia.illinois.gov/resources
 ---
 
 ## InfoNet’s Virtual Private Network (VPN)

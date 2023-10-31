@@ -15,7 +15,7 @@ draft: false
 title: What do I enter into the School field for a child too young to be in school?
 summary: What do I enter into the School field for a child too young to be in school?
 path: /faqs/dv-what-do-i-enter-into-the-school-field-for-a-child-too-young-to-be-in-school
-url: https://infonet.icjia.dev/faqs/dv-what-do-i-enter-into-the-school-field-for-a-child-too-young-to-be-in-school
+url: https://infonet.icjia.illinois.gov/faqs/dv-what-do-i-enter-into-the-school-field-for-a-child-too-young-to-be-in-school
 markdown: Enter Not of School Age.
 searchMeta: "faq  "
 ---

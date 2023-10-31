@@ -38,7 +38,7 @@ summary: If a grandmother with custody of her grandchild brings the child in for
   services, and the child’s mother is also a client of the program, which adult
   record should the child be associated with—the mother’s or the grandmother’s?
 path: /faqs/dv-if-a-grandmother-with-custody-of-her-grandchild-brings-the-child-in-for-services-and-the-child-s-mother-is-also-a-client-of-the-program
-url: https://infonet.icjia.dev/faqs/dv-if-a-grandmother-with-custody-of-her-grandchild-brings-the-child-in-for-services-and-the-child-s-mother-is-also-a-client-of-the-program
+url: https://infonet.icjia.illinois.gov/faqs/dv-if-a-grandmother-with-custody-of-her-grandchild-brings-the-child-in-for-services-and-the-child-s-mother-is-also-a-client-of-the-program
 markdown: >
   The child should be tied to the grandmother’s record since she has custody and
   is bringing the child in for services. Similarly, if a foster parent brings a

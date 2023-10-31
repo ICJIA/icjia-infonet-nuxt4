@@ -26,7 +26,7 @@ draft: false
 title: What is a client intake?
 summary: What is a client intake?
 path: /faqs/sa-what-is-a-client-intake
-url: https://infonet.icjia.dev/faqs/sa-what-is-a-client-intake
+url: https://infonet.icjia.illinois.gov/faqs/sa-what-is-a-client-intake
 markdown: >-
   A client intake is information collected to document the client’s profile at
   the time of intake into the program. Sexual assault service provider agencies

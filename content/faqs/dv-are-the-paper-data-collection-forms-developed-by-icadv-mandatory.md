@@ -28,7 +28,7 @@ draft: false
 title: Are the paper data collection forms developed by ICADV mandatory?
 summary: Are the paper data collection forms developed by ICADV mandatory?
 path: /faqs/dv-are-the-paper-data-collection-forms-developed-by-icadv-mandatory
-url: https://infonet.icjia.dev/faqs/dv-are-the-paper-data-collection-forms-developed-by-icadv-mandatory
+url: https://infonet.icjia.illinois.gov/faqs/dv-are-the-paper-data-collection-forms-developed-by-icadv-mandatory
 markdown: No. Program administrators may revise these forms or recreate their
   own, as long as the required information is collected. ICADV-created intake
   forms include those for adults and children and for residential and

@@ -54,7 +54,7 @@ rawText: "icjia staff used various research methods such as surveying victim
 draft: false
 navigation: true
 path: /news/icjia-publishes-2022-victim-service-planning-research-report
-url: https://infonet.icjia.dev/news/icjia-publishes-2022-victim-service-planning-research-report
+url: https://infonet.icjia.illinois.gov/news/icjia-publishes-2022-victim-service-planning-research-report
 ---
 
 ICJIA staff used various research methods such as surveying victim service providers, focus groups, and analyzing multiple datasets including InfoNet to better understand victim service needs and gaps in Illinois. Findings were presented and discussed with ICJIA’s Victim Services Planning Committee (VSPC) in early 2022. Both VSPC and ICJIA Board members voted to approve 12 research-informed victim service priority funding areas. Broadly, the priority areas aspire to increase victim service awareness and access; address victims’ needs; support victim-centered and -informed services; and promote service implementation, outcomes, and sustainability. These priorities will inform grantmaking in the victim services field for the next several years.  

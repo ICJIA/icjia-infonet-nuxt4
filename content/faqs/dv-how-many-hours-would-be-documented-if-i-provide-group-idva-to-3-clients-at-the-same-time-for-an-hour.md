@@ -32,7 +32,7 @@ title: How many hours would be documented if I provide Group IDVA to 3 clients
 summary: How many hours would be documented if I provide Group IDVA to 3 clients
   at the same time for an hour?
 path: /faqs/dv-how-many-hours-would-be-documented-if-i-provide-group-idva-to-3-clients-at-the-same-time-for-an-hour
-url: https://infonet.icjia.dev/faqs/dv-how-many-hours-would-be-documented-if-i-provide-group-idva-to-3-clients-at-the-same-time-for-an-hour
+url: https://infonet.icjia.illinois.gov/faqs/dv-how-many-hours-would-be-documented-if-i-provide-group-idva-to-3-clients-at-the-same-time-for-an-hour
 markdown: "You would enter the group service as Group IDVA, 1 session for 1
   hour, and then all three (3) Client ID numbers on the Attendees tab. This will
   show up on the Standard Services Report in multiple places depending on which

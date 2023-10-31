@@ -22,7 +22,7 @@ title: How to correct a data entry error in which an adult is entered as a child
 summary: How to correct a data entry error in which an adult is entered as a
   child or vice versa?
 path: /faqs/dv-how-to-correct-a-data-entry-error-in-which-an-adult-is-entered-as-a-child-or-vice-versa
-url: https://infonet.icjia.dev/faqs/dv-how-to-correct-a-data-entry-error-in-which-an-adult-is-entered-as-a-child-or-vice-versa
+url: https://infonet.icjia.illinois.gov/faqs/dv-how-to-correct-a-data-entry-error-in-which-an-adult-is-entered-as-a-child-or-vice-versa
 markdown: You cannot change a client’s type or delete the client. Follow the
   steps for the question above for deleting the client and re-enter this client
   under the correct type.

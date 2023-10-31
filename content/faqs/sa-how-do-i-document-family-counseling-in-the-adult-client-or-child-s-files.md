@@ -15,7 +15,7 @@ draft: false
 title: How do I document Family Counseling in the adult client or child’s files?
 summary: How do I document Family Counseling in the adult client or child’s files?
 path: /faqs/sa-how-do-i-document-family-counseling-in-the-adult-client-or-child-s-files
-url: https://infonet.icjia.dev/faqs/sa-how-do-i-document-family-counseling-in-the-adult-client-or-child-s-files
+url: https://infonet.icjia.illinois.gov/faqs/sa-how-do-i-document-family-counseling-in-the-adult-client-or-child-s-files
 markdown: See Group Services Section.
 searchMeta: "faq  "
 ---

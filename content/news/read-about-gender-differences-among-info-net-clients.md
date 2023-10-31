@@ -52,7 +52,7 @@ rawText: "read about gender differences among infonet clients receiving services
 draft: false
 navigation: true
 path: /news/read-about-gender-differences-among-info-net-clients
-url: https://infonet.icjia.dev/news/read-about-gender-differences-among-info-net-clients
+url: https://infonet.icjia.illinois.gov/news/read-about-gender-differences-among-info-net-clients
 ---
 
 Read about gender differences among InfoNet clients receiving services for intimate partner violence: Gender Differences in Intimate Partner Violence Service Use 

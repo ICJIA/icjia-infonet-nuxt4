@@ -21,7 +21,7 @@ draft: false
 title: What is a client intake (DV)?
 summary: What is a client intake (DV)?
 path: /faqs/dv-what-is-a-client-intake-dv
-url: https://infonet.icjia.dev/faqs/dv-what-is-a-client-intake-dv
+url: https://infonet.icjia.illinois.gov/faqs/dv-what-is-a-client-intake-dv
 markdown: Client information collected to document the client’s profile at the
   time of intake into the program. A sample form can be obtained from ICADV or
   by contacting CJA.InfonetHelp@illinois.gov. You may also create your own data

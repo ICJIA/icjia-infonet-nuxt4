@@ -18,7 +18,7 @@ title: How do we open a child client case when someone has obtained an OP on
 summary: How do we open a child client case when someone has obtained an OP on
   her/his behalf?
 path: /faqs/dv-how-do-we-open-a-child-client-case-when-someone-has-obtained-an-op-on-her-his-behalf
-url: https://infonet.icjia.dev/faqs/dv-how-do-we-open-a-child-client-case-when-someone-has-obtained-an-op-on-her-his-behalf
+url: https://infonet.icjia.illinois.gov/faqs/dv-how-do-we-open-a-child-client-case-when-someone-has-obtained-an-op-on-her-his-behalf
 markdown: See _Client Medical Criminal Justice Information_ Section.
 searchMeta: "faq  "
 ---

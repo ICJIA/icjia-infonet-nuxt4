@@ -19,7 +19,7 @@ draft: false
 title: Where do I enter new police and prosecution charges for an offender?
 summary: Where do I enter new police and prosecution charges for an offender?
 path: /faqs/sa-where-do-i-enter-new-police-and-prosecution-charges-for-an-offender
-url: https://infonet.icjia.dev/faqs/sa-where-do-i-enter-new-police-and-prosecution-charges-for-an-offender
+url: https://infonet.icjia.illinois.gov/faqs/sa-where-do-i-enter-new-police-and-prosecution-charges-for-an-offender
 markdown: Open the victim’s intake information and click the Offender button,
   then go to the Police and/or States Attorney charge data entry forms and to
   enter the information.

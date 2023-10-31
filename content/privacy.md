@@ -169,7 +169,7 @@ markdown: >-
   Construction of the disclaimers above and resolution of disputes thereof are governed by the laws of the State of Illinois. The laws of the State of Illinois, U.S.A., shall apply to all uses of this data and this system. By use of this system and any data contained therein, the user agrees that use shall conform to all applicable laws and regulations and user shall not violate the rights of any third parties.
 navigation: true
 path: /privacy
-url: https://infonet.icjia.dev/privacy
+url: https://infonet.icjia.illinois.gov/privacy
 ---
 
 Access to the State of Illinois websites is provided subject to the following terms and conditions. Please read these terms carefully as use of these sites constitutes acceptance of all of the following terms and conditions:

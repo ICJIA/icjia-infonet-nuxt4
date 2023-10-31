@@ -18,7 +18,7 @@ title: If a program has a consultant that provides education on topics like
 summary: If a program has a consultant that provides education on topics like
   self- care and hygiene, what service should be entered?
 path: /faqs/dv-if-a-program-has-a-consultant-that-provides-education-on-topics-like-self-care-and-hygiene-what-service-should-be-entered
-url: https://infonet.icjia.dev/faqs/dv-if-a-program-has-a-consultant-that-provides-education-on-topics-like-self-care-and-hygiene-what-service-should-be-entered
+url: https://infonet.icjia.illinois.gov/faqs/dv-if-a-program-has-a-consultant-that-provides-education-on-topics-like-self-care-and-hygiene-what-service-should-be-entered
 markdown: Life Skills.
 searchMeta: "faq  "
 ---

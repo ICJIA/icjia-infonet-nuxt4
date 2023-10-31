@@ -18,7 +18,7 @@ title: What type of Board activities can be collected on the Community and
 summary: What type of Board activities can be collected on the Community and
   Institutional Activities?
 path: /faqs/dv-what-type-of-board-activities-can-be-collected-on-the-community-and-institutional-activities
-url: https://infonet.icjia.dev/faqs/dv-what-type-of-board-activities-can-be-collected-on-the-community-and-institutional-activities
+url: https://infonet.icjia.illinois.gov/faqs/dv-what-type-of-board-activities-can-be-collected-on-the-community-and-institutional-activities
 markdown: Any activities your program wishes to track for any board.
 searchMeta: "faq  "
 ---

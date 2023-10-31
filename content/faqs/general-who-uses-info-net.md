@@ -31,7 +31,7 @@ draft: false
 title: Who uses InfoNet?
 summary: Who uses InfoNet?
 path: /faqs/general-who-uses-info-net
-url: https://infonet.icjia.dev/faqs/general-who-uses-info-net
+url: https://infonet.icjia.illinois.gov/faqs/general-who-uses-info-net
 markdown: >-
   Three types of service providers use InfoNet: child advocacy, domestic
   violence, and sexual assault cetners. Data from all three types are maintained

@@ -48,7 +48,7 @@ draft: false
 title: How do I delete a dv client?
 summary: How do I delete a dv client?
 path: /faqs/dv-how-do-i-delete-a-dv-client
-url: https://infonet.icjia.dev/faqs/dv-how-do-i-delete-a-dv-client
+url: https://infonet.icjia.illinois.gov/faqs/dv-how-do-i-delete-a-dv-client
 markdown: >
   You cannot delete a client and in general use there should not be a need to
   delete a client. However, as data belongs to the center, you may overwrite a

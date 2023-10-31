@@ -20,7 +20,7 @@ title: If we do not turn away any clients during a report period, do we need to
 summary: If we do not turn away any clients during a report period, do we need
   to enter a record of zero?
 path: /faqs/dv-if-we-do-not-turn-away-any-clients-during-a-report-period-do-we-need-to-enter-a-record-of-zero
-url: https://infonet.icjia.dev/faqs/dv-if-we-do-not-turn-away-any-clients-during-a-report-period-do-we-need-to-enter-a-record-of-zero
+url: https://infonet.icjia.illinois.gov/faqs/dv-if-we-do-not-turn-away-any-clients-during-a-report-period-do-we-need-to-enter-a-record-of-zero
 markdown: No. If no data are entered, then Turn Away report will indicate that
   your agency did not turn away any victims during the report period.
 searchMeta: "faq  "

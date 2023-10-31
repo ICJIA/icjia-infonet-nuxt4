@@ -18,7 +18,7 @@ title: When staff runs an errand, such as picking up a client’s medication, wh
 summary: When staff runs an errand, such as picking up a client’s medication,
   what service should be used to document it?
 path: /faqs/dv-when-staff-runs-an-errand-such-as-picking-up-a-client-s-medication-what-service-should-be-used-to-document-it
-url: https://infonet.icjia.dev/faqs/dv-when-staff-runs-an-errand-such-as-picking-up-a-client-s-medication-what-service-should-be-used-to-document-it
+url: https://infonet.icjia.illinois.gov/faqs/dv-when-staff-runs-an-errand-such-as-picking-up-a-client-s-medication-what-service-should-be-used-to-document-it
 markdown: Transportation.
 searchMeta: "faq  "
 ---

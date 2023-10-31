@@ -22,7 +22,7 @@ draft: false
 title: What is the difference between Institutional Advocacy and Training?
 summary: What is the difference between Institutional Advocacy and Training?
 path: /faqs/sa-what-is-the-difference-between-institutional-advocacy-and-training
-url: https://infonet.icjia.dev/faqs/sa-what-is-the-difference-between-institutional-advocacy-and-training
+url: https://infonet.icjia.illinois.gov/faqs/sa-what-is-the-difference-between-institutional-advocacy-and-training
 markdown: Public Education is raising awareness of participants to sexual
   assault issues. Professional Training involves providing information to
   participants that help improve their skills for working with victims–issues

@@ -26,7 +26,7 @@ summary: If adult clients attend a Children’s Group Counseling session with
   experiencing, how should I document that activity for the adult? For the
   children?
 path: /faqs/dv-if-adult-clients-attend-a-children-s-group-counseling-session-with-their-children-on-a-limited-basis
-url: https://infonet.icjia.dev/faqs/dv-if-adult-clients-attend-a-children-s-group-counseling-session-with-their-children-on-a-limited-basis
+url: https://infonet.icjia.illinois.gov/faqs/dv-if-adult-clients-attend-a-children-s-group-counseling-session-with-their-children-on-a-limited-basis
 markdown: Document the parent’s attendance in Parental Services. Document the
   group session under the children’s records as Group Children’s Counseling.
 searchMeta: "faq  "

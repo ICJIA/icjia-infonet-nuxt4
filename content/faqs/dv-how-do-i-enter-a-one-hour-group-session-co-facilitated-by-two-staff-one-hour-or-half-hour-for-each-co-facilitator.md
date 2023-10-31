@@ -26,7 +26,7 @@ title: How do I enter a one-hour group session co-facilitated by two staff—one
 summary: How do I enter a one-hour group session co-facilitated by two staff—one
   hour or ½ hour for each co-facilitator?
 path: /faqs/dv-how-do-i-enter-a-one-hour-group-session-co-facilitated-by-two-staff-one-hour-or-half-hour-for-each-co-facilitator
-url: https://infonet.icjia.dev/faqs/dv-how-do-i-enter-a-one-hour-group-session-co-facilitated-by-two-staff-one-hour-or-half-hour-for-each-co-facilitator
+url: https://infonet.icjia.illinois.gov/faqs/dv-how-do-i-enter-a-one-hour-group-session-co-facilitated-by-two-staff-one-hour-or-half-hour-for-each-co-facilitator
 markdown: Go to ServicesGroup Services and enter the group session indicating
   the Conduct Hours and Preparation Hours for each staff person. If both staff
   co-facilitated during the whole session, both staff should receive one full

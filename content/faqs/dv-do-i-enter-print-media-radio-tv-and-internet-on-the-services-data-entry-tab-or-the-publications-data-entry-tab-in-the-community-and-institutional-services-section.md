@@ -29,7 +29,7 @@ summary: Do I enter Print Media, Radio, TV, and Internet on the Services data
   entry tab or the Publications data entry tab in the Community and
   Institutional Services section?
 path: /faqs/dv-do-i-enter-print-media-radio-tv-and-internet-on-the-services-data-entry-tab-or-the-publications-data-entry-tab-in-the-community-and-institutional-services-section
-url: https://infonet.icjia.dev/faqs/dv-do-i-enter-print-media-radio-tv-and-internet-on-the-services-data-entry-tab-or-the-publications-data-entry-tab-in-the-community-and-institutional-services-section
+url: https://infonet.icjia.illinois.gov/faqs/dv-do-i-enter-print-media-radio-tv-and-internet-on-the-services-data-entry-tab-or-the-publications-data-entry-tab-in-the-community-and-institutional-services-section
 markdown: If your agency is creating a product, such as print ad, PSA; etc., it
   should be entered on the Media/Publications tab of the database. If staff are
   presenting on a TV show or answering questions on a radio show, those

@@ -26,7 +26,7 @@ title: How can I obtain our dv duplicate client count or caseload for a specific
 summary: How can I obtain our dv duplicate client count or caseload for a
   specific period?
 path: /faqs/dv-how-can-i-obtain-our-dv-duplicate-client-count-or-caseload-for-a-specific-period
-url: https://infonet.icjia.dev/faqs/dv-how-can-i-obtain-our-dv-duplicate-client-count-or-caseload-for-a-specific-period
+url: https://infonet.icjia.illinois.gov/faqs/dv-how-can-i-obtain-our-dv-duplicate-client-count-or-caseload-for-a-specific-period
 markdown: To obtain the duplicate client count for a specific period, you must
   run a Client Information Report (Demographics only) for each month (or
   quarter) within the period and add the number of total clients served among

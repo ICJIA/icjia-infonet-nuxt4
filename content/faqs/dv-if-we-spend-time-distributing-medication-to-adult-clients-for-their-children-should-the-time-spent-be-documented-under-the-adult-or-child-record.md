@@ -20,7 +20,7 @@ title: If we spend time distributing medication to adult clients for their
 summary: If we spend time distributing medication to adult clients for their
   children, should the time spent be documented under the adult or child record?
 path: /faqs/dv-if-we-spend-time-distributing-medication-to-adult-clients-for-their-children-should-the-time-spent-be-documented-under-the-adult-or-child-record
-url: https://infonet.icjia.dev/faqs/dv-if-we-spend-time-distributing-medication-to-adult-clients-for-their-children-should-the-time-spent-be-documented-under-the-adult-or-child-record
+url: https://infonet.icjia.illinois.gov/faqs/dv-if-we-spend-time-distributing-medication-to-adult-clients-for-their-children-should-the-time-spent-be-documented-under-the-adult-or-child-record
 markdown: Document that contact under the child’s record since the parent may be
   administering medication to more than one child.
 searchMeta: "faq  "

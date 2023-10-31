@@ -26,7 +26,7 @@ summary: What service should I use to document time I spend doing a child’s
   intake with the mother? What if I am completing multiple children’s intakes
   with the parent?
 path: /faqs/dv-what-service-should-i-use-to-document-time-i-spend-doing-a-child-s-intake-with-the-mother-what-if-i-am-completing-multiple-children-s-intakes-with-the-parent
-url: https://infonet.icjia.dev/faqs/dv-what-service-should-i-use-to-document-time-i-spend-doing-a-child-s-intake-with-the-mother-what-if-i-am-completing-multiple-children-s-intakes-with-the-parent
+url: https://infonet.icjia.illinois.gov/faqs/dv-what-service-should-i-use-to-document-time-i-spend-doing-a-child-s-intake-with-the-mother-what-if-i-am-completing-multiple-children-s-intakes-with-the-parent
 markdown: >
   You should document this as Individual Child Counseling under the child’s ID
   number. If intakes for multiple children are being completed, enter an
