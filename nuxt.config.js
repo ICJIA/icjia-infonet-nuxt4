@@ -71,7 +71,7 @@ export default defineNuxtConfig({
         },
         {
           src: "https://plausible.icjia.cloud/js/script.js",
-          "data-domain": "infonet.illinois.gov",
+          "data-domain": "infonet.icjia.illinois.gov",
           defer: true,
         },
 
