@@ -193,11 +193,6 @@ export default {
         // let dbResponse = await dbInsert(this.form);
         // console.log("dbinsert: ", dbResponse);
 
-        let axiosDBSubmitData = {
-          type: myForm.type,
-          email: myForm.email,
-          form: myForm,
-        };
         // console.table(axiosDBSubmitData);
 
         let axiosHeaders = {
@@ -207,21 +202,50 @@ export default {
           },
         };
 
-        try {
-          await api.post(
-            `https://infonet.icjia-api.cloud/api/forms`,
-            JSON.stringify({ data: axiosDBSubmitData }),
-            axiosHeaders
-          );
-          console.log("success");
-        } catch (e) {
-          console.log(e);
-          console.log("failure");
-        }
+        let axiosDBSubmitData = {
+          type: myForm.type,
+          email: myForm.email,
+          form: myForm,
+        };
+
+        // try {
+        //   await api.post(
+        //     `https://infonet.icjia-api.cloud/api/forms`,
+        //     JSON.stringify({ data: axiosDBSubmitData }),
+        //     axiosHeaders
+        //   );
+        //   console.log("db insert success");
+        // } catch (e) {
+        //   console.log(e);
+        //   console.log("db insert failure");
+        // }
         // TODO: Wire up to mailer here
+
+        let emailData = {
+          form: myForm,
+        };
+
+        let options = {
+          method: "POST",
+          data: JSON.stringify(emailData),
+          url: "https://mail.icjia.cloud/test",
+        };
+
+        //console.log("form email: ", axiosDBSubmitData);
+
+        try {
+          console.log("Sending...");
+          let res = await axios(options);
+          //this.success(res);
+          console.log("Email sent: ", res);
+        } catch (err) {
+          console.log(err.message);
+          console.log("nodemailer failure");
+        }
+
         this.successfullySubmitted = true;
 
-        console.log("submitForm", this.valid);
+        console.log("submitForm ", this.valid);
       }
     },
     clearForm() {
