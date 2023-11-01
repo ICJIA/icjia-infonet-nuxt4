@@ -4,7 +4,7 @@
     style="background: #fff; border: 1px solid #eee"
   >
     <h2 style="border: none; font-size: 18px">
-      Domestic and Sexual Assault Victims Who Received Services in Illinois,
+      Domestic and Sexual Violence Victims Who Received Services in Illinois,
       2018-2022
     </h2>
     <h3 style="border: none; font-size: 12px">Source: InfoNet System</h3>

@@ -7,12 +7,12 @@ hideFromSearch: false
 hideFromSitemap: false
 showTableOfContents: false
 summary: "In State Fiscal Year 2023, 108 Illinois domestic and sexual violence
-  agencies use InfoNet to collect and report client data to funders and
+  agencies used InfoNet to collect and report client data to funders and
   stakeholders. That same year, agencies provided 721,956 direct service hours
   to 63,610 clients.  "
 section: news
 createdAt: 2023-10-03T13:20:11.621Z
-updatedAt: 2023-10-03T13:20:55.180Z
+updatedAt: 2023-11-01T20:26:27.037Z
 publishedAt: 2023-10-03T13:20:55.173Z
 searchMeta: "news "
 splash:
@@ -22,8 +22,7 @@ attachments:
 postDate: 2023-10-03T00:00:00-05:00
 markdown: >-
   
-
-  In State Fiscal Year 2023, 108 Illinois domestic and sexual violence agencies use InfoNet to collect and report client data to funders and stakeholders. That same year, agencies provided 721,956 direct service hours to 63,610 clients.  
+  In State Fiscal Year 2023, 108 Illinois domestic and sexual violence agencies used InfoNet to collect and report client data to funders and stakeholders. That same year, agencies provided 721,956 direct service hours to 63,610 clients.  
 
 
   ## Client Demographics
@@ -52,7 +51,7 @@ markdown: >-
 
   - Agencies reached 2.3 million individuals through public awareness efforts.
 rawText: " in state fiscal year 2023 108 illinois domestic and sexual violence
-  agencies use infonet to collect and report client data to funders and
+  agencies used infonet to collect and report client data to funders and
   stakeholders that same year agencies provided 721 956 direct service hours to
   63 610 clients client demographics most clients identified as female 84 other
   clients identified as male 15 and transgender gender non conforming or another
@@ -64,8 +63,7 @@ url: https://infonet.icjia.illinois.gov/news/sfy-23-info-net-data-highlights
 ---
 
 
-
-In State Fiscal Year 2023, 108 Illinois domestic and sexual violence agencies use InfoNet to collect and report client data to funders and stakeholders. That same year, agencies provided 721,956 direct service hours to 63,610 clients.  
+In State Fiscal Year 2023, 108 Illinois domestic and sexual violence agencies used InfoNet to collect and report client data to funders and stakeholders. That same year, agencies provided 721,956 direct service hours to 63,610 clients.  
 
 ## Client Demographics
 - Most clients identified as female (84%). Other clients identified as male (15%) and transgender, gender non-conforming, or another gender identity (<1%).  
