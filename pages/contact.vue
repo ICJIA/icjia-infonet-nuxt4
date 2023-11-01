@@ -208,17 +208,17 @@ export default {
           form: myForm,
         };
 
-        // try {
-        //   await api.post(
-        //     `https://infonet.icjia-api.cloud/api/forms`,
-        //     JSON.stringify({ data: axiosDBSubmitData }),
-        //     axiosHeaders
-        //   );
-        //   console.log("db insert success");
-        // } catch (e) {
-        //   console.log(e);
-        //   console.log("db insert failure");
-        // }
+        try {
+          await api.post(
+            `https://infonet.icjia-api.cloud/api/forms`,
+            JSON.stringify({ data: axiosDBSubmitData }),
+            axiosHeaders
+          );
+          console.log("db insert success");
+        } catch (e) {
+          console.log(e);
+          console.log("db insert failure");
+        }
         // TODO: Wire up to mailer here
 
         let emailData = {
@@ -227,7 +227,7 @@ export default {
 
         let options = {
           method: "POST",
-          data: JSON.stringify(emailData),
+          data: JSON.stringify(emailData.form),
           url: "https://mail.icjia.cloud/test",
         };
 
