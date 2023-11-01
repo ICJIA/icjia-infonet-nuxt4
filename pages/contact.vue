@@ -205,6 +205,7 @@ export default {
         let axiosDBSubmitData = {
           type: myForm.type,
           email: myForm.email,
+          subject: myForm.subject,
           form: myForm,
         };
 
@@ -228,7 +229,7 @@ export default {
         let options = {
           method: "POST",
           data: JSON.stringify(emailData.form),
-          url: "https://mail.icjia.cloud/test",
+          url: "https://mail.icjia.cloud/internet/infonet",
         };
 
         //console.log("form email: ", axiosDBSubmitData);
