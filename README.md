@@ -14,7 +14,7 @@ The primary purposes of InfoNet are to:
 
 ## Site
 
-TBD
+https://infonet.icjia.illinois.gov
 
 ## Install
 
