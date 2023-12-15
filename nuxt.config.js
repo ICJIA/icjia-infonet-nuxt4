@@ -100,7 +100,24 @@ export default defineNuxtConfig({
     // compressPublicAssets: true,
   },
   devtools: { timeline: { enabled: true } },
-  vite: {},
+  vite: {
+    // See: https://github.com/nuxt/nuxt/issues/24196
+    optimizeDeps: {
+      include: [
+        "axios",
+        "moment",
+        "dompurify",
+        "fuse.js",
+        "lodash",
+        "markdown-it",
+        "markdown-it-attrs",
+        "uuid",
+        "mitt",
+        "vue-chartjs",
+        "chart.js",
+      ],
+    },
+  },
   runtimeConfig: {
     // The private keys which are only available within server-side
     // apiSecret: "123",

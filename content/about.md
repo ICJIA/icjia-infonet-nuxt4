@@ -15,7 +15,7 @@ summary: InfoNet is a web-based data/case management system used by over 100
   Chicago Department of Family & Support Services.
 section: root
 createdAt: 2023-04-02T15:04:25.519Z
-updatedAt: 2023-08-10T13:28:07.366Z
+updatedAt: 2023-11-09T15:51:12.168Z
 publishedAt: 2023-04-02T15:04:26.918Z
 searchMeta: null
 category: page
@@ -51,10 +51,15 @@ rawText: " indent margin left 25px ul member list webkit columns 1 moz columns 1
   research using infonet data and helps test infonet upgrades kirthi ravi
   infonet developer kirthi writes code for infonet to create new functions and
   tools for users ziaul z hasan infonet developer z writes code for infonet to
-  create new functions and tools for users infonet partners partners infonet
-  user agencies view list of user agencies online agencies nbsp raquo download
-  list of user agencies word https infonet icjia api cloud uploads infonet about
-  user agencies 2 4 0a645f865b docx national webinar illinois infonet gathering
+  create new functions and tools for users yolanda mosley information systems
+  analyst yolanda helps users establish access to infonet s vpn and
+  troubleshoots connectivity issues she also helps ensure infonet s
+  infrastructure is properly maintained and updated robert miranda information
+  systems analyst robert helps users establish access to infonet s vpn and
+  troubleshoots connectivity issues infonet partners partners infonet user
+  agencies view list of user agencies online agencies nbsp raquo download list
+  of user agencies word https infonet icjia api cloud uploads infonet about user
+  agencies 2 4 0a645f865b docx national webinar illinois infonet gathering
   statewide victim services data provides an overview of infonet and lessons
   learned in its development the system is supported by the illinois criminal
   justice information authority icjia while system use and requirements are
@@ -162,21 +167,27 @@ markdown: >2-
   <div class="indent">
 
 
-  **Jennifer Hiselman, InfoNet Manager**: Jennifer oversees InfoNet’s operation, provides training and assistance to users, and works with users and other stakeholders to improve and maximize InfoNet’s utility. 
+  - **Jennifer Hiselman, InfoNet Manager**: Jennifer oversees InfoNet’s operation, provides training and assistance to users, and works with users and other stakeholders to improve and maximize InfoNet’s utility. 
   		
-  **Ming Xie, Lead InfoNet Developer**: Ming leads InfoNet’s development work, overseeing all InfoNet maintenance and upgrades. 
+  - **Ming Xie, Lead InfoNet Developer**: Ming leads InfoNet’s development work, overseeing all InfoNet maintenance and upgrades. 
 
 
-  **L. Fernanda Gonzalez, Research Scientist**: Fernanda assists with training and user requests for data and/or assistance, and conducts research using InfoNet data. 
+  - **L. Fernanda Gonzalez, Research Scientist**: Fernanda assists with training and user requests for data and/or assistance, and conducts research using InfoNet data. 
 
 
-  **Caleb Schaffner, Research Scientist**: Caleb assists with training and user requests for data and/or assistance, conducts research using InfoNet data, and helps test InfoNet upgrades. 
+  - **Caleb Schaffner, Research Scientist**: Caleb assists with training and user requests for data and/or assistance, conducts research using InfoNet data, and helps test InfoNet upgrades. 
 
 
-  **Kirthi Ravi, InfoNet Developer**: Kirthi writes code for InfoNet to create new functions and tools for users. 
+  - **Kirthi Ravi, InfoNet Developer**: Kirthi writes code for InfoNet to create new functions and tools for users. 
 
 
-  **Ziaul “Z” Hasan, InfoNet Developer**: Z writes code for InfoNet to create new functions and tools for users. 
+  - **Ziaul “Z” Hasan, InfoNet Developer**: Z writes code for InfoNet to create new functions and tools for users. 
+
+
+  - **Yolanda Mosley, Information Systems Analyst**: Yolanda helps users establish access to InfoNet’s VPN and troubleshoots connectivity issues. She also helps ensure InfoNet’s infrastructure is properly maintained and updated.
+
+
+  - **Robert Miranda, Information Systems Analyst**: Robert helps users establish access to InfoNet’s VPN and troubleshoots connectivity issues. 
 
 
   </div>
@@ -319,17 +330,21 @@ The primary purposes of InfoNet are to:
 
 <div class="indent">
 
-**Jennifer Hiselman, InfoNet Manager**: Jennifer oversees InfoNet’s operation, provides training and assistance to users, and works with users and other stakeholders to improve and maximize InfoNet’s utility. 
+- **Jennifer Hiselman, InfoNet Manager**: Jennifer oversees InfoNet’s operation, provides training and assistance to users, and works with users and other stakeholders to improve and maximize InfoNet’s utility. 
 		
-**Ming Xie, Lead InfoNet Developer**: Ming leads InfoNet’s development work, overseeing all InfoNet maintenance and upgrades. 
+- **Ming Xie, Lead InfoNet Developer**: Ming leads InfoNet’s development work, overseeing all InfoNet maintenance and upgrades. 
 
-**L. Fernanda Gonzalez, Research Scientist**: Fernanda assists with training and user requests for data and/or assistance, and conducts research using InfoNet data. 
+- **L. Fernanda Gonzalez, Research Scientist**: Fernanda assists with training and user requests for data and/or assistance, and conducts research using InfoNet data. 
 
-**Caleb Schaffner, Research Scientist**: Caleb assists with training and user requests for data and/or assistance, conducts research using InfoNet data, and helps test InfoNet upgrades. 
+- **Caleb Schaffner, Research Scientist**: Caleb assists with training and user requests for data and/or assistance, conducts research using InfoNet data, and helps test InfoNet upgrades. 
 
-**Kirthi Ravi, InfoNet Developer**: Kirthi writes code for InfoNet to create new functions and tools for users. 
+- **Kirthi Ravi, InfoNet Developer**: Kirthi writes code for InfoNet to create new functions and tools for users. 
 
-**Ziaul “Z” Hasan, InfoNet Developer**: Z writes code for InfoNet to create new functions and tools for users. 
+- **Ziaul “Z” Hasan, InfoNet Developer**: Z writes code for InfoNet to create new functions and tools for users. 
+
+- **Yolanda Mosley, Information Systems Analyst**: Yolanda helps users establish access to InfoNet’s VPN and troubleshoots connectivity issues. She also helps ensure InfoNet’s infrastructure is properly maintained and updated.
+
+- **Robert Miranda, Information Systems Analyst**: Robert helps users establish access to InfoNet’s VPN and troubleshoots connectivity issues. 
 
 </div>
 
