@@ -13,7 +13,7 @@ summary: "ICJIA received $139,472 in grant funds from All Chicago to increase
   Homeless Management Information System (HMIS) comparable database. "
 section: news
 createdAt: 2023-12-15T20:52:17.070Z
-updatedAt: 2023-12-15T21:07:49.528Z
+updatedAt: 2023-12-15T21:15:49.901Z
 publishedAt: 2023-12-15T20:52:25.848Z
 searchMeta: "news "
 splash:

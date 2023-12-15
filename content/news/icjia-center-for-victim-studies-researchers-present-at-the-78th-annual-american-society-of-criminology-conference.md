@@ -15,7 +15,7 @@ summary: "InfoNet research scientist, Lucia Fernanda Gonzalez, and fellow Center
   exposed to violence and to their families. "
 section: news
 createdAt: 2023-12-15T21:05:24.734Z
-updatedAt: 2023-12-15T21:05:35.268Z
+updatedAt: 2023-12-15T21:14:44.760Z
 publishedAt: 2023-12-15T21:05:35.265Z
 searchMeta: "news "
 splash:
