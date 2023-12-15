@@ -2,7 +2,7 @@
 title: ICJIA Center for Victim Studies researchers present at the 78th Annual
   American Society of Criminology Conference
 slug: icjia-center-for-victim-studies-researchers-present-at-the-78th-annual-american-society-of-criminology-conference
-dateOverride: 2023-12-05
+dateOverride: 2023-12-06
 category: news
 hideFromSearch: false
 hideFromSitemap: false
@@ -15,7 +15,7 @@ summary: "InfoNet research scientist, Lucia Fernanda Gonzalez, and fellow Center
   exposed to violence and to their families. "
 section: news
 createdAt: 2023-12-15T21:05:24.734Z
-updatedAt: 2023-12-15T21:14:44.760Z
+updatedAt: 2023-12-15T21:33:29.440Z
 publishedAt: 2023-12-15T21:05:35.265Z
 searchMeta: "news "
 splash:
@@ -30,7 +30,7 @@ attachments:
         url: /uploads/ASC_Conference_Presentation_Final_1_c04c100886.pdf
         ext: .pdf
         size: 616.3
-postDate: 2023-12-05T00:00:00-06:00
+postDate: 2023-12-06T00:00:00-06:00
 markdown: >-
   InfoNet research scientist, Lucia Fernanda Gonzalez, and fellow Center for
   Victim Studies researcher, Stephanie Nguyen, presented Safe From the Start
