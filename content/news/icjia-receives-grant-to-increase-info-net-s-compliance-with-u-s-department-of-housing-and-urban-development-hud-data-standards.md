@@ -2,7 +2,7 @@
 title: ICJIA receives grant to increase InfoNet’s compliance with U.S.
   Department of Housing & Urban Development (HUD) data standards
 slug: icjia-receives-grant-to-increase-info-net-s-compliance-with-u-s-department-of-housing-and-urban-development-hud-data-standards
-dateOverride: 2023-12-16
+dateOverride: 2023-12-15
 category: news
 hideFromSearch: false
 hideFromSitemap: false
@@ -13,14 +13,14 @@ summary: "ICJIA received $139,472 in grant funds from All Chicago to increase
   Homeless Management Information System (HMIS) comparable database. "
 section: news
 createdAt: 2023-12-15T20:52:17.070Z
-updatedAt: 2023-12-15T21:33:37.271Z
+updatedAt: 2023-12-16T16:49:54.136Z
 publishedAt: 2023-12-15T20:52:25.848Z
 searchMeta: "news "
 splash:
   data: null
 attachments:
   data: []
-postDate: 2023-12-16T06:00:00Z
+postDate: 2023-12-15T06:00:00Z
 markdown: >-
   ICJIA received $139,472 in grant funds from [All
   Chicago](https://allchicago.org/) to increase compliance of its [InfoNet
