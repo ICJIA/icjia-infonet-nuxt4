@@ -1,5 +1,6 @@
 <script setup>
 // import appRoutes from "assets/json/appRoutes.json";
+import moment from "moment";
 const { pending, data: routes } = await useFetch("/api/routes");
 const appRoutes = routes.value.content;
 
@@ -127,7 +128,7 @@ useHead({
             <h1 style="line-height: 45px">{{ data.title.toUpperCase() }}</h1>
             <div style="margin-top: -15px; margin-bottom: 45px">
               <span style="font-weight: 900">{{
-                formatDate(data.postDate)
+                moment(data.postDate).utc().format("MMM DD, YYYY")
               }}</span>
               |
               <nuxt-link

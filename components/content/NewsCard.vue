@@ -7,7 +7,7 @@
   >
     <div style="font-size: 14px; margin-top: 0px">
       <span style="font-weight: 400"
-        >{{ formatDate(props.item.postDate) }}
+        >{{ moment(props.item.postDate).utc().format("MMM DD, YYYY") }}
       </span>
     </div>
     <h2 style="border: 0; margin-top: 5px">{{ props.item.title }}</h2>
@@ -31,6 +31,7 @@
 
 <script setup>
 const navigation = ref(null);
+import moment from "moment";
 const props = defineProps({
   item: {
     type: Object,
