@@ -23,7 +23,7 @@ splash:
   data: null
 attachments:
   data: []
-postDate: 2023-09-19T00:00:00-05:00
+postDate: 2023-09-19T05:00:00Z
 markdown: >
   Read about gender differences among InfoNet clients receiving services for
   intimate partner violence: Gender Differences in Intimate Partner Violence

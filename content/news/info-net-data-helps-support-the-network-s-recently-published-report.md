@@ -19,7 +19,7 @@ splash:
   data: null
 attachments:
   data: []
-postDate: 2023-09-28T00:00:00-05:00
+postDate: 2023-09-28T05:00:00Z
 markdown: >
   ICJIA provided [The Network](https://the-network.org/) with aggregate
   statewide InfoNet data for their report on gender-based violence. The report

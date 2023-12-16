@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "yarn clear:cache && yarn scripts && nuxt build",
+    "build": "yarn scripts && nuxt build",
     "build:serve": "rm -rf .nuxt && npm run scripts && nuxt build && node .output/server/index.mjs ",
     "dev": "kill-port 8000 && yarn clear:cache && yarn scripts && nuxt dev --port=8000 -o",
     "dev:local": "kill-port 8000 && yarn scripts:local && nuxt dev --port=8000 -o",
@@ -30,9 +30,8 @@
     "create:local": "yarn clear:cache && node ./creators/createLocalMeta.mjs",
     "create:sitemap": "node ./creators/createSitemap.mjs",
     "scripts:local": "yarn create:local",
-    "scripts": "yarn create:contentDirectory && yarn create:pages &&  yarn create:publistPublications && yarn create:tabs && yarn create:faqs && yarn create:hub && yarn create:hubImages && yarn create:news && yarn create:mergedPublications && yarn create:searchIndex && yarn create:sitemap && yarn create:routes",
-    "clear:cache": "rm -rf .nuxt .output",
-    "prestart": "source $HOME/.nvm/nvm.sh; nvm use"
+    "scripts": "yarn clear:cache && yarn create:contentDirectory && yarn create:pages &&  yarn create:publistPublications && yarn create:tabs && yarn create:faqs && yarn create:hub && yarn create:hubImages && yarn create:news && yarn create:mergedPublications && yarn create:searchIndex && yarn create:sitemap && yarn create:routes",
+    "clear:cache": "rm -rf .nuxt .output"
   },
   "devDependencies": {
     "@nuxt/content": "^2.9.0",

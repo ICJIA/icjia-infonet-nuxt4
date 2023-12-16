@@ -82,8 +82,8 @@ axios
     const site = posts.map((post) => {
       const obj = { ...post };
       obj.attributes.postDate = obj.attributes.dateOverride
-        ? moment(obj.attributes.dateOverride).format()
-        : moment(obj.attributes.publishedAt).format();
+        ? moment(obj.attributes.dateOverride).utc().format()
+        : moment(obj.attributes.publishedAt).utc().format();
 
       obj.attributes.markdown = post.attributes.body;
 

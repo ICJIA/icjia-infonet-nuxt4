@@ -20,7 +20,7 @@ splash:
   data: null
 attachments:
   data: []
-postDate: 2023-12-16T00:00:00-06:00
+postDate: 2023-12-16T06:00:00Z
 markdown: >-
   ICJIA received $139,472 in grant funds from [All
   Chicago](https://allchicago.org/) to increase compliance of its [InfoNet

@@ -19,7 +19,7 @@ splash:
   data: null
 attachments:
   data: []
-postDate: 2023-10-03T00:00:00-05:00
+postDate: 2023-10-03T05:00:00Z
 markdown: >-
   
   In State Fiscal Year 2023, 108 Illinois domestic and sexual violence agencies used InfoNet to collect and report client data to funders and stakeholders. That same year, agencies provided 721,956 direct service hours to 63,610 clients.  

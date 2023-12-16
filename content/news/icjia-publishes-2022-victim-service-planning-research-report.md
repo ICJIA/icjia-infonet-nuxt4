@@ -20,7 +20,7 @@ splash:
   data: null
 attachments:
   data: []
-postDate: 2023-08-31T00:00:00-05:00
+postDate: 2023-08-31T05:00:00Z
 markdown: >
   ICJIA staff used various research methods such as surveying victim service
   providers, focus groups, and analyzing multiple datasets including InfoNet to
