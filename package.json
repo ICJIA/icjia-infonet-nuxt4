@@ -44,7 +44,7 @@
     "consola": "^3.2.3",
     "font-awesome": "4.7.0",
     "material-design-icons-iconfont": "^6.7.0",
-    "nuxt": "^3.10.1"
+    "nuxt": "3.10.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
