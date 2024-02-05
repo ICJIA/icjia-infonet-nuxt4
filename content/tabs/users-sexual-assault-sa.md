@@ -33,8 +33,8 @@ markdown: >+
   ### Trainings
 
 
-  - **(Coming Soon)**
-
+  - **Using InfoNet’s New Client Needs & Updates Features**
+      - https://youtu.be/Ws887UprsTk
 
   ### Data Collection/Entry Forms
 
@@ -102,7 +102,8 @@ markdown: >+
 
 ### Trainings
 
-- **(Coming Soon)**
+- **Using InfoNet’s New Client Needs & Updates Features**
+    - https://youtu.be/Ws887UprsTk
 
 ### Data Collection/Entry Forms
 

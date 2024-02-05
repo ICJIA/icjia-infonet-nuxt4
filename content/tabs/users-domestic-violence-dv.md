@@ -33,8 +33,12 @@ markdown: >+
   ### Trainings
 
 
-  - **(Coming Soon)**
-
+  - **Using InfoNet’s New Client Needs & Updates Features**
+      - https://youtu.be/6nT_ry4CpNM
+  - **Generating and Troubleshooting InfoNet HUD Reports**
+      - https://youtu.be/rHI7dVkQ2KE
+  - **Using InfoNet’s Household Feature to Link Clients in the Same Household**
+      - https://youtu.be/xlOEAQ-5Gwc
 
   ### Data Collection/Entry Forms
 
@@ -114,7 +118,12 @@ markdown: >+
 
 ### Trainings
 
-- **(Coming Soon)**
+- **Using InfoNet’s New Client Needs & Updates Features**
+    - https://youtu.be/6nT_ry4CpNM
+- **Generating and Troubleshooting InfoNet HUD Reports**
+    - https://youtu.be/rHI7dVkQ2KE
+- **Using InfoNet’s Household Feature to Link Clients in the Same Household**
+    - https://youtu.be/xlOEAQ-5Gwc
 
 ### Data Collection/Entry Forms
 
