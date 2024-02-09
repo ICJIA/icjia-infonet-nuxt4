@@ -57,6 +57,8 @@ markdown: >+
 
   - [SA Advocacy_Services_Form.doc](https://infonet.icjia-api.cloud/uploads/SA_Advocacy_Services_Form_38791983d6.doc)
 
+  - [SA InfoNet Client Intake Form WITH Client Needs_Jan 2024.docx](https://infonet.icjia-api.cloud/uploads/SA_Info_Net_Client_Intake_Form_WITH_Client_Needs_Jan_2024_6db4adfc6e.docx)
+
 
 
   ### Frequently Asked Questions (FAQs)
@@ -116,6 +118,7 @@ markdown: >+
 - [SA Closure_Summary_Form.doc](https://infonet.icjia-api.cloud/uploads/SA_Closure_Summary_Form_f8f2812061.doc)
 - [SA Awareness-Promotion-and-Social-Justice-Activism-1-21.docx](https://infonet.icjia-api.cloud/uploads/SA_Awareness_Promotion_and_Social_Justice_Activism_1_21_5797421a92.docx)
 - [SA Advocacy_Services_Form.doc](https://infonet.icjia-api.cloud/uploads/SA_Advocacy_Services_Form_38791983d6.doc)
+- [SA InfoNet Client Intake Form WITH Client Needs_Jan 2024.docx](https://infonet.icjia-api.cloud/uploads/SA_Info_Net_Client_Intake_Form_WITH_Client_Needs_Jan_2024_6db4adfc6e.docx)
 
 
 ### Frequently Asked Questions (FAQs)
