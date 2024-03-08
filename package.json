@@ -46,6 +46,9 @@
     "material-design-icons-iconfont": "^6.7.0",
     "nuxt": "^3.10.3"
   },
+  "resolutions": {
+    "string-width": "4.2.3"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@mdi/font": "^7.4.47",
