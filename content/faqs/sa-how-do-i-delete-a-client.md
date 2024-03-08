@@ -12,7 +12,13 @@ answer: >
   not affect your numbers. 
 
 
-  If you want to rid the obsolete record completely, you can overwrite this bad record with a new client’s information. When the next new client comes in, do the following instead of adding a new Adult as usual: 1) View the bad client record; 2) Edit the Client ID # to reflect the new clients ID #; and 3) Proceed to overwrite EVERY field with the new client’s information. Remember to also update any data entered in the Medical/Criminal Justice, Offenders and in the Services Section.
+  If you want to rid the obsolete record completely, you can overwrite this bad
+  record with a new client’s information. When the next new client comes in, do
+  the following instead of adding a new Adult as usual: 1) View the bad client
+  record; 2) Edit the Client ID # to reflect the new clients ID #; and 3)
+  Proceed to overwrite EVERY field with the new client’s information. Remember
+  to also update any data entered in the Medical/Criminal Justice, Offenders and
+  in the Services Section.
 ranking: 1000
 slug: how-do-i-delete-a-client
 category: default
@@ -54,7 +60,13 @@ markdown: >
   not affect your numbers. 
 
 
-  If you want to rid the obsolete record completely, you can overwrite this bad record with a new client’s information. When the next new client comes in, do the following instead of adding a new Adult as usual: 1) View the bad client record; 2) Edit the Client ID # to reflect the new clients ID #; and 3) Proceed to overwrite EVERY field with the new client’s information. Remember to also update any data entered in the Medical/Criminal Justice, Offenders and in the Services Section.
+  If you want to rid the obsolete record completely, you can overwrite this bad
+  record with a new client’s information. When the next new client comes in, do
+  the following instead of adding a new Adult as usual: 1) View the bad client
+  record; 2) Edit the Client ID # to reflect the new clients ID #; and 3)
+  Proceed to overwrite EVERY field with the new client’s information. Remember
+  to also update any data entered in the Medical/Criminal Justice, Offenders and
+  in the Services Section.
 searchMeta: "faq  "
 ---
 

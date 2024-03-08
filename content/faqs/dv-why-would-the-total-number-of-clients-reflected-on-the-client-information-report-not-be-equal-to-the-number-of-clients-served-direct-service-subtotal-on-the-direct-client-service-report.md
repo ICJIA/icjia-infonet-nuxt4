@@ -14,10 +14,21 @@ answer: >
   common sources of these error types:
 
 
-  - Did you document any infants in shelter that never had a direct client service documented? Remember that time spent doing an intake on an infant should be entered under the child’s ID number as Individual Children’s Counseling. If you documented the client as being in shelter and no other service was provided, the client would be counted in the Client Information Report as being served, but would not be counted in the Direct Client Service report subtotal for receiving services. Run the **Exception Report > Open and Lengthy Shelter** Entries. This may help identify clients that left shelter and never updated with a Shelter End Date.
+  - Did you document any infants in shelter that never had a direct client
+  service documented? Remember that time spent doing an intake on an infant
+  should be entered under the child’s ID number as Individual Children’s
+  Counseling. If you documented the client as being in shelter and no other
+  service was provided, the client would be counted in the Client Information
+  Report as being served, but would not be counted in the Direct Client Service
+  report subtotal for receiving services. Run the **Exception Report > Open and
+  Lengthy Shelter** Entries. This may help identify clients that left shelter
+  and never updated with a Shelter End Date.
 
 
-  - Were any On- or Off-Site Shelter records entered by mistake? If you entered On- or Off-Site Shelter for a client not currently receiving services, then they would be counted as receiving shelter but have no other direct client services for the period.
+  - Were any On- or Off-Site Shelter records entered by mistake? If you entered
+  On- or Off-Site Shelter for a client not currently receiving services, then
+  they would be counted as receiving shelter but have no other direct client
+  services for the period.
 ranking: 1000
 slug: why-would-the-total-number-of-clients-reflected-on-the-client-information-report-not-be-equal-to-the-number-of-clients-served-direct-service-subtotal-on-the-direct-client-service-report
 category: default
@@ -68,10 +79,21 @@ markdown: >
   common sources of these error types:
 
 
-  - Did you document any infants in shelter that never had a direct client service documented? Remember that time spent doing an intake on an infant should be entered under the child’s ID number as Individual Children’s Counseling. If you documented the client as being in shelter and no other service was provided, the client would be counted in the Client Information Report as being served, but would not be counted in the Direct Client Service report subtotal for receiving services. Run the **Exception Report > Open and Lengthy Shelter** Entries. This may help identify clients that left shelter and never updated with a Shelter End Date.
+  - Did you document any infants in shelter that never had a direct client
+  service documented? Remember that time spent doing an intake on an infant
+  should be entered under the child’s ID number as Individual Children’s
+  Counseling. If you documented the client as being in shelter and no other
+  service was provided, the client would be counted in the Client Information
+  Report as being served, but would not be counted in the Direct Client Service
+  report subtotal for receiving services. Run the **Exception Report > Open and
+  Lengthy Shelter** Entries. This may help identify clients that left shelter
+  and never updated with a Shelter End Date.
 
 
-  - Were any On- or Off-Site Shelter records entered by mistake? If you entered On- or Off-Site Shelter for a client not currently receiving services, then they would be counted as receiving shelter but have no other direct client services for the period.
+  - Were any On- or Off-Site Shelter records entered by mistake? If you entered
+  On- or Off-Site Shelter for a client not currently receiving services, then
+  they would be counted as receiving shelter but have no other direct client
+  services for the period.
 searchMeta: "faq  "
 ---
 

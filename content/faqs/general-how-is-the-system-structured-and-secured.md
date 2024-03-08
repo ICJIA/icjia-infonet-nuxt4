@@ -8,7 +8,12 @@ answer: >-
   users and Authority InfoNet servers.
 
 
-  This centralized system shifts technical responsibilities for maintaining a data collection and reporting system from service providers, which often have little to no resources for information technology, to technical professionals at ICJIA. Service providers may use InfoNet at no cost, but they are responsible for obtaining a device that meets minimum specifications and an Internet connection.
+  This centralized system shifts technical responsibilities for maintaining a
+  data collection and reporting system from service providers, which often have
+  little to no resources for information technology, to technical professionals
+  at ICJIA. Service providers may use InfoNet at no cost, but they are
+  responsible for obtaining a device that meets minimum specifications and an
+  Internet connection.
 ranking: 1000
 slug: how-is-the-system-structured-and-secured
 category: default
@@ -41,7 +46,12 @@ markdown: >-
   users and Authority InfoNet servers.
 
 
-  This centralized system shifts technical responsibilities for maintaining a data collection and reporting system from service providers, which often have little to no resources for information technology, to technical professionals at ICJIA. Service providers may use InfoNet at no cost, but they are responsible for obtaining a device that meets minimum specifications and an Internet connection.
+  This centralized system shifts technical responsibilities for maintaining a
+  data collection and reporting system from service providers, which often have
+  little to no resources for information technology, to technical professionals
+  at ICJIA. Service providers may use InfoNet at no cost, but they are
+  responsible for obtaining a device that meets minimum specifications and an
+  Internet connection.
 searchMeta: "faq  "
 ---
 

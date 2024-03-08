@@ -6,22 +6,40 @@ answer: >
   _Updating an intake_: 
 
 
-  You should not update an intake except to complete or correct information pertinent to the client’s situation when they first started receiving services.
+  You should not update an intake except to complete or correct information
+  pertinent to the client’s situation when they first started receiving
+  services.
 
 
-  Intake information entered into InfoNet should correspond to the victim’s situation at the time of intake and should not be changed over time even as her situation may change. While a client receives services, things such as Employment Status, Marital Status, or Income may change such changes should NOT result in InfoNet data edits, as InfoNet must reflect a client’s situation at the point of intake.
+  Intake information entered into InfoNet should correspond to the victim’s
+  situation at the time of intake and should not be changed over time even as
+  her situation may change. While a client receives services, things such as
+  Employment Status, Marital Status, or Income may change such changes should
+  NOT result in InfoNet data edits, as InfoNet must reflect a client’s situation
+  at the point of intake.
 
 
-  However, important changes in the client’s life should be documented in their physical case file.
+  However, important changes in the client’s life should be documented in their
+  physical case file.
 
 
-  If you do need to correct or complete information related to the client’s status at intake: view the client’s record, edit the blank, incorrect or unknown fields, then save the updated record. Only the following intake information should be updated as the client’s situation changes over time: Referred To, Services Needed/Received, Residence, and Offender information.
+  If you do need to correct or complete information related to the client’s
+  status at intake: view the client’s record, edit the blank, incorrect or
+  unknown fields, then save the updated record. Only the following intake
+  information should be updated as the client’s situation changes over time:
+  Referred To, Services Needed/Received, Residence, and Offender information.
 
 
   _Entering a new case: _
 
 
-  Enter a new case for any client returning after a lapse in service of more than one year. Clients should maintain their assigned ID number regardless of how much time has passed. To add a new case, view the client’s record and click Add New Case. The screen will retain the client’s ID number, Gender Identity, Ethnicity, and Race. All other fields should be entered to reflect the client’s situation at the beginning of this new case. The First Contact Date should correspond to the client’s most recent contact with the program.
+  Enter a new case for any client returning after a lapse in service of more
+  than one year. Clients should maintain their assigned ID number regardless of
+  how much time has passed. To add a new case, view the client’s record and
+  click Add New Case. The screen will retain the client’s ID number, Gender
+  Identity, Ethnicity, and Race. All other fields should be entered to reflect
+  the client’s situation at the beginning of this new case. The First Contact
+  Date should correspond to the client’s most recent contact with the program.
 ranking: 1000
 slug: when-do-i-update-or-enter-a-new-intake-case
 category: default
@@ -65,22 +83,40 @@ markdown: >
   _Updating an intake_: 
 
 
-  You should not update an intake except to complete or correct information pertinent to the client’s situation when they first started receiving services.
+  You should not update an intake except to complete or correct information
+  pertinent to the client’s situation when they first started receiving
+  services.
 
 
-  Intake information entered into InfoNet should correspond to the victim’s situation at the time of intake and should not be changed over time even as her situation may change. While a client receives services, things such as Employment Status, Marital Status, or Income may change such changes should NOT result in InfoNet data edits, as InfoNet must reflect a client’s situation at the point of intake.
+  Intake information entered into InfoNet should correspond to the victim’s
+  situation at the time of intake and should not be changed over time even as
+  her situation may change. While a client receives services, things such as
+  Employment Status, Marital Status, or Income may change such changes should
+  NOT result in InfoNet data edits, as InfoNet must reflect a client’s situation
+  at the point of intake.
 
 
-  However, important changes in the client’s life should be documented in their physical case file.
+  However, important changes in the client’s life should be documented in their
+  physical case file.
 
 
-  If you do need to correct or complete information related to the client’s status at intake: view the client’s record, edit the blank, incorrect or unknown fields, then save the updated record. Only the following intake information should be updated as the client’s situation changes over time: Referred To, Services Needed/Received, Residence, and Offender information.
+  If you do need to correct or complete information related to the client’s
+  status at intake: view the client’s record, edit the blank, incorrect or
+  unknown fields, then save the updated record. Only the following intake
+  information should be updated as the client’s situation changes over time:
+  Referred To, Services Needed/Received, Residence, and Offender information.
 
 
   _Entering a new case: _
 
 
-  Enter a new case for any client returning after a lapse in service of more than one year. Clients should maintain their assigned ID number regardless of how much time has passed. To add a new case, view the client’s record and click Add New Case. The screen will retain the client’s ID number, Gender Identity, Ethnicity, and Race. All other fields should be entered to reflect the client’s situation at the beginning of this new case. The First Contact Date should correspond to the client’s most recent contact with the program.
+  Enter a new case for any client returning after a lapse in service of more
+  than one year. Clients should maintain their assigned ID number regardless of
+  how much time has passed. To add a new case, view the client’s record and
+  click Add New Case. The screen will retain the client’s ID number, Gender
+  Identity, Ethnicity, and Race. All other fields should be entered to reflect
+  the client’s situation at the beginning of this new case. The First Contact
+  Date should correspond to the client’s most recent contact with the program.
 searchMeta: "faq  "
 ---
 

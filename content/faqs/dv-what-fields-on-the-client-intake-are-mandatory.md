@@ -7,15 +7,23 @@ answer: >
   information is related to developing a comprehensive safety plan. Unknown and
   Unassigned data should be kept to a minimum.
 
-  Most of the data fields in the InfoNet data entry screens for intake are relevant to development of a comprehensive safety plan with a client. 
+  Most of the data fields in the InfoNet data entry screens for intake are
+  relevant to development of a comprehensive safety plan with a client. 
 
 
-  Most of this information may be obtained simply by saying “Tell me about your situation” to a client. Discussion style data collection may be better received by a victim than handing her a form to fill out.
+  Most of this information may be obtained simply by saying “Tell me about your
+  situation” to a client. Discussion style data collection may be better
+  received by a victim than handing her a form to fill out.
 
-  Advocates who use a discussion style will get more information and help victims the most.
+  Advocates who use a discussion style will get more information and help
+  victims the most.
 
 
-  This should also be balanced with importance of asking all questions to all clients, rather than making assumptions based on factors such as physical appearance. Be cognizant that asking all clients all questions not only avoids potential undercounting of some groups, but also avoids situations where individuals are only asked questions due to physical appearance.
+  This should also be balanced with importance of asking all questions to all
+  clients, rather than making assumptions based on factors such as physical
+  appearance. Be cognizant that asking all clients all questions not only avoids
+  potential undercounting of some groups, but also avoids situations where
+  individuals are only asked questions due to physical appearance.
 ranking: 1000
 slug: what-fields-on-the-client-intake-are-mandatory
 category: default
@@ -53,15 +61,23 @@ markdown: >
   information is related to developing a comprehensive safety plan. Unknown and
   Unassigned data should be kept to a minimum.
 
-  Most of the data fields in the InfoNet data entry screens for intake are relevant to development of a comprehensive safety plan with a client. 
+  Most of the data fields in the InfoNet data entry screens for intake are
+  relevant to development of a comprehensive safety plan with a client. 
 
 
-  Most of this information may be obtained simply by saying “Tell me about your situation” to a client. Discussion style data collection may be better received by a victim than handing her a form to fill out.
+  Most of this information may be obtained simply by saying “Tell me about your
+  situation” to a client. Discussion style data collection may be better
+  received by a victim than handing her a form to fill out.
 
-  Advocates who use a discussion style will get more information and help victims the most.
+  Advocates who use a discussion style will get more information and help
+  victims the most.
 
 
-  This should also be balanced with importance of asking all questions to all clients, rather than making assumptions based on factors such as physical appearance. Be cognizant that asking all clients all questions not only avoids potential undercounting of some groups, but also avoids situations where individuals are only asked questions due to physical appearance.
+  This should also be balanced with importance of asking all questions to all
+  clients, rather than making assumptions based on factors such as physical
+  appearance. Be cognizant that asking all clients all questions not only avoids
+  potential undercounting of some groups, but also avoids situations where
+  individuals are only asked questions due to physical appearance.
 searchMeta: "faq  "
 ---
 

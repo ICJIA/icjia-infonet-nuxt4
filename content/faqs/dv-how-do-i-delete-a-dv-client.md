@@ -11,10 +11,22 @@ answer: >
   DV needs.
 
 
-  If it is nonetheless appropriate to delete/overwrite a client, you can edit the Client ID number to indicate it as an obsolete record. Edit the Client ID # with some indicator flagging it as an obsolete record, e.g. 123v-BADID. Then, delete any services entered under this record. To see if services exist, go to the client’s direct services section on their record (and do the same for housing services). Delete any services found. Clients without services will not appear on standard or management reports, so this obsolete record will not affect your data.
+  If it is nonetheless appropriate to delete/overwrite a client, you can edit
+  the Client ID number to indicate it as an obsolete record. Edit the Client ID
+  # with some indicator flagging it as an obsolete record, e.g. 123v-BADID.
+  Then, delete any services entered under this record. To see if services exist,
+  go to the client’s direct services section on their record (and do the same
+  for housing services). Delete any services found. Clients without services
+  will not appear on standard or management reports, so this obsolete record
+  will not affect your data.
 
 
-  If you want to rid the obsolete record completely, you can overwrite this record with a new client’s information. When the next new client comes in, instead of adding a new Adult (or Child) record, do the following: 1) View the “bad” client record; 2) Edit the Client ID # to reflect the new client’s ID #; and 3) Proceed to overwrite EVERY field with the new client’s information and save.
+  If you want to rid the obsolete record completely, you can overwrite this
+  record with a new client’s information. When the next new client comes in,
+  instead of adding a new Adult (or Child) record, do the following: 1) View the
+  “bad” client record; 2) Edit the Client ID # to reflect the new client’s ID #;
+  and 3) Proceed to overwrite EVERY field with the new client’s information and
+  save.
 ranking: 1000
 slug: how-do-i-delete-a-dv-client
 category: default
@@ -60,10 +72,22 @@ markdown: >
   DV needs.
 
 
-  If it is nonetheless appropriate to delete/overwrite a client, you can edit the Client ID number to indicate it as an obsolete record. Edit the Client ID # with some indicator flagging it as an obsolete record, e.g. 123v-BADID. Then, delete any services entered under this record. To see if services exist, go to the client’s direct services section on their record (and do the same for housing services). Delete any services found. Clients without services will not appear on standard or management reports, so this obsolete record will not affect your data.
+  If it is nonetheless appropriate to delete/overwrite a client, you can edit
+  the Client ID number to indicate it as an obsolete record. Edit the Client ID
+  # with some indicator flagging it as an obsolete record, e.g. 123v-BADID.
+  Then, delete any services entered under this record. To see if services exist,
+  go to the client’s direct services section on their record (and do the same
+  for housing services). Delete any services found. Clients without services
+  will not appear on standard or management reports, so this obsolete record
+  will not affect your data.
 
 
-  If you want to rid the obsolete record completely, you can overwrite this record with a new client’s information. When the next new client comes in, instead of adding a new Adult (or Child) record, do the following: 1) View the “bad” client record; 2) Edit the Client ID # to reflect the new client’s ID #; and 3) Proceed to overwrite EVERY field with the new client’s information and save.
+  If you want to rid the obsolete record completely, you can overwrite this
+  record with a new client’s information. When the next new client comes in,
+  instead of adding a new Adult (or Child) record, do the following: 1) View the
+  “bad” client record; 2) Edit the Client ID # to reflect the new client’s ID #;
+  and 3) Proceed to overwrite EVERY field with the new client’s information and
+  save.
 searchMeta: "faq  "
 ---
 

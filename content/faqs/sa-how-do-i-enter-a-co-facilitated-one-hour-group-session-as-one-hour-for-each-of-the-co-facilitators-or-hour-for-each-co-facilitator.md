@@ -6,7 +6,9 @@ answer: >-
   Conduct Hours for each staff person on the right side of the screen. 
 
 
-  If both staff co-facilitated during the whole session, both staff should receive one Conduct Hour. Remember, total session hours documented for staff should match the length of the session (one hour). 
+  If both staff co-facilitated during the whole session, both staff should
+  receive one Conduct Hour. Remember, total session hours documented for staff
+  should match the length of the session (one hour). 
 ranking: 1000
 slug: how-do-i-enter-a-co-facilitated-one-hour-group-session-as-one-hour-for-each-of-the-co-facilitators-or-hour-for-each-co-facilitator
 category: default
@@ -33,7 +35,9 @@ markdown: >-
   Conduct Hours for each staff person on the right side of the screen. 
 
 
-  If both staff co-facilitated during the whole session, both staff should receive one Conduct Hour. Remember, total session hours documented for staff should match the length of the session (one hour). 
+  If both staff co-facilitated during the whole session, both staff should
+  receive one Conduct Hour. Remember, total session hours documented for staff
+  should match the length of the session (one hour). 
 searchMeta: "faq  "
 ---
 

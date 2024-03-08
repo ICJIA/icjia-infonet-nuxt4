@@ -8,7 +8,9 @@ answer: >-
   Services_ developed by IDHS.
 
 
-  Contact the InfoNet help desk at 312-793-8550 or  CJA.InfonetHelp@illinois.gov. ICJIA staff can generate a custom query for you.
+  Contact the InfoNet help desk at 312-793-8550
+  or  CJA.InfonetHelp@illinois.gov. ICJIA staff can generate a custom query for
+  you.
 ranking: 1000
 slug: what-if-none-of-the-available-standard-or-management-reports-give-me-the-number-s-or-the-information-i-need-but-i-know-the-information-is-entered-into-info-net
 category: default
@@ -37,7 +39,9 @@ markdown: >-
   Services_ developed by IDHS.
 
 
-  Contact the InfoNet help desk at 312-793-8550 or  CJA.InfonetHelp@illinois.gov. ICJIA staff can generate a custom query for you.
+  Contact the InfoNet help desk at 312-793-8550
+  or  CJA.InfonetHelp@illinois.gov. ICJIA staff can generate a custom query for
+  you.
 searchMeta: "faq  "
 ---
 

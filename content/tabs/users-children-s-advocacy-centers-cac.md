@@ -20,7 +20,8 @@ markdown: >+
   ### Children's Advocacy Centers (CAC) Definitions
 
 
-  - [CAC InfoNet Service Definitions.xlsx](https://infonet.icjia-api.cloud/uploads/3_4_3_CAC_Info_Net_Service_Definitions_fad41c74ab.xlsx)
+  - [CAC InfoNet Service
+  Definitions.xlsx](https://infonet.icjia-api.cloud/uploads/3_4_3_CAC_Info_Net_Service_Definitions_fad41c74ab.xlsx)
 
 
   ### Trainings
@@ -35,7 +36,8 @@ markdown: >+
   **Custom data report:**
 
 
-  - Please send request to cja.infonethelp@illinois.gov and include the following information:
+  - Please send request to cja.infonethelp@illinois.gov and include the
+  following information:
 
       - Time period(s)
       - Summary (aggregate) or record level

@@ -9,10 +9,13 @@ answer: >+
   There are some general best practices as determined by existing InfoNet users:
 
 
-  - End client IDs with a distinct letter like V or A for adults and C for children.
+  - End client IDs with a distinct letter like V or A for adults and C for
+  children.
 
 
-  - While the household feature should be used to link Adults and children (mandatory for HUD funded shelters), the following can assist in finding family members:
+  - While the household feature should be used to link Adults and children
+  (mandatory for HUD funded shelters), the following can assist in finding
+  family members:
 
       - For multiple children of the same adult victim, add another letter or number to the ID that corresponds to the child’s age order (i.e. AC would be for the oldest child, BC would be for the next oldest child, CC for the next oldest, etc.
       
@@ -56,10 +59,13 @@ markdown: >+
   There are some general best practices as determined by existing InfoNet users:
 
 
-  - End client IDs with a distinct letter like V or A for adults and C for children.
+  - End client IDs with a distinct letter like V or A for adults and C for
+  children.
 
 
-  - While the household feature should be used to link Adults and children (mandatory for HUD funded shelters), the following can assist in finding family members:
+  - While the household feature should be used to link Adults and children
+  (mandatory for HUD funded shelters), the following can assist in finding
+  family members:
 
       - For multiple children of the same adult victim, add another letter or number to the ID that corresponds to the child’s age order (i.e. AC would be for the oldest child, BC would be for the next oldest child, CC for the next oldest, etc.
       

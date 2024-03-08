@@ -7,7 +7,12 @@ answer: >+
   the first 1-2 weeks of service.
 
 
-  The “Out” column refers to post-intervention behavior issues identified after assessment and following services, usually through observation and/or reports by parent and/or child. Because some clients may end services abruptly after a few sessions and do not have the opportunity to fully benefit from the services, grantees should develop a schedule for completing the “Out” behavior issues.
+  The “Out” column refers to post-intervention behavior issues identified after
+  assessment and following services, usually through observation and/or reports
+  by parent and/or child. Because some clients may end services abruptly after a
+  few sessions and do not have the opportunity to fully benefit from the
+  services, grantees should develop a schedule for completing the “Out” behavior
+  issues.
 
 ranking: 1000
 slug: what-is-the-difference-between-the-in-and-out-columns
@@ -39,7 +44,12 @@ markdown: >+
   the first 1-2 weeks of service.
 
 
-  The “Out” column refers to post-intervention behavior issues identified after assessment and following services, usually through observation and/or reports by parent and/or child. Because some clients may end services abruptly after a few sessions and do not have the opportunity to fully benefit from the services, grantees should develop a schedule for completing the “Out” behavior issues.
+  The “Out” column refers to post-intervention behavior issues identified after
+  assessment and following services, usually through observation and/or reports
+  by parent and/or child. Because some clients may end services abruptly after a
+  few sessions and do not have the opportunity to fully benefit from the
+  services, grantees should develop a schedule for completing the “Out” behavior
+  issues.
 
 searchMeta: "faq  "
 ---

@@ -5,10 +5,14 @@ answer: >-
   displays service information for only volunteers. 
 
 
-  For this table to be accurate, however, volunteers must have been entered on the **Administration > Volunteer** tab. 
+  For this table to be accurate, however, volunteers must have been entered on
+  the **Administration > Volunteer** tab. 
 
 
-  If you are not sure that all your volunteers were entered on this tab, you have a second option. Run **Standard Reports > Service/Programs** using the Staff filter. Make sure you select all the volunteer names/groups to be included in the filter.
+  If you are not sure that all your volunteers were entered on this tab, you
+  have a second option. Run **Standard Reports > Service/Programs** using the
+  Staff filter. Make sure you select all the volunteer names/groups to be
+  included in the filter.
 ranking: 1000
 slug: how-do-i-determine-how-many-hours-of-service-were-provided-by-volunteers
 category: default
@@ -35,10 +39,14 @@ markdown: >-
   displays service information for only volunteers. 
 
 
-  For this table to be accurate, however, volunteers must have been entered on the **Administration > Volunteer** tab. 
+  For this table to be accurate, however, volunteers must have been entered on
+  the **Administration > Volunteer** tab. 
 
 
-  If you are not sure that all your volunteers were entered on this tab, you have a second option. Run **Standard Reports > Service/Programs** using the Staff filter. Make sure you select all the volunteer names/groups to be included in the filter.
+  If you are not sure that all your volunteers were entered on this tab, you
+  have a second option. Run **Standard Reports > Service/Programs** using the
+  Staff filter. Make sure you select all the volunteer names/groups to be
+  included in the filter.
 searchMeta: "faq  "
 ---
 

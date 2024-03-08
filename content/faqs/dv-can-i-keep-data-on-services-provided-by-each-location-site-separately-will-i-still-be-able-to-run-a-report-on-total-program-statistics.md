@@ -8,10 +8,14 @@ answer: >
   name and password. 
 
 
-  Then when running a report, select the appropriate location(s). This allows you to run a report for each location individually, all locations collectively, or any combination thereof.
+  Then when running a report, select the appropriate location(s). This allows
+  you to run a report for each location individually, all locations
+  collectively, or any combination thereof.
 
 
-  If your program has multiple locations and would like this ability, but does not currently have it, contact the InfoNet help desk at 312-793-8550 or  CJA.InfonetHelp@illinois.gov to discuss.
+  If your program has multiple locations and would like this ability, but does
+  not currently have it, contact the InfoNet help desk at 312-793-8550
+  or  CJA.InfonetHelp@illinois.gov to discuss.
 ranking: 1000
 slug: can-i-keep-data-on-services-provided-by-each-location-site-separately-will-i-still-be-able-to-run-a-report-on-total-program-statistics
 category: default
@@ -43,10 +47,14 @@ markdown: >
   name and password. 
 
 
-  Then when running a report, select the appropriate location(s). This allows you to run a report for each location individually, all locations collectively, or any combination thereof.
+  Then when running a report, select the appropriate location(s). This allows
+  you to run a report for each location individually, all locations
+  collectively, or any combination thereof.
 
 
-  If your program has multiple locations and would like this ability, but does not currently have it, contact the InfoNet help desk at 312-793-8550 or  CJA.InfonetHelp@illinois.gov to discuss.
+  If your program has multiple locations and would like this ability, but does
+  not currently have it, contact the InfoNet help desk at 312-793-8550
+  or  CJA.InfonetHelp@illinois.gov to discuss.
 searchMeta: "faq  "
 ---
 

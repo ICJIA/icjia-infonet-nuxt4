@@ -21,13 +21,15 @@ markdown: >+
   ### Sexual Assault (SA) User Manuals
 
 
-  - [InfoNet Manual for SA](https://infonet.icjia-api.cloud/uploads/Info_Net_Manual_for_SA_3c883f6965.pdf)
+  - [InfoNet Manual for
+  SA](https://infonet.icjia-api.cloud/uploads/Info_Net_Manual_for_SA_3c883f6965.pdf)
 
 
   ### Definitions
 
 
-  - [SA InfoNet Definitions](https://infonet.icjia-api.cloud/uploads/3_4_2_SA_INFONET_DEFINITIONS_f81d776023.docx)
+  - [SA InfoNet
+  Definitions](https://infonet.icjia-api.cloud/uploads/3_4_2_SA_INFONET_DEFINITIONS_f81d776023.docx)
 
 
   ### Trainings
@@ -39,32 +41,43 @@ markdown: >+
   ### Data Collection/Entry Forms
 
 
-  - [SA Counseling-Service-Review-Record-1-21.doc](https://infonet.icjia-api.cloud/uploads/SA_Counseling_Service_Review_Record_1_21_066acdf439.doc)
+  - [SA
+  Counseling-Service-Review-Record-1-21.doc](https://infonet.icjia-api.cloud/uploads/SA_Counseling_Service_Review_Record_1_21_066acdf439.doc)
 
-  - [SA Medical-Advocacy-7-19.docx](https://infonet.icjia-api.cloud/uploads/SA_Medical_Advocacy_7_19_921aac69cb.docx)
+  - [SA
+  Medical-Advocacy-7-19.docx](https://infonet.icjia-api.cloud/uploads/SA_Medical_Advocacy_7_19_921aac69cb.docx)
 
-  - [SA InfoNet Client Intake Data Entry Form - July 2020.docx](https://infonet.icjia-api.cloud/uploads/SA_Info_Net_Client_Intake_Data_Entry_Form_July_2020_7f218e614d.docx)
+  - [SA InfoNet Client Intake Data Entry Form - July
+  2020.docx](https://infonet.icjia-api.cloud/uploads/SA_Info_Net_Client_Intake_Data_Entry_Form_July_2020_7f218e614d.docx)
 
-  - [SA Criminal-Justice-7-19.docx](https://infonet.icjia-api.cloud/uploads/SA_Criminal_Justice_7_19_f34091f9d8.docx)
+  - [SA
+  Criminal-Justice-7-19.docx](https://infonet.icjia-api.cloud/uploads/SA_Criminal_Justice_7_19_f34091f9d8.docx)
 
-  - [SA Crisis-Intervention-7-19.docx](https://infonet.icjia-api.cloud/uploads/SA_Crisis_Intervention_7_19_c7667d1f83.docx)
+  - [SA
+  Crisis-Intervention-7-19.docx](https://infonet.icjia-api.cloud/uploads/SA_Crisis_Intervention_7_19_c7667d1f83.docx)
 
-  - [SA Counseling-Progress-Notes-7-19.docx](https://infonet.icjia-api.cloud/uploads/SA_Counseling_Progress_Notes_7_19_3887c27342.docx)
+  - [SA
+  Counseling-Progress-Notes-7-19.docx](https://infonet.icjia-api.cloud/uploads/SA_Counseling_Progress_Notes_7_19_3887c27342.docx)
 
-  - [SA Closure_Summary_Form.doc](https://infonet.icjia-api.cloud/uploads/SA_Closure_Summary_Form_f8f2812061.doc)
+  - [SA
+  Closure_Summary_Form.doc](https://infonet.icjia-api.cloud/uploads/SA_Closure_Summary_Form_f8f2812061.doc)
 
-  - [SA Awareness-Promotion-and-Social-Justice-Activism-1-21.docx](https://infonet.icjia-api.cloud/uploads/SA_Awareness_Promotion_and_Social_Justice_Activism_1_21_5797421a92.docx)
+  - [SA
+  Awareness-Promotion-and-Social-Justice-Activism-1-21.docx](https://infonet.icjia-api.cloud/uploads/SA_Awareness_Promotion_and_Social_Justice_Activism_1_21_5797421a92.docx)
 
-  - [SA Advocacy_Services_Form.doc](https://infonet.icjia-api.cloud/uploads/SA_Advocacy_Services_Form_38791983d6.doc)
+  - [SA
+  Advocacy_Services_Form.doc](https://infonet.icjia-api.cloud/uploads/SA_Advocacy_Services_Form_38791983d6.doc)
 
-  - [SA InfoNet Client Intake Form WITH Client Needs_Jan 2024.docx](https://infonet.icjia-api.cloud/uploads/SA_Info_Net_Client_Intake_Form_WITH_Client_Needs_Jan_2024_6db4adfc6e.docx)
+  - [SA InfoNet Client Intake Form WITH Client Needs_Jan
+  2024.docx](https://infonet.icjia-api.cloud/uploads/SA_Info_Net_Client_Intake_Form_WITH_Client_Needs_Jan_2024_6db4adfc6e.docx)
 
 
 
   ### Frequently Asked Questions (FAQs)
 
 
-  - [Download  Sexual Assault (SA) FAQs (Word)](https://infonet.icjia-api.cloud/uploads/3_3_2_SA_INFONET_Frequently_Asked_Questions_7_7_23_7c737ee0ff.docx)
+  - [Download  Sexual Assault (SA) FAQs
+  (Word)](https://infonet.icjia-api.cloud/uploads/3_3_2_SA_INFONET_Frequently_Asked_Questions_7_7_23_7c737ee0ff.docx)
 
 
   - [View All FAQs Online](https://infonet.icjia.dev/faqs)&nbsp;&raquo;
@@ -76,7 +89,8 @@ markdown: >+
   **Custom data report:**
 
 
-  - Please send request to cja.infonethelp@illinois.gov and include the following information:
+  - Please send request to cja.infonethelp@illinois.gov and include the
+  following information:
 
       - Time period(s)
       - Summary (aggregate) or record level

@@ -7,7 +7,10 @@ answer: >-
   first contact with a client or to correct previously entered information. 
 
 
-  To edit a client’s intake information, view the client’s record, edit the blank, incorrect or unknown fields, and then save the new information. Only the following information should be updated: referrals, services needed/received, residence, and offender information.
+  To edit a client’s intake information, view the client’s record, edit the
+  blank, incorrect or unknown fields, and then save the new information. Only
+  the following information should be updated: referrals, services
+  needed/received, residence, and offender information.
 ranking: 1000
 slug: when-do-i-update-intake-information-for-a-client-into-infonet
 category: default
@@ -37,7 +40,10 @@ markdown: >-
   first contact with a client or to correct previously entered information. 
 
 
-  To edit a client’s intake information, view the client’s record, edit the blank, incorrect or unknown fields, and then save the new information. Only the following information should be updated: referrals, services needed/received, residence, and offender information.
+  To edit a client’s intake information, view the client’s record, edit the
+  blank, incorrect or unknown fields, and then save the new information. Only
+  the following information should be updated: referrals, services
+  needed/received, residence, and offender information.
 searchMeta: "faq  "
 ---
 

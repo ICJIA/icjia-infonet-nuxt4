@@ -54,13 +54,16 @@ markdown: >-
   The primary purposes of InfoNet are to:
 
 
-  - Standardize data collection and reporting, thereby improving the ability to analyze information statewide and locally.
+  - Standardize data collection and reporting, thereby improving the ability to
+  analyze information statewide and locally.
 
   - Provide a central repository for statewide victim service data.
 
-  - Ease reporting for victim service providers that receive grants from multiple funding agencies, which often require different types of information.
+  - Ease reporting for victim service providers that receive grants from
+  multiple funding agencies, which often require different types of information.
 
-  Facilitate continuous strategic planning for improving services and system response to victims.
+  Facilitate continuous strategic planning for improving services and system
+  response to victims.
 
 
   </div>

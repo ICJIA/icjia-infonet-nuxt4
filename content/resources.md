@@ -34,7 +34,11 @@ markdown: >+
   ## InfoNet’s Virtual Private Network (VPN)
 
 
-  While no personally identifying information is entered into InfoNet, the system contains a large amount of data on individual survivors, so protecting client data is of highest priority. InfoNet’s Virtual Private Network (VPN) works to protect InfoNet data and ensure data are only accessed and viewed by authorized service provider staff. The VPN accomplishes this in three ways: 
+  While no personally identifying information is entered into InfoNet, the
+  system contains a large amount of data on individual survivors, so protecting
+  client data is of highest priority. InfoNet’s Virtual Private Network (VPN)
+  works to protect InfoNet data and ensure data are only accessed and viewed by
+  authorized service provider staff. The VPN accomplishes this in three ways: 
 
    1. Encrypts all data as they transport over the Internet. 
    
@@ -50,10 +54,12 @@ markdown: >+
       - Please state organization name, first and last names of each new user. 
 
       
-  - **Request that a new device is approved to access InfoNet**: cja.infonethelp@illinois.gov
+  - **Request that a new device is approved to access InfoNet**:
+  cja.infonethelp@illinois.gov
 
 
-  - **Request custom data report**: Please send request to cja.infonethelp@illinois.gov and include the following information: 
+  - **Request custom data report**: Please send request to
+  cja.infonethelp@illinois.gov and include the following information: 
 
       - Time period(s)
       
@@ -63,7 +69,8 @@ markdown: >+
           
       - Any desired filters, e.g. age, client’s resident county, service type
 
-  - **Request technical assistance**: cja.infonethelp@illinois.gov (preferred) or call 312-793-8550. 
+  - **Request technical assistance**: cja.infonethelp@illinois.gov (preferred)
+  or call 312-793-8550. 
 
 
   ## Agency-specific Resources

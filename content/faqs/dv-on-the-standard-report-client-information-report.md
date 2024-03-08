@@ -10,10 +10,15 @@ answer: >
   year. 
 
 
-  To delete unnecessary cases, contact ICJIA for assistance at 312-793-8550 or CJA.InfonetHelp@illinois.gov.
+  To delete unnecessary cases, contact ICJIA for assistance at 312-793-8550 or
+  CJA.InfonetHelp@illinois.gov.
 
 
-  If the report reflects activity for more than one year, the number of cases may be slightly higher than the number of clients because some clients may have more than one case. If you served a client that had two cases, both cases may be counted, but she would only be counted as one client (one person served).
+  If the report reflects activity for more than one year, the number of cases
+  may be slightly higher than the number of clients because some clients may
+  have more than one case. If you served a client that had two cases, both cases
+  may be counted, but she would only be counted as one client (one person
+  served).
 ranking: 1000
 slug: on-the-standard-report-client-information-report
 category: default
@@ -50,10 +55,15 @@ markdown: >
   year. 
 
 
-  To delete unnecessary cases, contact ICJIA for assistance at 312-793-8550 or CJA.InfonetHelp@illinois.gov.
+  To delete unnecessary cases, contact ICJIA for assistance at 312-793-8550 or
+  CJA.InfonetHelp@illinois.gov.
 
 
-  If the report reflects activity for more than one year, the number of cases may be slightly higher than the number of clients because some clients may have more than one case. If you served a client that had two cases, both cases may be counted, but she would only be counted as one client (one person served).
+  If the report reflects activity for more than one year, the number of cases
+  may be slightly higher than the number of clients because some clients may
+  have more than one case. If you served a client that had two cases, both cases
+  may be counted, but she would only be counted as one client (one person
+  served).
 searchMeta: "faq  "
 ---
 

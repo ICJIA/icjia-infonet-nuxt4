@@ -4,7 +4,9 @@ answer: >
   Enter -1.  
 
 
-  However, if you have a good estimation of her age, enter the approximate value. It is better to have the client fall within an age range on the report than to have several Unknown ages for clients.
+  However, if you have a good estimation of her age, enter the approximate
+  value. It is better to have the client fall within an age range on the report
+  than to have several Unknown ages for clients.
 ranking: 1000
 slug: how-do-i-enter-an-unknown-age-of-a-dv-client
 category: default
@@ -26,7 +28,9 @@ markdown: >
   Enter -1.  
 
 
-  However, if you have a good estimation of her age, enter the approximate value. It is better to have the client fall within an age range on the report than to have several Unknown ages for clients.
+  However, if you have a good estimation of her age, enter the approximate
+  value. It is better to have the client fall within an age range on the report
+  than to have several Unknown ages for clients.
 searchMeta: "faq  "
 ---
 

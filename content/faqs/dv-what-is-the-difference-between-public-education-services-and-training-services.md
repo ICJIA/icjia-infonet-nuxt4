@@ -6,7 +6,10 @@ answer: >-
   issues (DV101). 
 
 
-  Professional Training would be training your participants on how to deal with victims they may encounter—issues they specifically should be aware of when they are working their own client groups and how domestic violence may impact that population.
+  Professional Training would be training your participants on how to deal with
+  victims they may encounter—issues they specifically should be aware of when
+  they are working their own client groups and how domestic violence may impact
+  that population.
 ranking: 1000
 slug: what-is-the-difference-between-public-education-services-and-training-services
 category: default
@@ -33,7 +36,10 @@ markdown: >-
   issues (DV101). 
 
 
-  Professional Training would be training your participants on how to deal with victims they may encounter—issues they specifically should be aware of when they are working their own client groups and how domestic violence may impact that population.
+  Professional Training would be training your participants on how to deal with
+  victims they may encounter—issues they specifically should be aware of when
+  they are working their own client groups and how domestic violence may impact
+  that population.
 searchMeta: "faq  "
 ---
 

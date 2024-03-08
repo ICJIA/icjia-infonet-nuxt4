@@ -4,7 +4,8 @@ answer: >-
   Run **Standard Reports > Service/Programs**. 
 
 
-  The last table in this report reflects volunteer activity. You may also use the staff filter to filter the report for all volunteer names.
+  The last table in this report reflects volunteer activity. You may also use
+  the staff filter to filter the report for all volunteer names.
 ranking: 1000
 slug: how-do-i-figure-out-how-many-hours-of-service-were-provided-by-volunteers
 category: default
@@ -26,7 +27,8 @@ markdown: >-
   Run **Standard Reports > Service/Programs**. 
 
 
-  The last table in this report reflects volunteer activity. You may also use the staff filter to filter the report for all volunteer names.
+  The last table in this report reflects volunteer activity. You may also use
+  the staff filter to filter the report for all volunteer names.
 searchMeta: "faq  "
 ---
 

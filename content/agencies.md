@@ -757,7 +757,8 @@ markdown: >
   <li>
 
 
-  **Kankakee County Coalition Against Domestic Violence (same as Harbor House??)**
+  **Kankakee County Coalition Against Domestic Violence (same as Harbor
+  House??)**
 
 
   815-932-5814
@@ -790,7 +791,8 @@ markdown: >
   	
   <li>
   	
-  **LAKE COUNTY CRISIS CENTER FOR THE PREVENTION & TREATMENT OF DOMESTIC VIOLENCE (DBA A SAFE PLACE)**
+  **LAKE COUNTY CRISIS CENTER FOR THE PREVENTION & TREATMENT OF DOMESTIC
+  VIOLENCE (DBA A SAFE PLACE)**
   	
   info@asafeplaceforhelp.org
   	
@@ -1199,7 +1201,8 @@ markdown: >
 
   <li>
   	
-  **WESTERN ILLINOIS REGIONAL COUNCIL - COMMUNITY ACTION AGENCY VICTIM SERVICES (WIRC-CAA)**
+  **WESTERN ILLINOIS REGIONAL COUNCIL - COMMUNITY ACTION AGENCY VICTIM SERVICES
+  (WIRC-CAA)**
   	
   wirc@wirpc.org
   	
@@ -1507,7 +1510,8 @@ markdown: >
   	
   http://www.safecrisiscenter.org
   	
-  Vandalia, Illinois, Centralia, Illinois, Effingham, Illinois, Mt. Vernon, Illinois, and Breese, Illinois
+  Vandalia, Illinois, Centralia, Illinois, Effingham, Illinois, Mt. Vernon,
+  Illinois, and Breese, Illinois
   	
   </li>
   	
@@ -1547,7 +1551,8 @@ markdown: >
   	
   www.empoweringsurvivors.org
   	
-  Carbondale, Illinois (two locations), Harrisburg, Illinois, and Marion, Illinois
+  Carbondale, Illinois (two locations), Harrisburg, Illinois, and Marion,
+  Illinois
   	
   </li>
   	
@@ -1573,7 +1578,8 @@ markdown: >
   	
   <li>
   	
-  **The CARE Center of Northwest Center Against Sexual Assault (McHenry County)**
+  **The CARE Center of Northwest Center Against Sexual Assault (McHenry
+  County)**
   	
   www.nwcasa.org
   	
@@ -1623,7 +1629,8 @@ markdown: >
   	
   <li>
   	
-  **Western Illinois Regional Council/Community Action Agency – Victim Services**
+  **Western Illinois Regional Council/Community Action Agency – Victim
+  Services**
   	
   http://www.wirpc.org/victim-services
   	
@@ -1637,7 +1644,8 @@ markdown: >
   	
   http://www.ywcachicago.org
   	
-  Addison, Illinois, Chicago Heights, Illinois, Chicago, Illinois (four locations), and Addison, Illinois
+  Addison, Illinois, Chicago Heights, Illinois, Chicago, Illinois (four
+  locations), and Addison, Illinois
   	
   </li>
   	

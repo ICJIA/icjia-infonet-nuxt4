@@ -11,7 +11,10 @@ answer: >
   should be opened independently of the adult. 
 
 
-  Additionally, you can open this child client as an adult record to ensure you can enter offender and other data only linked to adult clients. If this option is taken, make sure you assign this child a child’s ID number (ending with a “c”) even though you are entering this child client as an adult.
+  Additionally, you can open this child client as an adult record to ensure you
+  can enter offender and other data only linked to adult clients. If this option
+  is taken, make sure you assign this child a child’s ID number (ending with a
+  “c”) even though you are entering this child client as an adult.
 ranking: 1000
 slug: if-a-grandmother-with-custody-of-her-grandchild-brings-the-child-in-for-services-and-the-child-s-mother-is-also-a-client-of-the-program
 category: default
@@ -47,7 +50,10 @@ markdown: >
   should be opened independently of the adult. 
 
 
-  Additionally, you can open this child client as an adult record to ensure you can enter offender and other data only linked to adult clients. If this option is taken, make sure you assign this child a child’s ID number (ending with a “c”) even though you are entering this child client as an adult.
+  Additionally, you can open this child client as an adult record to ensure you
+  can enter offender and other data only linked to adult clients. If this option
+  is taken, make sure you assign this child a child’s ID number (ending with a
+  “c”) even though you are entering this child client as an adult.
 searchMeta: "faq  "
 ---
 

@@ -7,7 +7,9 @@ answer: >-
   (New Orders of Protection), whether they were subsequently upgraded or not. 
 
 
-  Numbers of existing OPs that were upgraded during the reporting period are displayed in the second section of the report by the type of upgrade (Upgrade in the Type of Order).
+  Numbers of existing OPs that were upgraded during the reporting period are
+  displayed in the second section of the report by the type of upgrade (Upgrade
+  in the Type of Order).
 ranking: 1000
 slug: in-the-medical-cj-order-of-protection-report-does-the-number-of-o-ps-filed-include-the-number-of-o-ps-that-were-upgraded
 category: default
@@ -36,7 +38,9 @@ markdown: >-
   (New Orders of Protection), whether they were subsequently upgraded or not. 
 
 
-  Numbers of existing OPs that were upgraded during the reporting period are displayed in the second section of the report by the type of upgrade (Upgrade in the Type of Order).
+  Numbers of existing OPs that were upgraded during the reporting period are
+  displayed in the second section of the report by the type of upgrade (Upgrade
+  in the Type of Order).
 searchMeta: "faq  "
 ---
 

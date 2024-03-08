@@ -33,7 +33,10 @@ markdown: >-
   standards.    
 
 
-  Funding will be used to support developer staff time to revise and write new code that meet the standards, and research staff time to inform business logic, test new and revised reporting tools, and train users and provide related support on the new functions. 
+  Funding will be used to support developer staff time to revise and write new
+  code that meet the standards, and research staff time to inform business
+  logic, test new and revised reporting tools, and train users and provide
+  related support on the new functions. 
 rawText: "icjia received 139 472 in grant funds from all chicago https
   allchicago org to increase compliance of its infonet system https infonet
   icjia illinois gov with u s department of housing and urban development hud

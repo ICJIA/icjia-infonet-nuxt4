@@ -14,7 +14,12 @@ answer: >-
   InfoNet. Rather, a unique number is used to track each client.
 
 
-  Additionally, service providers enter all services provided by staff and volunteers. This includes services to clients such as crisis intervention and court advocacy, as well as services to the community such as prevention, training and public awareness. Administrative information entered into InfoNet includes staff funding sources and allowable services, which is used to generate reports that reflect grant specific information.
+  Additionally, service providers enter all services provided by staff and
+  volunteers. This includes services to clients such as crisis intervention and
+  court advocacy, as well as services to the community such as prevention,
+  training and public awareness. Administrative information entered into InfoNet
+  includes staff funding sources and allowable services, which is used to
+  generate reports that reflect grant specific information.
 ranking: 1000
 slug: what-information-is-collected-with-info-net
 category: default
@@ -60,7 +65,12 @@ markdown: >-
   InfoNet. Rather, a unique number is used to track each client.
 
 
-  Additionally, service providers enter all services provided by staff and volunteers. This includes services to clients such as crisis intervention and court advocacy, as well as services to the community such as prevention, training and public awareness. Administrative information entered into InfoNet includes staff funding sources and allowable services, which is used to generate reports that reflect grant specific information.
+  Additionally, service providers enter all services provided by staff and
+  volunteers. This includes services to clients such as crisis intervention and
+  court advocacy, as well as services to the community such as prevention,
+  training and public awareness. Administrative information entered into InfoNet
+  includes staff funding sources and allowable services, which is used to
+  generate reports that reflect grant specific information.
 searchMeta: "faq  "
 ---
 

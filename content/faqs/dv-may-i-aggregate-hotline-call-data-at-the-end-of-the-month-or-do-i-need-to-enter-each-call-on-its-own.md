@@ -7,7 +7,11 @@ answer: >
   staff’s aggregate data.
 
 
-  Otherwise technically yes, you may aggregate the data for the purposes of InfoNet reporting. Remember that this may make it hard for your organization, the coalition, etc. to get an accurate sense of trends and needs, as aggregating by month will make it impossible to identify say if certain days in the month were unexpectedly busy or calm (e.g. holidays).
+  Otherwise technically yes, you may aggregate the data for the purposes of
+  InfoNet reporting. Remember that this may make it hard for your organization,
+  the coalition, etc. to get an accurate sense of trends and needs, as
+  aggregating by month will make it impossible to identify say if certain days
+  in the month were unexpectedly busy or calm (e.g. holidays).
 ranking: 1000
 slug: may-i-aggregate-hotline-call-data-at-the-end-of-the-month-or-do-i-need-to-enter-each-call-on-its-own
 category: default
@@ -37,7 +41,11 @@ markdown: >
   staff’s aggregate data.
 
 
-  Otherwise technically yes, you may aggregate the data for the purposes of InfoNet reporting. Remember that this may make it hard for your organization, the coalition, etc. to get an accurate sense of trends and needs, as aggregating by month will make it impossible to identify say if certain days in the month were unexpectedly busy or calm (e.g. holidays).
+  Otherwise technically yes, you may aggregate the data for the purposes of
+  InfoNet reporting. Remember that this may make it hard for your organization,
+  the coalition, etc. to get an accurate sense of trends and needs, as
+  aggregating by month will make it impossible to identify say if certain days
+  in the month were unexpectedly busy or calm (e.g. holidays).
 searchMeta: "faq  "
 ---
 

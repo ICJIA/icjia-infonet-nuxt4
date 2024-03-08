@@ -6,7 +6,8 @@ answer: >
   training. 
 
 
-  Time spent attending a training may be documented in the Other Staff Activities section if your agency wishes to track that information.
+  Time spent attending a training may be documented in the Other Staff
+  Activities section if your agency wishes to track that information.
 ranking: 1000
 slug: for-in-service-new-staff-training-do-i-document-the-time-that-staff-spent-providing-training-or-document-the-time-staff-spent-in-the-training
 category: default
@@ -31,7 +32,8 @@ markdown: >
   training. 
 
 
-  Time spent attending a training may be documented in the Other Staff Activities section if your agency wishes to track that information.
+  Time spent attending a training may be documented in the Other Staff
+  Activities section if your agency wishes to track that information.
 searchMeta: "faq  "
 ---
 

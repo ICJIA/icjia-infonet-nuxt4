@@ -7,7 +7,8 @@ answer: >-
   from ICASA or at https://icjia.illinois.gov. 
 
 
-  In addition, agencies may create their own data collection forms and request ICASA approval before use.
+  In addition, agencies may create their own data collection forms and request
+  ICASA approval before use.
 ranking: 750
 slug: what-is-a-client-intake
 category: default
@@ -34,7 +35,8 @@ markdown: >-
   from ICASA or at https://icjia.illinois.gov. 
 
 
-  In addition, agencies may create their own data collection forms and request ICASA approval before use.
+  In addition, agencies may create their own data collection forms and request
+  ICASA approval before use.
 searchMeta: "faq  "
 ---
 

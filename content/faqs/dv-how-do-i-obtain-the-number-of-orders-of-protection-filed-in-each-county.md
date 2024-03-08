@@ -5,10 +5,16 @@ answer: >-
   by County**. 
 
 
-  Please note that this report will filter records based on the client’s county of residence, NOT the county court in which the OP was filed. In most instances, the number will be accurate because most victims file for an OP in the same county they live in. 
+  Please note that this report will filter records based on the client’s county
+  of residence, NOT the county court in which the OP was filed. In most
+  instances, the number will be accurate because most victims file for an OP in
+  the same county they live in. 
 
 
-  However, there may be instances when a client files for an OP in a different county court. If this causes concern and you need a report that displays the number of OPs by the county court they were filed in, contact ICJIA’s Help Desk at 312-793-8550 or CJA.InfonetHelp@illinois.gov.
+  However, there may be instances when a client files for an OP in a different
+  county court. If this causes concern and you need a report that displays the
+  number of OPs by the county court they were filed in, contact ICJIA’s Help
+  Desk at 312-793-8550 or CJA.InfonetHelp@illinois.gov.
 ranking: 1000
 slug: how-do-i-obtain-the-number-of-orders-of-protection-filed-in-each-county
 category: default
@@ -37,10 +43,16 @@ markdown: >-
   by County**. 
 
 
-  Please note that this report will filter records based on the client’s county of residence, NOT the county court in which the OP was filed. In most instances, the number will be accurate because most victims file for an OP in the same county they live in. 
+  Please note that this report will filter records based on the client’s county
+  of residence, NOT the county court in which the OP was filed. In most
+  instances, the number will be accurate because most victims file for an OP in
+  the same county they live in. 
 
 
-  However, there may be instances when a client files for an OP in a different county court. If this causes concern and you need a report that displays the number of OPs by the county court they were filed in, contact ICJIA’s Help Desk at 312-793-8550 or CJA.InfonetHelp@illinois.gov.
+  However, there may be instances when a client files for an OP in a different
+  county court. If this causes concern and you need a report that displays the
+  number of OPs by the county court they were filed in, contact ICJIA’s Help
+  Desk at 312-793-8550 or CJA.InfonetHelp@illinois.gov.
 searchMeta: "faq  "
 ---
 

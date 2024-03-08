@@ -8,7 +8,11 @@ answer: >
   entered into InfoNet, but common activities. There may be 3 or 4 boxes checked
   for topics covered that fit within one service
 
-  category. For example, you might have spent an hour with a client and check 4 boxes. The hour of service fits civil legal advocacy, which is entered into InfoNet as a service. For each contact you 1) enter the hours of service in appropriate category, 2) indicate common topics covered (check boxes), and 3) write notes for interaction in the Comments section.
+  category. For example, you might have spent an hour with a client and check 4
+  boxes. The hour of service fits civil legal advocacy, which is entered into
+  InfoNet as a service. For each contact you 1) enter the hours of service in
+  appropriate category, 2) indicate common topics covered (check boxes), and 3)
+  write notes for interaction in the Comments section.
 ranking: 1000
 slug: on-icadv-forms-there-are-check-boxes-on-the-service-contact-form
 category: default
@@ -42,7 +46,11 @@ markdown: >
   entered into InfoNet, but common activities. There may be 3 or 4 boxes checked
   for topics covered that fit within one service
 
-  category. For example, you might have spent an hour with a client and check 4 boxes. The hour of service fits civil legal advocacy, which is entered into InfoNet as a service. For each contact you 1) enter the hours of service in appropriate category, 2) indicate common topics covered (check boxes), and 3) write notes for interaction in the Comments section.
+  category. For example, you might have spent an hour with a client and check 4
+  boxes. The hour of service fits civil legal advocacy, which is entered into
+  InfoNet as a service. For each contact you 1) enter the hours of service in
+  appropriate category, 2) indicate common topics covered (check boxes), and 3)
+  write notes for interaction in the Comments section.
 searchMeta: "faq  "
 ---
 

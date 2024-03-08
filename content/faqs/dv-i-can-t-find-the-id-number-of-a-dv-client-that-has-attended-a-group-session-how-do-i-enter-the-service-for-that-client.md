@@ -9,10 +9,15 @@ answer: >
   received a group service before will not appear in this list.
 
 
-  - If there are dates entered in the Group Service Date fields, try removing the dates from the Group Service Date fields entirely and use another search field, such as First Contact Date, Client ID, or Client Type.
+  - If there are dates entered in the Group Service Date fields, try removing
+  the dates from the Group Service Date fields entirely and use another search
+  field, such as First Contact Date, Client ID, or Client Type.
 
 
-  - If you still cannot find your client, try searching with all the search fields blank. This will produce a list of all clients ever served by your agency. The list will be long, but Client IDs are listed in alphanumeric order so you should be able to find the client fairly easily.
+  - If you still cannot find your client, try searching with all the search
+  fields blank. This will produce a list of all clients ever served by your
+  agency. The list will be long, but Client IDs are listed in alphanumeric order
+  so you should be able to find the client fairly easily.
 ranking: 1000
 slug: i-can-t-find-the-id-number-of-a-dv-client-that-has-attended-a-group-session-how-do-i-enter-the-service-for-that-client
 category: default
@@ -49,10 +54,15 @@ markdown: >
   received a group service before will not appear in this list.
 
 
-  - If there are dates entered in the Group Service Date fields, try removing the dates from the Group Service Date fields entirely and use another search field, such as First Contact Date, Client ID, or Client Type.
+  - If there are dates entered in the Group Service Date fields, try removing
+  the dates from the Group Service Date fields entirely and use another search
+  field, such as First Contact Date, Client ID, or Client Type.
 
 
-  - If you still cannot find your client, try searching with all the search fields blank. This will produce a list of all clients ever served by your agency. The list will be long, but Client IDs are listed in alphanumeric order so you should be able to find the client fairly easily.
+  - If you still cannot find your client, try searching with all the search
+  fields blank. This will produce a list of all clients ever served by your
+  agency. The list will be long, but Client IDs are listed in alphanumeric order
+  so you should be able to find the client fairly easily.
 searchMeta: "faq  "
 ---
 

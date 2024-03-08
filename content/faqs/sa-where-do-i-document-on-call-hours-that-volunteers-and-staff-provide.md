@@ -4,7 +4,8 @@ answer: >-
   On-call hours can be documented at **Services > Other Staff Activities**. 
 
 
-  Remember those hours should be documented as a direct client service if staff and volunteers are responding to and serving victims during the shift.
+  Remember those hours should be documented as a direct client service if staff
+  and volunteers are responding to and serving victims during the shift.
 ranking: 1000
 slug: where-do-i-document-on-call-hours-that-volunteers-and-staff-provide
 category: default
@@ -26,7 +27,8 @@ markdown: >-
   On-call hours can be documented at **Services > Other Staff Activities**. 
 
 
-  Remember those hours should be documented as a direct client service if staff and volunteers are responding to and serving victims during the shift.
+  Remember those hours should be documented as a direct client service if staff
+  and volunteers are responding to and serving victims during the shift.
 searchMeta: "faq  "
 ---
 

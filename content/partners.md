@@ -61,22 +61,47 @@ markdown: >-
   <div class="indent">
 
 
-  [Illinois Criminal Justice Information Authority (ICJIA)](https://icjia.illinois.gov) is the lead agency responsible for housing and supporting InfoNet. ICJIA staff oversee InfoNet’s design and upgrades, provide training and technical assistance to users, use InfoNet’s data for research and planning, and works with partners to govern InfoNet’s use and growth. 
+  [Illinois Criminal Justice Information Authority
+  (ICJIA)](https://icjia.illinois.gov) is the lead agency responsible for
+  housing and supporting InfoNet. ICJIA staff oversee InfoNet’s design and
+  upgrades, provide training and technical assistance to users, use InfoNet’s
+  data for research and planning, and works with partners to govern InfoNet’s
+  use and growth. 
 
 
-  All four InfoNet partners below work routinely with ICJIA to govern InfoNet’s use and data requirements; use InfoNet’s data for grant monitoring, research, and strategic planning; and cohosting/facilitating forums and/or relaying feedback from the field about how InfoNet can be improved.   
+  All four InfoNet partners below work routinely with ICJIA to govern InfoNet’s
+  use and data requirements; use InfoNet’s data for grant monitoring, research,
+  and strategic planning; and cohosting/facilitating forums and/or relaying
+  feedback from the field about how InfoNet can be improved.   
 
 
-  [Illinois Coalition Against Domestic Violence (ICADV)](https://www.ilcadv.org/) is a membership organization working to eliminate domestic violence in Illinois and increase access to ever-improving services for survivors of all backgrounds. ICADV serves over 50 domestic violence programs statewide that provide direct service to survivors and their dependent children. 
+  [Illinois Coalition Against Domestic Violence
+  (ICADV)](https://www.ilcadv.org/) is a membership organization working to
+  eliminate domestic violence in Illinois and increase access to ever-improving
+  services for survivors of all backgrounds. ICADV serves over 50 domestic
+  violence programs statewide that provide direct service to survivors and their
+  dependent children. 
 
 
-  [Illinois Coalition Against Sexual Assault](https://icasa.org/) is a unified network of over 30 rape crisis centers, envisioning a world free of sexual violence, and working together to end sexual violence in Illinois. 
+  [Illinois Coalition Against Sexual Assault](https://icasa.org/) is a unified
+  network of over 30 rape crisis centers, envisioning a world free of sexual
+  violence, and working together to end sexual violence in Illinois. 
 
 
-  [Illinois Department of Human Services’ (IDHS)](https://www.dhs.state.il.us/page.aspx) Bureau of Domestic Violence, Sexual Assault, and Human Trafficking assists Illinois residents to live free from domestic violence, sexual assault, and human trafficking by promoting prevention and working in partnership with communities in advancing equality, dignity, and respect for all. IDHS administers federal and state funding to over 60 domestic violence and 30 sexual assault centers. 
+  [Illinois Department of Human Services’
+  (IDHS)](https://www.dhs.state.il.us/page.aspx) Bureau of Domestic Violence,
+  Sexual Assault, and Human Trafficking assists Illinois residents to live free
+  from domestic violence, sexual assault, and human trafficking by promoting
+  prevention and working in partnership with communities in advancing equality,
+  dignity, and respect for all. IDHS administers federal and state funding to
+  over 60 domestic violence and 30 sexual assault centers. 
 
 
-  [Chicago Department of Family & Support Services’ (CDFSS)](https://www.chicago.gov/city/en/depts/fss.html) Division on Domestic Violence leads the City of Chicago’s multi-layered response to domestic violence. CDFSS supports a network of about 20 service providers that address victims’ counseling and legal needs. 
+  [Chicago Department of Family & Support Services’
+  (CDFSS)](https://www.chicago.gov/city/en/depts/fss.html) Division on Domestic
+  Violence leads the City of Chicago’s multi-layered response to domestic
+  violence. CDFSS supports a network of about 20 service providers that address
+  victims’ counseling and legal needs. 
 
 
   <!--

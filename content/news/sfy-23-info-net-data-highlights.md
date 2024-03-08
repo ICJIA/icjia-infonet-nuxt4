@@ -22,25 +22,37 @@ attachments:
 postDate: 2023-10-03T05:00:00Z
 markdown: >-
   
-  In State Fiscal Year 2023, 108 Illinois domestic and sexual violence agencies used InfoNet to collect and report client data to funders and stakeholders. That same year, agencies provided 721,956 direct service hours to 63,610 clients.  
+  In State Fiscal Year 2023, 108 Illinois domestic and sexual violence agencies
+  used InfoNet to collect and report client data to funders and stakeholders.
+  That same year, agencies provided 721,956 direct service hours to 63,610
+  clients.  
 
 
   ## Client Demographics
 
-  - Most clients identified as female (84%). Other clients identified as male (15%) and transgender, gender non-conforming, or another gender identity (<1%).  
+  - Most clients identified as female (84%). Other clients identified as male
+  (15%) and transgender, gender non-conforming, or another gender identity
+  (<1%).  
 
-  - Half of clients identified as White (50%), followed by Black/African American (26%), and Hispanic/Latino (23%). 
+  - Half of clients identified as White (50%), followed by Black/African
+  American (26%), and Hispanic/Latino (23%). 
 
   - More than one in five clients (21%) were minors under age 18.  
 
-  - Among clients aged 18 or older who disclosed their sexual orientation, 8% clients identified as gay/lesbian, bisexual, queer, or other.  
+  - Among clients aged 18 or older who disclosed their sexual orientation, 8%
+  clients identified as gay/lesbian, bisexual, queer, or other.  
 
 
   ## Direct Services
 
   - Agencies provided nearly 1.1 million direct service contacts.
 
-  - Advocacy and counseling were the most common direct services provided to clients. Nearly half of domestic violence clients received civil legal advocacy (48%) and 41% received in-person counseling services. Similarly, 42% of sexual assault clients received general advocacy services (e.g., advocacy with social services, housing, unemployment) and 43% received in-person counseling. 
+  - Advocacy and counseling were the most common direct services provided to
+  clients. Nearly half of domestic violence clients received civil legal
+  advocacy (48%) and 41% received in-person counseling services. Similarly, 42%
+  of sexual assault clients received general advocacy services (e.g., advocacy
+  with social services, housing, unemployment) and 43% received in-person
+  counseling. 
 
   - 8,660 clients received emergency shelter or housing services.
 

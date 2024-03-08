@@ -11,10 +11,13 @@ answer: >
   case, you may have data entry errors. 
 
 
-  Run a **Management > Client Detail Information Report** for the same time period. Apply a **Client Type=Adult** filter and an Age 0- 17 filter to see the ID numbers of these clients. 
+  Run a **Management > Client Detail Information Report** for the same time
+  period. Apply a **Client Type=Adult** filter and an Age 0- 17 filter to see
+  the ID numbers of these clients. 
 
 
-  Any client entered under the wrong client type is an error and should be corrected.
+  Any client entered under the wrong client type is an error and should be
+  corrected.
 ranking: 1000
 slug: when-i-review-my-client-information-report-i-notice-that-there-are-some-adult-records-in-the-child-age-categories-of-the-report-what-may-cause-this
 category: default
@@ -51,10 +54,13 @@ markdown: >
   case, you may have data entry errors. 
 
 
-  Run a **Management > Client Detail Information Report** for the same time period. Apply a **Client Type=Adult** filter and an Age 0- 17 filter to see the ID numbers of these clients. 
+  Run a **Management > Client Detail Information Report** for the same time
+  period. Apply a **Client Type=Adult** filter and an Age 0- 17 filter to see
+  the ID numbers of these clients. 
 
 
-  Any client entered under the wrong client type is an error and should be corrected.
+  Any client entered under the wrong client type is an error and should be
+  corrected.
 searchMeta: "faq  "
 ---
 

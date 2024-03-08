@@ -4,7 +4,12 @@ answer: >
   Yes. 
 
 
-  You must enter the contractual person in the AdministrationStaff Information section of the database using the term Contractual as their First Name (or part of their first name, e.g. John - Contractual). Their Last Name could be the type of service or their actual name. For example, your program’s contractual child therapist may be entered as: First Name = Contractual; Last Name = Child Therapist.
+  You must enter the contractual person in the AdministrationStaff Information
+  section of the database using the term Contractual as their First Name (or
+  part of their first name, e.g. John - Contractual). Their Last Name could be
+  the type of service or their actual name. For example, your program’s
+  contractual child therapist may be entered as: First Name = Contractual; Last
+  Name = Child Therapist.
 
 
   Note: This may change in a future update.
@@ -32,7 +37,12 @@ markdown: >
   Yes. 
 
 
-  You must enter the contractual person in the AdministrationStaff Information section of the database using the term Contractual as their First Name (or part of their first name, e.g. John - Contractual). Their Last Name could be the type of service or their actual name. For example, your program’s contractual child therapist may be entered as: First Name = Contractual; Last Name = Child Therapist.
+  You must enter the contractual person in the AdministrationStaff Information
+  section of the database using the term Contractual as their First Name (or
+  part of their first name, e.g. John - Contractual). Their Last Name could be
+  the type of service or their actual name. For example, your program’s
+  contractual child therapist may be entered as: First Name = Contractual; Last
+  Name = Child Therapist.
 
 
   Note: This may change in a future update.

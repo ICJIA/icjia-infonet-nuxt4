@@ -6,7 +6,9 @@ answer: >-
   adult or a child. 
 
 
-  Each significant other who receives Family Counseling should be a client entered into InfoNet as a significant other, even if family counseling is the only service received by a significant other.
+  Each significant other who receives Family Counseling should be a client
+  entered into InfoNet as a significant other, even if family counseling is the
+  only service received by a significant other.
 ranking: 1000
 slug: how-do-i-document-family-counseling-in-both-the-adult-and-child-clients-files
 category: default
@@ -32,7 +34,9 @@ markdown: >-
   adult or a child. 
 
 
-  Each significant other who receives Family Counseling should be a client entered into InfoNet as a significant other, even if family counseling is the only service received by a significant other.
+  Each significant other who receives Family Counseling should be a client
+  entered into InfoNet as a significant other, even if family counseling is the
+  only service received by a significant other.
 searchMeta: "faq  "
 ---
 

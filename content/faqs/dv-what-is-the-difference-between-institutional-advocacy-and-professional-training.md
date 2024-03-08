@@ -6,10 +6,13 @@ answer: >
   victims to improve how the system responds to them.
 
 
-  Example: explaining the benefits of implementing the Illinois Model DV Protocol for Law Enforcement to a group of police chiefs.
+  Example: explaining the benefits of implementing the Illinois Model DV
+  Protocol for Law Enforcement to a group of police chiefs.
 
 
-  Professional Training is providing training to professionals on domestic violence issues, such as how to identify victims, refer victims, dynamics of domestic violence.
+  Professional Training is providing training to professionals on domestic
+  violence issues, such as how to identify victims, refer victims, dynamics of
+  domestic violence.
 ranking: 1000
 slug: what-is-the-difference-between-institutional-advocacy-and-professional-training
 category: default
@@ -37,10 +40,13 @@ markdown: >
   victims to improve how the system responds to them.
 
 
-  Example: explaining the benefits of implementing the Illinois Model DV Protocol for Law Enforcement to a group of police chiefs.
+  Example: explaining the benefits of implementing the Illinois Model DV
+  Protocol for Law Enforcement to a group of police chiefs.
 
 
-  Professional Training is providing training to professionals on domestic violence issues, such as how to identify victims, refer victims, dynamics of domestic violence.
+  Professional Training is providing training to professionals on domestic
+  violence issues, such as how to identify victims, refer victims, dynamics of
+  domestic violence.
 searchMeta: "faq  "
 ---
 

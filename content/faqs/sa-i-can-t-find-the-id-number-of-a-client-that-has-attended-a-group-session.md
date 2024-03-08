@@ -10,10 +10,17 @@ answer: >
   list. 
 
 
-  - If there are dates entered in the Group Service Date fields, does the client have a group service already entered in that date range? If not, remove the dates from the Group Service Date fields entirely and use one of the other search fields, such as First Contact Date, Client ID, or Client Type. 
+  - If there are dates entered in the Group Service Date fields, does the client
+  have a group service already entered in that date range? If not, remove the
+  dates from the Group Service Date fields entirely and use one of the other
+  search fields, such as First Contact Date, Client ID, or Client Type. 
 
 
-  - If you cannot find your client in the Available Clients list after several attempts, try searching with all the fields left blank. This will produce a list of all clients ever served by your agency. The list will be long, but Client IDs will be listed in alphanumeric order so you should be able to find the client you are looking for fairly easily.  
+  - If you cannot find your client in the Available Clients list after several
+  attempts, try searching with all the fields left blank. This will produce a
+  list of all clients ever served by your agency. The list will be long, but
+  Client IDs will be listed in alphanumeric order so you should be able to find
+  the client you are looking for fairly easily.  
 ranking: 1000
 slug: i-can-t-find-the-id-number-of-a-client-that-has-attended-a-group-session
 category: default
@@ -53,10 +60,17 @@ markdown: >
   list. 
 
 
-  - If there are dates entered in the Group Service Date fields, does the client have a group service already entered in that date range? If not, remove the dates from the Group Service Date fields entirely and use one of the other search fields, such as First Contact Date, Client ID, or Client Type. 
+  - If there are dates entered in the Group Service Date fields, does the client
+  have a group service already entered in that date range? If not, remove the
+  dates from the Group Service Date fields entirely and use one of the other
+  search fields, such as First Contact Date, Client ID, or Client Type. 
 
 
-  - If you cannot find your client in the Available Clients list after several attempts, try searching with all the fields left blank. This will produce a list of all clients ever served by your agency. The list will be long, but Client IDs will be listed in alphanumeric order so you should be able to find the client you are looking for fairly easily.  
+  - If you cannot find your client in the Available Clients list after several
+  attempts, try searching with all the fields left blank. This will produce a
+  list of all clients ever served by your agency. The list will be long, but
+  Client IDs will be listed in alphanumeric order so you should be able to find
+  the client you are looking for fairly easily.  
 searchMeta: "faq  "
 ---
 

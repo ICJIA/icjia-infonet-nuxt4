@@ -4,7 +4,8 @@ answer: >-
   Yes. 
 
 
-  You should obtain consent for services from her parent or guardian before providing more than 5 service sessions of up to 45 minutes of service.
+  You should obtain consent for services from her parent or guardian before
+  providing more than 5 service sessions of up to 45 minutes of service.
 ranking: 1000
 slug: can-we-serve-a-child-client-if-we-don-t-have-a-related-adult-client
 category: default
@@ -25,7 +26,8 @@ markdown: >-
   Yes. 
 
 
-  You should obtain consent for services from her parent or guardian before providing more than 5 service sessions of up to 45 minutes of service.
+  You should obtain consent for services from her parent or guardian before
+  providing more than 5 service sessions of up to 45 minutes of service.
 searchMeta: "faq  "
 ---
 

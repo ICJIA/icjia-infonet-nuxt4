@@ -139,22 +139,33 @@ markdown: >2-
   <div class="indent">
 
 
-  InfoNet is a web-based data/case management system used by over 100 domestic and sexual violence service providers in Illinois. The system is nationally recognized for facilitating standardized data collection and reporting at the statewide level. Initial development of InfoNet began in the mid-90s as a collaborative effort between the Illinois Criminal Justice Information Authority, the Illinois Coalition Against Domestic Violence, and the Illinois Coalition Against Sexual Assault. Since then, InfoNet has grown to include partnerships with the Illinois Department of Human Services and the Chicago Department of Family & Support Services. 
+  InfoNet is a web-based data/case management system used by over 100 domestic
+  and sexual violence service providers in Illinois. The system is nationally
+  recognized for facilitating standardized data collection and reporting at the
+  statewide level. Initial development of InfoNet began in the mid-90s as a
+  collaborative effort between the Illinois Criminal Justice Information
+  Authority, the Illinois Coalition Against Domestic Violence, and the Illinois
+  Coalition Against Sexual Assault. Since then, InfoNet has grown to include
+  partnerships with the Illinois Department of Human Services and the Chicago
+  Department of Family & Support Services. 
 
 
   The primary purposes of InfoNet are to:
 
 
-  -	Standardize data collection and reporting, improving the ability to analyze information statewide and locally.
+  -	Standardize data collection and reporting, improving the ability to analyze
+  information statewide and locally.
 
 
   - 	Provide a central repository for statewide victim service data.
 
 
-  -	Ease reporting for victim service providers that receive grants from multiple funding agencies, which often require different types of information.
+  -	Ease reporting for victim service providers that receive grants from
+  multiple funding agencies, which often require different types of information.
 
 
-  -	Facilitate continuous strategic planning for improving services and system response to victims.
+  -	Facilitate continuous strategic planning for improving services and system
+  response to victims.
 
 
   </div>
@@ -167,27 +178,39 @@ markdown: >2-
   <div class="indent">
 
 
-  - **Jennifer Hiselman, InfoNet Manager**: Jennifer oversees InfoNet’s operation, provides training and assistance to users, and works with users and other stakeholders to improve and maximize InfoNet’s utility. 
+  - **Jennifer Hiselman, InfoNet Manager**: Jennifer oversees InfoNet’s
+  operation, provides training and assistance to users, and works with users and
+  other stakeholders to improve and maximize InfoNet’s utility. 
   		
-  - **Ming Xie, Lead InfoNet Developer**: Ming leads InfoNet’s development work, overseeing all InfoNet maintenance and upgrades. 
+  - **Ming Xie, Lead InfoNet Developer**: Ming leads InfoNet’s development work,
+  overseeing all InfoNet maintenance and upgrades. 
 
 
-  - **L. Fernanda Gonzalez, Research Scientist**: Fernanda assists with training and user requests for data and/or assistance, and conducts research using InfoNet data. 
+  - **L. Fernanda Gonzalez, Research Scientist**: Fernanda assists with training
+  and user requests for data and/or assistance, and conducts research using
+  InfoNet data. 
 
 
-  - **Caleb Schaffner, Research Scientist**: Caleb assists with training and user requests for data and/or assistance, conducts research using InfoNet data, and helps test InfoNet upgrades. 
+  - **Caleb Schaffner, Research Scientist**: Caleb assists with training and
+  user requests for data and/or assistance, conducts research using InfoNet
+  data, and helps test InfoNet upgrades. 
 
 
-  - **Kirthi Ravi, InfoNet Developer**: Kirthi writes code for InfoNet to create new functions and tools for users. 
+  - **Kirthi Ravi, InfoNet Developer**: Kirthi writes code for InfoNet to create
+  new functions and tools for users. 
 
 
-  - **Ziaul “Z” Hasan, InfoNet Developer**: Z writes code for InfoNet to create new functions and tools for users. 
+  - **Ziaul “Z” Hasan, InfoNet Developer**: Z writes code for InfoNet to create
+  new functions and tools for users. 
 
 
-  - **Yolanda Mosley, Information Systems Analyst**: Yolanda helps users establish access to InfoNet’s VPN and troubleshoots connectivity issues. She also helps ensure InfoNet’s infrastructure is properly maintained and updated.
+  - **Yolanda Mosley, Information Systems Analyst**: Yolanda helps users
+  establish access to InfoNet’s VPN and troubleshoots connectivity issues. She
+  also helps ensure InfoNet’s infrastructure is properly maintained and updated.
 
 
-  - **Robert Miranda, Information Systems Analyst**: Robert helps users establish access to InfoNet’s VPN and troubleshoots connectivity issues. 
+  - **Robert Miranda, Information Systems Analyst**: Robert helps users
+  establish access to InfoNet’s VPN and troubleshoots connectivity issues. 
 
 
   </div>
@@ -213,7 +236,8 @@ markdown: >2-
 
   - [View list of user agencies online](/agencies)&nbsp;&raquo;
 
-  - [Download list of user agencies (Word)](https://infonet.icjia-api.cloud/uploads/Infonet_ABOUT_User_Agencies_2_4_0a645f865b.docx)
+  - [Download list of user agencies
+  (Word)](https://infonet.icjia-api.cloud/uploads/Infonet_ABOUT_User_Agencies_2_4_0a645f865b.docx)
 
 
   </div>
@@ -225,16 +249,35 @@ markdown: >2-
   <div class="indent">
 
 
-  **Illinois InfoNet: Gathering Statewide Victim Services Data** provides an overview of InfoNet and lessons learned in its development. The system is supported by the Illinois Criminal Justice Information Authority (ICJIA), while system use and requirements are collaboratively governed by ICJIA, the Illinois Department of Human Services, Illinois Coalition Against Domestic Violence, Illinois Coalition Against Sexual Assault, and Children’s Advocacy Centers of Illinois. Local service providers enter victim intake data, each service provided, and victim interactions with legal and health care systems. InfoNet is used to satisfy various funder requirements, including VOCA, VAWA STOP and SASP, and FVPSA. InfoNet is also used to better understand victimization and victim needs in Illinois, informing strategic planning at state and local levels.
+  **Illinois InfoNet: Gathering Statewide Victim Services Data** provides an
+  overview of InfoNet and lessons learned in its development. The system is
+  supported by the Illinois Criminal Justice Information Authority (ICJIA),
+  while system use and requirements are collaboratively governed by ICJIA, the
+  Illinois Department of Human Services, Illinois Coalition Against Domestic
+  Violence, Illinois Coalition Against Sexual Assault, and Children’s Advocacy
+  Centers of Illinois. Local service providers enter victim intake data, each
+  service provided, and victim interactions with legal and health care systems.
+  InfoNet is used to satisfy various funder requirements, including VOCA, VAWA
+  STOP and SASP, and FVPSA. InfoNet is also used to better understand
+  victimization and victim needs in Illinois, informing strategic planning at
+  state and local levels.
 
 
-  ICJIA recently completed the InfoNet 2.0 Project, an effort to completely rebuild the application on a new technology platform. With InfoNet 2.0 now poised for sustainability and growth, ICJIA’s next venture is the InfoNet Stepping Forward Project, which aims to build new automated reporting tools (including for PMT); incorporate more meaningful outcome measures; and create a new user interface for prosecution and law enforcement based victim service providers. 
+  ICJIA recently completed the InfoNet 2.0 Project, an effort to completely
+  rebuild the application on a new technology platform. With InfoNet 2.0 now
+  poised for sustainability and growth, ICJIA’s next venture is the InfoNet
+  Stepping Forward Project, which aims to build new automated reporting tools
+  (including for PMT); incorporate more meaningful outcome measures; and create
+  a new user interface for prosecution and law enforcement based victim service
+  providers. 
 
 
   <div class="text-center mt-8 mb-8">
 
 
-  <iframe loading="lazy" class="video" src="https://www.youtube.com/embed/rZ73MJVD_YU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;"></iframe>
+  <iframe loading="lazy" class="video"
+  src="https://www.youtube.com/embed/rZ73MJVD_YU" frameborder="0"
+  allow="accelerometer; autoplay; encrypted-media; gyroscope;"></iframe>
 
 
   </div>

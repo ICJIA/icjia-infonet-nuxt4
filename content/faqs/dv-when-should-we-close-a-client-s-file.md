@@ -4,7 +4,8 @@ answer: >
   Agency policy should dictate when a client file should be closed.
 
 
-  Generally, we recommend closing a file whenever the client has not been in contact for over one year.
+  Generally, we recommend closing a file whenever the client has not been in
+  contact for over one year.
 ranking: 1000
 slug: when-should-we-close-a-client-s-file
 category: default
@@ -26,7 +27,8 @@ markdown: >
   Agency policy should dictate when a client file should be closed.
 
 
-  Generally, we recommend closing a file whenever the client has not been in contact for over one year.
+  Generally, we recommend closing a file whenever the client has not been in
+  contact for over one year.
 searchMeta: "faq  "
 ---
 

@@ -7,7 +7,8 @@ answer: >-
   expire during the time period you specified. 
 
 
-  Note that future dates are acceptable for this report, and this can be an excellent tool for following up with clients who have an OP expiring soon.
+  Note that future dates are acceptable for this report, and this can be an
+  excellent tool for following up with clients who have an OP expiring soon.
 ranking: 1000
 slug: is-there-a-way-to-generate-a-report-of-orders-of-protection-by-their-expiration-dates
 category: default
@@ -35,7 +36,8 @@ markdown: >-
   expire during the time period you specified. 
 
 
-  Note that future dates are acceptable for this report, and this can be an excellent tool for following up with clients who have an OP expiring soon.
+  Note that future dates are acceptable for this report, and this can be an
+  excellent tool for following up with clients who have an OP expiring soon.
 searchMeta: "faq  "
 ---
 

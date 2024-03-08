@@ -6,7 +6,9 @@ answer: >-
   on the **Services > Direct Client Services > No Show/Cancellation** tab. 
 
 
-  Do not document hours of service for the time you waited for the client if a service is not provided (i.e. client doesn’t show up at court). Simply enter a No Show record and make a note in the client’s paper file. 
+  Do not document hours of service for the time you waited for the client if a
+  service is not provided (i.e. client doesn’t show up at court). Simply enter a
+  No Show record and make a note in the client’s paper file. 
 ranking: 1000
 slug: is-time-spent-entering-client-data-and-service-data-into-info-net-considered-a-direct-client-service
 category: default
@@ -33,7 +35,9 @@ markdown: >-
   on the **Services > Direct Client Services > No Show/Cancellation** tab. 
 
 
-  Do not document hours of service for the time you waited for the client if a service is not provided (i.e. client doesn’t show up at court). Simply enter a No Show record and make a note in the client’s paper file. 
+  Do not document hours of service for the time you waited for the client if a
+  service is not provided (i.e. client doesn’t show up at court). Simply enter a
+  No Show record and make a note in the client’s paper file. 
 searchMeta: "faq  "
 ---
 

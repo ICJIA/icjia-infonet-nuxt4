@@ -36,11 +36,21 @@ markdown: >
   bondage, or slavery; attempts are included.”
 
 
-  Additionally, InfoNet data show 767 trafficking victims received services from an Illinois domestic violence or sexual assault agency between July 2019 and December 2022. Of those clients, a small percentage (5.9%) were minors under age 18. Regarding race/ethnicity, the highest percentage of clients identified as White (43.2%), followed by Black/African American (26.1%), and Hispanic/Latino (13.8%). Also, nearly a third of clients (31.9%) resided in Central Illinois, followed by Northern Illinois (30.1%), and the Collar Counties (24.3%).
+  Additionally, InfoNet data show 767 trafficking victims received services from
+  an Illinois domestic violence or sexual assault agency between July 2019 and
+  December 2022. Of those clients, a small percentage (5.9%) were minors under
+  age 18. Regarding race/ethnicity, the highest percentage of clients identified
+  as White (43.2%), followed by Black/African American (26.1%), and
+  Hispanic/Latino (13.8%). Also, nearly a third of clients (31.9%) resided in
+  Central Illinois, followed by Northern Illinois (30.1%), and the Collar
+  Counties (24.3%).
 
 
 
-  For state fiscal year 2023 (July 2022 – June 2023), Illinois domestic violence and sexual assault agencies using InfoNet served 321 human trafficking victims. This number reflects a 31% increase in human trafficking victims served compared to the previous year.
+  For state fiscal year 2023 (July 2022 – June 2023), Illinois domestic violence
+  and sexual assault agencies using InfoNet served 321 human trafficking
+  victims. This number reflects a 31% increase in human trafficking victims
+  served compared to the previous year.
 rawText: "january is national human trafficking prevention month https www state
   gov national human trafficking prevention month continued efforts are made by
   illinois law enforcement agencies and service providers to identify human

@@ -12,10 +12,17 @@ answer: >
   session to five (5) clients:
 
 
-  - In the **Direct Client Service** section of the report, you will see five (5) Adult Group Counseling hours, because five (5) clients received an hour of service. Five (5) clients x one (1) hour = five (5) client service hours.
+  - In the **Direct Client Service** section of the report, you will see five
+  (5) Adult Group Counseling hours, because five (5) clients received an hour of
+  service. Five (5) clients x one (1) hour = five (5) client service hours.
 
 
-  - In the **Community, Institutional and Group Services** section, you will see one (1) Presentation Hour because this represents the session length no matter how many clients attended or how many staff facilitated the session. You will also see two (2) Staff Conduct Hours because even though the group service lasted just one (1) hour, two (2) staff persons provided service for that full hour.
+  - In the **Community, Institutional and Group Services** section, you will see
+  one (1) Presentation Hour because this represents the session length no matter
+  how many clients attended or how many staff facilitated the session. You will
+  also see two (2) Staff Conduct Hours because even though the group service
+  lasted just one (1) hour, two (2) staff persons provided service for that full
+  hour.
 ranking: 1000
 slug: group-service-data-are-displayed-on-two-sections-of-the-standard-services-report
 category: default
@@ -58,10 +65,17 @@ markdown: >
   session to five (5) clients:
 
 
-  - In the **Direct Client Service** section of the report, you will see five (5) Adult Group Counseling hours, because five (5) clients received an hour of service. Five (5) clients x one (1) hour = five (5) client service hours.
+  - In the **Direct Client Service** section of the report, you will see five
+  (5) Adult Group Counseling hours, because five (5) clients received an hour of
+  service. Five (5) clients x one (1) hour = five (5) client service hours.
 
 
-  - In the **Community, Institutional and Group Services** section, you will see one (1) Presentation Hour because this represents the session length no matter how many clients attended or how many staff facilitated the session. You will also see two (2) Staff Conduct Hours because even though the group service lasted just one (1) hour, two (2) staff persons provided service for that full hour.
+  - In the **Community, Institutional and Group Services** section, you will see
+  one (1) Presentation Hour because this represents the session length no matter
+  how many clients attended or how many staff facilitated the session. You will
+  also see two (2) Staff Conduct Hours because even though the group service
+  lasted just one (1) hour, two (2) staff persons provided service for that full
+  hour.
 searchMeta: "faq  "
 ---
 

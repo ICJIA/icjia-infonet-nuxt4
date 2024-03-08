@@ -10,7 +10,12 @@ answer: >
   cared for in that group setting.
 
 
-  Note that when saving this record, a warning message will likely appear stating that the number of Attendees (adult Client ID numbers added to group) does not match the number of Participants (number of children cared for). This is okay; just disregard the message as this is a unique type of group service. The message is just a warning to ensure you do not mistakenly leave out attendees and will not prevent you from saving the record as entered.
+  Note that when saving this record, a warning message will likely appear
+  stating that the number of Attendees (adult Client ID numbers added to group)
+  does not match the number of Participants (number of children cared for). This
+  is okay; just disregard the message as this is a unique type of group service.
+  The message is just a warning to ensure you do not mistakenly leave out
+  attendees and will not prevent you from saving the record as entered.
 ranking: 1000
 slug: how-do-i-enter-a-child-care-session-when-i-am-caring-for-children-from-more-than-one-family
 category: default
@@ -48,7 +53,12 @@ markdown: >
   cared for in that group setting.
 
 
-  Note that when saving this record, a warning message will likely appear stating that the number of Attendees (adult Client ID numbers added to group) does not match the number of Participants (number of children cared for). This is okay; just disregard the message as this is a unique type of group service. The message is just a warning to ensure you do not mistakenly leave out attendees and will not prevent you from saving the record as entered.
+  Note that when saving this record, a warning message will likely appear
+  stating that the number of Attendees (adult Client ID numbers added to group)
+  does not match the number of Participants (number of children cared for). This
+  is okay; just disregard the message as this is a unique type of group service.
+  The message is just a warning to ensure you do not mistakenly leave out
+  attendees and will not prevent you from saving the record as entered.
 searchMeta: "faq  "
 ---
 

@@ -5,7 +5,8 @@ answer: >-
   **Absolutely not!**
 
 
-  No client identifiers (such as name, initials, birth date, social security number, etc.) should be part of her ID number.  
+  No client identifiers (such as name, initials, birth date, social security
+  number, etc.) should be part of her ID number.  
 ranking: 1000
 slug: can-id-numbers-contain-client-identifiers-such-as-client-s-initials-name-date-of-birth-or-part-of-her-social-security-number
 category: default
@@ -28,7 +29,8 @@ markdown: >-
   **Absolutely not!**
 
 
-  No client identifiers (such as name, initials, birth date, social security number, etc.) should be part of her ID number.  
+  No client identifiers (such as name, initials, birth date, social security
+  number, etc.) should be part of her ID number.  
 searchMeta: "faq  "
 ---
 

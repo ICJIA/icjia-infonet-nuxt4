@@ -7,7 +7,10 @@ answer: >-
   others, respectively. 
 
 
-  For any victim’s child, before the S at the end of the significant other ID, you must also enter the letter that corresponds to the child's age order (i.e. as would be for the oldest Child, bS would be for the next-oldest child, cS would be for the next-oldest, etc.).
+  For any victim’s child, before the S at the end of the significant other ID,
+  you must also enter the letter that corresponds to the child's age order (i.e.
+  as would be for the oldest Child, bS would be for the next-oldest child, cS
+  would be for the next-oldest, etc.).
 ranking: 1000
 slug: what-id-numbering-system-should-i-use-for-clients
 category: default
@@ -36,7 +39,10 @@ markdown: >-
   others, respectively. 
 
 
-  For any victim’s child, before the S at the end of the significant other ID, you must also enter the letter that corresponds to the child's age order (i.e. as would be for the oldest Child, bS would be for the next-oldest child, cS would be for the next-oldest, etc.).
+  For any victim’s child, before the S at the end of the significant other ID,
+  you must also enter the letter that corresponds to the child's age order (i.e.
+  as would be for the oldest Child, bS would be for the next-oldest child, cS
+  would be for the next-oldest, etc.).
 searchMeta: "faq  "
 ---
 
