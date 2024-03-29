@@ -26,7 +26,7 @@ title: Do I need to enter a new funding statement at the beginning of each
 summary: Do I need to enter a new funding statement at the beginning of each
   fiscal year?
 path: /faqs/sa-do-i-need-to-enter-a-new-funding-statement-at-the-beginning-of-each-fiscal-year
-url: https://infonet.icjia.illinois.gov/faqs/sa-do-i-need-to-enter-a-new-funding-statement-at-the-beginning-of-each-fiscal-year
+url: https://infonet.icjia.dev/faqs/sa-do-i-need-to-enter-a-new-funding-statement-at-the-beginning-of-each-fiscal-year
 markdown: Yes. Enter a new funding statement every July 1 to reflect the new
   fiscal year funding information. It may not be necessary to update the
   information in the statement if it remains the same as in the previous fiscal

@@ -34,7 +34,7 @@ title: Can the Other Staff Activities dv section be used to document time spent
 summary: Can the Other Staff Activities dv section be used to document time
   spent on individual fundraising events?
 path: /faqs/dv-can-the-other-staff-activities-section-be-used-to-document-time-spent-on-individual-fundraising-events-1
-url: https://infonet.icjia.illinois.gov/faqs/dv-can-the-other-staff-activities-section-be-used-to-document-time-spent-on-individual-fundraising-events-1
+url: https://infonet.icjia.dev/faqs/dv-can-the-other-staff-activities-section-be-used-to-document-time-spent-on-individual-fundraising-events-1
 markdown: >+
   Yes, but remember that as information you want to track becomes more specific
   and detailed, the more data entry is required. Before adding a very specific

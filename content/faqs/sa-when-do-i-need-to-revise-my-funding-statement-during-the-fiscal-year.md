@@ -26,7 +26,7 @@ draft: false
 title: When do I need to revise my funding statement during the fiscal year?
 summary: When do I need to revise my funding statement during the fiscal year?
 path: /faqs/sa-when-do-i-need-to-revise-my-funding-statement-during-the-fiscal-year
-url: https://infonet.icjia.illinois.gov/faqs/sa-when-do-i-need-to-revise-my-funding-statement-during-the-fiscal-year
+url: https://infonet.icjia.dev/faqs/sa-when-do-i-need-to-revise-my-funding-statement-during-the-fiscal-year
 markdown: "You should add a new statement and make appropriate revisions any
   time you have turnover in staff positions, when there is a shift in how staff
   are funded, or when there is a shift in staff’ responsibilities. It is

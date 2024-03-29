@@ -21,7 +21,7 @@ draft: false
 title: How can I obtain our duplicate client count or caseload for a specific period?
 summary: How can I obtain our duplicate client count or caseload for a specific period?
 path: /faqs/sa-how-can-i-obtain-our-duplicate-client-count-or-caseload-for-a-specific-period
-url: https://infonet.icjia.illinois.gov/faqs/sa-how-can-i-obtain-our-duplicate-client-count-or-caseload-for-a-specific-period
+url: https://infonet.icjia.dev/faqs/sa-how-can-i-obtain-our-duplicate-client-count-or-caseload-for-a-specific-period
 markdown: Since InfoNet reports do not duplicate client counts, to obtain the
   duplicate client count for a specific period, run one report for each month in
   that period and add the number of new and ongoing clients in each month. These

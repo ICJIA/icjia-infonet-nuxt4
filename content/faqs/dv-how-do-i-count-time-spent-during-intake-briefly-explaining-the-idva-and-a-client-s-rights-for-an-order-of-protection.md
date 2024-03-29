@@ -22,7 +22,7 @@ title: How do I count time spent during intake briefly explaining the IDVA and a
 summary: How do I count time spent during intake briefly explaining the IDVA and
   a client’s rights for an order of protection?
 path: /faqs/dv-how-do-i-count-time-spent-during-intake-briefly-explaining-the-idva-and-a-client-s-rights-for-an-order-of-protection
-url: https://infonet.icjia.illinois.gov/faqs/dv-how-do-i-count-time-spent-during-intake-briefly-explaining-the-idva-and-a-client-s-rights-for-an-order-of-protection
+url: https://infonet.icjia.dev/faqs/dv-how-do-i-count-time-spent-during-intake-briefly-explaining-the-idva-and-a-client-s-rights-for-an-order-of-protection
 markdown: IDVA advocacy (Civil or Criminal Legal Advocacy/OP) likely will be
   recorded for every intake. This time should be counted as Civil Legal
   Advocacy/OP (or Criminal Legal Advocacy/Obtain OP if appropriate).

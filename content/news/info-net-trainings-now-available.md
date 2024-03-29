@@ -73,7 +73,7 @@ rawText: icjia recently posted four new training videos for infonet users using
 draft: false
 navigation: true
 path: /news/info-net-trainings-now-available
-url: https://infonet.icjia.illinois.gov/news/info-net-trainings-now-available
+url: https://infonet.icjia.dev/news/info-net-trainings-now-available
 ---
 
 ICJIA recently posted four new training videos for InfoNet users:

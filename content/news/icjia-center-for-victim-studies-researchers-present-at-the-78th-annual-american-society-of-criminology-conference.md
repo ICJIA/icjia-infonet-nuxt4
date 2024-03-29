@@ -70,7 +70,7 @@ rawText: "infonet research scientist lucia fernanda gonzalez and fellow center
 draft: false
 navigation: true
 path: /news/icjia-center-for-victim-studies-researchers-present-at-the-78th-annual-american-society-of-criminology-conference
-url: https://infonet.icjia.illinois.gov/news/icjia-center-for-victim-studies-researchers-present-at-the-78th-annual-american-society-of-criminology-conference
+url: https://infonet.icjia.dev/news/icjia-center-for-victim-studies-researchers-present-at-the-78th-annual-american-society-of-criminology-conference
 ---
 
 InfoNet research scientist, Lucia Fernanda Gonzalez, and fellow Center for Victim Studies researcher, Stephanie Nguyen, presented Safe From the Start (SFS) evaluation findings at the [78th Annual American Society of Criminology conference](https://asc41.org/2023-asc-annual-meeting/) in Philadelphia, Pennsylvania, on November 16, 2023. SFS is a program that provides direct services to young children (0-5 years old) exposed to violence and to their families. 

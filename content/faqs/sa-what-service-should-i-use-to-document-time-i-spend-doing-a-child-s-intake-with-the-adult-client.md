@@ -25,7 +25,7 @@ summary: What service should I use to document time I spend doing a child’s
   intake with the adult client? What if I am completing multiple children’s
   intakes with the adult client is it Group or In-Person Counseling?
 path: /faqs/sa-what-service-should-i-use-to-document-time-i-spend-doing-a-child-s-intake-with-the-adult-client
-url: https://infonet.icjia.illinois.gov/faqs/sa-what-service-should-i-use-to-document-time-i-spend-doing-a-child-s-intake-with-the-adult-client
+url: https://infonet.icjia.dev/faqs/sa-what-service-should-i-use-to-document-time-i-spend-doing-a-child-s-intake-with-the-adult-client
 markdown: What service should I use to document time I spend doing a child’s
   intake with the adult client? What if I am completing multiple children’s
   intakes with the adult client is it Group or In-Person Counseling?

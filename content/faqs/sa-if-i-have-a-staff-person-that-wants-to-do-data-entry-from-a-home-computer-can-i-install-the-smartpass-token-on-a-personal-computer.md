@@ -18,7 +18,7 @@ title: If I have a staff person that wants to do data entry from a home
 summary: If I have a staff person that wants to do data entry from a home
   computer, can I install the Smartpass token on a personal computer?
 path: /faqs/sa-if-i-have-a-staff-person-that-wants-to-do-data-entry-from-a-home-computer-can-i-install-the-smartpass-token-on-a-personal-computer
-url: https://infonet.icjia.illinois.gov/faqs/sa-if-i-have-a-staff-person-that-wants-to-do-data-entry-from-a-home-computer-can-i-install-the-smartpass-token-on-a-personal-computer
+url: https://infonet.icjia.dev/faqs/sa-if-i-have-a-staff-person-that-wants-to-do-data-entry-from-a-home-computer-can-i-install-the-smartpass-token-on-a-personal-computer
 markdown: No, InfoNet should not be installed off-site.
 searchMeta: "faq  "
 ---

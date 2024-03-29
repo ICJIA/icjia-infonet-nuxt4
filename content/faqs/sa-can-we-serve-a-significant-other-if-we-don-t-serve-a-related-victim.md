@@ -15,7 +15,7 @@ draft: false
 title: Can we serve a significant other if we don’t serve a related victim?
 summary: Can we serve a significant other if we don’t serve a related victim?
 path: /faqs/sa-can-we-serve-a-significant-other-if-we-don-t-serve-a-related-victim
-url: https://infonet.icjia.illinois.gov/faqs/sa-can-we-serve-a-significant-other-if-we-don-t-serve-a-related-victim
+url: https://infonet.icjia.dev/faqs/sa-can-we-serve-a-significant-other-if-we-don-t-serve-a-related-victim
 markdown: Yes.
 searchMeta: "faq  "
 ---

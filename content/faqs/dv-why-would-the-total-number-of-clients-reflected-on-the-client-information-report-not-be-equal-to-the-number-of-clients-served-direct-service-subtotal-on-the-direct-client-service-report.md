@@ -66,7 +66,7 @@ summary: Why would the total number of clients reflected on the Client
   Information Report not be equal to the number of clients served (direct
   service subtotal) on the Direct Client Service Report?
 path: /faqs/dv-why-would-the-total-number-of-clients-reflected-on-the-client-information-report-not-be-equal-to-the-number-of-clients-served-direct-service-subtotal-on-the-direct-client-service-report
-url: https://infonet.icjia.illinois.gov/faqs/dv-why-would-the-total-number-of-clients-reflected-on-the-client-information-report-not-be-equal-to-the-number-of-clients-served-direct-service-subtotal-on-the-direct-client-service-report
+url: https://infonet.icjia.dev/faqs/dv-why-would-the-total-number-of-clients-reflected-on-the-client-information-report-not-be-equal-to-the-number-of-clients-served-direct-service-subtotal-on-the-direct-client-service-report
 markdown: >
   A It is possible that a client that has an On- or Off-Site Shelter or
   Transitional Housing service for the period, but no documented direct

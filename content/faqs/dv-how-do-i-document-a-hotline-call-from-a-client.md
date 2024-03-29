@@ -22,7 +22,7 @@ draft: false
 title: How do I document a hotline call from a client?
 summary: How do I document a hotline call from a client?
 path: /faqs/dv-how-do-i-document-a-hotline-call-from-a-client
-url: https://infonet.icjia.illinois.gov/faqs/dv-how-do-i-document-a-hotline-call-from-a-client
+url: https://infonet.icjia.dev/faqs/dv-how-do-i-document-a-hotline-call-from-a-client
 markdown: If an existing client calls the hotline, document it as one call, with
   Call Type = Hotline - has client ID. If 15 minutes or is spent with that
   client, you would also document that time in that client’s Direct  Client

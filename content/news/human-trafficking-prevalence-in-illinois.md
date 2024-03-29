@@ -77,7 +77,7 @@ rawText: "january is national human trafficking prevention month https www state
 draft: false
 navigation: true
 path: /news/human-trafficking-prevalence-in-illinois
-url: https://infonet.icjia.illinois.gov/news/human-trafficking-prevalence-in-illinois
+url: https://infonet.icjia.dev/news/human-trafficking-prevalence-in-illinois
 ---
 
 January is [National Human Trafficking Prevention Month](https://www.state.gov/national-human-trafficking-prevention-month). Continued efforts are made by Illinois law enforcement agencies and service providers to identify human trafficking victims across the state. According to the National Incident-Based Reporting System, 30 sex trafficking offenses and 17 labor trafficking offenses were reported to Illinois law enforcement agencies between January 1, 2021, and June 30, 2023. The Illinois State Police defines human sex trafficking as “inducing a person by force, fraud, or coercion to participate in commercial sex acts, or in which the person is induced to perform such acts has not attained 18 years of age; attempts are included,” and labor trafficking as “the obtaining of a person(s) through recruitment, harboring, transportation, or provision, and subjecting persons by force, fraud, or coercion into involuntary servitude, peonage, debt bondage, or slavery; attempts are included.”

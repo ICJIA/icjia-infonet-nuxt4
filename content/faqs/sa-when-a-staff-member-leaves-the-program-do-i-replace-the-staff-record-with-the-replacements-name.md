@@ -33,7 +33,7 @@ title: When a staff member leaves the program, do I replace the staff record
 summary: When a staff member leaves the program, do I replace the staff record
   with the replacements name?
 path: /faqs/sa-when-a-staff-member-leaves-the-program-do-i-replace-the-staff-record-with-the-replacements-name
-url: https://infonet.icjia.illinois.gov/faqs/sa-when-a-staff-member-leaves-the-program-do-i-replace-the-staff-record-with-the-replacements-name
+url: https://infonet.icjia.dev/faqs/sa-when-a-staff-member-leaves-the-program-do-i-replace-the-staff-record-with-the-replacements-name
 markdown: No. Instead, locate the resigning staff member’s or volunteer’s record
   in the Administration >Staff section of the database and enter a termination
   date. When adding a new staff member, always click the Add button and start

@@ -20,7 +20,7 @@ title: How do I obtain the number of shelter days provided for clients from a
 summary: How do I obtain the number of shelter days provided for clients from a
   specific county?
 path: /faqs/dv-how-do-i-obtain-the-number-of-shelter-days-provided-for-clients-from-a-specific-county
-url: https://infonet.icjia.illinois.gov/faqs/dv-how-do-i-obtain-the-number-of-shelter-days-provided-for-clients-from-a-specific-county
+url: https://infonet.icjia.dev/faqs/dv-how-do-i-obtain-the-number-of-shelter-days-provided-for-clients-from-a-specific-county
 markdown: "**Standard Reports > Services/Programs > Direct Client Services >
   filtered by County**."
 searchMeta: "faq  "

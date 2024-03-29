@@ -32,7 +32,7 @@ draft: false
 title: May I enter the services provided by contractual consultants/providers?
 summary: May I enter the services provided by contractual consultants/providers?
 path: /faqs/dv-may-i-enter-the-services-provided-by-contractual-consultants-providers
-url: https://infonet.icjia.illinois.gov/faqs/dv-may-i-enter-the-services-provided-by-contractual-consultants-providers
+url: https://infonet.icjia.dev/faqs/dv-may-i-enter-the-services-provided-by-contractual-consultants-providers
 markdown: >
   Yes. 
 

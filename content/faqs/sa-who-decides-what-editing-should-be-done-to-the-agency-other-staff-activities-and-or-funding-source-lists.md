@@ -29,7 +29,7 @@ title: Who decides what editing should be done to the Agency, Other Staff
 summary: Who decides what editing should be done to the Agency, Other Staff
   Activities, and/or Funding Source lists?
 path: /faqs/sa-who-decides-what-editing-should-be-done-to-the-agency-other-staff-activities-and-or-funding-source-lists
-url: https://infonet.icjia.illinois.gov/faqs/sa-who-decides-what-editing-should-be-done-to-the-agency-other-staff-activities-and-or-funding-source-lists
+url: https://infonet.icjia.dev/faqs/sa-who-decides-what-editing-should-be-done-to-the-agency-other-staff-activities-and-or-funding-source-lists
 markdown: When ICASA secures new funding sources or grants for agency services,
   the sources are added to Infonet by administrators. Otherwise,
   individual  agencies decides what their local needs are. However, you should

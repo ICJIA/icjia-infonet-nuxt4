@@ -21,7 +21,7 @@ draft: false
 title: What is the difference between on- and off-site shelters?
 summary: What is the difference between on- and off-site shelters?
 path: /faqs/dv-what-is-the-difference-between-on-and-off-site-shelters
-url: https://infonet.icjia.illinois.gov/faqs/dv-what-is-the-difference-between-on-and-off-site-shelters
+url: https://infonet.icjia.dev/faqs/dv-what-is-the-difference-between-on-and-off-site-shelters
 markdown: On-Site Shelter is provided on-site at the residential domestic
   violence program. Off-site shelter is emergency shelter provided to clients by
   the domestic violence programs, but at an off-site location such at a safe

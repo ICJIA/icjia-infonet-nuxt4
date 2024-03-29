@@ -119,7 +119,7 @@ markdown: >-
   -->
 navigation: true
 path: /partners
-url: https://infonet.icjia.illinois.gov/partners
+url: https://infonet.icjia.dev/partners
 ---
 
 <style>

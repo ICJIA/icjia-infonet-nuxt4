@@ -34,7 +34,7 @@ summary: If I provide a group that covers multiple planned topics during the
   combined in one group session or entered in multiple sessions showing each
   type of service individually?
 path: /faqs/dv-if-i-provide-a-group-that-covers-multiple-planned-topics-during-the-same-session
-url: https://infonet.icjia.illinois.gov/faqs/dv-if-i-provide-a-group-that-covers-multiple-planned-topics-during-the-same-session
+url: https://infonet.icjia.dev/faqs/dv-if-i-provide-a-group-that-covers-multiple-planned-topics-during-the-same-session
 markdown: "Complete 1 group log sheet for the session indicating the amount of
   time spent on each topic. For example, if the session was 2 hours long and 1
   hour of it was Adult Group Counseling, ½ hour was spent on Life Skills, and ½

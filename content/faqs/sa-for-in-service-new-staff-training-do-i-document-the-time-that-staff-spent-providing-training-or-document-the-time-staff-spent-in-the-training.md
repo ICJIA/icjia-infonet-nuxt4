@@ -26,7 +26,7 @@ title: For in-service/new staff training, do I document the time that staff
 summary: For in-service/new staff training, do I document the time that staff
   spent providing training or document the time staff spent in the training?
 path: /faqs/sa-for-in-service-new-staff-training-do-i-document-the-time-that-staff-spent-providing-training-or-document-the-time-staff-spent-in-the-training
-url: https://infonet.icjia.illinois.gov/faqs/sa-for-in-service-new-staff-training-do-i-document-the-time-that-staff-spent-providing-training-or-document-the-time-staff-spent-in-the-training
+url: https://infonet.icjia.dev/faqs/sa-for-in-service-new-staff-training-do-i-document-the-time-that-staff-spent-providing-training-or-document-the-time-staff-spent-in-the-training
 markdown: >
   :You should document the amount of time your staff spent providing the
   training. 

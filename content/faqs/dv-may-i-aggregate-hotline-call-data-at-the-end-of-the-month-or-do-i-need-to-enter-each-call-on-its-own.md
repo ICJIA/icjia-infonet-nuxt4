@@ -34,7 +34,7 @@ title: May I aggregate hotline call data at the end of the month or do I need to
 summary: May I aggregate hotline call data at the end of the month or do I need
   to enter each call on its own?
 path: /faqs/dv-may-i-aggregate-hotline-call-data-at-the-end-of-the-month-or-do-i-need-to-enter-each-call-on-its-own
-url: https://infonet.icjia.illinois.gov/faqs/dv-may-i-aggregate-hotline-call-data-at-the-end-of-the-month-or-do-i-need-to-enter-each-call-on-its-own
+url: https://infonet.icjia.dev/faqs/dv-may-i-aggregate-hotline-call-data-at-the-end-of-the-month-or-do-i-need-to-enter-each-call-on-its-own
 markdown: >
   If the staff person answering the hotline calls is supported by VOCA and/or
   VAWA funds, you must enter that person’s aggregate data separately from other

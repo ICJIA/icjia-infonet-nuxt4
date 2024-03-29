@@ -20,7 +20,7 @@ title: I have staff that only needs to run reports and does not need access to
 summary: I have staff that only needs to run reports and does not need access to
   revise or enter new data. Is limited accessibility allowed by InfoNet?
 path: /faqs/sa-i-have-staff-that-only-needs-to-run-reports-and-does-not-need-access-to-revise-or-enter-new-data-is-limited-accessibility-allowed-by-info-net
-url: https://infonet.icjia.illinois.gov/faqs/sa-i-have-staff-that-only-needs-to-run-reports-and-does-not-need-access-to-revise-or-enter-new-data-is-limited-accessibility-allowed-by-info-net
+url: https://infonet.icjia.dev/faqs/sa-i-have-staff-that-only-needs-to-run-reports-and-does-not-need-access-to-revise-or-enter-new-data-is-limited-accessibility-allowed-by-info-net
 markdown: Yes. Contact Jennifer Hiselman to make those arrangements at (312)
   793-8689 or jennifer.hiselman@illinois.gov.
 searchMeta: "faq  "

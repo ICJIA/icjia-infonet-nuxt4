@@ -17,7 +17,7 @@ draft: false
 title: What choice for education do I use for a client who received her GED?
 summary: What choice for education do I use for a client who received her GED?
 path: /faqs/dv-what-choice-for-education-do-i-use-for-a-client-who-received-her-ged
-url: https://infonet.icjia.illinois.gov/faqs/dv-what-choice-for-education-do-i-use-for-a-client-who-received-her-ged
+url: https://infonet.icjia.dev/faqs/dv-what-choice-for-education-do-i-use-for-a-client-who-received-her-ged
 markdown: |+
   Enter High School Graduate.
 

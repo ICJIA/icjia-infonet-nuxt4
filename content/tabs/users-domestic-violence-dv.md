@@ -15,7 +15,7 @@ page:
 images:
   data: []
 path: /tabs/users-domestic-violence-dv
-url: https://infonet.icjia.illinois.gov/tabs/users-domestic-violence-dv
+url: https://infonet.icjia.dev/tabs/users-domestic-violence-dv
 markdown: >+
   
   ### Domestic Violence (DV) User Manuals

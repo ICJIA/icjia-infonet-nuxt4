@@ -22,7 +22,7 @@ title: When I do a search for ID numbers to enter a group session, why do some
 summary: When I do a search for ID numbers to enter a group session, why do some
   ID numbers appear multiple times with numbers after them?
 path: /faqs/dv-when-i-do-a-search-for-id-numbers-to-enter-a-group-session-why-do-some-id-numbers-appear-multiple-times-with-numbers-after-them
-url: https://infonet.icjia.illinois.gov/faqs/dv-when-i-do-a-search-for-id-numbers-to-enter-a-group-session-why-do-some-id-numbers-appear-multiple-times-with-numbers-after-them
+url: https://infonet.icjia.dev/faqs/dv-when-i-do-a-search-for-id-numbers-to-enter-a-group-session-why-do-some-id-numbers-appear-multiple-times-with-numbers-after-them
 markdown: These are clients with multiple cases. The number after the ID
   indicates the case number for that client. Add the most recent case or the ID
   with the highest case number to the group.

@@ -54,7 +54,7 @@ rawText: "icjia provided the network https the network org with aggregate
 draft: false
 navigation: true
 path: /news/info-net-data-helps-support-the-network-s-recently-published-report
-url: https://infonet.icjia.illinois.gov/news/info-net-data-helps-support-the-network-s-recently-published-report
+url: https://infonet.icjia.dev/news/info-net-data-helps-support-the-network-s-recently-published-report
 ---
 
 ICJIA provided [The Network](https://the-network.org/) with aggregate statewide InfoNet data for their report on gender-based violence. The report summarizes recent trends in services and needs of gender-based violence survivors across Illinois. Recommendations were made to promote investment in programs, policies, and systems change to prevent further violence and increase survivors’ safety.

@@ -16,7 +16,7 @@ draft: false
 markdown: Coming Soon!
 navigation: true
 path: /upgrades
-url: https://infonet.icjia.illinois.gov/upgrades
+url: https://infonet.icjia.dev/upgrades
 ---
 
 Coming Soon!

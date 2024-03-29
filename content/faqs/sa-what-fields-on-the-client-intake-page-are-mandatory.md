@@ -25,7 +25,7 @@ draft: false
 title: What fields on the client intake page are mandatory?
 summary: What fields on the client intake page are mandatory?
 path: /faqs/sa-what-fields-on-the-client-intake-page-are-mandatory
-url: https://infonet.icjia.illinois.gov/faqs/sa-what-fields-on-the-client-intake-page-are-mandatory
+url: https://infonet.icjia.dev/faqs/sa-what-fields-on-the-client-intake-page-are-mandatory
 markdown: Only Client ID, Age, Race, Sex and First Contact Date are mandatory.
   Collection of additional information varies by agency. Check with your agency
   director to ensure consistent collection and recording of data for your

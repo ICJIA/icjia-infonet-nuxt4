@@ -31,7 +31,7 @@ summary: After I enter group session information and staff hours spent on
   providing the group session to clients, how do I enter client ID numbers of
   those who attended the group?
 path: /faqs/sa-after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients
-url: https://infonet.icjia.illinois.gov/faqs/sa-after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients
+url: https://infonet.icjia.dev/faqs/sa-after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients
 markdown: Once you save the record, a message will appear asking you if you want
   to add attendees. Click OK and the Attendees tab will open. If you have
   entered and saved the group session information and then left that section of

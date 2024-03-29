@@ -55,7 +55,7 @@ summary: Group service data are displayed on two sections of the Standard
   Institutional and Group Services section. Should these two sections reflect
   identical numbers of service hours?
 path: /faqs/dv-group-service-data-are-displayed-on-two-sections-of-the-standard-services-report
-url: https://infonet.icjia.illinois.gov/faqs/dv-group-service-data-are-displayed-on-two-sections-of-the-standard-services-report
+url: https://infonet.icjia.dev/faqs/dv-group-service-data-are-displayed-on-two-sections-of-the-standard-services-report
 markdown: >
   No, because the numbers reflect different things. Direct Client Service
   reports the total number of service hours provided to clients under each ID

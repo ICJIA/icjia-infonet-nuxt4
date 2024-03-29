@@ -22,7 +22,7 @@ draft: false
 title: When should we close a client’s file?
 summary: When should we close a client’s file?
 path: /faqs/dv-when-should-we-close-a-client-s-file
-url: https://infonet.icjia.illinois.gov/faqs/dv-when-should-we-close-a-client-s-file
+url: https://infonet.icjia.dev/faqs/dv-when-should-we-close-a-client-s-file
 markdown: >
   Agency policy should dictate when a client file should be closed.
 

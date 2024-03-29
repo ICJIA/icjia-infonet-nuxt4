@@ -30,7 +30,7 @@ title: How long does a client need to be in residence before documenting shelter
 summary: How long does a client need to be in residence before documenting
   shelter for her?
 path: /faqs/dv-how-long-does-a-client-need-to-be-in-residence-before-documenting-shelter-for-her
-url: https://infonet.icjia.illinois.gov/faqs/dv-how-long-does-a-client-need-to-be-in-residence-before-documenting-shelter-for-her
+url: https://infonet.icjia.dev/faqs/dv-how-long-does-a-client-need-to-be-in-residence-before-documenting-shelter-for-her
 markdown: >
   Providing shelter (on or off site) is providing housing in emergency
   situations. If you provide a place to stay, document this as receiving

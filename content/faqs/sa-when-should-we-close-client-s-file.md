@@ -15,7 +15,7 @@ draft: false
 title: "When should we close client’s file?  "
 summary: "When should we close client’s file?  "
 path: /faqs/sa-when-should-we-close-client-s-file
-url: https://infonet.icjia.illinois.gov/faqs/sa-when-should-we-close-client-s-file
+url: https://infonet.icjia.dev/faqs/sa-when-should-we-close-client-s-file
 markdown: "Agency policy should dictate when a client file should be closed. "
 searchMeta: "faq  "
 ---

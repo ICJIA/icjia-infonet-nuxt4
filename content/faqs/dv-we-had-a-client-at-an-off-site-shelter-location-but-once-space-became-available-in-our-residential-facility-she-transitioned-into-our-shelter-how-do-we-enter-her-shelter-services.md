@@ -25,7 +25,7 @@ summary: We had a client at an off-site shelter location, but once space became
   available in our residential facility, she transitioned into our shelter. How
   do we enter her shelter services?
 path: /faqs/dv-we-had-a-client-at-an-off-site-shelter-location-but-once-space-became-available-in-our-residential-facility-she-transitioned-into-our-shelter-how-do-we-enter-her-shelter-services
-url: https://infonet.icjia.illinois.gov/faqs/dv-we-had-a-client-at-an-off-site-shelter-location-but-once-space-became-available-in-our-residential-facility-she-transitioned-into-our-shelter-how-do-we-enter-her-shelter-services
+url: https://infonet.icjia.dev/faqs/dv-we-had-a-client-at-an-off-site-shelter-location-but-once-space-became-available-in-our-residential-facility-she-transitioned-into-our-shelter-how-do-we-enter-her-shelter-services
 markdown: Enter Begin and End Dates for the Off-Site Shelter stay. Then enter
   additional Begin and End Dates to reflect an on-site shelter stay in your
   residential facility.

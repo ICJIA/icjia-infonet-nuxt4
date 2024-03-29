@@ -37,7 +37,7 @@ title: What is the difference between the “In” and “Out” columns on the 
 summary: What is the difference between the “In” and “Out” columns on the Child
   Behavioral Issues data entry screen?
 path: /faqs/dv-what-is-the-difference-between-the-in-and-out-columns
-url: https://infonet.icjia.illinois.gov/faqs/dv-what-is-the-difference-between-the-in-and-out-columns
+url: https://infonet.icjia.dev/faqs/dv-what-is-the-difference-between-the-in-and-out-columns
 markdown: >+
   The “In” column refers to pre-intervention behavior problems identified at
   intake, during a formal assessment, or additional observations noted during

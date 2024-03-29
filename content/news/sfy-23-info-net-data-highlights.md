@@ -71,7 +71,7 @@ rawText: " in state fiscal year 2023 108 illinois domestic and sexual violence
 draft: false
 navigation: true
 path: /news/sfy-23-info-net-data-highlights
-url: https://infonet.icjia.illinois.gov/news/sfy-23-info-net-data-highlights
+url: https://infonet.icjia.dev/news/sfy-23-info-net-data-highlights
 ---
 
 

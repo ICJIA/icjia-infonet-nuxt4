@@ -28,7 +28,7 @@ title: Can I keep data on services provided by each location separately?  Will I
 summary: Can I keep data on services provided by each location separately?  Will
   I still be able to run a report on total agency statistics?
 path: /faqs/sa-can-i-keep-data-on-services-provided-by-each-location-separately-will-i-still-be-able-to-run-a-report-on-total-agency-statistics
-url: https://infonet.icjia.illinois.gov/faqs/sa-can-i-keep-data-on-services-provided-by-each-location-separately-will-i-still-be-able-to-run-a-report-on-total-agency-statistics
+url: https://infonet.icjia.dev/faqs/sa-can-i-keep-data-on-services-provided-by-each-location-separately-will-i-still-be-able-to-run-a-report-on-total-agency-statistics
 markdown: "Separate logins (user name and password) for each location are
   required to extract data for each location managed by your program. When
   entering services for each location, log in using the corresponding location’s

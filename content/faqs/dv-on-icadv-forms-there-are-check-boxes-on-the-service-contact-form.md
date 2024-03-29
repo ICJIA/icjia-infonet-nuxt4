@@ -40,7 +40,7 @@ summary: On ICADV forms, there are check boxes on the Service Contact form under
   Explained court process. Do these have anything to do with the reporting of
   activities to the InfoNet?
 path: /faqs/dv-on-icadv-forms-there-are-check-boxes-on-the-service-contact-form
-url: https://infonet.icjia.illinois.gov/faqs/dv-on-icadv-forms-there-are-check-boxes-on-the-service-contact-form
+url: https://infonet.icjia.dev/faqs/dv-on-icadv-forms-there-are-check-boxes-on-the-service-contact-form
 markdown: >
   The check boxes help save writing time for staff. These are not services
   entered into InfoNet, but common activities. There may be 3 or 4 boxes checked

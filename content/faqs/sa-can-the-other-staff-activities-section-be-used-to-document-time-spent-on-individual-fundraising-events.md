@@ -28,7 +28,7 @@ title: Can the Other Staff Activities section be used to document time spent on
 summary: Can the Other Staff Activities section be used to document time spent
   on individual fundraising events?
 path: /faqs/sa-can-the-other-staff-activities-section-be-used-to-document-time-spent-on-individual-fundraising-events
-url: https://infonet.icjia.illinois.gov/faqs/sa-can-the-other-staff-activities-section-be-used-to-document-time-spent-on-individual-fundraising-events
+url: https://infonet.icjia.dev/faqs/sa-can-the-other-staff-activities-section-be-used-to-document-time-spent-on-individual-fundraising-events
 markdown: It’s possible to break out the data by each fundraising event by using
   the List Editor, but the number of activities you may assign in the drop down
   list is limited. Therefore, you may be limiting yourself for other staff

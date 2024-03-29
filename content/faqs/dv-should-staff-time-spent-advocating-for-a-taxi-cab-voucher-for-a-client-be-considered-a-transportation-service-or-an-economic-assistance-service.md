@@ -18,7 +18,7 @@ title: Should staff time spent advocating for a taxi cab voucher for a client be
 summary: Should staff time spent advocating for a taxi cab voucher for a client
   be considered a Transportation service or an Economic Assistance service?
 path: /faqs/dv-should-staff-time-spent-advocating-for-a-taxi-cab-voucher-for-a-client-be-considered-a-transportation-service-or-an-economic-assistance-service
-url: https://infonet.icjia.illinois.gov/faqs/dv-should-staff-time-spent-advocating-for-a-taxi-cab-voucher-for-a-client-be-considered-a-transportation-service-or-an-economic-assistance-service
+url: https://infonet.icjia.dev/faqs/dv-should-staff-time-spent-advocating-for-a-taxi-cab-voucher-for-a-client-be-considered-a-transportation-service-or-an-economic-assistance-service
 markdown: Transportation.
 searchMeta: "faq  "
 ---

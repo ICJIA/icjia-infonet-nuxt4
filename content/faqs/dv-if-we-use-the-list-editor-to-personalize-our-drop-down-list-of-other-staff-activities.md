@@ -32,7 +32,7 @@ title: If we use the List Editor to personalize our drop down list of Other
 summary: If we use the List Editor to personalize our drop down list of Other
   Staff Activities, will we be able to change the list later?
 path: /faqs/dv-if-we-use-the-list-editor-to-personalize-our-drop-down-list-of-other-staff-activities
-url: https://infonet.icjia.illinois.gov/faqs/dv-if-we-use-the-list-editor-to-personalize-our-drop-down-list-of-other-staff-activities
+url: https://infonet.icjia.dev/faqs/dv-if-we-use-the-list-editor-to-personalize-our-drop-down-list-of-other-staff-activities
 markdown: You may edit existing activities, but it can become increasingly
   challenging over time. Editing to correct spelling of an activity is fine.
   However, never edit one activity to reflect a different activity. For example,

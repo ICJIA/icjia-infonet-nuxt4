@@ -15,7 +15,7 @@ draft: false
 title: How do I enter the age for a child under the age of one year?
 summary: How do I enter the age for a child under the age of one year?
 path: /faqs/sa-how-do-i-enter-the-age-for-a-child-under-the-age-of-one-year
-url: https://infonet.icjia.illinois.gov/faqs/sa-how-do-i-enter-the-age-for-a-child-under-the-age-of-one-year
+url: https://infonet.icjia.dev/faqs/sa-how-do-i-enter-the-age-for-a-child-under-the-age-of-one-year
 markdown: Enter 0 (zero) as the age.
 searchMeta: "faq  "
 ---

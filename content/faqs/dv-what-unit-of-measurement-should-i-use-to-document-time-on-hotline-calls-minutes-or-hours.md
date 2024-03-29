@@ -22,7 +22,7 @@ title: What unit of measurement should I use to document time on hotline
 summary: What unit of measurement should I use to document time on hotline
   calls—minutes or hours?
 path: /faqs/dv-what-unit-of-measurement-should-i-use-to-document-time-on-hotline-calls-minutes-or-hours
-url: https://infonet.icjia.illinois.gov/faqs/dv-what-unit-of-measurement-should-i-use-to-document-time-on-hotline-calls-minutes-or-hours
+url: https://infonet.icjia.dev/faqs/dv-what-unit-of-measurement-should-i-use-to-document-time-on-hotline-calls-minutes-or-hours
 markdown: The amount of time spent on hotline calls should be documented in
   minutes, not hours. This is the only section in InfoNet where the quarter-hour
   system is not used.

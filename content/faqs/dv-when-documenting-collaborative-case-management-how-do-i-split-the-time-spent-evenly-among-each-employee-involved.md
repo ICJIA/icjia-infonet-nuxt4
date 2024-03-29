@@ -22,7 +22,7 @@ title: When documenting Collaborative Case Management, how do I split the time
 summary: When documenting Collaborative Case Management, how do I split the time
   spent evenly among each employee involved?
 path: /faqs/dv-when-documenting-collaborative-case-management-how-do-i-split-the-time-spent-evenly-among-each-employee-involved
-url: https://infonet.icjia.illinois.gov/faqs/dv-when-documenting-collaborative-case-management-how-do-i-split-the-time-spent-evenly-among-each-employee-involved
+url: https://infonet.icjia.dev/faqs/dv-when-documenting-collaborative-case-management-how-do-i-split-the-time-spent-evenly-among-each-employee-involved
 markdown: The time should be entered only for the staff person who was the
   primary source of information in that session and completing the documentation
   for that interaction.

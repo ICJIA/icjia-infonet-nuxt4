@@ -24,7 +24,7 @@ title: If a child was a client of the program and returns as an adult victim, do
 summary: If a child was a client of the program and returns as an adult victim,
   do we assign her a new client ID number as if she were a new client?
 path: /faqs/dv-if-a-child-was-a-client-of-the-program-and-returns-as-an-adult-victim-do-we-assign-her-a-new-client-id-number-as-if-she-were-a-new-client
-url: https://infonet.icjia.illinois.gov/faqs/dv-if-a-child-was-a-client-of-the-program-and-returns-as-an-adult-victim-do-we-assign-her-a-new-client-id-number-as-if-she-were-a-new-client
+url: https://infonet.icjia.dev/faqs/dv-if-a-child-was-a-client-of-the-program-and-returns-as-an-adult-victim-do-we-assign-her-a-new-client-id-number-as-if-she-were-a-new-client
 markdown: If your client was originally seen as a child witness and returns as
   an adult, primary victim of domestic violence, close their child file, and
   open him or her as an adult with a new client ID number. Reference this

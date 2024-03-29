@@ -24,7 +24,7 @@ title: When a young client turns 18 while in shelter, is she reentered as an 18-
 summary: When a young client turns 18 while in shelter, is she reentered as an
   18- year-old adult?
 path: /faqs/dv-when-a-young-client-turns-18-while-in-shelter-is-she-reentered-as-an-18-year-old-adult
-url: https://infonet.icjia.illinois.gov/faqs/dv-when-a-young-client-turns-18-while-in-shelter-is-she-reentered-as-an-18-year-old-adult
+url: https://infonet.icjia.dev/faqs/dv-when-a-young-client-turns-18-while-in-shelter-is-she-reentered-as-an-18-year-old-adult
 markdown: If the child only remained in shelter for a couple of months after her
   18th  birthday, then she probably would not need an adult file. If she
   continues to receive services for several months after her birthday, it may be

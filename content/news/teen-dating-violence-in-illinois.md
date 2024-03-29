@@ -53,7 +53,7 @@ rawText: "february is teen dating violence awareness month https www acf hhs gov
 draft: false
 navigation: true
 path: /news/teen-dating-violence-in-illinois
-url: https://infonet.icjia.illinois.gov/news/teen-dating-violence-in-illinois
+url: https://infonet.icjia.dev/news/teen-dating-violence-in-illinois
 ---
 
 February is [Teen Dating Violence Awareness Month](https://www.acf.hhs.gov/ofvps/teen-dating-violence-awareness-month-tdvam#:~:text=February%20is%20Teen%20Dating%20Violence,relationships%20and%20teen%20dating%20abuse). The National Institute of Justice defines teen dating violence as, “physical, psychological, or sexual abuse; harassment; or stalking among persons ages 12 to 18 within the context of a past or present romantic or consensual relationship.”

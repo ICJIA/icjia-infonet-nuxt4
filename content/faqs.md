@@ -30,7 +30,7 @@ markdown: >-
   (SA)](https://infonet.icjia-api.cloud/uploads/3_3_2_SA_INFONET_Frequently_Asked_Questions_7_7_23_7c737ee0ff.docx)
 navigation: true
 path: /faqs
-url: https://infonet.icjia.illinois.gov/faqs
+url: https://infonet.icjia.dev/faqs
 ---
 
 ## Downloads

@@ -28,7 +28,7 @@ title: Why would a report show service hour totals that are not in .25 hour
 summary: Why would a report show service hour totals that are not in .25 hour
   increments?
 path: /faqs/dv-why-would-a-report-show-service-hour-totals-that-are-not-in-25-hour-increments
-url: https://infonet.icjia.illinois.gov/faqs/dv-why-would-a-report-show-service-hour-totals-that-are-not-in-25-hour-increments
+url: https://infonet.icjia.dev/faqs/dv-why-would-a-report-show-service-hour-totals-that-are-not-in-25-hour-increments
 markdown: This should only occur if a Funding Filter is applied to a report. For
   example, if a VAWA grant pays for 33% of a staff person’s service time, a
   Standard Service Report with a VAWA filter will display .33 hours for every

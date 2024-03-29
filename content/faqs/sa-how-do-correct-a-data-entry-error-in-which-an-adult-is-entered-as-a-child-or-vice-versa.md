@@ -28,7 +28,7 @@ title: "How do correct a data entry error in which an adult is entered as a
 summary: "How do correct a data entry error in which an adult is entered as a
   child or vice versa?  "
 path: /faqs/sa-how-do-correct-a-data-entry-error-in-which-an-adult-is-entered-as-a-child-or-vice-versa
-url: https://infonet.icjia.illinois.gov/faqs/sa-how-do-correct-a-data-entry-error-in-which-an-adult-is-entered-as-a-child-or-vice-versa
+url: https://infonet.icjia.dev/faqs/sa-how-do-correct-a-data-entry-error-in-which-an-adult-is-entered-as-a-child-or-vice-versa
 markdown: "You cannot delete the client. First, you must make this an obsolete
   record by editing the Client ID # to something like “BAD ID 1.” Make sure no
   service contacts are entered for this record. If any service contacts exist,

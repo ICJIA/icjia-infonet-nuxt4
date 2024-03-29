@@ -300,7 +300,7 @@ markdown: >2-
   ::
 navigation: true
 path: /about
-url: https://infonet.icjia.illinois.gov/about
+url: https://infonet.icjia.dev/about
 ---
 
  <style>

@@ -45,7 +45,7 @@ title: I can’t find the ID number of a dv client that has attended a group
 summary: I can’t find the ID number of a dv client that has attended a group
   session. How do I enter the service for that client?
 path: /faqs/dv-i-can-t-find-the-id-number-of-a-dv-client-that-has-attended-a-group-session-how-do-i-enter-the-service-for-that-client
-url: https://infonet.icjia.illinois.gov/faqs/dv-i-can-t-find-the-id-number-of-a-dv-client-that-has-attended-a-group-session-how-do-i-enter-the-service-for-that-client
+url: https://infonet.icjia.dev/faqs/dv-i-can-t-find-the-id-number-of-a-dv-client-that-has-attended-a-group-session-how-do-i-enter-the-service-for-that-client
 markdown: >
   Most likely, the ID number is not showing up in the Available Clients list
   because the default search criteria used to create that list exclude the

@@ -52,7 +52,7 @@ rawText: "icjia received 139 472 in grant funds from all chicago https
 draft: false
 navigation: true
 path: /news/icjia-receives-grant-to-increase-info-net-s-compliance-with-u-s-department-of-housing-and-urban-development-hud-data-standards
-url: https://infonet.icjia.illinois.gov/news/icjia-receives-grant-to-increase-info-net-s-compliance-with-u-s-department-of-housing-and-urban-development-hud-data-standards
+url: https://infonet.icjia.dev/news/icjia-receives-grant-to-increase-info-net-s-compliance-with-u-s-department-of-housing-and-urban-development-hud-data-standards
 ---
 
 ICJIA received $139,472 in grant funds from [All Chicago](https://allchicago.org/) to increase compliance of its [InfoNet System](https://infonet.icjia.illinois.gov/) with [U.S. Department of Housing and Urban Development (HUD)](https://www.hud.gov/) data standards, thereby helping transition InfoNet into a [Homeless Management Information System (HMIS)](https://www.hudexchange.info/programs/hmis/) comparable database. This will be helpful to InfoNet users receiving HUD funding to serve survivors of domestic violence, as they are required to report metrics meeting these data standards.    

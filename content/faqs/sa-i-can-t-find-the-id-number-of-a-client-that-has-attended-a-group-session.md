@@ -50,7 +50,7 @@ title: I can’t find the ID number of a client that has attended a group sessio
 summary: I can’t find the ID number of a client that has attended a group
   session. How do I enter the service for that client?
 path: /faqs/sa-i-can-t-find-the-id-number-of-a-client-that-has-attended-a-group-session
-url: https://infonet.icjia.illinois.gov/faqs/sa-i-can-t-find-the-id-number-of-a-client-that-has-attended-a-group-session
+url: https://infonet.icjia.dev/faqs/sa-i-can-t-find-the-id-number-of-a-client-that-has-attended-a-group-session
 markdown: >
   Most likely, the ID number is not showing up in the Available Clients list
   because the search criteria used to create that list are too narrow and are

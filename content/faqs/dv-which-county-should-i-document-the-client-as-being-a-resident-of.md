@@ -23,7 +23,7 @@ draft: false
 title: Which county should I document the client as being a resident of?
 summary: Which county should I document the client as being a resident of?
 path: /faqs/dv-which-county-should-i-document-the-client-as-being-a-resident-of
-url: https://infonet.icjia.illinois.gov/faqs/dv-which-county-should-i-document-the-client-as-being-a-resident-of
+url: https://infonet.icjia.dev/faqs/dv-which-county-should-i-document-the-client-as-being-a-resident-of
 markdown: The county in which she resided at the time of intake. If your client
   lives in Christian County and moves to shelter in Sangamon County shortly
   after intake, the client is still considered a Christian County client.

@@ -261,7 +261,7 @@ markdown: >-
   rights of any third parties.
 navigation: true
 path: /privacy
-url: https://infonet.icjia.illinois.gov/privacy
+url: https://infonet.icjia.dev/privacy
 ---
 
 Access to the State of Illinois websites is provided subject to the following terms and conditions. Please read these terms carefully as use of these sites constitutes acceptance of all of the following terms and conditions:

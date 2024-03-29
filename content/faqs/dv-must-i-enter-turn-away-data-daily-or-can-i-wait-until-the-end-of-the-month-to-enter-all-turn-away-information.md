@@ -28,7 +28,7 @@ title: Must I enter turn away data daily or can I wait until the end of the
 summary: Must I enter turn away data daily or can I wait until the end of the
   month to enter all turn away information?
 path: /faqs/dv-must-i-enter-turn-away-data-daily-or-can-i-wait-until-the-end-of-the-month-to-enter-all-turn-away-information
-url: https://infonet.icjia.illinois.gov/faqs/dv-must-i-enter-turn-away-data-daily-or-can-i-wait-until-the-end-of-the-month-to-enter-all-turn-away-information
+url: https://infonet.icjia.dev/faqs/dv-must-i-enter-turn-away-data-daily-or-can-i-wait-until-the-end-of-the-month-to-enter-all-turn-away-information
 markdown: You may wait until the end of the month to enter all turn away data at
   the same time. However, consider that you will not be able to extract daily
   turn away information from InfoNet. If you enter monthly, you will only be

@@ -20,7 +20,7 @@ title: What type of board activities can be collected in Community and
 summary: What type of board activities can be collected in Community and
   Institutional Activities?
 path: /faqs/sa-what-type-of-board-activities-can-be-collected-in-community-and-institutional-activities
-url: https://infonet.icjia.illinois.gov/faqs/sa-what-type-of-board-activities-can-be-collected-in-community-and-institutional-activities
+url: https://infonet.icjia.dev/faqs/sa-what-type-of-board-activities-can-be-collected-in-community-and-institutional-activities
 markdown: Collect information on  ICASA board activities, including time spent,
   in the Other Staff Activities section.
 searchMeta: "faq  "

@@ -28,7 +28,7 @@ title: Are we required to provide .25 hours of Civil Legal Advocacy/OP services
 summary: Are we required to provide .25 hours of Civil Legal Advocacy/OP
   services to every new client to explain her rights under IDVA?
 path: /faqs/dv-are-we-required-to-provide-25-hours-of-civil-legal-advocacy-op-services-to-every-new-client-to-explain-her-rights-under-idva
-url: https://infonet.icjia.illinois.gov/faqs/dv-are-we-required-to-provide-25-hours-of-civil-legal-advocacy-op-services-to-every-new-client-to-explain-her-rights-under-idva
+url: https://infonet.icjia.dev/faqs/dv-are-we-required-to-provide-25-hours-of-civil-legal-advocacy-op-services-to-every-new-client-to-explain-her-rights-under-idva
 markdown: Although this is considered good practice and should be completed with
   as many new clients as possible, there may be situations that don’t lend
   themselves to discussing IDVA issues, especially with clients in extreme

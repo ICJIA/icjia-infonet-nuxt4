@@ -5,7 +5,7 @@
   >
     <h2 style="border: none; font-size: 18px">
       Domestic and Sexual Violence Victims Who Received Services in Illinois,
-      2018-2022
+      2018-2023
     </h2>
     <h3 style="border: none; font-size: 12px">Source: InfoNet System</h3>
     <div style="min-height: 25vh" class="pt-3 pb-10">

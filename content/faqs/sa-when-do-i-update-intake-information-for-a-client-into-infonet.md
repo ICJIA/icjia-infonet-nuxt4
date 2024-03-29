@@ -32,7 +32,7 @@ draft: false
 title: "When do I update intake information for a client into Infonet? "
 summary: "When do I update intake information for a client into Infonet? "
 path: /faqs/sa-when-do-i-update-intake-information-for-a-client-into-infonet
-url: https://infonet.icjia.illinois.gov/faqs/sa-when-do-i-update-intake-information-for-a-client-into-infonet
+url: https://infonet.icjia.dev/faqs/sa-when-do-i-update-intake-information-for-a-client-into-infonet
 markdown: >-
   Intake information should correspond to the victim’s situation at the time of
   intake and should not be changed over time, even as his/her situation changes.
