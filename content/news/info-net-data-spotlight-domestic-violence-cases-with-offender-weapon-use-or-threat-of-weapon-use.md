@@ -20,29 +20,14 @@ splash:
 attachments:
   data: []
 postDate: 2024-03-18T05:00:00Z
-markdown: >-
-  Illinois domestic violence (DV) agencies using InfoNet can indicate whether
-  the offender threatened the victim with a gun or knife or used one against
-  them. The number of domestic violence new client cases where the victim was
-  threatened with a gun or knife and/or had one used against them fluctuated
-  over the past five years but decreased last year (_Figure 1_). However, the
-  percentage of DV new client cases with weapon use or threat of weapon use
-  compared to the total number of all DV new client cases has remained
-  consistent since 2019 (_Figure 2_). In 2023, the victim was threatened with a
-  knife or gun and/or had one used against them in 6.9% of all DV cases, similar
-  to past years. 
+markdown: |-
+  Illinois domestic violence (DV) agencies using InfoNet can indicate whether the offender threatened the victim with a gun or knife or used one against them. The number of domestic violence new client cases where the victim was threatened with a gun or knife and/or had one used against them fluctuated over the past five years but decreased last year (_Figure 1_). However, the percentage of DV new client cases with weapon use or threat of weapon use compared to the total number of all DV new client cases has remained consistent since 2019 (_Figure 2_). In 2023, the victim was threatened with a knife or gun and/or had one used against them in 6.9% of all DV cases, similar to past years. 
 
-
-  **Figure 1**<br/>_Numbers of Domestic Violence New Client Cases with Offender
-  Weapon Use or Threat of Weapon Use, 2019-2023_
-
+  **Figure 1**<br/>_Numbers of Domestic Violence New Client Cases with Offender Weapon Use or Threat of Weapon Use, 2019-2023_
 
   ![image_alt_text](https://infonet.icjia-api.cloud/uploads/Number_of_DV_Cases_w_Weapon_Use_Threat_a2d3caea2a.jpg)
 
-
-  **Figure 2**<br/>_Percentages of Domestic Violence New Client Cases with
-  Offender Weapon Use or Threat of Weapon Use, 2019-2023_
-
+  **Figure 2**<br/>_Percentages of Domestic Violence New Client Cases with Offender Weapon Use or Threat of Weapon Use, 2019-2023_
 
   ![image_alt_text](https://infonet.icjia-api.cloud/uploads/Percentages_of_DV_Cases_w_Weapon_Use_Threat_897d69b24d.jpg)
 rawText: "illinois domestic violence dv agencies using infonet can indicate

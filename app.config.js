@@ -191,10 +191,7 @@ export default defineAppConfig({
       main: "Home",
       link: "/",
     },
-    {
-      main: "News & Updates",
-      link: "/news",
-    },
+
     {
       main: "About",
       link: "/about",

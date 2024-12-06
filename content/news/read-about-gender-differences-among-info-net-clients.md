@@ -24,26 +24,14 @@ splash:
 attachments:
   data: []
 postDate: 2023-09-19T05:00:00Z
-markdown: >
-  Read about gender differences among InfoNet clients receiving services for
-  intimate partner violence: Gender Differences in Intimate Partner Violence
-  Service Use 
+markdown: |
+  Read about gender differences among InfoNet clients receiving services for intimate partner violence: Gender Differences in Intimate Partner Violence Service Use 
 
+  InfoNet team member Caleb Schaffner led this study of InfoNet data that examines differences between men and women who received services for intimate partner violence between 2015-19. He noted some interesting findings about risk factors, barriers to services, and service types more likely to be received by men and women. Suggestions for improving access and outreach to both groups are included.
 
-  InfoNet team member Caleb Schaffner led this study of InfoNet data that
-  examines differences between men and women who received services for intimate
-  partner violence between 2015-19. He noted some interesting findings about
-  risk factors, barriers to services, and service types more likely to be
-  received by men and women. Suggestions for improving access and outreach to
-  both groups are included.
+  - [Read article](https://icjia.illinois.gov/researchhub/articles/gender-differences-in-intimate-partner-violence-service-use)&nbsp;&raquo;
 
-
-  - [Read
-  article](https://icjia.illinois.gov/researchhub/articles/gender-differences-in-intimate-partner-violence-service-use)&nbsp;&raquo;
-
-
-  - [Download full
-  report](https://researchhub.icjia-api.cloud/uploads/Gender%20Differences%20in%20Intimate%20Partner%20Violence%20Service%20Use-230817T20061573.pdf)&nbsp;&raquo;
+  - [Download full report](https://researchhub.icjia-api.cloud/uploads/Gender%20Differences%20in%20Intimate%20Partner%20Violence%20Service%20Use-230817T20061573.pdf)&nbsp;&raquo;
 rawText: "read about gender differences among infonet clients receiving services
   for intimate partner violence gender differences in intimate partner violence
   service use infonet team member caleb schaffner led this study of infonet data

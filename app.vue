@@ -14,10 +14,10 @@
       <NuxtPage></NuxtPage>
     </v-main>
     <!-- <div style="height: 75px"></div> -->
-
+    <!-- 
     <the-context-footer v-if="isMounted && !mobile"></the-context-footer>
 
-    <TheFooter></TheFooter>
+    <TheFooter></TheFooter> -->
   </v-app>
 </template>
 
