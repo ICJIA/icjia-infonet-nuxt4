@@ -67,6 +67,7 @@
     "markdown-it-attrs": "^4.3.0",
     "mitt": "^3.0.1",
     "moment": "^2.30.1",
+    "node-sass": "^9.0.0",
     "request": "^2.88.2",
     "sass": "1.78.0",
     "serve": "^14.2.4",
