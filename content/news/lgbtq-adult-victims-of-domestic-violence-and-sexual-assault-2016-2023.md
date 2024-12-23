@@ -20,12 +20,28 @@ splash:
 attachments:
   data: []
 postDate: 2024-06-28T05:00:00Z
-markdown: |+
-  June is [LGBTQI+ Pride Month](https://www.state.gov/commemorating-lgbtqi-pride-month-2/), a celebration and recognition of those who identify as lesbian, gay, bisexual, transgender, queer, or another sexual minority (LGBTQ+). To better capture the needs and experiences of LGBTQ+ survivors of violence, InfoNet expanded gender identity to include transgender and genderqueer and added sexual orientation as a data collection field in July 2015. 
+markdown: >+
+  June is [LGBTQI+ Pride
+  Month](https://www.state.gov/commemorating-lgbtqi-pride-month-2/), a
+  celebration and recognition of those who identify as lesbian, gay, bisexual,
+  transgender, queer, or another sexual minority (LGBTQ+). To better capture the
+  needs and experiences of LGBTQ+ survivors of violence, InfoNet expanded gender
+  identity to include transgender and genderqueer and added sexual orientation
+  as a data collection field in July 2015. 
 
-  InfoNet data show that in 2023, 1,611 adult clients with domestic violence (DV) cases self-identified as LGBTQ+, or 5.7% of all adult DV new cases that year. For sexual assault (SA), 790 adult clients self-identified as LGBTQ+, representing 13.8% of all adult SA new client cases in 2023. Data across the last eight years show the percentages of DV or SA adult clients self-identifying as LGBTQ+ has steadily increased, except for a slight decrease in 2020 (_Figure 1_).
 
-  **Figure 1**<br/>_Percentages of LGBTQ+ Adult Clients with Domestic Violence or Sexual Assault New Cases, 2016-2023_
+  InfoNet data show that in 2023, 1,611 adult clients with domestic violence
+  (DV) cases self-identified as LGBTQ+, or 5.7% of all adult DV new cases that
+  year. For sexual assault (SA), 790 adult clients self-identified as LGBTQ+,
+  representing 13.8% of all adult SA new client cases in 2023. Data across the
+  last eight years show the percentages of DV or SA adult clients
+  self-identifying as LGBTQ+ has steadily increased, except for a slight
+  decrease in 2020 (_Figure 1_).
+
+
+  **Figure 1**<br/>_Percentages of LGBTQ+ Adult Clients with Domestic Violence
+  or Sexual Assault New Cases, 2016-2023_
+
 
   ![image_alt_text](https://infonet.icjia-api.cloud/uploads/LGBTQ_DV_SA_Clients_2016_2023_f8e3cfaed4.jpg)
 
