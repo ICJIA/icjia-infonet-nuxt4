@@ -7,8 +7,6 @@
     "dev:local": "kill-port 8000 && yarn scripts:local && nuxt dev --port=8000 -o",
     "generate:local": "yarn scripts:local && nuxt generate",
     "generate": "yarn clear:cache && yarn scripts && nuxt generate",
-    "generate:serve": "yarn clear:cache && yarn scripts && nuxt generate && npx serve ./dist",
-    "generate:local:serve": "yarn clear:cache && yarn scripts:local && nuxt generate && serve ./dist",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore . --fix",
@@ -32,7 +30,8 @@
     "scripts:local": "yarn create:local",
     "scripts": "yarn create:contentDirectory && yarn create:pages &&  yarn create:publistPublications && yarn create:tabs && yarn create:faqs && yarn create:hub && yarn create:hubImages && yarn create:news && yarn create:mergedPublications && yarn create:searchIndex && yarn create:sitemap && yarn create:routes",
     "clear:cache": "rm -rf .nuxt .output",
-    "prestart": "source $HOME/.nvm/nvm.sh; nvm use"
+    "prestart": "source $HOME/.nvm/nvm.sh; nvm use",
+    "server": "npx serve .output/public"
   },
   "devDependencies": {
     "@nuxt/content": "^2.13.4",
