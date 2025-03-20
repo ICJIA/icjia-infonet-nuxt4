@@ -45,7 +45,7 @@ ChartJS.register(
 );
 
 const chartData = ref({
-  labels: ["2018", "2019", "2020", "2021", "2022", "2023"],
+  labels: ["2018", "2019", "2020", "2021", "2022", "2023", "2024"],
   layout: {
     padding: 20,
   },
@@ -53,7 +53,7 @@ const chartData = ref({
     {
       label: "Victims who received services",
       backgroundColor: "#0D4471",
-      data: [70133, 72905, 60717, 61857, 61259, 63211],
+      data: [70133, 72905, 60717, 61857, 61259, 63211, 63557],
     },
   ],
 });
