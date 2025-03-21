@@ -10,7 +10,9 @@ export default defineNuxtConfig({
     viewTransition: true,
     payloadExtraction: true,
   },
+
   devtools: true,
+
   app: {
     // baseURL: "/infonet/",
     // pageTransition: { name: "page", mode: "out-in" },
@@ -85,7 +87,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   plugins: [{ src: "~/plugins/aos", mode: "client" }],
+
   css: [
     "vuetify/lib/styles/main.sass",
     "@mdi/font/css/materialdesignicons.min.css",
@@ -93,13 +97,17 @@ export default defineNuxtConfig({
     "~/assets/css/app.css",
     "~/assets/css/github-markdown.css",
   ],
+
   build: {
     transpile: ["vuetify"],
   },
+
   nitro: {
     // compressPublicAssets: true,
   },
+
   devtools: { timeline: { enabled: true } },
+
   vite: {
     // See: https://github.com/nuxt/nuxt/issues/24196
     optimizeDeps: {
@@ -118,6 +126,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   runtimeConfig: {
     // The private keys which are only available within server-side
     // apiSecret: "123",
@@ -139,11 +148,11 @@ export default defineNuxtConfig({
     // "@nuxtjs/google-fonts",
     // "@nuxtjs/apollo",
     // "@pinia/nuxt",
-    //"@nuxt/image-edge",
+
     "@vueuse/nuxt",
     "@nuxt/content",
     "@nuxtjs/apollo",
-    "@nuxt/image",
+
     // "nuxt-link-checker",
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -154,6 +163,7 @@ export default defineNuxtConfig({
       });
     },
   ],
+
   content: {
     documentDriven: false,
     markdown: {
@@ -198,21 +208,22 @@ export default defineNuxtConfig({
   //   },
   // },
 
-  image: {
-    // The screen sizes predefined by `@nuxt/image`:
-    screens: {
-      xs: 320,
-      sm: 640,
-      md: 768,
-      lg: 1024,
-      xl: 1280,
-      xxl: 1536,
-      "2xl": 1536,
-    },
-  },
+  // image: {
+  //   // The screen sizes predefined by `@nuxt/image`:
+  //   screens: {
+  //     xs: 320,
+  //     sm: 640,
+  //     md: 768,
+  //     lg: 1024,
+  //     xl: 1280,
+  //     xxl: 1536,
+  //     "2xl": 1536,
+  //   },
+  // },
   generate: {
     routes: appRoutes,
   },
+
   // experimental: {
   //   componentIslands: true,
   // },
@@ -223,4 +234,6 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  compatibilityDate: "2025-03-21",
 });
