@@ -249,3 +249,45 @@ Key environment variables (from `.env.sample`):
   export const useEvent = emitter.emit;
   export const useListen = emitter.on;
   ```
+
+## 8. External Integrations
+
+1. **APIs:**
+
+   - **Main API:** `https://infonet.icjia-api.cloud` - Content management API
+   - **Research Hub:** `https://researchhub.icjia-api.cloud/graphql` - GraphQL API for research data
+   - **Mail Service:** `https://mail.icjia.cloud/internet/infonet` - Email service for contact form
+
+2. **Analytics:**
+
+   - **Plausible Analytics:** `https://plausible.icjia.cloud/js/script.js`
+
+3. **External Resources:**
+   - CDN for jQuery: `https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js`
+   - Google Fonts: `https://fonts.googleapis.com/css?family=Material+Icons`
+
+## 9. Performance Considerations
+
+1. **Static Site Generation:**
+
+   - Pre-renders pages at build time for optimal performance
+   - Reduces server load and improves page load times
+
+2. **Lazy Loading:**
+
+   - Components with `Lazy` prefix are loaded on demand
+   - `v-lazy` directive for lazy loading content
+
+3. **Image Optimization:**
+
+   - Image placeholders during loading
+   - Progress indicators for large content
+
+4. **Bundle Optimization:**
+
+   - Vite's dependency optimization
+   - Specific dependencies included in optimization list
+
+5. **Caching:**
+   - Cache clearing during build process: `yarn clear:cache`
+   - Netlify's CDN for content delivery
