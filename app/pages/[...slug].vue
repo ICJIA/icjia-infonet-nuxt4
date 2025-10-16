@@ -1,7 +1,7 @@
 <script setup>
 // import appRoutes from "assets/json/appRoutes.json";
 const { pending, data: routes } = await useFetch("/api/routes");
-const appRoutes = routes.value.content;
+const appRoutes = computed(() => routes.value?.content || []);
 const { path } = useRoute();
 const router = useRouter();
 
@@ -28,8 +28,8 @@ let myTocObj = {};
 onBeforeMount(() => {
   const currentPath = router.currentRoute.value.path;
   // console.log("Current route path: ", router.currentRoute.value.path);
-  // console.table(appRoutes);
-  const isValidRoute = appRoutes.includes(currentPath);
+  // console.table(appRoutes.value);
+  const isValidRoute = appRoutes.value.includes(currentPath);
   console.log("isValidRoute: ", isValidRoute);
   // if (!isValidRoute) {
   //   throw showError({ statusCode: 404, statusMessage: "Page Not Found" });

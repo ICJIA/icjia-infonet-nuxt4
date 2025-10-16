@@ -2,7 +2,7 @@
 // import appRoutes from "assets/json/appRoutes.json";
 import moment from "moment";
 const { pending, data: routes } = await useFetch("/api/routes");
-const appRoutes = routes.value.content;
+const appRoutes = computed(() => routes.value?.content || []);
 
 const { path } = useRoute();
 const router = useRouter();
@@ -28,7 +28,7 @@ let myTocObj = {};
 
 onBeforeMount(() => {
   const currentPath = router.currentRoute.value.path;
-  const isValidRoute = appRoutes.includes(currentPath);
+  const isValidRoute = appRoutes.value.includes(currentPath);
   if (!isValidRoute) {
     throw showError({ statusCode: 404, statusMessage: "Page Not Found" });
   }
