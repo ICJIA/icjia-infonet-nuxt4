@@ -6,11 +6,6 @@ import vuetify from "vite-plugin-vuetify";
 import appRoutes from "./src/appRoutes.json";
 
 export default defineNuxtConfig({
-  experimental: {
-    viewTransition: true,
-    payloadExtraction: true,
-  },
-
   devtools: true,
 
   app: {
@@ -88,14 +83,14 @@ export default defineNuxtConfig({
     },
   },
 
-  plugins: [{ src: "~/plugins/aos", mode: "client" }],
+  plugins: [{ src: "@/plugins/aos", mode: "client" }],
 
   css: [
     "vuetify/lib/styles/main.sass",
     "@mdi/font/css/materialdesignicons.min.css",
-    "~/assets/css/variables.scss",
-    "~/assets/css/app.css",
-    "~/assets/css/github-markdown.css",
+    "@/assets/css/variables.scss",
+    "@/assets/css/app.css",
+    "@/assets/css/github-markdown.css",
   ],
 
   build: {
@@ -103,6 +98,9 @@ export default defineNuxtConfig({
   },
 
   nitro: {
+    prerender: {
+      routes: appRoutes,
+    },
     // compressPublicAssets: true,
   },
 
@@ -220,9 +218,6 @@ export default defineNuxtConfig({
   //     "2xl": 1536,
   //   },
   // },
-  generate: {
-    routes: appRoutes,
-  },
 
   // experimental: {
   //   componentIslands: true,
