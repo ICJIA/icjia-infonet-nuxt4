@@ -1,4 +1,4 @@
-import content from "../../src/publist.json";
+import content from "../../app/data/publist.json";
 
 export default defineEventHandler((event) => {
   return {

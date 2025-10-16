@@ -1,4 +1,4 @@
-import content from "../../src/hub.json";
+import content from "../../app/data/hub.json";
 
 export default defineEventHandler((event) => {
   return {
