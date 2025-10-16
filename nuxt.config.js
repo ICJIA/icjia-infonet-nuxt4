@@ -108,7 +108,17 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: appRoutes,
+      routes: [
+        ...appRoutes,
+        // API routes for static generation
+        "/api/routes",
+        "/api/tabs",
+        "/api/dataAndPublications",
+        "/api/search",
+        "/api/hub",
+        "/api/publist",
+        "/api/research",
+      ],
     },
     // compressPublicAssets: true,
     rollupConfig: {
