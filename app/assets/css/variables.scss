@@ -1,4 +1,7 @@
+// Import Vuetify styles with namespace to avoid variable conflicts
+@use "vuetify/lib/styles/main" as vuetify;
+
+// Custom variable overrides
 $body-font-family: "Lato";
 // $heading-font-family: 'Raleway';
 $font-size-root: 18px;
-@use "vuetify/lib/styles/main" as *;
