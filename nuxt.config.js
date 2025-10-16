@@ -2,6 +2,17 @@
 //
 // https://v3.nuxtjs.org/api/configuration/nuxt.config\
 
+// Polyfill for File API in Node.js environment
+// This fixes the "File is not defined" error from undici
+if (typeof global !== "undefined" && !global.File) {
+  global.File = class File {
+    constructor(bits, filename, options = {}) {
+      this.name = filename;
+      this.lastModified = options.lastModified || Date.now();
+    }
+  };
+}
+
 import vuetify from "vite-plugin-vuetify";
 import appRoutes from "./src/appRoutes.json";
 
@@ -102,6 +113,9 @@ export default defineNuxtConfig({
       routes: appRoutes,
     },
     // compressPublicAssets: true,
+    rollupConfig: {
+      external: ["undici"],
+    },
   },
 
   devtools: { timeline: { enabled: true } },
@@ -122,6 +136,9 @@ export default defineNuxtConfig({
         "vue-chartjs",
         "chart.js",
       ],
+    },
+    ssr: {
+      external: ["undici"],
     },
   },
 
