@@ -17,8 +17,6 @@ import vuetify from "vite-plugin-vuetify";
 import appRoutes from "./app/data/appRoutes.json";
 
 export default defineNuxtConfig({
-  devtools: true,
-
   app: {
     // baseURL: "/infonet/",
     // pageTransition: { name: "page", mode: "out-in" },
@@ -117,8 +115,6 @@ export default defineNuxtConfig({
       external: ["undici"],
     },
   },
-
-  devtools: { timeline: { enabled: true } },
 
   vite: {
     // See: https://github.com/nuxt/nuxt/issues/24196
@@ -243,6 +239,9 @@ export default defineNuxtConfig({
     clients: {
       default: {
         httpEndpoint: "https://researchhub.icjia-api.cloud/graphql",
+        devtools: {
+          enabled: true,
+        },
       },
     },
   },
