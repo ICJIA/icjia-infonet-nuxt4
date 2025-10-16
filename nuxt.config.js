@@ -240,7 +240,7 @@ export default defineNuxtConfig({
       default: {
         httpEndpoint: "https://researchhub.icjia-api.cloud/graphql",
         devtools: {
-          enabled: true,
+          enabled: false,
         },
       },
     },
