@@ -1339,6 +1339,207 @@ if (!fs.existsSync(dataDir)) {
 - ✅ Sass deprecation warning: Fix by migrating to `@use`
 - ⚠️ Hydration mismatch: Usually resolves on rebuild, can be ignored during migration
 
+### 11. Missing Dependencies in Creator/Build Scripts
+
+**Issue:** Build scripts that use file system operations may require additional dependencies like `fs-extra`. If these dependencies are not listed in `package.json`, the build will fail on deployment platforms like Netlify.
+
+**Symptoms:**
+
+```
+Error: Cannot find module 'fs-extra'
+Require stack:
+- /path/to/creators/createContentDirectory.js
+```
+
+**Solution:**
+
+- Audit all creator/build scripts for external dependencies
+- Add any missing dependencies to `package.json`
+- Common file system utilities: `fs-extra`, `path`, `glob`
+- Test the build locally before deploying
+
+**Example:**
+
+```bash
+# Check what modules are used in creator scripts
+grep -r "require\|import" creators/ --include="*.js" --include="*.mjs" | grep -v "node_modules"
+
+# Add missing dependencies
+yarn add fs-extra
+```
+
+**Best Practice:** Document all external dependencies used by build scripts in a comment at the top of each script:
+
+```javascript
+// creators/createContentDirectory.js
+// Dependencies: fs-extra, path (built-in)
+const fs = require("fs-extra");
+const path = require("path");
+```
+
+### 12. API Routes and Static Site Generation (SSG)
+
+**Issue:** When using `yarn generate` for static site generation, server-side API routes defined in `/server/api/` are not available because there's no server running. This causes 404 errors when the client tries to fetch from these endpoints during navigation.
+
+**Symptoms:**
+
+```
+Failed to load resource: the server responded with a status of 404 (Not Found)
+GET http://localhost:3000/api/dataAndPublications 404
+```
+
+**Root Cause:** In a static build:
+
+- No server is running to handle API requests
+- API routes in `/server/api/` don't exist as static files
+- Browser fetch requests to `/api/*` endpoints fail
+
+**Solution:** Configure Nitro to prerender API routes as static JSON files:
+
+```javascript
+// nuxt.config.js
+export default defineNuxtConfig({
+  nitro: {
+    prerender: {
+      routes: [
+        // Page routes
+        ...appRoutes,
+        // API routes that need to be available in static build
+        "/api/routes",
+        "/api/tabs",
+        "/api/dataAndPublications",
+        "/api/search",
+        "/api/hub",
+        "/api/publist",
+        "/api/research",
+      ],
+    },
+  },
+});
+```
+
+**How It Works:**
+
+1. During `yarn generate`, Nuxt calls each API route
+2. Nitro captures the response and saves it as a static JSON file
+3. When serving the static build, these files are available at `/api/*` paths
+4. Browser fetch requests get the static JSON instead of 404
+
+**Best Practice:** List all API endpoints that are called from the client in the prerender routes array. This ensures they're available in both development and static builds.
+
+**Testing:**
+
+```bash
+# Generate static build
+yarn generate
+
+# Check that API files were created
+ls -la .output/public/api/
+
+# Should show files like:
+# routes.json
+# tabs.json
+# dataAndPublications.json
+```
+
+### 13. Handling Async Data with Optional Chaining During Navigation
+
+**Issue:** When navigating between pages in a client-side rendered application, async data fetches may not be complete when components try to access the data. This causes "Cannot read properties of undefined" errors.
+
+**Symptoms:**
+
+```
+TypeError: Cannot read properties of undefined (reading 'content')
+at setup (component.js:2:2654)
+```
+
+**Root Cause:** The error occurs when:
+
+1. Component fetches data with `useFetch()`
+2. Component immediately tries to access `data.value.content`
+3. During navigation, `data.value` is undefined before the fetch completes
+4. Accessing `.content` on undefined throws an error
+
+**Solution:** Use computed properties with optional chaining and fallback values:
+
+```javascript
+// ❌ WRONG - causes error during navigation
+const { data: articles } = await useFetch("/api/articles");
+const articleList = ref(articles.value.content); // Error if undefined
+
+// ✅ CORRECT - safe access with fallback
+const { data: articles } = await useFetch("/api/articles");
+const articleList = computed(() => articles.value?.content || []);
+```
+
+**Key Techniques:**
+
+1. **Optional Chaining (`?.`)**: Safely accesses properties that might be undefined
+
+   ```javascript
+   articles.value?.content; // Returns undefined if articles.value is undefined
+   ```
+
+2. **Nullish Coalescing (`||`)**: Provides fallback value
+
+   ```javascript
+   articles.value?.content || []; // Returns empty array if content is undefined
+   ```
+
+3. **Computed Properties**: Ensures reactivity when data changes
+   ```javascript
+   const articleList = computed(() => articles.value?.content || []);
+   // Updates automatically when articles.value changes
+   ```
+
+**Complete Example:**
+
+```vue
+<script setup>
+// Fetch data
+const { pending, data: hubArticles } = await useFetch(
+  "/api/dataAndPublications"
+);
+
+// Safe access with computed property
+const articles = computed(() => hubArticles.value?.content || []);
+
+// Use in template
+const filteredArticles = computed(() => {
+  return articles.value.filter((article) => article.published);
+});
+</script>
+
+<template>
+  <div>
+    <div v-if="pending">Loading...</div>
+    <div v-else-if="articles.length === 0">No articles found</div>
+    <div v-else>
+      <article v-for="article in filteredArticles" :key="article.id">
+        {{ article.title }}
+      </article>
+    </div>
+  </div>
+</template>
+```
+
+**Best Practice:** Always use optional chaining when accessing nested properties from async data:
+
+```javascript
+// Pattern to follow
+const { data: response } = await useFetch("/api/endpoint");
+const processedData = computed(
+  () => response.value?.nestedProperty?.deeperProperty || defaultValue
+);
+```
+
+**Why This Matters:**
+
+- **During navigation**: Data may be undefined while fetching
+- **On first load**: Data might not be available immediately
+- **On error**: Fetch might fail, leaving data undefined
+- **Reactive updates**: Computed properties update when data changes
+
 ---
 
 ## End of Migration

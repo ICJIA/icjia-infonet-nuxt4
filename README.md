@@ -71,3 +71,34 @@ yarn generate
 ```
 
 _Netlify will automatically deploy the live site when changes are pushed to the master branch._
+
+## Nuxt 4 Migration
+
+✅ **This project has been successfully migrated from Nuxt 3.13.2 to Nuxt 4.1.0**
+
+The migration includes:
+
+- **Nuxt 4.1.0** with Nitro 2.x and Vite 7.x
+- **Recommended `/app` directory structure** for better code organization
+- **Node.js 20.x** requirement (updated from 18.x)
+- **Static site generation (SSG)** with prerendered API routes
+- **All routes successfully prerendering** with no console errors
+
+### Key Changes
+
+- Application code moved to `/app` directory (components, pages, plugins, assets, etc.)
+- Path aliases: `@/` or `~/` → `/app`, `@@/` or `~~/` → project root
+- API routes prerendered as static JSON files for SSG compatibility
+- Async data handling with optional chaining to prevent undefined errors during navigation
+
+### For Developers
+
+For detailed information about the migration process, including lessons learned and troubleshooting guides, see [MIGRATION.md](./MIGRATION.md).
+
+This guide is designed to be reusable for any Nuxt 3 to Nuxt 4 migration project and includes:
+
+- Step-by-step migration phases
+- Common issues and solutions
+- Testing procedures
+- Rollback procedures
+- Best practices and lessons learned
