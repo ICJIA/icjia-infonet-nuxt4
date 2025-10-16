@@ -4,8 +4,8 @@ const jsonfile = require("jsonfile");
 const fs = require("fs");
 const axios = require("axios");
 const dirpath = "./public/images";
-// import tags from "../src/tags.json";
-const tags = require("../src/tags.json");
+// import tags from "../app/data/tags.json";
+const tags = require("../app/data/tags.json");
 let tagsArray = JSON.stringify(tags);
 console.log("tags: ", tagsArray);
 if (!fs.existsSync(dirpath)) {

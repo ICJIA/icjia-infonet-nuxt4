@@ -12,6 +12,7 @@ console.log("Content directory cleared");
 const publicDir = path.join(__dirname, "../public");
 const assetsDir = path.join(__dirname, "../assets/json");
 const srcDir = path.join(__dirname, "../src");
+const appDataDir = path.join(__dirname, "../app/data");
 
 const PUBLIC_FILES_TO_REMOVE = [
   "site.json",
@@ -41,6 +42,7 @@ PUBLIC_FILES_TO_REMOVE.forEach((fileName) => {
   fs.rmSync(`${publicDir}/${fileName}`, { force: true });
   fs.rmSync(`${assetsDir}/${fileName}`, { force: true });
   fs.rmSync(`${srcDir}/${fileName}`, { force: true });
+  fs.rmSync(`${appDataDir}/${fileName}`, { force: true });
 });
 
 console.log("Files removed: ", PUBLIC_FILES_TO_REMOVE);

@@ -14,7 +14,7 @@ if (typeof global !== "undefined" && !global.File) {
 }
 
 import vuetify from "vite-plugin-vuetify";
-import appRoutes from "./src/appRoutes.json";
+import appRoutes from "./app/data/appRoutes.json";
 
 export default defineNuxtConfig({
   devtools: true,

@@ -37,7 +37,7 @@ const appRoutes = useState("routes", () => routes);
 //console.log("useState: appRoutes.json loaded.");
 
 // Load tags into global state
-import tagMeta from "~/src/tags.json";
+import tagMeta from "@/data/tags.json";
 const tags = useState("tags", () => tagMeta);
 //console.log("useState: tags.json loaded:", tags.value);
 

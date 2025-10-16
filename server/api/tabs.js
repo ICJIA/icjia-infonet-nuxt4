@@ -1,4 +1,4 @@
-import content from "../../src/tabs.json";
+import content from "../../app/data/tabs.json";
 
 export default defineEventHandler((event) => {
   return {

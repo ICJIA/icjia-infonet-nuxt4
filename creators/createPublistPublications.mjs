@@ -3,7 +3,7 @@ const require = createRequire(import.meta.url);
 const jsonfile = require("jsonfile");
 const fs = require("fs");
 const axios = require("axios");
-const tags = require("../src/tags.json");
+const tags = require("../app/data/tags.json");
 let tagsArray = JSON.stringify(tags);
 console.log("tags: ", tagsArray);
 const _ = require("lodash");

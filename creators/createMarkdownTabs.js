@@ -90,7 +90,7 @@ axios
       }
       return obj;
     });
-    jsonfile.writeFileSync(`src/tabs.json`, site, function (err) {
+    jsonfile.writeFileSync(`app/data/tabs.json`, site, function (err) {
       if (err) {
         console.error(err);
       }
@@ -101,7 +101,7 @@ axios
     //     console.error(err);
     //   }
     // });
-    console.log("tabs.json created in /src/");
+    console.log("tabs.json created in /app/data/");
 
     const tabRoutes = site.map((item) => {
       return `${item.attributes.path}`;

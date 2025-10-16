@@ -36,12 +36,12 @@ const appRoutes = Array.from(
 //   }
 // });
 
-jsonfile.writeFileSync(`./src/appRoutes.json`, appRoutes, function (err) {
+jsonfile.writeFileSync(`./app/data/appRoutes.json`, appRoutes, function (err) {
   if (err) {
     console.error(err);
   }
 });
 
-//console.log("appRoutes.json created in /src/appRoutes.json:", appRoutes);
+//console.log("appRoutes.json created in /app/data/appRoutes.json:", appRoutes);
 
 console.log("Total app routes: ", appRoutes.length);

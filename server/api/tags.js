@@ -1,4 +1,4 @@
-import content from "../../src/tags.json";
+import content from "../../app/data/tags.json";
 
 export default defineEventHandler((event) => {
   return {
