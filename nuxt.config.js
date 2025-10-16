@@ -157,12 +157,10 @@ export default defineNuxtConfig({
 
   modules: [
     // "@nuxtjs/google-fonts",
-    // "@nuxtjs/apollo",
     // "@pinia/nuxt",
 
     "@vueuse/nuxt",
     "@nuxt/content",
-    "@nuxtjs/apollo",
 
     // "nuxt-link-checker",
 
@@ -235,16 +233,6 @@ export default defineNuxtConfig({
   // experimental: {
   //   componentIslands: true,
   // },
-  apollo: {
-    clients: {
-      default: {
-        httpEndpoint: "https://researchhub.icjia-api.cloud/graphql",
-        devtools: {
-          enabled: false,
-        },
-      },
-    },
-  },
 
   compatibilityDate: "2025-03-21",
 });
