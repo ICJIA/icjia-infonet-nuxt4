@@ -452,7 +452,7 @@ const infonetTags = useState("tags");
 // console.log(infonetTags.value);
 // const router = useRouter();
 const isMounted = ref(false);
-const articles = ref(hubArticles.value.content);
+const articles = computed(() => hubArticles.value?.content || []);
 //filter out homepage only
 // filter articles marked with homePage: true key
 

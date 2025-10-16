@@ -152,7 +152,7 @@ const props = defineProps({
 const tabs = useState("tabs");
 const tab = ref(null);
 const isMounted = ref(false);
-const _tabContent = tabs.value.content.filter((tab) => {
+const _tabContent = (tabs.value?.content || []).filter((tab) => {
   if (tab.attributes.sectionID === props.sectionID) {
     return tab;
   }

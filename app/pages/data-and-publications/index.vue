@@ -288,7 +288,7 @@ const { pending, data: hubArticles } = await useFetch(
 console.log("hub.json loaded from api.");
 let infonetTags = useState("tags");
 let isMounted = ref(false);
-const articles = ref(hubArticles.value.content);
+const articles = computed(() => hubArticles.value?.content || []);
 let filteredArticles = ref([]);
 const route = useRoute();
 const tagFilter = route.query.tag;
@@ -298,7 +298,7 @@ if (tagFilter && tagFilter.length > 0) {
     (article) => article.tags.includes(tagFilter) === true
   );
 } else {
-  filteredArticles = articles;
+  filteredArticles = articles.value;
 }
 
 const formatDate = (dateString) => {
