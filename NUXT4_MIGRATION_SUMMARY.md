@@ -174,6 +174,41 @@ git reset --hard pre-nuxt-4-migration
 **After:** `@import "vuetify/lib/styles/main.sass"`
 **Files Modified:** `app/assets/css/variables.scss`
 
+### Fix 3: JSON Data Files Migration ✅
+
+**Issue:** Import paths broken after moving to `/app` directory structure
+**Solution:** Moved all JSON data files from `/src/` to `/app/data/`
+
+**Files Moved:**
+
+- `appRoutes.json`
+- `dataAndPublications.json`
+- `hub.json`
+- `publist.json`
+- `searchIndex.json`
+- `tabs.json`
+- `tags.json`
+
+**App Files Updated:**
+
+- `app/app.vue` - Import from `@/data/tags.json`
+- `server/api/tags.js` - Import from `../../app/data/tags.json`
+- `server/api/tabs.js` - Import from `../../app/data/tabs.json`
+- `server/api/routes.js` - Import from `../../app/data/appRoutes.json`
+- `nuxt.config.js` - Import from `./app/data/appRoutes.json`
+
+**Creator Scripts Updated:**
+
+- `creators/createSiteRoutes.mjs` - Writes to `./app/data/appRoutes.json`
+- `creators/createSearchIndex.mjs` - Writes to `./app/data/searchIndex.json`
+- `creators/createHubImages.mjs` - Reads from `../app/data/tags.json`
+- `creators/createMarkdownTabs.js` - Writes to `app/data/tabs.json`
+- `creators/createHubArticles.mjs` - Writes to `./app/data/hub.json`
+- `creators/createPublistPublications.mjs` - Writes to `./app/data/publist.json`
+- `creators/mergeHubAndPublistPublications.mjs` - Reads/writes from/to `../app/data/`
+- `creators/createLocalMeta.mjs` - Writes to `./app/data/siteMeta.json`
+- `creators/createContentDirectory.js` - Cleans up `app/data/` directory
+
 ---
 
 ## Next Steps
