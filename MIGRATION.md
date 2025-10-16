@@ -1108,6 +1108,239 @@ Use this checklist to track progress through the migration:
 
 ---
 
+## Lessons Learned from Real-World Migrations
+
+This section documents insights and best practices discovered during actual Nuxt 3 → Nuxt 4 migrations.
+
+### 1. Sass/SCSS Migration: @import vs @use
+
+**Issue:** Dart Sass is deprecating `@import` in favor of `@use`. Projects using Vuetify or other Sass-based libraries will see deprecation warnings.
+
+**Solution:**
+
+- Migrate from `@import` to `@use` syntax
+- Use namespaces to avoid variable conflicts: `@use "vuetify/lib/styles/main" as vuetify`
+- Avoid wildcard imports (`as *`) when importing libraries with many variables
+
+**Example:**
+
+```scss
+// ❌ OLD (deprecated)
+@import "vuetify/lib/styles/main.sass";
+
+// ✅ NEW (recommended)
+@use "vuetify/lib/styles/main" as vuetify;
+```
+
+**Key Point:** When using `@use` with a namespace, custom variables defined after the import won't conflict with imported variables.
+
+### 2. Audit Configured Modules for Actual Usage
+
+**Issue:** Projects often have modules configured in `nuxt.config.js` that are never actually used in the application code. These unused modules:
+
+- Add unnecessary bundle size
+- Can cause deprecation warnings
+- Complicate the build process
+
+**Solution:**
+
+- Search the codebase for actual usage of each configured module
+- Remove modules that are configured but not used
+- Document why each module is needed
+
+**Example:** If Apollo GraphQL is configured but the application uses axios for GraphQL queries instead, remove `@nuxtjs/apollo` entirely.
+
+**Command to audit:**
+
+```bash
+# Search for Apollo usage
+grep -r "useQuery\|useMutation\|useSubscription\|apollo" app/ --include="*.vue" --include="*.js" --include="*.ts"
+
+# If no results, Apollo is not being used
+```
+
+### 3. DevTools and Development Dependencies
+
+**Issue:** Development tools like `@nuxt/devtools` add overhead and can cause warnings in newer versions.
+
+**Solution:**
+
+- Remove DevTools if not actively used during development
+- If needed, enable only in development mode
+- Consider using browser DevTools extensions instead
+
+**Recommendation:** For production-focused projects, remove DevTools to reduce bundle size and eliminate potential warnings.
+
+### 4. NuxtLayout Component is Required in Nuxt 4
+
+**Issue:** Nuxt 4 requires explicit use of `<NuxtLayout />` component to render layout files. Without it, you'll get a warning and layouts won't be applied.
+
+**Solution:**
+
+- Wrap `<NuxtPage />` with `<NuxtLayout />` in `app.vue`
+- Also add `<NuxtLayout />` to `error.vue` if you have custom error pages
+- This is different from Nuxt 3 where layouts were sometimes automatically applied
+
+**Example:**
+
+```vue
+<!-- app.vue -->
+<template>
+  <div>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
+</template>
+```
+
+**Key Point:** This is not optional in Nuxt 4. The warning will persist until you add `<NuxtLayout />`.
+
+### 5. JSON Data Files and /app Directory Structure
+
+**Issue:** When migrating to `/app` directory structure, JSON data files that were in `/src/` need to be relocated. This affects:
+
+- Import paths in components
+- Import paths in server API routes
+- Build scripts that read/write these files
+
+**Solution:**
+
+- Create `/app/data/` directory for JSON files
+- Update all import paths to reference `/app/data/`
+- Update creator/build scripts to read from and write to `/app/data/`
+- Use consistent path patterns (relative or absolute)
+
+**Best Practice:** Keep all application data in `/app/data/` and use the `@/data/` alias for imports.
+
+### 6. File API Polyfill for Node.js Environment
+
+**Issue:** Some libraries (like undici) use the File API which isn't available in Node.js runtime context. This causes "File is not defined" errors during SSR or build time.
+
+**Solution:**
+
+- Add a File API polyfill at the top of `nuxt.config.js`
+- Externalize the problematic library in Nitro and Vite configs
+
+**Example:**
+
+```javascript
+// At top of nuxt.config.js
+if (typeof global !== "undefined" && !global.File) {
+  global.File = class File {
+    constructor(bits, filename, options = {}) {
+      this.name = filename;
+      this.lastModified = options.lastModified || Date.now();
+    }
+  };
+}
+
+// In config
+nitro: {
+  rollupConfig: {
+    external: ["undici"],
+  },
+},
+vite: {
+  ssr: {
+    external: ["undici"],
+  },
+}
+```
+
+### 7. Sass Variable Conflicts with Namespaced Imports
+
+**Issue:** When using `@use` with wildcard import (`as *`), variable names from the imported library can conflict with your custom variables.
+
+**Solution:**
+
+- Use a namespace instead of wildcard: `@use "library" as namespace`
+- Reference library variables with the namespace: `namespace.$variable`
+- Define custom variables after the import to avoid conflicts
+
+**Example:**
+
+```scss
+// ❌ WRONG - causes conflicts
+@use "vuetify/lib/styles/main" as *;
+$body-font-family: "Lato"; // Conflicts with Vuetify's $body-font-family
+
+// ✅ CORRECT - no conflicts
+@use "vuetify/lib/styles/main" as vuetify;
+$body-font-family: "Lato"; // No conflict
+```
+
+### 8. Creator/Build Scripts Path Updates
+
+**Issue:** Build scripts that generate JSON files need to be updated to write to the new `/app/data/` location. Additionally, scripts that read generated files need to handle cases where files don't exist yet.
+
+**Solution:**
+
+- Update all write paths to `/app/data/`
+- Add safe require/import functions that handle missing files gracefully
+- Ensure directory exists before writing files
+
+**Example:**
+
+```javascript
+// Safe require function
+const safeRequire = (filePath) => {
+  try {
+    return require(filePath);
+  } catch (err) {
+    console.warn(
+      `Warning: Could not load ${filePath}. File may not exist yet.`
+    );
+    return [];
+  }
+};
+
+// Ensure directory exists
+const dataDir = path.join(process.cwd(), "app/data");
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
+```
+
+### 9. Testing After Each Major Change
+
+**Issue:** Combining multiple changes (Nuxt upgrade + directory migration + dependency updates) makes it hard to identify which change caused a problem.
+
+**Solution:**
+
+- Test after each phase completes
+- Run both `yarn dev` and `yarn generate` after each phase
+- Check browser console for errors
+- Commit frequently with descriptive messages
+
+**Recommended Test Sequence:**
+
+1. After Nuxt upgrade: `yarn dev` and `yarn generate`
+2. After /app migration: `yarn dev` and `yarn generate`
+3. After each fix: `yarn dev` and check console
+4. Final verification: Full build and preview
+
+### 10. Deprecation Warnings vs Errors
+
+**Issue:** Not all warnings are errors. Some warnings are informational and can be safely ignored, while others indicate real problems.
+
+**Solution:**
+
+- Distinguish between warnings and errors
+- Address errors immediately
+- For warnings, determine if they affect functionality
+- Remove unused modules that cause warnings
+- Disable checks for informational warnings if they don't affect functionality
+
+**Examples:**
+
+- ✅ Layout warning: Fix by adding `<NuxtLayout />`
+- ✅ Apollo devtools warning: Fix by removing unused Apollo module
+- ✅ Sass deprecation warning: Fix by migrating to `@use`
+- ⚠️ Hydration mismatch: Usually resolves on rebuild, can be ignored during migration
+
+---
+
 ## End of Migration
 
 If all success criteria are met, the migration is complete. The project is now running Nuxt 4 with the `/app` directory structure and is ready for deployment.

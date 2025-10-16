@@ -209,6 +209,65 @@ git reset --hard pre-nuxt-4-migration
 - `creators/createLocalMeta.mjs` - Writes to `./app/data/siteMeta.json`
 - `creators/createContentDirectory.js` - Cleans up `app/data/` directory
 
+### Fix 4: Sass @import Deprecation ✅
+
+**Issue:** Dart Sass deprecation warning about `@import` rules
+**Solution:** Migrated from `@import` to `@use` syntax
+**Before:** `@import "vuetify/lib/styles/main.sass"`
+**After:** `@use "vuetify/lib/styles/main" as vuetify`
+**Files Modified:** `app/assets/css/variables.scss`
+
+**Note:** When using `@use` with a namespace, custom variables defined after the import won't conflict with imported variables.
+
+### Fix 5: Sass Variable Conflicts ✅
+
+**Issue:** Variable name conflicts when importing Vuetify styles
+**Solution:** Used namespace (`as vuetify`) instead of wildcard import (`as *`)
+**Before:** `@use "vuetify/lib/styles/main" as *`
+**After:** `@use "vuetify/lib/styles/main" as vuetify`
+**Files Modified:** `app/assets/css/variables.scss`
+
+### Fix 6: Removed Unused Apollo Module ✅
+
+**Issue:** Apollo devtools deprecation warning from unused Apollo GraphQL client
+**Solution:** Removed `@nuxtjs/apollo` module entirely
+**Reason:** Apollo was configured but never used; creator scripts use axios for GraphQL queries
+**Files Modified:** `nuxt.config.js`, `package.json`
+
+**Lesson:** Audit all configured modules to ensure they're actually being used. Unused modules add bundle size and can cause deprecation warnings.
+
+### Fix 7: Removed Nuxt DevTools ✅
+
+**Issue:** DevTools adds unnecessary overhead
+**Solution:** Removed `@nuxt/devtools` dependency and configuration
+**Files Modified:** `nuxt.config.js`, `package.json`
+
+### Fix 8: Added NuxtLayout Component ✅
+
+**Issue:** Warning about layouts not being used with `<NuxtLayout />`
+**Solution:** Wrapped `<NuxtPage />` with `<NuxtLayout />` in app.vue and error.vue
+**Files Modified:** `app/app.vue`, `app/error.vue`
+
+**Before (app.vue):**
+
+```vue
+<v-main>
+  <NuxtPage></NuxtPage>
+</v-main>
+```
+
+**After (app.vue):**
+
+```vue
+<v-main>
+  <NuxtLayout>
+    <NuxtPage></NuxtPage>
+  </NuxtLayout>
+</v-main>
+```
+
+**Note:** In Nuxt 4, `<NuxtLayout />` is required to properly render layout files. This is different from Nuxt 3 where layouts were sometimes automatically applied.
+
 ---
 
 ## Next Steps
