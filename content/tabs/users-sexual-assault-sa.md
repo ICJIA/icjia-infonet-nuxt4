@@ -35,6 +35,9 @@ markdown: >+
   ### Trainings
 
 
+  - **Sexual Assault Data Entry Training (September 16, 2025)**
+      - https://www.youtube.com/playlist?list=PL4n4n7ZvbgEOL5vTc-b-DlAecAr0zj0oX
+
   - **Using InfoNet’s New Client Needs & Updates Features**
       - https://youtu.be/Ws887UprsTk
 
@@ -117,6 +120,9 @@ markdown: >+
 - [SA InfoNet Definitions](https://infonet.icjia-api.cloud/uploads/3_4_2_SA_INFONET_DEFINITIONS_f81d776023.docx)
 
 ### Trainings
+
+- **Sexual Assault Data Entry Training (September 16, 2025)**
+    - https://www.youtube.com/playlist?list=PL4n4n7ZvbgEOL5vTc-b-DlAecAr0zj0oX
 
 - **Using InfoNet’s New Client Needs & Updates Features**
     - https://youtu.be/Ws887UprsTk

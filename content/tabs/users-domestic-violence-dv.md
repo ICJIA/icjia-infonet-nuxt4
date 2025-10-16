@@ -35,6 +35,9 @@ markdown: >+
   ### Trainings
 
 
+  - **Domestic Violence Reports Training (September 16, 2025)**
+      - https://www.youtube.com/playlist?list=PL4n4n7ZvbgEMiudeOHONV0PLYZrfoLJbC
+
   - **Domestic Violence Data Entry Training (December 4, 2024)**
       - https://www.youtube.com/playlist?list=PL4n4n7ZvbgEOeLZG5ctBIWGkxOR2eDQij
 
@@ -151,6 +154,9 @@ markdown: >+
 - [Revised 2024 DV InfoNet Definitions](https://infonet.icjia-api.cloud/uploads/Info_Net_Definitions_Revisions_Oct_2024_b6e22e853a.docx)
 
 ### Trainings
+
+- **Domestic Violence Reports Training (September 16, 2025)**
+    - https://www.youtube.com/playlist?list=PL4n4n7ZvbgEMiudeOHONV0PLYZrfoLJbC
 
 - **Domestic Violence Data Entry Training (December 4, 2024)**
     - https://www.youtube.com/playlist?list=PL4n4n7ZvbgEOeLZG5ctBIWGkxOR2eDQij
