@@ -14,6 +14,7 @@ This document summarizes the successful migration of the ICJIA InfoNet project f
 ## Changes Made
 
 ### Phase 1: Preparation & Backup ✅
+
 - Created git backup tag: `pre-nuxt-4-migration`
 - Verified current build state
 - Committed pending changes
@@ -21,15 +22,18 @@ This document summarizes the successful migration of the ICJIA InfoNet project f
 ### Phase 2: Nuxt 4 Upgrade ✅
 
 **Package.json Updates:**
+
 - `nuxt`: 3.13.2 → 4.1.0
 - `@nuxt/content`: 2.13.2 → 2.13.4 (kept at v2, NOT upgraded to v3)
 - `@nuxt/devtools`: 1.4.2 → 1.5.0
 - `@nuxtjs/apollo`: 5.0.0-alpha.6 → 5.0.0 (stable release)
 
 **Node.js Version:**
+
 - `.nvmrc`: 18.20.6 → 20
 
 **nuxt.config.js Changes:**
+
 - Removed deprecated `experimental` options (viewTransition, payloadExtraction)
 - Removed deprecated `future.compatibilityVersion` flag
 - Migrated `generate.routes` to `nitro.prerender.routes`
@@ -37,6 +41,7 @@ This document summarizes the successful migration of the ICJIA InfoNet project f
 - Updated plugins path to use `@/` alias
 
 **Dependencies:**
+
 - Ran `yarn install` with Node.js 20
 - All dependencies resolved successfully
 - Peer dependency warnings are normal and safe to ignore
@@ -44,6 +49,7 @@ This document summarizes the successful migration of the ICJIA InfoNet project f
 ### Phase 3: /app Directory Migration ✅
 
 **Files Moved to /app:**
+
 - `app.vue` → `app/app.vue`
 - `app.config.js` → `app/app.config.js`
 - `components/` → `app/components/`
@@ -57,6 +63,7 @@ This document summarizes the successful migration of the ICJIA InfoNet project f
 - `global.js` → `app/global.js`
 
 **Files Remaining in Root (as intended):**
+
 - `content/` - Nuxt Content markdown files
 - `public/` - Static assets
 - `server/` - Server routes/middleware
@@ -70,12 +77,14 @@ This document summarizes the successful migration of the ICJIA InfoNet project f
 ### Phase 4: Fix Common Issues ✅
 
 **SCSS Import Path Fix:**
+
 - File: `app/assets/css/variables.scss`
 - Changed: `@import './node_modules/vuetify/_styles.scss'`
 - To: `@import '../../node_modules/vuetify/_styles.scss'`
 - Reason: File moved from `/assets/css/` (2 levels) to `/app/assets/css/` (3 levels)
 
 **Import Path Analysis:**
+
 - Searched for `@/src/` imports: None found
 - Searched for `~/src/` imports: None found
 - All imports are either API endpoints or properly aliased
@@ -86,12 +95,13 @@ This document summarizes the successful migration of the ICJIA InfoNet project f
 
 After migration, path aliases work as follows:
 
-| Alias | Resolves To | Use Case |
-|-------|-------------|----------|
-| `@/` or `~/` | `/app` | App code (components, pages, etc.) |
-| `@@/` or `~~/` | Project root | Config, content, src files |
+| Alias          | Resolves To  | Use Case                           |
+| -------------- | ------------ | ---------------------------------- |
+| `@/` or `~/`   | `/app`       | App code (components, pages, etc.) |
+| `@@/` or `~~/` | Project root | Config, content, src files         |
 
 **Examples:**
+
 - `@/components/Foo.vue` → `/app/components/Foo.vue`
 - `@/assets/css/app.css` → `/app/assets/css/app.css`
 - `@@/src/appRoutes.json` → `/src/appRoutes.json`
@@ -101,9 +111,11 @@ After migration, path aliases work as follows:
 ## Critical Decisions
 
 ### @nuxt/content v2 vs v3
+
 ✅ **Kept at v2.13.4** (NOT upgraded to v3)
 
 **Reason:** v3 has breaking API changes:
+
 - `queryContent()` → `queryCollection()`
 - Requires significant refactoring of all content queries
 - Combining both migrations would make debugging harder
@@ -135,6 +147,7 @@ Two backup tags were created for rollback if needed:
 2. `pre-app-directory-migration` - Before /app directory migration
 
 **Rollback commands:**
+
 ```bash
 # Rollback to before /app migration
 git reset --hard pre-app-directory-migration
@@ -145,9 +158,28 @@ git reset --hard pre-nuxt-4-migration
 
 ---
 
+## Post-Migration Fixes
+
+### Fix 1: File API Polyfill ✅
+
+**Issue:** `File is not defined` error from undici library
+**Solution:** Added File API polyfill at top of `nuxt.config.js`
+**Files Modified:** `nuxt.config.js`
+
+### Fix 2: SCSS Import Path ✅
+
+**Issue:** `Can't find stylesheet to import` for Vuetify styles
+**Solution:** Changed from relative path to package import
+**Before:** `@import "../../../node_modules/vuetify/_styles.scss"`
+**After:** `@import "vuetify/lib/styles/main.sass"`
+**Files Modified:** `app/assets/css/variables.scss`
+
+---
+
 ## Next Steps
 
 1. **Test the build locally:**
+
    ```bash
    source $HOME/.nvm/nvm.sh && nvm use 20
    yarn dev
@@ -183,4 +215,3 @@ If you encounter any issues:
 2. Review the git commit history for specific changes
 3. Use the backup tags to rollback if needed
 4. Refer to the Nuxt 4 upgrade guide: https://nuxt.com/docs/getting-started/upgrade
-
