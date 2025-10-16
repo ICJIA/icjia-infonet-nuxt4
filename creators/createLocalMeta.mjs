@@ -98,8 +98,8 @@ markdown.forEach((file) => {
 const searchIndex = [...content];
 // console.log(searchIndex);
 
-saveJson(searchIndex, "./src/siteMeta.json");
-//console.log(`Created: /src/siteMeta.json`);
+saveJson(searchIndex, "./app/data/siteMeta.json");
+//console.log(`Created: /app/data/siteMeta.json`);
 saveJson(searchIndex, "./public/searchIndex.json");
 //console.log(`Created: /public/searchIndex.json`);
 

@@ -45,7 +45,7 @@ const search = site.map((item) => {
   return obj;
 });
 
-jsonfile.writeFileSync(`./src/searchIndex.json`, search, function (err) {
+jsonfile.writeFileSync(`./app/data/searchIndex.json`, search, function (err) {
   if (err) {
     console.error(err);
   }
@@ -57,4 +57,4 @@ jsonfile.writeFileSync(`./public/sitemeta.json`, siteMeta, function (err) {
 });
 
 console.log("sitemeta.json created in ../public/sitemeta.json");
-console.log("searchIndex.json created in ../src/searchIndex.json");
+console.log("searchIndex.json created in ../app/data/searchIndex.json");

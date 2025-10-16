@@ -52,13 +52,13 @@ axios
     //   }
     // });
 
-    jsonfile.writeFileSync(`./src/hub.json`, articles, function (err) {
+    jsonfile.writeFileSync(`./app/data/hub.json`, articles, function (err) {
       if (err) {
         console.error(err);
       }
     });
 
-    console.log("hub.json created in /assets/json/");
+    console.log("hub.json created in /app/data/");
     console.log("Hub articles found: ", articles.length);
   })
   .catch((err) => console.error(err));

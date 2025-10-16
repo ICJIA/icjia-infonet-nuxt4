@@ -67,10 +67,14 @@ axios
     filteredPubs = _.compact(filteredPubs);
 
     console.log("filteredPubs publications found: ", filteredPubs.length);
-    jsonfile.writeFileSync(`./src/publist.json`, filteredPubs, function (err) {
-      if (err) {
-        console.error(err);
+    jsonfile.writeFileSync(
+      `./app/data/publist.json`,
+      filteredPubs,
+      function (err) {
+        if (err) {
+          console.error(err);
+        }
       }
-    });
+    );
   })
   .catch((err) => console.error(err));
