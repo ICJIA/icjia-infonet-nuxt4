@@ -11,7 +11,9 @@
 
     <v-main class="markdown-body" style="min-height: 90vh !important">
       <TheBreadcrumbBar v-if="!hideBreadcrumbs"></TheBreadcrumbBar>
-      <NuxtPage></NuxtPage>
+      <NuxtLayout>
+        <NuxtPage></NuxtPage>
+      </NuxtLayout>
     </v-main>
     <!-- <div style="height: 75px"></div> -->
     <!-- 
