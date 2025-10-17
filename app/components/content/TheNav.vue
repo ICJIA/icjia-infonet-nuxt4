@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <header>
     <v-app-bar
       fixed
       app
@@ -9,11 +9,17 @@
       size="150px"
       elevation="3"
       class="pl-5 pr-5"
+      role="presentation"
     >
       <div
         v-if="!nav"
         class="hover hamburger text-center hidden-md-and-up"
+        role="button"
+        tabindex="0"
+        aria-label="Open navigation menu"
         @click="toggleNav"
+        @keydown.enter="toggleNav"
+        @keydown.space.prevent="toggleNav"
       >
         <v-icon icon="mdi-menu" size="large"></v-icon>
         <div style="font-size: 10px; font-weight: 900">MENU</div>
@@ -21,7 +27,12 @@
       <div
         v-else
         class="hover hamburger text-center hidden-md-and-up"
+        role="button"
+        tabindex="0"
+        aria-label="Close navigation menu"
         @click="toggleNav"
+        @keydown.enter="toggleNav"
+        @keydown.space.prevent="toggleNav"
       >
         <v-icon icon="mdi-window-close" size="large"></v-icon>
         <div style="font-size: 10px; font-weight: 900">CLOSE</div>
@@ -196,10 +207,13 @@
         </span>
 
         <span class="hidden-sm-and-down">
-          <v-tooltip activator="parent" location="bottom"> More </v-tooltip>
           <v-menu transition="scale-transition">
             <template #activator="{ props }">
-              <v-btn v-bind="props">
+              <v-btn
+                v-bind="props"
+                aria-label="More options"
+                title="More options"
+              >
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </template>
@@ -234,7 +248,12 @@
         </span>
         <span
           class="hover hamburger text-center hidden-md-and-up"
+          role="button"
+          tabindex="0"
+          aria-label="Search"
           @click="goToSearch"
+          @keydown.enter="goToSearch"
+          @keydown.space.prevent="goToSearch"
         >
           <v-icon icon="mdi-magnify" size="large"></v-icon>
           <div style="font-size: 10px; font-weight: 900">SEARCH</div>
@@ -243,7 +262,7 @@
 
       <span v-else class="text center ml-12"><TheLoader></TheLoader> </span>
     </v-app-bar>
-  </div>
+  </header>
 </template>
 
 <script setup>

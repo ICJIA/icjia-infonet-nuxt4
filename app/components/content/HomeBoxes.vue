@@ -61,7 +61,7 @@
         </v-col>
         <v-col cols="12" md="4">
           <v-card
-            color="#6184a0"
+            color="#4f6d87"
             style="height: 300px"
             class="py-5 px-2 text-center info-card hover"
             :class="{ boxGutter: gutter }"

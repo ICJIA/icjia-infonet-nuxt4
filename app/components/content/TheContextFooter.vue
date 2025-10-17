@@ -1,5 +1,5 @@
 <template>
-  <nav style="z-index: 1000 !important">
+  <nav aria-label="Footer navigation" style="z-index: 1000 !important">
     <div class="nav-footer">
       <span v-for="(item, index) in navMenu" :key="index" class="nav-item">
         <NuxtLink :to="item.link" class="context-link">{{

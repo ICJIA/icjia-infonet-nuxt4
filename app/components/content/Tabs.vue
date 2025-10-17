@@ -7,7 +7,7 @@
             <!-- <div class="py-12"><strong>isMobile: </strong>{{ mobile }}</div> -->
             <div
               class="text-center mb-4 pr-2"
-              style="font-size: 12px; font-weight: 900; color: #777"
+              style="font-size: 12px; font-weight: 900; color: #6b6b6b"
             >
               Click tab to view agency info.
             </div>
@@ -92,6 +92,11 @@
                         :src="getImageURL(image.attributes.formats.medium.url)"
                         :lazy-src="
                           getImageURL(image.attributes.formats.thumbnail.url)
+                        "
+                        :alt="
+                          image.attributes?.caption ||
+                          image.attributes?.alternativeText ||
+                          'Screenshot image'
                         "
                         ><template v-slot:placeholder>
                           <div

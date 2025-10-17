@@ -17,6 +17,9 @@ import vuetify from "vite-plugin-vuetify";
 import appRoutes from "./app/data/appRoutes.json";
 
 export default defineNuxtConfig({
+  // Disable devtools to prevent accessibility violations in SiteImprove
+  devtools: { enabled: false },
+
   app: {
     // baseURL: "/infonet/",
     // pageTransition: { name: "page", mode: "out-in" },

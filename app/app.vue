@@ -9,17 +9,21 @@
 
     <NuxtLoadingIndicator color="blue" />
 
-    <v-main class="markdown-body" style="min-height: 90vh !important">
-      <TheBreadcrumbBar v-if="!hideBreadcrumbs"></TheBreadcrumbBar>
-      <NuxtLayout>
-        <NuxtPage></NuxtPage>
-      </NuxtLayout>
+    <v-main
+      class="markdown-body"
+      style="min-height: 90vh !important"
+      role="presentation"
+    >
+      <main>
+        <TheBreadcrumbBar v-if="!hideBreadcrumbs"></TheBreadcrumbBar>
+        <NuxtLayout>
+          <NuxtPage></NuxtPage>
+        </NuxtLayout>
+      </main>
     </v-main>
-    <!-- <div style="height: 75px"></div> -->
-    <!-- 
-    <the-context-footer v-if="isMounted && !mobile"></the-context-footer>
 
-    <TheFooter></TheFooter> -->
+    <TheContextFooter v-if="isMounted && !mobile"></TheContextFooter>
+    <TheFooter></TheFooter>
   </v-app>
 </template>
 

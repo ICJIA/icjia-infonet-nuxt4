@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <footer>
     <v-footer
       dark
       class=""
       style="margin: 0; padding: 0; z-index: 1000 !important"
+      role="presentation"
     >
       <v-card
         flat
@@ -122,7 +123,7 @@
         </v-container>
       </v-card>
     </v-footer>
-  </div>
+  </footer>
 </template>
 
 <script>

@@ -151,6 +151,11 @@ useHead({
                 cover
                 :src="`https://infonet.icjia-api.cloud${data.splash.data.attributes.formats.medium.url}`"
                 :lazy-src="`https://infonet.icjia-api.cloud${data.splash.data.attributes.formats.thumbnail.url}`"
+                :alt="
+                  data.splash.data.attributes.caption ||
+                  data.splash.data.attributes.alternativeText ||
+                  `${data.title} - Article splash image`
+                "
                 height="550"
                 ><template v-slot:placeholder>
                   <div class="d-flex align-center justify-center fill-height">

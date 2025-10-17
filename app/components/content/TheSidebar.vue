@@ -6,78 +6,124 @@
       temporary
       style="background: #fff"
     >
-      <v-list v-model:opened="open" density="compact">
+      <nav aria-label="Main navigation" class="sidebar-nav">
+        <!-- Main menu items with accordion functionality -->
         <div
           v-for="(menu, index) in navMenu"
           :key="`sidebar-accordion-${index}`"
+          class="sidebar-menu-item"
         >
+          <!-- Menu item with children (accordion) -->
           <div v-if="menu && menu.children">
-            <v-list-group :value="menu.children.title">
-              <template #activator="{ props }">
-                <v-list-item
-                  v-bind="props"
-                  style="font-weight: 900 !important"
-                  >{{ menu.main }}</v-list-item
+            <h3 class="sidebar-heading">
+              <button
+                :id="`accordion-header-${index}`"
+                type="button"
+                class="sidebar-accordion-button"
+                :aria-expanded="expandedItems[index] ? 'true' : 'false'"
+                :aria-controls="`accordion-panel-${index}`"
+                @click="toggleAccordion(index)"
+                @keydown.enter="toggleAccordion(index)"
+                @keydown.space.prevent="toggleAccordion(index)"
+              >
+                <span class="sidebar-accordion-title">{{ menu.main }}</span>
+                <v-icon
+                  :class="{ rotated: expandedItems[index] }"
+                  class="sidebar-accordion-icon"
+                  size="small"
                 >
-              </template>
-
-              <div v-for="(child, i) in menu.children" :key="`main-${i}`">
-                <v-list-item
-                  v-if="child.section"
-                  style="margin-top: 0px; font-weight: 900; color: #555"
-                >
-                  {{ child.section }}
-                </v-list-item>
-                <div
-                  v-if="child.divider"
-                  style="margin-top: 0px; font-weight: 900; color: #555"
-                >
-                  <v-divider></v-divider>
-                </div>
-                <v-list-item
-                  v-if="child.title"
-                  exact
-                  style="
-                    margin-top: 0px;
-                    font-weight: 400;
-                    color: #555;
-                    margin-left: -30px;
-                  "
-                  :to="child.link"
-                >
-                  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ child.title }}</span>
-                </v-list-item>
-              </div>
-            </v-list-group>
-          </div>
-          <div v-else>
-            <v-list-item
-              style="font-weight: 900 !important"
-              :to="menu.link"
-              class="hover"
-              >{{ menu.main }}</v-list-item
+                  mdi-chevron-down
+                </v-icon>
+              </button>
+            </h3>
+            <div
+              :id="`accordion-panel-${index}`"
+              role="region"
+              :aria-labelledby="`accordion-header-${index}`"
+              :hidden="!expandedItems[index]"
+              class="sidebar-accordion-panel"
             >
+              <nav aria-label="Submenu">
+                <div
+                  v-for="(child, i) in menu.children"
+                  :key="`child-${index}-${i}`"
+                >
+                  <!-- Section heading (non-interactive) -->
+                  <div
+                    v-if="child.section"
+                    class="sidebar-section-heading"
+                    role="heading"
+                    aria-level="4"
+                  >
+                    {{ child.section }}
+                  </div>
+
+                  <!-- Divider -->
+                  <hr v-if="child.divider" class="sidebar-divider" />
+
+                  <!-- Child link -->
+                  <NuxtLink
+                    v-if="child.title"
+                    :to="child.link"
+                    class="sidebar-child-link"
+                    @click="closeDrawer"
+                  >
+                    {{ child.title }}
+                  </NuxtLink>
+                </div>
+              </nav>
+            </div>
+          </div>
+
+          <!-- Menu item without children (simple link) -->
+          <div v-else>
+            <NuxtLink
+              :to="menu.link"
+              class="sidebar-main-link"
+              @click="closeDrawer"
+            >
+              {{ menu.main }}
+            </NuxtLink>
           </div>
         </div>
-        <!-- <v-list-item exact to="/contact" style="font-weight: 900 !important">
-          Contact</v-list-item
-        > -->
-        <v-divider class="my-3"></v-divider>
 
-        <v-list-item exact to="/search">
-          <v-icon left icon="mdi-magnify" size="x-small"></v-icon
-          >&nbsp;&nbsp;&nbsp;Search</v-list-item
-        >
-        <v-list-item exact to="/translate">
-          <v-icon left icon="mdi-web" size="x-small"></v-icon
-          >&nbsp;&nbsp;&nbsp;Translate</v-list-item
-        >
+        <!-- Separator -->
+        <hr class="sidebar-separator" />
 
-        <v-list-item exact to="/contact">
-          <v-icon left icon="mdi-mail" size="x-small"></v-icon
-          >&nbsp;&nbsp;&nbsp;Contact</v-list-item
-        >
-      </v-list>
+        <!-- Utility links -->
+        <nav aria-label="Utility links" class="sidebar-utility-links">
+          <NuxtLink
+            to="/search"
+            class="sidebar-utility-link"
+            @click="closeDrawer"
+          >
+            <v-icon class="sidebar-utility-icon" size="x-small"
+              >mdi-magnify</v-icon
+            >
+            <span class="sidebar-utility-text">Search</span>
+          </NuxtLink>
+
+          <NuxtLink
+            to="/translate"
+            class="sidebar-utility-link"
+            @click="closeDrawer"
+          >
+            <v-icon class="sidebar-utility-icon" size="x-small">mdi-web</v-icon>
+            <span class="sidebar-utility-text">Translate</span>
+          </NuxtLink>
+
+          <NuxtLink
+            to="/contact"
+            class="sidebar-utility-link"
+            @click="closeDrawer"
+          >
+            <v-icon class="sidebar-utility-icon" size="x-small"
+              >mdi-mail</v-icon
+            >
+            <span class="sidebar-utility-text">Contact</span>
+          </NuxtLink>
+        </nav>
+      </nav>
     </v-navigation-drawer>
   </div>
 </template>
@@ -88,27 +134,45 @@ const appConfig = useAppConfig();
 const navMenu = JSON.parse(JSON.stringify(appConfig.sidebarMenu));
 const isMounted = ref(false);
 const drawer = ref(false);
-const open = ref([]);
 const altState = useNavToggle();
+
+// Track which accordion items are expanded
+const expandedItems = ref({});
+
+// Initialize expanded state for items with children
+onMounted(() => {
+  isMounted.value = true;
+
+  // Initialize all accordion items as collapsed
+  navMenu.forEach((menu, index) => {
+    if (menu && menu.children) {
+      expandedItems.value[index] = false;
+    }
+  });
+});
+
+// Sync drawer state with global nav toggle
 watch(drawer, (val) => {
   altState.value = drawer.value;
 });
+
 watchEffect(() => {
   drawer.value = altState.value;
 });
-const click = () => {
-  console.log("click sidebar");
-  altState.value = false;
+
+// Toggle accordion panel
+const toggleAccordion = (index) => {
+  expandedItems.value[index] = !expandedItems.value[index];
 };
 
-onMounted(() => {
-  isMounted.value = true;
-});
+// Close drawer when navigating
+const closeDrawer = () => {
+  altState.value = false;
+};
 
 const router = useRouter();
 const routeTo = (url) => {
   altState.value = false;
-
   router.push({ path: url });
 };
 
@@ -119,6 +183,193 @@ const translationToggle = () => {
 </script>
 
 <style lang="scss" scoped>
+.sidebar-nav {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu-item {
+  margin: 0;
+}
+
+/* Accordion heading */
+.sidebar-heading {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+/* Accordion button */
+.sidebar-accordion-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.87);
+  transition: background-color 0.2s;
+  min-height: 40px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: -2px;
+  }
+}
+
+.sidebar-accordion-title {
+  flex: 1;
+}
+
+.sidebar-accordion-icon {
+  transition: transform 0.2s;
+  margin-left: 8px;
+
+  &.rotated {
+    transform: rotate(180deg);
+  }
+}
+
+/* Accordion panel */
+.sidebar-accordion-panel {
+  padding: 0;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+/* Section heading (non-interactive) */
+.sidebar-section-heading {
+  margin-top: 0;
+  padding: 8px 16px;
+  font-weight: 900;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+/* Divider */
+.sidebar-divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Child link */
+.sidebar-child-link {
+  display: block;
+  padding: 8px 16px 8px 46px; /* Indented to match original -30px margin-left */
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #555;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  min-height: 40px;
+  line-height: 1.5;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: -2px;
+  }
+
+  &.router-link-active,
+  &.router-link-exact-active {
+    background-color: rgba(25, 118, 210, 0.12);
+    color: #1976d2;
+  }
+}
+
+/* Main link (no children) */
+.sidebar-main-link {
+  display: block;
+  padding: 8px 16px;
+  font-weight: 900;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.87);
+  text-decoration: none;
+  transition: background-color 0.2s;
+  min-height: 40px;
+  line-height: 1.5;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: -2px;
+  }
+
+  &.router-link-active,
+  &.router-link-exact-active {
+    background-color: rgba(25, 118, 210, 0.12);
+    color: #1976d2;
+  }
+}
+
+/* Separator */
+.sidebar-separator {
+  margin: 12px 0;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Utility links section */
+.sidebar-utility-links {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-utility-link {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.87);
+  text-decoration: none;
+  transition: background-color 0.2s;
+  min-height: 40px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: -2px;
+  }
+
+  &.router-link-active,
+  &.router-link-exact-active {
+    background-color: rgba(25, 118, 210, 0.12);
+    color: #1976d2;
+  }
+}
+
+.sidebar-utility-icon {
+  margin-right: 8px;
+}
+
+.sidebar-utility-text {
+  line-height: 1.5;
+}
+
+/* Legacy class for compatibility */
 .sidebar-item {
   font-weight: 700;
   font-family: "Roboto", sans-serif;

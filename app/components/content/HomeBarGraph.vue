@@ -9,7 +9,11 @@
     </h2>
     <h3 style="border: none; font-size: 12px">Source: InfoNet System</h3>
     <div style="min-height: 25vh" class="pt-3 pb-10">
-      <Bar :data="chartData" :options="chartOptions" />
+      <Bar
+        :data="chartData"
+        :options="chartOptions"
+        aria-label="Bar chart showing domestic and sexual violence victims who received services in Illinois from 2018 to 2024. Data shows: 2018: 70,133; 2019: 72,905; 2020: 60,717; 2021: 61,857; 2022: 61,259; 2023: 63,211; 2024: 63,557 victims."
+      />
     </div>
     <div class="text-center">
       <v-btn

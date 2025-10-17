@@ -12,9 +12,11 @@
                   v-model="subject"
                   :rules="subjectRules"
                   label="Subject"
+                  aria-label="Subject"
                   required
                   :disabled="successfullySubmitted"
                   style="font-weight: 700 !important"
+                  base-color="#5a5d60"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="6">
@@ -22,8 +24,10 @@
                   v-model="firstname"
                   :rules="nameRules"
                   label="First Name"
+                  aria-label="First Name"
                   :disabled="successfullySubmitted"
                   required
+                  base-color="#5a5d60"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="6">
@@ -31,8 +35,10 @@
                   v-model="lastname"
                   :rules="nameRules"
                   label="Last Name"
+                  aria-label="Last Name"
                   :disabled="successfullySubmitted"
                   required
+                  base-color="#5a5d60"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -43,16 +49,20 @@
                   :rules="emailRules"
                   :disabled="successfullySubmitted"
                   label="Email"
+                  aria-label="Email"
                   required
+                  base-color="#5a5d60"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="6">
                 <v-text-field
                   v-model="phone"
                   label="Phone Number"
+                  aria-label="Phone Number"
                   :disabled="successfullySubmitted"
                   :rules="phoneRules"
                   required
+                  base-color="#5a5d60"
                 ></v-text-field>
               </v-col>
 
@@ -62,9 +72,11 @@
                   clearable
                   clear-icon="mdi-close-circle"
                   label="Message"
+                  aria-label="Message"
                   :disabled="successfullySubmitted"
                   auto-grow
                   required
+                  base-color="#5a5d60"
                 ></v-textarea>
               </v-col>
             </v-row>
@@ -272,5 +284,14 @@ export default {
 .fluid {
   margin: 0;
   padding: 0;
+}
+</style>
+
+<style>
+/* Accessibility fix: Improve form label contrast for WCAG AA compliance */
+/* Override Vuetify's default label color #9c9ea0 (2.48:1 contrast) */
+/* with #5a5d60 (4.5:1 contrast) on #f6f6f7 background */
+.v-label.v-field-label {
+  color: #5a5d60 !important;
 }
 </style>
