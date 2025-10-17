@@ -153,7 +153,7 @@ Recent improvements:
 
 For detailed information about accessibility testing and improvements, see:
 
-- [Developer Documentation Portal](http://localhost:8000/documentation/) - View latest reports
+- [Developer Documentation Portal](http://infonet.icjia.illinois.gov/documentation/) - View latest reports
 - [Documentation Portal Setup](./DOCUMENTATION_PORTAL_SETUP.md) - Portal configuration
 - [Complete Accessibility Summary](./ACCESSIBILITY_COMPLETE_SUMMARY.md) - Overview of all fixes
 - [Fresh Audit Summary](./FRESH_AUDIT_WITH_SERVER_SUMMARY.md) - Latest audit results
