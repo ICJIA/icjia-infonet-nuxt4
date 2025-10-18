@@ -45,6 +45,53 @@ html {
   word-wrap: break-word !important;
 }
 
+/* Fix for Siteimprove "Text is clipped when resized" warning on tabs */
+/* Override Vuetify's white-space: nowrap on tab button content to allow text to wrap when scaled to 200% */
+/* Enhanced with multiple selectors and higher specificity to help Siteimprove's static analysis detect the fix */
+
+/* Tab container - allow height to expand */
+.v-tab,
+button.v-tab,
+.v-tab.v-btn,
+button[role="tab"].v-tab {
+  height: auto !important;
+  min-height: 48px !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Tab content - allow text to wrap and expand */
+.v-tab .v-btn__content,
+.v-tab > .v-btn__content,
+button.v-tab .v-btn__content,
+button[role="tab"] .v-btn__content,
+.v-tab.v-btn .v-btn__content,
+span.v-btn__content[data-no-activator] {
+  white-space: normal !important;
+  white-space-collapse: collapse !important;
+  text-wrap: wrap !important;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+  display: inline-flex !important;
+  line-height: 1.5 !important;
+}
+
+/* Tab slider - ensure it doesn't interfere with text wrapping */
+.v-tab .v-tab__slider,
+.v-tab > .v-btn__content > .v-tab__slider,
+div.v-tab__slider {
+  overflow: visible !important;
+  position: absolute !important;
+}
+
 h1,
 h2,
 h3,
