@@ -1,32 +1,27 @@
 <template>
-  <div style="margin-top: -35px">
-    <v-dialog width="500" v-model="dialog">
-      <template v-slot:activator="{ props }">
-        <v-btn v-bind="props" text="Open Dialog"> </v-btn>
-      </template>
+  <!-- Modal is triggered programmatically via events, no visible activator needed -->
+  <v-dialog width="500" v-model="dialog">
+    <template v-slot:default="{ isActive }">
+      <v-card title="Redirect to External Website">
+        <v-card-text class="text-left">
+          <div v-html="bodyText"></div>
+        </v-card-text>
 
-      <template v-slot:default="{ isActive }">
-        <v-card title="Redirect to External Website">
-          <v-card-text class="text-left">
-            <div v-html="bodyText"></div>
-          </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
-
-            <v-btn size="small" text="Cancel" @click="close()"></v-btn>
-            <v-btn
-              color="#5865f2"
-              size="small"
-              variant="flat"
-              text="Yes, Please redirect me"
-              @click="redirect()"
-            ></v-btn>
-          </v-card-actions>
-        </v-card>
-      </template>
-    </v-dialog>
-  </div>
+          <v-btn size="small" text="Cancel" @click="close()"></v-btn>
+          <v-btn
+            color="#5865f2"
+            size="small"
+            variant="flat"
+            text="Yes, Please redirect me"
+            @click="redirect()"
+          ></v-btn>
+        </v-card-actions>
+      </v-card>
+    </template>
+  </v-dialog>
 </template>
 
 <script setup>

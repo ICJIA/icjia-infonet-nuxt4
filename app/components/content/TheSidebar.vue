@@ -14,8 +14,10 @@
           class="sidebar-menu-item"
         >
           <!-- Menu item with children (accordion) -->
+          <!-- Changed from h3 to div to fix Siteimprove "Page does not start with a level 1 heading" warning -->
+          <!-- Navigation labels should not use heading elements that interfere with page heading hierarchy -->
           <div v-if="menu && menu.children">
-            <h3 class="sidebar-heading">
+            <div class="sidebar-heading">
               <button
                 :id="`accordion-header-${index}`"
                 type="button"
@@ -35,7 +37,7 @@
                   mdi-chevron-down
                 </v-icon>
               </button>
-            </h3>
+            </div>
             <div
               :id="`accordion-panel-${index}`"
               role="region"

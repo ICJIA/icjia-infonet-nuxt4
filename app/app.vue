@@ -1,5 +1,8 @@
 <template>
   <v-app id="appTop">
+    <!-- Skip links must be first focusable element for WCAG 2.1 Level AA compliance -->
+    <SkipLinks></SkipLinks>
+
     <LazyImageModal></LazyImageModal>
     <LazyTextModal></LazyTextModal>
     <TheNav></TheNav>
@@ -14,7 +17,7 @@
       style="min-height: 90vh !important"
       role="presentation"
     >
-      <main>
+      <main id="main-content" tabindex="-1">
         <TheBreadcrumbBar v-if="!hideBreadcrumbs"></TheBreadcrumbBar>
         <NuxtLayout>
           <NuxtPage></NuxtPage>

@@ -28,6 +28,23 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Fix for Siteimprove "Text is clipped when resized" warning */
+/* Override Vuetify's overflow: hidden on chips to allow text to expand when scaled to 200% */
+.v-chip {
+  overflow: visible !important;
+  white-space: normal !important;
+  height: auto !important;
+  min-height: 32px !important;
+}
+
+.v-chip .v-chip__content {
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: clip !important;
+  display: inline-block !important;
+  word-wrap: break-word !important;
+}
+
 h1,
 h2,
 h3,
