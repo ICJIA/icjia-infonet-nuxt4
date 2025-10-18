@@ -39,6 +39,18 @@ const colors = {
 };
 
 /**
+ * Escape HTML special characters for safe display
+ */
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/**
  * Load all routes from the appRoutes.json file
  */
 async function loadRoutes() {
@@ -78,12 +90,25 @@ async function auditPage(page, url, route) {
       );
     }
 
-    // Wait a bit for dynamic content to load
-    await page.waitForTimeout(1000);
+    // Wait for dynamic content and CSS to fully load
+    // Increased to 2 seconds to ensure Vuetify theme styles are applied
+    await page.waitForTimeout(2000);
 
-    // Run axe accessibility scan
+    // Run axe accessibility scan with HTML snippets included
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"])
+      .options({
+        resultTypes: ["violations", "incomplete", "passes"],
+        runOnly: {
+          type: "tag",
+          values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"],
+        },
+        // Ensure HTML snippets are included in results
+        elementRef: true,
+        selectors: true,
+        ancestry: true,
+        xpath: false,
+      })
       .analyze();
 
     return {
@@ -231,6 +256,22 @@ async function generateHTMLReport(results, summary, outputPath) {
     .nodes { margin-top: 15px; }
     .node { background: #f8f9fa; padding: 10px; margin: 5px 0; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.85em; }
     .node-target { color: #e74c3c; font-weight: bold; }
+    .node-html {
+      margin-top: 8px;
+      padding: 10px;
+      background: #2d2d2d;
+      color: #f8f8f2;
+      border-radius: 4px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .node-html-label {
+      color: #95a5a6;
+      font-size: 0.9em;
+      margin-bottom: 5px;
+      display: block;
+    }
     .page-section { margin: 30px 0; padding: 20px; background: #f8f9fa; border-radius: 8px; }
     .page-title { font-size: 1.3em; color: #2c3e50; margin-bottom: 15px; }
     .no-violations { color: #27ae60; font-weight: bold; padding: 20px; text-align: center; background: #eafaf1; border-radius: 8px; }
@@ -399,11 +440,11 @@ async function generateHTMLReport(results, summary, outputPath) {
                     )}</div>
                     ${
                       node.html
-                        ? `<div style="margin-top: 5px; color: #555;">HTML: ${node.html.substring(
-                            0,
-                            200
-                          )}${node.html.length > 200 ? "..." : ""}</div>`
-                        : ""
+                        ? `<div class="node-html-label">HTML:</div>
+                           <div class="node-html">${escapeHtml(
+                             node.html
+                           )}</div>`
+                        : '<div style="margin-top: 5px; color: #95a5a6; font-style: italic;">HTML snippet not available</div>'
                     }
                   </div>
                 `

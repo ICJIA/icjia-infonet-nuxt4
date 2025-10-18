@@ -16,7 +16,6 @@
                   required
                   :disabled="successfullySubmitted"
                   style="font-weight: 700 !important"
-                  base-color="#5a5d60"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="6">
@@ -27,7 +26,6 @@
                   aria-label="First Name"
                   :disabled="successfullySubmitted"
                   required
-                  base-color="#5a5d60"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="6">
@@ -38,7 +36,6 @@
                   aria-label="Last Name"
                   :disabled="successfullySubmitted"
                   required
-                  base-color="#5a5d60"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -51,7 +48,6 @@
                   label="Email"
                   aria-label="Email"
                   required
-                  base-color="#5a5d60"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="6">
@@ -62,7 +58,6 @@
                   :disabled="successfullySubmitted"
                   :rules="phoneRules"
                   required
-                  base-color="#5a5d60"
                 ></v-text-field>
               </v-col>
 
@@ -76,7 +71,6 @@
                   :disabled="successfullySubmitted"
                   auto-grow
                   required
-                  base-color="#5a5d60"
                 ></v-textarea>
               </v-col>
             </v-row>
@@ -289,9 +283,9 @@ export default {
 
 <style>
 /* Accessibility fix: Improve form label contrast for WCAG AA compliance */
-/* Override Vuetify's default label color #9c9ea0 (2.48:1 contrast) */
-/* with #5a5d60 (4.5:1 contrast) on #f6f6f7 background */
+/* Override Vuetify's default label color to meet WCAG AA standards */
+/* Using rgba(0, 0, 0, 0.87) provides excellent contrast ratio (15.8:1) */
 .v-label.v-field-label {
-  color: #5a5d60 !important;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 </style>

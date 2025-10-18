@@ -21,8 +21,9 @@ export default defineNuxtPlugin((nuxtApp) => {
           colors: {
             // Accessibility fix: Override Vuetify's default label color
             // to meet WCAG AA contrast requirements (4.5:1) on #f6f6f7 background
-            // Original color #9c9ea0 had only 2.48:1 contrast ratio
-            "on-surface-variant": "#5a5d60",
+            // Using rgba(0, 0, 0, 0.87) provides excellent contrast ratio (15.8:1)
+            // This ensures WCAG AA compliance (minimum 4.5:1 required)
+            "on-surface-variant": "rgba(0, 0, 0, 0.87)",
           },
         },
       },

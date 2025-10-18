@@ -1,14 +1,22 @@
 {
   "summary": {
     "totalPages": 175,
-    "totalViolations": 180,
+    "totalViolations": 181,
     "bySeverity": {
       "critical": 0,
-      "serious": 1,
+      "serious": 2,
       "moderate": 4,
       "minor": 175
     },
     "byPage": [
+      {
+        "route": "/about",
+        "violations": 2,
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 1
+      },
       {
         "route": "/contact",
         "violations": 2,
@@ -51,14 +59,6 @@
       },
       {
         "route": "/",
-        "violations": 1,
-        "critical": 0,
-        "serious": 0,
-        "moderate": 0,
-        "minor": 1
-      },
-      {
-        "route": "/about",
         "violations": 1,
         "critical": 0,
         "serious": 0,
@@ -1614,6 +1614,15 @@
           "/tabs/users-sexual-assault-sa",
           "/tabs/users-children-s-advocacy-centers-cac"
         ]
+      },
+      {
+        "id": "frame-title",
+        "description": "Ensure <iframe> and <frame> elements have an accessible name",
+        "impact": "serious",
+        "count": 1,
+        "pages": [
+          "/about"
+        ]
       }
     ]
   },
@@ -1621,7 +1630,7 @@
     {
       "route": "/",
       "url": "http://localhost:8000/",
-      "timestamp": "2025-10-17T20:59:12.357Z",
+      "timestamp": "2025-10-17T20:05:36.516Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -1669,7 +1678,7 @@
     {
       "route": "/about",
       "url": "http://localhost:8000/about",
-      "timestamp": "2025-10-17T20:59:16.025Z",
+      "timestamp": "2025-10-17T20:05:39.625Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -1708,16 +1717,82 @@
               "failureSummary": "Fix any of the following:\n  ARIA role presentation is not allowed for given element"
             }
           ]
+        },
+        {
+          "id": "frame-title",
+          "impact": "serious",
+          "tags": [
+            "cat.text-alternatives",
+            "wcag2a",
+            "wcag412",
+            "section508",
+            "section508.22.i",
+            "TTv5",
+            "TT12.d",
+            "EN-301-549",
+            "EN-9.4.1.2"
+          ],
+          "description": "Ensure <iframe> and <frame> elements have an accessible name",
+          "help": "Frames must have an accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/frame-title?application=playwright",
+          "nodes": [
+            {
+              "any": [
+                {
+                  "id": "non-empty-title",
+                  "data": {
+                    "messageKey": "noAttr"
+                  },
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element has no title attribute"
+                },
+                {
+                  "id": "aria-label",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "aria-label attribute does not exist or is empty"
+                },
+                {
+                  "id": "aria-labelledby",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+                },
+                {
+                  "id": "presentational-role",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "serious",
+                  "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+                }
+              ],
+              "all": [],
+              "none": [],
+              "impact": "serious",
+              "html": "<iframe loading=\"lazy\" class=\"video\" src=\"https://www.youtube.com/embed/rZ73MJVD_YU\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope;\"></iframe>",
+              "element": null,
+              "target": [
+                "iframe"
+              ],
+              "ancestry": [
+                "html > body > div:nth-child(1) > div > div > main:nth-child(6) > main > div:nth-child(2) > div > div > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(11) > div:nth-child(3) > iframe"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element has no title attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ]
         }
       ],
-      "passes": 46,
+      "passes": 47,
       "incomplete": 3,
-      "inapplicable": 43
+      "inapplicable": 41
     },
     {
       "route": "/contact",
       "url": "http://localhost:8000/contact",
-      "timestamp": "2025-10-17T20:59:19.323Z",
+      "timestamp": "2025-10-17T20:05:42.065Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2096,7 +2171,7 @@
     {
       "route": "/privacy",
       "url": "http://localhost:8000/privacy",
-      "timestamp": "2025-10-17T20:59:22.491Z",
+      "timestamp": "2025-10-17T20:05:44.265Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2144,7 +2219,7 @@
     {
       "route": "/partners",
       "url": "http://localhost:8000/partners",
-      "timestamp": "2025-10-17T20:59:25.642Z",
+      "timestamp": "2025-10-17T20:05:46.476Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2192,7 +2267,7 @@
     {
       "route": "/upgrades",
       "url": "http://localhost:8000/upgrades",
-      "timestamp": "2025-10-17T20:59:28.774Z",
+      "timestamp": "2025-10-17T20:05:48.627Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2240,7 +2315,7 @@
     {
       "route": "/resources",
       "url": "http://localhost:8000/resources",
-      "timestamp": "2025-10-17T20:59:32.085Z",
+      "timestamp": "2025-10-17T20:05:50.981Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2288,7 +2363,7 @@
     {
       "route": "/screenshots",
       "url": "http://localhost:8000/screenshots",
-      "timestamp": "2025-10-17T20:59:35.742Z",
+      "timestamp": "2025-10-17T20:05:53.753Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2336,7 +2411,7 @@
     {
       "route": "/faqs",
       "url": "http://localhost:8000/faqs",
-      "timestamp": "2025-10-17T20:59:39.952Z",
+      "timestamp": "2025-10-17T20:05:57.040Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2384,7 +2459,7 @@
     {
       "route": "/agencies",
       "url": "http://localhost:8000/agencies",
-      "timestamp": "2025-10-17T20:59:43.657Z",
+      "timestamp": "2025-10-17T20:05:59.741Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2432,7 +2507,7 @@
     {
       "route": "/faqs/general-what-information-is-collected-with-info-net",
       "url": "http://localhost:8000/faqs/general-what-information-is-collected-with-info-net",
-      "timestamp": "2025-10-17T20:59:46.853Z",
+      "timestamp": "2025-10-17T20:06:01.880Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2480,7 +2555,7 @@
     {
       "route": "/faqs/general-how-is-the-system-structured-and-secured",
       "url": "http://localhost:8000/faqs/general-how-is-the-system-structured-and-secured",
-      "timestamp": "2025-10-17T20:59:49.975Z",
+      "timestamp": "2025-10-17T20:06:04.003Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2528,7 +2603,7 @@
     {
       "route": "/faqs/general-how-do-agencies-use-the-data",
       "url": "http://localhost:8000/faqs/general-how-do-agencies-use-the-data",
-      "timestamp": "2025-10-17T20:59:53.176Z",
+      "timestamp": "2025-10-17T20:06:06.155Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2576,7 +2651,7 @@
     {
       "route": "/faqs/general-how-much-data-have-been-entered-into-info-net-to-date",
       "url": "http://localhost:8000/faqs/general-how-much-data-have-been-entered-into-info-net-to-date",
-      "timestamp": "2025-10-17T20:59:56.383Z",
+      "timestamp": "2025-10-17T20:06:08.292Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2624,7 +2699,7 @@
     {
       "route": "/faqs/general-who-uses-info-net",
       "url": "http://localhost:8000/faqs/general-who-uses-info-net",
-      "timestamp": "2025-10-17T20:59:59.491Z",
+      "timestamp": "2025-10-17T20:06:10.457Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2672,7 +2747,7 @@
     {
       "route": "/faqs/sa-how-often-do-i-need-to-enter-agency-information",
       "url": "http://localhost:8000/faqs/sa-how-often-do-i-need-to-enter-agency-information",
-      "timestamp": "2025-10-17T21:00:02.695Z",
+      "timestamp": "2025-10-17T20:06:12.606Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2720,7 +2795,7 @@
     {
       "route": "/faqs/sa-when-a-staff-member-leaves-the-program-do-i-replace-the-staff-record-with-the-replacements-name",
       "url": "http://localhost:8000/faqs/sa-when-a-staff-member-leaves-the-program-do-i-replace-the-staff-record-with-the-replacements-name",
-      "timestamp": "2025-10-17T21:00:05.904Z",
+      "timestamp": "2025-10-17T20:06:14.767Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2768,7 +2843,7 @@
     {
       "route": "/faqs/sa-how-do-i-update-a-staff-member-s-name-if-the-person-gets-married-and-the-last-name-changes",
       "url": "http://localhost:8000/faqs/sa-how-do-i-update-a-staff-member-s-name-if-the-person-gets-married-and-the-last-name-changes",
-      "timestamp": "2025-10-17T21:00:09.005Z",
+      "timestamp": "2025-10-17T20:06:16.914Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2816,7 +2891,7 @@
     {
       "route": "/faqs/sa-do-i-need-to-enter-a-new-funding-statement-at-the-beginning-of-each-fiscal-year",
       "url": "http://localhost:8000/faqs/sa-do-i-need-to-enter-a-new-funding-statement-at-the-beginning-of-each-fiscal-year",
-      "timestamp": "2025-10-17T21:00:12.264Z",
+      "timestamp": "2025-10-17T20:06:19.081Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2864,7 +2939,7 @@
     {
       "route": "/faqs/sa-when-do-i-need-to-revise-my-funding-statement-during-the-fiscal-year",
       "url": "http://localhost:8000/faqs/sa-when-do-i-need-to-revise-my-funding-statement-during-the-fiscal-year",
-      "timestamp": "2025-10-17T21:00:15.437Z",
+      "timestamp": "2025-10-17T20:06:21.189Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2912,7 +2987,7 @@
     {
       "route": "/faqs/sa-do-i-need-to-enter-a-separate-statement-for-each-site",
       "url": "http://localhost:8000/faqs/sa-do-i-need-to-enter-a-separate-statement-for-each-site",
-      "timestamp": "2025-10-17T21:00:18.532Z",
+      "timestamp": "2025-10-17T20:06:23.342Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -2960,7 +3035,7 @@
     {
       "route": "/faqs/sa-who-decides-what-editing-should-be-done-to-the-agency-other-staff-activities-and-or-funding-source-lists",
       "url": "http://localhost:8000/faqs/sa-who-decides-what-editing-should-be-done-to-the-agency-other-staff-activities-and-or-funding-source-lists",
-      "timestamp": "2025-10-17T21:00:21.751Z",
+      "timestamp": "2025-10-17T20:06:25.473Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3008,7 +3083,7 @@
     {
       "route": "/faqs/sa-is-defining-the-agency-list-a-requirement",
       "url": "http://localhost:8000/faqs/sa-is-defining-the-agency-list-a-requirement",
-      "timestamp": "2025-10-17T21:00:24.907Z",
+      "timestamp": "2025-10-17T20:06:27.599Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3056,7 +3131,7 @@
     {
       "route": "/faqs/sa-how-do-i-remove-a-person-from-a-funding-statement",
       "url": "http://localhost:8000/faqs/sa-how-do-i-remove-a-person-from-a-funding-statement",
-      "timestamp": "2025-10-17T21:00:28.084Z",
+      "timestamp": "2025-10-17T20:06:29.728Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3104,7 +3179,7 @@
     {
       "route": "/faqs/sa-i-cannot-find-a-staff-person-in-my-funding-for-staff-list-what-should-i-do",
       "url": "http://localhost:8000/faqs/sa-i-cannot-find-a-staff-person-in-my-funding-for-staff-list-what-should-i-do",
-      "timestamp": "2025-10-17T21:00:31.297Z",
+      "timestamp": "2025-10-17T20:06:31.849Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3152,7 +3227,7 @@
     {
       "route": "/faqs/sa-what-is-a-client-intake",
       "url": "http://localhost:8000/faqs/sa-what-is-a-client-intake",
-      "timestamp": "2025-10-17T21:00:34.422Z",
+      "timestamp": "2025-10-17T20:06:33.945Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3200,7 +3275,7 @@
     {
       "route": "/faqs/sa-what-fields-on-the-client-intake-page-are-mandatory",
       "url": "http://localhost:8000/faqs/sa-what-fields-on-the-client-intake-page-are-mandatory",
-      "timestamp": "2025-10-17T21:00:37.592Z",
+      "timestamp": "2025-10-17T20:06:36.077Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3248,7 +3323,7 @@
     {
       "route": "/faqs/sa-what-id-numbering-system-should-i-use-for-clients",
       "url": "http://localhost:8000/faqs/sa-what-id-numbering-system-should-i-use-for-clients",
-      "timestamp": "2025-10-17T21:00:40.821Z",
+      "timestamp": "2025-10-17T20:06:38.240Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3296,7 +3371,7 @@
     {
       "route": "/faqs/sa-can-id-numbers-contain-client-identifiers-such-as-client-s-initials-name-date-of-birth-or-part-of-her-social-security-number",
       "url": "http://localhost:8000/faqs/sa-can-id-numbers-contain-client-identifiers-such-as-client-s-initials-name-date-of-birth-or-part-of-her-social-security-number",
-      "timestamp": "2025-10-17T21:00:43.974Z",
+      "timestamp": "2025-10-17T20:06:40.351Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3344,7 +3419,7 @@
     {
       "route": "/faqs/sa-when-do-i-update-intake-information-for-a-client-into-infonet",
       "url": "http://localhost:8000/faqs/sa-when-do-i-update-intake-information-for-a-client-into-infonet",
-      "timestamp": "2025-10-17T21:00:47.173Z",
+      "timestamp": "2025-10-17T20:06:42.501Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3392,7 +3467,7 @@
     {
       "route": "/faqs/sa-when-should-we-close-client-s-file",
       "url": "http://localhost:8000/faqs/sa-when-should-we-close-client-s-file",
-      "timestamp": "2025-10-17T21:00:50.302Z",
+      "timestamp": "2025-10-17T20:06:44.631Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3440,7 +3515,7 @@
     {
       "route": "/faqs/sa-can-we-serve-a-significant-other-if-we-don-t-serve-a-related-victim",
       "url": "http://localhost:8000/faqs/sa-can-we-serve-a-significant-other-if-we-don-t-serve-a-related-victim",
-      "timestamp": "2025-10-17T21:00:53.509Z",
+      "timestamp": "2025-10-17T20:06:46.759Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3488,7 +3563,7 @@
     {
       "route": "/faqs/sa-of-which-county-should-i-document-the-client-as-being-a-resident",
       "url": "http://localhost:8000/faqs/sa-of-which-county-should-i-document-the-client-as-being-a-resident",
-      "timestamp": "2025-10-17T21:00:56.694Z",
+      "timestamp": "2025-10-17T20:06:48.887Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3536,7 +3611,7 @@
     {
       "route": "/faqs/sa-what-choice-for-education-do-i-use-for-a-client-who-received-a-ged",
       "url": "http://localhost:8000/faqs/sa-what-choice-for-education-do-i-use-for-a-client-who-received-a-ged",
-      "timestamp": "2025-10-17T21:00:59.838Z",
+      "timestamp": "2025-10-17T20:06:51.045Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3584,7 +3659,7 @@
     {
       "route": "/faqs/sa-how-do-i-delete-a-client",
       "url": "http://localhost:8000/faqs/sa-how-do-i-delete-a-client",
-      "timestamp": "2025-10-17T21:01:03.033Z",
+      "timestamp": "2025-10-17T20:06:53.176Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3632,7 +3707,7 @@
     {
       "route": "/faqs/sa-how-do-correct-a-data-entry-error-in-which-an-adult-is-entered-as-a-child-or-vice-versa",
       "url": "http://localhost:8000/faqs/sa-how-do-correct-a-data-entry-error-in-which-an-adult-is-entered-as-a-child-or-vice-versa",
-      "timestamp": "2025-10-17T21:01:06.195Z",
+      "timestamp": "2025-10-17T20:06:55.275Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3680,7 +3755,7 @@
     {
       "route": "/faqs/sa-how-do-i-enter-the-age-for-a-child-under-the-age-of-one-year",
       "url": "http://localhost:8000/faqs/sa-how-do-i-enter-the-age-for-a-child-under-the-age-of-one-year",
-      "timestamp": "2025-10-17T21:01:09.327Z",
+      "timestamp": "2025-10-17T20:06:57.434Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3728,7 +3803,7 @@
     {
       "route": "/faqs/sa-how-do-i-enter-an-unknown-age-of-a-client",
       "url": "http://localhost:8000/faqs/sa-how-do-i-enter-an-unknown-age-of-a-client",
-      "timestamp": "2025-10-17T21:01:12.561Z",
+      "timestamp": "2025-10-17T20:06:59.539Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3776,7 +3851,7 @@
     {
       "route": "/faqs/sa-how-do-i-complete-the-pregnant-field-for-a-male-client",
       "url": "http://localhost:8000/faqs/sa-how-do-i-complete-the-pregnant-field-for-a-male-client",
-      "timestamp": "2025-10-17T21:01:15.757Z",
+      "timestamp": "2025-10-17T20:07:01.640Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3824,7 +3899,7 @@
     {
       "route": "/faqs/sa-where-do-i-enter-new-police-and-prosecution-charges-for-an-offender",
       "url": "http://localhost:8000/faqs/sa-where-do-i-enter-new-police-and-prosecution-charges-for-an-offender",
-      "timestamp": "2025-10-17T21:01:18.897Z",
+      "timestamp": "2025-10-17T20:07:03.758Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3872,7 +3947,7 @@
     {
       "route": "/faqs/sa-what-unit-of-measurement-should-i-use-to-document-direct-client-services-in-infonet",
       "url": "http://localhost:8000/faqs/sa-what-unit-of-measurement-should-i-use-to-document-direct-client-services-in-infonet",
-      "timestamp": "2025-10-17T21:01:22.175Z",
+      "timestamp": "2025-10-17T20:07:05.873Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3920,7 +3995,7 @@
     {
       "route": "/faqs/sa-may-i-enter-the-services-provided-by-contractual-consultants-or-providers-into-the-database",
       "url": "http://localhost:8000/faqs/sa-may-i-enter-the-services-provided-by-contractual-consultants-or-providers-into-the-database",
-      "timestamp": "2025-10-17T21:01:25.404Z",
+      "timestamp": "2025-10-17T20:07:07.979Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -3968,7 +4043,7 @@
     {
       "route": "/faqs/sa-what-service-should-i-use-to-document-time-i-spend-doing-a-child-s-intake-with-the-adult-client",
       "url": "http://localhost:8000/faqs/sa-what-service-should-i-use-to-document-time-i-spend-doing-a-child-s-intake-with-the-adult-client",
-      "timestamp": "2025-10-17T21:01:28.543Z",
+      "timestamp": "2025-10-17T20:07:10.104Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4016,7 +4091,7 @@
     {
       "route": "/faqs/sa-how-do-i-document-family-counseling-in-the-adult-client-or-child-s-files",
       "url": "http://localhost:8000/faqs/sa-how-do-i-document-family-counseling-in-the-adult-client-or-child-s-files",
-      "timestamp": "2025-10-17T21:01:31.740Z",
+      "timestamp": "2025-10-17T20:07:12.208Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4064,7 +4139,7 @@
     {
       "route": "/faqs/sa-do-i-document-any-data-in-a-client-s-service-log-if-the-client-calls-to-cancel-a-counseling-appointment",
       "url": "http://localhost:8000/faqs/sa-do-i-document-any-data-in-a-client-s-service-log-if-the-client-calls-to-cancel-a-counseling-appointment",
-      "timestamp": "2025-10-17T21:01:34.871Z",
+      "timestamp": "2025-10-17T20:07:14.309Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4112,7 +4187,7 @@
     {
       "route": "/faqs/sa-is-time-spent-entering-client-data-and-service-data-into-info-net-considered-a-direct-client-service",
       "url": "http://localhost:8000/faqs/sa-is-time-spent-entering-client-data-and-service-data-into-info-net-considered-a-direct-client-service",
-      "timestamp": "2025-10-17T21:01:38.049Z",
+      "timestamp": "2025-10-17T20:07:16.457Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4160,7 +4235,7 @@
     {
       "route": "/faqs/sa-how-do-i-enter-a-co-facilitated-one-hour-group-session-as-one-hour-for-each-of-the-co-facilitators-or-hour-for-each-co-facilitator",
       "url": "http://localhost:8000/faqs/sa-how-do-i-enter-a-co-facilitated-one-hour-group-session-as-one-hour-for-each-of-the-co-facilitators-or-hour-for-each-co-facilitator",
-      "timestamp": "2025-10-17T21:01:41.255Z",
+      "timestamp": "2025-10-17T20:07:18.588Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4208,7 +4283,7 @@
     {
       "route": "/faqs/sa-how-do-i-document-family-counseling-in-both-the-adult-and-child-clients-files",
       "url": "http://localhost:8000/faqs/sa-how-do-i-document-family-counseling-in-both-the-adult-and-child-clients-files",
-      "timestamp": "2025-10-17T21:01:44.386Z",
+      "timestamp": "2025-10-17T20:07:21.082Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4256,7 +4331,7 @@
     {
       "route": "/faqs/sa-after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients",
       "url": "http://localhost:8000/faqs/sa-after-i-enter-group-session-information-and-staff-hours-spent-on-providing-the-group-session-to-clients",
-      "timestamp": "2025-10-17T21:01:47.576Z",
+      "timestamp": "2025-10-17T20:07:23.228Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4304,7 +4379,7 @@
     {
       "route": "/faqs/sa-i-can-t-find-the-id-number-of-a-client-that-has-attended-a-group-session",
       "url": "http://localhost:8000/faqs/sa-i-can-t-find-the-id-number-of-a-client-that-has-attended-a-group-session",
-      "timestamp": "2025-10-17T21:01:50.756Z",
+      "timestamp": "2025-10-17T20:07:25.372Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4352,7 +4427,7 @@
     {
       "route": "/faqs/sa-what-is-the-difference-between-institutional-advocacy-and-training",
       "url": "http://localhost:8000/faqs/sa-what-is-the-difference-between-institutional-advocacy-and-training",
-      "timestamp": "2025-10-17T21:01:53.888Z",
+      "timestamp": "2025-10-17T20:07:27.505Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4400,7 +4475,7 @@
     {
       "route": "/faqs/sa-what-type-of-board-activities-can-be-collected-in-community-and-institutional-activities",
       "url": "http://localhost:8000/faqs/sa-what-type-of-board-activities-can-be-collected-in-community-and-institutional-activities",
-      "timestamp": "2025-10-17T21:01:57.149Z",
+      "timestamp": "2025-10-17T20:07:29.656Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4448,7 +4523,7 @@
     {
       "route": "/faqs/sa-for-in-service-new-staff-training-do-i-document-the-time-that-staff-spent-providing-training-or-document-the-time-staff-spent-in-the-training",
       "url": "http://localhost:8000/faqs/sa-for-in-service-new-staff-training-do-i-document-the-time-that-staff-spent-providing-training-or-document-the-time-staff-spent-in-the-training",
-      "timestamp": "2025-10-17T21:02:00.283Z",
+      "timestamp": "2025-10-17T20:07:31.782Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4496,7 +4571,7 @@
     {
       "route": "/faqs/sa-do-i-enter-print-media-radio-and-tv-on-the-activities-data-entry-tab-or-the-media-publications-data-entry-tab",
       "url": "http://localhost:8000/faqs/sa-do-i-enter-print-media-radio-and-tv-on-the-activities-data-entry-tab-or-the-media-publications-data-entry-tab",
-      "timestamp": "2025-10-17T21:02:03.474Z",
+      "timestamp": "2025-10-17T20:07:34.093Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4544,7 +4619,7 @@
     {
       "route": "/faqs/sa-where-do-i-document-on-call-hours-that-volunteers-and-staff-provide",
       "url": "http://localhost:8000/faqs/sa-where-do-i-document-on-call-hours-that-volunteers-and-staff-provide",
-      "timestamp": "2025-10-17T21:02:06.722Z",
+      "timestamp": "2025-10-17T20:07:36.472Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4592,7 +4667,7 @@
     {
       "route": "/faqs/sa-if-we-use-the-list-editor-to-personalize-our-drop-down-menu-of-other-staff-activities-will-we-be-able-to-change-the-list-later",
       "url": "http://localhost:8000/faqs/sa-if-we-use-the-list-editor-to-personalize-our-drop-down-menu-of-other-staff-activities-will-we-be-able-to-change-the-list-later",
-      "timestamp": "2025-10-17T21:02:09.866Z",
+      "timestamp": "2025-10-17T20:07:40.043Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4640,7 +4715,7 @@
     {
       "route": "/faqs/sa-can-the-other-staff-activities-section-be-used-to-document-time-spent-on-individual-fundraising-events",
       "url": "http://localhost:8000/faqs/sa-can-the-other-staff-activities-section-be-used-to-document-time-spent-on-individual-fundraising-events",
-      "timestamp": "2025-10-17T21:02:13.073Z",
+      "timestamp": "2025-10-17T20:07:42.151Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4688,7 +4763,7 @@
     {
       "route": "/faqs/sa-can-i-keep-data-on-services-provided-by-each-location-separately-will-i-still-be-able-to-run-a-report-on-total-agency-statistics",
       "url": "http://localhost:8000/faqs/sa-can-i-keep-data-on-services-provided-by-each-location-separately-will-i-still-be-able-to-run-a-report-on-total-agency-statistics",
-      "timestamp": "2025-10-17T21:02:16.240Z",
+      "timestamp": "2025-10-17T20:07:44.267Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4736,7 +4811,7 @@
     {
       "route": "/faqs/sa-how-do-i-figure-out-how-many-hours-of-service-were-provided-by-volunteers",
       "url": "http://localhost:8000/faqs/sa-how-do-i-figure-out-how-many-hours-of-service-were-provided-by-volunteers",
-      "timestamp": "2025-10-17T21:02:19.372Z",
+      "timestamp": "2025-10-17T20:07:47.649Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4784,7 +4859,7 @@
     {
       "route": "/faqs/sa-how-can-i-obtain-our-duplicate-client-count-or-caseload-for-a-specific-period",
       "url": "http://localhost:8000/faqs/sa-how-can-i-obtain-our-duplicate-client-count-or-caseload-for-a-specific-period",
-      "timestamp": "2025-10-17T21:02:22.580Z",
+      "timestamp": "2025-10-17T20:07:49.753Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4832,7 +4907,7 @@
     {
       "route": "/faqs/sa-if-i-have-a-staff-person-that-wants-to-do-data-entry-from-a-home-computer-can-i-install-the-smartpass-token-on-a-personal-computer",
       "url": "http://localhost:8000/faqs/sa-if-i-have-a-staff-person-that-wants-to-do-data-entry-from-a-home-computer-can-i-install-the-smartpass-token-on-a-personal-computer",
-      "timestamp": "2025-10-17T21:02:25.786Z",
+      "timestamp": "2025-10-17T20:07:51.869Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4880,7 +4955,7 @@
     {
       "route": "/faqs/sa-i-have-staff-that-only-needs-to-run-reports-and-does-not-need-access-to-revise-or-enter-new-data-is-limited-accessibility-allowed-by-info-net",
       "url": "http://localhost:8000/faqs/sa-i-have-staff-that-only-needs-to-run-reports-and-does-not-need-access-to-revise-or-enter-new-data-is-limited-accessibility-allowed-by-info-net",
-      "timestamp": "2025-10-17T21:02:28.917Z",
+      "timestamp": "2025-10-17T20:07:54.013Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4928,7 +5003,7 @@
     {
       "route": "/faqs/dv-are-the-paper-data-collection-forms-developed-by-icadv-mandatory",
       "url": "http://localhost:8000/faqs/dv-are-the-paper-data-collection-forms-developed-by-icadv-mandatory",
-      "timestamp": "2025-10-17T21:02:32.122Z",
+      "timestamp": "2025-10-17T20:07:56.132Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -4976,7 +5051,7 @@
     {
       "route": "/faqs/dv-are-staff-signatures-required-on-icadv-service-contact-forms",
       "url": "http://localhost:8000/faqs/dv-are-staff-signatures-required-on-icadv-service-contact-forms",
-      "timestamp": "2025-10-17T21:02:35.248Z",
+      "timestamp": "2025-10-17T20:07:58.253Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5024,7 +5099,7 @@
     {
       "route": "/faqs/dv-is-it-ok-to-leave-the-comments-section-on-icadv-forms-blank",
       "url": "http://localhost:8000/faqs/dv-is-it-ok-to-leave-the-comments-section-on-icadv-forms-blank",
-      "timestamp": "2025-10-17T21:02:38.407Z",
+      "timestamp": "2025-10-17T20:08:00.389Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5072,7 +5147,7 @@
     {
       "route": "/faqs/dv-on-icadv-forms-there-are-check-boxes-on-the-service-contact-form",
       "url": "http://localhost:8000/faqs/dv-on-icadv-forms-there-are-check-boxes-on-the-service-contact-form",
-      "timestamp": "2025-10-17T21:02:41.596Z",
+      "timestamp": "2025-10-17T20:08:02.525Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5120,7 +5195,7 @@
     {
       "route": "/faqs/dv-what-is-a-client-intake-dv",
       "url": "http://localhost:8000/faqs/dv-what-is-a-client-intake-dv",
-      "timestamp": "2025-10-17T21:02:44.729Z",
+      "timestamp": "2025-10-17T20:08:04.803Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5168,7 +5243,7 @@
     {
       "route": "/faqs/dv-what-fields-on-the-client-intake-are-mandatory",
       "url": "http://localhost:8000/faqs/dv-what-fields-on-the-client-intake-are-mandatory",
-      "timestamp": "2025-10-17T21:02:47.902Z",
+      "timestamp": "2025-10-17T20:08:06.921Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5216,7 +5291,7 @@
     {
       "route": "/faqs/dv-what-id-numbering-system-should-i-use-for-our-clients",
       "url": "http://localhost:8000/faqs/dv-what-id-numbering-system-should-i-use-for-our-clients",
-      "timestamp": "2025-10-17T21:02:51.102Z",
+      "timestamp": "2025-10-17T20:08:09.039Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5264,7 +5339,7 @@
     {
       "route": "/faqs/dv-can-id-numbers-contain-client-identifiers-such-as-client-s-initials-name-date-of-birth-or-part-of-her-social-security-number-1",
       "url": "http://localhost:8000/faqs/dv-can-id-numbers-contain-client-identifiers-such-as-client-s-initials-name-date-of-birth-or-part-of-her-social-security-number-1",
-      "timestamp": "2025-10-17T21:02:54.229Z",
+      "timestamp": "2025-10-17T20:08:11.158Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5312,7 +5387,7 @@
     {
       "route": "/faqs/dv-when-do-i-update-or-enter-a-new-intake-case",
       "url": "http://localhost:8000/faqs/dv-when-do-i-update-or-enter-a-new-intake-case",
-      "timestamp": "2025-10-17T21:02:57.426Z",
+      "timestamp": "2025-10-17T20:08:13.348Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5360,7 +5435,7 @@
     {
       "route": "/faqs/dv-when-should-we-close-a-client-s-file",
       "url": "http://localhost:8000/faqs/dv-when-should-we-close-a-client-s-file",
-      "timestamp": "2025-10-17T21:03:00.622Z",
+      "timestamp": "2025-10-17T20:08:15.489Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5408,7 +5483,7 @@
     {
       "route": "/faqs/dv-how-old-does-a-victim-have-to-be-to-be-considered-an-adult-client",
       "url": "http://localhost:8000/faqs/dv-how-old-does-a-victim-have-to-be-to-be-considered-an-adult-client",
-      "timestamp": "2025-10-17T21:03:03.752Z",
+      "timestamp": "2025-10-17T20:08:17.619Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5456,7 +5531,7 @@
     {
       "route": "/faqs/dv-can-we-serve-a-child-client-if-we-don-t-have-a-related-adult-client",
       "url": "http://localhost:8000/faqs/dv-can-we-serve-a-child-client-if-we-don-t-have-a-related-adult-client",
-      "timestamp": "2025-10-17T21:03:06.931Z",
+      "timestamp": "2025-10-17T20:08:19.747Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5504,7 +5579,7 @@
     {
       "route": "/faqs/dv-when-a-young-client-turns-18-while-in-shelter-is-she-reentered-as-an-18-year-old-adult",
       "url": "http://localhost:8000/faqs/dv-when-a-young-client-turns-18-while-in-shelter-is-she-reentered-as-an-18-year-old-adult",
-      "timestamp": "2025-10-17T21:03:10.068Z",
+      "timestamp": "2025-10-17T20:08:21.853Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5552,7 +5627,7 @@
     {
       "route": "/faqs/dv-if-a-child-was-a-client-of-the-program-and-returns-as-an-adult-victim-do-we-assign-her-a-new-client-id-number-as-if-she-were-a-new-client",
       "url": "http://localhost:8000/faqs/dv-if-a-child-was-a-client-of-the-program-and-returns-as-an-adult-victim-do-we-assign-her-a-new-client-id-number-as-if-she-were-a-new-client",
-      "timestamp": "2025-10-17T21:03:13.291Z",
+      "timestamp": "2025-10-17T20:08:24.001Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5600,7 +5675,7 @@
     {
       "route": "/faqs/dv-if-a-grandmother-with-custody-of-her-grandchild-brings-the-child-in-for-services-and-the-child-s-mother-is-also-a-client-of-the-program",
       "url": "http://localhost:8000/faqs/dv-if-a-grandmother-with-custody-of-her-grandchild-brings-the-child-in-for-services-and-the-child-s-mother-is-also-a-client-of-the-program",
-      "timestamp": "2025-10-17T21:03:16.490Z",
+      "timestamp": "2025-10-17T20:08:26.109Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5648,7 +5723,7 @@
     {
       "route": "/faqs/dv-which-county-should-i-document-the-client-as-being-a-resident-of",
       "url": "http://localhost:8000/faqs/dv-which-county-should-i-document-the-client-as-being-a-resident-of",
-      "timestamp": "2025-10-17T21:03:19.640Z",
+      "timestamp": "2025-10-17T20:08:28.273Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5696,7 +5771,7 @@
     {
       "route": "/faqs/dv-what-do-i-enter-into-the-school-field-for-a-child-too-young-to-be-in-school",
       "url": "http://localhost:8000/faqs/dv-what-do-i-enter-into-the-school-field-for-a-child-too-young-to-be-in-school",
-      "timestamp": "2025-10-17T21:03:22.857Z",
+      "timestamp": "2025-10-17T20:08:30.505Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5744,7 +5819,7 @@
     {
       "route": "/faqs/dv-what-choice-for-education-do-i-use-for-a-client-who-received-her-ged",
       "url": "http://localhost:8000/faqs/dv-what-choice-for-education-do-i-use-for-a-client-who-received-her-ged",
-      "timestamp": "2025-10-17T21:03:26.075Z",
+      "timestamp": "2025-10-17T20:08:32.616Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5792,7 +5867,7 @@
     {
       "route": "/faqs/dv-how-do-i-delete-a-dv-client",
       "url": "http://localhost:8000/faqs/dv-how-do-i-delete-a-dv-client",
-      "timestamp": "2025-10-17T21:03:29.192Z",
+      "timestamp": "2025-10-17T20:08:34.742Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5840,7 +5915,7 @@
     {
       "route": "/faqs/dv-how-to-correct-a-data-entry-error-in-which-an-adult-is-entered-as-a-child-or-vice-versa",
       "url": "http://localhost:8000/faqs/dv-how-to-correct-a-data-entry-error-in-which-an-adult-is-entered-as-a-child-or-vice-versa",
-      "timestamp": "2025-10-17T21:03:32.408Z",
+      "timestamp": "2025-10-17T20:08:36.855Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5888,7 +5963,7 @@
     {
       "route": "/faqs/dv-what-is-the-difference-between-the-in-and-out-columns",
       "url": "http://localhost:8000/faqs/dv-what-is-the-difference-between-the-in-and-out-columns",
-      "timestamp": "2025-10-17T21:03:35.632Z",
+      "timestamp": "2025-10-17T20:08:38.979Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5936,7 +6011,7 @@
     {
       "route": "/faqs/dv-q-i-have-a-child-client-who-has-not-received-direct-services-under-her-id-number",
       "url": "http://localhost:8000/faqs/dv-q-i-have-a-child-client-who-has-not-received-direct-services-under-her-id-number",
-      "timestamp": "2025-10-17T21:03:38.790Z",
+      "timestamp": "2025-10-17T20:08:41.097Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -5984,7 +6059,7 @@
     {
       "route": "/faqs/dv-how-do-i-enter-age-for-a-child-under-the-age-of-1-year",
       "url": "http://localhost:8000/faqs/dv-how-do-i-enter-age-for-a-child-under-the-age-of-1-year",
-      "timestamp": "2025-10-17T21:03:41.980Z",
+      "timestamp": "2025-10-17T20:08:43.219Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6032,7 +6107,7 @@
     {
       "route": "/faqs/dv-how-do-i-enter-an-unknown-age-of-a-dv-client",
       "url": "http://localhost:8000/faqs/dv-how-do-i-enter-an-unknown-age-of-a-dv-client",
-      "timestamp": "2025-10-17T21:03:45.101Z",
+      "timestamp": "2025-10-17T20:08:45.363Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6080,7 +6155,7 @@
     {
       "route": "/faqs/dv-how-do-i-complete-the-pregnant-field-for-a-male-client-1",
       "url": "http://localhost:8000/faqs/dv-how-do-i-complete-the-pregnant-field-for-a-male-client-1",
-      "timestamp": "2025-10-17T21:03:48.274Z",
+      "timestamp": "2025-10-17T20:08:47.484Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6128,7 +6203,7 @@
     {
       "route": "/faqs/dv-how-do-we-open-a-child-client-case-when-someone-has-obtained-an-op-on-her-his-behalf",
       "url": "http://localhost:8000/faqs/dv-how-do-we-open-a-child-client-case-when-someone-has-obtained-an-op-on-her-his-behalf",
-      "timestamp": "2025-10-17T21:03:51.445Z",
+      "timestamp": "2025-10-17T20:08:49.628Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6176,7 +6251,7 @@
     {
       "route": "/faqs/dv-when-documenting-the-number-of-children-an-adult-client-has",
       "url": "http://localhost:8000/faqs/dv-when-documenting-the-number-of-children-an-adult-client-has",
-      "timestamp": "2025-10-17T21:03:54.570Z",
+      "timestamp": "2025-10-17T20:08:51.742Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6224,7 +6299,7 @@
     {
       "route": "/faqs/dv-what-unit-of-measurement-should-i-use-to-document-direct-client-services-minutes-or-hours",
       "url": "http://localhost:8000/faqs/dv-what-unit-of-measurement-should-i-use-to-document-direct-client-services-minutes-or-hours",
-      "timestamp": "2025-10-17T21:03:57.740Z",
+      "timestamp": "2025-10-17T20:08:53.851Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6272,7 +6347,7 @@
     {
       "route": "/faqs/dv-may-i-enter-the-services-provided-by-contractual-consultants-providers",
       "url": "http://localhost:8000/faqs/dv-may-i-enter-the-services-provided-by-contractual-consultants-providers",
-      "timestamp": "2025-10-17T21:04:00.996Z",
+      "timestamp": "2025-10-17T20:08:55.950Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6320,7 +6395,7 @@
     {
       "route": "/faqs/dv-what-service-should-i-use-to-document-time-i-spend-doing-a-child-s-intake-with-the-mother-what-if-i-am-completing-multiple-children-s-intakes-with-the-parent",
       "url": "http://localhost:8000/faqs/dv-what-service-should-i-use-to-document-time-i-spend-doing-a-child-s-intake-with-the-mother-what-if-i-am-completing-multiple-children-s-intakes-with-the-parent",
-      "timestamp": "2025-10-17T21:04:04.146Z",
+      "timestamp": "2025-10-17T20:08:58.103Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6368,7 +6443,7 @@
     {
       "route": "/faqs/dv-if-a-client-leaves-shelter-for-a-couple-of-nights-and-later-returns-do-we-give-her-a-shelter-end-date-when-she-leaves-and-open-a-new-shelter-record-when-she-returns",
       "url": "http://localhost:8000/faqs/dv-if-a-client-leaves-shelter-for-a-couple-of-nights-and-later-returns-do-we-give-her-a-shelter-end-date-when-she-leaves-and-open-a-new-shelter-record-when-she-returns",
-      "timestamp": "2025-10-17T21:04:07.336Z",
+      "timestamp": "2025-10-17T20:09:00.226Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6416,7 +6491,7 @@
     {
       "route": "/faqs/dv-how-long-does-a-client-need-to-be-in-residence-before-documenting-shelter-for-her",
       "url": "http://localhost:8000/faqs/dv-how-long-does-a-client-need-to-be-in-residence-before-documenting-shelter-for-her",
-      "timestamp": "2025-10-17T21:04:10.508Z",
+      "timestamp": "2025-10-17T20:09:02.340Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6464,7 +6539,7 @@
     {
       "route": "/faqs/dv-what-is-the-difference-between-on-and-off-site-shelters",
       "url": "http://localhost:8000/faqs/dv-what-is-the-difference-between-on-and-off-site-shelters",
-      "timestamp": "2025-10-17T21:04:13.702Z",
+      "timestamp": "2025-10-17T20:09:04.467Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6512,7 +6587,7 @@
     {
       "route": "/faqs/dv-we-had-a-client-at-an-off-site-shelter-location-but-once-space-became-available-in-our-residential-facility-she-transitioned-into-our-shelter-how-do-we-enter-her-shelter-services",
       "url": "http://localhost:8000/faqs/dv-we-had-a-client-at-an-off-site-shelter-location-but-once-space-became-available-in-our-residential-facility-she-transitioned-into-our-shelter-how-do-we-enter-her-shelter-services",
-      "timestamp": "2025-10-17T21:04:16.873Z",
+      "timestamp": "2025-10-17T20:09:06.575Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6560,7 +6635,7 @@
     {
       "route": "/faqs/dv-how-do-i-document-family-counseling-in-both-parent-and-child-s-files",
       "url": "http://localhost:8000/faqs/dv-how-do-i-document-family-counseling-in-both-parent-and-child-s-files",
-      "timestamp": "2025-10-17T21:04:20.031Z",
+      "timestamp": "2025-10-17T20:09:08.708Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6608,7 +6683,7 @@
     {
       "route": "/faqs/dv-do-i-document-counseling-appointment-cancellations-or-when-the-client-does-not-show-up-for-an-op-hearing",
       "url": "http://localhost:8000/faqs/dv-do-i-document-counseling-appointment-cancellations-or-when-the-client-does-not-show-up-for-an-op-hearing",
-      "timestamp": "2025-10-17T21:04:23.240Z",
+      "timestamp": "2025-10-17T20:09:10.829Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6656,7 +6731,7 @@
     {
       "route": "/faqs/dv-when-documenting-collaborative-case-management-how-do-i-split-the-time-spent-evenly-among-each-employee-involved",
       "url": "http://localhost:8000/faqs/dv-when-documenting-collaborative-case-management-how-do-i-split-the-time-spent-evenly-among-each-employee-involved",
-      "timestamp": "2025-10-17T21:04:26.484Z",
+      "timestamp": "2025-10-17T20:09:12.952Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6704,7 +6779,7 @@
     {
       "route": "/faqs/dv-when-staff-runs-an-errand-such-as-picking-up-a-client-s-medication-what-service-should-be-used-to-document-it",
       "url": "http://localhost:8000/faqs/dv-when-staff-runs-an-errand-such-as-picking-up-a-client-s-medication-what-service-should-be-used-to-document-it",
-      "timestamp": "2025-10-17T21:04:29.630Z",
+      "timestamp": "2025-10-17T20:09:15.042Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6752,7 +6827,7 @@
     {
       "route": "/faqs/dv-if-we-spend-time-distributing-medication-to-adult-clients-for-their-children-should-the-time-spent-be-documented-under-the-adult-or-child-record",
       "url": "http://localhost:8000/faqs/dv-if-we-spend-time-distributing-medication-to-adult-clients-for-their-children-should-the-time-spent-be-documented-under-the-adult-or-child-record",
-      "timestamp": "2025-10-17T21:04:32.864Z",
+      "timestamp": "2025-10-17T20:09:17.173Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6800,7 +6875,7 @@
     {
       "route": "/faqs/dv-if-legal-services-are-provided-by-a-paralegal-should-that-be-documented-as-legal-advocacy-advocate-or-legal-services-attorney",
       "url": "http://localhost:8000/faqs/dv-if-legal-services-are-provided-by-a-paralegal-should-that-be-documented-as-legal-advocacy-advocate-or-legal-services-attorney",
-      "timestamp": "2025-10-17T21:04:36.053Z",
+      "timestamp": "2025-10-17T20:09:19.355Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6848,7 +6923,7 @@
     {
       "route": "/faqs/dv-is-time-spent-entering-dv-client-data-and-service-data-into-info-net-considered-a-direct-client-service",
       "url": "http://localhost:8000/faqs/dv-is-time-spent-entering-dv-client-data-and-service-data-into-info-net-considered-a-direct-client-service",
-      "timestamp": "2025-10-17T21:04:39.201Z",
+      "timestamp": "2025-10-17T20:09:21.482Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6896,7 +6971,7 @@
     {
       "route": "/faqs/dv-should-staff-time-spent-advocating-for-a-taxi-cab-voucher-for-a-client-be-considered-a-transportation-service-or-an-economic-assistance-service",
       "url": "http://localhost:8000/faqs/dv-should-staff-time-spent-advocating-for-a-taxi-cab-voucher-for-a-client-be-considered-a-transportation-service-or-an-economic-assistance-service",
-      "timestamp": "2025-10-17T21:04:42.388Z",
+      "timestamp": "2025-10-17T20:09:23.565Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6944,7 +7019,7 @@
     {
       "route": "/faqs/dv-what-is-the-difference-between-counseling-and-therapy-services",
       "url": "http://localhost:8000/faqs/dv-what-is-the-difference-between-counseling-and-therapy-services",
-      "timestamp": "2025-10-17T21:04:45.575Z",
+      "timestamp": "2025-10-17T20:09:25.696Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -6992,7 +7067,7 @@
     {
       "route": "/faqs/dv-how-do-i-count-time-spent-during-intake-briefly-explaining-the-idva-and-a-client-s-rights-for-an-order-of-protection",
       "url": "http://localhost:8000/faqs/dv-how-do-i-count-time-spent-during-intake-briefly-explaining-the-idva-and-a-client-s-rights-for-an-order-of-protection",
-      "timestamp": "2025-10-17T21:04:48.722Z",
+      "timestamp": "2025-10-17T20:09:27.823Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7040,7 +7115,7 @@
     {
       "route": "/faqs/dv-are-we-required-to-provide-25-hours-of-civil-legal-advocacy-op-services-to-every-new-client-to-explain-her-rights-under-idva",
       "url": "http://localhost:8000/faqs/dv-are-we-required-to-provide-25-hours-of-civil-legal-advocacy-op-services-to-every-new-client-to-explain-her-rights-under-idva",
-      "timestamp": "2025-10-17T21:04:51.907Z",
+      "timestamp": "2025-10-17T20:09:30.625Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7088,7 +7163,7 @@
     {
       "route": "/faqs/dv-what-service-should-i-use-to-document-time-spent-consulting-with-an-adult-regarding-her-child-s-case",
       "url": "http://localhost:8000/faqs/dv-what-service-should-i-use-to-document-time-spent-consulting-with-an-adult-regarding-her-child-s-case",
-      "timestamp": "2025-10-17T21:04:55.125Z",
+      "timestamp": "2025-10-17T20:09:32.738Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7136,7 +7211,7 @@
     {
       "route": "/faqs/dv-what-service-should-i-use-to-document-time-spent-improving-a-parent-s-ability-to-effectively-discipline-her-child-while-they-are-in-shelter",
       "url": "http://localhost:8000/faqs/dv-what-service-should-i-use-to-document-time-spent-improving-a-parent-s-ability-to-effectively-discipline-her-child-while-they-are-in-shelter",
-      "timestamp": "2025-10-17T21:04:58.309Z",
+      "timestamp": "2025-10-17T20:09:34.845Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7184,7 +7259,7 @@
     {
       "route": "/faqs/dv-if-adult-clients-attend-a-children-s-group-counseling-session-with-their-children-on-a-limited-basis",
       "url": "http://localhost:8000/faqs/dv-if-adult-clients-attend-a-children-s-group-counseling-session-with-their-children-on-a-limited-basis",
-      "timestamp": "2025-10-17T21:05:01.499Z",
+      "timestamp": "2025-10-17T20:09:36.976Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7232,7 +7307,7 @@
     {
       "route": "/faqs/dv-if-a-program-has-a-consultant-that-provides-education-on-topics-like-self-care-and-hygiene-what-service-should-be-entered",
       "url": "http://localhost:8000/faqs/dv-if-a-program-has-a-consultant-that-provides-education-on-topics-like-self-care-and-hygiene-what-service-should-be-entered",
-      "timestamp": "2025-10-17T21:05:04.636Z",
+      "timestamp": "2025-10-17T20:09:39.114Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7280,7 +7355,7 @@
     {
       "route": "/faqs/dv-how-do-i-enter-a-one-hour-group-session-co-facilitated-by-two-staff-one-hour-or-half-hour-for-each-co-facilitator",
       "url": "http://localhost:8000/faqs/dv-how-do-i-enter-a-one-hour-group-session-co-facilitated-by-two-staff-one-hour-or-half-hour-for-each-co-facilitator",
-      "timestamp": "2025-10-17T21:05:07.803Z",
+      "timestamp": "2025-10-17T20:09:41.220Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7328,7 +7403,7 @@
     {
       "route": "/faqs/dv-how-do-i-document-family-counseling-in-parent-and-child-s-files",
       "url": "http://localhost:8000/faqs/dv-how-do-i-document-family-counseling-in-parent-and-child-s-files",
-      "timestamp": "2025-10-17T21:05:11.019Z",
+      "timestamp": "2025-10-17T20:09:43.323Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7376,7 +7451,7 @@
     {
       "route": "/faqs/dv-i-can-t-find-the-id-number-of-a-dv-client-that-has-attended-a-group-session-how-do-i-enter-the-service-for-that-client",
       "url": "http://localhost:8000/faqs/dv-i-can-t-find-the-id-number-of-a-dv-client-that-has-attended-a-group-session-how-do-i-enter-the-service-for-that-client",
-      "timestamp": "2025-10-17T21:05:14.152Z",
+      "timestamp": "2025-10-17T20:09:45.616Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7424,7 +7499,7 @@
     {
       "route": "/faqs/dv-how-do-i-enter-a-child-care-session-when-i-am-caring-for-children-from-more-than-one-family",
       "url": "http://localhost:8000/faqs/dv-how-do-i-enter-a-child-care-session-when-i-am-caring-for-children-from-more-than-one-family",
-      "timestamp": "2025-10-17T21:05:17.390Z",
+      "timestamp": "2025-10-17T20:09:47.736Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7472,7 +7547,7 @@
     {
       "route": "/faqs/dv-how-many-hours-would-be-documented-if-i-provide-group-idva-to-3-clients-at-the-same-time-for-an-hour",
       "url": "http://localhost:8000/faqs/dv-how-many-hours-would-be-documented-if-i-provide-group-idva-to-3-clients-at-the-same-time-for-an-hour",
-      "timestamp": "2025-10-17T21:05:20.594Z",
+      "timestamp": "2025-10-17T20:09:49.862Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7520,7 +7595,7 @@
     {
       "route": "/faqs/dv-when-i-do-a-search-for-id-numbers-to-enter-a-group-session-why-do-some-id-numbers-appear-multiple-times-with-numbers-after-them",
       "url": "http://localhost:8000/faqs/dv-when-i-do-a-search-for-id-numbers-to-enter-a-group-session-why-do-some-id-numbers-appear-multiple-times-with-numbers-after-them",
-      "timestamp": "2025-10-17T21:05:23.762Z",
+      "timestamp": "2025-10-17T20:09:51.988Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7568,7 +7643,7 @@
     {
       "route": "/faqs/dv-if-i-provide-a-group-that-covers-multiple-planned-topics-during-the-same-session",
       "url": "http://localhost:8000/faqs/dv-if-i-provide-a-group-that-covers-multiple-planned-topics-during-the-same-session",
-      "timestamp": "2025-10-17T21:05:26.931Z",
+      "timestamp": "2025-10-17T20:09:54.068Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7616,7 +7691,7 @@
     {
       "route": "/faqs/dv-may-i-enter-an-entire-month-s-worth-of-community-and-institutional-services-in-one-record-if-the-service-was-the-same",
       "url": "http://localhost:8000/faqs/dv-may-i-enter-an-entire-month-s-worth-of-community-and-institutional-services-in-one-record-if-the-service-was-the-same",
-      "timestamp": "2025-10-17T21:05:30.056Z",
+      "timestamp": "2025-10-17T20:09:56.710Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7664,7 +7739,7 @@
     {
       "route": "/faqs/dv-what-is-the-difference-between-institutional-advocacy-and-professional-training",
       "url": "http://localhost:8000/faqs/dv-what-is-the-difference-between-institutional-advocacy-and-professional-training",
-      "timestamp": "2025-10-17T21:05:33.303Z",
+      "timestamp": "2025-10-17T20:09:58.848Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7712,7 +7787,7 @@
     {
       "route": "/faqs/dv-what-is-the-difference-between-public-education-services-and-training-services",
       "url": "http://localhost:8000/faqs/dv-what-is-the-difference-between-public-education-services-and-training-services",
-      "timestamp": "2025-10-17T21:05:36.492Z",
+      "timestamp": "2025-10-17T20:10:00.938Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7760,7 +7835,7 @@
     {
       "route": "/faqs/dv-what-type-of-board-activities-can-be-collected-on-the-community-and-institutional-activities",
       "url": "http://localhost:8000/faqs/dv-what-type-of-board-activities-can-be-collected-on-the-community-and-institutional-activities",
-      "timestamp": "2025-10-17T21:05:39.640Z",
+      "timestamp": "2025-10-17T20:10:03.075Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7808,7 +7883,7 @@
     {
       "route": "/faqs/dv-for-in-service-new-staff-training-in-the-community-and-institutional-services-section",
       "url": "http://localhost:8000/faqs/dv-for-in-service-new-staff-training-in-the-community-and-institutional-services-section",
-      "timestamp": "2025-10-17T21:05:42.836Z",
+      "timestamp": "2025-10-17T20:10:05.191Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7856,7 +7931,7 @@
     {
       "route": "/faqs/dv-do-i-enter-print-media-radio-tv-and-internet-on-the-services-data-entry-tab-or-the-publications-data-entry-tab-in-the-community-and-institutional-services-section",
       "url": "http://localhost:8000/faqs/dv-do-i-enter-print-media-radio-tv-and-internet-on-the-services-data-entry-tab-or-the-publications-data-entry-tab-in-the-community-and-institutional-services-section",
-      "timestamp": "2025-10-17T21:05:46.000Z",
+      "timestamp": "2025-10-17T20:10:07.304Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7904,7 +7979,7 @@
     {
       "route": "/faqs/dv-what-unit-of-measurement-should-i-use-to-document-time-on-hotline-calls-minutes-or-hours",
       "url": "http://localhost:8000/faqs/dv-what-unit-of-measurement-should-i-use-to-document-time-on-hotline-calls-minutes-or-hours",
-      "timestamp": "2025-10-17T21:05:49.137Z",
+      "timestamp": "2025-10-17T20:10:09.454Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -7952,7 +8027,7 @@
     {
       "route": "/faqs/dv-how-do-i-document-a-hotline-call-from-a-client",
       "url": "http://localhost:8000/faqs/dv-how-do-i-document-a-hotline-call-from-a-client",
-      "timestamp": "2025-10-17T21:05:52.343Z",
+      "timestamp": "2025-10-17T20:10:11.583Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8000,7 +8075,7 @@
     {
       "route": "/faqs/dv-may-i-aggregate-hotline-call-data-at-the-end-of-the-month-or-do-i-need-to-enter-each-call-on-its-own",
       "url": "http://localhost:8000/faqs/dv-may-i-aggregate-hotline-call-data-at-the-end-of-the-month-or-do-i-need-to-enter-each-call-on-its-own",
-      "timestamp": "2025-10-17T21:05:55.556Z",
+      "timestamp": "2025-10-17T20:10:13.710Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8048,7 +8123,7 @@
     {
       "route": "/faqs/dv-where-do-i-document-on-call-hours-that-volunteers-and-dv-staff-provide",
       "url": "http://localhost:8000/faqs/dv-where-do-i-document-on-call-hours-that-volunteers-and-dv-staff-provide",
-      "timestamp": "2025-10-17T21:05:58.714Z",
+      "timestamp": "2025-10-17T20:10:15.836Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8096,7 +8171,7 @@
     {
       "route": "/faqs/dv-if-we-use-the-list-editor-to-personalize-our-drop-down-list-of-other-staff-activities",
       "url": "http://localhost:8000/faqs/dv-if-we-use-the-list-editor-to-personalize-our-drop-down-list-of-other-staff-activities",
-      "timestamp": "2025-10-17T21:06:01.906Z",
+      "timestamp": "2025-10-17T20:10:17.957Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8144,7 +8219,7 @@
     {
       "route": "/faqs/dv-can-the-other-staff-activities-section-be-used-to-document-time-spent-on-individual-fundraising-events-1",
       "url": "http://localhost:8000/faqs/dv-can-the-other-staff-activities-section-be-used-to-document-time-spent-on-individual-fundraising-events-1",
-      "timestamp": "2025-10-17T21:06:05.181Z",
+      "timestamp": "2025-10-17T20:10:20.188Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8192,7 +8267,7 @@
     {
       "route": "/faqs/dv-if-we-do-not-turn-away-any-clients-during-a-report-period-do-we-need-to-enter-a-record-of-zero",
       "url": "http://localhost:8000/faqs/dv-if-we-do-not-turn-away-any-clients-during-a-report-period-do-we-need-to-enter-a-record-of-zero",
-      "timestamp": "2025-10-17T21:06:08.406Z",
+      "timestamp": "2025-10-17T20:10:22.303Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8240,7 +8315,7 @@
     {
       "route": "/faqs/dv-must-i-enter-turn-away-data-daily-or-can-i-wait-until-the-end-of-the-month-to-enter-all-turn-away-information",
       "url": "http://localhost:8000/faqs/dv-must-i-enter-turn-away-data-daily-or-can-i-wait-until-the-end-of-the-month-to-enter-all-turn-away-information",
-      "timestamp": "2025-10-17T21:06:11.608Z",
+      "timestamp": "2025-10-17T20:10:24.420Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8288,7 +8363,7 @@
     {
       "route": "/faqs/dv-what-if-none-of-the-available-standard-or-management-reports-give-me-the-number-s-or-the-information-i-need-but-i-know-the-information-is-entered-into-info-net",
       "url": "http://localhost:8000/faqs/dv-what-if-none-of-the-available-standard-or-management-reports-give-me-the-number-s-or-the-information-i-need-but-i-know-the-information-is-entered-into-info-net",
-      "timestamp": "2025-10-17T21:06:14.756Z",
+      "timestamp": "2025-10-17T20:10:26.521Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8336,7 +8411,7 @@
     {
       "route": "/faqs/dv-can-i-keep-data-on-services-provided-by-each-location-site-separately-will-i-still-be-able-to-run-a-report-on-total-program-statistics",
       "url": "http://localhost:8000/faqs/dv-can-i-keep-data-on-services-provided-by-each-location-site-separately-will-i-still-be-able-to-run-a-report-on-total-program-statistics",
-      "timestamp": "2025-10-17T21:06:18.003Z",
+      "timestamp": "2025-10-17T20:10:28.768Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8384,7 +8459,7 @@
     {
       "route": "/faqs/dv-is-there-a-way-to-generate-a-report-of-orders-of-protection-by-their-expiration-dates",
       "url": "http://localhost:8000/faqs/dv-is-there-a-way-to-generate-a-report-of-orders-of-protection-by-their-expiration-dates",
-      "timestamp": "2025-10-17T21:06:21.226Z",
+      "timestamp": "2025-10-17T20:10:30.857Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8432,7 +8507,7 @@
     {
       "route": "/faqs/dv-when-i-review-my-client-information-report-i-notice-that-there-are-some-adult-records-in-the-child-age-categories-of-the-report-what-may-cause-this",
       "url": "http://localhost:8000/faqs/dv-when-i-review-my-client-information-report-i-notice-that-there-are-some-adult-records-in-the-child-age-categories-of-the-report-what-may-cause-this",
-      "timestamp": "2025-10-17T21:06:24.360Z",
+      "timestamp": "2025-10-17T20:10:32.995Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8480,7 +8555,7 @@
     {
       "route": "/faqs/dv-how-do-i-determine-how-many-hours-of-service-were-provided-by-volunteers",
       "url": "http://localhost:8000/faqs/dv-how-do-i-determine-how-many-hours-of-service-were-provided-by-volunteers",
-      "timestamp": "2025-10-17T21:06:27.556Z",
+      "timestamp": "2025-10-17T20:10:35.147Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8528,7 +8603,7 @@
     {
       "route": "/faqs/dv-how-do-i-obtain-the-number-of-orders-of-protection-filed-in-each-county",
       "url": "http://localhost:8000/faqs/dv-how-do-i-obtain-the-number-of-orders-of-protection-filed-in-each-county",
-      "timestamp": "2025-10-17T21:06:30.763Z",
+      "timestamp": "2025-10-17T20:10:37.279Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8576,7 +8651,7 @@
     {
       "route": "/faqs/dv-in-the-medical-cj-order-of-protection-report-does-the-number-of-o-ps-filed-include-the-number-of-o-ps-that-were-upgraded",
       "url": "http://localhost:8000/faqs/dv-in-the-medical-cj-order-of-protection-report-does-the-number-of-o-ps-filed-include-the-number-of-o-ps-that-were-upgraded",
-      "timestamp": "2025-10-17T21:06:33.912Z",
+      "timestamp": "2025-10-17T20:10:39.423Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8624,7 +8699,7 @@
     {
       "route": "/faqs/dv-how-do-i-obtain-the-number-of-shelter-days-provided-for-clients-from-a-specific-county",
       "url": "http://localhost:8000/faqs/dv-how-do-i-obtain-the-number-of-shelter-days-provided-for-clients-from-a-specific-county",
-      "timestamp": "2025-10-17T21:06:37.121Z",
+      "timestamp": "2025-10-17T20:10:41.557Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8672,7 +8747,7 @@
     {
       "route": "/faqs/dv-how-can-i-obtain-our-dv-duplicate-client-count-or-caseload-for-a-specific-period",
       "url": "http://localhost:8000/faqs/dv-how-can-i-obtain-our-dv-duplicate-client-count-or-caseload-for-a-specific-period",
-      "timestamp": "2025-10-17T21:06:40.246Z",
+      "timestamp": "2025-10-17T20:10:43.674Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8720,7 +8795,7 @@
     {
       "route": "/faqs/dv-group-service-data-are-displayed-on-two-sections-of-the-standard-services-report",
       "url": "http://localhost:8000/faqs/dv-group-service-data-are-displayed-on-two-sections-of-the-standard-services-report",
-      "timestamp": "2025-10-17T21:06:43.439Z",
+      "timestamp": "2025-10-17T20:10:45.787Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8768,7 +8843,7 @@
     {
       "route": "/faqs/dv-why-would-a-report-show-service-hour-totals-that-are-not-in-25-hour-increments",
       "url": "http://localhost:8000/faqs/dv-why-would-a-report-show-service-hour-totals-that-are-not-in-25-hour-increments",
-      "timestamp": "2025-10-17T21:06:46.666Z",
+      "timestamp": "2025-10-17T20:10:47.915Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8816,7 +8891,7 @@
     {
       "route": "/faqs/dv-on-the-standard-report-client-information-report",
       "url": "http://localhost:8000/faqs/dv-on-the-standard-report-client-information-report",
-      "timestamp": "2025-10-17T21:06:49.810Z",
+      "timestamp": "2025-10-17T20:10:50.053Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8864,7 +8939,7 @@
     {
       "route": "/faqs/dv-why-would-the-total-number-of-clients-reflected-on-the-client-information-report-not-be-equal-to-the-number-of-clients-served-direct-service-subtotal-on-the-direct-client-service-report",
       "url": "http://localhost:8000/faqs/dv-why-would-the-total-number-of-clients-reflected-on-the-client-information-report-not-be-equal-to-the-number-of-clients-served-direct-service-subtotal-on-the-direct-client-service-report",
-      "timestamp": "2025-10-17T21:06:53.013Z",
+      "timestamp": "2025-10-17T20:10:52.168Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8912,7 +8987,7 @@
     {
       "route": "/news/sfy-23-info-net-data-highlights",
       "url": "http://localhost:8000/news/sfy-23-info-net-data-highlights",
-      "timestamp": "2025-10-17T21:06:56.250Z",
+      "timestamp": "2025-10-17T20:10:54.389Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -8960,7 +9035,7 @@
     {
       "route": "/news/info-net-data-helps-support-the-network-s-recently-published-report",
       "url": "http://localhost:8000/news/info-net-data-helps-support-the-network-s-recently-published-report",
-      "timestamp": "2025-10-17T21:06:59.497Z",
+      "timestamp": "2025-10-17T20:10:56.563Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9008,7 +9083,7 @@
     {
       "route": "/news/read-about-gender-differences-among-info-net-clients",
       "url": "http://localhost:8000/news/read-about-gender-differences-among-info-net-clients",
-      "timestamp": "2025-10-17T21:07:02.752Z",
+      "timestamp": "2025-10-17T20:10:58.717Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9056,7 +9131,7 @@
     {
       "route": "/news/icjia-publishes-2022-victim-service-planning-research-report",
       "url": "http://localhost:8000/news/icjia-publishes-2022-victim-service-planning-research-report",
-      "timestamp": "2025-10-17T21:07:05.973Z",
+      "timestamp": "2025-10-17T20:11:00.847Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9104,7 +9179,7 @@
     {
       "route": "/news/icjia-receives-grant-to-increase-info-net-s-compliance-with-u-s-department-of-housing-and-urban-development-hud-data-standards",
       "url": "http://localhost:8000/news/icjia-receives-grant-to-increase-info-net-s-compliance-with-u-s-department-of-housing-and-urban-development-hud-data-standards",
-      "timestamp": "2025-10-17T21:07:09.149Z",
+      "timestamp": "2025-10-17T20:11:03.003Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9152,7 +9227,7 @@
     {
       "route": "/news/icjia-center-for-victim-studies-researchers-present-at-the-78th-annual-american-society-of-criminology-conference",
       "url": "http://localhost:8000/news/icjia-center-for-victim-studies-researchers-present-at-the-78th-annual-american-society-of-criminology-conference",
-      "timestamp": "2025-10-17T21:07:12.385Z",
+      "timestamp": "2025-10-17T20:11:05.146Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9200,7 +9275,7 @@
     {
       "route": "/news/human-trafficking-prevalence-in-illinois",
       "url": "http://localhost:8000/news/human-trafficking-prevalence-in-illinois",
-      "timestamp": "2025-10-17T21:07:15.574Z",
+      "timestamp": "2025-10-17T20:11:07.253Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9248,7 +9323,7 @@
     {
       "route": "/news/teen-dating-violence-in-illinois",
       "url": "http://localhost:8000/news/teen-dating-violence-in-illinois",
-      "timestamp": "2025-10-17T21:07:18.728Z",
+      "timestamp": "2025-10-17T20:11:09.399Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9296,7 +9371,7 @@
     {
       "route": "/news/info-net-trainings-now-available",
       "url": "http://localhost:8000/news/info-net-trainings-now-available",
-      "timestamp": "2025-10-17T21:07:21.940Z",
+      "timestamp": "2025-10-17T20:11:11.543Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9344,7 +9419,7 @@
     {
       "route": "/news/2023-info-net-data-now-available",
       "url": "http://localhost:8000/news/2023-info-net-data-now-available",
-      "timestamp": "2025-10-17T21:07:25.081Z",
+      "timestamp": "2025-10-17T20:11:13.685Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9392,7 +9467,7 @@
     {
       "route": "/news/info-net-data-spotlight-domestic-violence-cases-with-offender-weapon-use-or-threat-of-weapon-use",
       "url": "http://localhost:8000/news/info-net-data-spotlight-domestic-violence-cases-with-offender-weapon-use-or-threat-of-weapon-use",
-      "timestamp": "2025-10-17T21:07:28.299Z",
+      "timestamp": "2025-10-17T20:11:15.837Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9440,7 +9515,7 @@
     {
       "route": "/news/sv-victims-who-received-services-2023",
       "url": "http://localhost:8000/news/sv-victims-who-received-services-2023",
-      "timestamp": "2025-10-17T21:07:31.542Z",
+      "timestamp": "2025-10-17T20:11:17.979Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9488,7 +9563,7 @@
     {
       "route": "/news/lgbtq-adult-victims-of-domestic-violence-and-sexual-assault-2016-2023",
       "url": "http://localhost:8000/news/lgbtq-adult-victims-of-domestic-violence-and-sexual-assault-2016-2023",
-      "timestamp": "2025-10-17T21:07:34.684Z",
+      "timestamp": "2025-10-17T20:11:20.105Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9536,7 +9611,7 @@
     {
       "route": "/news/icjia-statewide-domestic-violence-fatality-review-committee-releases-reports",
       "url": "http://localhost:8000/news/icjia-statewide-domestic-violence-fatality-review-committee-releases-reports",
-      "timestamp": "2025-10-17T21:07:37.955Z",
+      "timestamp": "2025-10-17T20:11:22.253Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9584,7 +9659,7 @@
     {
       "route": "/news/sfy-24-info-net-domestic-violence-data-highlights",
       "url": "http://localhost:8000/news/sfy-24-info-net-domestic-violence-data-highlights",
-      "timestamp": "2025-10-17T21:07:41.243Z",
+      "timestamp": "2025-10-17T20:11:24.380Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9632,7 +9707,7 @@
     {
       "route": "/news/domestic-violence-data-entry-training-now-available-2",
       "url": "http://localhost:8000/news/domestic-violence-data-entry-training-now-available-2",
-      "timestamp": "2025-10-17T21:07:44.468Z",
+      "timestamp": "2025-10-17T20:11:26.548Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9680,7 +9755,7 @@
     {
       "route": "/news/info-net-data-helps-support-the-network-s-annual-report-measuring-safety-gender-based-violence-in-illinois-2023",
       "url": "http://localhost:8000/news/info-net-data-helps-support-the-network-s-annual-report-measuring-safety-gender-based-violence-in-illinois-2023",
-      "timestamp": "2025-10-17T21:07:47.662Z",
+      "timestamp": "2025-10-17T20:11:28.715Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9728,7 +9803,7 @@
     {
       "route": "/news/2024-info-net-data-now-available",
       "url": "http://localhost:8000/news/2024-info-net-data-now-available",
-      "timestamp": "2025-10-17T21:07:50.923Z",
+      "timestamp": "2025-10-17T20:11:31.384Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9776,7 +9851,7 @@
     {
       "route": "/news/2024-info-net-sexual-assault-data-highlights",
       "url": "http://localhost:8000/news/2024-info-net-sexual-assault-data-highlights",
-      "timestamp": "2025-10-17T21:07:54.188Z",
+      "timestamp": "2025-10-17T20:11:33.536Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9824,7 +9899,7 @@
     {
       "route": "/news/domestic-violence-reports-and-sexual-assault-data-entry-trainings-now-available",
       "url": "http://localhost:8000/news/domestic-violence-reports-and-sexual-assault-data-entry-trainings-now-available",
-      "timestamp": "2025-10-17T21:07:57.429Z",
+      "timestamp": "2025-10-17T20:11:35.724Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9908,7 +9983,7 @@
     {
       "route": "/tabs/screenshots-dv",
       "url": "http://localhost:8000/tabs/screenshots-dv",
-      "timestamp": "2025-10-17T21:08:00.598Z",
+      "timestamp": "2025-10-17T20:11:37.779Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -9956,7 +10031,7 @@
     {
       "route": "/tabs/users-domestic-violence-dv",
       "url": "http://localhost:8000/tabs/users-domestic-violence-dv",
-      "timestamp": "2025-10-17T21:08:03.713Z",
+      "timestamp": "2025-10-17T20:11:39.897Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -10040,7 +10115,7 @@
     {
       "route": "/tabs/screenshots-sa",
       "url": "http://localhost:8000/tabs/screenshots-sa",
-      "timestamp": "2025-10-17T21:08:06.811Z",
+      "timestamp": "2025-10-17T20:11:41.922Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -10088,7 +10163,7 @@
     {
       "route": "/tabs/users-sexual-assault-sa",
       "url": "http://localhost:8000/tabs/users-sexual-assault-sa",
-      "timestamp": "2025-10-17T21:08:09.882Z",
+      "timestamp": "2025-10-17T20:11:44.041Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -10172,7 +10247,7 @@
     {
       "route": "/tabs/screenshots-cac",
       "url": "http://localhost:8000/tabs/screenshots-cac",
-      "timestamp": "2025-10-17T21:08:13.014Z",
+      "timestamp": "2025-10-17T20:11:46.059Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -10220,7 +10295,7 @@
     {
       "route": "/tabs/users-children-s-advocacy-centers-cac",
       "url": "http://localhost:8000/tabs/users-children-s-advocacy-centers-cac",
-      "timestamp": "2025-10-17T21:08:16.151Z",
+      "timestamp": "2025-10-17T20:11:48.087Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -10304,7 +10379,7 @@
     {
       "route": "/search",
       "url": "http://localhost:8000/search",
-      "timestamp": "2025-10-17T21:08:19.320Z",
+      "timestamp": "2025-10-17T20:11:50.328Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -10352,7 +10427,7 @@
     {
       "route": "/translate",
       "url": "http://localhost:8000/translate",
-      "timestamp": "2025-10-17T21:08:22.604Z",
+      "timestamp": "2025-10-17T20:11:52.548Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -10400,7 +10475,7 @@
     {
       "route": "/news",
       "url": "http://localhost:8000/news",
-      "timestamp": "2025-10-17T21:08:25.965Z",
+      "timestamp": "2025-10-17T20:11:54.842Z",
       "violations": [
         {
           "id": "aria-allowed-role",
@@ -10448,7 +10523,7 @@
     {
       "route": "/data-and-publications",
       "url": "http://localhost:8000/data-and-publications",
-      "timestamp": "2025-10-17T21:08:29.953Z",
+      "timestamp": "2025-10-17T20:11:57.942Z",
       "violations": [
         {
           "id": "aria-allowed-role",

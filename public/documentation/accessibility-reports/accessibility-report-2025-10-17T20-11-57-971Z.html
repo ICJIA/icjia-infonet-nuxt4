@@ -75,7 +75,7 @@
 <body>
   <div class="container">
     <h1>🔍 Accessibility Audit Report</h1>
-    <p class="timestamp">Generated: 10/17/2025, 4:08:30 PM</p>
+    <p class="timestamp">Generated: 10/17/2025, 3:11:57 PM</p>
     
     <h2>📊 Summary</h2>
     <div class="summary">
@@ -88,7 +88,7 @@
         <div class="stat-label">Critical Issues</div>
       </div>
       <div class="stat-card serious">
-        <div class="stat-number">1</div>
+        <div class="stat-number">2</div>
         <div class="stat-label">Serious Issues</div>
       </div>
       <div class="stat-card moderate">
@@ -115,6 +115,15 @@
         </tr>
       </thead>
       <tbody>
+        
+          <tr>
+            <td><strong>/about</strong></td>
+            <td><strong>2</strong></td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
         
           <tr>
             <td><strong>/contact</strong></td>
@@ -163,15 +172,6 @@
         
           <tr>
             <td><strong>/</strong></td>
-            <td><strong>1</strong></td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>1</td>
-          </tr>
-        
-          <tr>
-            <td><strong>/about</strong></td>
             <td><strong>1</strong></td>
             <td>0</td>
             <td>0</td>
@@ -340,6 +340,18 @@
           </div>
         </div>
       
+        <div class="issue-item">
+          <div class="violation-header">
+            <span class="violation-title">frame-title</span>
+            <span class="badge serious">serious</span>
+          </div>
+          <div class="violation-description">Ensure <iframe> and <frame> elements have an accessible name</div>
+          <div style="margin-top: 10px; color: #7f8c8d;">
+            <strong>Occurrences:</strong> 1 | 
+            <strong>Affected pages:</strong> 1
+          </div>
+        </div>
+      
     </div>
     
     
@@ -374,7 +386,30 @@
         </div>
       
         <div class="page-section">
-          <div class="page-title">/about (1 issue)</div>
+          <div class="page-title">/about (2 issues)</div>
+          
+            <div class="violation serious">
+              <div class="violation-header">
+                <span class="violation-title">frame-title</span>
+                <span class="badge serious">serious</span>
+              </div>
+              <div class="violation-description">Ensure <iframe> and <frame> elements have an accessible name</div>
+              <div class="violation-help">
+                <strong>How to fix:</strong> Frames must have an accessible name
+                 | <a href="https://dequeuniversity.com/rules/axe/4.10/frame-title?application=playwright" target="_blank">Learn more</a>
+              </div>
+              <div class="nodes">
+                <strong>Affected elements (1):</strong>
+                
+                  <div class="node">
+                    <div class="node-target">Target: iframe</div>
+                    <div class="node-html-label">HTML:</div>
+                           <div class="node-html">&lt;iframe loading=&quot;lazy&quot; class=&quot;video&quot; src=&quot;https://www.youtube.com/embed/rZ73MJVD_YU&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope;&quot;&gt;&lt;/iframe&gt;</div>
+                  </div>
+                
+                
+              </div>
+            </div>
           
             <div class="violation minor">
               <div class="violation-header">
