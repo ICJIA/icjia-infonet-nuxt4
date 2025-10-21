@@ -14,7 +14,7 @@ category: page
 rawText: " tabs sectionid screenshots "
 draft: false
 markdown: |-
-  ::Tabs
+  ::TabsScreenshotsAccessible
   ---
   sectionID: "screenshots"
   ---
@@ -24,8 +24,8 @@ path: /screenshots
 url: https://infonet.icjia.dev/screenshots
 ---
 
-::Tabs
----
-sectionID: "screenshots"
----
+## ::TabsScreenshotsAccessible
+
+## sectionID: "screenshots"
+
 ::

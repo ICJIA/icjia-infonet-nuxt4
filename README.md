@@ -158,6 +158,85 @@ For detailed information about accessibility testing and improvements, see:
 - [Complete Accessibility Summary](./ACCESSIBILITY_COMPLETE_SUMMARY.md) - Overview of all fixes
 - [Fresh Audit Summary](./FRESH_AUDIT_WITH_SERVER_SUMMARY.md) - Latest audit results
 - [Sidebar Refactor Summary](./SIDEBAR_REFACTOR_SUMMARY.md) - Technical details of navigation refactor
+- [Tabs Accessibility Fix Guide](./ACCESSIBILITY_TABS_FIX_GUIDE.md) - Universal guide for fixing WCAG AA text clipping in tabs
+
+### Tabs Component Accessibility Fix
+
+**Problem:** The tabs component on the `/resources` page was failing Siteimprove accessibility scans with text clipping violations at 200% zoom, violating WCAG 2.1 Level AA criteria (1.4.4 Resize Text, 1.4.10 Reflow).
+
+**Root Cause:** Vuetify's `<v-tabs>` component uses CSS properties that cause text clipping:
+
+- `overflow: hidden` - Clips content outside container bounds
+- Fixed heights (`height: 48px`) - Prevents vertical expansion
+- `white-space: nowrap` - Prevents text wrapping
+- `flex-shrink: 1` - Allows tabs to compress
+
+**Solution:** Replaced Vuetify tabs with a custom accessible component using vanilla HTML + ARIA:
+
+**Components Created:**
+
+- `app/components/content/TabsUserInfoAccessible.vue` (for `/resources` page)
+- `app/components/content/TabsScreenshotsAccessible.vue` (for `/screenshots` page)
+
+⚠️ **CRITICAL:** Creating the component is only half the work! You must also update any Nuxt Content markdown files that reference the old component:
+
+**Content Files Updated:**
+
+- `content/resources.md` - Changed `::Tabs` to `::TabsUserInfoAccessible`
+- `content/screenshots.md` - Changed `::Tabs` to `::TabsScreenshotsAccessible`
+
+**Key Features:**
+
+- ✅ **Vanilla HTML** - Uses `<div>` and `<button>` with ARIA roles (no Vuetify components)
+- ✅ **Complete ARIA** - Full WAI-ARIA tabs pattern (`role="tablist"`, `role="tab"`, `role="tabpanel"`)
+- ✅ **Anti-Clipping CSS** - Six critical properties prevent text clipping:
+  ```css
+  overflow: visible; /* Prevent clipping */
+  max-height: none; /* No height restriction */
+  height: auto; /* Flexible height */
+  white-space: normal; /* Allow text wrapping */
+  word-wrap: break-word; /* Break long words */
+  flex-shrink: 0; /* Prevent compression */
+  ```
+- ✅ **Keyboard Navigation** - Arrow keys, Home, End with automatic activation
+- ✅ **Focus Management** - Proper `tabindex` and focus indicators
+- ✅ **Zero Dependencies** - No Vuetify imports or utilities
+- ✅ **AA Compliant** - Passes WCAG 2.1 Level AA at 200% zoom
+
+**Testing:**
+
+- ✅ Passes Siteimprove accessibility scan
+- ✅ No text clipping at 200% zoom
+- ✅ Full keyboard navigation support
+- ✅ Screen reader compatible
+- ✅ Responsive design (mobile/desktop)
+
+**For Developers:**
+
+This fix demonstrates a universal pattern for resolving text clipping issues in UI framework tab components. The solution is framework-agnostic and can be adapted for:
+
+- React (Material-UI, Ant Design, Chakra UI)
+- Angular (Angular Material)
+- Vue (Element Plus, Quasar)
+- Bootstrap tabs
+
+⚠️ **Important:** When implementing this fix, remember to update BOTH:
+
+1. **The component itself** - Create accessible component with vanilla HTML + ARIA
+2. **All content files that use it** - Update markdown files, templates, CMS content, etc.
+
+See [ACCESSIBILITY_TABS_FIX_GUIDE.md](./ACCESSIBILITY_TABS_FIX_GUIDE.md) for:
+
+- Complete technical explanation
+- Framework-agnostic HTML/CSS/JS templates
+- React and Angular implementation examples
+- **Step-by-step guide for updating content files** (Step 7)
+- **Common pitfall: Forgetting to update content files** (Pitfall #3)
+- Comprehensive testing checklist
+- Common pitfalls and solutions
+- Decision tree for troubleshooting
+
+**Test Page:** Visit `/sandbox` to see the accessible tabs component in action with verification checklist.
 
 ## Production
 
