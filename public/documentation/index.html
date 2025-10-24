@@ -419,13 +419,53 @@
 
           <div class="card-actions">
             <a
-              href="accessibility-reports/accessibility-report-latest.html"
+              href="/documentation/accessibility-reports/accessibility-report-latest.html"
               class="btn"
               id="latest-report-link"
               target="_blank"
               rel="noopener noreferrer"
             >
               View Report
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Accessibility Audit Summary Card -->
+        <article class="card" aria-labelledby="a11y-summary-heading">
+          <div class="card-icon" aria-hidden="true">📋</div>
+          <div class="card-content">
+            <h2 id="a11y-summary-heading">Accessibility Audit Summary</h2>
+            <p class="card-description">
+              Comprehensive accessibility audit documentation with detailed
+              findings, remediation strategies, and compliance tracking for WCAG
+              2.1 Level AA standards.
+            </p>
+
+            <div class="card-meta">
+              <span class="badge success" role="status">✓ 100% Resolved</span>
+              <span class="badge" id="a11y-summary-date"
+                >Last Updated: Loading...</span
+              >
+            </div>
+
+            <div class="card-details">
+              <strong>Includes:</strong>
+              • Complete audit findings and analysis<br />
+              • Detailed remediation documentation<br />
+              • Before/after comparison metrics<br />
+              • Best practices and implementation guides
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <a
+              href="/documentation/accessibility-summary.html"
+              class="btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Summary
               <span aria-hidden="true">→</span>
             </a>
           </div>
@@ -459,7 +499,7 @@
 
           <div class="card-actions">
             <a
-              href="site-architecture.html"
+              href="/documentation/site-architecture.html"
               class="btn"
               target="_blank"
               rel="noopener noreferrer"
@@ -497,7 +537,7 @@
 
           <div class="card-actions">
             <a
-              href="jsdoc/index.html"
+              href="/documentation/jsdoc/index.html"
               class="btn"
               target="_blank"
               rel="noopener noreferrer"
@@ -536,7 +576,7 @@
 
           <div class="card-actions">
             <a
-              href="deployment-guide.html"
+              href="/documentation/deployment-guide.html"
               class="btn"
               target="_blank"
               rel="noopener noreferrer"
@@ -562,7 +602,7 @@
     </footer>
 
     <script>
-      // Set last updated date
+      // Set last updated date for portal
       document.getElementById("last-updated").textContent =
         new Date().toLocaleDateString("en-US", {
           year: "numeric",
@@ -570,8 +610,35 @@
           day: "numeric",
         });
 
-      // Optional: Fetch latest report metadata if available
-      // This could be enhanced to read from a JSON file with report metadata
+      // Fetch and display accessibility summary last updated date
+      async function fetchA11ySummaryDate() {
+        try {
+          const response = await fetch(
+            "/documentation/accessibility-summary.html"
+          );
+          if (response.ok) {
+            const html = await response.text();
+            // Extract the last updated date from the HTML
+            const match = html.match(/Last Updated: ([^<]+)</);
+            if (match && match[1]) {
+              const dateElement = document.getElementById("a11y-summary-date");
+              if (dateElement) {
+                dateElement.textContent = `Last Updated: ${match[1]}`;
+              }
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching accessibility summary date:", error);
+          // Fallback to current date if fetch fails
+          const dateElement = document.getElementById("a11y-summary-date");
+          if (dateElement) {
+            dateElement.textContent = "Last Updated: Oct 17, 2025";
+          }
+        }
+      }
+
+      // Call the function when page loads
+      fetchA11ySummaryDate();
     </script>
   </body>
 </html>

@@ -10,8 +10,9 @@
           class="text-link"
           >Domestic Violence Awareness Month</a
         >. InfoNet data show that in state fiscal year 2025, domestic violence
-        agencies statewide provided over half a million (501,130) direct service
-        hours to 52,191 domestic violence survivors.
+        agencies statewide provided over
+        <strong>half a million</strong> (621,130) direct service hours to
+        <strong>52,191</strong> domestic violence survivors.
       </p>
     </section>
 
@@ -99,7 +100,7 @@
                   </li>
                   <li>
                     Domestic violence clients most commonly received in-person
-                    counseling services (70%) and civil legal assistance (65%).
+                    counseling services (50%) and civil legal assistance (45%).
                   </li>
                   <li>
                     Nearly 1 in 5 clients (9,324) received emergency shelter or

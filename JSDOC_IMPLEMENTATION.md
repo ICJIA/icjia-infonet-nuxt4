@@ -125,10 +125,53 @@ The generated documentation is available at:
 public/documentation/jsdoc/index.html
 ```
 
-Or when the server is running:
+### Development Server
+```
+http://localhost:8000/documentation/jsdoc/
+```
+
+### Local Static Server (after `yarn generate:serve`)
 ```
 http://localhost:3000/documentation/jsdoc/
 ```
+
+### Production
+```
+https://infonet.icjia.illinois.gov/documentation/jsdoc/
+```
+
+## Local Development with `yarn generate:serve`
+
+### Issue Fixed ✅
+The `dist` symlink was pointing to the wrong location (old nuxt3 project), causing 404 errors when serving the generated site locally.
+
+**Problem**:
+```bash
+dist -> /Users/cschweda/webdev/icjia-infonet-nuxt3/.output/public  # ❌ Wrong!
+```
+
+**Solution**:
+```bash
+rm dist && ln -s .output/public dist  # ✅ Correct!
+```
+
+### How to Use
+```bash
+# Generate and serve the site locally on port 3000
+yarn generate:serve
+
+# Or manually:
+yarn generate
+serve ./dist -l 3000
+```
+
+### Verification
+- ✅ JSDoc documentation accessible at `http://localhost:3000/documentation/jsdoc/`
+- ✅ All CSS and JavaScript files load correctly
+- ✅ Navigation works perfectly
+- ✅ Same behavior as production site
+
+**Note**: The `generate:serve` script in `package.json` does NOT need any changes. The issue was only the broken symlink, which has been fixed.
 
 ## Features
 
