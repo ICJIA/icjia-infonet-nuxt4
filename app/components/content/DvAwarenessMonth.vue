@@ -4,8 +4,9 @@
     <section class="header-section mb-8">
       <p class="body-text">
         October is
-        <a href="#" class="text-link">Domestic Violence Awareness Month</a>.
-        InfoNet data show that in state fiscal year 2025, domestic violence
+        <a target="_blank" class="text-link"
+          >Domestic Violence Awareness Month</a
+        >. InfoNet data show that in state fiscal year 2025, domestic violence
         agencies statewide provided over half a million (501,130) direct service
         hours to 52,191 domestic violence survivors.
       </p>
