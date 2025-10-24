@@ -4,7 +4,10 @@
     <section class="header-section mb-8">
       <p class="body-text">
         October is
-        <a target="_blank" class="text-link"
+        <a
+          href="https://www.thehotline.org/stakeholders/domestic-violence-awareness-month/"
+          target="_blank"
+          class="text-link"
           >Domestic Violence Awareness Month</a
         >. InfoNet data show that in state fiscal year 2025, domestic violence
         agencies statewide provided over half a million (501,130) direct service
