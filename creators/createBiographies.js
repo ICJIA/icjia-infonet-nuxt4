@@ -1,3 +1,18 @@
+/**
+ * Biographies Generator
+ * Fetches biography data from agency API and generates JSON files
+ * Creates biography metadata for display in the application
+ * @module creators/createBiographies
+ * @requires dotenv
+ * @requires fs
+ * @requires path
+ * @requires axios
+ * @requires moment
+ * @requires jsonfile
+ * @requires lodash
+ * @requires yaml
+ */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 require("dotenv").config();
 

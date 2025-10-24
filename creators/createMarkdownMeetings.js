@@ -1,3 +1,17 @@
+/**
+ * Markdown Meetings Generator
+ * Fetches meeting data from Strapi API and generates markdown files
+ * Creates meeting content with date information and metadata
+ * @module creators/createMarkdownMeetings
+ * @requires dotenv
+ * @requires fs
+ * @requires path
+ * @requires axios
+ * @requires jsonfile
+ * @requires lodash
+ * @requires yaml
+ */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 require("dotenv").config();
 

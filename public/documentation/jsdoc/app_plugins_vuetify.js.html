@@ -1,0 +1,173 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICJIA InfoNet API Documentation app/plugins/vuetify.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">ICJIA InfoNet - API Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="app_app.module_config.html">config</a></li><li><a href="module-TheFooter.html">TheFooter</a></li><li><a href="module-app_global.html">app/global</a></li><li><a href="module-composables_useCurrentPage.html">composables/useCurrentPage</a></li><li><a href="module-composables_useEventBus.html">composables/useEventBus</a></li><li><a href="module-creators_createBiographies.html">creators/createBiographies</a></li><li><a href="module-creators_createContentDirectory.html">creators/createContentDirectory</a></li><li><a href="module-creators_createMarkdownFaqs.html">creators/createMarkdownFaqs</a></li><li><a href="module-creators_createMarkdownMeetings.html">creators/createMarkdownMeetings</a></li><li><a href="module-creators_createMarkdownNews.html">creators/createMarkdownNews</a></li><li><a href="module-creators_createMarkdownPages.html">creators/createMarkdownPages</a></li><li><a href="module-creators_createMarkdownPublications.html">creators/createMarkdownPublications</a></li><li><a href="module-creators_createMarkdownTabs.html">creators/createMarkdownTabs</a></li><li><a href="module-creators_generateJsdoc.html">creators/generateJsdoc</a></li><li><a href="module-creators_utils.html">creators/utils</a></li><li><a href="module-middleware_redirect-404.html">middleware/redirect-404</a></li><li><a href="module-middleware_redirect-trailing-slash.html">middleware/redirect-trailing-slash</a></li><li><a href="module-plugins_vuetify.html">plugins/vuetify</a></li><li><a href="module-server_api_dataAndPublications.html">server/api/dataAndPublications</a></li><li><a href="module-server_api_hub.html">server/api/hub</a></li><li><a href="module-server_api_publist.html">server/api/publist</a></li><li><a href="module-server_api_research.html">server/api/research</a></li><li><a href="module-server_api_routes.html">server/api/routes</a></li><li><a href="module-server_api_search.html">server/api/search</a></li><li><a href="module-server_api_tabs.html">server/api/tabs</a></li><li><a href="module-server_api_tags.html">server/api/tags</a></li><li><a href="module-server_utils_polyfills.html">server/utils/polyfills</a></li></ul><h3>Classes</h3><ul><li><a href="module-server_utils_polyfills-Blob.html">Blob</a></li><li><a href="module-server_utils_polyfills-File.html">File</a></li><li><a href="module-server_utils_polyfills-global-global.Blob.html">Blob</a></li><li><a href="module-server_utils_polyfills-global-global.File.html">File</a></li></ul><h3>Global</h3><ul><li><a href="global.html#routeToSite">routeToSite</a></li><li><a href="global.html#scrollTop">scrollTop</a></li><li><a href="global.html#translate">translate</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>app/plugins/vuetify.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Vuetify Plugin
+ * Initializes Vuetify Material Design framework for Vue 3
+ * @module plugins/vuetify
+ * @see {@link https://vuetifyjs.com/|Vuetify Documentation}
+ */
+
+import { createVuetify } from "vuetify";
+import * as labs from "vuetify/labs/components";
+import { aliases, fa } from "vuetify/iconsets/fa";
+import { mdi } from "vuetify/iconsets/mdi";
+
+/**
+ * Initialize Vuetify plugin for Nuxt
+ * Configures Material Design components, icons, and theme
+ * @function vuetifyPlugin
+ * @param {Object} nuxtApp - Nuxt application instance
+ * @returns {void}
+ * @description
+ * Configures:
+ * - Material Design components from labs
+ * - Font Awesome and MDI icon sets
+ * - Light theme with WCAG AA compliant colors
+ * - Accessibility-focused color overrides for contrast compliance
+ */
+export default defineNuxtPlugin((nuxtApp) => {
+  const vuetify = createVuetify({
+    icons: {
+      iconfont: ["mdiSvg", "fa", "fa4", "faSvg"],
+    },
+    components: {
+      ...labs,
+    },
+    theme: {
+      themes: {
+        light: {
+          colors: {
+            /**
+             * Accessibility fix: Override Vuetify's default label color
+             * to meet WCAG AA contrast requirements (4.5:1) on #f6f6f7 background
+             * Using rgba(0, 0, 0, 0.87) provides excellent contrast ratio (15.8:1)
+             * This ensures WCAG AA compliance (minimum 4.5:1 required)
+             */
+            "on-surface-variant": "rgba(0, 0, 0, 0.87)",
+          },
+        },
+      },
+    },
+  });
+
+  nuxtApp.vueApp.use(vuetify);
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

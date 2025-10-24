@@ -147,16 +147,28 @@ const renderer = new md({
   quotes: "“”‘’",
 }).use(attrs);
 
+/**
+ * Tabs Component
+ * Displays tabbed content for different agencies/sections
+ *
+ * @component
+ * @prop {string} sectionID - Section identifier to filter tabs
+ * @description
+ * Renders a tabbed interface for displaying agency information.
+ * Filters tab content by sectionID and displays responsive tabs.
+ * Includes image gallery modal functionality.
+ */
 const props = defineProps({
   sectionID: {
     type: String,
     default: "",
   },
 });
-//console.log(props.sectionID);
+
 const tabs = useState("tabs");
 const tab = ref(null);
 const isMounted = ref(false);
+
 const _tabContent = (tabs.value?.content || []).filter((tab) => {
   if (tab.attributes.sectionID === props.sectionID) {
     return tab;
@@ -164,9 +176,14 @@ const _tabContent = (tabs.value?.content || []).filter((tab) => {
 });
 
 const tabContent = toRaw(_tabContent);
-
 const { mobile } = useDisplay();
 
+/**
+ * Get appropriate title based on device type
+ * @function getTitle
+ * @param {Object} attributes - Tab attributes object
+ * @returns {string} Agency name on mobile, full title on desktop
+ */
 const getTitle = (attributes) => {
   let title;
   if (mobile.value === true) {
@@ -177,16 +194,34 @@ const getTitle = (attributes) => {
   return title;
 };
 
+/**
+ * Construct full image URL from relative path
+ * @function getImageURL
+ * @param {string} url - Relative image URL
+ * @returns {string} Full image URL with API base
+ */
 const getImageURL = (url) => {
   return `https://infonet.icjia-api.cloud${url}`;
 };
 
+/**
+ * Generate HTML caption for image
+ * @function getImageCaption
+ * @param {string} caption - Image caption text
+ * @returns {string} HTML formatted caption or undefined
+ */
 const getImageCaption = (caption) => {
   if (caption) {
     return `<div class="" style="font-size: 10px !important">${caption}</div>`;
   }
 };
 
+/**
+ * Sort images by filename in ascending order
+ * @function sortImagesByFilename
+ * @param {Array<Object>} images - Array of image objects
+ * @returns {Array<Object>} Sorted images array
+ */
 const sortImagesByFilename = (images) => {
   return images.sort((a, b) => {
     if (a.attributes.name < b.attributes.name) {
@@ -199,10 +234,18 @@ const sortImagesByFilename = (images) => {
   });
 };
 
+/**
+ * Open image gallery modal with image details
+ * @function openGalleryModal
+ * @param {Object} options - Modal options
+ * @param {string} options.url - Full image URL
+ * @param {string} options.caption - Image caption
+ * @param {string} options.thumbnail - Thumbnail URL
+ * @param {string} options.filename - Image filename
+ */
 const openGalleryModal = ({ url, caption, thumbnail, filename }) => {
   let myURL = `https://infonet.icjia-api.cloud${url}`;
   let thumbnailURL = `https://infonet.icjia-api.cloud${thumbnail}`;
-  //console.log("Modal: ", myURL, caption);
   useEvent("modal:gallery", {
     url: myURL,
     caption: caption,

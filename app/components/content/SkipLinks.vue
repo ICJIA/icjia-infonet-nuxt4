@@ -5,8 +5,24 @@
 </template>
 
 <script setup>
-// Skip links component for WCAG 2.1 Level AA compliance
-// Provides keyboard users a way to bypass repetitive navigation
+/**
+ * SkipLinks Component
+ * Provides keyboard navigation skip links for WCAG 2.1 Level AA compliance
+ * Allows keyboard users to bypass repetitive navigation and jump to main content
+ *
+ * @component
+ * @description
+ * This component renders a hidden skip link that becomes visible when focused via keyboard.
+ * It's essential for accessibility compliance and improves keyboard navigation experience.
+ *
+ * @accessibility
+ * - Keyboard accessible: Tab key reveals the skip link
+ * - High contrast mode: Enhanced border visibility
+ * - Reduced motion: Respects prefers-reduced-motion preference
+ * - WCAG 2.1 Level AA compliant
+ *
+ * @see {@link https://www.w3.org/WAI/WCAG21/Techniques/general/G1|WCAG G1: Skip Links}
+ */
 </script>
 
 <style scoped>
@@ -48,7 +64,7 @@
   .skip-link {
     border: 2px solid #ffffff;
   }
-  
+
   .skip-link:focus {
     outline: 4px solid #ffd700;
   }
@@ -61,4 +77,3 @@
   }
 }
 </style>
-

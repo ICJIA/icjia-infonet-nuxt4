@@ -1,3 +1,17 @@
+/**
+ * Markdown Publications Generator
+ * Fetches publication data from Strapi API and generates markdown files
+ * Creates publication content with metadata and search indexing
+ * @module creators/createMarkdownPublications
+ * @requires dotenv
+ * @requires fs
+ * @requires path
+ * @requires axios
+ * @requires jsonfile
+ * @requires lodash
+ * @requires yaml
+ */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 require("dotenv").config();
 

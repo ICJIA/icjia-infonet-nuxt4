@@ -1,3 +1,14 @@
+/**
+ * Content Directory Initialization Script
+ * Cleans up generated content files before creating new ones
+ * Removes all previously generated JSON and markdown files
+ * @module creators/createContentDirectory
+ * @requires dotenv
+ * @requires fs
+ * @requires path
+ * @requires fs-extra
+ */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const fs = require("fs");
@@ -14,6 +25,11 @@ const assetsDir = path.join(__dirname, "../assets/json");
 const srcDir = path.join(__dirname, "../src");
 const appDataDir = path.join(__dirname, "../app/data");
 
+/**
+ * List of generated files to remove before content generation
+ * Ensures clean state for new content creation
+ * @type {Array<string>}
+ */
 const PUBLIC_FILES_TO_REMOVE = [
   "site.json",
   "sitemap.xml",

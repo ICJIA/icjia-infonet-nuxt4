@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Deployment Guide - Complete deployment instructions for ICJIA InfoNet"
+    />
+    <title>Deployment Guide | ICJIA InfoNet Developer Documentation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #1976d2;
+        --primary-dark: #1565c0;
+        --secondary-color: #424242;
+        --accent-color: #00897b;
+        --success-color: #2e7d32;
+        --warning-color: #f57c00;
+        --error-color: #d32f2f;
+        --info-color: #0288d1;
+        --background: #f5f5f5;
+        --card-background: #ffffff;
+        --code-background: #f8f9fa;
+        --text-primary: #212121;
+        --text-secondary: #757575;
+        --border-color: #e0e0e0;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.7;
+        min-height: 100vh;
+      }
+
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--primary-color);
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        z-index: 100;
+      }
+
+      .skip-link:focus {
+        top: 0;
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        padding: 2rem 1rem;
+        box-shadow: var(--shadow);
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.5px;
+      }
+
+      .subtitle {
+        font-size: 1.125rem;
+        opacity: 0.95;
+        font-weight: 400;
+      }
+
+      .breadcrumb {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        opacity: 0.9;
+      }
+
+      .breadcrumb a {
+        color: white;
+        text-decoration: underline;
+      }
+
+      .breadcrumb a:hover {
+        opacity: 0.8;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+
+      .toc {
+        background: var(--card-background);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+        border-left: 4px solid var(--accent-color);
+      }
+
+      .toc h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .toc ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .toc li {
+        margin-bottom: 0.5rem;
+      }
+
+      .toc a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .toc a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+      }
+
+      .section {
+        background: var(--card-background);
+        padding: 2rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .section h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        border-bottom: 3px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+      }
+
+      .section h3 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .section h4 {
+        font-size: 1.25rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: var(--secondary-color);
+      }
+
+      .section p {
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .section ul,
+      .section ol {
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+      }
+
+      .section li {
+        margin-bottom: 0.5rem;
+      }
+
+      code {
+        background: var(--code-background);
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: "Monaco", "Courier New", monospace;
+        font-size: 0.9em;
+        color: var(--secondary-color);
+      }
+
+      pre {
+        background: var(--code-background);
+        padding: 1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin-bottom: 1rem;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      pre code {
+        background: none;
+        padding: 0;
+      }
+
+      .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border-left: 4px solid;
+      }
+
+      .alert-info {
+        background: #e3f2fd;
+        border-color: var(--info-color);
+        color: #01579b;
+      }
+
+      .alert-warning {
+        background: #fff3e0;
+        border-color: var(--warning-color);
+        color: #e65100;
+      }
+
+      .alert-success {
+        background: #e8f5e9;
+        border-color: var(--success-color);
+        color: #1b5e20;
+      }
+
+      .alert-error {
+        background: #ffebee;
+        border-color: var(--error-color);
+        color: #b71c1c;
+      }
+
+      .alert strong {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .diagram {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        border: 2px solid var(--border-color);
+        text-align: center;
+      }
+
+      .flow-step {
+        background: var(--primary-color);
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 0.5rem 0;
+        font-weight: 600;
+      }
+
+      .flow-arrow {
+        font-size: 2rem;
+        color: var(--primary-color);
+        margin: 0.5rem 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1.5rem;
+      }
+
+      th,
+      td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      th {
+        background: var(--code-background);
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .checklist {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .checklist li {
+        padding-left: 2rem;
+        position: relative;
+        margin-bottom: 0.75rem;
+      }
+
+      .checklist li:before {
+        content: "☐";
+        position: absolute;
+        left: 0;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+      }
+
+      footer {
+        background: var(--card-background);
+        border-top: 1px solid var(--border-color);
+        padding: 2rem 1rem;
+        margin-top: 4rem;
+        text-align: center;
+        color: var(--text-secondary);
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        .section {
+          padding: 1.5rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+      <div class="header-content">
+        <h1>Deployment Guide</h1>
+        <p class="subtitle">
+          Complete Deployment Instructions for ICJIA InfoNet
+        </p>
+        <div class="breadcrumb">
+          <a href="index.html">Documentation Portal</a> / Deployment Guide
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" role="main">
+      <!-- Table of Contents -->
+      <nav class="toc" aria-labelledby="toc-heading">
+        <h2 id="toc-heading">Table of Contents</h2>
+        <ul>
+          <li>
+            <a href="#prerequisites">1. Prerequisites & System Requirements</a>
+          </li>
+          <li>
+            <a href="#local-deployment">2. Local Development Deployment</a>
+          </li>
+          <li>
+            <a href="#netlify-deployment">3. Netlify Production Deployment</a>
+          </li>
+          <li>
+            <a href="#common-issues">4. Common Deployment Issues & Solutions</a>
+          </li>
+          <li><a href="#checklist">5. Deployment Checklist</a></li>
+          <li>
+            <a href="#best-practices">6. Tips, Tricks & Best Practices</a>
+          </li>
+          <li><a href="#troubleshooting">7. Troubleshooting Guide</a></li>
+        </ul>
+      </nav>
+
+      <!-- Section 1: Prerequisites -->
+      <section id="prerequisites" class="section">
+        <h2>1. Prerequisites & System Requirements</h2>
+
+        <h3>Required Software</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Software</th>
+              <th>Required Version</th>
+              <th>How to Check</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Node.js</strong></td>
+              <td>20.x (exactly)</td>
+              <td><code>node --version</code></td>
+            </tr>
+            <tr>
+              <td><strong>Yarn</strong></td>
+              <td>1.22.22</td>
+              <td><code>yarn --version</code></td>
+            </tr>
+            <tr>
+              <td><strong>Git</strong></td>
+              <td>2.x or higher</td>
+              <td><code>git --version</code></td>
+            </tr>
+            <tr>
+              <td><strong>nvm</strong> (recommended)</td>
+              <td>Latest</td>
+              <td><code>nvm --version</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-warning">
+          <strong>Critical: Node.js Version</strong>
+          <p>
+            This project <strong>requires Node.js 20.x</strong>. Using Node.js
+            18.x or 22.x will cause build failures. The exact version is
+            specified in the <code>.nvmrc</code> file.
+          </p>
+        </div>
+
+        <h3>Installing Node.js with nvm (Recommended)</h3>
+        <p>Using nvm ensures you have the correct Node.js version:</p>
+
+        <pre><code># Install nvm (if not already installed)
+# macOS/Linux:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
+# Windows:
+# Download and install from https://github.com/coreybutler/nvm-windows
+
+# Restart your terminal, then:
+# Install and use the correct Node.js version
+nvm install 20
+nvm use 20
+
+# Verify installation
+node --version  # Should show v20.x.x</code></pre>
+
+        <h3>Installing Yarn</h3>
+        <pre><code># Install Yarn globally
+npm install -g yarn@1.22.22
+
+# Verify installation
+yarn --version  # Should show 1.22.22</code></pre>
+
+        <div class="alert alert-error">
+          <strong>Do NOT Use npm for This Project!</strong>
+          <p>
+            This project uses <strong>Yarn</strong> exclusively. Mixing npm and
+            Yarn will cause dependency conflicts. The
+            <code>package.json</code> specifies
+            <code>packageManager: "yarn@1.22.22"</code>.
+          </p>
+        </div>
+
+        <h3>Required Environment Variables</h3>
+        <p>The following environment variables must be configured:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Purpose</th>
+              <th>Required?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>NUXT_PUBLIC_API_BASE_URL</code></td>
+              <td>Strapi API endpoint</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><code>NUXT_PUBLIC_BASE_URL</code></td>
+              <td>Site base URL</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><code>NUXT_MANUAL_ROUTES</code></td>
+              <td>Routes for static generation</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><code>PLAUSIBLE_DOMAIN</code></td>
+              <td>Analytics domain</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td><code>PLAUSIBLE_API_HOST</code></td>
+              <td>Analytics API host</td>
+              <td>No</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Operating System Compatibility</h3>
+        <ul>
+          <li><strong>macOS:</strong> ✅ Fully supported</li>
+          <li><strong>Linux:</strong> ✅ Fully supported</li>
+          <li>
+            <strong>Windows:</strong> ✅ Supported via WSL2 (Windows Subsystem
+            for Linux)
+          </li>
+        </ul>
+
+        <div class="alert alert-info">
+          <strong>Windows Users:</strong>
+          <p>
+            For best performance on Windows, use <strong>WSL2</strong> (Windows
+            Subsystem for Linux). Store the project in the WSL2 file system
+            (<code>/home/username/</code>) not the Windows file system
+            (<code>/mnt/c/</code>).
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 2: Local Development Deployment -->
+      <section id="local-deployment" class="section">
+        <h2>2. Local Development Deployment</h2>
+
+        <h3>Step-by-Step Setup from Scratch</h3>
+
+        <h4>Step 1: Clone the Repository</h4>
+        <pre><code># Clone the repository
+git clone https://github.com/ICJIA/icjia-infonet-nuxt4.git
+
+# Navigate to the project directory
+cd icjia-infonet-nuxt4</code></pre>
+
+        <h4>Step 2: Set Up Node.js Version</h4>
+        <pre><code># Use the correct Node.js version (reads from .nvmrc)
+nvm use
+
+# If the version isn't installed, nvm will prompt you to install it:
+nvm install 20
+nvm use 20</code></pre>
+
+        <h4>Step 3: Configure Environment Variables</h4>
+        <pre><code># Copy the sample environment file
+cp .env.sample .env
+
+# Edit the .env file with your preferred editor
+# For local development, the default values should work:
+nano .env  # or vim, code, etc.</code></pre>
+
+        <p>Your <code>.env</code> file should contain:</p>
+        <pre><code>NUXT_PUBLIC_API_BASE_URL=https://infonet.icjia-api.cloud
+NUXT_PUBLIC_BASE_URL=https://infonet.icjia.dev
+NUXT_MANUAL_ROUTES=["/search", "/translate", "/faqs", "/news","/data-and-publications"]
+PLAUSIBLE_DOMAIN=infonet.illinois.gov
+PLAUSIBLE_API_HOST=https://analytics.icjia-api.cloud/js/plausible.js
+NUXT_BASE_URL=/
+NUXT_ACTIVE_SECTIONS=['root', 'page', 'meetings', 'faqs']</code></pre>
+
+        <h4>Step 4: Install Dependencies</h4>
+        <pre><code># Install all project dependencies
+yarn install
+
+# This will:
+# 1. Download all packages from package.json
+# 2. Create/update yarn.lock
+# 3. Run postinstall script (nuxt prepare)</code></pre>
+
+        <div class="alert alert-info">
+          <strong>First Install Takes Time:</strong>
+          <p>
+            The first <code>yarn install</code> can take 2-5 minutes depending
+            on your internet connection. Subsequent installs will be faster due
+            to Yarn's cache.
+          </p>
+        </div>
+
+        <h4>Step 5: Run the Development Server</h4>
+        <pre><code># Start the development server
+yarn dev
+
+# This command does the following:
+# 1. Kills any process on port 8000
+# 2. Clears Nuxt cache (.nuxt and .output directories)
+# 3. Runs creator scripts to fetch content from Strapi
+# 4. Starts Nuxt dev server on http://localhost:8000
+# 5. Opens browser automatically</code></pre>
+
+        <div class="alert alert-success">
+          <strong>Success!</strong>
+          <p>If everything is working, you should see:</p>
+          <ul>
+            <li>Creator scripts running and generating content</li>
+            <li>Nuxt dev server starting</li>
+            <li>Browser opening to <code>http://localhost:8000</code></li>
+            <li>The InfoNet homepage loading</li>
+          </ul>
+        </div>
+
+        <h3>Building and Previewing Locally</h3>
+        <p>
+          Before deploying to production, test the production build locally:
+        </p>
+
+        <pre><code># Generate static site and serve it locally
+yarn generate:serve
+
+# This will:
+# 1. Clear cache
+# 2. Run creator scripts
+# 3. Generate static HTML files (175+ pages)
+# 4. Serve on http://localhost:3000
+
+# Note: You need 'serve' installed globally:
+npm install -g serve</code></pre>
+
+        <div class="alert alert-warning">
+          <strong>Production Build vs Dev Server:</strong>
+          <p>
+            The production build (<code>yarn generate</code>) is different from
+            the dev server (<code>yarn dev</code>):
+          </p>
+          <ul>
+            <li>
+              <strong>Dev:</strong> Hot reload, source maps, faster builds
+            </li>
+            <li>
+              <strong>Production:</strong> Optimized, minified, static HTML
+              files
+            </li>
+          </ul>
+          <p>
+            Always test with <code>yarn generate:serve</code> before deploying!
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 3: Netlify Production Deployment -->
+      <section id="netlify-deployment" class="section">
+        <h2>3. Netlify Production Deployment</h2>
+
+        <h3>Overview of Netlify Continuous Deployment</h3>
+        <p>
+          ICJIA InfoNet uses <strong>Netlify</strong> for hosting and continuous
+          deployment. Every push to the <code>main</code> branch automatically
+          triggers a new deployment.
+        </p>
+
+        <div class="diagram">
+          <div class="flow-step">1. Push to main branch</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">2. Netlify detects change</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">3. Build environment starts</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">4. yarn install (dependencies)</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">5. yarn generate (build)</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">6. Deploy to CDN</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">7. Site live! 🎉</div>
+        </div>
+
+        <h3>Connecting GitHub Repository to Netlify</h3>
+        <p>
+          If you're setting up a new Netlify site or need to reconnect the
+          repository:
+        </p>
+
+        <ol>
+          <li>
+            Log in to <a href="https://app.netlify.com">Netlify Dashboard</a>
+          </li>
+          <li>
+            Click <strong>"Add new site"</strong> →
+            <strong>"Import an existing project"</strong>
+          </li>
+          <li>Choose <strong>"GitHub"</strong> as the Git provider</li>
+          <li>Authorize Netlify to access your GitHub account</li>
+          <li>Select the <code>ICJIA/icjia-infonet-nuxt4</code> repository</li>
+          <li>Configure build settings (see below)</li>
+          <li>Click <strong>"Deploy site"</strong></li>
+        </ol>
+
+        <h3>Required Netlify Build Settings</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Setting</th>
+              <th>Value</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Build command</strong></td>
+              <td><code>yarn generate</code></td>
+              <td>Runs creator scripts and generates static site</td>
+            </tr>
+            <tr>
+              <td><strong>Publish directory</strong></td>
+              <td><code>dist</code></td>
+              <td>Output directory containing static files</td>
+            </tr>
+            <tr>
+              <td><strong>Production branch</strong></td>
+              <td><code>main</code></td>
+              <td>Branch that triggers production deployments</td>
+            </tr>
+            <tr>
+              <td><strong>Node version</strong></td>
+              <td><code>20</code></td>
+              <td>Specified in .nvmrc file (auto-detected)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-info">
+          <strong>Netlify Auto-Detects Node Version:</strong>
+          <p>
+            Netlify automatically reads the <code>.nvmrc</code> file to use the
+            correct Node.js version. You don't need to manually configure this
+            in the Netlify dashboard.
+          </p>
+        </div>
+
+        <h3>Configuring Environment Variables in Netlify</h3>
+        <p>
+          Environment variables must be configured in the Netlify dashboard:
+        </p>
+
+        <ol>
+          <li>
+            Go to <strong>Site settings</strong> →
+            <strong>Build & deploy</strong> →
+            <strong>Environment variables</strong>
+          </li>
+          <li>Click <strong>"Add a variable"</strong></li>
+          <li>Add each variable from your <code>.env.sample</code> file</li>
+          <li>Click <strong>"Save"</strong></li>
+        </ol>
+
+        <p>Required environment variables for production:</p>
+        <pre><code>NUXT_PUBLIC_API_BASE_URL=https://infonet.icjia-api.cloud
+NUXT_PUBLIC_BASE_URL=https://infonet.icjia.illinois.gov
+NUXT_MANUAL_ROUTES=["/search", "/translate", "/faqs", "/news","/data-and-publications"]
+PLAUSIBLE_DOMAIN=infonet.illinois.gov
+PLAUSIBLE_API_HOST=https://analytics.icjia-api.cloud/js/plausible.js
+NUXT_BASE_URL=/
+NUXT_ACTIVE_SECTIONS=['root', 'page', 'meetings', 'faqs']</code></pre>
+
+        <div class="alert alert-warning">
+          <strong>Environment Variables Are Sensitive:</strong>
+          <p>
+            Never commit <code>.env</code> files to Git. Environment variables
+            should only be configured in the Netlify dashboard for production.
+          </p>
+        </div>
+
+        <h3>Build Process Timeline</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>Duration</th>
+              <th>What Happens</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dependency Installation</td>
+              <td>1-2 minutes</td>
+              <td><code>yarn install</code> downloads all packages</td>
+            </tr>
+            <tr>
+              <td>Creator Scripts</td>
+              <td>2-4 minutes</td>
+              <td>Fetch content from Strapi APIs, generate Markdown files</td>
+            </tr>
+            <tr>
+              <td>Static Generation</td>
+              <td>3-5 minutes</td>
+              <td><code>nuxt generate</code> creates 175+ HTML pages</td>
+            </tr>
+            <tr>
+              <td>Asset Optimization</td>
+              <td>30-60 seconds</td>
+              <td>Netlify optimizes images and assets</td>
+            </tr>
+            <tr>
+              <td>CDN Distribution</td>
+              <td>10-30 seconds</td>
+              <td>Deploy to global CDN</td>
+            </tr>
+            <tr>
+              <td><strong>Total</strong></td>
+              <td><strong>7-12 minutes</strong></td>
+              <td>Complete deployment</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Monitoring Deployment Status</h3>
+        <p>To monitor a deployment in progress:</p>
+
+        <ol>
+          <li>Go to the <strong>Deploys</strong> tab in Netlify dashboard</li>
+          <li>Click on the deployment in progress</li>
+          <li>View real-time build logs</li>
+          <li>Watch for errors or warnings</li>
+        </ol>
+
+        <div class="alert alert-success">
+          <strong>Successful Deployment Indicators:</strong>
+          <ul>
+            <li>✅ Build status shows "Published"</li>
+            <li>✅ No errors in build logs</li>
+            <li>✅ Site preview shows updated content</li>
+            <li>✅ Production URL loads correctly</li>
+          </ul>
+        </div>
+
+        <h3>Viewing Build Logs and Debugging Failed Deployments</h3>
+        <p>If a deployment fails:</p>
+
+        <ol>
+          <li>
+            Click on the failed deployment in the <strong>Deploys</strong> tab
+          </li>
+          <li>Scroll through the build log to find the error</li>
+          <li>
+            Common error locations:
+            <ul>
+              <li>
+                <strong>Dependency installation:</strong> Check for version
+                conflicts
+              </li>
+              <li>
+                <strong>Creator scripts:</strong> Check for API connection
+                issues
+              </li>
+              <li>
+                <strong>Nuxt generate:</strong> Check for route generation
+                errors
+              </li>
+            </ul>
+          </li>
+          <li>Fix the error locally and push again</li>
+        </ol>
+
+        <div class="alert alert-error">
+          <strong>Build Failed? Don't Panic!</strong>
+          <p>
+            Failed deployments do NOT affect your live site. The previous
+            successful deployment remains live until a new deployment succeeds.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 4: Common Deployment Issues & Solutions -->
+      <section id="common-issues" class="section">
+        <h2>4. Common Deployment Issues & Solutions</h2>
+
+        <h3>Issue 1: Node.js Version Mismatch</h3>
+        <div class="alert alert-error">
+          <strong>Error Message:</strong>
+          <pre><code>error unplugin-utils@0.3.1: The engine "node" is incompatible with this module.
+Expected version ">=20.19.0". Got "18.20.6"</code></pre>
+        </div>
+
+        <p>
+          <strong>Cause:</strong> Wrong Node.js version installed or Netlify
+          using cached version.
+        </p>
+
+        <p><strong>Solution:</strong></p>
+        <pre><code># Local fix:
+nvm install 20
+nvm use 20
+node --version  # Verify it shows v20.x.x
+
+# Netlify fix:
+# 1. Ensure .nvmrc file contains "20"
+# 2. Clear Netlify cache: Site settings → Build & deploy → Clear cache and retry deploy
+# 3. Trigger new deployment</code></pre>
+
+        <h3>Issue 2: Yarn vs npm Conflicts</h3>
+        <div class="alert alert-error">
+          <strong>Error Message:</strong>
+          <pre><code>Error: Cannot find module 'xyz'
+or
+Dependency version mismatch</code></pre>
+        </div>
+
+        <p><strong>Cause:</strong> Mixing npm and Yarn package managers.</p>
+
+        <p><strong>Solution:</strong></p>
+        <pre><code># Remove npm artifacts
+rm -rf node_modules package-lock.json
+
+# Use Yarn exclusively
+yarn install
+
+# NEVER run:
+npm install  # ❌ Don't do this!
+
+# ALWAYS run:
+yarn install  # ✅ Do this!</code></pre>
+
+        <div class="alert alert-warning">
+          <strong>Remember:</strong> This project uses Yarn 1.22.22 exclusively.
+          Using npm will cause conflicts.
+        </div>
+
+        <h3>Issue 3: Missing Environment Variables</h3>
+        <div class="alert alert-error">
+          <strong>Error Message:</strong>
+          <pre><code>ERROR: no api base url specified
+or
+ERROR: no site base url specified</code></pre>
+        </div>
+
+        <p><strong>Cause:</strong> Environment variables not configured.</p>
+
+        <p><strong>Solution:</strong></p>
+        <pre><code># Local fix:
+# 1. Copy .env.sample to .env
+cp .env.sample .env
+
+# 2. Edit .env and add required values
+nano .env
+
+# Netlify fix:
+# 1. Go to Site settings → Build & deploy → Environment variables
+# 2. Add all variables from .env.sample
+# 3. Trigger new deployment</code></pre>
+
+        <h3>Issue 4: Build Script Failures (Creator Scripts)</h3>
+        <div class="alert alert-error">
+          <strong>Error Message:</strong>
+          <pre><code>Error fetching data from API
+or
+GraphQL query failed
+or
+Timeout connecting to Strapi</code></pre>
+        </div>
+
+        <p>
+          <strong>Cause:</strong> Strapi API connection issues or API timeout.
+        </p>
+
+        <p><strong>Solution:</strong></p>
+        <pre><code># Check API connectivity
+curl https://infonet.icjia-api.cloud/graphql
+
+# If API is down, wait and retry
+# If API is up but slow, increase timeout in creator scripts
+
+# Local testing:
+yarn scripts  # Run creator scripts separately to debug
+
+# Check specific creator script:
+node ./creators/createMarkdownPages.js</code></pre>
+
+        <h3>Issue 5: Cache-Related Issues</h3>
+        <div class="alert alert-warning">
+          <strong>Symptoms:</strong>
+          <ul>
+            <li>Old content still showing after update</li>
+            <li>Build using outdated dependencies</li>
+            <li>Unexpected behavior after code changes</li>
+          </ul>
+        </div>
+
+        <p><strong>Solution:</strong></p>
+        <pre><code># Clear local cache
+yarn clear:cache
+# This removes .nuxt and .output directories
+
+# Clear Yarn cache (if dependency issues)
+yarn cache clean
+
+# Netlify cache clear:
+# Site settings → Build & deploy → Clear cache and retry deploy</code></pre>
+
+        <h3>Issue 6: Memory/Timeout Errors During Nuxt Generate</h3>
+        <div class="alert alert-error">
+          <strong>Error Message:</strong>
+          <pre><code>JavaScript heap out of memory
+or
+Build exceeded maximum time limit</code></pre>
+        </div>
+
+        <p>
+          <strong>Cause:</strong> Large number of pages (175+) consuming too
+          much memory.
+        </p>
+
+        <p><strong>Solution:</strong></p>
+        <pre><code># Increase Node.js memory limit (local)
+NODE_OPTIONS="--max-old-space-size=4096" yarn generate
+
+# For Netlify, this is usually not needed as they have sufficient memory
+# If it persists, contact Netlify support to increase build limits</code></pre>
+
+        <h3>Issue 7: Strapi API Connection Failures During Build</h3>
+        <div class="alert alert-error">
+          <strong>Error Message:</strong>
+          <pre><code>ECONNREFUSED
+or
+Network request failed
+or
+API returned 500 error</code></pre>
+        </div>
+
+        <p><strong>Cause:</strong> Strapi API is down or unreachable.</p>
+
+        <p><strong>Solution:</strong></p>
+        <ol>
+          <li>
+            Check Strapi API status:
+            <code>curl https://infonet.icjia-api.cloud</code>
+          </li>
+          <li>Contact Strapi administrator if API is down</li>
+          <li>
+            Use local development mode while API is down:
+            <code>yarn dev:local</code>
+          </li>
+          <li>Retry deployment once API is back online</li>
+        </ol>
+
+        <h3>Issue 8: Static Generation Errors for Specific Routes</h3>
+        <div class="alert alert-error">
+          <strong>Error Message:</strong>
+          <pre><code>Error generating route: /some/path
+or
+404 error during prerendering</code></pre>
+        </div>
+
+        <p>
+          <strong>Cause:</strong> Route not included in prerender configuration.
+        </p>
+
+        <p><strong>Solution:</strong></p>
+        <pre><code># Check nuxt.config.js nitro.prerender.routes
+# Ensure all routes are included in appRoutes.json
+
+# Manually add route to NUXT_MANUAL_ROUTES in .env:
+NUXT_MANUAL_ROUTES=["/search", "/translate", "/faqs", "/news", "/your-new-route"]
+
+# Regenerate routes:
+yarn create:routes</code></pre>
+      </section>
+
+      <!-- Section 5: Deployment Checklist -->
+      <section id="checklist" class="section">
+        <h2>5. Deployment Checklist</h2>
+
+        <h3>Pre-Deployment Checklist</h3>
+        <ul class="checklist">
+          <li>Verify Node.js version is 20.x (<code>node --version</code>)</li>
+          <li>Verify Yarn version is 1.22.22 (<code>yarn --version</code>)</li>
+          <li>All dependencies installed (<code>yarn install</code>)</li>
+          <li>Environment variables configured in <code>.env</code></li>
+          <li>Code changes committed to Git</li>
+          <li>
+            Local development server runs without errors (<code>yarn dev</code>)
+          </li>
+          <li>
+            Production build succeeds locally (<code>yarn generate</code>)
+          </li>
+          <li>
+            Test production build locally (<code>yarn generate:serve</code>)
+          </li>
+          <li>Run accessibility audit (<code>yarn audit:a11y</code>)</li>
+          <li>Check build logs for warnings or errors</li>
+          <li>Verify all creator scripts complete successfully</li>
+          <li>
+            Test critical user paths (navigation, search, content display)
+          </li>
+          <li>Review changes in staging/preview environment</li>
+        </ul>
+
+        <h3>Deployment Steps</h3>
+        <ol>
+          <li>Ensure all pre-deployment checks pass</li>
+          <li>Commit and push changes to <code>main</code> branch</li>
+          <li>Monitor Netlify deployment in dashboard</li>
+          <li>Watch build logs for errors</li>
+          <li>Wait for deployment to complete (7-12 minutes)</li>
+          <li>Verify deployment status shows "Published"</li>
+        </ol>
+
+        <h3>Post-Deployment Verification</h3>
+        <ul class="checklist">
+          <li>Visit production URL and verify site loads</li>
+          <li>Check homepage displays correctly</li>
+          <li>Test navigation between pages</li>
+          <li>Verify search functionality works</li>
+          <li>Check that new content appears correctly</li>
+          <li>Test on mobile devices (responsive design)</li>
+          <li>Verify analytics tracking is working</li>
+          <li>Check browser console for JavaScript errors</li>
+          <li>Test accessibility with screen reader (if major changes)</li>
+          <li>Verify all images load correctly</li>
+          <li>Check that external links work</li>
+          <li>Monitor error logs for 24 hours after deployment</li>
+        </ul>
+
+        <h3>Rollback Procedures (If Deployment Fails)</h3>
+        <ol>
+          <li>Go to Netlify dashboard → <strong>Deploys</strong> tab</li>
+          <li>Find the last successful deployment</li>
+          <li>Click the three dots (⋯) next to the deployment</li>
+          <li>Select <strong>"Publish deploy"</strong></li>
+          <li>Confirm rollback</li>
+          <li>Site will revert to previous version within 1-2 minutes</li>
+          <li>Fix the issue locally before attempting new deployment</li>
+        </ol>
+
+        <div class="alert alert-info">
+          <strong>Rollback is Safe and Fast:</strong>
+          <p>
+            Netlify keeps all previous deployments. You can rollback to any
+            previous version instantly without rebuilding.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 6: Best Practices -->
+      <section id="best-practices" class="section">
+        <h2>6. Tips, Tricks & Best Practices</h2>
+
+        <h3>How to Speed Up Builds</h3>
+        <ul>
+          <li>
+            <strong>Use Netlify's cache:</strong> Don't clear cache unless
+            necessary
+          </li>
+          <li>
+            <strong>Optimize creator scripts:</strong> Run only necessary
+            scripts during development
+          </li>
+          <li>
+            <strong>Use local development mode:</strong>
+            <code>yarn dev:local</code> skips API calls
+          </li>
+          <li>
+            <strong>Parallel processing:</strong> Creator scripts run
+            independently when possible
+          </li>
+          <li>
+            <strong>Incremental builds:</strong> Only push changes when ready to
+            deploy
+          </li>
+        </ul>
+
+        <h3>When to Clear Cache vs When Not To</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Clear Cache When...</th>
+              <th>Don't Clear Cache When...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dependency versions changed</td>
+              <td>Only content changed</td>
+            </tr>
+            <tr>
+              <td>Build configuration changed</td>
+              <td>Making small code tweaks</td>
+            </tr>
+            <tr>
+              <td>Seeing unexpected behavior</td>
+              <td>Everything is working fine</td>
+            </tr>
+            <tr>
+              <td>Node.js version changed</td>
+              <td>Regular development work</td>
+            </tr>
+            <tr>
+              <td>Nuxt config changed</td>
+              <td>Just updating content</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Testing Production Build Locally</h3>
+        <p>Always test production builds before deploying:</p>
+        <pre><code># Full production build and serve
+yarn generate:serve
+
+# This simulates exactly what Netlify will deploy
+# Test thoroughly at http://localhost:3000
+
+# Check for:
+# - All pages load correctly
+# - No console errors
+# - Images display properly
+# - Navigation works
+# - Search functionality works</code></pre>
+
+        <h3>Handling Content Updates from Strapi</h3>
+        <p>When content is updated in Strapi:</p>
+
+        <ol>
+          <li>
+            <strong>Option 1: Automatic (Recommended):</strong> Configure Strapi
+            webhook to trigger Netlify build on content changes
+          </li>
+          <li>
+            <strong>Option 2: Manual:</strong> Trigger deployment manually in
+            Netlify dashboard
+          </li>
+          <li>
+            <strong>Option 3: Scheduled:</strong> Set up scheduled deployments
+            (e.g., daily at 2 AM)
+          </li>
+        </ol>
+
+        <div class="alert alert-info">
+          <strong>Strapi Webhook Setup:</strong>
+          <p>
+            In Strapi admin panel, go to Settings → Webhooks → Add webhook. Set
+            the URL to your Netlify build hook URL (found in Netlify dashboard
+            under Build & deploy → Build hooks).
+          </p>
+        </div>
+
+        <h3>Branch Strategy Recommendations</h3>
+        <ul>
+          <li><strong>main branch:</strong> Production-ready code only</li>
+          <li>
+            <strong>develop branch:</strong> Integration branch for features
+          </li>
+          <li>
+            <strong>feature branches:</strong> Individual features or fixes
+          </li>
+          <li>
+            <strong>Pull requests:</strong> Always use PRs for code review
+          </li>
+          <li>
+            <strong>Deploy previews:</strong> Netlify automatically creates
+            preview URLs for PRs
+          </li>
+        </ul>
+
+        <h3>Using Netlify Deploy Previews for Pull Requests</h3>
+        <p>
+          Netlify automatically creates preview deployments for pull requests:
+        </p>
+
+        <ol>
+          <li>Create a feature branch and make changes</li>
+          <li>Push branch to GitHub</li>
+          <li>Create pull request to <code>main</code></li>
+          <li>Netlify automatically builds a preview</li>
+          <li>Preview URL appears in PR comments</li>
+          <li>Test changes in preview before merging</li>
+          <li>Merge PR to deploy to production</li>
+        </ol>
+
+        <div class="alert alert-success">
+          <strong>Deploy Previews are Powerful:</strong>
+          <p>
+            Use deploy previews to test changes in a production-like environment
+            before merging. Share preview URLs with stakeholders for review.
+          </p>
+        </div>
+
+        <h3>Performance Optimization Tips</h3>
+        <ul>
+          <li>
+            <strong>Image optimization:</strong> Use WebP format and responsive
+            images
+          </li>
+          <li>
+            <strong>Code splitting:</strong> Nuxt automatically splits code by
+            route
+          </li>
+          <li>
+            <strong>Lazy loading:</strong> Use lazy loading for images and
+            components
+          </li>
+          <li>
+            <strong>CDN caching:</strong> Netlify's CDN caches static assets
+            globally
+          </li>
+          <li>
+            <strong>Minimize dependencies:</strong> Only install necessary
+            packages
+          </li>
+          <li>
+            <strong>Monitor bundle size:</strong> Keep JavaScript bundles under
+            250KB
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section 7: Troubleshooting Guide -->
+      <section id="troubleshooting" class="section">
+        <h2>7. Troubleshooting Guide</h2>
+
+        <h3>Deployment Troubleshooting Decision Tree</h3>
+
+        <div class="diagram">
+          <div style="text-align: left; max-width: 800px; margin: 0 auto">
+            <p><strong>Start: Deployment Failed</strong></p>
+            <p style="margin-left: 2rem">
+              ↓ Check build logs in Netlify dashboard
+            </p>
+
+            <p style="margin-left: 2rem">
+              <strong>Q: Error during dependency installation?</strong>
+            </p>
+            <p style="margin-left: 4rem">
+              → Yes: Check Node.js version, clear cache, verify package.json
+            </p>
+            <p style="margin-left: 4rem">→ No: Continue ↓</p>
+
+            <p style="margin-left: 2rem">
+              <strong>Q: Error during creator scripts?</strong>
+            </p>
+            <p style="margin-left: 4rem">
+              → Yes: Check Strapi API connectivity, verify environment variables
+            </p>
+            <p style="margin-left: 4rem">→ No: Continue ↓</p>
+
+            <p style="margin-left: 2rem">
+              <strong>Q: Error during nuxt generate?</strong>
+            </p>
+            <p style="margin-left: 4rem">
+              → Yes: Check route configuration, verify content files exist
+            </p>
+            <p style="margin-left: 4rem">→ No: Continue ↓</p>
+
+            <p style="margin-left: 2rem">
+              <strong>Q: Build succeeded but site not working?</strong>
+            </p>
+            <p style="margin-left: 4rem">
+              → Yes: Check browser console, verify environment variables
+            </p>
+            <p style="margin-left: 4rem">→ No: Contact support</p>
+          </div>
+        </div>
+
+        <h3>Quick Reference: Common Commands</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Command</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Start development server</td>
+              <td><code>yarn dev</code></td>
+            </tr>
+            <tr>
+              <td>Build for production</td>
+              <td><code>yarn generate</code></td>
+            </tr>
+            <tr>
+              <td>Test production build locally</td>
+              <td><code>yarn generate:serve</code></td>
+            </tr>
+            <tr>
+              <td>Clear cache</td>
+              <td><code>yarn clear:cache</code></td>
+            </tr>
+            <tr>
+              <td>Run creator scripts</td>
+              <td><code>yarn scripts</code></td>
+            </tr>
+            <tr>
+              <td>Check Node.js version</td>
+              <td><code>node --version</code></td>
+            </tr>
+            <tr>
+              <td>Switch Node.js version</td>
+              <td><code>nvm use 20</code></td>
+            </tr>
+            <tr>
+              <td>Install dependencies</td>
+              <td><code>yarn install</code></td>
+            </tr>
+            <tr>
+              <td>Run accessibility audit</td>
+              <td><code>yarn audit:a11y</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Links to Relevant Documentation</h3>
+        <ul>
+          <li>
+            <a href="https://nuxt.com/docs" target="_blank"
+              >Nuxt 4 Documentation</a
+            >
+          </li>
+          <li>
+            <a href="https://docs.netlify.com/" target="_blank"
+              >Netlify Documentation</a
+            >
+          </li>
+          <li>
+            <a href="https://strapi.io/documentation" target="_blank"
+              >Strapi Documentation</a
+            >
+          </li>
+          <li>
+            <a href="https://yarnpkg.com/getting-started" target="_blank"
+              >Yarn Documentation</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/nvm-sh/nvm" target="_blank"
+              >nvm Documentation</a
+            >
+          </li>
+          <li>
+            <a href="site-architecture.html" target="_blank"
+              >Site Architecture & Build Process</a
+            >
+          </li>
+          <li>
+            <a href="index.html" target="_blank">Documentation Portal</a>
+          </li>
+        </ul>
+
+        <h3>How to Get Help</h3>
+        <div class="alert alert-info">
+          <strong>Need Assistance?</strong>
+          <ul>
+            <li>
+              <strong>GitHub Issues:</strong> Report bugs or request features on
+              the project repository
+            </li>
+            <li>
+              <strong>Team Chat:</strong> Ask questions in the development team
+              channel
+            </li>
+            <li>
+              <strong>Documentation:</strong> Check the
+              <a href="index.html">Documentation Portal</a> for guides
+            </li>
+            <li>
+              <strong>Netlify Support:</strong> Contact Netlify support for
+              platform-specific issues
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <div class="footer-content">
+        <p>
+          &copy; 2025 Illinois Criminal Justice Information Authority (ICJIA)
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.875rem">
+          <a href="index.html" style="color: var(--primary-color)"
+            >Back to Documentation Portal</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

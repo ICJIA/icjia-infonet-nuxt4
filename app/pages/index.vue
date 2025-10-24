@@ -549,9 +549,13 @@ const { data } = await useAsyncData(`content-home`, async () => {
   return post;
 });
 
+/**
+ * Navigate to InfoNet research page with tag filter
+ * @function gotoInfoNetResearchPage
+ * @param {string} tag - Research tag to filter by
+ */
 const gotoInfoNetResearchPage = (tag) => {
   const url = `/research/?tag=${tag}`;
-  //console.log("goto URL: ", url);
   const tagIndex = infonetTags.value.indexOf(tag);
   router.push({ path: url, query: { tag, tagIndex } });
 };
@@ -560,6 +564,12 @@ const { data: faqs } = await useAsyncData("content-faqs", () =>
   queryContent("/faqs/").find()
 );
 
+/**
+ * Filter tags to only include those in InfoNet's tag list
+ * @function getInfoNetSpecificTags
+ * @param {Array<string>} tagArr - Array of tags to filter
+ * @returns {Array<string>} Filtered tags that exist in InfoNet
+ */
 const getInfoNetSpecificTags = (tagArr) => {
   let tagArrFiltered = [];
   for (let i = 0; i < tagArr.length; i++) {
@@ -575,35 +585,60 @@ const getInfoNetSpecificTags = (tagArr) => {
 
 onMounted(() => {
   isMounted.value = true;
-  // fire an event
-  // useEvent("user:registered", { name: "Chris" });
 });
 
+/**
+ * Open ICJIA Research Hub article in new tab
+ * @function gotoArticle
+ * @param {string} slug - Article slug identifier
+ */
 const gotoArticle = (slug) => {
   let hubArticle = `https://icjia.illinois.gov/researchhub/articles/${slug}`;
   return window.open(hubArticle, "_blank");
 };
 
+/**
+ * Open publication URL in new tab
+ * @function gotoPublication
+ * @param {string} url - Publication URL
+ */
 const gotoPublication = (url) => {
   return window.open(url, "_blank");
 };
 
+/**
+ * Format date string to locale-specific format
+ * @function formatDate
+ * @param {string} dateString - ISO date string
+ * @returns {string} Formatted date (e.g., "January 15, 2024")
+ */
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
+/**
+ * Extract file extension from filename
+ * @function getFileExtension
+ * @param {string} filename - Filename with extension
+ * @returns {string} File extension (e.g., "pdf", "docx")
+ */
 const getFileExtension = (filename) => {
-  // get file extension
   const extension = filename.split(".").pop();
   return extension;
 };
 
+/**
+ * Truncate string to specified length with ellipsis
+ * @function truncateString
+ * @param {string} str - String to truncate
+ * @param {number} [num=250] - Maximum length before truncation
+ * @returns {string} Truncated string with "..." appended if needed
+ */
 const truncateString = (str, num = 250) => {
   if (str.length <= num) {
     return str;
   }
-  // Return str truncated with '...' concatenated to the end of str.
   return str.slice(0, num) + "...";
 };
 </script>

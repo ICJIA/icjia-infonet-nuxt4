@@ -127,18 +127,46 @@
 </template>
 
 <script>
+/**
+ * TheFooter Component
+ * Main application footer with site information, links, and contact details
+ *
+ * @component
+ * @description
+ * Renders the main footer for the ICJIA InfoNet application.
+ * Includes ICJIA branding, footer navigation links, and contact information.
+ * Styled with dark background (#0d4471) for visual separation from main content.
+ *
+ * @example
+ * <template>
+ *   <TheFooter />
+ * </template>
+ */
 export default {
   setup() {
     const { isTranslationEnabled } = useAppConfig();
+
+    /**
+     * Scroll page to top
+     * @function scrollTop
+     */
     const scrollTop = () => {
       window.scrollTo(0, 0);
     };
 
+    /**
+     * Enable translation mode
+     * @function translate
+     */
     const translate = () => {
       const toggleState = useTranslateToggle();
       toggleState.value = true;
     };
 
+    /**
+     * Navigate to ICJIA main website in new tab
+     * @function routeToSite
+     */
     const routeToSite = () => {
       // open new site in new tab
       window.open("https://icjia.illinois.gov", "_blank");

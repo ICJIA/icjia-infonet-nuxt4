@@ -1,3 +1,25 @@
+/**
+ * Application configuration for ICJIA InfoNet
+ * Defines global settings, API endpoints, navigation menus, and feature flags
+ * @module app/app.config
+ * @see {@link https://nuxt.com/docs/guide/directory-structure/app-config|Nuxt App Config}
+ */
+
+/**
+ * @typedef {Object} AppConfig
+ * @property {string} title - Application title
+ * @property {string} description - Application description
+ * @property {string} api - Strapi API base URL
+ * @property {string} root - Application root URL
+ * @property {boolean} isTranslationEnabled - Whether translation feature is enabled
+ * @property {number} homeNewsLimit - Number of news items to show on homepage
+ * @property {Object} faqCategoryMap - Mapping of FAQ categories to display names
+ * @property {Object} strapiEnumMap - Mapping of Strapi enum values to display names
+ * @property {Array<Object>} footerMenu - Footer navigation menu items
+ * @property {Array<Object>} sidebarMenu - Sidebar navigation menu items
+ * @property {Array<Object>} navMenu - Main navigation menu items
+ */
+
 export default defineAppConfig({
   title: "InfoNet",
   description: "InfoNet",

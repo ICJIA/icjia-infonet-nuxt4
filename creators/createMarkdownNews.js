@@ -1,3 +1,17 @@
+/**
+ * Markdown News Generator
+ * Fetches news articles from Strapi API and generates markdown files
+ * Creates news content with metadata and search indexing
+ * @module creators/createMarkdownNews
+ * @requires dotenv
+ * @requires fs
+ * @requires path
+ * @requires axios
+ * @requires jsonfile
+ * @requires lodash
+ * @requires yaml
+ */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 require("dotenv").config();
 

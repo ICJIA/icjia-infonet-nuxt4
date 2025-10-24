@@ -1,3 +1,17 @@
+/**
+ * Markdown Pages Generator
+ * Fetches page content from Strapi API and generates markdown files
+ * Creates both markdown files and JSON metadata for static site generation
+ * @module creators/createMarkdownPages
+ * @requires dotenv
+ * @requires fs
+ * @requires path
+ * @requires axios
+ * @requires jsonfile
+ * @requires lodash
+ * @requires yaml
+ */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 require("dotenv").config();
 

@@ -12,21 +12,13 @@ summary: "October is Domestic Violence Awareness Month. InfoNet data show that
   survivors.  "
 section: news
 createdAt: 2025-10-24T13:47:50.512Z
-updatedAt: 2025-10-24T14:30:19.522Z
+updatedAt: 2025-10-24T14:39:14.761Z
 publishedAt: 2025-10-24T13:51:42.769Z
 searchMeta: "news dvfr dv "
 splash:
   data: null
 attachments:
-  data:
-    - attributes:
-        createdAt: 2025-10-24T13:47:45.867Z
-        updatedAt: 2025-10-24T13:47:45.867Z
-        name: SFY25 InfoNet Domestic Violence Data Highlights.docx
-        alternativeText: null
-        url: /uploads/SFY_25_Info_Net_Domestic_Violence_Data_Highlights_5c06ab60ca.docx
-        ext: .docx
-        size: 49.65
+  data: []
 postDate: 2025-10-01T05:00:00Z
 markdown: |-
   

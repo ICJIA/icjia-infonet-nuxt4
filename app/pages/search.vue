@@ -81,18 +81,31 @@
 </template>
 
 <script setup>
+/**
+ * Search Page
+ * Full-text search interface for InfoNet content using Fuse.js
+ *
+ * @component
+ * @description
+ * Provides a search interface that allows users to search across all InfoNet content.
+ * Uses Fuse.js for client-side full-text search with fuzzy matching capabilities.
+ * Search index is fetched from /api/search endpoint.
+ *
+ * @see {@link https://fusejs.io/|Fuse.js Documentation}
+ */
 import Fuse from "fuse.js";
-// import searchIndex from "~/src/searchIndex.json";
-// const searchIdx = useState("search");
-const { pending, data: searchIdx } = await useFetch("/api/search");
-console.log("searchIdx pending: ", pending.value);
 
-console.log("searchIndex.json loaded from api.");
-// console.log(mySear)
+const { pending, data: searchIdx } = await useFetch("/api/search");
+
 useHead({
   title: "Search",
 });
 
+/**
+ * Fuse.js search options configuration
+ * @type {Object}
+ * @constant
+ */
 const options = {
   isCaseSensitive: false,
   includeScore: true,
@@ -117,11 +130,12 @@ const options = {
     "answer",
   ],
 };
-const router = useRouter();
 
+const router = useRouter();
 const query = ref("");
 const route = useRoute();
-// console.log("route params: ", route.query.q);
+
+// Initialize query from URL params if present
 if (route.query && route.query.q) {
   query.value = route.query.q;
 } else {
@@ -129,14 +143,22 @@ if (route.query && route.query.q) {
 }
 
 const fuse = new Fuse(searchIdx.value.content, options);
-
 const result = ref(fuse.search(query.value.toLowerCase));
 
+/**
+ * Perform instant search as user types
+ * @function instantSearch
+ */
 const instantSearch = () => {
   result.value = fuse.search(query.value);
 };
 
 const showIndex = ref(false);
+
+/**
+ * Toggle search index visibility
+ * @function toggleIndex
+ */
 const toggleIndex = () => {
   showIndex.value = !showIndex.value;
 };
@@ -147,11 +169,19 @@ watch(query, (val) => {
   }
 });
 
+/**
+ * Navigate to search result item
+ * @function navigateTo
+ * @param {Object} item - Search result item with path property
+ */
 const navigateTo = (item) => {
-  // console.log("navigateTo: ", item?.path);
   router.push({ path: item.path });
 };
 
+/**
+ * Clear all search results and reset form
+ * @function clearAll
+ */
 const clearAll = () => {
   query.value = "";
   result.value = [];

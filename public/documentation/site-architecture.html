@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Site Architecture & Build Process - Developer Guide for ICJIA InfoNet"
+    />
+    <title>
+      Site Architecture & Build Process | ICJIA InfoNet Developer Documentation
+    </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #1976d2;
+        --primary-dark: #1565c0;
+        --secondary-color: #424242;
+        --accent-color: #00897b;
+        --success-color: #2e7d32;
+        --warning-color: #f57c00;
+        --info-color: #0288d1;
+        --background: #f5f5f5;
+        --card-background: #ffffff;
+        --code-background: #f8f9fa;
+        --text-primary: #212121;
+        --text-secondary: #757575;
+        --border-color: #e0e0e0;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: var(--background);
+        color: var(--text-primary);
+        line-height: 1.7;
+        min-height: 100vh;
+      }
+
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: var(--primary-color);
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        z-index: 100;
+      }
+
+      .skip-link:focus {
+        top: 0;
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        padding: 2rem 1rem;
+        box-shadow: var(--shadow);
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.5px;
+      }
+
+      .subtitle {
+        font-size: 1.125rem;
+        opacity: 0.95;
+        font-weight: 400;
+      }
+
+      .breadcrumb {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        opacity: 0.9;
+      }
+
+      .breadcrumb a {
+        color: white;
+        text-decoration: underline;
+      }
+
+      .breadcrumb a:hover {
+        opacity: 0.8;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+
+      .toc {
+        background: var(--card-background);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+        border-left: 4px solid var(--accent-color);
+      }
+
+      .toc h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .toc ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .toc li {
+        margin-bottom: 0.5rem;
+      }
+
+      .toc a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .toc a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+      }
+
+      .section {
+        background: var(--card-background);
+        padding: 2rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .section h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        border-bottom: 3px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+      }
+
+      .section h3 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .section h4 {
+        font-size: 1.25rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: var(--secondary-color);
+      }
+
+      .section p {
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .section ul,
+      .section ol {
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+      }
+
+      .section li {
+        margin-bottom: 0.5rem;
+      }
+
+      code {
+        background: var(--code-background);
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: "Monaco", "Courier New", monospace;
+        font-size: 0.9em;
+        color: var(--secondary-color);
+      }
+
+      pre {
+        background: var(--code-background);
+        padding: 1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin-bottom: 1rem;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      pre code {
+        background: none;
+        padding: 0;
+      }
+
+      .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border-left: 4px solid;
+      }
+
+      .alert-info {
+        background: #e3f2fd;
+        border-color: var(--info-color);
+        color: #01579b;
+      }
+
+      .alert-warning {
+        background: #fff3e0;
+        border-color: var(--warning-color);
+        color: #e65100;
+      }
+
+      .alert-success {
+        background: #e8f5e9;
+        border-color: var(--success-color);
+        color: #1b5e20;
+      }
+
+      .alert strong {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .diagram {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        border: 2px solid var(--border-color);
+        text-align: center;
+      }
+
+      .flow-step {
+        background: var(--primary-color);
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 0.5rem 0;
+        font-weight: 600;
+      }
+
+      .flow-arrow {
+        font-size: 2rem;
+        color: var(--primary-color);
+        margin: 0.5rem 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1.5rem;
+      }
+
+      th,
+      td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      th {
+        background: var(--code-background);
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.875rem 1.5rem;
+        background: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .btn:hover,
+      .btn:focus {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+      }
+
+      footer {
+        background: var(--card-background);
+        border-top: 1px solid var(--border-color);
+        padding: 2rem 1rem;
+        margin-top: 4rem;
+        text-align: center;
+        color: var(--text-secondary);
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        .section {
+          padding: 1.5rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+      <div class="header-content">
+        <h1>Site Architecture & Build Process</h1>
+        <p class="subtitle">Developer Guide for ICJIA InfoNet</p>
+        <div class="breadcrumb">
+          <a href="index.html">Documentation Portal</a> / Site Architecture &
+          Build Process
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" role="main">
+      <!-- Table of Contents -->
+      <nav class="toc" aria-labelledby="toc-heading">
+        <h2 id="toc-heading">Table of Contents</h2>
+        <ul>
+          <li><a href="#overview">1. Project Overview</a></li>
+          <li><a href="#structure">2. Site Structure</a></li>
+          <li>
+            <a href="#dependencies">3. Dependencies & Package Management</a>
+          </li>
+          <li>
+            <a href="#strapi">4. Strapi Integration & Content Management</a>
+          </li>
+          <li>
+            <a href="#build-process">5. Build Process & Content Generation</a>
+          </li>
+          <li><a href="#workflow">6. Development Workflow</a></li>
+          <li><a href="#deployment">7. Deployment</a></li>
+        </ul>
+      </nav>
+
+      <!-- Section 1: Project Overview -->
+      <section id="overview" class="section">
+        <h2>1. Project Overview</h2>
+
+        <h3>What is ICJIA InfoNet?</h3>
+        <p>
+          InfoNet is a web-based data collection and reporting system used by
+          victim service providers in Illinois. The system is nationally
+          recognized for facilitating standardized data collection and reporting
+          at the statewide level.
+        </p>
+
+        <h3>Technology Stack</h3>
+        <p>
+          This project uses modern web technologies to deliver a fast,
+          accessible, and maintainable application:
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Technology</th>
+              <th>Version</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Nuxt 4</strong></td>
+              <td>4.1.0</td>
+              <td>Vue.js framework for building the application</td>
+            </tr>
+            <tr>
+              <td><strong>Vue.js</strong></td>
+              <td>3.x</td>
+              <td>Progressive JavaScript framework for UI</td>
+            </tr>
+            <tr>
+              <td><strong>Vuetify</strong></td>
+              <td>3.7.1</td>
+              <td>Material Design component library</td>
+            </tr>
+            <tr>
+              <td><strong>@nuxt/content</strong></td>
+              <td>2.13.4</td>
+              <td>File-based CMS for Markdown content</td>
+            </tr>
+            <tr>
+              <td><strong>Strapi</strong></td>
+              <td>N/A (External)</td>
+              <td>Headless CMS for content management</td>
+            </tr>
+            <tr>
+              <td><strong>Chart.js</strong></td>
+              <td>4.4.4</td>
+              <td>Data visualization library</td>
+            </tr>
+            <tr>
+              <td><strong>Fuse.js</strong></td>
+              <td>7.0.0</td>
+              <td>Fuzzy search functionality</td>
+            </tr>
+            <tr>
+              <td><strong>Axios</strong></td>
+              <td>1.7.7</td>
+              <td>HTTP client for API requests</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>What is JAMstack?</h3>
+        <div class="alert alert-info">
+          <strong>JAMstack Explained (for Beginners)</strong>
+          <p>
+            JAMstack stands for <strong>J</strong>avaScript,
+            <strong>A</strong>PIs, and <strong>M</strong>arkup. It's a modern
+            web development architecture that delivers better performance,
+            security, and scalability.
+          </p>
+          <p><strong>How it works:</strong></p>
+          <ul>
+            <li>
+              <strong>JavaScript:</strong> Handles dynamic functionality in the
+              browser
+            </li>
+            <li>
+              <strong>APIs:</strong> Server-side operations are abstracted into
+              reusable APIs (like Strapi)
+            </li>
+            <li>
+              <strong>Markup:</strong> Pre-built HTML files served from a CDN
+              (Content Delivery Network)
+            </li>
+          </ul>
+          <p>
+            <strong>Key Benefit:</strong> Instead of generating pages on-demand
+            when users visit (traditional server-side rendering), JAMstack
+            pre-builds all pages during deployment. This means pages load
+            instantly because they're just static HTML files!
+          </p>
+        </div>
+
+        <h3>Architecture Overview</h3>
+        <div class="diagram">
+          <div class="flow-step">Strapi CMS (Content Management)</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            Build Scripts Fetch Content via GraphQL API
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">Generate Markdown Files & JSON Data</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">Nuxt Processes Content with @nuxt/content</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">Static Site Generation (SSG)</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">Deploy to Netlify CDN</div>
+        </div>
+
+        <div class="alert alert-success">
+          <strong>Why This Architecture?</strong>
+          <ul>
+            <li>
+              <strong>Performance:</strong> Pre-built pages load instantly
+            </li>
+            <li><strong>Security:</strong> No database or server to hack</li>
+            <li>
+              <strong>Scalability:</strong> CDN handles millions of requests
+            </li>
+            <li>
+              <strong>Developer Experience:</strong> Content editors use Strapi,
+              developers use Git
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section 2: Site Structure -->
+      <section id="structure" class="section">
+        <h2>2. Site Structure</h2>
+
+        <h3>Directory Structure</h3>
+        <p>
+          Nuxt 4 uses a convention-based directory structure. Understanding
+          where files go is crucial for working with the framework.
+        </p>
+
+        <pre><code>icjia-infonet-nuxt4/
+├── app/                    # Application code (Nuxt 4 convention)
+│   ├── assets/            # Uncompiled assets (CSS, images, fonts)
+│   ├── components/        # Vue components
+│   ├── composables/       # Vue composables (reusable logic)
+│   ├── data/              # Static JSON data files
+│   ├── layouts/           # Page layouts
+│   ├── middleware/        # Route middleware
+│   ├── pages/             # File-based routing (each file = route)
+│   ├── plugins/           # Vue plugins
+│   └── app.vue            # Root component
+│
+├── content/               # Markdown content (@nuxt/content)
+│   ├── faqs/             # FAQ markdown files
+│   ├── news/             # News posts
+│   ├── tabs/             # Tab content
+│   └── *.md              # Other pages
+│
+├── creators/              # Build scripts for content generation
+│   ├── createMarkdownPages.js
+│   ├── createMarkdownNews.js
+│   ├── createMarkdownFaqs.js
+│   ├── createHubArticles.mjs
+│   └── ...
+│
+├── public/                # Static files served as-is
+│   ├── documentation/    # Developer documentation portal
+│   ├── images/           # Generated images from Strapi
+│   └── *.json            # Generated data files
+│
+├── server/                # Server-side code
+│   └── api/              # API routes (prerendered for SSG)
+│
+├── nuxt.config.js         # Nuxt configuration
+├── package.json           # Dependencies and scripts
+└── .env                   # Environment variables (not in Git)</code></pre>
+
+        <h3>How Nuxt Routing Works</h3>
+        <div class="alert alert-info">
+          <strong>File-Based Routing (for Beginners)</strong>
+          <p>
+            Nuxt automatically creates routes based on files in the
+            <code>app/pages/</code> directory. You don't need to manually
+            configure routes!
+          </p>
+          <p><strong>Examples:</strong></p>
+          <ul>
+            <li>
+              <code>app/pages/index.vue</code> → <code>/</code> (home page)
+            </li>
+            <li><code>app/pages/about.vue</code> → <code>/about</code></li>
+            <li><code>app/pages/news/index.vue</code> → <code>/news</code></li>
+            <li>
+              <code>app/pages/news/[slug].vue</code> →
+              <code>/news/any-slug</code> (dynamic route)
+            </li>
+          </ul>
+        </div>
+
+        <h3>Component Organization</h3>
+        <p>
+          Components are organized by purpose in the
+          <code>app/components/</code> directory:
+        </p>
+        <ul>
+          <li>
+            <code>app/components/content/</code> - Content-specific components
+            (tabs, cards, etc.)
+          </li>
+          <li>
+            <code>app/components/layout/</code> - Layout components (header,
+            footer, sidebar)
+          </li>
+          <li>
+            <code>app/components/ui/</code> - Reusable UI components (buttons,
+            modals, etc.)
+          </li>
+        </ul>
+
+        <div class="alert alert-warning">
+          <strong>Naming Convention:</strong> Nuxt auto-imports components based
+          on their file path. A component at
+          <code>app/components/content/TabsAccessible.vue</code> can be used as
+          <code>&lt;ContentTabsAccessible /&gt;</code> in any template.
+        </div>
+      </section>
+
+      <!-- Section 3: Dependencies -->
+      <section id="dependencies" class="section">
+        <h2>3. Dependencies & Package Management</h2>
+
+        <h3>Understanding package.json</h3>
+        <p>
+          The <code>package.json</code> file is the heart of any Node.js
+          project. It defines:
+        </p>
+        <ul>
+          <li>
+            <strong>Dependencies:</strong> Libraries your project needs to run
+          </li>
+          <li>
+            <strong>DevDependencies:</strong> Tools needed only during
+            development
+          </li>
+          <li>
+            <strong>Scripts:</strong> Commands you can run (like
+            <code>yarn dev</code>)
+          </li>
+        </ul>
+
+        <h3>Key Dependencies Explained</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>What It Does</th>
+              <th>Why We Need It</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>nuxt</code></td>
+              <td>The Nuxt framework</td>
+              <td>Core framework that powers the entire application</td>
+            </tr>
+            <tr>
+              <td><code>@nuxt/content</code></td>
+              <td>File-based CMS</td>
+              <td>Processes Markdown files and makes them queryable</td>
+            </tr>
+            <tr>
+              <td><code>vuetify</code></td>
+              <td>Material Design components</td>
+              <td>Provides pre-built UI components (buttons, cards, etc.)</td>
+            </tr>
+            <tr>
+              <td><code>axios</code></td>
+              <td>HTTP client</td>
+              <td>Makes API requests to Strapi during build</td>
+            </tr>
+            <tr>
+              <td><code>chart.js</code></td>
+              <td>Charting library</td>
+              <td>Creates data visualizations</td>
+            </tr>
+            <tr>
+              <td><code>fuse.js</code></td>
+              <td>Fuzzy search</td>
+              <td>Powers the site search functionality</td>
+            </tr>
+            <tr>
+              <td><code>markdown-it</code></td>
+              <td>Markdown parser</td>
+              <td>Converts Markdown to HTML</td>
+            </tr>
+            <tr>
+              <td><code>dompurify</code></td>
+              <td>HTML sanitizer</td>
+              <td>Prevents XSS attacks by cleaning HTML</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Installing Dependencies</h3>
+        <p>
+          This project uses <strong>Yarn</strong> as the package manager. Here's
+          how to work with dependencies:
+        </p>
+
+        <pre><code># Install all dependencies (run this after cloning the repo)
+yarn install
+
+# Add a new dependency
+yarn add package-name
+
+# Add a development dependency
+yarn add -D package-name
+
+# Remove a dependency
+yarn remove package-name
+
+# Update all dependencies
+yarn upgrade</code></pre>
+
+        <div class="alert alert-warning">
+          <strong>Important:</strong> Always use <code>yarn</code> instead of
+          <code>npm</code> for this project. Mixing package managers can cause
+          dependency conflicts.
+        </div>
+      </section>
+
+      <!-- Section 4: Strapi Integration -->
+      <section id="strapi" class="section">
+        <h2>4. Strapi Integration & Content Management</h2>
+
+        <h3>What is Strapi?</h3>
+        <div class="alert alert-info">
+          <strong>Strapi Explained (for Beginners)</strong>
+          <p>
+            <strong>Strapi</strong> is a <strong>headless CMS</strong> (Content
+            Management System). "Headless" means it only manages content—it
+            doesn't care how you display it.
+          </p>
+          <p><strong>Traditional CMS (like WordPress):</strong></p>
+          <ul>
+            <li>Manages content AND displays it</li>
+            <li>Tightly coupled frontend and backend</li>
+            <li>Limited flexibility</li>
+          </ul>
+          <p><strong>Headless CMS (like Strapi):</strong></p>
+          <ul>
+            <li>Only manages content</li>
+            <li>Provides content via API</li>
+            <li>
+              You build the frontend however you want (Nuxt, React, mobile app,
+              etc.)
+            </li>
+          </ul>
+        </div>
+
+        <h3>How Content is Structured in Strapi</h3>
+        <p>
+          Strapi organizes content into <strong>Content Types</strong>. For
+          InfoNet, we have:
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Content Type</th>
+              <th>Purpose</th>
+              <th>Example Fields</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pages</strong></td>
+              <td>Static pages (About, Contact, etc.)</td>
+              <td>title, slug, body, section, summary</td>
+            </tr>
+            <tr>
+              <td><strong>Posts (News)</strong></td>
+              <td>News articles and updates</td>
+              <td>title, slug, body, dateOverride, category</td>
+            </tr>
+            <tr>
+              <td><strong>FAQs</strong></td>
+              <td>Frequently asked questions</td>
+              <td>question, answer, agency, slug</td>
+            </tr>
+            <tr>
+              <td><strong>Tabs</strong></td>
+              <td>Tabbed content sections</td>
+              <td>title, slug, body, sectionID, ranking</td>
+            </tr>
+            <tr>
+              <td><strong>Meetings</strong></td>
+              <td>Meeting information</td>
+              <td>title, start, end, body, attachments</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Content Areas: DV, SA, and CAC</h3>
+        <p>InfoNet serves three main victim service areas:</p>
+        <ul>
+          <li><strong>DV:</strong> Domestic Violence services</li>
+          <li><strong>SA:</strong> Sexual Assault services</li>
+          <li><strong>CAC:</strong> Children's Advocacy Center services</li>
+        </ul>
+        <p>
+          Content in Strapi is tagged with these categories, allowing the site
+          to filter and display relevant information for each service area.
+        </p>
+
+        <h3>API Endpoints</h3>
+        <p>
+          Strapi provides a GraphQL API for fetching content. The main endpoint
+          is:
+        </p>
+        <pre><code>https://infonet.icjia-api.cloud/graphql</code></pre>
+
+        <p>Additional APIs used by the project:</p>
+        <ul>
+          <li>
+            <code>https://researchhub.icjia-api.cloud/graphql</code> - Research
+            Hub articles
+          </li>
+          <li>
+            <code>https://agency.icjia-api.cloud/graphql</code> - Publications
+            from the agency
+          </li>
+        </ul>
+
+        <h3>Example GraphQL Query</h3>
+        <p>Here's how we fetch pages from Strapi:</p>
+        <pre><code>query {
+  pages {
+    data {
+      id
+      attributes {
+        title
+        slug
+        body
+        section
+        summary
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}</code></pre>
+
+        <div class="alert alert-success">
+          <strong>No Authentication Required:</strong> The Strapi APIs used by
+          this project are public and don't require authentication. The build
+          scripts can fetch content without API keys.
+        </div>
+      </section>
+
+      <!-- Section 5: Build Process -->
+      <section id="build-process" class="section">
+        <h2>5. Build Process & Content Generation</h2>
+
+        <h3>Overview: How Content Gets from Strapi to Your Browser</h3>
+        <p>
+          The build process is the magic that transforms content from Strapi
+          into a static website. Here's the complete journey:
+        </p>
+
+        <div class="diagram">
+          <div class="flow-step">1. Content Editor Updates Strapi</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">2. Developer Runs Build Command</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">3. Creator Scripts Fetch Data via GraphQL</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">4. Scripts Generate Markdown Files</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">5. Scripts Generate JSON Data Files</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">6. Nuxt Reads Markdown with @nuxt/content</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">7. Nuxt Generates Static HTML Pages</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">8. Deploy to Netlify</div>
+        </div>
+
+        <h3>Build Scripts Explained</h3>
+        <p>
+          The <code>creators/</code> directory contains Node.js scripts that
+          fetch content from Strapi and generate files. Each script has a
+          specific purpose:
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Script</th>
+              <th>What It Does</th>
+              <th>Output</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>createMarkdownPages.js</code></td>
+              <td>Fetches pages from Strapi</td>
+              <td>
+                <code>content/*.md</code> + <code>public/pages.json</code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>createMarkdownNews.js</code></td>
+              <td>Fetches news posts</td>
+              <td>
+                <code>content/news/*.md</code> + <code>public/posts.json</code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>createMarkdownFaqs.js</code></td>
+              <td>Fetches FAQs</td>
+              <td>
+                <code>content/faqs/*.md</code> + <code>public/faqs.json</code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>createMarkdownTabs.js</code></td>
+              <td>Fetches tab content</td>
+              <td>
+                <code>content/tabs/*.md</code> + <code>public/tabs.json</code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>createHubArticles.mjs</code></td>
+              <td>Fetches Research Hub articles</td>
+              <td><code>app/data/hub.json</code></td>
+            </tr>
+            <tr>
+              <td><code>createPublistPublications.mjs</code></td>
+              <td>Fetches publications</td>
+              <td><code>app/data/publist.json</code></td>
+            </tr>
+            <tr>
+              <td><code>createSearchIndex.mjs</code></td>
+              <td>Builds search index</td>
+              <td><code>app/data/searchIndex.json</code></td>
+            </tr>
+            <tr>
+              <td><code>createSitemap.mjs</code></td>
+              <td>Generates sitemap</td>
+              <td><code>public/sitemap.xml</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Step-by-Step: What Happens During <code>npm run build</code></h3>
+
+        <h4>Step 1: Clear Cache</h4>
+        <pre><code>yarn clear:cache
+# Removes .nuxt and .output directories to ensure clean build</code></pre>
+
+        <h4>Step 2: Run Creator Scripts</h4>
+        <pre><code>yarn scripts
+# This runs all creator scripts in sequence:
+# - createContentDirectory
+# - createPages
+# - createPublistPublications
+# - createTabs
+# - createFaqs
+# - createHub
+# - createHubImages
+# - createNews
+# - createMergedPublications
+# - createSearchIndex
+# - createSitemap
+# - createRoutes</code></pre>
+
+        <h4>Step 3: Nuxt Build</h4>
+        <pre><code>nuxt build
+# Nuxt processes all content and generates static HTML</code></pre>
+
+        <h3>How Markdown Files Are Generated</h3>
+        <p>Let's look at how <code>createMarkdownPages.js</code> works:</p>
+
+        <pre><code>// 1. Fetch data from Strapi GraphQL API
+axios.post('https://infonet.icjia-api.cloud/graphql', { query })
+  .then((res) => {
+    const pages = res.data.data.pages.data;
+
+    // 2. Process each page
+    pages.forEach((page) => {
+      // 3. Format as Markdown with YAML frontmatter
+      const content = formatMarkdown(page.attributes);
+
+      // 4. Write to file system
+      fs.writeFileSync(`content/${slug}.md`, content);
+    });
+
+    // 5. Also save as JSON for API routes
+    jsonfile.writeFileSync('public/pages.json', pages);
+  });</code></pre>
+
+        <h4>Example Generated Markdown File</h4>
+        <pre><code>---
+title: About InfoNet
+slug: about
+section: root
+summary: Learn about the InfoNet system
+createdAt: 2024-01-15T10:00:00.000Z
+---
+
+This is the page body content from Strapi.
+It can include **Markdown** formatting.</code></pre>
+
+        <h3>How @nuxt/content Processes Markdown</h3>
+        <div class="alert alert-info">
+          <strong>@nuxt/content Explained (for Beginners)</strong>
+          <p>
+            <code>@nuxt/content</code> is a Nuxt module that turns Markdown
+            files into a queryable database. It reads files from the
+            <code>content/</code> directory and makes them available via a query
+            API.
+          </p>
+          <p><strong>Example usage in a Vue component:</strong></p>
+          <pre><code>// Fetch a single page
+const { data } = await useAsyncData('about', () =>
+  queryContent('/about').findOne()
+);
+
+// Fetch all news posts, sorted by date
+const { data: posts } = await useAsyncData('news', () =>
+  queryContent('/news').sort({ date: -1 }).find()
+);</code></pre>
+        </div>
+
+        <h3>Build vs. Runtime</h3>
+        <p>Understanding when things happen is crucial:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Build Time</th>
+              <th>Runtime (Browser)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Creator scripts run</td>
+              <td>User visits the site</td>
+            </tr>
+            <tr>
+              <td>API calls to Strapi</td>
+              <td>No API calls (everything is pre-built)</td>
+            </tr>
+            <tr>
+              <td>Markdown files generated</td>
+              <td>HTML files served from CDN</td>
+            </tr>
+            <tr>
+              <td>Static pages created</td>
+              <td>Pages load instantly</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-success">
+          <strong>Key Insight:</strong> All content fetching happens at
+          <strong>build time</strong>, not runtime. This means the site is
+          blazing fast because there are no database queries or API calls when
+          users visit.
+        </div>
+      </section>
+
+      <!-- Section 6: Development Workflow -->
+      <section id="workflow" class="section">
+        <h2>6. Development Workflow</h2>
+
+        <h3>Setting Up the Project Locally</h3>
+        <p>Follow these steps to get the project running on your machine:</p>
+
+        <h4>1. Clone the Repository</h4>
+        <pre><code>git clone https://github.com/ICJIA/icjia-infonet-nuxt4.git
+cd icjia-infonet-nuxt4</code></pre>
+
+        <h4>2. Set Up Environment Variables</h4>
+        <pre><code># Copy the sample environment file
+cp .env.sample .env
+
+# Edit .env with your preferred editor
+# The default values should work for most development scenarios</code></pre>
+
+        <p>Key environment variables:</p>
+        <pre><code>NUXT_PUBLIC_API_BASE_URL=https://infonet.icjia-api.cloud
+NUXT_PUBLIC_BASE_URL=https://infonet.icjia.dev
+NUXT_MANUAL_ROUTES=["/search", "/translate", "/faqs", "/news","/data-and-publications"]</code></pre>
+
+        <h4>3. Install Node.js (via nvm)</h4>
+        <pre><code># Install nvm if you don't have it
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+
+# Use the correct Node.js version (defined in .nvmrc)
+nvm use</code></pre>
+
+        <h4>4. Install Dependencies</h4>
+        <pre><code>yarn install</code></pre>
+
+        <h3>Running the Development Server</h3>
+        <pre><code># Start development server on http://localhost:8000
+yarn dev
+
+# This command does three things:
+# 1. Kills any process on port 8000
+# 2. Clears the cache
+# 3. Runs creator scripts to fetch latest content
+# 4. Starts Nuxt dev server with hot reload</code></pre>
+
+        <div class="alert alert-info">
+          <strong>Hot Reload:</strong> When you save changes to Vue files, the
+          browser automatically updates without a full page refresh. This makes
+          development much faster!
+        </div>
+
+        <h3>Triggering Content Updates from Strapi</h3>
+        <p>
+          When content is updated in Strapi, you need to re-run the creator
+          scripts:
+        </p>
+
+        <pre><code># Fetch latest content from remote Strapi
+yarn scripts
+
+# OR fetch from local data (no API calls)
+yarn scripts:local</code></pre>
+
+        <div class="alert alert-warning">
+          <strong>Important:</strong> The dev server (<code>yarn dev</code>)
+          automatically runs <code>yarn scripts</code> on startup, so you'll
+          always have the latest content when you start developing.
+        </div>
+
+        <h3>Common Development Commands</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Command</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>yarn dev</code></td>
+              <td>Start development server with hot reload</td>
+            </tr>
+            <tr>
+              <td><code>yarn build</code></td>
+              <td>Build for production (runs scripts + nuxt build)</td>
+            </tr>
+            <tr>
+              <td><code>yarn generate</code></td>
+              <td>Generate static site (for deployment)</td>
+            </tr>
+            <tr>
+              <td><code>yarn generate:serve</code></td>
+              <td>Generate and serve locally on port 3000</td>
+            </tr>
+            <tr>
+              <td><code>yarn scripts</code></td>
+              <td>Run all creator scripts (fetch from Strapi)</td>
+            </tr>
+            <tr>
+              <td><code>yarn scripts:local</code></td>
+              <td>Run scripts with local data (no API calls)</td>
+            </tr>
+            <tr>
+              <td><code>yarn clear:cache</code></td>
+              <td>Clear Nuxt cache (.nuxt and .output)</td>
+            </tr>
+            <tr>
+              <td><code>yarn audit:a11y</code></td>
+              <td>Run accessibility audit on all routes</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Previewing Changes Before Deployment</h3>
+        <p>To see exactly what will be deployed to production:</p>
+
+        <pre><code># Generate static site and serve it locally
+yarn generate:serve
+
+# This will:
+# 1. Clear cache
+# 2. Run creator scripts
+# 3. Generate static HTML files
+# 4. Serve on http://localhost:3000</code></pre>
+
+        <div class="alert alert-success">
+          <strong>Best Practice:</strong> Always test with
+          <code>yarn generate:serve</code> before pushing to production. This
+          catches issues that might not appear in dev mode.
+        </div>
+      </section>
+
+      <!-- Section 7: Deployment -->
+      <section id="deployment" class="section">
+        <h2>7. Deployment</h2>
+
+        <h3>How Netlify Deployment Works</h3>
+        <p>
+          The site is hosted on <strong>Netlify</strong>, a platform optimized
+          for JAMstack sites. Deployment is fully automated through continuous
+          deployment.
+        </p>
+
+        <div class="diagram">
+          <div class="flow-step">Developer Pushes to GitHub (main branch)</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">Netlify Detects Changes</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">Netlify Runs Build Command</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">Static Files Generated</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">Deploy to Netlify CDN</div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">Site Live at infonet.icjia.illinois.gov</div>
+        </div>
+
+        <h3>Netlify Configuration</h3>
+        <p>Deployment settings are defined in <code>netlify.toml</code>:</p>
+
+        <pre><code># Build settings (configured in Netlify dashboard)
+Build command: yarn generate
+Publish directory: dist
+Production branch: main</code></pre>
+
+        <h3>Build Triggers</h3>
+        <p>Deployment is triggered by:</p>
+        <ul>
+          <li>
+            <strong>Git Push:</strong> Any push to the <code>main</code> branch
+          </li>
+          <li><strong>Manual Deploy:</strong> Via Netlify dashboard</li>
+          <li>
+            <strong>Webhook:</strong> Can be triggered by Strapi when content
+            changes (if configured)
+          </li>
+        </ul>
+
+        <h3>Environment Variables in Netlify</h3>
+        <p>
+          Environment variables are configured in the Netlify dashboard under
+          <strong
+            >Site settings → Build & deploy → Environment variables</strong
+          >
+        </p>
+
+        <div class="alert alert-warning">
+          <strong>Important:</strong> Make sure all environment variables from
+          <code>.env</code>
+          are also set in Netlify, or the build will fail.
+        </div>
+
+        <h3>Deployment Process Timeline</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>Duration</th>
+              <th>What Happens</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1. Build Start</td>
+              <td>~10 seconds</td>
+              <td>Netlify clones repository and installs dependencies</td>
+            </tr>
+            <tr>
+              <td>2. Creator Scripts</td>
+              <td>~30-60 seconds</td>
+              <td>Fetch content from Strapi APIs</td>
+            </tr>
+            <tr>
+              <td>3. Nuxt Generate</td>
+              <td>~2-3 minutes</td>
+              <td>Generate 175+ static HTML pages</td>
+            </tr>
+            <tr>
+              <td>4. Deploy</td>
+              <td>~10 seconds</td>
+              <td>Upload files to CDN</td>
+            </tr>
+            <tr>
+              <td><strong>Total</strong></td>
+              <td><strong>~3-5 minutes</strong></td>
+              <td>From push to live</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Monitoring Deployments</h3>
+        <p>You can monitor deployment status:</p>
+        <ul>
+          <li>
+            <strong>Netlify Dashboard:</strong>
+            <a
+              href="https://app.netlify.com/sites/icjia-infonet/deploys"
+              target="_blank"
+              >https://app.netlify.com/sites/icjia-infonet/deploys</a
+            >
+          </li>
+          <li>
+            <strong>Build Badge:</strong> Check the README.md for deployment
+            status badge
+          </li>
+          <li>
+            <strong>Build Logs:</strong> View detailed logs in Netlify dashboard
+          </li>
+        </ul>
+
+        <h3>Rollback Procedures</h3>
+        <p>If a deployment causes issues, you can rollback:</p>
+        <ol>
+          <li>Go to Netlify dashboard → Deploys</li>
+          <li>Find a previous successful deployment</li>
+          <li>Click "Publish deploy" to restore that version</li>
+        </ol>
+
+        <div class="alert alert-info">
+          <strong>Instant Rollback:</strong> Netlify keeps all previous
+          deployments, so you can rollback to any previous version instantly
+          without rebuilding.
+        </div>
+      </section>
+
+      <!-- Additional Resources -->
+      <section class="section">
+        <h2>Additional Resources</h2>
+
+        <h3>Learning Resources</h3>
+        <ul>
+          <li>
+            <strong>Nuxt 4 Documentation:</strong>
+            <a href="https://nuxt.com/docs" target="_blank"
+              >https://nuxt.com/docs</a
+            >
+          </li>
+          <li>
+            <strong>Vue.js Guide:</strong>
+            <a href="https://vuejs.org/guide/" target="_blank"
+              >https://vuejs.org/guide/</a
+            >
+          </li>
+          <li>
+            <strong>Vuetify Components:</strong>
+            <a href="https://vuetifyjs.com/en/components/all/" target="_blank"
+              >https://vuetifyjs.com/en/components/all/</a
+            >
+          </li>
+          <li>
+            <strong>@nuxt/content:</strong>
+            <a href="https://content.nuxt.com/" target="_blank"
+              >https://content.nuxt.com/</a
+            >
+          </li>
+          <li>
+            <strong>Strapi Documentation:</strong>
+            <a href="https://docs.strapi.io/" target="_blank"
+              >https://docs.strapi.io/</a
+            >
+          </li>
+          <li>
+            <strong>JAMstack Explained:</strong>
+            <a href="https://jamstack.org/" target="_blank"
+              >https://jamstack.org/</a
+            >
+          </li>
+        </ul>
+
+        <h3>Project-Specific Documentation</h3>
+        <ul>
+          <li><strong>README.md:</strong> Quick start guide and overview</li>
+          <li>
+            <strong>MIGRATION.md:</strong> Nuxt 3 to Nuxt 4 migration guide
+          </li>
+          <li>
+            <strong>ACCESSIBILITY_COMPLETE_SUMMARY.md:</strong> Accessibility
+            improvements
+          </li>
+          <li>
+            <strong>Developer Portal:</strong>
+            <a href="index.html">Documentation Portal Home</a>
+          </li>
+        </ul>
+
+        <h3>Getting Help</h3>
+        <p>If you're stuck or have questions:</p>
+        <ul>
+          <li>Check the project documentation files in the repository root</li>
+          <li>Review existing code for patterns and examples</li>
+          <li>Consult the official Nuxt and Vue.js documentation</li>
+          <li>Reach out to the development team</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <div class="footer-content">
+        <p>
+          &copy; 2025 Illinois Criminal Justice Information Authority (ICJIA)
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.875rem">
+          <a
+            href="index.html"
+            style="color: var(--primary-color); text-decoration: none"
+            >← Back to Documentation Portal</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

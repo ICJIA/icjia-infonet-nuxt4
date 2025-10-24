@@ -1,3 +1,17 @@
+/**
+ * Markdown FAQs Generator
+ * Fetches FAQ content from Strapi API and generates markdown files
+ * Organizes FAQs by agency and category
+ * @module creators/createMarkdownFaqs
+ * @requires dotenv
+ * @requires fs
+ * @requires path
+ * @requires axios
+ * @requires jsonfile
+ * @requires lodash
+ * @requires yaml
+ */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 require("dotenv").config();
 
@@ -11,6 +25,12 @@ const contentDir = path.join(__dirname, "../content");
 const SITE_URL = process.env.NUXT_PUBLIC_BASE_URL;
 const API = process.env.NUXT_PUBLIC_API_BASE_URL;
 
+/**
+ * Format content object into markdown with YAML frontmatter
+ * @function formatMarkdown
+ * @param {Object} content - Content object with body and metadata
+ * @returns {string} Formatted markdown string with YAML frontmatter
+ */
 function formatMarkdown(content) {
   const { body } = content;
   delete content.body;
