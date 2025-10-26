@@ -51,10 +51,20 @@ export default defineNuxtConfig({
           content: "InfoNet",
         },
         {
+          hid: "og-type",
+          property: "og:type",
+          content: "website",
+        },
+        {
           hid: "og-image",
           property: "og:image",
           content:
             "https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg",
+        },
+        {
+          hid: "fb-app-id",
+          property: "fb:app_id",
+          content: process.env.NUXT_PUBLIC_FB_APP_ID || "",
         },
       ],
       link: [
