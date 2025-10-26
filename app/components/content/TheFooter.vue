@@ -23,7 +23,7 @@
             >
               <div>
                 <img
-                  src="https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg"
+                  src="https://infonet.icjia.dev/icjia-logo.png"
                   alt="Footer logo"
                   width="150"
                   style="border: 0px solid #ddd; display: inline"
@@ -84,7 +84,7 @@
 
               <div style="font-size: 12px; font-weight: 400">
                 <strong
-                  >&#169; 2023
+                  >&#169; {{ currentYear }}
                   <a
                     href="https://icjia.illinois.gov"
                     target="_blank"
@@ -147,6 +147,12 @@ export default {
     const { isTranslationEnabled } = useAppConfig();
 
     /**
+     * Get current year dynamically
+     * @type {number}
+     */
+    const currentYear = new Date().getFullYear();
+
+    /**
      * Scroll page to top
      * @function scrollTop
      */
@@ -171,7 +177,13 @@ export default {
       // open new site in new tab
       window.open("https://icjia.illinois.gov", "_blank");
     };
-    return { routeToSite, scrollTop, translate, isTranslationEnabled };
+    return {
+      routeToSite,
+      scrollTop,
+      translate,
+      isTranslationEnabled,
+      currentYear,
+    };
   },
 };
 </script>
