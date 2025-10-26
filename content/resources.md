@@ -7,7 +7,7 @@ showTableOfContents: true
 summary: Summary for the user info & resources page.
 section: root
 createdAt: 2023-06-28T13:48:17.718Z
-updatedAt: 2023-07-13T13:52:25.743Z
+updatedAt: 2025-10-26T18:49:48.028Z
 publishedAt: 2023-06-28T13:48:20.104Z
 searchMeta: null
 category: page
@@ -28,7 +28,7 @@ rawText: " infonet s virtual private network vpn while no personally identifying
   for example a client client case or service any desired filters e g age client
   s resident county service type request technical assistance cja infonethelp
   illinois gov preferred or call 312 793 8550 agency specific resources
-  tabsuserinfo "
+  tabsuserinfoaccessible "
 draft: false
 markdown: >+
   ## InfoNet’s Virtual Private Network (VPN)
@@ -76,7 +76,7 @@ markdown: >+
   ## Agency-specific Resources
 
 
-  :TabsUserInfo
+  :TabsUserInfoAccessible
 
 
 navigation: true
@@ -116,7 +116,7 @@ While no personally identifying information is entered into InfoNet, the system 
 
 ## Agency-specific Resources
 
-:TabsUserInfo
+:TabsUserInfoAccessible
 
 
 
