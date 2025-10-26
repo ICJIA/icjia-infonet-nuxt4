@@ -23,7 +23,7 @@
             >
               <div>
                 <img
-                  src="https://infonet.icjia.dev/icjia-logo.png"
+                  src="https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg"
                   alt="Footer logo"
                   width="150"
                   style="border: 0px solid #ddd; display: inline"

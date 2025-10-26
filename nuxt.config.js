@@ -53,7 +53,8 @@ export default defineNuxtConfig({
         {
           hid: "og-image",
           property: "og:image",
-          content: "https://infonet.icjia.dev/icjia-logo.png",
+          content:
+            "https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg",
         },
       ],
       link: [
