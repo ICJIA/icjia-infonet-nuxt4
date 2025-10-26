@@ -3,6 +3,7 @@
 ## 1. Project Overview
 
 ### Repository Information
+
 - **Repository URL:** https://github.com/ICJIA/icjia-infonet-nuxt3
 - **Live Site:** https://infonet.icjia.illinois.gov
 - **Development Site:** https://infonet.icjia.dev
@@ -10,23 +11,27 @@
 - **Deployment Status:** [![Netlify Status](https://api.netlify.com/api/v1/badges/f9b9ef26-d98b-4df5-8d10-77c1a2b72189/deploy-status)](https://app.netlify.com/sites/icjia-infonet/deploys)
 
 ### Project Purpose and Goals
+
 InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois. The system is nationally recognized for facilitating standardized data collection and reporting at the statewide level. Initial development of InfoNet began in the mid-90s as a collaborative effort between the Illinois Criminal Justice Information Authority, the Illinois Coalition Against Sexual Assault, and the Illinois Coalition Against Domestic Violence.
 
 **Primary Purposes:**
+
 - Standardize data collection and reporting, thereby improving the ability to analyze information statewide and locally
 - Provide a central repository for statewide victim service data
 - Ease reporting for victim service providers that receive grants from multiple funding agencies, which often require different types of information
 - Facilitate continuous strategic planning for improving services and system response to victims
 
 ### Target Audience
+
 - **Primary Users:** Victim service providers in Illinois
 - **Secondary Users:** Researchers, policymakers, and grant administrators
-- **Content Categories:** 
+- **Content Categories:**
   - Domestic Violence (DV)
   - Sexual Assault (SA)
   - Children's Advocacy Center (CAC)
 
 ### Key Features and Functionality
+
 - **Content Management System:** Markdown-based content with YAML frontmatter
 - **Data Visualization:** Interactive charts and graphs for victim service data using Chart.js
 - **Search Functionality:** Full-text search using Fuse.js with pre-generated search index
@@ -36,6 +41,7 @@ InfoNet is a web-based data collection and reporting system used by victim servi
 - **External API Integration:** Apollo GraphQL for research hub data and REST APIs for content management
 
 ### Project History and Version Information
+
 - **Current Framework:** Nuxt 3.13.2
 - **Architecture:** JAMstack (JavaScript, APIs, Markup) with static site generation
 - **Package Manager:** Yarn 1.22.22
@@ -45,11 +51,13 @@ InfoNet is a web-based data collection and reporting system used by victim servi
 ## 2. Technology Stack
 
 ### Core Framework (with exact versions)
+
 - **Nuxt 3:** ^3.13.2 - Vue.js framework for building server-side rendered and static applications
 - **Vue.js:** ^3.5.5 - The underlying JavaScript framework (via Nuxt dependency)
 - **Node.js:** Version managed via NVM (see `.nvmrc` file)
 
 ### UI Framework & Styling Tools
+
 - **Vuetify:** ^3.7.1 - Material Design component framework for Vue
 - **Sass:** ^1.78.0 - CSS preprocessor
 - **@mdi/font:** ^7.4.47 - Material Design Icons
@@ -60,12 +68,14 @@ InfoNet is a web-based data collection and reporting system used by victim servi
 - **vite-plugin-vuetify:** ^2.0.4 - Vuetify integration for Vite
 
 ### Content Management Systems
+
 - **@nuxt/content:** ^2.13.2 - Content management system for Nuxt
 - **markdown-it:** ^14.1.0 - Markdown parser
 - **markdown-it-attrs:** ^4.2.0 - Markdown parser extension for attributes
 - **dompurify:** ^3.1.6 - HTML sanitizer for security
 
 ### Build Tools & Development Environment
+
 - **@nuxt/devtools:** 1.4.2 - Development tools for Nuxt
 - **@vueuse/nuxt:** ^11.1.0 - VueUse integration for Nuxt
 - **consola:** ^3.2.3 - Elegant console logger
@@ -73,6 +83,7 @@ InfoNet is a web-based data collection and reporting system used by victim servi
 - **loading-attribute-polyfill:** ^2.1.1 - Polyfill for loading attribute
 
 ### Search & Utility Libraries
+
 - **fuse.js:** ^7.0.0 - Lightweight fuzzy-search library
 - **moment:** ^2.30.1 - Date manipulation library
 - **uuid:** ^10.0.0 - UUID generation
@@ -84,31 +95,37 @@ InfoNet is a web-based data collection and reporting system used by victim servi
 - **@vueuse/router:** ^11.1.0 - VueUse router utilities
 
 ### Analytics & Monitoring Tools
+
 - **@nuxtjs/plausible:** ^1.0.2 - Plausible Analytics integration
 - **Plausible Analytics:** Custom integration via script tags
 
 ### Deployment & Hosting Platform
+
 - **Netlify:** Continuous deployment platform
 - **Build Command:** `yarn generate`
 - **Output Directory:** `dist`
 - **Node.js Version:** Managed via `.nvmrc`
 
 ### Data Fetching and API Integration
+
 - **@nuxtjs/apollo:** ^5.0.0-alpha.6 - Apollo GraphQL client for Nuxt
 - **axios:** ^1.7.7 - HTTP client for API requests
 - **request:** ^2.88.2 - Simplified HTTP request client
 
 ### Data Visualization
+
 - **chart.js:** ^4.4.4 - JavaScript charting library
 - **vue-chartjs:** ^5.3.1 - Chart.js wrapper for Vue
 
 ### Additional Dependencies
+
 - **sitemap:** ^8.0.0 - Sitemap generation
 - **@nuxtjs/google-fonts:** ^3.2.0 - Google Fonts integration (currently disabled)
 
 ## 3. Architecture Overview
 
 ### High-Level Architecture Description
+
 The ICJIA InfoNet Nuxt3 project follows a JAMstack (JavaScript, APIs, Markup) architecture with static site generation. This approach provides the benefits of both dynamic content management and static site performance, ensuring fast load times and excellent SEO while maintaining the ability to integrate with external APIs and content management systems.
 
 ### Data Flow Diagrams and Patterns
@@ -121,6 +138,7 @@ Main API        Generate        (Git Repo)      (Netlify)      (CDN)
 ```
 
 **Data Flow Process:**
+
 1. **Build-Time Data Fetching:** Creator scripts fetch data from external APIs during the build process
 2. **Content Transformation:** API data is transformed into Markdown files and JSON data structures
 3. **Content Processing:** @nuxt/content processes Markdown files and makes them available to the application
@@ -130,26 +148,31 @@ Main API        Generate        (Git Repo)      (Netlify)      (CDN)
 ### Key Design Patterns and Principles
 
 **1. Content-First Architecture:**
+
 - Content is stored as Markdown files with YAML frontmatter
 - Separation of content from presentation logic
 - Version-controlled content management through Git
 
 **2. Build-Time Data Generation:**
+
 - External data fetched during build process, not runtime
 - Pre-generated search indices and route configurations
 - Optimized for performance and reliability
 
 **3. Component-Based Design:**
+
 - Modular Vue components with clear separation of concerns
 - Reusable UI components following Vuetify design system
 - Layout components for consistent page structure
 
 **4. State Management Pattern:**
+
 - Nuxt's built-in `useState` composable for global state
 - Custom composables for specific functionality
 - Event bus pattern using `mitt` for component communication
 
 **5. Progressive Enhancement:**
+
 - Static-first approach with JavaScript enhancement
 - Lazy loading for non-critical components
 - Graceful degradation for accessibility
@@ -157,16 +180,19 @@ Main API        Generate        (Git Repo)      (Netlify)      (CDN)
 ### Integration Points and External Dependencies
 
 **External APIs:**
+
 - **Main Content API:** `https://infonet.icjia-api.cloud` - Primary content management system
 - **Research Hub API:** `https://researchhub.icjia-api.cloud/graphql` - GraphQL API for research data
 - **Mail Service:** `https://mail.icjia.cloud/internet/infonet` - Email service for contact forms
 
 **Third-Party Services:**
+
 - **Plausible Analytics:** `https://plausible.icjia.cloud/js/script.js` - Privacy-focused analytics
 - **Google Fonts:** Font delivery and optimization
 - **Netlify:** Hosting, CDN, and continuous deployment
 
 **Build-Time Integrations:**
+
 - Creator scripts integrate with external APIs to generate content
 - Sitemap generation for SEO optimization
 - Search index creation for client-side search functionality
@@ -331,10 +357,12 @@ icjia-infonet-nuxt3/
 ### Purpose of Each Major Directory
 
 **Configuration Files:**
+
 - Root-level configuration files manage framework settings, dependencies, and deployment
 - Environment variables control API endpoints and feature flags
 
 **Source Code Directories:**
+
 - `components/` - Reusable Vue components organized by functionality
 - `composables/` - Shared logic and state management using Vue Composition API
 - `pages/` - File-based routing structure defining application URLs
@@ -342,12 +370,14 @@ icjia-infonet-nuxt3/
 - `middleware/` - Route-level logic for redirects and URL handling
 
 **Content and Data:**
+
 - `content/` - Markdown files generated from external APIs during build
 - `creators/` - Node.js scripts that fetch and transform external data
 - `src/` - Generated JSON data files used by the application
 - `public/` - Static assets served directly without processing
 
 **Build and Deployment:**
+
 - `assets/` - Source files processed by the build system
 - `plugins/` - Vue plugin configurations and initializations
 - `server/` - Server-side API routes for data access
@@ -355,28 +385,33 @@ icjia-infonet-nuxt3/
 ### Key Configuration Files and Their Roles
 
 **Framework Configuration:**
+
 - `nuxt.config.js` - Main Nuxt framework configuration including modules, build settings, and runtime config
 - `app.config.js` - Application-specific configuration like API endpoints and feature flags
 - `tsconfig.json` - TypeScript configuration extending Nuxt's defaults
 
 **Development and Build:**
+
 - `package.json` - Dependencies, scripts, and project metadata
 - `yarn.lock` - Dependency version lock file for consistent installs
 - `.nvmrc` - Node.js version specification for development consistency
 
 **Deployment:**
+
 - `netlify.toml` - Netlify deployment configuration including headers and redirects
 - `.env.sample` - Template for environment variables needed in production
 
 ### Generated vs. Source File Distinctions
 
 **Generated Files (created by build scripts):**
+
 - `content/` directory contents - Generated from external APIs
 - `src/*.json` files - Data files created by creator scripts
 - `public/sitemap.xml` - Generated XML sitemap
 - `public/*.json` - Public data files for client-side access
 
 **Source Files (version controlled):**
+
 - All files in `components/`, `pages/`, `layouts/`, `composables/`
 - Configuration files in project root
 - Creator scripts in `creators/` directory
@@ -387,30 +422,35 @@ icjia-infonet-nuxt3/
 ### Layout Components and Their Responsibilities
 
 **TheNav.vue** - Main navigation component
+
 - Responsive navigation bar with mobile hamburger menu
 - Integration with Vuetify's v-app-bar component
 - Navigation state management using `useNavToggle` composable
 - Breadcrumb integration and search functionality
 
 **TheSidebar.vue** - Sidebar navigation component
+
 - Collapsible sidebar with category-based navigation
 - Dynamic content based on current page context
 - Mobile-responsive with overlay behavior
 - Integration with global navigation state
 
 **TheFooter.vue** - Main site footer
+
 - Contact information and organizational links
 - Social media integration
 - Responsive layout with multi-column design
 - Consistent branding and legal information
 
 **TheBreadcrumbBar.vue** - Breadcrumb navigation
+
 - Dynamic breadcrumb generation based on current route
 - Integration with Nuxt's route metadata
 - Accessible navigation with proper ARIA labels
 - Responsive design for mobile devices
 
 **TheTableOfContents.vue** - Table of contents component
+
 - Automatic generation from page headings
 - Smooth scrolling navigation
 - Sticky positioning for long content pages
@@ -419,30 +459,35 @@ icjia-infonet-nuxt3/
 ### Content Components and Rendering Logic
 
 **DisplayFaqs.vue** - FAQ display component
+
 - Category-based FAQ organization (DV, SA, CAC, General)
 - Search and filter functionality within FAQs
 - Expandable/collapsible FAQ items
 - Integration with Fuse.js for fuzzy search
 
 **News.vue & NewsCard.vue** - News content components
+
 - News listing with pagination and filtering
 - Individual news card display with metadata
 - Date formatting using Moment.js
 - Responsive grid layout for news items
 
 **TabRender.vue & Tabs.vue** - Tab content system
+
 - Dynamic tab content rendering from Markdown
 - Category-based tab organization
 - State management for active tab selection
 - Integration with @nuxt/content for content fetching
 
 **HomeBarGraph.vue** - Data visualization component
+
 - Chart.js integration for data visualization
 - Responsive chart rendering
 - Data fetching from generated JSON files
 - Interactive chart features with tooltips
 
 **Partners.vue** - Partner organization display
+
 - Grid layout for partner logos and information
 - Responsive design with mobile optimization
 - Integration with content management system
@@ -451,24 +496,28 @@ icjia-infonet-nuxt3/
 ### Page Components and Routing Structure
 
 **index.vue** - Homepage component
+
 - Hero section with splash image and call-to-action
 - Featured content sections (news, statistics, quick links)
 - Integration with multiple content components
 - Performance optimized with lazy loading
 
 **[...slug].vue** - Dynamic catch-all route
+
 - Handles all dynamic content pages
 - Integration with @nuxt/content for Markdown rendering
 - SEO metadata generation from frontmatter
 - Flexible layout system based on content type
 
 **search.vue** - Search results page
+
 - Client-side search using pre-generated search index
 - Fuse.js integration for fuzzy search capabilities
 - Result filtering and categorization
 - Responsive results display with pagination
 
 **contact.vue** - Contact form page
+
 - Form validation and submission handling
 - Integration with external mail service API
 - Accessibility features and error handling
@@ -477,18 +526,21 @@ icjia-infonet-nuxt3/
 ### Utility Components and Shared Functionality
 
 **TheLoader.vue & ThePageLoader.vue** - Loading indicators
+
 - Global loading state management
 - Smooth transitions between page loads
 - Customizable loading animations
 - Integration with Nuxt's loading system
 
 **ImageModal.vue & TextModal.vue** - Modal dialogs
+
 - Reusable modal components for content display
 - Accessibility features with focus management
 - Responsive design for mobile devices
 - Event-driven modal state management
 
 **TheCookieWarning.vue** - Cookie consent component
+
 - GDPR compliance for cookie usage
 - Persistent user preference storage
 - Customizable consent options
@@ -497,14 +549,17 @@ icjia-infonet-nuxt3/
 ### State Management Components
 
 **Composables (states.ts):**
+
 ```typescript
 export const useNavToggle = () => useState<boolean>("nav", () => false);
-export const useTranslateToggle = () => useState<boolean>("translate", () => false);
+export const useTranslateToggle = () =>
+  useState<boolean>("translate", () => false);
 export const useCounter = () => useState<number>("counter", () => 0);
 export const useColor = () => useState<string>("color", () => "pink");
 ```
 
 **Event Bus (useEventBus.js):**
+
 ```javascript
 import mitt from "mitt";
 const emitter = mitt();
@@ -513,6 +568,7 @@ export const useListen = emitter.on;
 ```
 
 **State Management Patterns:**
+
 - Global state using Nuxt's `useState` composable
 - Event-driven communication between components
 - Reactive state updates with Vue's reactivity system
@@ -523,6 +579,7 @@ export const useListen = emitter.on;
 ### External API Integrations and Configurations
 
 **Main Content API**
+
 - **Endpoint:** `https://infonet.icjia-api.cloud`
 - **Purpose:** Primary content management system for pages, news, FAQs, and publications
 - **Authentication:** API key-based (configured via environment variables)
@@ -530,6 +587,7 @@ export const useListen = emitter.on;
 - **Rate Limiting:** Handled during build process, not runtime
 
 **Research Hub GraphQL API**
+
 - **Endpoint:** `https://researchhub.icjia-api.cloud/graphql`
 - **Purpose:** Research publications and academic content
 - **Client:** Apollo GraphQL client (@nuxtjs/apollo)
@@ -537,6 +595,7 @@ export const useListen = emitter.on;
 - **Schema:** GraphQL schema for publications, authors, and research data
 
 **Mail Service API**
+
 - **Endpoint:** `https://mail.icjia.cloud/internet/infonet`
 - **Purpose:** Contact form submission handling
 - **Method:** POST requests with form data
@@ -632,16 +691,19 @@ query GetPublication($id: ID!) {
 ### Authentication and Authorization Patterns
 
 **API Key Authentication:**
+
 - Environment variable: `NUXT_PUBLIC_API_BASE_URL`
 - Header-based authentication for content API
 - Build-time authentication only (no runtime API calls)
 
 **GraphQL Authentication:**
+
 - Optional authentication for enhanced access
 - Public queries available without authentication
 - Rate limiting based on IP address
 
 **Security Considerations:**
+
 - API keys stored as environment variables
 - No sensitive data exposed to client-side
 - CORS configuration in `netlify.toml`
@@ -650,6 +712,7 @@ query GetPublication($id: ID!) {
 ### Data Processing Workflows
 
 **Build-Time Data Flow:**
+
 1. Creator scripts execute during `yarn scripts` command
 2. External APIs are queried for latest content
 3. Data is transformed and validated
@@ -659,6 +722,7 @@ query GetPublication($id: ID!) {
 7. Sitemap is generated for SEO
 
 **Content Transformation Process:**
+
 ```javascript
 // Example from createMarkdownNews.js
 const transformNewsItem = (apiData) => ({
@@ -667,25 +731,28 @@ const transformNewsItem = (apiData) => ({
   published: apiData.published_at,
   excerpt: apiData.excerpt,
   content: sanitizeHtml(apiData.content),
-  category: apiData.category || 'general'
+  category: apiData.category || "general",
 });
 ```
 
 ### Error Handling Strategies
 
 **API Error Handling:**
+
 - Graceful degradation when APIs are unavailable
 - Retry logic with exponential backoff
 - Fallback to cached content when possible
 - Comprehensive error logging with Consola
 
 **Build-Time Error Handling:**
+
 - Validation of API responses before processing
 - Rollback to previous content on build failures
 - Error reporting to build logs
 - Partial builds when some APIs fail
 
 **Runtime Error Handling:**
+
 - 404 handling with custom error pages
 - Client-side error boundaries
 - Graceful fallbacks for missing content
@@ -698,59 +765,63 @@ const transformNewsItem = (apiData) => ({
 While InfoNet Nuxt3 doesn't use a traditional database, it manages structured content through Markdown files with YAML frontmatter and JSON data files. The content structure follows specific schemas for consistency and validation.
 
 **Page Content Schema:**
+
 ```yaml
 ---
-title: "Page Title"                 # Required: String, max 200 chars
-slug: "page-slug"                   # Required: String, URL-safe
-description: "Page description"     # Optional: String, max 300 chars
-published: true                     # Required: Boolean
-created_at: "2023-01-01"           # Required: Date (YYYY-MM-DD)
-updated_at: "2023-01-01"           # Optional: Date (YYYY-MM-DD)
-category: "general"                 # Optional: String (general|dv|sa|cac)
-tags: ["tag1", "tag2"]             # Optional: Array of strings
-author: "Author Name"               # Optional: String
-featured: false                     # Optional: Boolean
-order: 1                           # Optional: Number for sorting
+title: "Page Title" # Required: String, max 200 chars
+slug: "page-slug" # Required: String, URL-safe
+description: "Page description" # Optional: String, max 300 chars
+published: true # Required: Boolean
+created_at: "2023-01-01" # Required: Date (YYYY-MM-DD)
+updated_at: "2023-01-01" # Optional: Date (YYYY-MM-DD)
+category: "general" # Optional: String (general|dv|sa|cac)
+tags: ["tag1", "tag2"] # Optional: Array of strings
+author: "Author Name" # Optional: String
+featured: false # Optional: Boolean
+order: 1 # Optional: Number for sorting
 ---
 # Content in Markdown format
 ```
 
 **News Article Schema:**
+
 ```yaml
 ---
-title: "News Article Title"        # Required: String, max 200 chars
-slug: "article-slug"               # Required: String, URL-safe
-excerpt: "Brief description"       # Required: String, max 500 chars
-published_at: "2023-01-01"        # Required: Date (YYYY-MM-DD)
-category: "announcement"           # Optional: String
-featured: false                    # Optional: Boolean
-image: "/images/article.jpg"       # Optional: String, image path
-author: "Author Name"              # Optional: String
-tags: ["news", "update"]          # Optional: Array of strings
+title: "News Article Title" # Required: String, max 200 chars
+slug: "article-slug" # Required: String, URL-safe
+excerpt: "Brief description" # Required: String, max 500 chars
+published_at: "2023-01-01" # Required: Date (YYYY-MM-DD)
+category: "announcement" # Optional: String
+featured: false # Optional: Boolean
+image: "/images/article.jpg" # Optional: String, image path
+author: "Author Name" # Optional: String
+tags: ["news", "update"] # Optional: Array of strings
 ---
 # Article content in Markdown
 ```
 
 **FAQ Schema:**
+
 ```yaml
 ---
-question: "How do I...?"           # Required: String, max 300 chars
-category: "general"                # Required: String (general|dv|sa|cac)
-order: 1                          # Optional: Number for sorting
-tags: ["help", "guide"]           # Optional: Array of strings
-updated_at: "2023-01-01"          # Optional: Date (YYYY-MM-DD)
+question: "How do I...?" # Required: String, max 300 chars
+category: "general" # Required: String (general|dv|sa|cac)
+order: 1 # Optional: Number for sorting
+tags: ["help", "guide"] # Optional: Array of strings
+updated_at: "2023-01-01" # Optional: Date (YYYY-MM-DD)
 ---
 # Answer content in Markdown
 ```
 
 **Tab Content Schema:**
+
 ```yaml
 ---
-title: "Tab Title"                 # Required: String, max 100 chars
-category: "dv"                     # Required: String (dv|sa|cac)
-section: "users"                   # Required: String (users|screenshots)
-order: 1                          # Required: Number for tab ordering
-icon: "mdi-help"                   # Optional: String, Material Design icon
+title: "Tab Title" # Required: String, max 100 chars
+category: "dv" # Required: String (dv|sa|cac)
+section: "users" # Required: String (users|screenshots)
+order: 1 # Required: Number for tab ordering
+icon: "mdi-help" # Optional: String, Material Design icon
 ---
 # Tab content in Markdown
 ```
@@ -758,6 +829,7 @@ icon: "mdi-help"                   # Optional: String, Material Design icon
 ### Data Models and Relationships
 
 **Content Hierarchy:**
+
 ```
 Site
 ├── Pages (Static content)
@@ -776,12 +848,14 @@ Site
 ```
 
 **Category Relationships:**
+
 - **DV (Domestic Violence):** Content specific to domestic violence services
 - **SA (Sexual Assault):** Content specific to sexual assault services
 - **CAC (Children's Advocacy Center):** Content specific to children's advocacy
 - **General:** Cross-cutting content applicable to all categories
 
 **Content Linking:**
+
 - Tags create many-to-many relationships between content items
 - Categories create hierarchical organization
 - Slugs provide unique identifiers for URL routing
@@ -790,6 +864,7 @@ Site
 ### Migration and Seeding Strategies
 
 **Content Migration Process:**
+
 1. **API Data Fetching:** Creator scripts fetch latest content from external APIs
 2. **Data Transformation:** Raw API data is transformed to match content schemas
 3. **Validation:** Content is validated against schema requirements
@@ -797,6 +872,7 @@ Site
 5. **Index Updates:** Search indices and route configurations are updated
 
 **Seeding Strategy:**
+
 ```bash
 # Full content regeneration
 yarn scripts
@@ -810,6 +886,7 @@ yarn create:publications   # Regenerate publication data
 ```
 
 **Data Validation Rules:**
+
 - Required fields must be present and non-empty
 - Dates must be in ISO format (YYYY-MM-DD)
 - Slugs must be URL-safe (lowercase, hyphens only)
@@ -832,12 +909,14 @@ This project is **NOT compatible with vanilla Windows** (native Windows without 
 **Technical Reasoning:** Node.js development tools, file system operations, and build processes work more reliably on Unix-like systems. Many npm packages, build tools, and file watchers have compatibility issues with native Windows environments.
 
 **Required Software:**
+
 - **Node.js:** Version specified in `.nvmrc` file (use NVM for version management)
 - **Yarn:** Version 1.22.22 or compatible (specified in package.json)
 - **Git:** For version control and repository cloning
 - **NVM (Node Version Manager):** For Node.js version management
 
 **Optional but Recommended:**
+
 - **VS Code:** With Remote-WSL extension (for Windows WSL2 users)
 - **Terminal:** Modern terminal with good Unicode support
 
@@ -846,6 +925,7 @@ This project is **NOT compatible with vanilla Windows** (native Windows without 
 **1. Platform-Specific Setup**
 
 **For Windows Users (WSL2 MANDATORY):**
+
 ```bash
 # Install WSL2 (run in PowerShell as Administrator)
 wsl --install
@@ -864,6 +944,7 @@ sudo apt install build-essential curl git -y
 ```
 
 **For macOS Users:**
+
 ```bash
 # Install Homebrew (if not already installed)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -873,6 +954,7 @@ brew install git
 ```
 
 **For Linux Users (Debian/Ubuntu):**
+
 ```bash
 # Update package manager
 sudo apt update && sudo apt upgrade -y
@@ -951,6 +1033,7 @@ NUXT_ACTIVE_SECTIONS=['root', 'page', 'meetings', 'faqs']
 ```
 
 **Development vs Production Configuration:**
+
 - **Development:** Uses local API endpoints and debug features
 - **Production:** Uses production API endpoints and optimized builds
 - **Environment Detection:** Automatic based on NODE_ENV variable
@@ -976,6 +1059,7 @@ yarn dev
 **2. Common Installation Issues**
 
 **Windows Users Attempting Native Development:**
+
 - **Error:** `ENOENT: no such file or directory, scandir`
   - **Solution:** Use WSL2, not native Windows
 - **Error:** `gyp ERR! stack Error: Can't find Python executable`
@@ -984,6 +1068,7 @@ yarn dev
   - **Solution:** Use WSL2 file system, not Windows file system
 
 **General Issues:**
+
 - **Node Version Mismatch:** Run `nvm use` in project directory
 - **Yarn Not Found:** Install Yarn globally with `npm install -g yarn`
 - **Permission Errors:** Ensure proper file permissions in Unix environments
@@ -1004,13 +1089,16 @@ yarn dev
 ### Git Workflow and Branching Strategy
 
 **Branch Structure:**
+
 - **master** - Production branch (auto-deploys to live site)
 - **develop** - Development integration branch
-- **feature/*** - Feature development branches
-- **hotfix/*** - Emergency fixes for production issues
+- **feature/\*** - Feature development branches
+- **hotfix/\*** - Emergency fixes for production issues
 
 **Workflow Process:**
+
 1. **Feature Development:**
+
    ```bash
    # Create feature branch from develop
    git checkout develop
@@ -1026,6 +1114,7 @@ yarn dev
    ```
 
 2. **Pull Request Process:**
+
    - Create PR from feature branch to develop
    - Ensure all tests pass and build succeeds
    - Request code review from team members
@@ -1042,6 +1131,7 @@ yarn dev
    ```
 
 **Commit Message Conventions:**
+
 - `feat:` - New features
 - `fix:` - Bug fixes
 - `docs:` - Documentation updates
@@ -1053,12 +1143,14 @@ yarn dev
 ### Code Standards and Formatting Rules
 
 **JavaScript/TypeScript Standards:**
+
 - **ESLint Configuration:** Extends Nuxt's recommended rules
 - **Prettier Integration:** Automatic code formatting
 - **File Naming:** kebab-case for components, camelCase for utilities
 - **Component Structure:** Composition API preferred over Options API
 
 **Vue Component Standards:**
+
 ```vue
 <template>
   <!-- Use semantic HTML elements -->
@@ -1081,12 +1173,14 @@ yarn dev
 ```
 
 **CSS/SCSS Standards:**
+
 - **Vuetify First:** Use Vuetify components and utilities before custom CSS
 - **SCSS Variables:** Defined in `assets/css/variables.scss`
 - **Responsive Design:** Mobile-first approach with Vuetify breakpoints
 - **Accessibility:** Ensure proper contrast ratios and focus states
 
 **Markdown Content Standards:**
+
 - **Frontmatter:** Required YAML metadata for all content files
 - **Headings:** Proper hierarchy (H1 → H2 → H3)
 - **Links:** Use relative paths for internal links
@@ -1095,12 +1189,14 @@ yarn dev
 ### Testing Approach and Procedures
 
 **Current Testing Strategy:**
+
 - **Manual Testing:** Comprehensive manual testing across devices and browsers
 - **Build Testing:** Automated build verification on each deployment
 - **Content Validation:** Schema validation for generated content
 - **Performance Testing:** Lighthouse audits for performance metrics
 
 **Testing Checklist:**
+
 - [ ] All pages load without errors
 - [ ] Navigation works correctly across all sections
 - [ ] Search functionality returns relevant results
@@ -1110,6 +1206,7 @@ yarn dev
 - [ ] Performance scores meet targets (Lighthouse)
 
 **Browser Testing Matrix:**
+
 - **Desktop:** Chrome, Firefox, Safari, Edge (latest versions)
 - **Mobile:** iOS Safari, Android Chrome (latest versions)
 - **Accessibility:** Screen reader testing with NVDA/JAWS
@@ -1117,6 +1214,7 @@ yarn dev
 ### Common Development Tasks and Procedures
 
 **Starting Development:**
+
 ```bash
 # Start development server with remote API
 yarn dev
@@ -1129,6 +1227,7 @@ yarn clear:cache && yarn dev
 ```
 
 **Content Management:**
+
 ```bash
 # Regenerate all content from APIs
 yarn scripts
@@ -1148,6 +1247,7 @@ yarn create:sitemap
 ```
 
 **Build and Deployment:**
+
 ```bash
 # Build for production
 yarn generate
@@ -1160,6 +1260,7 @@ yarn preview
 ```
 
 **Debugging and Development:**
+
 ```bash
 # Enable Nuxt DevTools
 # DevTools are enabled by default in development
@@ -1172,12 +1273,14 @@ yarn clear:cache
 ```
 
 **Adding New Content:**
+
 1. **Pages:** Add content via API or create Markdown file in `content/`
 2. **Components:** Create Vue component in appropriate `components/` subdirectory
 3. **Routes:** Add to `pages/` directory following Nuxt's file-based routing
 4. **Styles:** Add to component or global styles in `assets/css/`
 
 **Environment Management:**
+
 ```bash
 # Switch Node.js versions
 nvm use
@@ -1193,6 +1296,7 @@ yarn audit fix
 ```
 
 **Performance Optimization:**
+
 - **Image Optimization:** Use appropriate formats and sizes
 - **Lazy Loading:** Implement for non-critical components
 - **Bundle Analysis:** Use Nuxt DevTools to analyze bundle size
@@ -1203,6 +1307,7 @@ yarn audit fix
 ### Build Process Overview and Scripts
 
 **Build Pipeline Architecture:**
+
 ```
 Content Generation → Static Site Generation → Deployment
        ↓                      ↓                    ↓
@@ -1227,6 +1332,7 @@ yarn generate:local
 ```
 
 **Individual Creator Scripts:**
+
 ```bash
 yarn create:contentDirectory    # Initialize content directory
 yarn create:pages              # Generate page content from API
@@ -1242,6 +1348,7 @@ yarn create:routes            # Generate route configurations
 ```
 
 **Build Script Execution Order:**
+
 1. `yarn clear:cache` - Remove previous build artifacts
 2. `yarn create:contentDirectory` - Initialize content structure
 3. Content generation scripts (pages, news, FAQs, tabs, publications)
@@ -1252,6 +1359,7 @@ yarn create:routes            # Generate route configurations
 ### Content Generation Workflows
 
 **API-Driven Content Generation:**
+
 ```javascript
 // Example workflow from createMarkdownNews.js
 1. Fetch data from external API
@@ -1262,6 +1370,7 @@ yarn create:routes            # Generate route configurations
 ```
 
 **Content Processing Pipeline:**
+
 ```
 External APIs → Raw Data → Validation → Transformation → Markdown Files
      ↓             ↓          ↓             ↓              ↓
@@ -1270,6 +1379,7 @@ Main API       Arrays      Required Fields Frontmatter   Git Repository
 ```
 
 **Error Handling in Content Generation:**
+
 - **API Failures:** Graceful degradation with cached content
 - **Data Validation:** Schema validation before file generation
 - **Partial Failures:** Continue processing other content types
@@ -1278,6 +1388,7 @@ Main API       Arrays      Required Fields Frontmatter   Git Repository
 ### Deployment Configuration and Process
 
 **Netlify Configuration (netlify.toml):**
+
 ```toml
 [[headers]]
   for = "/*"
@@ -1287,12 +1398,14 @@ Main API       Arrays      Required Fields Frontmatter   Git Repository
 ```
 
 **Deployment Settings:**
+
 - **Build Command:** `yarn generate`
 - **Publish Directory:** `dist`
 - **Node Version:** Specified in `.nvmrc`
 - **Environment Variables:** Configured in Netlify dashboard
 
 **Automatic Deployment Process:**
+
 1. **Trigger:** Push to master branch
 2. **Build Environment:** Netlify's build servers
 3. **Dependency Installation:** `yarn install`
@@ -1303,6 +1416,7 @@ Main API       Arrays      Required Fields Frontmatter   Git Repository
 8. **DNS Update:** Automatic DNS propagation
 
 **Manual Deployment Options:**
+
 ```bash
 # Local build and manual upload
 yarn generate
@@ -1316,6 +1430,7 @@ netlify deploy --prod --dir=dist
 ### Environment-Specific Considerations
 
 **Development Environment:**
+
 - **Hot Reload:** Enabled for rapid development
 - **Source Maps:** Full source maps for debugging
 - **DevTools:** Nuxt DevTools enabled
@@ -1323,6 +1438,7 @@ netlify deploy --prod --dir=dist
 - **Cache:** Disabled for fresh content on each reload
 
 **Production Environment:**
+
 - **Optimization:** Minified and optimized assets
 - **Caching:** Aggressive caching strategies
 - **CDN:** Global content delivery network
@@ -1330,18 +1446,21 @@ netlify deploy --prod --dir=dist
 - **Error Handling:** User-friendly error pages
 
 **Build Performance Optimization:**
+
 - **Parallel Processing:** Creator scripts run independently when possible
 - **Incremental Builds:** Only regenerate changed content (future enhancement)
 - **Asset Optimization:** Image compression and format optimization
 - **Bundle Splitting:** Automatic code splitting by Nuxt
 
 **Monitoring and Alerts:**
+
 - **Build Status:** Netlify build notifications
 - **Performance Monitoring:** Lighthouse CI integration
 - **Error Tracking:** Console error monitoring
 - **Uptime Monitoring:** External uptime monitoring services
 
 **Rollback Procedures:**
+
 1. **Immediate Rollback:** Netlify dashboard rollback to previous deployment
 2. **Git Rollback:** Revert commits and redeploy
 3. **Content Rollback:** Restore previous content from Git history
@@ -1352,6 +1471,7 @@ netlify deploy --prod --dir=dist
 ### Environment Variables and Their Purposes
 
 **API Configuration:**
+
 ```bash
 # Primary content management API
 NUXT_PUBLIC_API_BASE_URL=https://infonet.icjia-api.cloud
@@ -1373,6 +1493,7 @@ NUXT_THUMBOR_KEY=your-thumbor-key-here
 ```
 
 **Routing and Navigation:**
+
 ```bash
 # Manual routes for static generation
 NUXT_MANUAL_ROUTES=["/search", "/translate", "/faqs", "/news", "/data-and-publications"]
@@ -1394,6 +1515,7 @@ NUXT_ACTIVE_SECTIONS=['root', 'page', 'meetings', 'faqs']
 ```
 
 **Analytics Configuration:**
+
 ```bash
 # Plausible Analytics domain
 PLAUSIBLE_DOMAIN=infonet.illinois.gov
@@ -1411,6 +1533,7 @@ PLAUSIBLE_API_HOST=https://analytics.icjia-api.cloud/js/plausible.js
 ### Application Configuration Options
 
 **App Configuration (app.config.js):**
+
 ```javascript
 export default defineAppConfig({
   // Basic site information
@@ -1450,6 +1573,7 @@ export default defineAppConfig({
 ```
 
 **Nuxt Configuration (nuxt.config.js):**
+
 ```javascript
 export default defineNuxtConfig({
   // Development tools
@@ -1464,20 +1588,20 @@ export default defineNuxtConfig({
   // Runtime configuration
   runtimeConfig: {
     private: {
-      thumborKey: process.env.NUXT_THUMBOR_KEY || "ERROR: thumbor key not specified",
+      thumborKey:
+        process.env.NUXT_THUMBOR_KEY || "ERROR: thumbor key not specified",
     },
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE_URL || "ERROR: no api base url specified",
-      siteBase: process.env.NUXT_PUBLIC_BASE_URL || "ERROR: no site base url specified",
+      apiBase:
+        process.env.NUXT_PUBLIC_API_BASE_URL ||
+        "ERROR: no api base url specified",
+      siteBase:
+        process.env.NUXT_PUBLIC_BASE_URL || "ERROR: no site base url specified",
     },
   },
 
   // Module configuration
-  modules: [
-    "@vueuse/nuxt",
-    "@nuxt/content",
-    "@nuxtjs/apollo",
-  ],
+  modules: ["@vueuse/nuxt", "@nuxt/content", "@nuxtjs/apollo"],
 
   // Content module configuration
   content: {
@@ -1509,6 +1633,7 @@ export default defineNuxtConfig({
 ### Build and Deployment Configurations
 
 **Package.json Scripts Configuration:**
+
 ```json
 {
   "scripts": {
@@ -1521,6 +1646,7 @@ export default defineNuxtConfig({
 ```
 
 **Netlify Configuration (netlify.toml):**
+
 ```toml
 [[headers]]
   for = "/*"
@@ -1532,6 +1658,7 @@ export default defineNuxtConfig({
 ### SEO and Analytics Setup
 
 **Meta Tag Configuration:**
+
 ```javascript
 // In nuxt.config.js
 app: {
@@ -1557,7 +1684,7 @@ app: {
       {
         hid: "og-image",
         property: "og:image",
-        content: "https://infonet.icjia.dev/icjia-logo.png",
+        content: "https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg",
       },
     ],
   },
@@ -1565,6 +1692,7 @@ app: {
 ```
 
 **Analytics Integration:**
+
 ```javascript
 // Plausible Analytics script
 {
@@ -1575,6 +1703,7 @@ app: {
 ```
 
 **SEO Optimization:**
+
 - **Sitemap Generation:** Automatic XML sitemap creation
 - **Meta Tags:** Dynamic meta tag generation from content frontmatter
 - **Structured Data:** JSON-LD structured data for rich snippets
@@ -1607,14 +1736,17 @@ app: {
 **WSL2-Specific Issues:**
 
 🔧 **Performance Issues:**
+
 - **Problem:** Slow file operations when project is on Windows filesystem
 - **Solution:** Store projects in WSL2 file system (`/home/username/`) not Windows file system (`/mnt/c/`)
 
 🔧 **VS Code Integration:**
+
 - **Problem:** VS Code not recognizing WSL2 environment
 - **Solution:** Install "Remote - WSL" extension and open project from within WSL2
 
 🔧 **Memory Issues:**
+
 - **Problem:** WSL2 consuming too much memory
 - **Solution:** Configure WSL2 memory limits in `.wslconfig` file:
   ```ini
@@ -1624,12 +1756,14 @@ app: {
   ```
 
 🔧 **Network Issues:**
+
 - **Problem:** Cannot access development server from Windows browser
 - **Solution:** Use WSL2 IP address or configure port forwarding
 
 **General Development Issues**
 
 **Build Failures:**
+
 ```bash
 # Clear all caches and retry
 yarn clear:cache
@@ -1644,6 +1778,7 @@ cat .env
 ```
 
 **Development Server Issues:**
+
 ```bash
 # Port already in use
 yarn dev  # Automatically kills port 8000 and restarts
@@ -1655,11 +1790,13 @@ lsof -ti:8000 | xargs kill -9
 ```
 
 **Content Display Issues:**
+
 - **Missing Content:** Run `yarn scripts` to regenerate content from APIs
 - **Broken Images:** Check image paths and ensure images exist in `public/` directory
 - **Search Not Working:** Regenerate search index with `yarn create:searchIndex`
 
 **Deployment Issues:**
+
 - **Build Failures on Netlify:** Check build logs for specific errors
 - **404 Errors:** Verify routes are included in `NUXT_MANUAL_ROUTES`
 - **Performance Issues:** Run Lighthouse audit and optimize assets
@@ -1667,6 +1804,7 @@ lsof -ti:8000 | xargs kill -9
 ### Debug Strategies
 
 **Development Debugging:**
+
 ```bash
 # Enable verbose logging
 DEBUG=nuxt:* yarn dev
@@ -1682,6 +1820,7 @@ ls -la content/
 ```
 
 **Build Process Debugging:**
+
 ```bash
 # Debug individual creator scripts
 node creators/createMarkdownNews.js
@@ -1693,6 +1832,7 @@ cat public/sitemap.xml
 ```
 
 **Browser Debugging:**
+
 - **Console Errors:** Check browser developer tools console
 - **Network Issues:** Monitor network tab for failed requests
 - **Performance:** Use Lighthouse for performance analysis
@@ -1701,17 +1841,20 @@ cat public/sitemap.xml
 ### Performance Optimization Tips
 
 **Build Performance:**
+
 - **Parallel Processing:** Creator scripts run independently when possible
 - **Incremental Builds:** Clear only necessary caches
 - **Asset Optimization:** Optimize images before adding to repository
 
 **Runtime Performance:**
+
 - **Lazy Loading:** Use `Lazy` prefix for non-critical components
 - **Image Optimization:** Use appropriate image formats and sizes
 - **Bundle Analysis:** Use Nuxt DevTools to analyze bundle size
 - **Caching:** Leverage browser and CDN caching
 
 **Content Performance:**
+
 - **Search Index Size:** Monitor search index size and optimize if needed
 - **Content Chunking:** Break large content into smaller pages
 - **API Response Caching:** Cache API responses during build process
@@ -1719,26 +1862,31 @@ cat public/sitemap.xml
 ### Maintenance Tasks and Schedules
 
 **Daily Tasks:**
+
 - Monitor build status and deployment success
 - Check for console errors in production
 - Review analytics for unusual traffic patterns
 
 **Weekly Tasks:**
+
 - Update content via `yarn scripts` if APIs have new data
 - Review and merge pending pull requests
 - Check for security vulnerabilities with `yarn audit`
 
 **Monthly Tasks:**
+
 - Update dependencies with `yarn upgrade`
 - Review performance metrics and optimize if needed
 - Backup important configuration and content
 
 **Quarterly Tasks:**
+
 - Review and update documentation
 - Conduct security audit and penetration testing
 - Evaluate new features and framework updates
 
 **Emergency Procedures:**
+
 1. **Site Down:** Check Netlify status and rollback if needed
 2. **Build Failures:** Investigate logs and fix issues or rollback
 3. **Content Issues:** Regenerate content or restore from backup
@@ -1752,6 +1900,7 @@ cat public/sitemap.xml
 Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine that allows you to run JavaScript on the server side. It's the foundation for modern web development tools and frameworks like Nuxt.js.
 
 **Key Concepts:**
+
 - **Runtime Environment:** Executes JavaScript outside of a browser
 - **Event-Driven:** Non-blocking, asynchronous programming model
 - **Package Manager:** npm/Yarn for managing dependencies
@@ -1759,6 +1908,7 @@ Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine that allo
 - **Build Tools:** Webpack, Vite, and other bundlers for asset processing
 
 **Node.js Ecosystem for This Project:**
+
 - **Nuxt.js:** Vue.js framework for building web applications
 - **Vue.js:** Progressive JavaScript framework for user interfaces
 - **Yarn:** Package manager for dependency management
@@ -1772,6 +1922,7 @@ Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine that allo
 **Windows Users MUST Use WSL2 - Native Windows Development is NOT Supported**
 
 **Why WSL2 is Required for Windows:**
+
 - Native Windows lacks proper Unix-like file system operations
 - Many Node.js packages have native dependencies that don't compile on Windows
 - File watchers and build tools perform poorly on Windows file systems
@@ -1781,6 +1932,7 @@ Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine that allo
 #### **Windows with WSL2 Setup (MANDATORY for Windows Users)**
 
 **Step 1: Install WSL2**
+
 ```powershell
 # Run in PowerShell as Administrator
 wsl --install
@@ -1792,6 +1944,7 @@ wsl --install -d Ubuntu
 ```
 
 **Step 2: Configure WSL2**
+
 ```bash
 # Enter WSL2 environment
 wsl
@@ -1807,6 +1960,7 @@ sudo apt install wget unzip -y
 ```
 
 **Step 3: Install Node.js in WSL2**
+
 ```bash
 # Install NVM (Node Version Manager)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -1823,6 +1977,7 @@ npm install -g yarn
 ```
 
 **Step 4: VS Code Integration**
+
 ```bash
 # Install VS Code Remote-WSL extension
 # Open VS Code and install "Remote - WSL" extension
@@ -1832,6 +1987,7 @@ npm install -g yarn
 ```
 
 **WSL2 Best Practices:**
+
 - **File Location:** Store projects in WSL2 filesystem (`/home/username/`) NOT Windows filesystem (`/mnt/c/`)
 - **Performance:** Use WSL2 terminal for all development commands
 - **Memory Management:** Configure `.wslconfig` to limit memory usage
@@ -1840,12 +1996,14 @@ npm install -g yarn
 #### **macOS Setup (Fully Supported)**
 
 **Step 1: Install Homebrew**
+
 ```bash
 # Install Homebrew package manager
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 **Step 2: Install Development Tools**
+
 ```bash
 # Install Git (if not already installed)
 brew install git
@@ -1860,6 +2018,7 @@ npm install -g yarn
 ```
 
 **macOS Advantages:**
+
 - **Native Unix Environment:** Excellent compatibility with Node.js tools
 - **Apple Silicon Performance:** M1/M2/M3/M4 processors offer superior performance
 - **Developer Tools:** Excellent integration with development tools
@@ -1868,6 +2027,7 @@ npm install -g yarn
 #### **Linux Setup (Fully Supported)**
 
 **Debian/Ubuntu (Recommended):**
+
 ```bash
 # Update package manager
 sudo apt update && sudo apt upgrade -y
@@ -1885,6 +2045,7 @@ npm install -g yarn
 ```
 
 **Other Distributions:**
+
 - **Fedora/RHEL:** Use `dnf` package manager
 - **Arch Linux:** Use `pacman` package manager
 - **Note:** Other distributions may work but are not officially supported
@@ -1892,6 +2053,7 @@ npm install -g yarn
 ### Essential Command Line Skills
 
 **Basic Terminal Navigation:**
+
 ```bash
 # Navigate directories
 cd /path/to/directory    # Change directory
@@ -1908,6 +2070,7 @@ nano filename           # Edit file (beginner-friendly editor)
 ```
 
 **Git Version Control:**
+
 ```bash
 # Basic Git commands
 git clone <repository-url>    # Clone repository
@@ -1924,6 +2087,7 @@ git merge branch-name         # Merge branch
 ```
 
 **Node.js and Yarn Commands:**
+
 ```bash
 # Node.js version management
 nvm list                 # List installed Node.js versions
@@ -1945,7 +2109,9 @@ yarn test               # Run tests (if configured)
 ### Development Workflow Best Practices
 
 **Daily Development Routine:**
+
 1. **Start Development Session:**
+
    ```bash
    cd project-directory
    nvm use                    # Ensure correct Node.js version
@@ -1955,6 +2121,7 @@ yarn test               # Run tests (if configured)
    ```
 
 2. **Making Changes:**
+
    ```bash
    git checkout -b feature/my-new-feature  # Create feature branch
    # Make your changes
@@ -1970,6 +2137,7 @@ yarn test               # Run tests (if configured)
    ```
 
 **Code Quality Practices:**
+
 - **Consistent Formatting:** Use Prettier and ESLint
 - **Meaningful Commits:** Write descriptive commit messages
 - **Small Changes:** Make small, focused commits
@@ -1979,6 +2147,7 @@ yarn test               # Run tests (if configured)
 ### Project-Specific Quick Start Guide
 
 **First-Time Setup:**
+
 ```bash
 # 1. Clone the repository
 git clone https://github.com/ICJIA/icjia-infonet-nuxt3.git
@@ -1999,6 +2168,7 @@ yarn dev
 ```
 
 **Understanding the Project Structure:**
+
 - **`pages/`** - Define website routes (file-based routing)
 - **`components/`** - Reusable Vue components
 - **`content/`** - Markdown content files (generated from APIs)
@@ -2007,6 +2177,7 @@ yarn dev
 - **`public/`** - Static files served directly
 
 **Common Development Tasks:**
+
 ```bash
 # Update content from external APIs
 yarn scripts
@@ -2024,6 +2195,7 @@ yarn lint
 ### Useful Tools and Extensions
 
 **VS Code Extensions (Recommended):**
+
 - **Remote - WSL:** Essential for Windows WSL2 development
 - **Vue Language Features (Volar):** Vue.js support
 - **TypeScript Vue Plugin (Volar):** TypeScript support for Vue
@@ -2034,11 +2206,13 @@ yarn lint
 - **Bracket Pair Colorizer:** Color-code matching brackets
 
 **Browser Developer Tools:**
+
 - **Vue DevTools:** Browser extension for Vue.js debugging
 - **Lighthouse:** Performance and accessibility auditing
 - **axe DevTools:** Accessibility testing
 
 **Command Line Tools:**
+
 ```bash
 # Install useful global tools
 npm install -g @vue/cli          # Vue CLI for Vue projects
@@ -2048,6 +2222,7 @@ npm install -g npm-check-updates  # Check for dependency updates
 ```
 
 **Learning Resources:**
+
 - **Node.js Official Documentation:** https://nodejs.org/docs/
 - **Vue.js Guide:** https://vuejs.org/guide/
 - **Nuxt.js Documentation:** https://nuxt.com/docs
@@ -2055,12 +2230,14 @@ npm install -g npm-check-updates  # Check for dependency updates
 - **Git Tutorial:** https://git-scm.com/docs/gittutorial
 
 **Getting Help:**
+
 - **Project Issues:** Create GitHub issues for bugs or feature requests
 - **Vue.js Community:** Vue.js Discord server and forums
 - **Stack Overflow:** Tag questions with `vue.js`, `nuxt.js`, `node.js`
 - **Documentation:** Always check official documentation first
 
 **Next Steps for New Developers:**
+
 1. **Complete the setup process** following this guide
 2. **Explore the codebase** by examining existing components and pages
 3. **Make a small change** to understand the development workflow

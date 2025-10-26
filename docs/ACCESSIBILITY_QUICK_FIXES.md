@@ -7,6 +7,7 @@ This guide provides quick solutions for the most common accessibility issues fou
 ## 🔴 Critical Issue #1: Button Names
 
 ### Problem
+
 Buttons without discernible text are inaccessible to screen reader users.
 
 ### Quick Fix
@@ -30,6 +31,7 @@ Buttons without discernible text are inaccessible to screen reader users.
 ```
 
 ### Where to Apply
+
 - All icon-only buttons
 - All buttons with only visual indicators
 - Navigation buttons
@@ -40,6 +42,7 @@ Buttons without discernible text are inaccessible to screen reader users.
 ## 🔴 Critical Issue #2: Image Alt Text
 
 ### Problem
+
 Images without alt text prevent screen reader users from understanding image content.
 
 ### Quick Fix
@@ -49,34 +52,32 @@ Images without alt text prevent screen reader users from understanding image con
 <v-img src="/images/chart.png" />
 
 <!-- ✅ CORRECT: Informative image with descriptive alt -->
-<v-img 
-  src="/images/chart.png" 
+<v-img
+  src="/images/chart.png"
   alt="Bar chart showing 45% increase in domestic violence cases from 2023 to 2024"
 />
 
 <!-- ✅ CORRECT: Decorative image -->
-<v-img 
-  src="/images/decorative-pattern.png" 
-  alt=""
-  role="presentation"
-/>
+<v-img src="/images/decorative-pattern.png" alt="" role="presentation" />
 
 <!-- ✅ CORRECT: Logo -->
-<v-img 
-  src="/images/icjia-logo.png" 
-  alt="ICJIA - Illinois Criminal Justice Information Authority"
+<v-img
+  src="/infonet-thumbnail-dark.jpg"
+  alt="InfoNet - Illinois Criminal Justice Information Authority"
 />
 ```
 
 ### Alt Text Guidelines
 
 **DO:**
+
 - Describe the content and function of the image
 - Be concise but descriptive
 - Include relevant data from charts/graphs
 - Use empty alt (`alt=""`) for purely decorative images
 
 **DON'T:**
+
 - Start with "Image of..." or "Picture of..."
 - Include file names or extensions
 - Repeat information already in surrounding text
@@ -86,35 +87,25 @@ Images without alt text prevent screen reader users from understanding image con
 
 ```vue
 <!-- Chart/Graph -->
-<v-img 
-  src="chart.png" 
+<v-img
+  src="chart.png"
   alt="Line graph showing steady increase in service requests from 100 in January to 250 in December 2024"
 />
 
 <!-- Photo of person -->
-<v-img 
-  src="director.jpg" 
-  alt="Jane Smith, Executive Director"
-/>
+<v-img src="director.jpg" alt="Jane Smith, Executive Director" />
 
 <!-- Screenshot -->
-<v-img 
-  src="screenshot.png" 
+<v-img
+  src="screenshot.png"
   alt="InfoNet dashboard showing client statistics and recent activity"
 />
 
 <!-- Icon (functional) -->
-<v-img 
-  src="pdf-icon.png" 
-  alt="PDF document"
-/>
+<v-img src="pdf-icon.png" alt="PDF document" />
 
 <!-- Background pattern (decorative) -->
-<v-img 
-  src="pattern.png" 
-  alt=""
-  role="presentation"
-/>
+<v-img src="pattern.png" alt="" role="presentation" />
 ```
 
 ---
@@ -122,6 +113,7 @@ Images without alt text prevent screen reader users from understanding image con
 ## 🔴 Critical Issue #3: ARIA Required Children
 
 ### Problem
+
 Vuetify tooltips and other ARIA components have incorrect role hierarchies.
 
 ### Quick Fix
@@ -156,11 +148,7 @@ Vuetify tooltips and other ARIA components have incorrect role hierarchies.
 
 ```vue
 <!-- Simple tooltip alternative -->
-<v-btn 
-  icon 
-  aria-label="Help"
-  title="Click for help information"
->
+<v-btn icon aria-label="Help" title="Click for help information">
   <v-icon>mdi-help</v-icon>
 </v-btn>
 ```
@@ -170,6 +158,7 @@ Vuetify tooltips and other ARIA components have incorrect role hierarchies.
 ## 🟠 Serious Issue: ARIA Tooltip Names
 
 ### Problem
+
 Tooltip elements don't have accessible names.
 
 ### Quick Fix
@@ -198,6 +187,7 @@ Tooltip elements don't have accessible names.
 ## 🟡 Moderate Issue: Landmark Regions
 
 ### Problem
+
 Page content is not contained within proper semantic landmarks.
 
 ### Quick Fix
@@ -226,11 +216,11 @@ Update your layout components to use semantic HTML5 elements:
     <header>
       <v-app-bar>...</v-app-bar>
     </header>
-    
+
     <nav aria-label="Main navigation">
       <v-navigation-drawer>...</v-navigation-drawer>
     </nav>
-    
+
     <main>
       <article v-if="isArticlePage">
         <!-- article content -->
@@ -239,7 +229,7 @@ Update your layout components to use semantic HTML5 elements:
         <!-- other content -->
       </div>
     </main>
-    
+
     <footer>
       <!-- footer content -->
     </footer>
@@ -275,7 +265,7 @@ Update your layout components to use semantic HTML5 elements:
       :rules="emailRules"
       aria-required="true"
     />
-    
+
     <!-- ✅ CORRECT: Checkbox with label -->
     <v-checkbox
       v-model="agree"
@@ -283,7 +273,7 @@ Update your layout components to use semantic HTML5 elements:
       required
       aria-required="true"
     />
-    
+
     <!-- ✅ CORRECT: Select with label -->
     <v-select
       v-model="county"
@@ -292,11 +282,9 @@ Update your layout components to use semantic HTML5 elements:
       required
       aria-required="true"
     />
-    
+
     <!-- ✅ CORRECT: Submit button -->
-    <v-btn type="submit" color="primary">
-      Submit Form
-    </v-btn>
+    <v-btn type="submit" color="primary"> Submit Form </v-btn>
   </v-form>
 </template>
 ```
@@ -306,26 +294,18 @@ Update your layout components to use semantic HTML5 elements:
 ```vue
 <template>
   <!-- ✅ CORRECT: Descriptive link text -->
-  <v-btn to="/contact" text>
-    Contact Us
-  </v-btn>
-  
+  <v-btn to="/contact" text> Contact Us </v-btn>
+
   <!-- ❌ WRONG: Generic link text -->
-  <v-btn to="/report.pdf" text>
-    Click here
-  </v-btn>
-  
+  <v-btn to="/report.pdf" text> Click here </v-btn>
+
   <!-- ✅ CORRECT: Link with context -->
   <v-btn to="/report.pdf" text>
     Download 2024 Annual Report (PDF, 2.5MB)
   </v-btn>
-  
+
   <!-- ✅ CORRECT: External link -->
-  <v-btn 
-    href="https://example.com" 
-    target="_blank"
-    text
-  >
+  <v-btn href="https://example.com" target="_blank" text>
     Visit External Site
     <v-icon right small>mdi-open-in-new</v-icon>
     <span class="sr-only">(opens in new window)</span>
@@ -352,7 +332,9 @@ Update your layout components to use semantic HTML5 elements:
 ```vue
 <template>
   <v-table>
-    <caption>Client Statistics by County for 2024</caption>
+    <caption>
+      Client Statistics by County for 2024
+    </caption>
     <thead>
       <tr>
         <th scope="col">County</th>
@@ -375,30 +357,25 @@ Update your layout components to use semantic HTML5 elements:
 
 ```vue
 <template>
-  <v-dialog 
-    v-model="dialog" 
+  <v-dialog
+    v-model="dialog"
     max-width="500"
     role="dialog"
     aria-labelledby="dialog-title"
     aria-describedby="dialog-description"
   >
     <v-card>
-      <v-card-title id="dialog-title">
-        Confirm Delete
-      </v-card-title>
-      
+      <v-card-title id="dialog-title"> Confirm Delete </v-card-title>
+
       <v-card-text id="dialog-description">
-        Are you sure you want to delete this record? This action cannot be undone.
+        Are you sure you want to delete this record? This action cannot be
+        undone.
       </v-card-text>
-      
+
       <v-card-actions>
         <v-spacer />
-        <v-btn text @click="dialog = false">
-          Cancel
-        </v-btn>
-        <v-btn color="error" @click="confirmDelete">
-          Delete
-        </v-btn>
+        <v-btn text @click="dialog = false"> Cancel </v-btn>
+        <v-btn color="error" @click="confirmDelete"> Delete </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -433,6 +410,7 @@ Test that all interactive elements can be accessed via keyboard:
 ### 3. Screen Reader Testing
 
 **macOS (VoiceOver):**
+
 ```bash
 # Enable VoiceOver
 Cmd + F5
@@ -442,6 +420,7 @@ Control + Option + Arrow keys
 ```
 
 **Windows (NVDA - Free):**
+
 - Download from https://www.nvaccess.org/
 - Use arrow keys to navigate
 - Use Tab to jump between interactive elements
@@ -449,6 +428,7 @@ Control + Option + Arrow keys
 ### 4. Browser DevTools
 
 **Chrome/Edge:**
+
 1. Open DevTools (F12)
 2. Go to "Lighthouse" tab
 3. Select "Accessibility" category
@@ -491,4 +471,3 @@ If you're unsure about how to fix an accessibility issue:
 3. Consult the WCAG guidelines
 4. Ask the team in the accessibility channel
 5. Test with actual assistive technology when possible
-
