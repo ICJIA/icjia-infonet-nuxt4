@@ -4,7 +4,7 @@
       dark
       class=""
       style="margin: 0; padding: 0; z-index: 1000 !important"
-      role="presentation"
+      tag="div"
     >
       <v-card
         flat
@@ -24,7 +24,7 @@
               <div>
                 <img
                   src="https://infonet.icjia.dev/icjia-logo.png"
-                  alt="Footer logo"
+                  alt="Illinois Criminal Justice Information Authority logo"
                   width="150"
                   style="border: 0px solid #ddd; display: inline"
                   class="hover"
@@ -49,7 +49,8 @@
                     margin-right: -10px;
                   "
                   target="_blank"
-                  aria-label="Link to ICJIA on Facebook"
+                  rel="noopener noreferrer"
+                  aria-label="Link to ICJIA on Facebook (opens in new window)"
                   href="https://www.facebook.com/ICJIA/"
                   ><v-icon>mdi-facebook</v-icon></v-btn
                 >
@@ -58,7 +59,8 @@
                   variant="text"
                   style="color: #fff !important; font-size: 20px"
                   target="_blank"
-                  aria-label="Link to ICJIA on YouTube"
+                  rel="noopener noreferrer"
+                  aria-label="Link to ICJIA on YouTube (opens in new window)"
                   href="https://www.youtube.com/c/illinoiscriminaljusticeinformationauthority"
                   ><v-icon> mdi-youtube</v-icon></v-btn
                 >
@@ -67,8 +69,9 @@
                   variant="text"
                   style="color: #fff !important; font-size: 20px"
                   target="_blank"
+                  rel="noopener noreferrer"
                   href="https://www.instagram.com/icjia_illinois/"
-                  aria-label="ICJIA on Instagram"
+                  aria-label="ICJIA on Instagram (opens in new window)"
                   ><v-icon>mdi-instagram</v-icon></v-btn
                 >
 
@@ -76,8 +79,9 @@
                   variant="text"
                   style="color: #fff !important; font-size: 20px"
                   target="_blank"
+                  rel="noopener noreferrer"
                   href="https://www.linkedin.com/company/icjia/"
-                  aria-label="ICJIA on LinkedIn "
+                  aria-label="ICJIA on LinkedIn (opens in new window)"
                   ><v-icon>mdi-linkedin</v-icon></v-btn
                 >
               </div>
@@ -88,6 +92,7 @@
                   <a
                     href="https://icjia.illinois.gov"
                     target="_blank"
+                    rel="noopener noreferrer"
                     style="color: #fff"
                     >Illinois Criminal Justice Information Authority</a
                   >

@@ -15,7 +15,7 @@ summary: InfoNet is a web-based data/case management system used by over 100
   Chicago Department of Family & Support Services.
 section: root
 createdAt: 2023-04-02T15:04:25.519Z
-updatedAt: 2023-11-09T15:51:12.168Z
+updatedAt: 2026-03-23T14:14:24.142Z
 publishedAt: 2023-04-02T15:04:26.918Z
 searchMeta: null
 category: page
@@ -77,7 +77,7 @@ rawText: " indent margin left 25px ul member list webkit columns 1 moz columns 1
   build new automated reporting tools including for pmt incorporate more
   meaningful outcome measures and create a new user interface for prosecution
   and law enforcement based victim service providers infonet screenshots
-  lazytabs sectionid screenshots "
+  tabsscreenshotsaccessible sectionid screenshots "
 draft: false
 markdown: |2-
    <style>
@@ -195,7 +195,7 @@ markdown: |2-
 
   <div class="text-center mt-8 mb-8">
 
-  <iframe loading="lazy" class="video" src="https://www.youtube.com/embed/rZ73MJVD_YU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;"></iframe>
+  <iframe loading="lazy" class="video" src="https://www.youtube.com/embed/rZ73MJVD_YU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; " title="InfoNet overview video"></iframe>
 
   </div>
 
@@ -203,7 +203,7 @@ markdown: |2-
 
   ## InfoNet Screenshots
 
-  ::LazyTabs
+  ::TabsScreenshotsAccessible
   ---
   sectionID: "screenshots"
   ---
@@ -328,7 +328,7 @@ ICJIA recently completed the InfoNet 2.0 Project, an effort to completely rebuil
 
 <div class="text-center mt-8 mb-8">
 
-<iframe loading="lazy" class="video" src="https://www.youtube.com/embed/rZ73MJVD_YU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;"></iframe>
+<iframe loading="lazy" class="video" src="https://www.youtube.com/embed/rZ73MJVD_YU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; " title="InfoNet overview video"></iframe>
 
 </div>
 
@@ -336,7 +336,7 @@ ICJIA recently completed the InfoNet 2.0 Project, an effort to completely rebuil
 
 ## InfoNet Screenshots
 
-::LazyTabs
+::TabsScreenshotsAccessible
 ---
 sectionID: "screenshots"
 ---

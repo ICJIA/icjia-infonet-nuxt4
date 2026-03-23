@@ -18,15 +18,15 @@ path: /tabs/users-domestic-violence-dv
 url: https://infonet.icjia.dev/tabs/users-domestic-violence-dv
 markdown: |+
   
-  ### Domestic Violence (DV) User Manuals
+  ## Domestic Violence (DV) User Manuals
 
   - [InfoNet Manual for DV](https://infonet.icjia-api.cloud/uploads/Info_Net_Manual_for_DV_87e639d5ba.pdf)
 
-  ### Definitions
+  ## Definitions
 
   - [Revised 2024 DV InfoNet Definitions](https://infonet.icjia-api.cloud/uploads/Info_Net_Definitions_Revisions_Oct_2024_b6e22e853a.docx)
 
-  ### Trainings
+  ## Trainings
 
   - **Domestic Violence Reports Training (September 16, 2025)**
       - https://www.youtube.com/playlist?list=PL4n4n7ZvbgEMiudeOHONV0PLYZrfoLJbC
@@ -46,7 +46,7 @@ markdown: |+
 
 
 
-  ### Data Collection/Entry Forms
+  ## Data Collection/Entry Forms
 
   - [DVAdult_RESIDENTIAL_7-2020.pdf](https://infonet.icjia-api.cloud/uploads/DV_Adult_RESIDENTIAL_7_2020_d7e3b8c33b.pdf)
   - [DVAdult_NONResidential_7-2020.pdf](https://infonet.icjia-api.cloud/uploads/DV_Adult_NON_Residential_7_2020_8c3b8b2951.pdf)
@@ -66,13 +66,13 @@ markdown: |+
   - [DV Infonet Adult Service log 11-2022.docx](https://infonet.icjia-api.cloud/uploads/DV_Infonet_Adult_Service_log_11_2022_c635533f58.docx)
   - [DV CLIENT NEEDS 2024.docx](https://infonet.icjia-api.cloud/uploads/DV_CLIENT_NEEDS_2024_221486cafa.docx)
 
-  ### Frequently Asked Questions (FAQs)
+  ## Frequently Asked Questions (FAQs)
 
   - [Download Domestic Violence (DV) FAQs (Word)](https://infonet.icjia-api.cloud/uploads/3_3_1_DV_INFONET_Frequently_Asked_Questions_7_7_23_5b58b1a47b.docx)
 
   - [View All FAQs Online](https://infonet.icjia.dev/faqs)&nbsp;&nbsp;&raquo;
 
-  ### Requests
+  ## Requests
 
   **Custom data report:**
 
@@ -92,15 +92,15 @@ markdown: |+
 ---
 
 
-### Domestic Violence (DV) User Manuals
+## Domestic Violence (DV) User Manuals
 
 - [InfoNet Manual for DV](https://infonet.icjia-api.cloud/uploads/Info_Net_Manual_for_DV_87e639d5ba.pdf)
 
-### Definitions
+## Definitions
 
 - [Revised 2024 DV InfoNet Definitions](https://infonet.icjia-api.cloud/uploads/Info_Net_Definitions_Revisions_Oct_2024_b6e22e853a.docx)
 
-### Trainings
+## Trainings
 
 - **Domestic Violence Reports Training (September 16, 2025)**
     - https://www.youtube.com/playlist?list=PL4n4n7ZvbgEMiudeOHONV0PLYZrfoLJbC
@@ -120,7 +120,7 @@ markdown: |+
 
 
 
-### Data Collection/Entry Forms
+## Data Collection/Entry Forms
 
 - [DVAdult_RESIDENTIAL_7-2020.pdf](https://infonet.icjia-api.cloud/uploads/DV_Adult_RESIDENTIAL_7_2020_d7e3b8c33b.pdf)
 - [DVAdult_NONResidential_7-2020.pdf](https://infonet.icjia-api.cloud/uploads/DV_Adult_NON_Residential_7_2020_8c3b8b2951.pdf)
@@ -140,13 +140,13 @@ markdown: |+
 - [DV Infonet Adult Service log 11-2022.docx](https://infonet.icjia-api.cloud/uploads/DV_Infonet_Adult_Service_log_11_2022_c635533f58.docx)
 - [DV CLIENT NEEDS 2024.docx](https://infonet.icjia-api.cloud/uploads/DV_CLIENT_NEEDS_2024_221486cafa.docx)
 
-### Frequently Asked Questions (FAQs)
+## Frequently Asked Questions (FAQs)
 
 - [Download Domestic Violence (DV) FAQs (Word)](https://infonet.icjia-api.cloud/uploads/3_3_1_DV_INFONET_Frequently_Asked_Questions_7_7_23_5b58b1a47b.docx)
 
 - [View All FAQs Online](https://infonet.icjia.dev/faqs)&nbsp;&nbsp;&raquo;
 
-### Requests
+## Requests
 
 **Custom data report:**
 

@@ -9,7 +9,7 @@
       size="150px"
       elevation="3"
       class="pl-5 pr-5"
-      role="presentation"
+      tag="div"
     >
       <div
         v-if="!nav"

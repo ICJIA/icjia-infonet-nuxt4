@@ -5,10 +5,14 @@
         <v-col cols="12" md="4">
           <v-card
             color="#0D4474"
-            style="height: 300px"
+            style="min-height: 300px"
             class="py-5 px-2 text-center info-card hover"
             :class="{ boxGutter: gutter }"
+            role="link"
+            tabindex="0"
             @click="routeTo('/contact?subject=InfoNet%20Information%20Request')"
+            @keydown.enter="routeTo('/contact?subject=InfoNet%20Information%20Request')"
+            @keydown.space.prevent="routeTo('/contact?subject=InfoNet%20Information%20Request')"
           >
             <v-container fill-height fluid>
               <v-row align="center" justify="center">
@@ -34,10 +38,14 @@
         <v-col cols="12" md="4">
           <v-card
             color="#2e618c"
-            style="height: 300px"
+            style="min-height: 300px"
             class="py-5 px-2 text-center info-card hover"
             :class="{ boxGutter: gutter }"
+            role="link"
+            tabindex="0"
             @click="routeTo('/contact?subject=InfoNet%20Data%20Request')"
+            @keydown.enter="routeTo('/contact?subject=InfoNet%20Data%20Request')"
+            @keydown.space.prevent="routeTo('/contact?subject=InfoNet%20Data%20Request')"
           >
             <v-container fill-height fluid>
               <v-row align="center" justify="center">
@@ -62,10 +70,22 @@
         <v-col cols="12" md="4">
           <v-card
             color="#4f6d87"
-            style="height: 300px"
+            style="min-height: 300px"
             class="py-5 px-2 text-center info-card hover"
             :class="{ boxGutter: gutter }"
+            role="link"
+            tabindex="0"
             @click="
+              routeTo(
+                '/contact?subject=InfoNet%20Technical%20Assistance%20Request'
+              )
+            "
+            @keydown.enter="
+              routeTo(
+                '/contact?subject=InfoNet%20Technical%20Assistance%20Request'
+              )
+            "
+            @keydown.space.prevent="
               routeTo(
                 '/contact?subject=InfoNet%20Technical%20Assistance%20Request'
               )

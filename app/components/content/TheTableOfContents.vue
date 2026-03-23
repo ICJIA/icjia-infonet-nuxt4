@@ -7,7 +7,7 @@
       class="toc px-5 py-5 markdown-body"
       style="background: #fafafa"
     >
-      <div
+      <h3
         id="navigation"
         ref="navigation"
         class="hover pb-4 navigation-anchor"
@@ -16,11 +16,15 @@
           font-size: 20px;
           font-weight: bold;
           font-family: 'Roboto', sans-serif !important;
+          cursor: pointer;
         "
+        tabindex="0"
         @click="scrollToTop"
+        @keydown.enter="scrollToTop"
+        @keydown.space.prevent="scrollToTop"
       >
         {{ props.title }}
-      </div>
+      </h3>
       <div v-if="props && props.data && props.data.links">
         <div
           v-for="(item, index) in props.data.links"
@@ -30,7 +34,11 @@
           <div
             :id="`toc-${item.id}`"
             class="mb-4 hover tocItem"
+            role="button"
+            tabindex="0"
             @click="scrollTo(item.id)"
+            @keydown.enter="scrollTo(item.id)"
+            @keydown.space.prevent="scrollTo(item.id)"
           >
             {{ item.text }}
           </div>

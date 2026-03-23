@@ -1,13 +1,30 @@
 <template>
   <div class="text-center">
-    <div id="myModal" class="modal" @click="closeModal">
-      <div class="modal-content">
-        <v-img :src="url" :lazy-src="thumbnail" :alt="`Image: ${caption}`"
+    <div
+      id="myModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      :aria-label="caption ? `Image: ${caption}` : 'Image viewer'"
+      @click="closeModal"
+      @keydown.escape="closeModal"
+    >
+      <div class="modal-content" @click.stop>
+        <button
+          ref="closeBtn"
+          class="close-button"
+          aria-label="Close image viewer"
+          @click="closeModal"
+        >
+          &times;
+        </button>
+        <v-img :src="url" :lazy-src="thumbnail" :alt="caption ? `Image: ${caption}` : 'Enlarged screenshot'"
           ><template v-slot:placeholder>
             <div class="d-flex align-center justify-center fill-height">
               <v-progress-circular
                 color="grey-lighten-4"
                 indeterminate
+                aria-label="Loading image"
               ></v-progress-circular>
             </div> </template
         ></v-img>
@@ -29,48 +46,75 @@ let caption = ref("");
 let dialog = ref(false);
 let thumbnail = ref();
 let modal = ref(null);
-//console.log("ImageModal.vue loaded.");
+const closeBtn = ref(null);
+let previouslyFocusedElement = ref(null);
+
 useListen("modal:gallery", (e) => {
-  //console.log("Event data: ", e);
-  //console.log(e.url, e.caption);
   url.value = e.url;
   caption.value = e.caption || null;
   thumbnail.value = e.thumbnail;
   dialog.value = true;
+  // Store the element that had focus before the modal opened
+  previouslyFocusedElement.value = document.activeElement;
 });
+
 onUnmounted(() => {
-  console.log("Unmounted");
   dialog.value = false;
   url = null;
   caption = null;
+  document.removeEventListener("keydown", trapFocus);
 });
+
 onMounted(() => {
-  //console.log("ImageModal Mounted");
   dialog.value = true;
   modal = document.getElementById("myModal");
-  //modal.style.display = "block";
-  //console.log("myModal: ", modal);
 });
 
 const closeModal = () => {
-  console.log("closeModal");
   modal.style.display = "none";
   dialog.value = false;
   url.value = "";
+  document.removeEventListener("keydown", trapFocus);
+  // Restore focus to the element that triggered the modal
+  if (previouslyFocusedElement.value) {
+    previouslyFocusedElement.value.focus();
+    previouslyFocusedElement.value = null;
+  }
+};
+
+const trapFocus = (e) => {
+  if (e.key !== "Tab") return;
+  const focusableElements = modal.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  const firstFocusable = focusableElements[0];
+  const lastFocusable = focusableElements[focusableElements.length - 1];
+
+  if (e.shiftKey) {
+    if (document.activeElement === firstFocusable) {
+      lastFocusable.focus();
+      e.preventDefault();
+    }
+  } else {
+    if (document.activeElement === lastFocusable) {
+      firstFocusable.focus();
+      e.preventDefault();
+    }
+  }
 };
 
 watchEffect(() => {
-  //console.log("url: ", url.value);
   if (url.value) {
     modal.style.display = "block";
+    document.addEventListener("keydown", trapFocus);
+    // Focus the close button when the modal opens
+    nextTick(() => {
+      if (closeBtn.value) {
+        closeBtn.value.focus();
+      }
+    });
   }
 });
-
-const constructURL = (f) => {
-  let temp = toRaw(f);
-  console.log("temp: ", temp);
-  return `https://infonet.icjia-api.cloud/uploads/medium_benjamin_rascoe_a_CF_Yb_Y_Tyji_Q_unsplash_589892737c.jpg`;
-};
 </script>
 
 <style scoped>
@@ -95,6 +139,7 @@ const constructURL = (f) => {
   padding: 10px;
   border: 1px solid #888;
   width: 70%; /* Could be more or less, depending on screen size */
+  position: relative;
 }
 
 .modal-content img {
@@ -102,19 +147,27 @@ const constructURL = (f) => {
   max-height: 600px;
 }
 
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
+/* Close button */
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: none;
+  border: none;
   font-size: 28px;
   font-weight: bold;
+  color: #666;
+  cursor: pointer;
+  z-index: 1;
+  line-height: 1;
+  padding: 0 5px;
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+.close-button:hover,
+.close-button:focus {
+  color: #000;
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
 }
 
 /* Extra small devices (phones, 600px and down) */

@@ -15,7 +15,7 @@
     <v-main
       class="markdown-body"
       style="min-height: 90vh !important"
-      role="presentation"
+      tag="div"
     >
       <main id="main-content" tabindex="-1">
         <TheBreadcrumbBar v-if="!hideBreadcrumbs"></TheBreadcrumbBar>
@@ -74,6 +74,13 @@ watchEffect(async () => {
   }
   await nextTick();
   await nextTick();
+  // Focus main content on route change for screen reader users
+  if (!process.server) {
+    const mainContent = document.getElementById("main-content");
+    if (mainContent) {
+      mainContent.focus({ preventScroll: true });
+    }
+  }
   // if (!process.server) {
   //   const links = document.querySelectorAll('a[href^="https://"]');
 

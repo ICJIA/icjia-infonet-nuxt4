@@ -5,11 +5,11 @@
         ><v-col>
           <h1 class="brand-color">Search</h1>
           <div v-if="!pending">
-            <div class="text-right" v-if="result.length > 0">
+            <div class="text-right" role="status" aria-live="polite" v-if="result.length > 0">
               Found: {{ result.length }}
             </div>
 
-            <v-form class="pl-2 mt-4" style="margin-top: -15px">
+            <v-form class="pl-2 mt-4" style="margin-top: -15px" role="search">
               <v-text-field
                 id="textfield"
                 ref="textfield"
@@ -17,7 +17,9 @@
                 clearable
                 focused
                 label="Search Infonet"
+                aria-label="Search Infonet"
                 placeholder="Enter search term"
+                autocomplete="off"
                 style="font-weight: 900"
                 @input="instantSearch"
               />
@@ -32,7 +34,7 @@
                 >Clear</v-btn
               >
             </div>
-            <div v-if="result && query?.length" class="mt-10">
+            <div v-if="result && query?.length" class="mt-10" aria-live="polite">
               <!-- <div class="text-center">
                 <h2>Search results:</h2>
               </div> -->
@@ -43,7 +45,11 @@
                   class="px-5 py-5 mx-5 my-10 hover text-left info-card"
                   elevation="2"
                   color="grey-lighten-4"
+                  role="link"
+                  tabindex="0"
+                  :aria-label="`Go to: ${result.item.title}`"
                   @click="navigateTo(result.item)"
+                  @keydown.enter="navigateTo(result.item)"
                 >
                   <div
                     class="text-right mb-8"

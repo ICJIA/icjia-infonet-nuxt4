@@ -257,7 +257,15 @@
                           outlined
                           min-height="200"
                           style="max-width: 700px"
+                          role="link"
+                          tabindex="0"
+                          :aria-label="`Read: ${article.title}`"
                           @click.prevent.stop="
+                            article.source === 'hub'
+                              ? gotoArticle(article.slug)
+                              : gotoPublication(article.fileURL)
+                          "
+                          @keydown.enter="
                             article.source === 'hub'
                               ? gotoArticle(article.slug)
                               : gotoPublication(article.fileURL)
@@ -382,7 +390,11 @@
                     class="px-3 py-5 info-card mt-2"
                     outlined
                     style="width: 100%"
+                    role="link"
+                    tabindex="0"
+                    :aria-label="`Read: ${article.title}`"
                     @click="gotoArticle(article.slug)"
+                    @keydown.enter="gotoArticle(article.slug)"
                   >
                     <div>
                       {{ formatDate(article.date) }}

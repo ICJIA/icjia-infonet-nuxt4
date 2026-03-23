@@ -53,6 +53,8 @@
         <div
           class="text-center mb-12"
           style="font-size: 14px; margin-top: 15px"
+          role="status"
+          aria-live="polite"
         >
           <span v-if="filteredArticles.length === articles.length"
             >Displaying
@@ -83,7 +85,15 @@
                 height="100%"
                 style="position: relative"
                 class="px-5 py-5 elevation-5 hover info-card"
+                role="link"
+                tabindex="0"
+                :aria-label="`Read: ${article.title} (opens in new window)`"
                 @click.prevent.stop="
+                  article.source === 'hub'
+                    ? gotoArticle(article.slug)
+                    : gotoPublication(article.fileURL)
+                "
+                @keydown.enter="
                   article.source === 'hub'
                     ? gotoArticle(article.slug)
                     : gotoPublication(article.fileURL)

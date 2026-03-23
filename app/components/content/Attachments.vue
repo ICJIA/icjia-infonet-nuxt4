@@ -14,9 +14,9 @@
       >
         <thead>
           <tr>
-            <th class="text-left" style="font-weight: 900">Filename</th>
-            <th class="text-left" style="font-weight: 900">Last Updated</th>
-            <th class="text-left" style="font-weight: 900">Size</th>
+            <th scope="col" class="text-left" style="font-weight: 900">Filename</th>
+            <th scope="col" class="text-left" style="font-weight: 900">Last Updated</th>
+            <th scope="col" class="text-left" style="font-weight: 900">Size</th>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +30,7 @@
                   'https://infonet.icjia-api.cloud' + attachment.attributes.url
                 "
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 {{ attachment.attributes.name.replace(/\.[^/.]+$/, "")
                 }}{{ attachment.attributes.ext }}

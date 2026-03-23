@@ -8,13 +8,32 @@
       2018-2024
     </h2>
     <h3 style="border: none; font-size: 12px">Source: InfoNet System</h3>
-    <div style="min-height: 25vh" class="pt-3 pb-10">
+    <div style="min-height: 25vh" class="pt-3 pb-10" role="img" aria-label="Bar chart showing domestic and sexual violence victims who received services in Illinois from 2018 to 2024">
       <Bar
         :data="chartData"
         :options="chartOptions"
-        aria-label="Bar chart showing domestic and sexual violence victims who received services in Illinois from 2018 to 2024. Data shows: 2018: 70,133; 2019: 72,905; 2020: 60,717; 2021: 61,857; 2022: 61,259; 2023: 63,211; 2024: 63,557 victims."
+        aria-hidden="true"
       />
     </div>
+    <!-- Screen reader accessible data table (visually hidden) -->
+    <table class="sr-only-table">
+      <caption>Domestic and Sexual Violence Victims Who Received Services, 2018-2024</caption>
+      <thead>
+        <tr>
+          <th scope="col">Year</th>
+          <th scope="col">Victims who received services</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>2018</td><td>70,133</td></tr>
+        <tr><td>2019</td><td>72,905</td></tr>
+        <tr><td>2020</td><td>60,717</td></tr>
+        <tr><td>2021</td><td>61,857</td></tr>
+        <tr><td>2022</td><td>61,259</td></tr>
+        <tr><td>2023</td><td>63,211</td></tr>
+        <tr><td>2024</td><td>63,557</td></tr>
+      </tbody>
+    </table>
     <div class="text-center">
       <v-btn
         size="small"

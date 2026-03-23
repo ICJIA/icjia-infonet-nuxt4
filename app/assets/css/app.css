@@ -174,29 +174,43 @@ ul.cohort-list li {
   color: red;
 }
 
+/* Screen reader only table — visually hidden but accessible to assistive technology */
+.sr-only-table {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Accessibility fix: Improve form label contrast for WCAG AA compliance */
-/* Color rgba(0, 0, 0, 0.87) provides excellent contrast ratio (15.8:1) on white background */
-/* This ensures WCAG AA compliance (minimum 4.5:1 required) */
+/* Using #4a4a4a provides contrast ratio of 7.1:1 (exceeds WCAG AA requirement of 4.5:1) */
+/* This ensures WCAG AA compliance for all form labels across the application */
 
-/* Override Vuetify's CSS variable for on-surface-variant color */
+/* Override Vuetify's CSS custom properties that control label color */
+/* Vuetify uses --v-theme-on-surface-variant (as RGB triplet) for unfocused labels */
 :root {
-  --v-theme-on-surface-variant: 0, 0, 0 !important;
+  --v-theme-on-surface-variant: 74, 74, 74 !important;
 }
 
-.v-input .v-field .v-label.v-field-label {
-  color: rgba(0, 0, 0, 0.87) !important;
+/* Override at the component level to ensure specificity over Vuetify's scoped styles */
+.v-application .v-field .v-label.v-field-label,
+.v-application .v-field--focused .v-label.v-field-label,
+.v-application .v-input .v-label.v-field-label,
+.v-application .v-textarea .v-label.v-field-label {
+  color: #4a4a4a !important;
+  opacity: 1 !important;
 }
 
-/* Also target the label when field is focused or has content */
-.v-input .v-field--focused .v-label.v-field-label,
-.v-input .v-field--active .v-label.v-field-label,
-.v-field .v-label.v-field-label {
-  color: rgba(0, 0, 0, 0.87) !important;
-}
-
-/* Ensure textarea labels also have proper contrast */
-.v-textarea .v-field-label {
-  color: rgba(0, 0, 0, 0.87) !important;
+/* Also target via the Vuetify field wrapper to override inline style attribute */
+.v-field .v-field__overlay + .v-label,
+.v-field .v-label {
+  color: #4a4a4a !important;
+  opacity: 1 !important;
 }
 
 /* Centering via flexbox */

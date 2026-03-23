@@ -69,20 +69,32 @@
                         tab.attributes.images.data
                       )"
                       :key="`images-${index}`"
+                      role="button"
+                      tabindex="0"
+                      :aria-label="`View screenshot: ${image.attributes?.caption || image.attributes?.name || 'Screenshot image'}`"
                       @click="
-                        image?.attributes?.formats?.large
-                          ? openGalleryModal({
-                              url: `${image.attributes.url}`,
-                              caption: image.attributes?.caption || null,
-                              thumbnail: image.attributes.formats.thumbnail.url,
-                              filename: image.attributes.name,
-                            })
-                          : openGalleryModal({
-                              url: `${image.attributes.url}`,
-                              caption: image.attributes?.caption || null,
-                              thumbnail: image.attributes.formats.thumbnail.url,
-                              filename: image.attributes.name,
-                            })
+                        openGalleryModal({
+                          url: `${image.attributes.url}`,
+                          caption: image.attributes?.caption || null,
+                          thumbnail: image.attributes.formats.thumbnail.url,
+                          filename: image.attributes.name,
+                        })
+                      "
+                      @keydown.enter="
+                        openGalleryModal({
+                          url: `${image.attributes.url}`,
+                          caption: image.attributes?.caption || null,
+                          thumbnail: image.attributes.formats.thumbnail.url,
+                          filename: image.attributes.name,
+                        })
+                      "
+                      @keydown.space.prevent="
+                        openGalleryModal({
+                          url: `${image.attributes.url}`,
+                          caption: image.attributes?.caption || null,
+                          thumbnail: image.attributes.formats.thumbnail.url,
+                          filename: image.attributes.name,
+                        })
                       "
                     >
                       <!-- {{
@@ -94,9 +106,8 @@
                           getImageURL(image.attributes.formats.thumbnail.url)
                         "
                         :alt="
-                          image.attributes?.caption ||
                           image.attributes?.alternativeText ||
-                          'Screenshot image'
+                          `Screenshot: ${image.attributes?.caption || image.attributes?.name || 'application view'}`
                         "
                         ><template v-slot:placeholder>
                           <div
@@ -105,6 +116,7 @@
                             <v-progress-circular
                               color="grey-lighten-4"
                               indeterminate
+                              aria-label="Loading image"
                             ></v-progress-circular>
                           </div> </template
                       ></v-img>

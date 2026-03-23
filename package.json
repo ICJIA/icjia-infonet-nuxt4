@@ -1,14 +1,15 @@
 {
+  "version": "2.1.0",
   "private": true,
   "scripts": {
-    "build": "yarn clear:cache && yarn scripts && yarn create:a11y-summary && nuxt build",
-    "build:serve": "rm -rf .nuxt && npm run scripts && yarn create:a11y-summary && nuxt build && node .output/server/index.mjs ",
-    "dev": "kill-port 8000 && yarn clear:cache && yarn scripts && yarn create:a11y-summary && nuxt dev --port=8000 -o",
-    "dev:local": "kill-port 8000 && yarn scripts:local && yarn create:a11y-summary && nuxt dev --port=8000 -o",
-    "generate:local": "yarn scripts:local && yarn create:a11y-summary && nuxt generate",
-    "generate": "yarn clear:cache && yarn scripts && yarn create:a11y-summary && nuxt generate",
-    "generate:serve": "yarn clear:cache && yarn scripts && yarn create:a11y-summary && nuxt generate && serve ./dist",
-    "generate:local:serve": "yarn clear:cache && yarn scripts:local && yarn create:a11y-summary && nuxt generate && serve ./dist",
+    "build": "yarn clear:cache && yarn scripts && nuxt build",
+    "build:serve": "rm -rf .nuxt && npm run scripts && nuxt build && node .output/server/index.mjs ",
+    "dev": "kill-port 8000 && yarn clear:cache && yarn scripts && nuxt dev --port=8000 -o",
+    "dev:local": "kill-port 8000 && yarn scripts:local && nuxt dev --port=8000 -o",
+    "generate:local": "yarn scripts:local && nuxt generate",
+    "generate": "yarn clear:cache && yarn scripts && nuxt generate",
+    "generate:serve": "yarn clear:cache && yarn scripts && nuxt generate && serve ./dist",
+    "generate:local:serve": "yarn clear:cache && yarn scripts:local && nuxt generate && serve ./dist",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore . --fix",
@@ -30,13 +31,12 @@
     "create:local": "yarn clear:cache && node ./creators/createLocalMeta.mjs",
     "create:sitemap": "node ./creators/createSitemap.mjs",
     "create:jsdoc": "node ./creators/generateJsdoc.js",
-    "create:a11y-summary": "node ./creators/renderAccessibilitySummary.js",
     "scripts:local": "yarn create:local",
-    "scripts": "yarn create:contentDirectory && yarn create:pages &&  yarn create:publistPublications && yarn create:tabs && yarn create:faqs && yarn create:hub && yarn create:hubImages && yarn create:news && yarn create:mergedPublications && yarn create:searchIndex && yarn create:sitemap && yarn create:routes && yarn create:jsdoc && yarn create:a11y-summary",
+    "scripts": "yarn create:contentDirectory && yarn create:pages &&  yarn create:publistPublications && yarn create:tabs && yarn create:faqs && yarn create:hub && yarn create:hubImages && yarn create:news && yarn create:mergedPublications && yarn create:searchIndex && yarn create:sitemap && yarn create:routes && yarn create:jsdoc",
     "clear:cache": "rm -rf .nuxt .output",
     "prestart": "source $HOME/.nvm/nvm.sh; nvm use",
-    "audit:a11y": "node scripts/accessibility-audit.mjs",
-    "audit:a11y:report": "node scripts/open-a11y-report.mjs"
+    "audit:a11y": "node scripts/axe-audit.js",
+    "audit:errors": "node scripts/audit-errors.js"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
@@ -52,7 +52,8 @@
     "jsdoc-vuejs": "^4.0.0",
     "material-design-icons-iconfont": "^6.7.0",
     "nuxt": "^4.1.0",
-    "playwright": "^1.56.1"
+    "playwright": "^1.56.1",
+    "xml2js": "^0.6.2"
   },
   "resolutions": {
     "string-width": "4.2.3"

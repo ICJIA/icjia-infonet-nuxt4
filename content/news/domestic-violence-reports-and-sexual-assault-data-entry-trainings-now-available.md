@@ -10,7 +10,7 @@ summary: "ICJIA released two new comprehensive training series designed to help
   InfoNet users maximize the system’s data entry and reporting features.   "
 section: news
 createdAt: 2025-09-16T20:50:28.805Z
-updatedAt: 2025-09-16T21:36:17.241Z
+updatedAt: 2026-03-23T14:20:33.206Z
 publishedAt: 2025-09-16T21:20:24.065Z
 searchMeta: "news "
 splash:
@@ -23,7 +23,7 @@ markdown: >+
   users maximize the system’s data entry and reporting features. 
 
 
-  #### Domestic Violence Reports Training Series 
+  ## Domestic Violence Reports Training Series 
 
   This training series describes the purpose of each report type and
   demonstrates how to run them. Users will learn:
@@ -49,7 +49,7 @@ markdown: >+
   **View the Domestic Violence Data Reports Training Series here:**
    https://www.youtube.com/playlist?list=PL4n4n7ZvbgEMiudeOHONV0PLYZrfoLJbC
 
-  #### Sexual Assault Data Entry Training Series
+  ## Sexual Assault Data Entry Training Series
 
   This training series demonstrates how to enter and manage sexual assault
   client and service data in InfoNet. Users will learn:
@@ -115,7 +115,7 @@ url: https://infonet.icjia.dev/news/domestic-violence-reports-and-sexual-assault
 
 ICJIA released two new comprehensive training series designed to help InfoNet users maximize the system’s data entry and reporting features. 
 
-#### Domestic Violence Reports Training Series 
+## Domestic Violence Reports Training Series 
 This training series describes the purpose of each report type and demonstrates how to run them. Users will learn:
 - How to generate standard reports that show aggregate data on client information, services/programs, and client interactions with medical and/or legal/criminal justice systems, including with application of data filters.
 - How to run management reports that show record and aggregate level data on clients, staff and services, and orders of protection.
@@ -126,7 +126,7 @@ This training series describes the purpose of each report type and demonstrates 
 **View the Domestic Violence Data Reports Training Series here:**
  https://www.youtube.com/playlist?list=PL4n4n7ZvbgEMiudeOHONV0PLYZrfoLJbC
 
-#### Sexual Assault Data Entry Training Series
+## Sexual Assault Data Entry Training Series
 This training series demonstrates how to enter and manage sexual assault client and service data in InfoNet. Users will learn:
 - How to enter data on client intake, person(s) who caused harm, and client interactions with medical and/or legal/criminal justice systems.
 - How to add client update records to document changing client circumstances over time while engaged in services.

@@ -1,6 +1,7 @@
 /**
  * AOS (Animate On Scroll) Plugin
  * Initializes AOS library for scroll-triggered animations
+ * Respects prefers-reduced-motion for accessibility
  * @module plugins/aos
  * @see {@link https://michalsnik.github.io/aos/|AOS Documentation}
  */
@@ -12,6 +13,7 @@ import "aos/dist/aos.css";
 /**
  * Initialize AOS plugin for Nuxt
  * Enables scroll-triggered animations on page elements
+ * Disables animations when user prefers reduced motion
  * @function aosPlugin
  * @param {Object} nuxtApp - Nuxt application instance
  * @returns {void}
@@ -22,8 +24,13 @@ import "aos/dist/aos.css";
  */
 export default defineNuxtPlugin((nuxtApp) => {
   if (typeof window !== "undefined") {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     nuxtApp.AOS = AOS.init({
       once: false,
+      disable: prefersReducedMotion,
     });
   }
 });
