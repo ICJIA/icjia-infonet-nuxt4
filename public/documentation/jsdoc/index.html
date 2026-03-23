@@ -106,7 +106,10 @@
     <section>
         <article><p><a href="https://app.netlify.com/sites/icjia-infonet/deploys"><img src="https://api.netlify.com/api/v1/badges/f9b9ef26-d98b-4df5-8d10-77c1a2b72189/deploy-status" alt="Netlify Status"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></p>
 <h1>InfoNet</h1>
-<p>InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois. The system is nationally recognized for facilitating standardized data collection and reporting at the statewide level. Initial development of InfoNet began in the mid-90s as a collaborative effort between the Illinois Criminal Justice Information Authority, the Illinois Coalition Against Sexual Assault, and the Illinois Coalition Against Domestic Violence. Since then, InfoNet has grown to include partnerships with the Illinois Department of Human Services and the Children’s Advocacy Centers of Illinois.</p>
+<blockquote>
+<p><strong>Version 2.1.0</strong> | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant</p>
+</blockquote>
+<p>InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois. The system is nationally recognized for facilitating standardized data collection and reporting at the statewide level. Initial development of InfoNet began in the mid-90s as a collaborative effort between the Illinois Criminal Justice Information Authority, the Illinois Coalition Against Sexual Assault, and the Illinois Coalition Against Domestic Violence. Since then, InfoNet has grown to include partnerships with the Illinois Department of Human Services and the Children's Advocacy Centers of Illinois.</p>
 <p>The primary purposes of InfoNet are to:</p>
 <ul>
 <li>
@@ -121,6 +124,17 @@
 </ul>
 <h2>Site</h2>
 <p>https://infonet.icjia.illinois.gov</p>
+<h2>Tech Stack</h2>
+<ul>
+<li><strong>Framework:</strong> Nuxt 4.1.0 (Vue 3)</li>
+<li><strong>UI Library:</strong> Vuetify 3</li>
+<li><strong>CMS:</strong> Strapi 3 (headless)</li>
+<li><strong>Search:</strong> Fuse.js (client-side fuzzy search)</li>
+<li><strong>Charts:</strong> Chart.js / vue-chartjs</li>
+<li><strong>Deployment:</strong> Netlify (static site generation)</li>
+<li><strong>Analytics:</strong> Plausible</li>
+<li><strong>Node.js:</strong> 20.x (see <code>.nvmrc</code>)</li>
+</ul>
 <h2>Install</h2>
 <pre class="prettyprint source lang-bash"><code>git clone https://github.com/ICJIA/icjia-infonet-nuxt3.git
 cd icjia-infonet-nuxt3
@@ -150,184 +164,63 @@ nvm use
 <h2>Manually run build scripts for a local API (i.e., no backend -- all local data)</h2>
 <pre class="prettyprint source lang-bash"><code>yarn scripts:local
 </code></pre>
-<h2>Developer Documentation Portal</h2>
-<p>This project includes a comprehensive developer documentation portal that provides centralized access to technical documentation, accessibility reports, and development resources.</p>
-<h3>Access the Portal</h3>
-<p>When running the development server:</p>
-<pre class="prettyprint source lang-bash"><code>yarn dev
-# Navigate to: http://localhost:8000/documentation/
-</code></pre>
-<p>The portal includes:</p>
-<ul>
-<li><strong>Accessibility Reports</strong> - Automated WCAG 2.1 Level AA compliance testing</li>
-<li><strong>API Documentation</strong> - Coming soon</li>
-<li><strong>Testing Documentation</strong> - Coming soon</li>
-<li><strong>Deployment Guide</strong> - Coming soon</li>
-</ul>
-<h3>Portal Features</h3>
-<ul>
-<li>✅ Modern, accessible design (WCAG 2.1 Level AA compliant)</li>
-<li>✅ Responsive layout for all devices</li>
-<li>✅ Dynamic links to latest accessibility reports</li>
-<li>✅ Automated report generation and updates</li>
-<li>✅ Professional presentation for developers and stakeholders</li>
-</ul>
-<p>For detailed information about the portal setup, see <a href="./DOCUMENTATION_PORTAL_SETUP.md">DOCUMENTATION_PORTAL_SETUP.md</a>.</p>
-<h2>Accessibility Auditing</h2>
-<p>This project includes comprehensive accessibility testing using axe-core and Playwright.</p>
-<h3>Run Accessibility Audit</h3>
-<pre class="prettyprint source lang-bash"><code># Make sure dev server is running first
-yarn dev
-
-# In another terminal, run the audit
-npm run audit:a11y
-</code></pre>
-<h3>View Audit Reports</h3>
-<p><strong>Option 1: Developer Documentation Portal (Recommended)</strong></p>
-<pre class="prettyprint source lang-bash"><code># Navigate to the portal in your browser
-http://localhost:8000/documentation/
-</code></pre>
-<p><strong>Option 2: Direct Report Access</strong></p>
-<pre class="prettyprint source lang-bash"><code># Open the latest HTML report directly
-npm run audit:a11y:report
-</code></pre>
-<h3>Reports Location</h3>
-<p>All accessibility reports are saved in <code>public/documentation/accessibility-reports/</code>:</p>
-<ul>
-<li><code>accessibility-report-latest.html</code> - Interactive HTML report</li>
-<li><code>accessibility-report-latest.json</code> - Machine-readable JSON data</li>
-<li><code>accessibility-report-[timestamp].html</code> - Historical reports</li>
-</ul>
-<h3>Accessibility Status</h3>
-<p>✅ <strong>0 Critical Violations</strong> (100% resolution)
-⚠️ <strong>2 Serious Violations</strong> (color contrast, iframe title)
-⚠️ <strong>4 Moderate Violations</strong> (heading order)
-ℹ️ <strong>175 Minor Violations</strong> (ARIA role usage)</p>
-<p><strong>Total Pages Tested:</strong> 175 routes
-<strong>Testing Tools:</strong> axe-core 4.10.3 + Playwright 1.56.1
-<strong>Standard:</strong> WCAG 2.1 Level AA</p>
-<p>Recent improvements:</p>
-<ul>
-<li>Semantic HTML navigation with WAI-ARIA accordion pattern</li>
-<li>Full keyboard accessibility with proper focus management</li>
-<li>Screen reader compatible with proper ARIA attributes</li>
-<li>Icon-only buttons with accessible names</li>
-<li>All images with descriptive alt text</li>
-<li>Proper landmark regions on all pages</li>
-<li>Correct heading hierarchy</li>
-</ul>
-<p>For detailed information about accessibility testing and improvements, see:</p>
-<ul>
-<li><a href="http://infonet.icjia.illinois.gov/documentation/">Developer Documentation Portal</a> - View latest reports</li>
-<li><a href="./DOCUMENTATION_PORTAL_SETUP.md">Documentation Portal Setup</a> - Portal configuration</li>
-<li><a href="./ACCESSIBILITY_COMPLETE_SUMMARY.md">Complete Accessibility Summary</a> - Overview of all fixes</li>
-<li><a href="./FRESH_AUDIT_WITH_SERVER_SUMMARY.md">Fresh Audit Summary</a> - Latest audit results</li>
-<li><a href="./SIDEBAR_REFACTOR_SUMMARY.md">Sidebar Refactor Summary</a> - Technical details of navigation refactor</li>
-<li><a href="./ACCESSIBILITY_TABS_FIX_GUIDE.md">Tabs Accessibility Fix Guide</a> - Universal guide for fixing WCAG AA text clipping in tabs</li>
-</ul>
-<h3>Tabs Component Accessibility Fix</h3>
-<p><strong>Problem:</strong> The tabs component on the <code>/resources</code> page was failing Siteimprove accessibility scans with text clipping violations at 200% zoom, violating WCAG 2.1 Level AA criteria (1.4.4 Resize Text, 1.4.10 Reflow).</p>
-<p><strong>Root Cause:</strong> Vuetify's <code>&lt;v-tabs&gt;</code> component uses CSS properties that cause text clipping:</p>
-<ul>
-<li><code>overflow: hidden</code> - Clips content outside container bounds</li>
-<li>Fixed heights (<code>height: 48px</code>) - Prevents vertical expansion</li>
-<li><code>white-space: nowrap</code> - Prevents text wrapping</li>
-<li><code>flex-shrink: 1</code> - Allows tabs to compress</li>
-</ul>
-<p><strong>Solution:</strong> Replaced Vuetify tabs with a custom accessible component using vanilla HTML + ARIA:</p>
-<p><strong>Components Created:</strong></p>
-<ul>
-<li><code>app/components/content/TabsUserInfoAccessible.vue</code> (for <code>/resources</code> page)</li>
-<li><code>app/components/content/TabsScreenshotsAccessible.vue</code> (for <code>/screenshots</code> page)</li>
-</ul>
-<p>⚠️ <strong>CRITICAL:</strong> Creating the component is only half the work! You must also update any Nuxt Content markdown files that reference the old component:</p>
-<p><strong>Content Files Updated:</strong></p>
-<ul>
-<li><code>content/resources.md</code> - Changed <code>::Tabs</code> to <code>::TabsUserInfoAccessible</code></li>
-<li><code>content/screenshots.md</code> - Changed <code>::Tabs</code> to <code>::TabsScreenshotsAccessible</code></li>
-</ul>
-<p><strong>Key Features:</strong></p>
-<ul>
-<li>✅ <strong>Vanilla HTML</strong> - Uses <code>&lt;div&gt;</code> and <code>&lt;button&gt;</code> with ARIA roles (no Vuetify components)</li>
-<li>✅ <strong>Complete ARIA</strong> - Full WAI-ARIA tabs pattern (<code>role=&quot;tablist&quot;</code>, <code>role=&quot;tab&quot;</code>, <code>role=&quot;tabpanel&quot;</code>)</li>
-<li>✅ <strong>Anti-Clipping CSS</strong> - Six critical properties prevent text clipping:<pre class="prettyprint source lang-css"><code>overflow: visible; /* Prevent clipping */
-max-height: none; /* No height restriction */
-height: auto; /* Flexible height */
-white-space: normal; /* Allow text wrapping */
-word-wrap: break-word; /* Break long words */
-flex-shrink: 0; /* Prevent compression */
-</code></pre>
-</li>
-<li>✅ <strong>Keyboard Navigation</strong> - Arrow keys, Home, End with automatic activation</li>
-<li>✅ <strong>Focus Management</strong> - Proper <code>tabindex</code> and focus indicators</li>
-<li>✅ <strong>Zero Dependencies</strong> - No Vuetify imports or utilities</li>
-<li>✅ <strong>AA Compliant</strong> - Passes WCAG 2.1 Level AA at 200% zoom</li>
-</ul>
-<p><strong>Testing:</strong></p>
-<ul>
-<li>✅ Passes Siteimprove accessibility scan</li>
-<li>✅ No text clipping at 200% zoom</li>
-<li>✅ Full keyboard navigation support</li>
-<li>✅ Screen reader compatible</li>
-<li>✅ Responsive design (mobile/desktop)</li>
-</ul>
-<p><strong>For Developers:</strong></p>
-<p>This fix demonstrates a universal pattern for resolving text clipping issues in UI framework tab components. The solution is framework-agnostic and can be adapted for:</p>
-<ul>
-<li>React (Material-UI, Ant Design, Chakra UI)</li>
-<li>Angular (Angular Material)</li>
-<li>Vue (Element Plus, Quasar)</li>
-<li>Bootstrap tabs</li>
-</ul>
-<p>⚠️ <strong>Important:</strong> When implementing this fix, remember to update BOTH:</p>
-<ol>
-<li><strong>The component itself</strong> - Create accessible component with vanilla HTML + ARIA</li>
-<li><strong>All content files that use it</strong> - Update markdown files, templates, CMS content, etc.</li>
-</ol>
-<p>See <a href="./ACCESSIBILITY_TABS_FIX_GUIDE.md">ACCESSIBILITY_TABS_FIX_GUIDE.md</a> for:</p>
-<ul>
-<li>Complete technical explanation</li>
-<li>Framework-agnostic HTML/CSS/JS templates</li>
-<li>React and Angular implementation examples</li>
-<li><strong>Step-by-step guide for updating content files</strong> (Step 7)</li>
-<li><strong>Common pitfall: Forgetting to update content files</strong> (Pitfall #3)</li>
-<li>Comprehensive testing checklist</li>
-<li>Common pitfalls and solutions</li>
-<li>Decision tree for troubleshooting</li>
-</ul>
-<p><strong>Test Page:</strong> Visit <code>/sandbox</code> to see the accessible tabs component in action with verification checklist.</p>
 <h2>Production</h2>
 <p>Build the application for production:</p>
 <pre class="prettyprint source lang-bash"><code>yarn generate
 </code></pre>
 <p><em>Netlify will automatically deploy the live site when changes are pushed to the master branch.</em></p>
-<h2>Nuxt 4 Migration</h2>
-<p>✅ <strong>This project has been successfully migrated from Nuxt 3.13.2 to Nuxt 4.1.0</strong></p>
-<p>The migration includes:</p>
+<h2>Accessibility</h2>
+<p>This project has been audited for WCAG 2.1 Level AA compliance using axe-core with Playwright across all 177 site routes.</p>
+<h3>Current Status</h3>
+<p><strong>177 / 177 pages pass with zero axe-core violations.</strong></p>
 <ul>
-<li><strong>Nuxt 4.1.0</strong> with Nitro 2.x and Vite 7.x</li>
-<li><strong>Recommended <code>/app</code> directory structure</strong> for better code organization</li>
-<li><strong>Node.js 20.x</strong> requirement (updated from 18.x)</li>
-<li><strong>Static site generation (SSG)</strong> with prerendered API routes</li>
-<li><strong>All routes successfully prerendering</strong> with no console errors</li>
+<li><strong>Testing tools:</strong> axe-core 4.10 + Playwright 1.56</li>
+<li><strong>Standard:</strong> WCAG 2.1 Level AA + Section 508 + best practices</li>
+<li><strong>Last full audit:</strong> March 23, 2026</li>
 </ul>
+<h3>Run Accessibility Audit</h3>
+<pre class="prettyprint source lang-bash"><code># Make sure dev server is running first
+yarn dev
+
+# In another terminal, run the full audit (all 177 pages)
+node scripts/full-axe-audit.js
+</code></pre>
+<p>Results are saved to <code>scripts/axe-audit-results.json</code>.</p>
+<h3>Accessibility Features</h3>
+<ul>
+<li>Skip links with high-contrast mode and reduced-motion support</li>
+<li>Focus management on SPA route changes</li>
+<li>Full keyboard navigation on all interactive elements</li>
+<li>Proper ARIA tab patterns (custom accessible components replacing Vuetify tabs)</li>
+<li>Focus trap and Escape key handling on all modals</li>
+<li><code>aria-live</code> regions for dynamic content (search results, filter counts, form success)</li>
+<li><code>autocomplete</code> attributes on contact form fields</li>
+<li><code>prefers-reduced-motion</code> respected (AOS animations disabled)</li>
+<li>Visually-hidden data table fallback for chart data</li>
+<li><code>rel=&quot;noopener noreferrer&quot;</code> on all external links</li>
+<li>Proper heading hierarchy across all pages</li>
+<li>Descriptive alt text on all images</li>
+<li><code>scope=&quot;col&quot;</code> on data table headers</li>
+</ul>
+<h3>Accessible Tab Components</h3>
+<p>Vuetify's <code>&lt;v-tabs&gt;</code> caused text clipping at 200% zoom (WCAG 1.4.4 / 1.4.10 violation). Two custom accessible components replace them:</p>
+<ul>
+<li><code>app/components/content/TabsUserInfoAccessible.vue</code> — for <code>/resources</code> page</li>
+<li><code>app/components/content/TabsScreenshotsAccessible.vue</code> — for <code>/screenshots</code> page</li>
+</ul>
+<p>These use vanilla HTML + WAI-ARIA tab pattern with full keyboard navigation (Arrow keys, Home, End), proper <code>tabindex</code> management, and zero Vuetify dependencies.</p>
+<h2>Nuxt 4 Migration</h2>
+<p>This project was migrated from Nuxt 3.13.2 to Nuxt 4.1.0 in October 2025.</p>
 <h3>Key Changes</h3>
 <ul>
-<li>Application code moved to <code>/app</code> directory (components, pages, plugins, assets, etc.)</li>
-<li>Path aliases: <code>@/</code> or <code>~/</code> → <code>/app</code>, <code>@@/</code> or <code>~~/</code> → project root</li>
+<li>Application code in <code>/app</code> directory (components, pages, plugins, assets, etc.)</li>
+<li>Path aliases: <code>@/</code> or <code>~/</code> point to <code>/app</code>, <code>@@/</code> or <code>~~/</code> point to project root</li>
 <li>API routes prerendered as static JSON files for SSG compatibility</li>
 <li>Async data handling with optional chaining to prevent undefined errors during navigation</li>
+<li>Node.js 20.x requirement</li>
 </ul>
-<h3>For Developers</h3>
-<p>For detailed information about the migration process, including lessons learned and troubleshooting guides, see <a href="./MIGRATION.md">MIGRATION.md</a>.</p>
-<p>This guide is designed to be reusable for any Nuxt 3 to Nuxt 4 migration project and includes:</p>
-<ul>
-<li>Step-by-step migration phases</li>
-<li>Common issues and solutions</li>
-<li>Testing procedures</li>
-<li>Rollback procedures</li>
-<li>Best practices and lessons learned</li>
-</ul></article>
+<h2>Changelog</h2>
+<p>See <a href="./CHANGELOG.md">CHANGELOG.md</a> for a detailed version history.</p></article>
     </section>
 
 
