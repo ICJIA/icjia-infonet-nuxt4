@@ -117,16 +117,16 @@
       </div>
 
       <v-spacer></v-spacer>
-      <span v-if="isMounted">
+      <span v-if="isMounted" style="display: inline-flex; align-items: center;">
         <span
           v-for="(menu, index) in navMenu"
           :key="`main-${index}`"
           style="
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             font-weight: 900 !important;
             font-size: 18px;
             font-family: 'Roboto', sans-serif !important;
-            font-weight: 900;
           "
         >
           <span v-if="menu && menu?.children">
@@ -184,7 +184,7 @@
               </v-list>
             </v-menu>
           </span>
-          <span v-else class="d-flex">
+          <span v-else>
             <v-btn
               :to="menu?.external ? null : menu?.link"
               :href="menu?.external ? menu.link : null"
@@ -195,7 +195,6 @@
               class="hidden-sm-and-down navItem"
               style="
                 font-weight: 900 !important;
-                font-size: 16px;
                 font-family: 'Roboto', sans-serif !important;
               "
               >{{ menu.main }}&nbsp;
@@ -323,5 +322,15 @@ const items = ref([
 .navItem {
   color: #333 !important;
   font-weight: 900;
+}
+
+</style>
+
+<style>
+/* Unscoped: force all nav buttons to align text to same baseline */
+.v-toolbar .navItem .v-btn__content {
+  min-height: 30px !important;
+  display: inline-flex !important;
+  align-items: center !important;
 }
 </style>

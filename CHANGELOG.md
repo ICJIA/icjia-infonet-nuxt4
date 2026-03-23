@@ -2,6 +2,12 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.1.1] - 2026-03-23
+
+### UI fix
+
+- Fix vertical alignment of top navigation menu items — "News & Updates" text baseline now matches "About" and "Resources" by enforcing consistent `min-height: 30px` on `.v-btn__content` inside nav items
+
 ## [2.1.0] - 2026-03-23
 
 ### Accessibility - Deep audit and runtime fixes
