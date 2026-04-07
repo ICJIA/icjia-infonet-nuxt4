@@ -81,10 +81,7 @@
             </h2>
           </div>
           <div style="margin-top: -25px" class="py-5 pl-2 pr-5 text-left">
-            <ContentDoc :key="data?.title" :value="data" class="markdown-body">
-              <template #empty>Document not found</template>
-              <template #not-found>Document not found</template>
-            </ContentDoc>
+            <ContentRenderer :value="data" class="markdown-body" />
             <div class="text-center mt-4">
               <v-btn
                 size="small"
