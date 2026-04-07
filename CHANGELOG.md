@@ -4,9 +4,10 @@ All notable changes to the ICJIA InfoNet website are documented in this file.
 
 ## [2.2.1] - 2026-04-07
 
-### Bug fix
+### Bug fixes
 
 - Fix home page rendering raw JSON instead of content — replace `<ContentDoc>` with `<ContentRenderer>` to resolve SSR hydration mismatch after removing `isMounted` guard
+- Remove `ThePageLoader` gear animation from home page — no longer needed since content renders immediately via SSR; was stacking on top of visible content
 
 ## [2.2.0] - 2026-04-07
 

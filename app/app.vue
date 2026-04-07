@@ -7,7 +7,6 @@
     <LazyTextModal></LazyTextModal>
     <TheNav></TheNav>
 
-    <ThePageLoader v-if="!isMounted && hideBreadcrumbs"> </ThePageLoader>
     <TheSidebar></TheSidebar>
 
     <NuxtLoadingIndicator color="blue" />
