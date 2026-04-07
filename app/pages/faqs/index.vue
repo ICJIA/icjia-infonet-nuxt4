@@ -73,7 +73,7 @@
 
 <script setup>
 const showTOC = ref(true);
-const cols = ref(12);
+const cols = ref(9);
 let sections = ref([]);
 let myToc = [];
 let myTocObj = {};
@@ -87,7 +87,6 @@ const { data } = await useAsyncData(`faqs-${path}`, async () => {
 
 onMounted(() => {
   showTOC.value = true;
-  cols.value = 9;
   //console.log("showTOC", showTOC.value);
   sections = Array.from(document.querySelectorAll("h2"));
   myToc = sections.map((section) => {

@@ -80,6 +80,10 @@ export default defineNuxtConfig({
         },
         {
           rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Raleway:wght@100;300;400;700;900&family=Roboto:wght@100;400;700;900&display=swap",
+        },
+        {
+          rel: "stylesheet",
           href: "https://fonts.googleapis.com/css?family=Material+Icons",
         },
       ],
@@ -88,6 +92,7 @@ export default defineNuxtConfig({
         {
           src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js",
           type: "text/javascript",
+          defer: true,
         },
         {
           src: "https://plausible.icjia.cloud/js/script.js",

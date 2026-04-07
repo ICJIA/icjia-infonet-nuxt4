@@ -8,7 +8,6 @@
         background: #f2f2f2;
         z-index: 1000;
       "
-      v-if="isMounted"
     >
       <v-row style="" v-if="data">
         <v-col cols="12" md="6" class="text-center">
@@ -108,14 +107,13 @@
       ></v-row>
     </v-container>
 
-    <HomeBoxes v-if="isMounted"></HomeBoxes>
+    <HomeBoxes></HomeBoxes>
 
     <!-- ---------------------------------------- start text section -->
 
     <v-container
       fluid
       style="background: #f2f2f2; z-index: 1000"
-      v-if="isMounted"
     >
       <v-row
         ><v-col cols="12" md="6" style="margin-top: -20px">

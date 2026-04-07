@@ -18,21 +18,20 @@
       tag="div"
     >
       <main id="main-content" tabindex="-1">
-        <TheBreadcrumbBar v-if="!hideBreadcrumbs"></TheBreadcrumbBar>
+        <TheBreadcrumbBar v-show="!hideBreadcrumbs"></TheBreadcrumbBar>
         <NuxtLayout>
           <NuxtPage></NuxtPage>
         </NuxtLayout>
       </main>
     </v-main>
 
-    <TheContextFooter v-if="isMounted && !mobile"></TheContextFooter>
+    <TheContextFooter v-if="!mobile"></TheContextFooter>
     <TheFooter></TheFooter>
   </v-app>
 </template>
 
 <script setup>
 import { useDisplay } from "vuetify";
-import { is } from "@babel/types";
 
 const { mobile } = useDisplay();
 

@@ -2,6 +2,24 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.2.0] - 2026-04-07
+
+### Performance, SEO, and Lighthouse optimization
+
+- Add `public/robots.txt` — fixes SEO audit failure (HTTP 500); all pages now score SEO 100
+- Move Google Fonts from render-blocking CSS `@import` to `<link>` tag in `nuxt.config.js` head
+- Add `defer` to jQuery CDN script to eliminate render-blocking
+- Add `font-display: block` to Material Icons `@font-face` to prevent icon layout shifts
+- Add CSS font fallbacks with `size-adjust` for Raleway and Roboto to minimize CLS during font swap
+- Remove unused Font Awesome icon set imports from Vuetify plugin (only MDI is used)
+- Enable Vuetify `ssr: true` for improved server-side rendering layout hints
+- Replace `v-if="isMounted"` with immediate rendering in TheNav — nav menu now renders from static config without client-side toggle
+- Replace `v-if` with `v-show` for breadcrumb bar to preserve layout space
+- Remove `isMounted` guards from SSR-safe content sections on home page to prevent content pop-in CLS
+- Initialize FAQs page column layout to `cols=9` to prevent reflow from 12→9 on mount
+- Add explicit `width`/`height` attributes to all `<img>` tags (ThePageLoader, TheLoader, TheFooter) to reserve layout space
+- Remove unused `@babel/types` import from `app.vue`
+
 ## [2.1.1] - 2026-03-23
 
 ### UI fix
@@ -13,7 +31,7 @@ All notable changes to the ICJIA InfoNet website are documented in this file.
 ### Accessibility - Deep audit and runtime fixes
 
 - Fix TOC "Navigation" title: changed from `<div role="button">` to proper `<h3>` heading element to resolve axe DevTools heading-markup finding
-- Add visually-hidden data table fallback for HomeBarGraph so screen readers can access all chart data (2018-2024 victim counts)
+- Add visually-hidden data table fallback for HomeBarGraph so screen readers can access all chart data (2then18-2024 victim counts)
 - Add keyboard accessibility to Data & Publications article cards (`role="link"`, `tabindex`, `@keydown.enter`, `aria-label`)
 - Add `aria-live="polite"` and `role="status"` to Data & Publications filter count so screen readers announce filtered results
 - Add `scope="col"` to `<th>` elements in Attachments table for proper screen reader column association

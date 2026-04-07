@@ -59,7 +59,7 @@
             ><span
               style="
                 color: #0d4270;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Raleway', 'Raleway fallback', sans-serif;
                 letter-spacing: 0em;
               "
               >INFONET</span
@@ -72,7 +72,7 @@
                 color: #000;
                 font-size: 26px;
                 letter-spacing: 0px;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Raleway', 'Raleway fallback', sans-serif;
               "
               class="mb-12 hidden-sm-and-down"
               >DATA COLLECTION & REPORTING SYSTEM</span
@@ -84,7 +84,7 @@
             class="headerTitle"
             style="
               color: #0d4270;
-              font-family: 'Raleway', sans-serif;
+              font-family: 'Raleway', 'Raleway fallback', sans-serif;
               letter-spacing: 0em;
             "
             >INFONET |
@@ -94,7 +94,7 @@
                 color: #000;
                 font-size: 26px;
                 letter-spacing: 0px;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Raleway', 'Raleway fallback', sans-serif;
               "
               class="mb-12"
               >Data Collection & Reporting System</span
@@ -117,7 +117,7 @@
       </div>
 
       <v-spacer></v-spacer>
-      <span v-if="isMounted" style="display: inline-flex; align-items: center;">
+      <span style="display: inline-flex; align-items: center;">
         <span
           v-for="(menu, index) in navMenu"
           :key="`main-${index}`"
@@ -259,14 +259,13 @@
         </span>
       </span>
 
-      <span v-else class="text center ml-12"><TheLoader></TheLoader> </span>
+      <!-- loader removed: nav renders immediately from static config -->
     </v-app-bar>
   </header>
 </template>
 
 <script setup>
 const { isTranslationEnabled } = useAppConfig();
-const isMounted = ref(false);
 const nav = useNavToggle();
 const toggleNav = () => {
   nav.value = !nav.value;
@@ -288,10 +287,6 @@ const navMenu = JSON.parse(JSON.stringify(appConfig.navMenu));
 const isExternalUrl = (url) => {
   return true;
 };
-
-onMounted(() => {
-  isMounted.value = true;
-});
 
 const router = useRouter();
 
