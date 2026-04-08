@@ -1,0 +1,28 @@
+# InfoNet
+
+> InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois to facilitate standardized statewide data collection and reporting.
+
+InfoNet is developed and maintained by the Illinois Criminal Justice Information Authority (ICJIA). The system is nationally recognized for facilitating standardized data collection at the statewide level, serving domestic violence, sexual assault, and children's advocacy center programs across Illinois.
+
+## Key Pages
+
+- [About InfoNet](https://infonet.icjia.illinois.gov/about): Overview of the InfoNet system, its history, and partnerships.
+- [Partners](https://infonet.icjia.illinois.gov/partners): Organizations partnering with ICJIA on InfoNet.
+- [Agencies](https://infonet.icjia.illinois.gov/agencies): Agencies using InfoNet for data collection.
+- [FAQs](https://infonet.icjia.illinois.gov/faqs): Frequently asked questions about InfoNet usage and data entry.
+- [News](https://infonet.icjia.illinois.gov/news): News articles, data highlights, and research publications.
+- [Data and Publications](https://infonet.icjia.illinois.gov/data-and-publications): Research reports and data publications using InfoNet data.
+- [Resources](https://infonet.icjia.illinois.gov/resources): Training materials and user resources.
+- [Screenshots](https://infonet.icjia.illinois.gov/screenshots): Application screenshots for DV, SA, and CAC modules.
+- [System Upgrades](https://infonet.icjia.illinois.gov/upgrades): History of InfoNet system upgrades and improvements.
+- [Contact](https://infonet.icjia.illinois.gov/contact): Contact information for InfoNet support.
+- [Privacy Policy](https://infonet.icjia.illinois.gov/privacy): Data privacy and security policies.
+
+## Topics Covered
+
+- Domestic violence victim services data collection
+- Sexual assault victim services data collection
+- Children's advocacy center data collection
+- Victim service provider reporting in Illinois
+- Statewide crime victim data and statistics
+- InfoNet system training and data entry guidance

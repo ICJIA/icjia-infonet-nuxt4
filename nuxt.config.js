@@ -32,12 +32,17 @@ export default defineNuxtConfig({
         {
           hid: "description",
           name: "description",
-          content: "InfoNet",
+          content:
+            "InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois to facilitate standardized statewide data collection.",
+        },
+        {
+          hid: "author",
+          name: "author",
+          content: "Illinois Criminal Justice Information Authority",
         },
         {
           hid: "permissions-policy",
           "http-equiv": "Permissions-Policy",
-
           content: "interest-cohort=()",
         },
         {
@@ -48,7 +53,8 @@ export default defineNuxtConfig({
         {
           hid: "og-desc",
           property: "og:description",
-          content: "InfoNet",
+          content:
+            "InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois to facilitate standardized statewide data collection.",
         },
         {
           hid: "og-type",
@@ -94,9 +100,29 @@ export default defineNuxtConfig({
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css?family=Material+Icons",
         },
+        {
+          rel: "canonical",
+          href: "https://infonet.icjia.illinois.gov",
+        },
       ],
 
       script: [
+        {
+          type: "application/ld+json",
+          innerHTML: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "InfoNet",
+            url: "https://infonet.icjia.illinois.gov",
+            description:
+              "InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois to facilitate standardized statewide data collection.",
+            publisher: {
+              "@type": "Organization",
+              name: "Illinois Criminal Justice Information Authority",
+              url: "https://icjia.illinois.gov",
+            },
+          }),
+        },
         {
           src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js",
           type: "text/javascript",

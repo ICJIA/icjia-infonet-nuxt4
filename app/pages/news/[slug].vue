@@ -91,32 +91,51 @@ const capitalize = (s) => {
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
 
+const publishedDate = data.value.postDate || data.value.publishedAt || data.value.createdAt;
+const modifiedDate = data.value.updatedAt || publishedDate;
+const splashImage = data.value.splash?.data?.attributes?.formats?.medium?.url
+  ? `https://infonet.icjia-api.cloud${data.value.splash.data.attributes.formats.medium.url}`
+  : "https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg";
+
+useSeoMeta({
+  description: desc,
+  ogTitle: data.value.title,
+  ogDescription: desc,
+  ogType: "article",
+  ogImage: splashImage,
+  ogImageWidth: "1200",
+  ogImageHeight: "630",
+  articlePublishedTime: publishedDate,
+  articleModifiedTime: modifiedDate,
+  twitterCard: "summary_large_image",
+  twitterTitle: data.value.title,
+  twitterDescription: desc,
+  twitterImage: splashImage,
+});
+
 useHead({
-  meta: [
+  script: [
     {
-      hid: "og-image",
-      property: "og:image",
-      content: "/infonet-thumbnail-dark.jpg",
-    },
-    {
-      hid: "og-image-width",
-      property: "og:image:width",
-      content: "1200",
-    },
-    {
-      hid: "og-image-height",
-      property: "og:image:height",
-      content: "630",
-    },
-    {
-      hid: "description",
-      name: "description",
-      content: desc,
-    },
-    {
-      hid: "og-desc",
-      property: "og:description",
-      content: desc,
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: data.value.title,
+        description: desc,
+        image: splashImage,
+        datePublished: publishedDate,
+        dateModified: modifiedDate,
+        author: {
+          "@type": "Organization",
+          name: "Illinois Criminal Justice Information Authority",
+          url: "https://icjia.illinois.gov",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Illinois Criminal Justice Information Authority",
+          url: "https://icjia.illinois.gov",
+        },
+      }),
     },
   ],
 });

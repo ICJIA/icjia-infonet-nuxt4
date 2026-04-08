@@ -98,8 +98,22 @@ watchEffect(async () => {
   //   }
   // }
 });
+const siteBase = "https://infonet.icjia.illinois.gov";
+const defaultDescription =
+  "InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois to facilitate standardized statewide data collection.";
+const defaultImage = `${siteBase}/infonet-thumbnail-dark.jpg`;
+
+useSeoMeta({
+  ogUrl: `${siteBase}${route.path}`,
+  ogImageWidth: "1200",
+  ogImageHeight: "630",
+  twitterCard: "summary_large_image",
+  twitterTitle: "InfoNet",
+  twitterDescription: defaultDescription,
+  twitterImage: defaultImage,
+});
+
 useHead({
-  meta: [{ name: "og:url", content: routePath }],
   htmlAttrs: {
     lang: "en",
   },

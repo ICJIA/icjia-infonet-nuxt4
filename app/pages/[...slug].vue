@@ -54,32 +54,34 @@ onMounted(() => {
 
 const desc = data.value.summary ? data.value.summary : data.value.title;
 
+useSeoMeta({
+  description: desc,
+  ogTitle: data.value.title,
+  ogDescription: desc,
+  ogImage: "https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg",
+  ogImageWidth: "1200",
+  ogImageHeight: "630",
+  twitterCard: "summary_large_image",
+  twitterTitle: data.value.title,
+  twitterDescription: desc,
+  twitterImage: "https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg",
+});
+
 useHead({
-  meta: [
+  script: [
     {
-      hid: "og-image",
-      property: "og:image",
-      content: "https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg",
-    },
-    {
-      hid: "og-image-width",
-      property: "og:image:width",
-      content: "1200",
-    },
-    {
-      hid: "og-image-height",
-      property: "og:image:height",
-      content: "630",
-    },
-    {
-      hid: "description",
-      name: "description",
-      content: desc,
-    },
-    {
-      hid: "og-desc",
-      property: "og:description",
-      content: desc,
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: data.value.title,
+        description: desc,
+        publisher: {
+          "@type": "Organization",
+          name: "Illinois Criminal Justice Information Authority",
+          url: "https://icjia.illinois.gov",
+        },
+      }),
     },
   ],
 });
