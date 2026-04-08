@@ -57,11 +57,12 @@
                     v-if="
                       tab.attributes &&
                       tab.attributes.images &&
+                      tab.attributes.images.data &&
                       tab.attributes.images.data.length > 0
                     "
-                  ></div>
-
-                  <div class="gallery mt-12" style="margin-left: 0px">
+                    class="gallery mt-12"
+                    style="margin-left: 0px"
+                  >
                     <div
                       class="gallery-panel hover my-5"
                       style=""

@@ -28,27 +28,30 @@ let myTocObj = {};
 
 onBeforeMount(() => {
   const currentPath = router.currentRoute.value.path;
-  const isValidRoute = appRoutes.value.includes(currentPath);
-  if (!isValidRoute) {
-    throw showError({ statusCode: 404, statusMessage: "Page Not Found" });
+  if (appRoutes.value && appRoutes.value.length > 0) {
+    const isValidRoute = appRoutes.value.includes(currentPath);
+    if (!isValidRoute) {
+      throw showError({ statusCode: 404, statusMessage: "Page Not Found" });
+    }
   }
 });
 onMounted(() => {
   isMounted.value = true;
-  if (data.value.showTableOfContents) {
+  if (data.value?.showTableOfContents) {
     showTOC.value = true;
     cols.value = 9;
-    console.log("showTOC", showTOC.value);
-    sections = Array.from(document.querySelectorAll("h2"));
-    myToc = sections.map((section) => {
-      return {
-        id: section.id,
-        depth: 2,
-        text: section.innerText,
-      };
-    });
+    nextTick(() => {
+      sections = Array.from(document.querySelectorAll("h2"));
+      myToc = sections.map((section) => {
+        return {
+          id: section.id,
+          depth: 2,
+          text: section.innerText,
+        };
+      });
 
-    myTocObj = { title: "", searchDepth: 2, depth: 2, links: myToc };
+      myTocObj = { title: "", searchDepth: 2, depth: 2, links: myToc };
+    });
   }
 });
 
@@ -198,7 +201,6 @@ useHead({
             margin-top: 12px;
             margin-bottom: -105px;
             border: 1px solid #ddd;
-
             z-index: 1;
             margin-left: -20px;
             margin-right: 0;

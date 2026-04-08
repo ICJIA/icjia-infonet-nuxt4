@@ -92,49 +92,52 @@ const scrollToTop = () => {
 
 onMounted(() => {
   const scrollOffset = 100;
-  const toc = [];
-  console.log("mounted toc");
   const sections = Array.from(document.querySelectorAll("h2"));
-  sections.forEach((section) => {
-    const obj = {};
-    obj.text = section.innerText;
-    obj.id = section.id;
-    toc.push(obj);
-  });
 
-  window.onscroll = () => {
-    let scrollPosition =
-      document.documentElement.scrollTop || document.body.scrollTop;
-    scrollPosition = scrollPosition + scrollOffset + 35;
-    const tocItems = document.querySelectorAll(".tocItem");
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      let scrollPosition =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      scrollPosition = scrollPosition + scrollOffset + 35;
+      const tocItems = document.querySelectorAll(".tocItem");
 
-    if (scrollPosition < 150) {
-      tocItems.forEach((toc) => {
-        toc.classList.remove("visible");
-        // console.log("remove all visible");
-      });
-      navigation.value.classList.add("visible-anchor");
-    } else {
-      navigation.value.classList.remove("visible-anchor");
-      // console.log("remove all visible-anchor");
-    }
-
-    sections.forEach((section) => {
-      if (section.offsetTop <= scrollPosition) {
-        if (tocItems) {
-          tocItems.forEach((toc) => {
-            toc.classList.remove("visible");
-          });
-        }
-        const sectionItem = document.getElementById(`toc-${section.id}`);
-        sectionItem.classList.add("visible");
+      if (scrollPosition < 150) {
+        tocItems.forEach((toc) => {
+          toc.classList.remove("visible");
+        });
+        if (navigation.value) navigation.value.classList.add("visible-anchor");
+      } else {
+        if (navigation.value) navigation.value.classList.remove("visible-anchor");
       }
+
+      sections.forEach((section) => {
+        if (section.offsetTop <= scrollPosition) {
+          if (tocItems) {
+            tocItems.forEach((toc) => {
+              toc.classList.remove("visible");
+            });
+          }
+          const sectionItem = document.getElementById(`toc-${section.id}`);
+          if (sectionItem) sectionItem.classList.add("visible");
+        }
+      });
+      ticking = false;
     });
   };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  // Store reference for cleanup
+  window.__tocScrollHandler = onScroll;
 });
 
 onUnmounted(() => {
-  window.onscroll = null;
+  if (window.__tocScrollHandler) {
+    window.removeEventListener("scroll", window.__tocScrollHandler);
+    delete window.__tocScrollHandler;
+  }
 });
 </script>
 

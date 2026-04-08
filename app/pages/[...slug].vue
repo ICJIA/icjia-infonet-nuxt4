@@ -27,21 +27,17 @@ let myTocObj = {};
 
 onBeforeMount(() => {
   const currentPath = router.currentRoute.value.path;
-  // console.log("Current route path: ", router.currentRoute.value.path);
-  // console.table(appRoutes.value);
-  const isValidRoute = appRoutes.value.includes(currentPath);
-  console.log("isValidRoute: ", isValidRoute);
-  // if (!isValidRoute) {
-  //   throw showError({ statusCode: 404, statusMessage: "Page Not Found" });
-  // }
-}),
-  onMounted(() => {
-    // const isValidRoute = appRoutes.includes(currentPath);
-    // console.log("isValidRoute: ", isValidRoute);
-    if (data.value.showTableOfContents) {
-      showTOC.value = true;
-      cols.value = 9;
-      console.log("showTOC", showTOC.value);
+  if (appRoutes.value && appRoutes.value.length > 0) {
+    const isValidRoute = appRoutes.value.includes(currentPath);
+    console.log("isValidRoute: ", isValidRoute);
+  }
+});
+
+onMounted(() => {
+  if (data.value?.showTableOfContents) {
+    showTOC.value = true;
+    cols.value = 9;
+    nextTick(() => {
       sections = Array.from(document.querySelectorAll("h2"));
       myToc = sections.map((section) => {
         return {
@@ -52,8 +48,9 @@ onBeforeMount(() => {
       });
 
       myTocObj = { title: "", searchDepth: 2, depth: 2, links: myToc };
-    }
-  });
+    });
+  }
+});
 
 const desc = data.value.summary ? data.value.summary : data.value.title;
 
@@ -125,12 +122,10 @@ useHead({
           md="3"
           style="
             min-height: 110vh !important;
-
             background: #fafafa;
             margin-top: 13px;
             margin-bottom: -105px;
             border: 1px solid #ddd;
-
             z-index: 1;
             margin-left: -1px;
             margin-right: 0px;

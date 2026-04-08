@@ -79,6 +79,14 @@ export default defineNuxtConfig({
           crossorigin: true,
         },
         {
+          rel: "preconnect",
+          href: "https://infonet.icjia-api.cloud",
+        },
+        {
+          rel: "dns-prefetch",
+          href: "https://infonet.icjia-api.cloud",
+        },
+        {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Raleway:wght@100;300;400;700;900&family=Roboto:wght@100;400;700;900&display=swap",
         },

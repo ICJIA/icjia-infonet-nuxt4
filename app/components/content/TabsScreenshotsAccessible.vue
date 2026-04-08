@@ -77,7 +77,11 @@
                       ></span>
                     </div>
 
-                    <div class="gallery mt-12" style="margin-left: 0px">
+                    <div
+                      v-if="tabItem.attributes.images && tabItem.attributes.images.data && tabItem.attributes.images.data.length > 0"
+                      class="gallery mt-12"
+                      style="margin-left: 0px"
+                    >
                       <div
                         class="gallery-panel hover my-5"
                         v-for="(image, imgIndex) in sortImagesByFilename(
@@ -120,8 +124,11 @@
                             getImageURL(image.attributes.formats.medium.url)
                           "
                           :lazy-src="
-                            getImageURL(image.attributes.formats.thumbnail.url)
+                            imgIndex === 0 && activeTabIndex === index
+                              ? undefined
+                              : getImageURL(image.attributes.formats.thumbnail.url)
                           "
+                          :eager="imgIndex === 0 && activeTabIndex === index"
                           :alt="
                             image.attributes?.alternativeText ||
                             `Screenshot: ${image.attributes?.caption || image.attributes?.name || 'application view'}`
