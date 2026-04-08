@@ -2,7 +2,7 @@
 
 # InfoNet
 
-> **Version 2.2.1** | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant
+> **Version 2.3.2** | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant
 
 InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois. The system is nationally recognized for facilitating standardized data collection and reporting at the statewide level. Initial development of InfoNet began in the mid-90s as a collaborative effort between the Illinois Criminal Justice Information Authority, the Illinois Coalition Against Sexual Assault, and the Illinois Coalition Against Domestic Violence. Since then, InfoNet has grown to include partnerships with the Illinois Department of Human Services and the Children's Advocacy Centers of Illinois.
 
@@ -133,6 +133,54 @@ Vuetify's `<v-tabs>` caused text clipping at 200% zoom (WCAG 1.4.4 / 1.4.10 viol
 - `app/components/content/TabsScreenshotsAccessible.vue` — for `/screenshots` page
 
 These use vanilla HTML + WAI-ARIA tab pattern with full keyboard navigation (Arrow keys, Home, End), proper `tabindex` management, and zero Vuetify dependencies.
+
+## Testing
+
+The project includes a full Vitest test suite with 100 tests across 8 test files.
+
+```bash
+# Run tests
+yarn test
+
+# Watch mode
+yarn test:watch
+
+# With coverage
+yarn test:coverage
+```
+
+### Test Coverage
+
+| Test File | Tests | Scope |
+|---|---|---|
+| `server-api.test.js` | 6 | API endpoints (routes, tabs, search) |
+| `meta-tags.test.js` | 17 | SEO meta, OG tags, JSON-LD, llms.txt, robots.txt |
+| `content.test.js` | 12 | Content files, frontmatter, sitemap |
+| `app-config.test.js` | 13 | Nav menus, enums, feature flags |
+| `routes-data.test.js` | 7 | Route validity, deduplication, content file consistency |
+| `nuxt-config.test.js` | 14 | Head config, CSS, modules, prerender, scripts |
+| `composables.test.js` | 5 | State composables (counter, color, nav, translate) |
+| `static-assets.test.js` | 8 | Required public files and data files |
+
+## Lighthouse Scores (Dev Server)
+
+| Category | Score |
+|---|---|
+| Accessibility | 100 (all pages) |
+| SEO | 100 (all pages) |
+| Best Practices | 96-100 |
+| Performance | 76-98 (higher in production builds) |
+
+## SEO and AI Readiness
+
+- Open Graph and Twitter Card meta tags on all pages (per-page overrides via `useSeoMeta`)
+- JSON-LD structured data: `WebSite` (global), `Article` (news), `WebPage` (content pages)
+- `article:published_time` and `article:modified_time` on news pages
+- Canonical URLs on all pages
+- `<meta name="author">` on all pages
+- `robots.txt` with sitemap reference
+- `sitemap.xml` with all routes
+- `/llms.txt` for AI system discoverability ([llmstxt.org](https://llmstxt.org) spec)
 
 ## Nuxt 4 Migration
 
