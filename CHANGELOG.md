@@ -2,6 +2,18 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.3.2] - 2026-04-08
+
+### Performance and bug fixes
+
+- Fix `/faqs` performance: replace `ContentDoc` with `ContentRenderer` to eliminate hydration mismatch (Perf 53→91, CLS 0.54→0.10)
+- Lazy-load DV, SA, CAC FAQ sections with `LazyDisplayFaqs` for progressive rendering
+- Fix `/tabs` crash: `appRoutes.includes is not a function` — add `.value` and guard check
+- Add `width`/`height` to gallery `<v-img>` in Tabs and TabsScreenshotsAccessible to reduce CLS
+- Add Lato font fallback with `size-adjust` metrics; refine Raleway and Roboto fallback metrics
+- Clean up dead code and upgrade `useHead` to `useSeoMeta` in tabs page
+- Console errors eliminated on `/faqs` and `/tabs/screenshots-dv` (BP 96→100)
+
 ## [2.3.1] - 2026-04-08
 
 ### Testing

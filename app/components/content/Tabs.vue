@@ -106,6 +106,8 @@
                         :lazy-src="
                           getImageURL(image.attributes.formats.thumbnail.url)
                         "
+                        :width="image.attributes.formats.medium.width || 750"
+                        :height="image.attributes.formats.medium.height || 400"
                         :alt="
                           image.attributes?.alternativeText ||
                           `Screenshot: ${image.attributes?.caption || image.attributes?.name || 'application view'}`

@@ -7,15 +7,12 @@
             <h1 class="brand-color">
               {{ data.title.toUpperCase() }}
             </h1>
-            <ContentDoc
+            <ContentRenderer
               :key="data?.title"
               :value="data"
               class="markdown-body"
               style="margin-top: -10px"
-            >
-              <template #empty>Document not found</template>
-              <template #not-found>Document not found</template>
-            </ContentDoc>
+            />
           </div>
           <DisplayFaqs
             strapi-agency="general"
@@ -25,26 +22,26 @@
             key="general"
             class="mt-12"
           ></DisplayFaqs>
-          <DisplayFaqs
+          <LazyDisplayFaqs
             strapi-agency="dv"
             color="#fff"
             :show-heading="true"
             :showCategory="true"
-          ></DisplayFaqs>
-          <DisplayFaqs
+          ></LazyDisplayFaqs>
+          <LazyDisplayFaqs
             strapi-agency="sa"
             color="#fff"
             :show-heading="true"
             :showCategory="true"
             key="sa"
-          ></DisplayFaqs>
-          <DisplayFaqs
+          ></LazyDisplayFaqs>
+          <LazyDisplayFaqs
             strapi-agency="cac"
             color="#fff"
             :show-heading="true"
             :showCategory="true"
             key="cac"
-          ></DisplayFaqs>
+          ></LazyDisplayFaqs>
         </v-col>
 
         <v-col

@@ -52,9 +52,11 @@ let myTocObj = {};
 
 onBeforeMount(() => {
   const currentPath = router.currentRoute.value.path;
-  const isValidRoute = appRoutes.includes(currentPath);
-  if (!isValidRoute) {
-    throw showError({ statusCode: 404, statusMessage: "Page Not Found" });
+  if (appRoutes.value && appRoutes.value.length > 0) {
+    const isValidRoute = appRoutes.value.includes(currentPath);
+    if (!isValidRoute) {
+      throw showError({ statusCode: 404, statusMessage: "Page Not Found" });
+    }
   }
 });
 onMounted(() => {
@@ -63,68 +65,13 @@ onMounted(() => {
 
 const desc = data.value.summary ? data.value.summary : data.value.title;
 
-const niceBytes = (bytes, si = false, dp = 1) => {
-  const thresh = si ? 1000 : 1024;
-
-  if (Math.abs(bytes) < thresh) {
-    return bytes + " B";
-  }
-
-  const units = si
-    ? ["kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-    : ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
-  let u = -1;
-  const r = 10 ** dp;
-
-  do {
-    bytes /= thresh;
-    ++u;
-  } while (
-    Math.round(Math.abs(bytes) * r) / r >= thresh &&
-    u < units.length - 1
-  );
-
-  return bytes.toFixed(dp) + " " + units[u];
-};
-
-const formatDate = (dateString) => {
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  return new Date(dateString).toLocaleDateString(undefined, options);
-};
-
-const capitalize = (s) => {
-  if (typeof s !== "string") return "";
-  return s.charAt(0).toUpperCase() + s.slice(1);
-};
-
-useHead({
-  meta: [
-    {
-      hid: "og-image",
-      property: "og:image",
-      content: "/infonet-thumbnail-dark.jpg",
-    },
-    {
-      hid: "og-image-width",
-      property: "og:image:width",
-      content: "1200",
-    },
-    {
-      hid: "og-image-height",
-      property: "og:image:height",
-      content: "630",
-    },
-    {
-      hid: "description",
-      name: "description",
-      content: desc,
-    },
-    {
-      hid: "og-desc",
-      property: "og:description",
-      content: desc,
-    },
-  ],
+useSeoMeta({
+  description: desc,
+  ogDescription: desc,
+  ogImage: "https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg",
+  twitterCard: "summary_large_image",
+  twitterTitle: data.value.title,
+  twitterDescription: desc,
 });
 </script>
 
