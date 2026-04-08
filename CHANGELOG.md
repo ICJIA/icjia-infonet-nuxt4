@@ -2,6 +2,31 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.3.0] - 2026-04-08
+
+### Lighthouse audit fixes
+
+- Fix `img.hover` aspect ratio in TheFooter — Best Practices score improved from 96 to 100 site-wide
+- Add null guards for `images.data` in Tabs and TabsScreenshotsAccessible to prevent console errors on tab pages
+- Fix news page route validation race condition — skip validation if `appRoutes` hasn't loaded yet
+- Remove unused `uuid` and `moment` imports and dead code from DisplayFaqs (reduced bundle size)
+- Add `preconnect` and `dns-prefetch` for `infonet.icjia-api.cloud` image CDN
+- Throttle TOC scroll listener with `requestAnimationFrame` and `passive: true` for smoother scrolling
+- Load first screenshot image eagerly (no lazy-src) to improve LCP on /screenshots
+- Wrap TOC DOM queries in `nextTick` for safer post-render access
+
+### SEO and AI readiness
+
+- Expand meta description from 7 characters to 160 characters
+- Add Twitter Card meta tags (`summary_large_image`) with per-page overrides via `useSeoMeta`
+- Add canonical URL (`<link rel="canonical">`) on all pages
+- Add JSON-LD structured data: `WebSite` (global), `Article` (news pages), `WebPage` (content pages)
+- Add `<meta name="author">` for Illinois Criminal Justice Information Authority
+- Add `article:published_time` and `article:modified_time` meta for news pages
+- Add `og:image:width` and `og:image:height` for proper social sharing previews
+- Create `/llms.txt` for AI system discoverability (llmstxt.org spec)
+- Migrate page-level meta from `useHead` with `hid` to `useSeoMeta` for proper Nuxt 3 deduplication
+
 ## [2.2.1] - 2026-04-07
 
 ### Bug fixes
