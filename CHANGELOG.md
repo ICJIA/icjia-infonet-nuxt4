@@ -2,6 +2,17 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.3.1] - 2026-04-08
+
+### Testing
+
+- Add Vitest test suite with 100 tests across 8 test files
+- Install `vitest`, `@vue/test-utils`, `happy-dom` dev dependencies
+- Add `vitest.config.js` with happy-dom environment and path aliases
+- Add test setup file with mocked Nuxt auto-imports and composables
+- Tests cover: server API endpoints, meta tags/SEO/AI readiness, content file integrity, app config, route data consistency, Nuxt config, composables, and static assets
+- Add `yarn test`, `yarn test:watch`, and `yarn test:coverage` scripts
+
 ## [2.3.0] - 2026-04-08
 
 ### Lighthouse audit fixes
