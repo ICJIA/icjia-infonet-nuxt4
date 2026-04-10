@@ -2,6 +2,14 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.3.3] - 2026-04-10
+
+### Accessibility
+
+- Fix 404 page color contrast: change heading color from `#aaa` to `#333` (WCAG 1.4.3 AA)
+- Remove sandbox page (dev-only test page with color-contrast violation)
+- Full axe-core WCAG A+AA audit: 27/27 pages pass with 0 violations
+
 ## [2.3.2] - 2026-04-08
 
 ### Performance and bug fixes

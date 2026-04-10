@@ -3,7 +3,7 @@
     <v-container class="text-center">
       <v-row>
         <v-col class="mt-12">
-          <h1 style="font-size: 120px; color: #aaa">404</h1>
+          <h1 style="font-size: 120px; color: #333">404</h1>
           <p>Page not found</p>
           <v-btn class="mt-8" @click="goHome">Go Home</v-btn>
         </v-col></v-row
