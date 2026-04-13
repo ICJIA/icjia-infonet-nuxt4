@@ -107,7 +107,7 @@
         <article><p><a href="https://app.netlify.com/sites/icjia-infonet/deploys"><img src="https://api.netlify.com/api/v1/badges/f9b9ef26-d98b-4df5-8d10-77c1a2b72189/deploy-status" alt="Netlify Status"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></p>
 <h1>InfoNet</h1>
 <blockquote>
-<p><strong>Version 2.2.1</strong> | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant</p>
+<p><strong>Version 2.3.2</strong> | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant</p>
 </blockquote>
 <p>InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois. The system is nationally recognized for facilitating standardized data collection and reporting at the statewide level. Initial development of InfoNet began in the mid-90s as a collaborative effort between the Illinois Criminal Justice Information Authority, the Illinois Coalition Against Sexual Assault, and the Illinois Coalition Against Domestic Violence. Since then, InfoNet has grown to include partnerships with the Illinois Department of Human Services and the Children's Advocacy Centers of Illinois.</p>
 <p>The primary purposes of InfoNet are to:</p>
@@ -209,6 +209,107 @@ node scripts/full-axe-audit.js
 <li><code>app/components/content/TabsScreenshotsAccessible.vue</code> — for <code>/screenshots</code> page</li>
 </ul>
 <p>These use vanilla HTML + WAI-ARIA tab pattern with full keyboard navigation (Arrow keys, Home, End), proper <code>tabindex</code> management, and zero Vuetify dependencies.</p>
+<h2>Testing</h2>
+<p>The project includes a full Vitest test suite with 100 tests across 8 test files.</p>
+<pre class="prettyprint source lang-bash"><code># Run tests
+yarn test
+
+# Watch mode
+yarn test:watch
+
+# With coverage
+yarn test:coverage
+</code></pre>
+<h3>Test Coverage</h3>
+<table>
+<thead>
+<tr>
+<th>Test File</th>
+<th>Tests</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>server-api.test.js</code></td>
+<td>6</td>
+<td>API endpoints (routes, tabs, search)</td>
+</tr>
+<tr>
+<td><code>meta-tags.test.js</code></td>
+<td>17</td>
+<td>SEO meta, OG tags, JSON-LD, llms.txt, robots.txt</td>
+</tr>
+<tr>
+<td><code>content.test.js</code></td>
+<td>12</td>
+<td>Content files, frontmatter, sitemap</td>
+</tr>
+<tr>
+<td><code>app-config.test.js</code></td>
+<td>13</td>
+<td>Nav menus, enums, feature flags</td>
+</tr>
+<tr>
+<td><code>routes-data.test.js</code></td>
+<td>7</td>
+<td>Route validity, deduplication, content file consistency</td>
+</tr>
+<tr>
+<td><code>nuxt-config.test.js</code></td>
+<td>14</td>
+<td>Head config, CSS, modules, prerender, scripts</td>
+</tr>
+<tr>
+<td><code>composables.test.js</code></td>
+<td>5</td>
+<td>State composables (counter, color, nav, translate)</td>
+</tr>
+<tr>
+<td><code>static-assets.test.js</code></td>
+<td>8</td>
+<td>Required public files and data files</td>
+</tr>
+</tbody>
+</table>
+<h2>Lighthouse Scores (Dev Server)</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accessibility</td>
+<td>100 (all pages)</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>100 (all pages)</td>
+</tr>
+<tr>
+<td>Best Practices</td>
+<td>96-100</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>76-98 (higher in production builds)</td>
+</tr>
+</tbody>
+</table>
+<h2>SEO and AI Readiness</h2>
+<ul>
+<li>Open Graph and Twitter Card meta tags on all pages (per-page overrides via <code>useSeoMeta</code>)</li>
+<li>JSON-LD structured data: <code>WebSite</code> (global), <code>Article</code> (news), <code>WebPage</code> (content pages)</li>
+<li><code>article:published_time</code> and <code>article:modified_time</code> on news pages</li>
+<li>Canonical URLs on all pages</li>
+<li><code>&lt;meta name=&quot;author&quot;&gt;</code> on all pages</li>
+<li><code>robots.txt</code> with sitemap reference</li>
+<li><code>sitemap.xml</code> with all routes</li>
+<li><code>/llms.txt</code> for AI system discoverability (<a href="https://llmstxt.org">llmstxt.org</a> spec)</li>
+</ul>
 <h2>Nuxt 4 Migration</h2>
 <p>This project was migrated from Nuxt 3.13.2 to Nuxt 4.1.0 in October 2025.</p>
 <h3>Key Changes</h3>
