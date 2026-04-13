@@ -87,7 +87,6 @@
                 class="px-5 py-5 elevation-5 hover info-card"
                 role="link"
                 tabindex="0"
-                :aria-label="`Read: ${article.title} (opens in new window)`"
                 @click.prevent.stop="
                   article.source === 'hub'
                     ? gotoArticle(article.slug)
@@ -99,6 +98,7 @@
                     : gotoPublication(article.fileURL)
                 "
               >
+                <span class="sr-only-inline">opens in new window:</span>
                 <div>
                   <span
                     style="
@@ -175,7 +175,8 @@
                   >
                     <v-chip
                       size="x-small"
-                      style="font-weight: 700"
+                      variant="outlined"
+                      class="tag-chip-hc"
                       @click.prevent.stop="setTagFilter(tag)"
                       >&nbsp;{{ tag.toUpperCase() }}&nbsp;</v-chip
                     >
@@ -415,6 +416,32 @@ const openSnackbar = (str = "All Research") => {
 
 .mdi-check {
   font-size: 20px !important;
+}
+
+.sr-only-inline {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.tag-chip-hc.v-chip {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+  font-weight: 700;
+  opacity: 1 !important;
+}
+
+.tag-chip-hc.v-chip:hover,
+.tag-chip-hc.v-chip:focus {
+  background-color: #000000 !important;
+  color: #ffffff !important;
 }
 
 // .v-icon--size-default {

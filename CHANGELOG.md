@@ -2,6 +2,14 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.3.4] - 2026-04-13
+
+### Accessibility
+
+- Fix `/data-and-publications` WCAG 2.5.3 Label-in-Name violation (38 occurrences from Siteimprove): remove `aria-label` prefix/suffix on article cards so accessible name matches visible content; add visually-hidden "opens in new window" hint for screen reader users
+- Restyle clickable article tag chips to high-contrast outlined pill (white bg, black text, 1px black border); invert on hover/focus for visible affordance
+- axe-core AA and Lighthouse a11y: 0 violations on `/data-and-publications`
+
 ## [2.3.3] - 2026-04-10
 
 ### Accessibility
