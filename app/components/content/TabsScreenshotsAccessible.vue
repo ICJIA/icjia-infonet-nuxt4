@@ -129,8 +129,10 @@
                               : getImageURL(image.attributes.formats.thumbnail.url)
                           "
                           :eager="imgIndex === 0 && activeTabIndex === index"
-                          :width="image.attributes.formats.medium.width || 750"
-                          :height="image.attributes.formats.medium.height || 400"
+                          :aspect-ratio="
+                            (image.attributes.formats.medium.width || 750) /
+                            (image.attributes.formats.medium.height || 400)
+                          "
                           :alt="
                             image.attributes?.alternativeText ||
                             `Screenshot: ${image.attributes?.caption || image.attributes?.name || 'application view'}`

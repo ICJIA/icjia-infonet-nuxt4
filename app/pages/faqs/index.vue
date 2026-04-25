@@ -71,7 +71,7 @@ const showTOC = ref(true);
 const cols = ref(9);
 let sections = ref([]);
 let myToc = [];
-let myTocObj = {};
+const myTocObj = ref({});
 
 const { path } = useRoute();
 
@@ -83,7 +83,7 @@ const { data } = await useAsyncData(`faqs-${path}`, async () => {
 onMounted(() => {
   showTOC.value = true;
   nextTick(() => {
-    sections = Array.from(document.querySelectorAll("h2"));
+    sections = Array.from(document.querySelectorAll("h2[id]"));
     myToc = sections.map((section) => {
       return {
         id: section.id,
@@ -92,7 +92,7 @@ onMounted(() => {
       };
     });
 
-    myTocObj = { title: "", searchDepth: 2, depth: 2, links: myToc };
+    myTocObj.value = { title: "", searchDepth: 2, depth: 2, links: myToc };
   });
 });
 </script>

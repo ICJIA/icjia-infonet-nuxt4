@@ -2,6 +2,14 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.3.5] - 2026-04-25
+
+### Bug fixes
+
+- Fix Table of Contents missing page links across `/about`, news, meetings, and FAQs pages: convert `myTocObj` from non-reactive `let` to `ref()` so Vue picks up assignment after `nextTick` (regression from 2.3.0)
+- Fix Table of Contents picking up tab titles as broken entries on `/about`: filter `h2` selector to `h2[id]` so only headings with valid scroll targets populate the TOC
+- Fix screenshot tiles off-kilter inside agency tabs: replace `:width`/`:height` props on gallery `<v-img>` with `:aspect-ratio`. Previously Vuetify treated the height prop as a literal CSS value, leaving each tile's image floating in oversized empty containers (regression from 2.3.2)
+
 ## [2.3.4] - 2026-04-13
 
 ### Accessibility

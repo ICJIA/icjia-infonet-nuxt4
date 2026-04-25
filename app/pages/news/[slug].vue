@@ -24,7 +24,7 @@ const redirect = () => {
   router.push("/404");
 };
 
-let myTocObj = {};
+const myTocObj = ref({});
 
 onBeforeMount(() => {
   const currentPath = router.currentRoute.value.path;
@@ -41,7 +41,7 @@ onMounted(() => {
     showTOC.value = true;
     cols.value = 9;
     nextTick(() => {
-      sections = Array.from(document.querySelectorAll("h2"));
+      sections = Array.from(document.querySelectorAll("h2[id]"));
       myToc = sections.map((section) => {
         return {
           id: section.id,
@@ -50,7 +50,7 @@ onMounted(() => {
         };
       });
 
-      myTocObj = { title: "", searchDepth: 2, depth: 2, links: myToc };
+      myTocObj.value = { title: "", searchDepth: 2, depth: 2, links: myToc };
     });
   }
 });
