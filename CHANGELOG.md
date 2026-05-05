@@ -2,6 +2,13 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.3.7] - 2026-05-05
+
+### Documentation
+
+- Re-verified WCAG 2.1 AA compliance via axecap MCP audit: **177 / 177** unique sitemap URLs pass with zero axe-core violations. No app code changed since 2.3.6.
+- Correct previously reported sitemap URL count from 178 to 177 (README and 2.3.6 changelog had an off-by-one).
+
 ## [2.3.6] - 2026-05-05
 
 ### Accessibility

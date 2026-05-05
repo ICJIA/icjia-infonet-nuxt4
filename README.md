@@ -2,7 +2,7 @@
 
 # InfoNet
 
-> **Version 2.3.6** | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant
+> **Version 2.3.7** | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant
 
 InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois. The system is nationally recognized for facilitating standardized data collection and reporting at the statewide level. Initial development of InfoNet began in the mid-90s as a collaborative effort between the Illinois Criminal Justice Information Authority, the Illinois Coalition Against Sexual Assault, and the Illinois Coalition Against Domestic Violence. Since then, InfoNet has grown to include partnerships with the Illinois Department of Human Services and the Children's Advocacy Centers of Illinois.
 
@@ -87,11 +87,11 @@ _Netlify will automatically deploy the live site when changes are pushed to the 
 
 ## Accessibility
 
-This project has been audited for WCAG 2.1 Level AA compliance using axe-core with Playwright across all 177 site routes.
+This project has been audited for WCAG 2.1 Level AA compliance using axe-core with Playwright across all 177 unique sitemap URLs.
 
 ### Current Status
 
-**178 / 178 unique sitemap URLs pass with zero axe-core violations** (axecap MCP audit, 2026-05-05).
+**177 / 177 unique sitemap URLs pass with zero axe-core violations** (axecap MCP audit, 2026-05-05; re-verified for 2.3.7).
 
 - **Testing tools:** axe-core 4.11 (axecap MCP) + Playwright
 - **Standard:** WCAG 2.1 Level AA + Section 508 + best practices
