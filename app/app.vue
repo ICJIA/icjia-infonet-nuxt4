@@ -17,7 +17,7 @@
       tag="div"
     >
       <main id="main-content" tabindex="-1">
-        <TheBreadcrumbBar v-show="!hideBreadcrumbs"></TheBreadcrumbBar>
+        <TheBreadcrumbBar v-if="!hideBreadcrumbs"></TheBreadcrumbBar>
         <NuxtLayout>
           <NuxtPage></NuxtPage>
         </NuxtLayout>

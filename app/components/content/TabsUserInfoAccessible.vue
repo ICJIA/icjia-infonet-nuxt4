@@ -61,6 +61,7 @@
           role="tabpanel"
           :aria-labelledby="`tab-one`"
           :hidden="activeTab !== 'one'"
+          :inert="activeTab !== 'one' || null"
           :tabindex="activeTab === 'one' ? 0 : -1"
           class="accessible-tab-panel"
         >
@@ -77,6 +78,7 @@
           role="tabpanel"
           :aria-labelledby="`tab-two`"
           :hidden="activeTab !== 'two'"
+          :inert="activeTab !== 'two' || null"
           :tabindex="activeTab === 'two' ? 0 : -1"
           class="accessible-tab-panel"
         >
@@ -93,6 +95,7 @@
           role="tabpanel"
           :aria-labelledby="`tab-three`"
           :hidden="activeTab !== 'three'"
+          :inert="activeTab !== 'three' || null"
           :tabindex="activeTab === 'three' ? 0 : -1"
           class="accessible-tab-panel"
         >

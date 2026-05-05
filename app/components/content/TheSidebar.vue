@@ -43,6 +43,7 @@
               role="region"
               :aria-labelledby="`accordion-header-${index}`"
               :hidden="!expandedItems[index]"
+              :inert="!expandedItems[index] || null"
               class="sidebar-accordion-panel"
             >
               <nav aria-label="Submenu">

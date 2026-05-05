@@ -7,7 +7,7 @@
       class="toc px-5 py-5 markdown-body"
       style="background: #fafafa"
     >
-      <h3
+      <h2
         id="navigation"
         ref="navigation"
         class="hover pb-4 navigation-anchor"
@@ -24,7 +24,7 @@
         @keydown.space.prevent="scrollToTop"
       >
         {{ props.title }}
-      </h3>
+      </h2>
       <div v-if="props && props.data && props.data.links">
         <div
           v-for="(item, index) in props.data.links"

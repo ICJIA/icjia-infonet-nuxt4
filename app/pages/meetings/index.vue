@@ -137,7 +137,7 @@ useHead({
           </p>
           <div class="mb-2">&nbsp;</div>
 
-          <div v-for="meeting in query" :key="meeting._path">
+          <div v-for="meeting in data" :key="meeting._path">
             <h2
               :id="`year-${meeting.year}`"
               style="

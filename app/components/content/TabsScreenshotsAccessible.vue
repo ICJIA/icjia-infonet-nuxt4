@@ -50,6 +50,7 @@
                     role="tabpanel"
                     :aria-labelledby="`tab-${index}`"
                     :hidden="activeTabIndex !== index"
+                    :inert="activeTabIndex !== index || null"
                     :tabindex="activeTabIndex === index ? 0 : -1"
                     class="accessible-tab-panel"
                   >

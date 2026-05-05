@@ -6,6 +6,7 @@
       role="dialog"
       aria-modal="true"
       :aria-label="caption ? `Image: ${caption}` : 'Image viewer'"
+      :inert="!url || null"
       @click="closeModal"
       @keydown.escape="closeModal"
     >
