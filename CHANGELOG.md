@@ -2,6 +2,28 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.3.6] - 2026-05-05
+
+### Accessibility
+
+- Fix Siteimprove "Hidden element has focusable content" (recurring 1-occurrence flag for ~6 months): add `inert` attribute to subtrees that use `[hidden]` or `display:none` to wrap focusable descendants. Siteimprove flags this pattern even when axe-core's `aria-hidden-focus` rule passes (Siteimprove also checks `[hidden]` and `display:none`, not just `aria-hidden`).
+  - `TheSidebar.vue` accordion panels (~28 instances per crawl) — `inert` when collapsed
+  - `ImageModal.vue` `#myModal` (14 per crawl) — `inert` when no url is set
+  - `TabsScreenshotsAccessible.vue` and `TabsUserInfoAccessible.vue` tab panels (6 per crawl) — `inert` when not active
+  - `TheBreadcrumbBar` on home page — `v-show` → `v-if` (one-shot mount/unmount)
+- Fix axe `heading-order` on `/meetings`: change TOC heading in `TheTableOfContents.vue` from `<h3>` to `<h2>` so heading hierarchy stays valid even when surrounding meeting content is empty
+- Verified via new `scripts/find-hidden-focusable.js` diagnostic: 49 → 0 instances across 14 representative routes
+- Full axecap (axe-core) audit on all 178 unique sitemap URLs: 0 violations, 4,028 rule passes
+
+### Bug fixes
+
+- Fix `/meetings` v-for binding: typo `query` → `data` (the `useAsyncData` destructured ref). Page will correctly iterate over the meeting list once content is restored.
+- Fix `package.json` `audit:a11y` script pointing to non-existent `scripts/axe-audit.js` — now points to `scripts/full-axe-audit.js`
+
+### Tooling
+
+- Add `scripts/find-hidden-focusable.js` — Playwright diagnostic that emulates Siteimprove's "Hidden element has focusable content" rule (catches `[hidden]`/`display:none`/`visibility:hidden` containing focusable descendants without `inert`). Available as `yarn audit:hidden-focusable`.
+
 ## [2.3.5] - 2026-04-25
 
 ### Bug fixes

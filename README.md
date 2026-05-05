@@ -2,7 +2,7 @@
 
 # InfoNet
 
-> **Version 2.3.5** | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant
+> **Version 2.3.6** | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant
 
 InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois. The system is nationally recognized for facilitating standardized data collection and reporting at the statewide level. Initial development of InfoNet began in the mid-90s as a collaborative effort between the Illinois Criminal Justice Information Authority, the Illinois Coalition Against Sexual Assault, and the Illinois Coalition Against Domestic Violence. Since then, InfoNet has grown to include partnerships with the Illinois Department of Human Services and the Children's Advocacy Centers of Illinois.
 
@@ -91,11 +91,13 @@ This project has been audited for WCAG 2.1 Level AA compliance using axe-core wi
 
 ### Current Status
 
-**177 / 177 pages pass with zero axe-core violations.**
+**178 / 178 unique sitemap URLs pass with zero axe-core violations** (axecap MCP audit, 2026-05-05).
 
-- **Testing tools:** axe-core 4.10 + Playwright 1.56
+- **Testing tools:** axe-core 4.11 (axecap MCP) + Playwright
 - **Standard:** WCAG 2.1 Level AA + Section 508 + best practices
-- **Last full audit:** March 23, 2026
+- **Last full audit:** May 5, 2026
+
+In addition, `scripts/find-hidden-focusable.js` emulates Siteimprove's stricter "Hidden element has focusable content" rule (catches `[hidden]`/`display:none`/`visibility:hidden` containing focusable descendants without `inert`). Run with `yarn audit:hidden-focusable`.
 
 ### Run Accessibility Audit
 
