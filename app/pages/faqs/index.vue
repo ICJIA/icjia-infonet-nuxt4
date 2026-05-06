@@ -83,7 +83,9 @@ const { data } = await useAsyncData(`faqs-${path}`, async () => {
 onMounted(() => {
   showTOC.value = true;
   nextTick(() => {
-    sections = Array.from(document.querySelectorAll("h2[id]"));
+    sections = Array.from(
+      document.querySelectorAll("h2[id]:not(#toc-sidebar-heading)")
+    );
     myToc = sections.map((section) => {
       return {
         id: section.id,

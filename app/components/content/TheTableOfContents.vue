@@ -8,7 +8,7 @@
       style="background: #fafafa"
     >
       <h2
-        id="navigation"
+        id="toc-sidebar-heading"
         ref="navigation"
         class="hover pb-4 navigation-anchor"
         style="
@@ -92,43 +92,64 @@ const scrollToTop = () => {
 
 onMounted(() => {
   const scrollOffset = 100;
-  const sections = Array.from(document.querySelectorAll("h2"));
+
+  // Re-query each tick: the parent page populates h2[id]s asynchronously
+  // (in nextTick after its own onMounted), so a single query at mount time
+  // misses sections. Excluding the TOC sidebar's own heading prevents it
+  // from being treated as a content section in the highlight loop.
+  const getSections = () =>
+    Array.from(
+      document.querySelectorAll("h2[id]:not(#toc-sidebar-heading)")
+    );
 
   let ticking = false;
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      let scrollPosition =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      scrollPosition = scrollPosition + scrollOffset + 35;
+      const scrollPosition =
+        (document.documentElement.scrollTop || document.body.scrollTop) +
+        scrollOffset +
+        35;
       const tocItems = document.querySelectorAll(".tocItem");
 
+      // Near the top: no section is "current" — show the sidebar header
+      // as the active anchor and clear all section highlights.
       if (scrollPosition < 150) {
-        tocItems.forEach((toc) => {
-          toc.classList.remove("visible");
-        });
+        tocItems.forEach((toc) => toc.classList.remove("visible"));
         if (navigation.value) navigation.value.classList.add("visible-anchor");
-      } else {
-        if (navigation.value) navigation.value.classList.remove("visible-anchor");
+        ticking = false;
+        return;
       }
 
-      sections.forEach((section) => {
+      if (navigation.value) navigation.value.classList.remove("visible-anchor");
+
+      // Find the deepest content section whose top is at or above the
+      // scroll line. That's the section the user is currently reading.
+      let currentSection = null;
+      for (const section of getSections()) {
         if (section.offsetTop <= scrollPosition) {
-          if (tocItems) {
-            tocItems.forEach((toc) => {
-              toc.classList.remove("visible");
-            });
-          }
-          const sectionItem = document.getElementById(`toc-${section.id}`);
-          if (sectionItem) sectionItem.classList.add("visible");
+          currentSection = section;
+        } else {
+          break;
         }
-      });
+      }
+
+      tocItems.forEach((toc) => toc.classList.remove("visible"));
+      if (currentSection) {
+        const sectionItem = document.getElementById(
+          `toc-${currentSection.id}`
+        );
+        if (sectionItem) sectionItem.classList.add("visible");
+      }
       ticking = false;
     });
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
+  // Run once after mount so the initial state reflects the load position
+  // (e.g. when the user lands on a deep-link with a hash).
+  nextTick(onScroll);
   // Store reference for cleanup
   window.__tocScrollHandler = onScroll;
 });

@@ -34,7 +34,9 @@ onBeforeMount(() => {
       showTOC.value = true;
       cols.value = 9;
       console.log("showTOC", showTOC.value);
-      sections = Array.from(document.querySelectorAll("h2[id]"));
+      sections = Array.from(
+        document.querySelectorAll("h2[id]:not(#toc-sidebar-heading)")
+      );
       myToc = sections.map((section) => {
         return {
           id: section.id,

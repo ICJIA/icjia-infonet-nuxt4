@@ -2,6 +2,16 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.3.9] - 2026-05-06
+
+### Bug fixes
+
+- Fix Table of Contents scroll-spy never highlighting the actual current section: TOC always showed a spurious "Navigation" entry at the bottom of the list, and that entry stayed permanently highlighted regardless of scroll position. Two root causes:
+  - `document.querySelectorAll("h2[id]")` in `[...slug].vue`, `faqs/index.vue`, `news/[slug].vue`, and `meetings/[slug].vue` was matching the TOC sidebar's own `<h2 id="navigation">` heading and adding it as a TOC link.
+  - The scroll handler in `TheTableOfContents.vue` queried `h2` (no `[id]` filter) and iterated all matches in document order, taking the LAST section above the scroll line. Because the sidebar's own `<h2>` is in the right column at a small `offsetTop` and is the last `<h2>` in document order, it always won the loop and `toc-navigation` stayed `.visible` everywhere.
+- Renamed the TOC sidebar heading id from `navigation` → `toc-sidebar-heading` (no inbound links to `#navigation`) and excluded it via `:not(#toc-sidebar-heading)` in all five queries.
+- Rewrote the scroll-spy to use a proper "deepest section above scroll line" loop with an early return at the top of the page, requery sections each frame (so async-rendered content is picked up), and run once on mount via `nextTick(onScroll)` so a deep-link with a hash lands in the right state.
+
 ## [2.3.8] - 2026-05-06
 
 ### Accessibility
