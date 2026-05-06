@@ -28,11 +28,10 @@ markdown: |+
 
   ## Trainings
 
-  - **Sexual Assault Data Entry Training (September 16, 2025)**
-      - https://www.youtube.com/playlist?list=PL4n4n7ZvbgEOL5vTc-b-DlAecAr0zj0oX
+  - **Sexual Assault Data Entry, Reports, and Funding for Staff (November 2025)**
+      - https://learningwithicjia.illinois.gov/learn/learning-plans/12/infonet-core-training-data-entry-reporting-and-staff-funding
 
-  - **Using InfoNet’s New Client Needs & Updates Features**
-      - https://youtu.be/Ws887UprsTk
+  *Note that you will be required to register an account with ICJIA’s Learning Management System in order to enroll in and access the training videos. There are no restrictions on who may register, only a name and email address are required.
 
   ## Data Collection/Entry Forms
 
@@ -85,11 +84,10 @@ markdown: |+
 
 ## Trainings
 
-- **Sexual Assault Data Entry Training (September 16, 2025)**
-    - https://www.youtube.com/playlist?list=PL4n4n7ZvbgEOL5vTc-b-DlAecAr0zj0oX
+- **Sexual Assault Data Entry, Reports, and Funding for Staff (November 2025)**
+    - https://learningwithicjia.illinois.gov/learn/learning-plans/12/infonet-core-training-data-entry-reporting-and-staff-funding
 
-- **Using InfoNet’s New Client Needs & Updates Features**
-    - https://youtu.be/Ws887UprsTk
+*Note that you will be required to register an account with ICJIA’s Learning Management System in order to enroll in and access the training videos. There are no restrictions on who may register, only a name and email address are required.
 
 ## Data Collection/Entry Forms
 

@@ -2,19 +2,63 @@
   "summary": {
     "totalPages": 177,
     "pagesAudited": 177,
-    "pagesWithErrors": 0,
+    "pagesWithErrors": 1,
     "pagesFailed": 0,
-    "totalViolations": 0,
+    "totalViolations": 2,
     "bySeverity": {
-      "critical": 0,
-      "serious": 0,
+      "critical": 1,
+      "serious": 1,
       "moderate": 0,
       "minor": 0
     },
-    "byRule": {},
+    "byRule": {
+      "aria-prohibited-attr": {
+        "impact": "serious",
+        "description": "Elements must only use permitted ARIA attributes",
+        "count": 1,
+        "pages": [
+          "/about"
+        ],
+        "totalNodes": 1
+      },
+      "button-name": {
+        "impact": "critical",
+        "description": "Buttons must have discernible text",
+        "count": 1,
+        "pages": [
+          "/about"
+        ],
+        "totalNodes": 1
+      }
+    },
     "byPage": {}
   },
-  "sortedRules": [],
+  "sortedRules": [
+    [
+      "button-name",
+      {
+        "impact": "critical",
+        "description": "Buttons must have discernible text",
+        "count": 1,
+        "pages": [
+          "/about"
+        ],
+        "totalNodes": 1
+      }
+    ],
+    [
+      "aria-prohibited-attr",
+      {
+        "impact": "serious",
+        "description": "Elements must only use permitted ARIA attributes",
+        "count": 1,
+        "pages": [
+          "/about"
+        ],
+        "totalNodes": 1
+      }
+    ]
+  ],
   "results": [
     {
       "route": "/",
@@ -26,9 +70,63 @@
     {
       "route": "/about",
       "url": "http://localhost:8000/about",
-      "violations": [],
-      "violationCount": 0,
-      "nodeCount": 0
+      "violations": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious",
+          "description": "Ensure ARIA attributes are not prohibited for an element's role",
+          "help": "Elements must only use permitted ARIA attributes",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-prohibited-attr?application=playwright",
+          "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412",
+            "EN-301-549",
+            "EN-9.4.1.2"
+          ],
+          "nodes": [
+            {
+              "html": "<div class=\"html5-video-player ytp-hide-controls ytp-exp-bottom-control-flexbox ytp-modern-caption ytp-livebadge-color unstarted-mode ytp-small-mode\" tabindex=\"\" id=\"movie_player\" data-version=\"/s/player/5afa7c36/player_embed.vflset/en_US/base.js\" aria-label=\"YouTube Video Player\">",
+              "target": [
+                "iframe",
+                "#movie_player"
+              ],
+              "failureSummary": "Fix all of the following:\n  aria-label attribute cannot be used on a div with no valid role attribute."
+            }
+          ]
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "description": "Ensure buttons have discernible text",
+          "help": "Buttons must have discernible text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/button-name?application=playwright",
+          "tags": [
+            "cat.name-role-value",
+            "wcag2a",
+            "wcag412",
+            "section508",
+            "section508.22.a",
+            "TTv5",
+            "TT6.a",
+            "EN-301-549",
+            "EN-9.4.1.2",
+            "ACT"
+          ],
+          "nodes": [
+            {
+              "html": "<button class=\"ytmVideoInfoLink ytmVideoInfoChannelAvatar\"><img alt=\"thumbnail-image\" class=\"ytCoreImageHost ytmVideoInfoChannelLogo ytCoreImageFillParentHeight ytCoreImageFillParentWidth ytCoreImageContentModeScaleAspectFill\"></button>",
+              "target": [
+                "iframe",
+                ".ytmVideoInfoChannelAvatar"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+            }
+          ]
+        }
+      ],
+      "violationCount": 2,
+      "nodeCount": 2
     },
     {
       "route": "/contact",
