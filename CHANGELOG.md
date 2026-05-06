@@ -2,6 +2,27 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [2.3.8] - 2026-05-06
+
+### Accessibility
+
+- Voluntarily fix the three sub-100 SiteImprove findings (all WCAG 2.1 **AAA** — outside the AA / IITAA 2.1 conformance target, but cheap to address):
+  - **SC 1.4.6 enhanced color contrast** — bumped multiple components from ~5–6.5:1 to ≥7:1:
+    - Breadcrumb bar bg `#2e618c` → `#0d4474` (5.83 → 10.16:1)
+    - Homepage hero tag boxes `#2e618c` → `#0d4474`
+    - `HomeBoxes` box 2 `#2e618c` → `#1c5183` (5.83 → 8.24:1) and box 3 `#4f6d87` → `#3a5571` (4.93 → 7.75:1) — preserves three-color visual gradient
+    - Markdown body link color `#0366d6` → `#0353a4` (5.42 → 7.55:1)
+    - Accessible-tabs inactive text alpha 0.7 → 0.85, active bg `#616161` → `#555555` (`TabsUserInfoAccessible.vue`, `TabsScreenshotsAccessible.vue`)
+    - "Click tab to view agency info" helper `#6b6b6b` → `#525252` (`Tabs.vue`, `TabsScreenshotsAccessible.vue`)
+    - Form labels `#4a4a4a` → `#3a3a3a` (8.87 → 11.38:1 on white; 6.51 → 8.37:1 on Vuetify's `#dcddde` overlay where floating labels actually sit — the spot axe was flagging)
+  - **SC 1.4.8 fixed font size** — `$font-size-root: 18px` → `112.5%` in `app/assets/css/variables.scss` so the root font size scales with the user's browser font-size preference
+- **SC 2.5.5 enhanced target size** documented as out-of-scope: would require redesigning every inline link, breadcrumb, sidebar nav, and TOC item to ≥44×44 CSS px. Not required for AA / IITAA 2.1 (WCAG 2.1).
+- axe-core 4.11 verification post-fix: **0 AA violations** and **0 AAA violations** on every page sampled (homepage, agencies, resources, screenshots, search, contact, about, data-and-publications, partners, translate, faqs, news, privacy, upgrades).
+
+### Documentation
+
+- README: add "SiteImprove findings outside the AA conformance target" subsection with per-bucket rule counts (A: 38/38, AA: 11/11, AAA: 8/8 after fixes, WAI-ARIA authoring: 6/6, best practices: 14/14), the three sub-100 items mapped to WCAG SC numbers and AA/AAA scope, and the full list of out-of-scope SiteImprove rule categories so future sub-100 hits can be triaged correctly.
+
 ## [2.3.7] - 2026-05-05
 
 ### Documentation

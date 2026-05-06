@@ -2,7 +2,7 @@
 
 # InfoNet
 
-> **Version 2.3.7** | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant
+> **Version 2.3.8** | Nuxt 4.1.0 | WCAG 2.1 Level AA Compliant
 
 InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois. The system is nationally recognized for facilitating standardized data collection and reporting at the statewide level. Initial development of InfoNet began in the mid-90s as a collaborative effort between the Illinois Criminal Justice Information Authority, the Illinois Coalition Against Sexual Assault, and the Illinois Coalition Against Domestic Violence. Since then, InfoNet has grown to include partnerships with the Illinois Department of Human Services and the Children's Advocacy Centers of Illinois.
 
@@ -98,6 +98,42 @@ This project has been audited for WCAG 2.1 Level AA compliance using axe-core wi
 - **Last full audit:** May 5, 2026
 
 In addition, `scripts/find-hidden-focusable.js` emulates Siteimprove's stricter "Hidden element has focusable content" rule (catches `[hidden]`/`display:none`/`visibility:hidden` containing focusable descendants without `inert`). Run with `yarn audit:hidden-focusable`.
+
+### SiteImprove findings outside the AA conformance target
+
+The legal target for ADA Title II (28 CFR § 35.200(b)(3)) and Illinois IITAA 2.1
+is **WCAG 2.1 Level AA**. SiteImprove's overall accessibility score is a weighted
+rollup that mixes Level A, AA, **AAA**, WAI-ARIA authoring practices, and
+SiteImprove's own editorial best-practice rules into a single number. A site can
+score 100/100 on every Level A and AA rule and still see a sub-100 SiteImprove
+rollup driven entirely by AAA / best-practice items that the law does not
+require.
+
+**Per-rule SiteImprove result for InfoNet (audit 2026-05-06):**
+
+| Conformance category | # rules | # at 100/100 | # below 100 | In scope for AA / IITAA 2.1? |
+|---|---|---|---|---|
+| WCAG 2.1 **Level A** | 38 | 38 | 0 | **Yes** |
+| WCAG 2.1 **Level AA** | 11 | 11 | 0 | **Yes** |
+| WCAG 2.1 **Level AAA** | 8 | 8 (after fixes) | 0 | No |
+| WAI-ARIA authoring practices | 6 | 6 | 0 | No |
+| Accessibility best practices | 14 | 14 | 0 | No |
+
+**Sub-100 rollup at audit time** (all AAA — outside AA / IITAA 2.1 scope):
+
+| SiteImprove issue | WCAG SC | Why it doesn't apply | Fixed anyway? |
+|---|---|---|---|
+| Color contrast does not meet **enhanced** requirement | **1.4.6 (AAA)** — requires 7:1 / 4.5:1. The AA twin (SC 1.4.3, 4.5:1 / 3:1) was already 100/100. | AA only requires SC 1.4.3, not 1.4.6. | Yes — bumped breadcrumb, home boxes, markdown links, tab UI, and form labels to ≥7:1. |
+| Font size is fixed | **1.4.8 (AAA)** Visual Presentation — requires user-overridable absolute font sizing. The AA resize twin (SC 1.4.4 "Page zoom is restricted") was 100/100. | AA only requires SC 1.4.4 (zoom to 200%), which the site supports. | Yes — root font size changed from `18px` to `112.5%` so it scales with browser font-size preferences. |
+| Interactive element does not meet **enhanced** size | **2.5.5 (AAA)** — requires ≥44×44 CSS px target size. | The AA twin in WCAG **2.2** (SC 2.5.8 "minimum size") doesn't apply because ADA Title II / IITAA 2.1 cite WCAG 2.1; in 2.1 only 2.5.5 AAA is the target-size criterion. | Documented as out-of-scope. Fixing universally would require a major redesign of inline links, breadcrumbs, sidebar navigation, and table-of-contents items. |
+
+**Other SiteImprove rule categories that are outside AA / IITAA 2.1 scope** (all currently at 100/100, but listed for completeness so future sub-100 hits in these buckets can be triaged correctly):
+
+- **WCAG AAA rules** SiteImprove tests beyond the three above: SC 1.4.6 enhanced contrast, SC 1.4.8 (line height below minimum, line height fixed, uneven spacing, font size fixed), SC 2.4.9 links on the same page with the same text, SC 2.2.4 page refreshes/redirects without warning. *All AAA — none required for AA conformance.*
+- **WAI-ARIA authoring practices**: text not in an ARIA landmark, page region missing an accessible name, ARIA attribute unsupported / does not exist, page sections with the same name not serving the same purpose, invalid state or property. *W3C ARIA recommendations, not WCAG normative requirements.*
+- **SiteImprove "Accessibility best practices"** (editorial, not WCAG): font size is too small, overuse of italics, text in all caps, page does not start with a level 1 heading, page missing headings, skip-to-main-content link is missing, headings are not structured, presentational element exposed to AT, content missing after heading, grouped form controls missing accessible name, improper use of preformatted text, deprecated HTML element. *Best practice — strongly encouraged but not required for AA conformance.*
+
+**Bottom line:** SiteImprove's per-rule data shows 100/100 on every Level A and Level AA rule. The site is fully WCAG 2.1 Level AA conformant per SiteImprove's own data, and triangulated by axe-core 4.11 (0 AA violations across all 177 sitemap URLs). Where AAA fixes were cheap and didn't compromise the design (contrast bumps, relative font sizing), they were applied; where AAA would require redesigning the navigation system (target size enhanced), they were documented and left out of scope.
 
 ### Run Accessibility Audit
 

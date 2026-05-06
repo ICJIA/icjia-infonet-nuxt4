@@ -16,7 +16,7 @@
             style="
               font-weight: 900;
               color: #fff;
-              background: #2e618c;
+              background: #0d4474;
               display: inline-block;
               padding: 5px 10px;
               border-radius: 5px;
@@ -51,7 +51,7 @@
               style="
                 font-weight: 900;
                 color: #fff;
-                background: #2e618c;
+                background: #0d4474;
                 display: inline-block;
                 padding: 5px 10px;
                 border-radius: 3px;

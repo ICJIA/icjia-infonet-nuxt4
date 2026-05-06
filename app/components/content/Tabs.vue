@@ -7,7 +7,7 @@
             <!-- <div class="py-12"><strong>isMobile: </strong>{{ mobile }}</div> -->
             <div
               class="text-center mb-4 pr-2"
-              style="font-size: 12px; font-weight: 900; color: #6b6b6b"
+              style="font-size: 12px; font-weight: 900; color: #525252"
             >
               Click tab to view agency info.
             </div>

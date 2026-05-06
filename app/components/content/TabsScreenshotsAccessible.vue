@@ -6,7 +6,7 @@
           <div v-if="isMounted">
             <div
               class="text-center mb-4 pr-2"
-              style="font-size: 12px; font-weight: 900; color: #6b6b6b"
+              style="font-size: 12px; font-weight: 900; color: #525252"
             >
               Click tab to view agency info.
             </div>
@@ -326,7 +326,7 @@ onUnmounted(() => {
   flex-shrink: 0;
   background-color: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.85);
   font-family: "Lato", sans-serif;
   font-size: 14px;
   font-weight: 900;
@@ -356,7 +356,8 @@ onUnmounted(() => {
 
 .accessible-tab-active {
   color: #ffffff;
-  background-color: #616161;
+  /* #555555 keeps white text at 7.46:1 contrast (passes WCAG SC 1.4.6 AAA). */
+  background-color: #555555;
 }
 
 .accessible-tab:focus {

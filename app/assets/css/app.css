@@ -215,14 +215,15 @@ ul.cohort-list li {
   border: 0;
 }
 
-/* Accessibility fix: Improve form label contrast for WCAG AA compliance */
-/* Using #4a4a4a provides contrast ratio of 7.1:1 (exceeds WCAG AA requirement of 4.5:1) */
-/* This ensures WCAG AA compliance for all form labels across the application */
+/* Accessibility fix: form-label contrast.
+   #3a3a3a gives ≥7:1 contrast on both pure white (11.4:1) and Vuetify's
+   filled-variant overlay #dcddde (8.4:1), so floating labels — which sit
+   over the .v-field__overlay — also clear WCAG SC 1.4.6 (AAA). */
 
 /* Override Vuetify's CSS custom properties that control label color */
 /* Vuetify uses --v-theme-on-surface-variant (as RGB triplet) for unfocused labels */
 :root {
-  --v-theme-on-surface-variant: 74, 74, 74 !important;
+  --v-theme-on-surface-variant: 58, 58, 58 !important;
 }
 
 /* Override at the component level to ensure specificity over Vuetify's scoped styles */
@@ -230,14 +231,14 @@ ul.cohort-list li {
 .v-application .v-field--focused .v-label.v-field-label,
 .v-application .v-input .v-label.v-field-label,
 .v-application .v-textarea .v-label.v-field-label {
-  color: #4a4a4a !important;
+  color: #3a3a3a !important;
   opacity: 1 !important;
 }
 
 /* Also target via the Vuetify field wrapper to override inline style attribute */
 .v-field .v-field__overlay + .v-label,
 .v-field .v-label {
-  color: #4a4a4a !important;
+  color: #3a3a3a !important;
   opacity: 1 !important;
 }
 

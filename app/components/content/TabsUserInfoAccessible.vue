@@ -229,7 +229,7 @@ onUnmounted(() => {
   flex-shrink: 0;
   background-color: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.85);
   font-family: "Lato", sans-serif;
   font-size: 14px;
   font-weight: 900;
@@ -280,8 +280,9 @@ onUnmounted(() => {
 
 .accessible-tab-active {
   color: #ffffff;
-  /* Slightly lighter background for active tab - maintains AA contrast */
-  background-color: #616161; /* grey-darken-2 - lighter than base #424242 */
+  /* Lighter than the #424242 container for visual selection state.
+     #555555 keeps white text at 7.46:1 contrast (passes WCAG SC 1.4.6 AAA). */
+  background-color: #555555;
 }
 
 .accessible-tab-active::after {

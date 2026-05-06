@@ -4,4 +4,6 @@
 // Custom variable overrides
 $body-font-family: "Lato";
 // $heading-font-family: 'Raleway';
-$font-size-root: 18px;
+// 112.5% of the user-agent default (typically 16px → 18px), but scales with
+// the user's browser font-size setting. Required for WCAG SC 1.4.8 (AAA).
+$font-size-root: 112.5%;
