@@ -12,6 +12,8 @@
 // Font: Raleway 900 for the large INFONET title (same weight / color as nav).
 // Color: #0d4270 (nav brand color, confirmed in AppNav.astro / legacy CSS).
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import HomeBoxes from '~/components/HomeBoxes.astro';
+import HomeBarGraph from '~/components/HomeBarGraph.astro';
 
 const description =
   'InfoNet is a web-based data collection and reporting system used by victim service providers ' +
@@ -51,7 +53,8 @@ const description =
     </div>
   </section>
 
-  {/* TODO: Phase 5b — HomeBarGraph (chart), HomeBoxes, HomePosts, HomeEvents, InfoNet Research carousel */}
+  <HomeBarGraph />
+  <HomeBoxes />
 </BaseLayout>
 
 <style>

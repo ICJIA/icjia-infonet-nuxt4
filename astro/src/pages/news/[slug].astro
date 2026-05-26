@@ -7,6 +7,8 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 import CmsImage from '~/components/CmsImage.astro';
 import PostedMeta from '~/components/PostedMeta.astro';
 import LastUpdated from '~/components/LastUpdated.astro';
+import ReadProgress from '~/components/ReadProgress.astro';
+import Toc from '~/components/Toc.astro';
 import { strapiFetch } from '~/lib/strapi';
 import { QUERY_POST_LIST } from '~/lib/queries';
 import { PostListResponseSchema } from '~/lib/schemas';
@@ -27,7 +29,7 @@ const attr = post.attributes;
 // Date precedence: dateOverride > createdAt
 const displayDate = attr.dateOverride ?? attr.createdAt ?? null;
 
-const { html } = renderMarkdown(attr.body);
+const { html, headings } = renderMarkdown(attr.body);
 
 // Splash image — Strapi v4 nested under data.attributes
 const splashAttr = attr.splash?.data?.attributes;
@@ -56,11 +58,13 @@ const description = attr.summary ?? attr.title ?? '';
   ogImage={splashUrl ?? undefined}
   breadcrumbTitle="News & Updates"
 >
+  <ReadProgress />
   <article class="post-detail">
     <header class="post-header">
       <h1>{attr.title}</h1>
       <PostedMeta date={displayDate} author={attr.category ?? undefined} />
     </header>
+    {headings.length >= 2 && <Toc headings={headings} />}
 
     {splashUrl && (
       <figure class="post-splash">
