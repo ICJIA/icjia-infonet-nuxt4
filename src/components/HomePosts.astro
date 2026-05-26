@@ -1,0 +1,188 @@
+---
+// astro/src/components/HomePosts.astro
+//
+// Home page "News & Updates" section.
+// Port of the news section in legacy app/pages/index.vue.
+//
+// Fetches the 3 most recent posts (by createdAt desc) and renders them as
+// news preview cards. Mirrors the legacy NewsCard.vue style:
+//   - date (formatted)
+//   - bold title (h3)
+//   - summary (truncated to 250 chars)
+//   - "Read more »" link to /news/<slug>/
+//
+// Section header: h2 "News & Updates" + right-aligned "All News »" button.
+// Hairline border-top below header row.
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_POST_LIST } from '~/lib/queries';
+import { PostListResponseSchema } from '~/lib/schemas';
+import { formatDate } from '~/lib/dates';
+
+const raw = await strapiFetch(QUERY_POST_LIST);
+const parsed = PostListResponseSchema.parse(raw);
+const posts = parsed.posts.data
+  .sort(
+    (a, b) =>
+      new Date(b.attributes.createdAt ?? 0).getTime() -
+      new Date(a.attributes.createdAt ?? 0).getTime(),
+  )
+  .slice(0, 3);
+
+function truncate(s: string | null | undefined, max = 250): string {
+  if (!s) return '';
+  const cleaned = s.replace(/\s+/g, ' ').trim();
+  if (cleaned.length <= max) return cleaned;
+  const cut = cleaned.slice(0, max - 3);
+  const sp = cut.lastIndexOf(' ');
+  return cut.slice(0, sp > max * 0.6 ? sp : max - 3) + '...';
+}
+---
+
+<section class="home-posts">
+  <div class="home-posts__header">
+    <h2 class="home-posts__heading">News &amp; Updates</h2>
+    <a href="/news/" class="home-posts__all-btn" aria-label="All News &amp; Updates">
+      All News&nbsp;&raquo;
+    </a>
+  </div>
+  <div class="home-posts__rule"></div>
+
+  <div class="home-posts__list">
+    {posts.map((post) => {
+      const attr = post.attributes;
+      const href = `/news/${attr.slug}/`;
+      const displayDate = attr.dateOverride ?? attr.createdAt ?? null;
+      const dateStr = formatDate(displayDate, 'short');
+      const summary = truncate(attr.summary);
+
+      return (
+        <article class="home-post-card">
+          <a href={href} class="home-post-card__link">
+            {dateStr && (
+              <time class="home-post-card__date" datetime={displayDate ?? undefined}>
+                {dateStr}
+              </time>
+            )}
+            <h3 class="home-post-card__title">{attr.title ?? '(untitled)'}</h3>
+            {summary && (
+              <p class="home-post-card__summary">{summary}</p>
+            )}
+            <span class="home-post-card__more">Read more&nbsp;&raquo;</span>
+          </a>
+        </article>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  .home-posts {
+    margin-bottom: 2rem;
+  }
+
+  .home-posts__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0;
+  }
+
+  .home-posts__heading {
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .home-posts__all-btn {
+    display: inline-block;
+    background: #0D4474;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    text-decoration: none;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-bottom: 4px;
+  }
+
+  .home-posts__all-btn:hover,
+  .home-posts__all-btn:focus {
+    background: #0a3560;
+    text-decoration: none;
+  }
+
+  .home-posts__rule {
+    border-top: 1px solid #222;
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+
+  .home-posts__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* News preview card */
+  .home-post-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    transition: box-shadow 200ms ease;
+  }
+
+  .home-post-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+  }
+
+  .home-post-card__link {
+    display: block;
+    padding: 16px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .home-post-card__link:focus-visible {
+    outline: 2px solid #0d4270;
+    outline-offset: -2px;
+  }
+
+  .home-post-card__date {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 4px;
+  }
+
+  .home-post-card__title {
+    font-size: 1.125rem;
+    font-weight: 900;
+    color: #0d4270;
+    margin: 0 0 12px;
+    border: none;
+    padding: 0;
+    line-height: 1.25;
+  }
+
+  .home-post-card__summary {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: #444;
+    margin: 0 0 12px;
+  }
+
+  .home-post-card__more {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+</style>
