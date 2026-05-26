@@ -1,11 +1,41 @@
+# netlify.toml
+#
+# Production (main) builds the legacy Nuxt 4 source from the repo root.
+# Branch deploys + deploy previews build the Astro source from astro/.
+# Phase 7 cutover flips the [build] block to use astro/ for production too.
+
+[build]
+  base = "."
+  command = "yarn generate"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22.22.2"
+
+# --- Astro branch deploy (feat/astro-migration and any other non-main branch) ---
+[context.branch-deploy]
+  base = "astro"
+  command = "pnpm build"
+  publish = "dist"     # resolves to astro/dist relative to base="astro"
+
+[context.branch-deploy.environment]
+  NODE_VERSION = "22.22.2"
+  PNPM_VERSION = "10.33.0"
+
+# --- Astro deploy preview (PRs) ---
+[context.deploy-preview]
+  base = "astro"
+  command = "pnpm build"
+  publish = "dist"
+
+[context.deploy-preview.environment]
+  NODE_VERSION = "22.22.2"
+  PNPM_VERSION = "10.33.0"
+
+# --- Headers (apply to ALL contexts) ---
+
 [[headers]]
   for = "/*"
   [headers.values]
-   ## X-Frame-Options = "SAMEORIGIN"
-   ## X-XSS-Protection = "1; mode=block"
-  ##  Referrer-Policy = "no-referrer"
-  ##  X-Content-Type-Options = "nosniff"
-   
     Access-Control-Allow-Origin = "*"
     X-Greeting = "Hello from Chicago!"
-   
