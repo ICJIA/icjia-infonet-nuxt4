@@ -1,0 +1,240 @@
+---
+// astro/src/components/AppSidebar.astro
+//
+// Mobile navigation drawer. Port of legacy TheSidebar.vue.
+//
+// State pattern: Alpine.js LOCAL x-data per component (NOT global $store).
+//   - "open" boolean drives visibility.
+//   - Hamburger in AppNav dispatches CustomEvent('drawer-toggle') on window;
+//     this component listens with @drawer-toggle.window.
+//   - body.drawer-open class applied when open; removed when closed.
+//   - Focus trap via x-trap.noscroll.inert="open" (@alpinejs/focus).
+//   - Escape key closes drawer globally.
+//   - Backdrop click closes drawer.
+//   - Every nav link clicks close the drawer.
+//
+// Visual spec matches legacy Vuetify v-navigation-drawer:
+//   - Width 280px, slide-in from left
+//   - White background, dark text
+//   - Items with children: native <details><summary> accordions
+//   - Items without children: plain <a>
+//   - utilityLinks section below separator (Search / Translate / Contact)
+
+import { sidebarMenu, utilityLinks } from '~/lib/menu';
+const pathname = Astro.url.pathname;
+---
+
+<aside
+  x-data="{ open: false }"
+  @drawer-toggle.window="open = !open; document.body.classList.toggle('drawer-open', open)"
+  @keydown.escape.window="if (open) { open = false; document.body.classList.remove('drawer-open'); }"
+  aria-label="Mobile navigation"
+  style="display: contents;"
+>
+  <!-- Backdrop -->
+  <div
+    x-show="open"
+    x-cloak
+    x-transition:enter="transition-opacity duration-200 ease-out"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition-opacity duration-200 ease-in"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    @click="open = false; document.body.classList.remove('drawer-open');"
+    aria-hidden="true"
+    style="
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 199;
+    "
+  ></div>
+
+  <!-- Drawer panel -->
+  <nav
+    id="mobile-navigation"
+    x-show="open"
+    x-cloak
+    x-trap.noscroll.inert="open"
+    x-transition:enter="transition-transform duration-250 ease-out"
+    x-transition:enter-start="-translate-x-full"
+    x-transition:enter-end="translate-x-0"
+    x-transition:leave="transition-transform duration-200 ease-in"
+    x-transition:leave-start="translate-x-0"
+    x-transition:leave-end="-translate-x-full"
+    aria-label="Mobile navigation"
+    style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 100%;
+      background: #ffffff;
+      z-index: 200;
+      overflow-y: auto;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+    "
+  >
+    <ul style="list-style: none; margin: 0; padding: 0;">
+      {sidebarMenu.map((menu) => (
+        <li>
+          {menu.children ? (
+            <details class="sidebar-group">
+              <summary
+                class="sidebar-link sidebar-link--parent"
+                style="font-weight: 900; color: rgba(0,0,0,0.87); cursor: pointer;"
+              >
+                {menu.main}
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  class="sidebar-chevron"
+                  style="margin-left: auto; flex-shrink: 0; transition: transform 0.2s;"
+                >
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </summary>
+              <ul style="list-style: none; margin: 0; padding: 0;">
+                {menu.children.map((child) => (
+                  <li>
+                    {child.section && (
+                      <span
+                        class="sidebar-section-label"
+                        role="heading"
+                        aria-level={4}
+                        style="display: block; padding: 8px 16px; font-weight: 900; font-size: 0.875rem; color: #555;"
+                      >
+                        {child.section}
+                      </span>
+                    )}
+                    {child.divider && (
+                      <hr style="margin: 0; border: none; border-top: 1px solid rgba(0,0,0,0.12);" />
+                    )}
+                    {child.title && child.link && (
+                      <a
+                        href={child.link}
+                        aria-current={pathname === child.link ? 'page' : undefined}
+                        @click="open = false; document.body.classList.remove('drawer-open');"
+                        class="sidebar-child-link"
+                        style="
+                          display: block;
+                          padding: 8px 16px 8px 40px;
+                          font-weight: 400;
+                          font-size: 0.875rem;
+                          color: #555;
+                          text-decoration: none;
+                          min-height: 40px;
+                          line-height: 1.5;
+                        "
+                        {...(child.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      >
+                        {child.title}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ) : (
+            <a
+              href={menu.link}
+              aria-current={pathname === menu.link ? 'page' : undefined}
+              @click="open = false; document.body.classList.remove('drawer-open');"
+              class="sidebar-link"
+              style="
+                font-weight: 900;
+                color: rgba(0,0,0,0.87);
+                text-decoration: none;
+              "
+              {...(menu.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              {menu.main}
+            </a>
+          )}
+        </li>
+      ))}
+
+      <!-- Separator -->
+      <li aria-hidden="true">
+        <hr style="margin: 12px 0; border: none; border-top: 1px solid rgba(0,0,0,0.12);" />
+      </li>
+
+      <!-- Utility links: Search / Translate / Contact -->
+      {utilityLinks.map((item) => (
+        <li>
+          <a
+            href={item.link}
+            aria-current={pathname === item.link ? 'page' : undefined}
+            @click="open = false; document.body.classList.remove('drawer-open');"
+            class="sidebar-link sidebar-link--utility"
+            style="
+              font-weight: 400;
+              color: rgba(0,0,0,0.87);
+              text-decoration: none;
+            "
+          >
+            {item.main}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</aside>
+
+<style>
+/* Shared link base */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.875rem;
+  min-height: 40px;
+  line-height: 1.5;
+  transition: background-color 0.2s;
+}
+.sidebar-link:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.sidebar-link:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: -2px;
+}
+.sidebar-link[aria-current="page"] {
+  background-color: rgba(25, 118, 210, 0.12);
+  color: #1976d2 !important;
+}
+
+/* Child links — indented */
+.sidebar-child-link:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.sidebar-child-link:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: -2px;
+}
+.sidebar-child-link[aria-current="page"] {
+  background-color: rgba(25, 118, 210, 0.12);
+  color: #1976d2 !important;
+}
+
+/* <details> group — reset browser default marker */
+.sidebar-group {
+  list-style: none;
+}
+.sidebar-group > summary {
+  list-style: none;
+}
+.sidebar-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Rotate chevron when open */
+.sidebar-group[open] .sidebar-chevron {
+  transform: rotate(180deg);
+}
+</style>
