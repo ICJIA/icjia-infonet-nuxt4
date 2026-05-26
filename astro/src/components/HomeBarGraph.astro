@@ -1,0 +1,177 @@
+---
+// astro/src/components/HomeBarGraph.astro
+//
+// Port of legacy app/components/content/HomeBarGraph.vue.
+// Bar chart: "Domestic and Sexual Violence Victims Who Received Services
+// in Illinois, 2018-2024". Chart.js renders into a <canvas>. An
+// accessible data table is provided as a <details> fallback.
+//
+// Dataset ported verbatim from legacy HomeBarGraph.vue:
+//   2018: 70,133 | 2019: 72,905 | 2020: 60,717 | 2021: 61,857
+//   2022: 61,259 | 2023: 63,211 | 2024: 63,557
+//
+// Accessibility:
+//   - canvas has aria-label describing the chart content
+//   - Full data exposed in a <details>/<table> below the chart
+//   - prefers-reduced-motion: animation disabled when motion is reduced
+---
+
+<figure class="home-bar-graph">
+  <figcaption class="home-bar-graph__caption">
+    <strong>
+      Domestic and Sexual Violence Victims Who Received Services in Illinois, 2018–2024
+    </strong>
+  </figcaption>
+
+  <div class="home-bar-graph__canvas-wrap">
+    <canvas
+      id="home-bar-graph-canvas"
+      aria-label="Bar chart of domestic and sexual violence victims who received services in Illinois from 2018 to 2024. Data table below."
+      width="600"
+      height="400"
+    ></canvas>
+  </div>
+
+  <details class="home-bar-graph__table-wrap">
+    <summary>Show data table (accessible alternative)</summary>
+    <table class="home-bar-graph__table">
+      <caption>Domestic and Sexual Violence Victims Who Received Services, 2018–2024</caption>
+      <thead>
+        <tr>
+          <th scope="col">Year</th>
+          <th scope="col">Number of victims served</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>2018</td><td>70,133</td></tr>
+        <tr><td>2019</td><td>72,905</td></tr>
+        <tr><td>2020</td><td>60,717</td></tr>
+        <tr><td>2021</td><td>61,857</td></tr>
+        <tr><td>2022</td><td>61,259</td></tr>
+        <tr><td>2023</td><td>63,211</td></tr>
+        <tr><td>2024</td><td>63,557</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <p class="home-bar-graph__source">
+    <small>Source: InfoNet System</small>
+  </p>
+</figure>
+
+<script>
+  import { Chart } from 'chart.js/auto';
+
+  const canvas = document.getElementById('home-bar-graph-canvas');
+  if (canvas instanceof HTMLCanvasElement) {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+        datasets: [
+          {
+            label: 'Victims who received services',
+            backgroundColor: '#0D4471',
+            data: [70133, 72905, 60717, 61857, 61259, 63211, 63557],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: prefersReducedMotion ? false : { duration: 800 },
+        plugins: {
+          legend: { display: false },
+          title: { display: false },
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            ticks: {
+              callback: (value) =>
+                typeof value === 'number'
+                  ? value.toLocaleString()
+                  : value,
+            },
+          },
+        },
+      },
+    });
+  }
+</script>
+
+<style>
+  .home-bar-graph {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 32px;
+    text-align: center;
+    margin: 0;
+  }
+
+  .home-bar-graph__caption {
+    font-size: 18px;
+    display: block;
+    margin: 0 0 16px;
+    border: none;
+  }
+
+  .home-bar-graph__canvas-wrap {
+    min-height: 25vh;
+    position: relative;
+    padding-bottom: 40px;
+  }
+
+  .home-bar-graph__table-wrap {
+    margin: 16px 0 0;
+    text-align: left;
+  }
+
+  .home-bar-graph__table-wrap summary {
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: #555;
+    padding: 4px 0;
+  }
+
+  .home-bar-graph__table-wrap summary:focus-visible {
+    outline: 2px solid #0d4270;
+    outline-offset: 2px;
+  }
+
+  .home-bar-graph__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 0.875rem;
+  }
+
+  .home-bar-graph__table caption {
+    font-weight: 700;
+    padding: 6px 0;
+    text-align: left;
+  }
+
+  .home-bar-graph__table th,
+  .home-bar-graph__table td {
+    border: 1px solid #e0e0e0;
+    padding: 6px 12px;
+    text-align: left;
+  }
+
+  .home-bar-graph__table thead th {
+    background: #f5f5f5;
+    font-weight: 700;
+  }
+
+  .home-bar-graph__source {
+    margin: 12px 0 0;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+  }
+</style>
