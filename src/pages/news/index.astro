@@ -12,8 +12,10 @@ import { PostListResponseSchema } from '~/lib/schemas';
 
 const raw = await strapiFetch(QUERY_POST_LIST);
 const parsed = PostListResponseSchema.parse(raw);
-const posts = parsed.posts.data.sort((a, b) =>
-  new Date(b.attributes.createdAt ?? 0).getTime() - new Date(a.attributes.createdAt ?? 0).getTime()
+const displayDate = (p: (typeof parsed.posts.data)[number]) =>
+  p.attributes.dateOverride ?? p.attributes.createdAt ?? null;
+const posts = parsed.posts.data.sort(
+  (a, b) => new Date(displayDate(b) ?? 0).getTime() - new Date(displayDate(a) ?? 0).getTime()
 );
 const [first, ...rest] = posts;
 ---
