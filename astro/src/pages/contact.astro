@@ -1,0 +1,219 @@
+---
+// astro/src/pages/contact.astro
+//
+// Port of app/pages/contact.vue (308 lines, Vuetify-free).
+//
+// Form submission wires:
+//   POST https://infonet.icjia-api.cloud/api/forms  (DB insert)
+//   POST https://mail.icjia.cloud/internet/infonet   (email)
+// Both endpoints are called via Alpine.js fetch() on submit.
+// TODO: Phase 4 follow-up — add proper error UI and retry logic if either
+//       endpoint fails (currently mirrors legacy behaviour: console.log only).
+import BaseLayout from '~/layouts/BaseLayout.astro';
+---
+<BaseLayout title="Contact" breadcrumbTitle="Contact InfoNet">
+  <h1>Contact InfoNet</h1>
+
+  <div
+    x-data="{
+      subject: '',
+      firstname: '',
+      lastname: '',
+      email: '',
+      phone: '',
+      message: '',
+      submitted: false,
+      errors: {},
+      validate() {
+        this.errors = {};
+        if (!this.subject.trim()) this.errors.subject = 'Subject is required';
+        if (!this.firstname.trim()) this.errors.firstname = 'First name is required';
+        if (!this.lastname.trim()) this.errors.lastname = 'Last name is required';
+        if (!this.email.trim()) this.errors.email = 'Email is required';
+        else if (!/^[^@]+@[^@]+\.[^@]+$/.test(this.email)) this.errors.email = 'Email must be valid';
+        if (!this.phone.trim()) this.errors.phone = 'Phone number is required';
+        if (!this.message.trim()) this.errors.message = 'Message is required';
+        return Object.keys(this.errors).length === 0;
+      },
+      sanitize(str) {
+        return str.replace(/[^a-z0-9áéíóúñü .,_-]/gim, '').trim();
+      },
+      async submitForm() {
+        if (!this.validate()) return;
+        const form = {
+          type: 'InfoNet Contact',
+          subject: this.sanitize(this.subject),
+          firstname: this.sanitize(this.firstname),
+          lastname: this.sanitize(this.lastname),
+          email: this.sanitize(this.email),
+          phone: this.sanitize(this.phone),
+          message: this.sanitize(this.message),
+        };
+        try {
+          await fetch('https://infonet.icjia-api.cloud/api/forms', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: { type: form.type, email: form.email, subject: form.subject, form } }),
+          });
+        } catch(e) { console.log('db insert failure', e); }
+        try {
+          await fetch('https://mail.icjia.cloud/internet/infonet', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(form),
+          });
+        } catch(e) { console.log('email failure', e); }
+        this.submitted = true;
+      },
+      clearForm() {
+        this.subject = ''; this.firstname = ''; this.lastname = '';
+        this.email = ''; this.phone = ''; this.message = '';
+        this.errors = {}; this.submitted = false;
+      }
+    }"
+    style="max-width: 720px;"
+  >
+    <form
+      x-show="!submitted"
+      @submit.prevent="submitForm"
+      novalidate
+      style="margin-top: 16px;"
+    >
+      <!-- Subject -->
+      <div style="margin-bottom: 16px;">
+        <label for="contact-subject" style="display:block;font-weight:700;margin-bottom:4px;">
+          Subject <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="contact-subject"
+          type="text"
+          x-model="subject"
+          autocomplete="off"
+          required
+          aria-required="true"
+          :aria-describedby="errors.subject ? 'err-subject' : null"
+          style="width:100%;border:1px solid #aaa;border-radius:4px;padding:8px 12px;font-size:1rem;font-family:inherit;"
+        />
+        <span id="err-subject" x-show="errors.subject" x-text="errors.subject" style="color:#c62828;font-size:0.8rem;" role="alert"></span>
+      </div>
+
+      <!-- First / Last name row -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label for="contact-firstname" style="display:block;font-weight:700;margin-bottom:4px;">
+            First Name <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="contact-firstname"
+            type="text"
+            x-model="firstname"
+            autocomplete="given-name"
+            required
+            aria-required="true"
+            :aria-describedby="errors.firstname ? 'err-firstname' : null"
+            style="width:100%;border:1px solid #aaa;border-radius:4px;padding:8px 12px;font-size:1rem;font-family:inherit;"
+          />
+          <span id="err-firstname" x-show="errors.firstname" x-text="errors.firstname" style="color:#c62828;font-size:0.8rem;" role="alert"></span>
+        </div>
+        <div>
+          <label for="contact-lastname" style="display:block;font-weight:700;margin-bottom:4px;">
+            Last Name <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="contact-lastname"
+            type="text"
+            x-model="lastname"
+            autocomplete="family-name"
+            required
+            aria-required="true"
+            :aria-describedby="errors.lastname ? 'err-lastname' : null"
+            style="width:100%;border:1px solid #aaa;border-radius:4px;padding:8px 12px;font-size:1rem;font-family:inherit;"
+          />
+          <span id="err-lastname" x-show="errors.lastname" x-text="errors.lastname" style="color:#c62828;font-size:0.8rem;" role="alert"></span>
+        </div>
+      </div>
+
+      <!-- Email / Phone row -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label for="contact-email" style="display:block;font-weight:700;margin-bottom:4px;">
+            Email <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="contact-email"
+            type="email"
+            x-model="email"
+            autocomplete="email"
+            required
+            aria-required="true"
+            :aria-describedby="errors.email ? 'err-email' : null"
+            style="width:100%;border:1px solid #aaa;border-radius:4px;padding:8px 12px;font-size:1rem;font-family:inherit;"
+          />
+          <span id="err-email" x-show="errors.email" x-text="errors.email" style="color:#c62828;font-size:0.8rem;" role="alert"></span>
+        </div>
+        <div>
+          <label for="contact-phone" style="display:block;font-weight:700;margin-bottom:4px;">
+            Phone Number <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="contact-phone"
+            type="tel"
+            x-model="phone"
+            autocomplete="tel"
+            required
+            aria-required="true"
+            :aria-describedby="errors.phone ? 'err-phone' : null"
+            style="width:100%;border:1px solid #aaa;border-radius:4px;padding:8px 12px;font-size:1rem;font-family:inherit;"
+          />
+          <span id="err-phone" x-show="errors.phone" x-text="errors.phone" style="color:#c62828;font-size:0.8rem;" role="alert"></span>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div style="margin-bottom: 24px;">
+        <label for="contact-message" style="display:block;font-weight:700;margin-bottom:4px;">
+          Message <span aria-hidden="true">*</span>
+        </label>
+        <textarea
+          id="contact-message"
+          x-model="message"
+          required
+          aria-required="true"
+          rows="6"
+          :aria-describedby="errors.message ? 'err-message' : null"
+          style="width:100%;border:1px solid #aaa;border-radius:4px;padding:8px 12px;font-size:1rem;font-family:inherit;resize:vertical;"
+        ></textarea>
+        <span id="err-message" x-show="errors.message" x-text="errors.message" style="color:#c62828;font-size:0.8rem;" role="alert"></span>
+      </div>
+
+      <div style="display:flex;gap:12px;justify-content:center;">
+        <button
+          type="submit"
+          style="background:#0d4270;color:#fff;border:none;border-radius:4px;padding:10px 28px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;"
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          @click="clearForm"
+          style="background:transparent;color:#0d4270;border:2px solid #0d4270;border-radius:4px;padding:10px 28px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;"
+        >
+          Clear
+        </button>
+      </div>
+    </form>
+
+    <!-- Success state -->
+    <div
+      x-show="submitted"
+      role="alert"
+      aria-live="assertive"
+      style="text-align:center;margin-top:40px;color:#2e7d32;font-weight:900;"
+    >
+      Your form was successfully submitted!
+      <div style="color:#111;font-weight:400;margin-top:8px;">
+        &laquo;&nbsp;<a href="/" style="color:#111;">Back to home</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
