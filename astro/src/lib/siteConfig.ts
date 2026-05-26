@@ -51,6 +51,8 @@ export const siteConfig = {
     '404', 'translate', 'search', 'contact', 'debug',
     'data-and-publications', 'faqs',
     'news', 'meetings', 'tabs',
+    'index',  // Strapi has a page slug "index" used as home-body content;
+              // exclude it from the catch-all to avoid /index/ route collision
   ] as readonly string[],
 
   // Open Graph defaults

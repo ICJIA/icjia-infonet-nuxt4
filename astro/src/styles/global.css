@@ -26,8 +26,11 @@
 @import '@fontsource/roboto/700.css';
 @import '@fontsource/roboto/900.css';
 
-/* Material Design Icons — kept per pixel-perfect mandate */
-@import '@mdi/font/css/materialdesignicons.css';
+/* Material Design Icons — REMOVED in Phase 4 (88 KiB unused CSS).
+   All icons in AppNav / AppSidebar / AppFooter / SimpleCard use INLINE SVG,
+   so @mdi/font's icon-font CSS isn't needed. Re-introduce only if a future
+   phase needs the .mdi-* font-class style hooks. */
+/* @import '@mdi/font/css/materialdesignicons.css'; */
 
 /* Prose styling for CMS markdown bodies */
 @import './github-markdown.css';
