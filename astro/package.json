@@ -47,6 +47,7 @@
   "devDependencies": {
     "@types/alpinejs": "^3.13.11",
     "@types/markdown-it": "^14.1.2",
+    "pagefind": "^1.5.2",
     "tsx": "^4.22.3"
   }
 }
