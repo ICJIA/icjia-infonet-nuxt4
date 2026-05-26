@@ -3870,3 +3870,29 @@ After fixing CORP, **force a re-scrape** on each platform that previously failed
 - LinkedIn: [Post Inspector](https://www.linkedin.com/post-inspector/)
 - Slack: re-share the link (cache TTL ~30 min)
 - iMessage: clear via `defaults delete com.apple.MobileSMS`
+
+---
+
+## Infonet (2026-05-26) — Phase 1 lessons (v6.1 increment)
+
+### Skip-link forward-reference rule
+
+A skip-link's `href` must point to an element that EXISTS in the DOM in the phase the skip-link ships. Phase 1 only emits the `<main id="main-content">` landmark — the `<nav id="main-navigation">` element doesn't land until Phase 2 ships AppNav.
+
+If BaseLayout Phase 1 includes `<a href="#main-navigation" class="skip-link">Skip to navigation</a>`, Lighthouse's `skip-link` best-practice audit fails with "No skip link target" and mobile A11y drops from 100 to 97 — exit-gate fail.
+
+**Fix:** ship Phase 1 BaseLayout with ONE skip-link (`#main-content`). Add the `#main-navigation` skip-link in Phase 2 when the nav lands. Document this with a comment in the BaseLayout so the Phase 2 implementer remembers to reintroduce it.
+
+axe-core AA does NOT catch this (it's a best-practice rule, not an A/AA rule). Lighthouse does. Both gates must pass.
+
+### Astro 6 emits flat `dist/404.html` (NOT `dist/404/index.html`)
+
+With `trailingSlash: 'always'` in `astro.config.ts`, intuition says 404 should emit as `dist/404/index.html`. It does not — Astro 6 always emits 404 as a flat file. Netlify still serves it for unmatched routes. No remediation needed; just don't reference `dist/404/index.html` in audit logs or build verification scripts.
+
+### Netlify GitHub App not always installed
+
+If a repo wired to Netlify hasn't had the Netlify GitHub App explicitly installed, branch deploys still run, but no commit-status updates are posted to GitHub. `gh api repos/<org>/<repo>/commits/<sha>/statuses` returns `[]` indefinitely.
+
+**Fallback:** run per-phase audits against `astro preview` on `http://localhost:4322/` — it serves the actual `dist/` build artifact (identical to what Netlify deploys). The Lighthouse/axe/viewcap results are unaffected by where the build is served from.
+
+**Long-term:** request the user install the Netlify GitHub App so per-phase audits can hit the branch preview URL directly (matches production network conditions more closely than local preview).
