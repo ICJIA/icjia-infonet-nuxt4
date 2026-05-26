@@ -1,0 +1,121 @@
+---
+// astro/src/pages/data-and-publications/index.astro
+//
+// Port of app/pages/data-and-publications/index.vue (450 lines).
+//
+// Data source: app/data/dataAndPublications.json, copied to astro/src/data/.
+// The JSON is a merged array of 'hub' articles (ICJIA Research Hub) and
+// 'publist' items (PDFs from archive.icjia-api.cloud).
+//
+// Phase 4 ships a flat date-sorted list (no tag filtering).
+// TODO: Phase 5a — add client-side Alpine tag filter (matches legacy chip-group).
+//
+// Link logic:
+//   source === 'hub'     → https://icjia.illinois.gov/researchhub/articles/<slug>
+//   source === 'publist' → article.fileURL (PDF/external)
+// Both open in a new window (external content).
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { formatDate } from '~/lib/dates';
+import pubData from '~/data/dataAndPublications.json';
+
+// Sort by date descending; items with no date go to bottom.
+const articles = [...pubData].sort((a, b) => {
+  const da = a.date ?? '';
+  const db = b.date ?? '';
+  return da > db ? -1 : da < db ? 1 : 0;
+});
+
+function getPublicationType(type: string | null | undefined): string {
+  const map: Record<string, string> = {
+    researchReport: 'Research Report',
+    researchBulletin: 'Research Bulletin',
+    researchAtAGlance: 'Research At A Glance',
+    trendsAndIssuesUpdate: 'Trends and Issues Update',
+    motorVehicleTheftPublications: 'Motor Vehicle Theft Publication',
+    barj: 'BARJ',
+    compiler: 'Compiler',
+    dataset: 'Dataset',
+    getTheFacts: 'GET THE FACTS',
+    programEvaluationSummary: 'Program Evaluation Summary',
+    megProfiles: 'MEG Profiles',
+    annualReport: 'Annual Report',
+    article: 'Article',
+    report: 'Report',
+    evaluation: 'Evaluation',
+    toolkit: 'Toolkit',
+    onGoodAuthority: 'On Good Authority',
+    application: 'Application',
+  };
+  return type ? (map[type] ?? 'Publication') : 'Publication';
+}
+
+function getArticleHref(article: typeof articles[0]): string {
+  if (article.source === 'hub') {
+    return `https://icjia.illinois.gov/researchhub/articles/${article.slug}`;
+  }
+  return article.fileURL ?? '#';
+}
+---
+<BaseLayout
+  title="InfoNet & Other Victim Services Research"
+  breadcrumbTitle="Data & Publications"
+>
+  <h1>InfoNet &amp; Other Victim Services Research</h1>
+
+  <p style="color:#666;font-size:0.875rem;margin-bottom:8px;">
+    {articles.length} item{articles.length !== 1 ? 's' : ''}
+  </p>
+
+  <!-- TODO: Phase 5a — add Alpine.js tag filter chip-group here -->
+
+  <div style="margin-top: 24px;">
+    {articles.map((article) => {
+      const href = getArticleHref(article);
+      const pubType = getPublicationType(article.pubType);
+      const displayDate = formatDate(article.date, 'short');
+      const abstract = article.abstract
+        ? (article.abstract.length > 350 ? article.abstract.slice(0, 350) + '...' : article.abstract)
+        : '';
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${article.title} — opens in new window`}
+          style="display:block;text-decoration:none;color:inherit;margin-bottom:20px;"
+        >
+          <article
+            style="
+              border: 1px solid #e0e0e0;
+              border-radius: 4px;
+              padding: 16px 20px;
+              background: #fafafa;
+              transition: box-shadow 0.2s ease;
+            "
+            onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.12)'"
+            onmouseout="this.style.boxShadow='none'"
+          >
+            <div style="font-size:0.75rem;margin-bottom:8px;">
+              {displayDate && (
+                <span style="font-weight:700;color:#000;text-transform:uppercase;">{displayDate}</span>
+              )}
+              {displayDate && <span style="color:#999;"> | </span>}
+              <span style="color:#555;text-transform:uppercase;">{pubType}</span>
+            </div>
+            <h3 style="margin:0 0 10px;font-size:1rem;font-weight:900;color:#0d4270;">
+              {article.title}
+            </h3>
+            {abstract && (
+              <p style="margin:0;font-size:0.875rem;color:#444;line-height:1.55;">{abstract}</p>
+            )}
+            <div style="text-align:right;margin-top:10px;font-size:0.75rem;font-weight:900;color:#1976d2;">
+              {article.source === 'hub'
+                ? 'Read Article (Web) »'
+                : `Read ${pubType} (${article.ext ?? 'link'}) »`}
+            </div>
+          </article>
+        </a>
+      );
+    })}
+  </div>
+</BaseLayout>
