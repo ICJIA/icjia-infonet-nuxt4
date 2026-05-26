@@ -6,22 +6,19 @@
 
 @import 'tailwindcss';
 
-/* Lato — Infonet body font (legacy variables.scss: $body-font-family: "Lato") */
-@import '@fontsource/lato/100.css';
-@import '@fontsource/lato/300.css';
+/* Lato — Infonet body font (legacy variables.scss: $body-font-family: "Lato").
+   Trimmed to weights actually used (Phase 5a CSS-bundle-shrink lesson).
+   Re-add 100/300 if a future phase ships designs using thin/light weights. */
 @import '@fontsource/lato/400.css';
 @import '@fontsource/lato/700.css';
 @import '@fontsource/lato/900.css';
 
-/* Raleway — heading font candidate per legacy nuxt.config.js link tag */
-@import '@fontsource/raleway/100.css';
-@import '@fontsource/raleway/300.css';
+/* Raleway — heading font (AppNav INFONET 900, h1-h6 use 700/900) */
 @import '@fontsource/raleway/400.css';
 @import '@fontsource/raleway/700.css';
 @import '@fontsource/raleway/900.css';
 
-/* Roboto — Vuetify default fallback per legacy link tag */
-@import '@fontsource/roboto/100.css';
+/* Roboto — Vuetify default fallback per legacy link tag (nav dropdown items) */
 @import '@fontsource/roboto/400.css';
 @import '@fontsource/roboto/700.css';
 @import '@fontsource/roboto/900.css';
