@@ -76,7 +76,7 @@ const pathname = Astro.url.pathname;
       href="/"
       class="md-show"
       aria-label="INFONET — go to homepage"
-      style="text-decoration: none; display: inline-flex; align-items: center;"
+      style="text-decoration: none;"
     >
       <span style="
         font-weight: 900;
@@ -123,7 +123,7 @@ const pathname = Astro.url.pathname;
     <div style="flex: 1;"></div>
 
     <!-- ── Desktop nav items (≥ 960px) ─────────────────────────────── -->
-    <span class="md-show" style="display: inline-flex; align-items: center; gap: 0;">
+    <span class="md-show" style="align-items: center; gap: 0;">
       {topNav.map((menu) => (
         <span style="display: inline-flex; align-items: center;">
           {menu.children ? (
@@ -358,7 +358,7 @@ const pathname = Astro.url.pathname;
 
 /* Desktop-only elements */
 .md-show {
-  display: none;
+  display: none !important;
 }
 @media (min-width: 960px) {
   .md-show {
