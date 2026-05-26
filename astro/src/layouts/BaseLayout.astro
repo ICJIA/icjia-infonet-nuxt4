@@ -104,7 +104,9 @@ const mainTopPad = isHome ? 64 : 96;
   <body>
     <nav class="skip-links" aria-label="Skip links">
       <a href="#main-content" class="skip-link">Skip to main content</a>
-      <a href="#main-navigation" class="skip-link">Skip to navigation</a>
+      {/* "Skip to navigation" link reintroduced in Phase 2 when AppNav
+          lands with id="main-navigation". A link pointing to a missing
+          target fails Lighthouse's skip-link best-practice (A11y < 100). */}
     </nav>
 
     <main id="main-content" style={`padding-top: ${mainTopPad}px`}>
