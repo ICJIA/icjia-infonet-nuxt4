@@ -10,12 +10,44 @@
 //   /data-and-publications/, /meetings/, /tabs/
 //
 // Phase 5b may add a TOC sidebar for pages with showTableOfContents: true.
+// Phase 7: MDC component detection — renders DvAwarenessMonth/Partners/Tabs
+//           components when body is a bare MDC reference.
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import DvAwarenessMonth from '~/components/mdc/DvAwarenessMonth.astro';
+import Partners from '~/components/mdc/Partners.astro';
+import TabsScreenshotsAccessible from '~/components/mdc/TabsScreenshotsAccessible.astro';
+import TabsUserInfoAccessible from '~/components/mdc/TabsUserInfoAccessible.astro';
 import { strapiFetch } from '~/lib/strapi';
 import { QUERY_PAGE_LIST } from '~/lib/queries';
 import { PageListResponseSchema } from '~/lib/schemas';
 import { renderMarkdown } from '~/lib/markdown';
 import { siteConfig } from '~/lib/siteConfig';
+
+// ---------------------------------------------------------------------------
+// MDC detection helper
+// ---------------------------------------------------------------------------
+function detectMdcComponent(body: string | null | undefined): { name: string; props: Record<string, string> } | null {
+  if (!body) return null;
+  // Block form: ::ComponentName\n---\nprop: value\n---\n::
+  const blockMatch = body.trim().match(/^::([A-Z][a-zA-Z]+)\n---\n((?:.|\n)*?)\n---\n::$/);
+  if (blockMatch) {
+    const props: Record<string, string> = {};
+    if (blockMatch[2]) {
+      for (const line of blockMatch[2].split('\n')) {
+        const colonIdx = line.indexOf(':');
+        if (colonIdx === -1) continue;
+        const k = line.slice(0, colonIdx).trim();
+        const v = line.slice(colonIdx + 1).trim().replace(/^"(.*)"$/, '$1');
+        if (k) props[k] = v;
+      }
+    }
+    return { name: blockMatch[1], props };
+  }
+  // Inline form: :ComponentName as the entire body
+  const inlineMatch = body.trim().match(/^:([A-Z][a-zA-Z]+)$/);
+  if (inlineMatch) return { name: inlineMatch[1], props: {} };
+  return null;
+}
 
 export async function getStaticPaths() {
   const raw = await strapiFetch(QUERY_PAGE_LIST);
@@ -33,7 +65,8 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 const attr = page.attributes;
 
-const { html } = renderMarkdown(attr.body);
+const mdc = detectMdcComponent(attr.body);
+const { html } = mdc ? { html: '' } : renderMarkdown(attr.body);
 
 const description = attr.summary ?? attr.title ?? '';
 ---
@@ -44,7 +77,15 @@ const description = attr.summary ?? attr.title ?? '';
 >
   <article class="page-detail">
     <h1>{attr.title?.toUpperCase()}</h1>
-    <div class="markdown-body" set:html={html}></div>
+    {mdc ? (
+      mdc.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+      mdc.name === 'Partners' ? <Partners /> :
+      mdc.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={mdc.props.sectionID ?? 'screenshots'} /> :
+      mdc.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={mdc.props.sectionID ?? 'users'} /> :
+      <div class="markdown-body" set:html={html}></div>
+    ) : (
+      <div class="markdown-body" set:html={html}></div>
+    )}
   </article>
 </BaseLayout>
 
