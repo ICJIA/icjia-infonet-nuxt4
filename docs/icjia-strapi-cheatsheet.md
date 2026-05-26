@@ -317,3 +317,43 @@ curl -s -X POST https://<site>.icjia-api.cloud/graphql \
 ```
 
 If step 3 surfaces `:foo-component` tokens, you have MDC components to plan for in Phase 4 of the migration spec.
+
+---
+
+## Infonet Strapi findings (2026-05-26)
+
+**Confirmed during Phase 3 probe:**
+
+- **Version: v4** (response shape `{ data: { <entity>: { data: [{ id, attributes: {...} }] } } }`)
+- **Endpoint:** `https://infonet.icjia-api.cloud/graphql`
+- **Available entities:** `faqs`, `forms`, `pages`, `posts`, `tabs`
+- **Field naming:** camelCase (`createdAt`, `updatedAt` — NOT v3's snake_case)
+- **Pagination:** v4 syntax `pagination: { limit: N, page: M }`
+
+### FAQ field naming — DIFFERS from DVFR cheatsheet baseline
+
+The cheatsheet's section on FAQ field renames (`name`/`identifier`/`details`/`ranking` → `title`/`slug`/`body`/`ranking`) is **NOT** Infonet's shape. Infonet's FAQs use:
+
+| Field on `FaqEntity.attributes` | Type | Maps to (UI) |
+|---|---|---|
+| `question` | string | title / display question |
+| `answer` | string | body / display answer |
+| `ranking` | number | sort key |
+| `createdAt` / `updatedAt` | iso | sort fallback |
+
+The Astro `queries.ts` and `schemas.ts` reflect Infonet's actual fields. When porting a future ICJIA site, probe the FAQ entity type first:
+
+```bash
+curl -fsS -X POST -H "Content-Type: application/json" \
+  -d '{"query":"{ __type(name: \"FaqEntity\") { name fields { name } } }"}' \
+  https://<strapi-host>/graphql
+```
+
+### Content counts (Phase 3 smoke baseline)
+
+- pages: 10
+- posts (news): 22
+- faqs: 135
+- tabs: 6
+
+Phase 4's `getStaticPaths` for `news/[slug]/`, `meetings/[slug]/`, `[...slug]/`, `tabs/[...slug]/` consume these counts. The `posts` collection in Strapi maps to the `/news/` route per `siteConfig.pathMeta.posts`.
