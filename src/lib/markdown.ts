@@ -35,6 +35,11 @@ export interface Heading {
   level: number;
 }
 
+export interface MdcRef {
+  name: string;
+  props: Record<string, string>;
+}
+
 interface ManifestEntry {
   originalUrl: string;
   originalWidth: number;
@@ -160,6 +165,75 @@ const filter = new FilterXSS({
 });
 
 // ---------------------------------------------------------------------------
+// MDC pre-processor — strip MDC blocks before markdown-it sees them
+// ---------------------------------------------------------------------------
+
+// Block form: ::ComponentName\n---\nprop: "value"\n---\n::
+// Must be anchored to the start of a line in the source body.
+const MDC_BLOCK_RX = /^::([A-Z][a-zA-Z]+)\n---\n((?:.|\n)*?)\n---\n::$/gm;
+
+// Inline form: :ComponentName on a line by itself
+const MDC_INLINE_RX = /^:([A-Z][a-zA-Z]+)$/gm;
+
+function parseMdcProps(raw: string): Record<string, string> {
+  const props: Record<string, string> = {};
+  for (const line of raw.split('\n')) {
+    const colonIdx = line.indexOf(':');
+    if (colonIdx === -1) continue;
+    const k = line.slice(0, colonIdx).trim();
+    const v = line.slice(colonIdx + 1).trim().replace(/^"(.*)"$/, '$1');
+    if (k) props[k] = v;
+  }
+  return props;
+}
+
+/**
+ * Strip MDC block/inline references from markdown source.
+ * Returns the cleaned source and an ordered list of MdcRef objects.
+ */
+function stripMdcBlocks(src: string): { cleaned: string; mdcRefs: MdcRef[] } {
+  // Collect all matches with their start positions so we can preserve order.
+  type MatchEntry = { index: number; ref: MdcRef; fullMatch: string };
+  const entries: MatchEntry[] = [];
+
+  // Reset regex state (global flags carry lastIndex across calls).
+  MDC_BLOCK_RX.lastIndex = 0;
+  MDC_INLINE_RX.lastIndex = 0;
+
+  let m: RegExpExecArray | null;
+  while ((m = MDC_BLOCK_RX.exec(src)) !== null) {
+    entries.push({
+      index: m.index,
+      fullMatch: m[0],
+      ref: { name: m[1], props: parseMdcProps(m[2] ?? '') },
+    });
+  }
+
+  MDC_INLINE_RX.lastIndex = 0;
+  while ((m = MDC_INLINE_RX.exec(src)) !== null) {
+    entries.push({
+      index: m.index,
+      fullMatch: m[0],
+      ref: { name: m[1], props: {} },
+    });
+  }
+
+  // Sort by position in source.
+  entries.sort((a, b) => a.index - b.index);
+
+  // Replace every matched string with empty string (strip from markdown).
+  let cleaned = src;
+  for (const entry of entries) {
+    cleaned = cleaned.split(entry.fullMatch).join('');
+  }
+  // Collapse sequences of blank lines that stripping may leave behind.
+  cleaned = cleaned.replace(/\n{3,}/g, '\n\n').trim();
+
+  const mdcRefs = entries.map((e) => e.ref);
+  return { cleaned, mdcRefs };
+}
+
+// ---------------------------------------------------------------------------
 // Regex patterns
 // ---------------------------------------------------------------------------
 
@@ -262,20 +336,31 @@ function extractHeadings(html: string): Heading[] {
 /**
  * Render a CMS markdown body to sanitised HTML, and extract headings for TOC.
  *
- * Returns `{ html: '', headings: [] }` for null/undefined/empty input so
- * templates never crash on missing CMS fields.
+ * MDC block/inline references are stripped BEFORE markdown-it parses the
+ * source, so the parser never sees the `::ComponentName\n---` pattern that
+ * would otherwise be misread as setext h2 headings. The stripped refs are
+ * returned as `mdcRefs` in source order for the calling template to render.
+ *
+ * Returns `{ html: '', headings: [], mdcRefs: [] }` for null/undefined/empty
+ * input so templates never crash on missing CMS fields.
  */
 export function renderMarkdown(
   src: string | null | undefined,
-): { html: string; headings: Heading[] } {
-  if (!src || !src.trim()) return { html: '', headings: [] };
+): { html: string; headings: Heading[]; mdcRefs: MdcRef[] } {
+  if (!src || !src.trim()) return { html: '', headings: [], mdcRefs: [] };
 
-  const rendered = md.render(src);
-  const safe     = filter.process(rendered);
-  const withImgs = rewriteImages(safe);
+  // 1. Strip MDC blocks first — prevents markdown-it setext-h2 misparse.
+  const { cleaned, mdcRefs } = stripMdcBlocks(src);
+
+  // 2. If stripping consumed the entire body (pure-MDC body), skip render.
+  if (!cleaned) return { html: '', headings: [], mdcRefs };
+
+  const rendered  = md.render(cleaned);
+  const safe      = filter.process(rendered);
+  const withImgs  = rewriteImages(safe);
   const withLinks = rewriteExternalLinks(withImgs);
   const html      = injectHeadingIds(withLinks);
   const headings  = extractHeadings(html);
 
-  return { html, headings };
+  return { html, headings, mdcRefs };
 }
