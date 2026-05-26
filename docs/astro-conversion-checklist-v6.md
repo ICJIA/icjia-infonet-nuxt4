@@ -3896,3 +3896,33 @@ If a repo wired to Netlify hasn't had the Netlify GitHub App explicitly installe
 **Fallback:** run per-phase audits against `astro preview` on `http://localhost:4322/` — it serves the actual `dist/` build artifact (identical to what Netlify deploys). The Lighthouse/axe/viewcap results are unaffected by where the build is served from.
 
 **Long-term:** request the user install the Netlify GitHub App so per-phase audits can hit the branch preview URL directly (matches production network conditions more closely than local preview).
+
+### Infonet Phase 2 lessons (v6.1 increment)
+
+#### CSS class responsive-visibility + inline display = specificity collision
+
+**Symptom:** `.md-show { display: none }` (intended to hide an element on mobile) doesn't work when the same element also has inline `style="display: inline-flex"`. Inline styles beat external CSS — the element renders on mobile despite the class.
+
+**Pattern that breaks:**
+```html
+<a class="md-show" style="display: inline-flex; align-items: center;">...</a>
+<style>
+  .md-show { display: none; }                                       /* loses to inline */
+  @media (min-width: 960px) { .md-show { display: inline-flex; } }
+</style>
+```
+
+**Fix:** never mix inline `display:` with a CSS class that controls visibility. Either:
+- (a) Use `!important` on the base hidden state: `.md-show { display: none !important; }` (matched by the media query rule using `!important` too)
+- (b) Drop the inline `display:` entirely; let the CSS class handle both `display: inline-flex` (when shown) and `display: none` (when hidden)
+
+Option (a) is what Infonet's AppNav uses. Easy to spot when reviewing a responsive component — search inline styles for `display:` and confirm no class is fighting it.
+
+#### `position: fixed` chrome needs body padding-top
+
+When AppNav is `position: fixed; top: 0; height: 150px`, the body content overlaps behind it (the nav is removed from flow). Fix: add `body { padding-top: 150px }` so subsequent flow elements (Breadcrumb, `<main>`, AppFooter) start below the nav. Tagging the body via BaseLayout's `<style is:global>` block keeps the rule scoped to every page that uses BaseLayout.
+
+#### Responsive nav-item visibility may vary by viewport range
+
+Legacy Vuetify navigation may show inline nav items only at width thresholds wider than the framework's `md` breakpoint (e.g., legacy at 1072px width hides items that appear at 1280px+). When porting, inspect the legacy rendered DOM at MULTIPLE viewport widths (375 / 768 / 1024 / 1280 / 1440 / 1920) to identify all the breakpoints where the responsive layout changes. The Vue/Vuetify port often "always-visible from 960" while legacy was "always-visible from 1280" — a subtle but visible diff.
+
