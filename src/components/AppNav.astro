@@ -20,6 +20,9 @@
 //
 // Dropdown items: native <details><summary> (no Alpine state — full keyboard a11y).
 // Active route: <a aria-current="page"> when pathname matches.
+//
+// Breakpoint: desktop nav (brand subtitle + topNav links + ⋮) appears at ≥960px.
+// This matches legacy behaviour at 1072px viewport (desktop nav shown, not hamburger).
 
 import { topNav, utilityLinks } from '~/lib/menu';
 const pathname = Astro.url.pathname;
@@ -39,7 +42,7 @@ const pathname = Astro.url.pathname;
       box-sizing: border-box;
     "
   >
-    <!-- ── Hamburger (mobile/tablet, < 1280px) ──────────────────────── -->
+    <!-- ── Hamburger (mobile/tablet, < 960px) ───────────────────────── -->
     <button
       type="button"
       id="nav-hamburger"
@@ -122,7 +125,7 @@ const pathname = Astro.url.pathname;
     <!-- ── Spacer (desktop — pushes nav items right) ────────────────── -->
     <div style="flex: 1;"></div>
 
-    <!-- ── Desktop nav items (≥ 1280px) ────────────────────────────── -->
+    <!-- ── Desktop nav items (≥ 960px) ─────────────────────────────── -->
     <span class="md-show" style="align-items: center; gap: 0;">
       {topNav.map((menu) => (
         <span style="display: inline-flex; align-items: center;">
@@ -312,7 +315,7 @@ const pathname = Astro.url.pathname;
       </span>
     </span>
 
-    <!-- ── Mobile/tablet search icon (< 1280px) ────────────────────── -->
+    <!-- ── Mobile/tablet search icon (< 960px) ─────────────────────── -->
     <a
       href="/search/"
       class="md-hide"
@@ -354,14 +357,14 @@ const pathname = Astro.url.pathname;
 
 <style>
 /* ── Responsive show/hide ─────────────────────────────────────────────── */
-/* lg = 1280px — matches legacy responsive behaviour observed at 1072px
-   viewport (Phase 2): desktop nav items only appear at wider breakpoints. */
+/* lg = 960px — matches legacy responsive behaviour: desktop nav (brand
+   subtitle + topNav items + ⋮) shows at 1072px viewport, not just 1280px. */
 
 /* Desktop-only elements */
 .md-show {
   display: none !important;
 }
-@media (min-width: 1280px) {
+@media (min-width: 960px) {
   .md-show {
     display: inline-flex !important;
     align-items: center;
