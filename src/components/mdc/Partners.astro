@@ -1,0 +1,83 @@
+---
+// src/components/mdc/Partners.astro
+//
+// Ported from v1-final app/components/content/Partners.vue.
+// The legacy component fetched the /partners content from Nuxt Content local
+// markdown files and rendered it with markdown-it.
+//
+// In Astro the partner organization listing is static — rendered as plain HTML
+// matching the content from the Strapi "partners" page body.
+// This component is used when body = ":Partners" MDC syntax is detected.
+---
+
+<div class="partners-body">
+  <div class="partners-indent">
+    <p>
+      <a href="https://icjia.illinois.gov" target="_blank" rel="noopener noreferrer">Illinois Criminal Justice Information Authority (ICJIA)</a>
+      is the lead agency responsible for housing and supporting InfoNet. ICJIA staff oversee InfoNet's design and upgrades,
+      provide training and technical assistance to users, use InfoNet's data for research and planning, and works with partners
+      to govern InfoNet's use and growth.
+    </p>
+    <p>
+      All four InfoNet partners below work routinely with ICJIA to govern InfoNet's use and data requirements; use InfoNet's
+      data for grant monitoring, research, and strategic planning; and cohosting/facilitating forums and/or relaying feedback
+      from the field about how InfoNet can be improved.
+    </p>
+    <p>
+      <a href="https://www.ilcadv.org/" target="_blank" rel="noopener noreferrer">Illinois Coalition Against Domestic Violence (ICADV)</a>
+      is a membership organization working to eliminate domestic violence in Illinois and increase access to ever-improving services
+      for survivors of all backgrounds. ICADV serves over 50 domestic violence programs statewide that provide direct service to
+      survivors and their dependent children.
+    </p>
+    <p>
+      <a href="https://icasa.org/" target="_blank" rel="noopener noreferrer">Illinois Coalition Against Sexual Assault</a>
+      is a unified network of over 30 rape crisis centers, envisioning a world free of sexual violence, and working together to
+      end sexual violence in Illinois.
+    </p>
+    <p>
+      <a href="https://www.dhs.state.il.us/page.aspx" target="_blank" rel="noopener noreferrer">Illinois Department of Human Services' (IDHS)</a>
+      Bureau of Domestic Violence, Sexual Assault, and Human Trafficking assists Illinois residents to live free from domestic violence,
+      sexual assault, and human trafficking by promoting prevention and working in partnership with communities in advancing equality,
+      dignity, and respect for all. IDHS administers federal and state funding to over 60 domestic violence and 30 sexual assault centers.
+    </p>
+    <p>
+      <a href="https://www.chicago.gov/city/en/depts/fss.html" target="_blank" rel="noopener noreferrer">Chicago Department of Family &amp; Support Services' (CDFSS)</a>
+      Division on Domestic Violence leads the City of Chicago's multi-layered response to domestic violence. CDFSS supports a network
+      of about 20 service providers that address victims' counseling and legal needs.
+    </p>
+  </div>
+</div>
+
+<style>
+  .partners-body {
+    padding: 0 1rem;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #333;
+  }
+
+  .partners-indent {
+    margin-left: 25px;
+  }
+
+  .partners-body p {
+    margin-bottom: 1rem;
+  }
+
+  .partners-body a {
+    color: #1565c0;
+    text-decoration: underline;
+  }
+
+  .partners-body a:hover {
+    color: #0d47a1;
+  }
+
+  .partners-body a:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+  }
+
+  @media (min-width: 600px)  { .partners-body { padding: 0 2rem; } }
+  @media (min-width: 960px)  { .partners-body { padding: 0 4rem; } }
+</style>
