@@ -44,8 +44,26 @@ const fmtRelative = new Intl.RelativeTimeFormat('en-US', {
 
 // --- Helpers ----------------------------------------------------------------
 
+/**
+ * Parse an ISO string to a Date, avoiding TZ shift for date-only strings.
+ *
+ * JS parses "YYYY-MM-DD" (no time component) as midnight UTC, which shifts
+ * the displayed date backward by one day for America/Chicago (UTC-5/6).
+ * Fix: construct date-only strings using local-time constructor at noon,
+ * so the date is stable across all US timezones.
+ *
+ * Full ISO strings (with 'T' time component) are passed through new Date()
+ * as before — those already carry explicit timezone info.
+ */
 function parseDate(iso: string | null | undefined): Date | null {
   if (!iso) return null;
+  // Date-only: YYYY-MM-DD → construct as local date at noon to avoid TZ shifts
+  if (/^\d{4}-\d{2}-\d{2}$/.test(iso)) {
+    const [y, m, d] = iso.split('-').map(Number);
+    const date = new Date(y, m - 1, d, 12, 0, 0);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+  // Full ISO with time → parse as UTC, format in Chicago
   const d = new Date(iso);
   return Number.isNaN(d.getTime()) ? null : d;
 }
