@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://infonet.icjia.illinois.gov/sitemap-index.xml

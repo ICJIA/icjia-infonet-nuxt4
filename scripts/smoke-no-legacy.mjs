@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Guard: no legacy stack refs in astro/src/.
+// Guard: no legacy stack refs in src/ or scripts/.
 import { execSync } from 'child_process';
 
 const patterns = [
@@ -18,7 +18,7 @@ try {
 } catch (e) {
   // grep exit 1 = no matches; success
   if (e.status === 1) {
-    console.log('✓ no legacy stack refs in astro/src/');
+    console.log('✓ no legacy stack refs in src/ or scripts/');
     process.exit(0);
   }
   throw e;
@@ -32,7 +32,7 @@ const lines = stdout.split('\n').filter(l => {
 });
 
 if (lines.length === 0) {
-  console.log('✓ no legacy stack refs in astro/src/');
+  console.log('✓ no legacy stack refs in src/ or scripts/');
   process.exit(0);
 }
 

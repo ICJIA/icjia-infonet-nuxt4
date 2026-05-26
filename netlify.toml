@@ -1,41 +1,27 @@
 # netlify.toml
 #
-# Production (main) builds the legacy Nuxt 4 source from the repo root.
-# Branch deploys + deploy previews build the Astro source from astro/.
-# Phase 7 cutover flips the [build] block to use astro/ for production too.
+# Post-cutover (v3.0.0): production builds the Astro 6 / Alpine 3 / Tailwind 4
+# site from the repo root. The legacy Nuxt 4 source has been removed.
 
 [build]
   base = "."
-  command = "yarn generate"
+  command = "pnpm build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "22.22.2"
-
-# --- Astro branch deploy (feat/astro-migration and any other non-main branch) ---
-[context.branch-deploy]
-  base = "astro"
-  command = "pnpm build"
-  publish = "dist"     # resolves to astro/dist relative to base="astro"
-
-[context.branch-deploy.environment]
-  NODE_VERSION = "22.22.2"
   PNPM_VERSION = "10.33.0"
 
-# --- Astro deploy preview (PRs) ---
-[context.deploy-preview]
-  base = "astro"
-  command = "pnpm build"
-  publish = "dist"
-
-[context.deploy-preview.environment]
-  NODE_VERSION = "22.22.2"
-  PNPM_VERSION = "10.33.0"
-
-# --- Headers (apply to ALL contexts) ---
+# --- Headers ---
 
 [[headers]]
   for = "/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
     X-Greeting = "Hello from Chicago!"
+    # CSP — see scripts/csp-hashes.mjs. Re-run after any inline-script change.
+    # Inline scripts: URL normalizer (BaseLayout), Plausible, Pagefind init,
+    # ReadProgress / TOC init, news post variant.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-0GEXQXbX4Ty5Tg6K7e8GdROTUXHbFOL/QU8sxXcM9Ic=' 'sha256-G0Dp5UGj6QBfhhdXh7ZDZxAJFYG4q+ofBO2wVq9W9nQ=' 'sha256-TETLPxwYreIF/Skse4Fss+ckYiL1JK4qabttEwV56tc=' 'sha256-dqb/A1cZzRV+FyrA8bd5jomPVslUsWJY0MridsYksIA=' 'sha256-mGhkZOJ2G63NJ6hKuOJod9nrWFUveMlI5snsLCwyrPk=' https://plausible.icjia.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://infonet.icjia-api.cloud; connect-src 'self' https://plausible.icjia.cloud https://infonet.icjia-api.cloud; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://mail.icjia.cloud"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "cross-origin"

@@ -2,6 +2,47 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.0.0] - 2026-05-26 — Astro 6 / Alpine 3 / Tailwind 4 cutover
+
+**Tech swap, not a redesign.** Managers approved the legacy look; this release ports the underlying tech to recover mobile performance.
+
+### Migration value delivered
+
+| Metric | Legacy (v2.3.9) | Astro (v3.0.0) | Δ |
+|---|---:|---:|---:|
+| Mobile Perf | 55 – 61 | **98 – 100** | **+37 to +43** |
+| Mobile A11y | 100 | 100 | 0 |
+| Mobile BP | 100 | 100 | 0 |
+| Mobile SEO | 92 – 100 | 100 | +8 on listing / detail / contact |
+| axe-core AA | 0 violations | 0 violations | 0 |
+| CLS (home) | 0.13 (Vuetify shell shift) | 0.00 | -0.13 |
+
+### Tech changes
+
+- **Removed:** Vue 3, Nuxt 4, Vuetify 3, AOS, Fuse.js, `@mdi/font` runtime CSS, MDI runtime CSS, all `image.icjia.cloud` (Thumbor) URLs from served HTML/CSS/JS.
+- **Added:** Astro 6 (`output: 'static'`), Tailwind 4 (vite plugin + `@theme` tokens calibrated to legacy Vuetify defaults), Alpine.js 3 + `@alpinejs/focus`, Pagefind 1.5 (search), Sharp 0.34 (image pipeline), `@fontsource/{lato,raleway,roboto}` self-hosted fonts, Chart.js 4.5 (home bar graph).
+- **Build chain (2-pass + index + og):** `astro build && fetch-cms-images && astro build && pagefind && og:image`.
+- **Strapi loaders** with build-time `.cache/strapi/<sha256>.json`, `AbortSignal.timeout(60s)`, Zod validation.
+- **Self-hosted images** under `public/_cms-img/<hash>/<width>.<ext>` — no runtime Thumbor.
+- **CSP `script-src 'self'`** + sha256 hashes for the 5 unique inline scripts (URL normalizer, Plausible, Pagefind init, ReadProgress / TOC init, news post variant).
+- **OG image generator** — Sharp SVG → PNG 1200×630, `font-family="sans-serif"` (librsvg-safe).
+
+### User-facing functional / visual changes
+
+**None intended.** Every page, every interaction, every form field, every hover state, every link target preserved per pixel-perfect mandate. Viewcap pixel-perfect-vs-legacy diff verified across the public route surface during Phases 2, 5b, and 7.
+
+### Routes
+
+45 emitted (vs ~14 logical in legacy — dynamic catch-alls expand for Strapi `posts` / `tabs` / `pages`):
+
+- Static: `/`, `/404`, `/translate`, `/contact`, `/debug`, `/search`, `/data-and-publications`, `/faqs`, `/news`, `/meetings`
+- Dynamic via `getStaticPaths`: `/news/<slug>/` (22), `/tabs/<slug>/` (6), `/<page>/` catch-all filtered via `reservedSlugs` (7 pages: `/about`, `/agencies`, `/partners`, `/privacy`, `/resources`, `/screenshots`, `/upgrades`)
+
+### Cutover safety
+
+- `v1-final` git tag preserved as a rollback point on the final legacy state (`feat/astro-migration` HEAD just before the cutover commit).
+- Migration spec, all 7 phase plans, all 8 audit logs preserved under `docs/superpowers/specs/` and `docs/perf/`.
+
 ## [2.3.9] - 2026-05-06
 
 ### Bug fixes
