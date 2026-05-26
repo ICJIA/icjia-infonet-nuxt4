@@ -1,0 +1,41 @@
+---
+// astro/src/components/PageHeader.astro
+//
+// Shared page-header for static pages — mirrors the h1 treatment in
+// [...slug].astro (dark text, uppercase, hairline separator).
+// Used by: /faqs/, /contact/, /translate/, /data-and-publications/,
+//          /search/, /meetings/
+
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+<header class="page-header">
+  <h1>{title}</h1>
+  {subtitle && <p class="page-subtitle">{subtitle}</p>}
+</header>
+
+<style>
+  .page-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.25rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #222;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.75rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .page-subtitle {
+    color: #555;
+    font-size: 1rem;
+    margin: 0;
+  }
+</style>

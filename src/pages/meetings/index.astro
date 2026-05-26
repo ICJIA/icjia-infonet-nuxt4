@@ -9,8 +9,9 @@
 // Re-introduce data source in a future phase when meeting content is available.
 // Skip meetings/[slug].astro — no slugs to generate.
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHeader from '~/components/PageHeader.astro';
 ---
 <BaseLayout title="Meetings" breadcrumbTitle="Meetings">
-  <h1>Meetings</h1>
+  <PageHeader title="Meetings" />
   <p>No meetings to display.</p>
 </BaseLayout>

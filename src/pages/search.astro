@@ -10,12 +10,13 @@
 // Legacy: app/pages/search.vue used Fuse.js against /api/search endpoint —
 // replaced by Pagefind for static-site full-text search.
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHeader from '~/components/PageHeader.astro';
 ---
 <BaseLayout title="Search" breadcrumbTitle="Search">
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
 
   <div class="search-wrapper">
-    <h1 class="search-title">Search</h1>
+    <PageHeader title="Search" />
     <div id="pagefind-ui"></div>
   </div>
 
@@ -46,13 +47,6 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
     max-width: 780px;
     margin: 0 auto;
     padding: 0 1rem 3rem;
-  }
-
-  .search-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 1.25rem;
-    color: var(--color-primary, #2a4d6e);
   }
 
   /* Override Pagefind UI defaults to blend with site typography */
