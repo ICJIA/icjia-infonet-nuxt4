@@ -1,0 +1,32 @@
+---
+// astro/src/components/LastUpdated.astro
+//
+// Renders a small "Updated: <date>" note below post body content.
+// Only shown when updatedAt differs meaningfully from createdAt.
+//
+// Usage:
+//   <LastUpdated date={post.attributes.updatedAt} />
+import { formatDate } from '~/lib/dates';
+
+interface Props {
+  date?: string | null;
+}
+
+const { date } = Astro.props;
+const displayDate = formatDate(date, 'short');
+---
+{displayDate && (
+  <p class="last-updated">
+    Updated: <time datetime={date ?? undefined}>{displayDate}</time>
+  </p>
+)}
+
+<style>
+  .last-updated {
+    font-size: 0.8125rem;
+    color: #777;
+    margin-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 0.75rem;
+  }
+</style>

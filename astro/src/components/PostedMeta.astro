@@ -1,0 +1,47 @@
+---
+// astro/src/components/PostedMeta.astro
+//
+// Renders "Published: <date> | <author>" metadata line below article titles.
+// Ported from IFVCC PostedMeta.astro, adapted for Infonet field names.
+//
+// Usage:
+//   <PostedMeta date={post.attributes.createdAt} author={post.attributes.category} />
+import { formatDate } from '~/lib/dates';
+
+interface Props {
+  date?: string | null;
+  author?: string | null;
+}
+
+const { date, author } = Astro.props;
+const displayDate = formatDate(date, 'long');
+---
+{displayDate && (
+  <div class="posted-meta">
+    {author?.trim() && (
+      <span class="posted-meta__author">{author.trim()}</span>
+    )}
+    {author?.trim() && <span class="posted-meta__sep"> | </span>}
+    <time class="posted-meta__date" datetime={date ?? undefined}>{displayDate}</time>
+  </div>
+)}
+
+<style>
+  .posted-meta {
+    font-size: 0.875rem;
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+  .posted-meta__author {
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .posted-meta__sep {
+    font-weight: 400;
+  }
+  .posted-meta__date {
+    font-weight: 400;
+  }
+</style>
