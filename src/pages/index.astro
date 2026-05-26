@@ -14,6 +14,8 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import HomeBoxes from '~/components/HomeBoxes.astro';
 import HomeBarGraph from '~/components/HomeBarGraph.astro';
+import HomePosts from '~/components/HomePosts.astro';
+import HomeFaqs from '~/components/HomeFaqs.astro';
 
 const description =
   'InfoNet is a web-based data collection and reporting system used by victim service providers ' +
@@ -57,6 +59,11 @@ const description =
     <HomeBarGraph />
   </div>
   <HomeBoxes />
+
+  <section class="home-news-faqs">
+    <HomePosts />
+    <HomeFaqs />
+  </section>
 </BaseLayout>
 
 <style>
@@ -146,5 +153,22 @@ const description =
   .home-partners-link a:focus {
     text-decoration: underline;
     color: #0d4270;
+  }
+
+  /* News & FAQs two-column section */
+  .home-news-faqs {
+    display: block;
+    background: #f2f2f2;
+    padding: 2rem 1rem;
+    margin-top: 0;
+  }
+
+  @media (min-width: 960px) {
+    .home-news-faqs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 2rem;
+    }
   }
 </style>

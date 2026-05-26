@@ -1,0 +1,147 @@
+---
+// astro/src/components/HomeFaqs.astro
+//
+// Home page "Frequently Asked Questions" section.
+// Port of the FAQs section in legacy app/pages/index.vue (DisplayFaqs component).
+//
+// Fetches all FAQs via QUERY_FAQ_LIST, sorts by ranking asc (nulls last),
+// then takes the first 3. Renders each as a native <details> accordion,
+// matching the pattern in /faqs/index.astro.
+//
+// Section header: h2 "Frequently Asked Questions" + right-aligned "All FAQs »" button.
+// Hairline border-top below header row.
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_FAQ_LIST } from '~/lib/queries';
+import { FaqListResponseSchema } from '~/lib/schemas';
+import { renderMarkdown } from '~/lib/markdown';
+
+const raw = await strapiFetch(QUERY_FAQ_LIST);
+const parsed = FaqListResponseSchema.parse(raw);
+const faqs = [...parsed.faqs.data]
+  .sort((a, b) => {
+    const ar = a.attributes.ranking ?? 9999;
+    const br = b.attributes.ranking ?? 9999;
+    if (ar !== br) return ar - br;
+    const da = a.attributes.createdAt ?? '';
+    const db = b.attributes.createdAt ?? '';
+    return da < db ? -1 : da > db ? 1 : 0;
+  })
+  .slice(0, 3);
+---
+
+<section class="home-faqs">
+  <div class="home-faqs__header">
+    <h2 class="home-faqs__heading">Frequently Asked Questions</h2>
+    <a href="/faqs/" class="home-faqs__all-btn" aria-label="All Frequently Asked Questions">
+      All FAQs&nbsp;&raquo;
+    </a>
+  </div>
+  <div class="home-faqs__rule"></div>
+
+  <div class="home-faqs__list">
+    {faqs.map((f) => {
+      const { html } = renderMarkdown(f.attributes.answer);
+      return (
+        <details class="home-faq-item">
+          <summary class="home-faq-item__summary">
+            <span>{f.attributes.question ?? '(untitled)'}</span>
+            <span aria-hidden="true" class="home-faq-item__arrow">&#x25BE;</span>
+          </summary>
+          <div class="home-faq-item__body markdown-body" set:html={html} />
+        </details>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  .home-faqs {
+    margin-bottom: 2rem;
+  }
+
+  .home-faqs__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0;
+  }
+
+  .home-faqs__heading {
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .home-faqs__all-btn {
+    display: inline-block;
+    background: #0D4474;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    text-decoration: none;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-bottom: 4px;
+  }
+
+  .home-faqs__all-btn:hover,
+  .home-faqs__all-btn:focus {
+    background: #0a3560;
+    text-decoration: none;
+  }
+
+  .home-faqs__rule {
+    border-top: 1px solid #222;
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+
+  .home-faqs__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* FAQ accordion item — matches /faqs/ page pattern */
+  .home-faq-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+  }
+
+  .home-faq-item__summary {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-weight: 700;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .home-faq-item__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .home-faq-item__summary:focus-visible {
+    outline: 2px solid #0d4270;
+    outline-offset: -2px;
+  }
+
+  .home-faq-item__arrow {
+    font-size: 1.25rem;
+    color: #0d4270;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  .home-faq-item__body {
+    padding: 12px 16px 16px;
+    border-top: 1px solid #e0e0e0;
+  }
+</style>
