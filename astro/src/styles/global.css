@@ -33,9 +33,9 @@
 @import './github-markdown.css';
 
 /* @theme — Tailwind 4 design tokens calibrated to Vuetify 3 defaults.
-   Calibration source: legacy app/plugins/vuetify.js (Vuetify default theme
-   with only on-surface-variant override) + legacy variables.scss.
-   Verify exact values against legacy pages in Phase 2 viewcap diff. */
+ * Calibration source: legacy app/plugins/vuetify.js (Vuetify default theme
+ * with only on-surface-variant override) + legacy variables.scss.
+ * Verify exact values against legacy pages in Phase 2 viewcap diff. */
 @theme {
   /* Colors — Vuetify 3 default light theme */
   --color-primary: #1976d2;          /* Vuetify default primary blue */
