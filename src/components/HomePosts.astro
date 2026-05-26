@@ -27,7 +27,7 @@ const posts = parsed.posts.data
       new Date(displayDate(b) ?? 0).getTime() -
       new Date(displayDate(a) ?? 0).getTime(),
   )
-  .slice(0, 3);
+  .slice(0, 2);  // legacy app/pages/index.vue: const limit = ref(2)
 ---
 
 <section class="home-posts">

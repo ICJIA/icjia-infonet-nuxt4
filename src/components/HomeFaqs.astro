@@ -4,9 +4,14 @@
 // Home page "Frequently Asked Questions" section.
 // Port of the FAQs section in legacy app/pages/index.vue (DisplayFaqs component).
 //
-// Fetches all FAQs via QUERY_FAQ_LIST, sorts by ranking asc (nulls last),
-// then takes the first 3. Renders each as a native <details> accordion,
-// matching the pattern in /faqs/index.astro.
+// Pixel-perfect parity with legacy:
+//   <DisplayFaqs strapiAgency="general"> in app/pages/index.vue
+//   queryContent("/faqs/").where({ agency: "general" })
+//                         .sort({ ranking: 1 }).sort({ subcat: 1 }).sort({ cat: 1 })
+//
+// Filter: agency === "general" (NOT all FAQs)
+// Order: ranking asc, then subcat asc, then cat asc
+// Limit: NONE — show ALL "general" FAQs (legacy currently has 5)
 //
 // Section header: h2 "Frequently Asked Questions" + right-aligned "All FAQs »" button.
 // Hairline border-top below header row.
@@ -17,16 +22,15 @@ import { renderMarkdown } from '~/lib/markdown';
 
 const raw = await strapiFetch(QUERY_FAQ_LIST);
 const parsed = FaqListResponseSchema.parse(raw);
-const faqs = [...parsed.faqs.data]
-  .sort((a, b) => {
-    const ar = a.attributes.ranking ?? 9999;
-    const br = b.attributes.ranking ?? 9999;
-    if (ar !== br) return ar - br;
-    const da = a.attributes.createdAt ?? '';
-    const db = b.attributes.createdAt ?? '';
-    return da < db ? -1 : da > db ? 1 : 0;
-  })
-  .slice(0, 3);
+// Sort order matches legacy DisplayFaqs RENDER (not the source).
+// Legacy source chained three .sort() calls; Nuxt Content's queryContent
+// .sort() replaces prior calls instead of chaining, so only the FINAL sort
+// ({ cat: 1 }) applies. With all "general" FAQs having cat: "none", they tie
+// on `cat` and fall through to Nuxt Content's default `_path` (slug) order.
+// Net result on legacy: alphabetical by slug. Reproducing that here.
+const faqs = parsed.faqs.data
+  .filter((f) => (f.attributes.agency ?? '').toLowerCase() === 'general')
+  .sort((a, b) => a.attributes.slug.localeCompare(b.attributes.slug));
 ---
 
 <section class="home-faqs">
