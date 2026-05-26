@@ -1,0 +1,16 @@
+---
+// astro/src/pages/meetings/index.astro
+//
+// Placeholder — no content source identified during Phase 4 audit:
+//   - Strapi has no `meetings` entity (confirmed in live introspection)
+//   - Legacy content/meetings/ is empty
+//   - app/pages/meetings/ routes existed but rendered an empty list
+// URL preserved to avoid 404s for any inbound links.
+// Re-introduce data source in a future phase when meeting content is available.
+// Skip meetings/[slug].astro — no slugs to generate.
+import BaseLayout from '~/layouts/BaseLayout.astro';
+---
+<BaseLayout title="Meetings" breadcrumbTitle="Meetings">
+  <h1>Meetings</h1>
+  <p>No meetings to display.</p>
+</BaseLayout>
