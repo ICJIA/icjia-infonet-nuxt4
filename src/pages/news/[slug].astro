@@ -90,6 +90,8 @@ const description = attr.summary ?? attr.title ?? '';
   description={description}
   ogImage={splashUrl ?? undefined}
   breadcrumbTitle="News"
+  breadcrumbTitleHref="/news/"
+  breadcrumbCurrent={attr.title ?? undefined}
 >
   <ReadProgress />
   <article class="post-detail">

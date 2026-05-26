@@ -18,6 +18,10 @@ interface Props {
   noindex?: boolean;
   canonicalOverride?: string;
   breadcrumbTitle?: string;
+  /** Optional href for the middle breadcrumb entry (makes it a link). */
+  breadcrumbTitleHref?: string;
+  /** Optional current-page label for 3-level breadcrumb. */
+  breadcrumbCurrent?: string | null;
 }
 
 const {
@@ -27,6 +31,8 @@ const {
   noindex = false,
   canonicalOverride,
   breadcrumbTitle = undefined,
+  breadcrumbTitleHref = undefined,
+  breadcrumbCurrent = undefined,
 } = Astro.props;
 
 // Canonical URL — strip /index.html / .html (Astro static format edge case);
@@ -115,7 +121,7 @@ const mainTopPad = isHome ? 64 : 96;
 
     <AppNav />
     <AppSidebar />
-    <Breadcrumb title={breadcrumbTitle} />
+    <Breadcrumb title={breadcrumbTitle} breadcrumbTitleHref={breadcrumbTitleHref} breadcrumbCurrent={breadcrumbCurrent} />
 
     <main id="main-content" data-pagefind-body style={`padding-top: ${mainTopPad}px; min-height: 70vh;`}>
       <slot />
