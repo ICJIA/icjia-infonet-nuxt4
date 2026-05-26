@@ -1,17 +1,14 @@
 ---
-
+// astro/src/pages/index.astro — empty shell for Phase 1
+import BaseLayout from '~/layouts/BaseLayout.astro';
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Home"
+  description="InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois to facilitate standardized statewide data collection."
+>
+  <h1>InfoNet</h1>
+  <p>
+    Phase 1 scaffold. This page intentionally has minimal content for
+    audit calibration — Phase 4 lands the home template.
+  </p>
+</BaseLayout>

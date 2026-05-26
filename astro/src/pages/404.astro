@@ -1,0 +1,17 @@
+---
+// astro/src/pages/404.astro — 404 with min-h to avoid CLS
+import BaseLayout from '~/layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Not Found"
+  description="The page you were looking for doesn't exist."
+  noindex={true}
+>
+  <div style="min-height: 40vh">
+    <h1>Page Not Found</h1>
+    <p>The page you were looking for doesn't exist.</p>
+    <p>
+      <a href="/">Return home</a>
+    </p>
+  </div>
+</BaseLayout>
