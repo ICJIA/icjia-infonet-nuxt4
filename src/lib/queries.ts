@@ -252,3 +252,49 @@ export const QUERY_TAB_LIST = `
     }
   }
 `;
+
+// Fetch all tabs for a given sectionID, with images, sorted by ranking.
+// Used by TabsScreenshotsAccessible and TabsUserInfoAccessible MDC components.
+export const QUERY_TAB_LIST_BY_SECTION = `
+  query TabListBySection($sectionID: String!) {
+    tabs(
+      filters: { sectionID: { eq: $sectionID } }
+      sort: "ranking:asc"
+      pagination: { limit: 50 }
+    ) {
+      data {
+        id
+        attributes {
+          title
+          slug
+          agency
+          summary
+          body
+          sectionID
+          ranking
+          searchMeta
+          createdAt
+          updatedAt
+          publishedAt
+          images {
+            data {
+              id
+              attributes {
+                url
+                alternativeText
+                caption
+                name
+                width
+                height
+                formats
+              }
+            }
+          }
+        }
+      }
+      meta {
+        pagination { total }
+      }
+    }
+  }
+`;

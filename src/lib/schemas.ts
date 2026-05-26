@@ -182,6 +182,32 @@ export type FaqAttr = z.infer<typeof FaqAttrSchema>;
 export type Faq = z.infer<typeof FaqSchema>;
 
 // ---------------------------------------------------------------------------
+// Tab images (UploadFileRelation — array of upload file entities)
+// ---------------------------------------------------------------------------
+
+export const TabImageAttrSchema = z.object({
+  url: z.string().nullable().optional(),
+  alternativeText: z.string().nullable().optional(),
+  caption: z.string().nullable().optional(),
+  name: z.string().nullable().optional(),
+  width: z.number().nullable().optional(),
+  height: z.number().nullable().optional(),
+  formats: z.unknown().nullable().optional(),
+});
+
+export const TabImageEntitySchema = z.object({
+  id: IdSchema,
+  attributes: TabImageAttrSchema,
+});
+
+export const TabImagesRelationSchema = z.object({
+  data: z.array(TabImageEntitySchema).nullable().optional(),
+}).nullable().optional();
+
+export type TabImageAttr = z.infer<typeof TabImageAttrSchema>;
+export type TabImageEntity = z.infer<typeof TabImageEntitySchema>;
+
+// ---------------------------------------------------------------------------
 // Tabs
 // ---------------------------------------------------------------------------
 
@@ -197,6 +223,8 @@ export const TabAttrSchema = z.object({
   createdAt: IsoDateSchema,
   updatedAt: IsoDateSchema,
   publishedAt: IsoDateSchema,
+  // Images relation — populated when fetched via QUERY_TAB_LIST_BY_SECTION.
+  images: TabImagesRelationSchema,
 });
 
 export const TabSchema = z.object({
@@ -212,6 +240,9 @@ export const TabListResponseSchema = z.object({
     }).nullable().optional(),
   }),
 });
+
+// Response schema for QUERY_TAB_LIST_BY_SECTION (includes images relation).
+export const TabListBySectionResponseSchema = TabListResponseSchema;
 
 export const TabBySlugResponseSchema = z.object({
   tabs: z.object({
