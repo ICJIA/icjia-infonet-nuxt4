@@ -10,4 +10,15 @@ declare global {
 
 window.Alpine = Alpine;
 Alpine.plugin(focus);
-Alpine.start();
+
+// Defer Alpine.start() to DOMContentLoaded so per-page `alpine:init`
+// listeners (registered in <script> blocks lower in the document) have
+// a chance to attach BEFORE Alpine evaluates `x-data` expressions.
+// Without this defer, `Alpine.data('foo', ...)` registrations in page
+// scripts race with Alpine.start() and lose — Alpine reports
+// "foo is not defined" when it tries to evaluate x-data.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => Alpine.start());
+} else {
+  Alpine.start();
+}
