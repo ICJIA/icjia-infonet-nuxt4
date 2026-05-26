@@ -17,7 +17,8 @@
   "scripts": {
     "dev": "astro dev --port 4321",
     "start": "astro dev --port 4321",
-    "build": "astro build",
+    "build": "astro build && node scripts/fetch-cms-images.mjs && astro build",
+    "build:fast": "astro build",
     "preview": "astro preview --port 4322",
     "check": "astro check",
     "csp-hashes": "node scripts/csp-hashes.mjs",
