@@ -1,1 +1,50 @@
-{}
+{
+  "db8d430a6c214fed5b76ac51d520da84baa9519d8aaf3997c7d2b02502c39405": {
+    "originalUrl": "https://infonet.icjia-api.cloud/uploads/LGBTQ_DV_SA_Clients_f7a8bc7d40.png",
+    "originalWidth": 752,
+    "originalHeight": 452,
+    "sources": [
+      {
+        "width": 320,
+        "src": "/_cms-img/db8d430a6c214fed5b76ac51d520da84baa9519d8aaf3997c7d2b02502c39405/320.png"
+      },
+      {
+        "width": 640,
+        "src": "/_cms-img/db8d430a6c214fed5b76ac51d520da84baa9519d8aaf3997c7d2b02502c39405/640.png"
+      }
+    ],
+    "ext": "png"
+  },
+  "a4627650761eb370ef0927c4bdcb6eec86a2405caa79657d400edee7e44a9398": {
+    "originalUrl": "https://infonet.icjia-api.cloud/uploads/Number_of_DV_Cases_w_Weapon_Use_Threat_a2d3caea2a.jpg",
+    "originalWidth": 849,
+    "originalHeight": 430,
+    "sources": [
+      {
+        "width": 320,
+        "src": "/_cms-img/a4627650761eb370ef0927c4bdcb6eec86a2405caa79657d400edee7e44a9398/320.jpg"
+      },
+      {
+        "width": 640,
+        "src": "/_cms-img/a4627650761eb370ef0927c4bdcb6eec86a2405caa79657d400edee7e44a9398/640.jpg"
+      }
+    ],
+    "ext": "jpg"
+  },
+  "8bdd1aa238c125e4f0f656fcd4ab43f0b55e1d61de60ba017c4385a18708257f": {
+    "originalUrl": "https://infonet.icjia-api.cloud/uploads/Percentages_of_DV_Cases_w_Weapon_Use_Threat_897d69b24d.jpg",
+    "originalWidth": 834,
+    "originalHeight": 445,
+    "sources": [
+      {
+        "width": 320,
+        "src": "/_cms-img/8bdd1aa238c125e4f0f656fcd4ab43f0b55e1d61de60ba017c4385a18708257f/320.jpg"
+      },
+      {
+        "width": 640,
+        "src": "/_cms-img/8bdd1aa238c125e4f0f656fcd4ab43f0b55e1d61de60ba017c4385a18708257f/640.jpg"
+      }
+    ],
+    "ext": "jpg"
+  }
+}
