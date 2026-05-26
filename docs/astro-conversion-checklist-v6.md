@@ -3955,3 +3955,28 @@ Strapi sites that store the home page body content as a `page` entity often use 
 
 **Fix:** add `'index'` to `siteConfig.reservedSlugs`. Same applies to any other slug that mirrors a static route (`'home'`, `'404'`, etc.). Verify via `ls dist/` after first catch-all build.
 
+
+### Infonet Phase 5a lessons (v6.1 increment)
+
+#### Font-weight tax in `@fontsource/*` imports
+
+Each `@fontsource/<family>/<weight>.css` import ships ~5–10 KB of CSS into the bundle. Default-installing 5+ weights per family is wasteful when only 3-4 are used in the actual UI.
+
+**Audit step at end of Phase 5a (or Phase 7):** open the CSS bundle (`dist/_astro/*.css`), grep `font-weight:` and verify each weight present is genuinely used. Drop unused weights from `global.css` `@import` statements.
+
+**Impact (Infonet):** dropping Lato 100/300, Raleway 100/300, Roboto 100 shrank the CSS bundle from 112 KB → 85 KB. Home mobile Perf 97 → 99.
+
+#### Astro bundles all CSS into one shared route bundle
+
+Astro (with `inlineStylesheets: 'auto'` and a large total CSS surface) emits ONE `_astro/<hash>.css` linked from every HTML page — even component CSS that only one route uses ends up in the shared bundle.
+
+Per-route CSS splitting requires:
+- Manual `<link rel="stylesheet">` in component frontmatter (Astro emits it scoped to the route), OR
+- Defer non-critical CSS via `<link rel="stylesheet" media="print" onload="this.media='all'">` hack
+
+For v6 sites, the right inflection point to optimize this is Phase 7 (post-Pagefind, last perf push). Earlier phases can accept ~3-5 mobile Perf points spent on shared-bundle bloat.
+
+#### Strapi image fields may be empty
+
+Many Strapi sites have fields like `splash.data` or `featuredImage.data` defined in the schema but unpopulated by editors. CmsImage / SplashNews / InfoCard must render gracefully without images (text-only). Don't assume every post has a splash; design the card with a no-image fallback.
+
