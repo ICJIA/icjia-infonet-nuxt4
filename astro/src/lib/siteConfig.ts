@@ -57,7 +57,7 @@ export const siteConfig = {
 
   // Open Graph defaults
   og: {
-    image: 'https://infonet.icjia.illinois.gov/infonet-thumbnail-dark.jpg',
+    image: 'https://infonet.icjia.illinois.gov/og-image.png',
     fbAppId: '', // legacy NUXT_PUBLIC_FB_APP_ID — empty in build env
   },
 
