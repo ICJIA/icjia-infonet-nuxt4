@@ -1,19 +1,27 @@
 ---
 // astro/src/pages/faqs/index.astro
 //
-// 135 FAQs from Strapi, rendered as native <details> accordions.
-// Sorted by ranking (ascending, nulls last) then createdAt.
-// renderMarkdown() is used for answer bodies — CMS authors may use markdown
-// in answer fields (confirmed in Phase 3 smoke test).
+// 135 FAQs from Strapi, grouped by agency field and rendered as native
+// <details> accordions in sections matching the legacy /faqs/ layout:
+//   - Downloads section (hardcoded DOCX URLs from legacy content/faqs.md)
+//   - "General FAQs"         — agency: null / "general" / ""
+//   - "Domestic Violence (DV) FAQs" — agency: "dv"
+//   - "Sexual Assault (SA) FAQs"    — agency: "sa"
+//   - "Children's Advocacy Center (CAC) FAQs" — agency: "cac" (if any)
+// Each h2 has an id for Toc linking. Toc sidebar is in a 2-col layout
+// matching [...slug].astro with showTableOfContents pages.
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHeader from '~/components/PageHeader.astro';
+import Toc from '~/components/Toc.astro';
 import { strapiFetch } from '~/lib/strapi';
 import { QUERY_FAQ_LIST } from '~/lib/queries';
 import { FaqListResponseSchema } from '~/lib/schemas';
 import { renderMarkdown } from '~/lib/markdown';
+import type { Heading } from '~/lib/markdown';
 
 const raw = await strapiFetch(QUERY_FAQ_LIST);
 const parsed = FaqListResponseSchema.parse(raw);
-const faqs = [...parsed.faqs.data].sort((a, b) => {
+const allFaqs = [...parsed.faqs.data].sort((a, b) => {
   const ar = a.attributes.ranking ?? 9999;
   const br = b.attributes.ranking ?? 9999;
   if (ar !== br) return ar - br;
@@ -21,25 +29,195 @@ const faqs = [...parsed.faqs.data].sort((a, b) => {
   const db = b.attributes.createdAt ?? '';
   return da < db ? -1 : da > db ? 1 : 0;
 });
+
+// Group by agency — null/empty/"general" → "general"
+function normaliseAgency(agency: string | null | undefined): string {
+  const a = (agency ?? '').toLowerCase().trim();
+  return a === '' || a === 'general' ? 'general' : a;
+}
+
+const groups: Record<string, typeof allFaqs> = {};
+for (const faq of allFaqs) {
+  const key = normaliseAgency(faq.attributes.agency);
+  if (!groups[key]) groups[key] = [];
+  groups[key].push(faq);
+}
+
+const sectionDefs = [
+  { key: 'general', id: 'general-faqs', label: 'General FAQs' },
+  { key: 'dv', id: 'dv-faqs', label: 'Domestic Violence (DV) FAQs' },
+  { key: 'sa', id: 'sa-faqs', label: 'Sexual Assault (SA) FAQs' },
+  { key: 'cac', id: 'cac-faqs', label: "Children's Advocacy Center (CAC) FAQs" },
+];
+
+// Build TOC headings manually — downloads + each non-empty FAQ section.
+// Matches the shape expected by Toc.astro (level, text, id).
+const tocHeadings: Heading[] = [
+  { level: 2, text: 'Downloads', id: 'downloads' },
+  ...sectionDefs
+    .filter((s) => (groups[s.key] ?? []).length > 0)
+    .map((s) => ({ level: 2, text: s.label, id: s.id })),
+];
 ---
 <BaseLayout title="FAQs" breadcrumbTitle="FAQs">
-  <h1>Frequently Asked Questions</h1>
-  <p style="color:#666;font-size:0.875rem;margin-bottom:24px;">
-    {faqs.length} questions
-  </p>
+  <PageHeader title="Frequently Asked Questions" />
 
-  <div style="max-width:800px;">
-    {faqs.map((f) => {
-      const { html } = renderMarkdown(f.attributes.answer);
-      return (
-        <details style="border:1px solid #e0e0e0;border-radius:4px;margin-bottom:8px;">
-          <summary style="padding:12px 16px;cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-            <span>{f.attributes.question ?? '(untitled)'}</span>
-            <span aria-hidden="true" style="font-size:1.25rem;color:#0d4270;">&#x25BE;</span>
-          </summary>
-          <div class="markdown-body" style="padding:12px 16px 16px;" set:html={html} />
-        </details>
-      );
-    })}
+  <div class="faqs-layout">
+    <div class="faqs-body">
+
+      <!-- Downloads -------------------------------------------------------- -->
+      <section aria-labelledby="downloads">
+        <h2 id="downloads" class="section-heading">Downloads</h2>
+        <p class="section-intro">Printer-friendly FAQs:</p>
+        <ul class="downloads-list">
+          <li>
+            <a
+              href="https://infonet.icjia-api.cloud/uploads/3_3_1_DV_INFONET_Frequently_Asked_Questions_7_7_23_5b58b1a47b.docx"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Domestic Violence (DV)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://infonet.icjia-api.cloud/uploads/3_3_2_SA_INFONET_Frequently_Asked_Questions_7_7_23_7c737ee0ff.docx"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Sexual Assault (SA)
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- FAQ sections per agency ----------------------------------------- -->
+      {sectionDefs.map(({ key, id, label }) => {
+        const faqs = groups[key] ?? [];
+        if (faqs.length === 0) return null;
+        return (
+          <section aria-labelledby={id} style="margin-top: 2rem;">
+            <h2 id={id} class="section-heading">{label}</h2>
+            <p class="section-count">{faqs.length} question{faqs.length !== 1 ? 's' : ''}</p>
+            <div>
+              {faqs.map((f) => {
+                const { html } = renderMarkdown(f.attributes.answer);
+                return (
+                  <details class="faq-item">
+                    <summary class="faq-summary">
+                      <span>{f.attributes.question ?? '(untitled)'}</span>
+                      <span aria-hidden="true" class="faq-chevron">&#x25BE;</span>
+                    </summary>
+                    <div class="markdown-body faq-body" set:html={html} />
+                  </details>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
+
+    </div>
+
+    <!-- Toc sidebar ------------------------------------------------------- -->
+    <aside class="faqs-toc-sidebar">
+      <Toc headings={tocHeadings} tocHeading="Navigation" />
+    </aside>
   </div>
 </BaseLayout>
+
+<style>
+  .faqs-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    max-width: 1100px;
+  }
+
+  .faqs-body {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .faqs-toc-sidebar {
+    flex: 0 0 260px;
+    position: sticky;
+    top: 170px;
+  }
+
+  @media (max-width: 768px) {
+    .faqs-layout {
+      flex-direction: column;
+    }
+
+    .faqs-toc-sidebar {
+      flex: none;
+      position: static;
+      width: 100%;
+      order: -1;
+    }
+  }
+
+  .section-heading {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #0d4270;
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #e0e0e0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .section-intro,
+  .section-count {
+    color: #666;
+    font-size: 0.875rem;
+    margin: 0 0 12px;
+  }
+
+  .downloads-list {
+    margin: 0 0 8px 1.25rem;
+    padding: 0;
+  }
+
+  .downloads-list li {
+    margin-bottom: 4px;
+  }
+
+  .downloads-list a {
+    color: #0d4270;
+    font-weight: 700;
+  }
+
+  .faq-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  .faq-summary {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-weight: 700;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-chevron {
+    font-size: 1.25rem;
+    color: #0d4270;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  .faq-body {
+    padding: 12px 16px 16px;
+  }
+</style>
