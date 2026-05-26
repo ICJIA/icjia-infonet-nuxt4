@@ -1,0 +1,100 @@
+---
+// astro/src/components/NewsCard.astro
+//
+// Shared news preview card — used on /news/ listing and home page News section.
+// Matches legacy NewsCard.vue: whole card is a link, date + title + summary,
+// no separate "Read More" button.
+//
+// Props: post — a Strapi Post entity from schemas.ts
+import { formatDate } from '~/lib/dates';
+import type { Post } from '~/lib/schemas';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const attr = post.attributes;
+const href = `/news/${attr.slug}/`;
+
+const displayDate = attr.dateOverride ?? attr.createdAt ?? null;
+const dateStr = formatDate(displayDate, 'short');
+
+function truncate(s: string | null | undefined, max = 200): string {
+  if (!s) return '';
+  const cleaned = s.replace(/\s+/g, ' ').trim();
+  if (cleaned.length <= max) return cleaned;
+  const cut = cleaned.slice(0, max - 3);
+  const sp = cut.lastIndexOf(' ');
+  return cut.slice(0, sp > max * 0.6 ? sp : max - 3) + '...';
+}
+
+const summary = truncate(attr.summary);
+---
+
+<a href={href} class="news-card">
+  <article>
+    {dateStr && (
+      <p class="news-card__date">
+        <time datetime={displayDate ?? undefined}>{dateStr}</time>
+      </p>
+    )}
+    <h2 class="news-card__title">{attr.title ?? '(untitled)'}</h2>
+    {summary && <p class="news-card__summary">{summary}</p>}
+  </article>
+</a>
+
+<style>
+  .news-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 1.5rem;
+    transition: box-shadow 200ms ease;
+  }
+
+  .news-card:hover,
+  .news-card:focus-visible {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    text-decoration: none;
+  }
+
+  .news-card:focus-visible {
+    outline: 2px solid #0d4270;
+    outline-offset: -2px;
+  }
+
+  .news-card article {
+    /* no extra spacing needed — padding is on the anchor */
+  }
+
+  .news-card__date {
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: #666;
+    margin: 0 0 6px;
+  }
+
+  .news-card__date time {
+    /* inherit */
+  }
+
+  .news-card__title {
+    font-size: 1.1875rem;
+    font-weight: 700;
+    color: #0d4270;
+    line-height: 1.25;
+    margin: 0 0 0.75rem;
+    border: none;
+    padding: 0;
+  }
+
+  .news-card__summary {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #444;
+    margin: 0;
+  }
+</style>
