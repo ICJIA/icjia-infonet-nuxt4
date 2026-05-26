@@ -21,7 +21,8 @@
     "preview": "astro preview --port 4322",
     "check": "astro check",
     "csp-hashes": "node scripts/csp-hashes.mjs",
-    "fetch:cms-images": "node scripts/fetch-cms-images.mjs"
+    "fetch:cms-images": "node scripts/fetch-cms-images.mjs",
+    "smoke:strapi": "tsx scripts/smoke-strapi.mjs"
   },
   "dependencies": {
     "@alpinejs/focus": "^3.15.12",

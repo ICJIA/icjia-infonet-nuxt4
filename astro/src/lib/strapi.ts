@@ -40,9 +40,10 @@ export async function strapiFetch<T = unknown>(
   query: string,
   variables: Record<string, unknown> = {},
 ): Promise<T> {
-  // Cache key: sha256 of serialised query + variables (sorted keys for stability).
-  const payload = JSON.stringify({ query, variables }, Object.keys(variables).sort());
-  const cacheKey = crypto.createHash('sha256').update(payload).digest('hex');
+  // Cache key: sha256 of query + sorted-key variables JSON.
+  // Sort variable keys for cache stability (different insertion order → same hash).
+  const varsJson = JSON.stringify(variables, Object.keys(variables).sort());
+  const cacheKey = crypto.createHash('sha256').update(query + varsJson).digest('hex');
   const cachePath = path.join(CACHE_DIR, `${cacheKey}.json`);
 
   // Fast path: return cached response (~1ms) to skip the network (~50-500ms).
