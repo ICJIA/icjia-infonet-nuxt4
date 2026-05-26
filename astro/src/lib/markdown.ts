@@ -37,6 +37,14 @@ export interface Heading {
 
 interface ManifestEntry {
   originalUrl: string;
+  originalWidth: number;
+  originalHeight: number;
+  sources: Array<{ width: number; src: string }>;
+  ext: string;
+}
+
+// Derived shape used for image rewriting (src/srcset/width/height).
+interface ResolvedImage {
   src: string;
   srcset: string;
   width: number;
@@ -44,8 +52,10 @@ interface ManifestEntry {
 }
 
 // ---------------------------------------------------------------------------
-// CMS image manifest (stub {} until Phase 5a populates it)
+// CMS image manifest (Phase 5a: populated by scripts/fetch-cms-images.mjs)
 // ---------------------------------------------------------------------------
+
+import crypto from 'node:crypto';
 
 let cmsImageManifest: Record<string, ManifestEntry> = {};
 try {
@@ -57,13 +67,32 @@ try {
   cmsImageManifest = {};
 }
 
-function lookupCmsImage(src: string): ManifestEntry | null {
-  // Manifest is keyed by the bare /uploads/... path (relative to API base).
+function lookupCmsImage(src: string): ResolvedImage | null {
+  // Canonicalise to bare /uploads/... path.
   const relPath = src.startsWith('http')
     ? src.replace(siteConfig.api.base, '')
     : src;
   if (!relPath.startsWith('/uploads')) return null;
-  return cmsImageManifest[relPath] ?? null;
+
+  // Manifest is keyed by sha256 of the relative path (same hash as the script).
+  const hash = crypto.createHash('sha256').update(relPath).digest('hex');
+  const entry = cmsImageManifest[hash];
+  if (!entry || !entry.sources || entry.sources.length === 0) return null;
+
+  // Use the 960-wide source as the primary src (mid-resolution representative),
+  // falling back to the largest available.
+  const preferred = entry.sources.find((s) => s.width === 960)
+    ?? entry.sources[entry.sources.length - 1];
+  const srcset = entry.sources.map((s) => `${s.src} ${s.width}w`).join(', ');
+
+  return {
+    src: preferred.src,
+    srcset,
+    width: preferred.width,
+    height: entry.originalHeight
+      ? Math.round((preferred.width / entry.originalWidth) * entry.originalHeight)
+      : 0,
+  };
 }
 
 // ---------------------------------------------------------------------------
