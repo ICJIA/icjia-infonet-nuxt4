@@ -14,15 +14,17 @@ interface Props {
 }
 
 const { date, author } = Astro.props;
-const displayDate = formatDate(date, 'long');
+// Short format matches legacy: "Oct 01, 2025" — NOT the long weekday form.
+const displayDate = formatDate(date, 'short');
 ---
 {displayDate && (
   <div class="posted-meta">
+    {/* Legacy meta order: date first, then category/author */}
+    <time class="posted-meta__date" datetime={date ?? undefined}>{displayDate}</time>
+    {author?.trim() && <span class="posted-meta__sep"> | </span>}
     {author?.trim() && (
       <span class="posted-meta__author">{author.trim()}</span>
     )}
-    {author?.trim() && <span class="posted-meta__sep"> | </span>}
-    <time class="posted-meta__date" datetime={date ?? undefined}>{displayDate}</time>
   </div>
 )}
 
