@@ -3926,3 +3926,32 @@ When AppNav is `position: fixed; top: 0; height: 150px`, the body content overla
 
 Legacy Vuetify navigation may show inline nav items only at width thresholds wider than the framework's `md` breakpoint (e.g., legacy at 1072px width hides items that appear at 1280px+). When porting, inspect the legacy rendered DOM at MULTIPLE viewport widths (375 / 768 / 1024 / 1280 / 1440 / 1920) to identify all the breakpoints where the responsive layout changes. The Vue/Vuetify port often "always-visible from 960" while legacy was "always-visible from 1280" — a subtle but visible diff.
 
+
+### Infonet Phase 4 lessons (v6.1 increment)
+
+#### `@mdi/font` CSS is render-blocking dead weight if you use inline SVG
+
+`@mdi/font/css/materialdesignicons.css` ships **88 KiB unused CSS** when components use inline SVG icons (the norm in v6+ ports). Importing the font CSS just for visual fallback OR a few decorative classes is wasteful — Lighthouse counts every byte against render-blocking.
+
+**Rule:** if no component uses `<i class="mdi mdi-foo">`, do NOT import the MDI font CSS in `global.css`. Leave it as a commented `@import` so future phases can re-enable if needed.
+
+**Impact (measured on Infonet home, mobile):** render-blocking 1,650 ms → 300 ms, mobile Perf 92 → 100.
+
+#### Listings need `<h2>` cards under the page `<h1>`
+
+`SimpleCard` (or any list-card component) should use `<h2>` not `<h3>`. Listing pages have `<h1>page title</h1>` and each card title is one level below. Skipping h2 → h3 fails Lighthouse `heading-order` audit (A11y drops to 98 from 100).
+
+#### Short pages cause footer CLS unless `<main>` reserves min-height
+
+When a page's content is shorter than the viewport, the AppFooter renders above the fold. Below-fold elements (markdown images, dynamic widgets) loading later push the document height up, sliding the visible footer down — a measurable Cumulative Layout Shift.
+
+**Fix:** `<main style="min-height: 70vh">` in BaseLayout (or wherever the page outer wrapper lives). Reserves viewport-height so the footer always sits below the fold during initial paint.
+
+**Impact (Infonet news detail, mobile):** CLS 0.17 → 0.00, Perf 85 → 100.
+
+#### Strapi `pages` may include reserved-slug collisions
+
+Strapi sites that store the home page body content as a `page` entity often use `slug: "index"` for that storage. A `[...slug]` catch-all without this slug in `reservedSlugs` will emit `/index/index.html` redundantly alongside the actual home.
+
+**Fix:** add `'index'` to `siteConfig.reservedSlugs`. Same applies to any other slug that mirrors a static route (`'home'`, `'404'`, etc.). Verify via `ls dist/` after first catch-all build.
+
