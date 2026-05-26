@@ -110,3 +110,17 @@ html { font-size: var(--font-size-root); }
 
 /* Alpine x-cloak prevents flash-of-unhydrated content (CLS protection) */
 [x-cloak] { display: none !important; }
+
+/* Drawer-open lock: prevents body scroll while sidebar drawer is open */
+body.drawer-open { overflow: hidden; }
+
+/* Global reduced-motion guard — kills animation/transition for users
+   who opt out. Per-component CSS may further specialize. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
