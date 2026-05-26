@@ -20,46 +20,62 @@ const description =
   'in Illinois to facilitate standardized statewide data collection.';
 ---
 <BaseLayout title="Home" description={description}>
-  <section class="home-hero">
-    <div class="home-hero-inner">
-      <div class="home-badge">
-        Illinois Criminal Justice Information Authority
-      </div>
+  <div class="home-grid">
+    <section class="home-hero">
+      <div class="home-hero-inner">
+        <div class="home-badge">
+          Illinois Criminal Justice Information Authority
+        </div>
 
-      <h1 class="infonet-title">INFONET</h1>
+        <h1 class="infonet-title">INFONET</h1>
 
-      <p class="infonet-tagline">
-        Illinois&rsquo; victim service data resource for over 25 years
-      </p>
+        <p class="infonet-tagline">
+          Illinois&rsquo; victim service data resource for over 25 years
+        </p>
 
-      <div class="home-lead">
-        <p>
-          InfoNet is a web-based data collection and reporting system used by
-          victim service providers in Illinois. The system is nationally
-          recognized for facilitating standardized data collection and reporting
-          at the statewide level. Initial development of InfoNet began in the
-          mid-90s as a collaborative effort between the Illinois Criminal Justice
-          Information Authority, the Illinois Coalition Against Sexual Assault,
-          and the Illinois Coalition Against Domestic Violence. Since then,
-          InfoNet has grown to include partnerships with the Illinois Department
-          of Human Services and the Chicago Department of Family &amp; Support
-          Services.
+        <div class="home-lead">
+          <p>
+            InfoNet is a web-based data collection and reporting system used by
+            victim service providers in Illinois. The system is nationally
+            recognized for facilitating standardized data collection and reporting
+            at the statewide level. Initial development of InfoNet began in the
+            mid-90s as a collaborative effort between the Illinois Criminal Justice
+            Information Authority, the Illinois Coalition Against Sexual Assault,
+            and the Illinois Coalition Against Domestic Violence. Since then,
+            InfoNet has grown to include partnerships with the Illinois Department
+            of Human Services and the Chicago Department of Family &amp; Support
+            Services.
+          </p>
+        </div>
+
+        <p class="home-partners-link">
+          <a href="/partners/">List of Partners&nbsp;&raquo;</a>
         </p>
       </div>
+    </section>
 
-      <p class="home-partners-link">
-        <a href="/partners/">List of Partners&nbsp;&raquo;</a>
-      </p>
-    </div>
-  </section>
-
-  <HomeBarGraph />
+    <HomeBarGraph />
+  </div>
   <HomeBoxes />
 </BaseLayout>
 
 <style>
   /* Import Raleway for the INFONET title — matches legacy headingHomeMain class. */
   @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;900&display=swap');
+
+  /* 2-column desktop layout: hero + chart side-by-side */
+  .home-grid {
+    display: block; /* mobile: stacked */
+  }
+
+  @media (min-width: 960px) {
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+  }
 
   .home-hero {
     background: #f2f2f2;
@@ -123,6 +139,7 @@ const description =
     color: #000;
     text-decoration: none;
     font-size: 0.95rem;
+    text-transform: uppercase;
   }
 
   .home-partners-link a:hover,

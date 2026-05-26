@@ -6,8 +6,8 @@
 //   - <nav id="main-navigation"> landmark — skip-link target in BaseLayout
 //   - Height 150px (legacy v-app-bar size="150px"), z-index 50
 //   - Background white, drop-shadow (elevation 3)
-//   - Mobile (< 960px): hamburger + "INFONET" abbreviated title + search icon
-//   - Desktop (≥ 960px): full title + topNav links (dropdown via <details>) + utility ⋮ dropdown
+//   - Mobile/tablet (< 1280px): hamburger + "INFONET" abbreviated title + search icon
+//   - Desktop (≥ 1280px): full title + topNav links (dropdown via <details>) + utility ⋮ dropdown
 //
 // Hamburger pattern: dispatches CustomEvent('drawer-toggle') on window.
 //   AppSidebar listens with @drawer-toggle.window.
@@ -39,7 +39,7 @@ const pathname = Astro.url.pathname;
       box-sizing: border-box;
     "
   >
-    <!-- ── Hamburger (mobile only, < 960px) ─────────────────────────── -->
+    <!-- ── Hamburger (mobile/tablet, < 1280px) ──────────────────────── -->
     <button
       type="button"
       id="nav-hamburger"
@@ -122,7 +122,7 @@ const pathname = Astro.url.pathname;
     <!-- ── Spacer (desktop — pushes nav items right) ────────────────── -->
     <div style="flex: 1;"></div>
 
-    <!-- ── Desktop nav items (≥ 960px) ─────────────────────────────── -->
+    <!-- ── Desktop nav items (≥ 1280px) ────────────────────────────── -->
     <span class="md-show" style="align-items: center; gap: 0;">
       {topNav.map((menu) => (
         <span style="display: inline-flex; align-items: center;">
@@ -312,7 +312,7 @@ const pathname = Astro.url.pathname;
       </span>
     </span>
 
-    <!-- ── Mobile search icon (< 960px) ─────────────────────────────── -->
+    <!-- ── Mobile/tablet search icon (< 1280px) ────────────────────── -->
     <a
       href="/search/"
       class="md-hide"
@@ -354,13 +354,14 @@ const pathname = Astro.url.pathname;
 
 <style>
 /* ── Responsive show/hide ─────────────────────────────────────────────── */
-/* md = 960px (Vuetify breakpoint --breakpoint-md) */
+/* lg = 1280px — matches legacy responsive behaviour observed at 1072px
+   viewport (Phase 2): desktop nav items only appear at wider breakpoints. */
 
 /* Desktop-only elements */
 .md-show {
   display: none !important;
 }
-@media (min-width: 960px) {
+@media (min-width: 1280px) {
   .md-show {
     display: inline-flex !important;
     align-items: center;
