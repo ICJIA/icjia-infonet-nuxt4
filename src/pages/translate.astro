@@ -5,16 +5,17 @@
 // googleTranslate() uses window.open — wired via inline Alpine click handler.
 // siteConfig.siteOrigin provides the root URL for Google Translate redirect.
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHeader from '~/components/PageHeader.astro';
 import { siteConfig } from '~/lib/siteConfig';
 
 const root = siteConfig.siteOrigin;
 ---
-<BaseLayout title="Translate" breadcrumbTitle="Translation Options">
-  <h1>Translation Options</h1>
+<BaseLayout title="Translate" breadcrumbTitle="Translate">
+  <PageHeader title="Translation Options" />
 
   <div style="margin: 12px 0 24px;">
     <div
-      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 4px 12px;"
+      class="translate-grid"
       x-data={`{ root: '${root}', googleTranslate(lang) { window.open('https://translate.google.com/translate?hl=en&sl=en&u=' + this.root + '&tl=' + lang, '_blank'); } }`}
     >
       <button type="button" class="translate-btn" @click="googleTranslate('es')">Spanish</button>
@@ -68,21 +69,48 @@ const root = siteConfig.siteOrigin;
 </BaseLayout>
 
 <style>
-.translate-btn {
-  display: block;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 0.875rem;
-  color: #1976d2;
-  padding: 6px 0;
-  text-align: left;
-  font-family: inherit;
-}
-.translate-btn:hover,
-.translate-btn:focus {
-  text-decoration: underline;
-  outline: 2px solid #1976d2;
-  outline-offset: 2px;
-}
+  /* 3-col grid at ≥960px (legacy layout); collapses on mobile */
+  .translate-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 16px;
+  }
+
+  @media (max-width: 959px) {
+    .translate-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .translate-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .translate-btn {
+    display: block;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #222;
+    padding: 6px 0;
+    text-align: left;
+    font-family: inherit;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .translate-btn:hover {
+    text-decoration: underline;
+  }
+
+  .translate-btn:focus-visible {
+    outline: 2px solid #1565c0;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 </style>
