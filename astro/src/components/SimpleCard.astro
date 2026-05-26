@@ -1,0 +1,62 @@
+---
+// astro/src/components/SimpleCard.astro
+//
+// Minimal placeholder card for Phase 4 listing pages.
+// imageUrl prop is accepted but intentionally not rendered —
+// Phase 5a wires CmsImage when the image manifest is populated.
+//
+// Props:
+//   title    (required) — card heading
+//   href               — makes the card a link
+//   date?              — ISO 8601 string; rendered via formatDate('short')
+//   summary?           — short body text
+//   imageUrl?          — forward-looking prop, ignored until Phase 5a
+
+import { formatDate } from '~/lib/dates';
+
+interface Props {
+  title: string;
+  href?: string;
+  date?: string | null;
+  summary?: string | null;
+  imageUrl?: string | null;
+}
+
+const { title, href, date, summary } = Astro.props;
+const displayDate = date ? formatDate(date, 'short') : null;
+---
+
+<a
+  href={href ?? '#'}
+  style="display:block;text-decoration:none;color:inherit;"
+>
+  <article
+    style="
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      background: #fafafa;
+      transition: box-shadow 0.2s ease;
+    "
+    onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.12)'"
+    onmouseout="this.style.boxShadow='none'"
+  >
+    {displayDate && (
+      <time
+        datetime={date ?? ''}
+        style="font-size: 0.75rem; font-weight: 700; color: #555; text-transform: uppercase; display: block; margin-bottom: 6px;"
+      >
+        {displayDate}
+      </time>
+    )}
+    <h3 style="margin: 0 0 8px; font-size: 1rem; font-weight: 700; color: #0d4270;">
+      {title}
+    </h3>
+    {summary && (
+      <p style="margin: 0; font-size: 0.875rem; color: #444; line-height: 1.5;">
+        {summary}
+      </p>
+    )}
+  </article>
+</a>
