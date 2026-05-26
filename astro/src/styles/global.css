@@ -1,0 +1,112 @@
+/* astro/src/styles/global.css
+   Entry point — imported once from BaseLayout.astro.
+   Order matters: tailwindcss first, then fontsource (Lato/Raleway/Roboto),
+   then MDI, then github-markdown (must come after tailwind so preflight
+   resets don't override the .markdown-body rules). */
+
+@import 'tailwindcss';
+
+/* Lato — Infonet body font (legacy variables.scss: $body-font-family: "Lato") */
+@import '@fontsource/lato/100.css';
+@import '@fontsource/lato/300.css';
+@import '@fontsource/lato/400.css';
+@import '@fontsource/lato/700.css';
+@import '@fontsource/lato/900.css';
+
+/* Raleway — heading font candidate per legacy nuxt.config.js link tag */
+@import '@fontsource/raleway/100.css';
+@import '@fontsource/raleway/300.css';
+@import '@fontsource/raleway/400.css';
+@import '@fontsource/raleway/700.css';
+@import '@fontsource/raleway/900.css';
+
+/* Roboto — Vuetify default fallback per legacy link tag */
+@import '@fontsource/roboto/100.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/700.css';
+@import '@fontsource/roboto/900.css';
+
+/* Material Design Icons — kept per pixel-perfect mandate */
+@import '@mdi/font/css/materialdesignicons.css';
+
+/* Prose styling for CMS markdown bodies */
+@import './github-markdown.css';
+
+/* @theme — Tailwind 4 design tokens calibrated to Vuetify 3 defaults.
+   Calibration source: legacy app/plugins/vuetify.js (Vuetify default theme
+   with only on-surface-variant override) + legacy variables.scss.
+   Verify exact values against legacy pages in Phase 2 viewcap diff. */
+@theme {
+  /* Colors — Vuetify 3 default light theme */
+  --color-primary: #1976d2;          /* Vuetify default primary blue */
+  --color-secondary: #424242;
+  --color-accent: #82b1ff;
+  --color-error: #ff5252;
+  --color-info: #2196f3;
+  --color-success: #4caf50;
+  --color-warning: #fb8c00;
+
+  --color-text: #212121;
+  --color-text-secondary: rgba(0, 0, 0, 0.87); /* legacy a11y override: on-surface-variant */
+  --color-background: #ffffff;
+  --color-surface: #ffffff;
+
+  /* Breakpoints — Vuetify 3 (Material Design 2 breakpoints) */
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 960px;
+  --breakpoint-lg: 1280px;
+  --breakpoint-xl: 1920px;
+
+  /* Type scale — Vuetify Material Design typography */
+  --text-h1: 6rem;
+  --text-h2: 3.75rem;
+  --text-h3: 3rem;
+  --text-h4: 2.125rem;
+  --text-h5: 1.5rem;
+  --text-h6: 1.25rem;
+  --text-body-1: 1rem;
+  --text-body-2: 0.875rem;
+  --text-caption: 0.75rem;
+
+  /* Elevation — Vuetify Material dp scale */
+  --shadow-elevation-1: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12);
+  --shadow-elevation-2: 0 3px 1px -2px rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12);
+  --shadow-elevation-4: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12);
+  --shadow-elevation-6: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+  --shadow-elevation-8: 0 5px 5px -3px rgba(0,0,0,0.2), 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12);
+
+  /* Fonts — Lato body per legacy, Raleway heading candidate */
+  --font-sans: 'Lato', sans-serif;
+  --font-heading: 'Raleway', sans-serif;
+
+  /* WCAG SC 1.4.8 (AAA) — 112.5% root font-size per legacy variables.scss */
+  --font-size-root: 112.5%;
+}
+
+/* Root font-size — legacy WCAG AAA hook */
+html { font-size: var(--font-size-root); }
+
+/* Vuetify accessibility override carried over — legacy app.css:226
+   Required for WCAG AA contrast on unfocused field labels (4.5:1) */
+.v-application,
+:root {
+  --v-theme-on-surface-variant: 58, 58, 58;
+}
+
+/* Heading-font override (matches legacy app.css if Raleway is used for h1-h3) */
+/* h1, h2, h3 { font-family: 'Raleway', sans-serif !important; } */
+/* NOTE: Uncomment in Phase 2 if viewcap diff shows heading-font mismatch.
+   Legacy variables.scss has $heading-font-family: 'Raleway' commented out,
+   so Vuetify default likely wins on legacy. Confirm in Phase 2. */
+
+/* Markdown lists need list-style restored — Tailwind preflight strips it */
+.markdown-body ul { list-style-type: disc; }
+.markdown-body ol { list-style-type: decimal; }
+.markdown-body ul ul { list-style-type: circle; }
+.markdown-body ul ul ul { list-style-type: square; }
+.markdown-body ol ol { list-style-type: lower-alpha; }
+.markdown-body ol ol ol { list-style-type: lower-roman; }
+.markdown-body li > p { margin: 0; }
+
+/* Alpine x-cloak prevents flash-of-unhydrated content (CLS protection) */
+[x-cloak] { display: none !important; }
