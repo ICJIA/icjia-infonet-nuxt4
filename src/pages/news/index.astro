@@ -17,7 +17,7 @@ const posts = parsed.posts.data.sort((a, b) =>
 );
 const [first, ...rest] = posts;
 ---
-<BaseLayout title="News" breadcrumbTitle="News & Updates">
+<BaseLayout title="News" breadcrumbTitle="News">
   <h1>News &amp; Updates</h1>
 
   {first && <SplashNews post={first} />}
