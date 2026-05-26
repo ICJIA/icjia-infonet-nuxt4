@@ -9,7 +9,6 @@
 // itself is .mjs so Node won't complain about the shebang, but tsx handles
 // the TS imports transparently.
 
-import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { existsSync } from 'node:fs';

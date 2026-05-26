@@ -18,11 +18,11 @@
 //
 // Returns { html: '', headings: [] } for null/undefined/empty input.
 //
-// xss CJS note: FilterXSS is accessible as both a named export and off
-// the default export. getDefaultWhiteList only exists on the default export.
+// xss CJS note: FilterXSS is a named export; getDefaultWhiteList lives only
+// on the default export. Both are accessed via type-assertion casts.
 
 import MarkdownIt from 'markdown-it';
-import xssLib from 'xss';
+import xssLib, * as xssNs from 'xss';
 import { siteConfig } from './siteConfig';
 
 // ---------------------------------------------------------------------------
@@ -51,7 +51,7 @@ let cmsImageManifest: Record<string, ManifestEntry> = {};
 try {
   // Dynamic import evaluated once per build. If the file is missing (fresh
   // checkout before pnpm fetch:cms-images runs), catch and keep empty map.
-  const mod = await import('./cms-image-manifest.json', { assert: { type: 'json' } });
+  const mod = await import('./cms-image-manifest.json', { with: { type: 'json' } });
   cmsImageManifest = (mod.default ?? mod) as Record<string, ManifestEntry>;
 } catch {
   cmsImageManifest = {};
@@ -81,20 +81,15 @@ const md = new MarkdownIt({
 // xss filter
 // ---------------------------------------------------------------------------
 
-// getDefaultWhiteList lives on xssLib.default (CJS interop — the named export
-// FilterXSS works, but getDefaultWhiteList only exists on the default object).
-const xssDefault = (xssLib as unknown as {
-  getDefaultWhiteList: () => Record<string, string[]>;
+// xss CJS interop: FilterXSS is a named export (confirmed live).
+// getDefaultWhiteList only exists on the CJS default object — access via cast.
+type XssLib = {
   FilterXSS: new (opts: Record<string, unknown>) => { process: (html: string) => string };
-}).default ?? xssLib;
-
-const getDefaultWhiteList = (xssDefault as unknown as {
   getDefaultWhiteList: () => Record<string, string[]>;
-}).getDefaultWhiteList;
+};
 
-const FilterXSS = (xssLib as unknown as {
-  FilterXSS: new (opts: Record<string, unknown>) => { process: (html: string) => string };
-}).FilterXSS;
+const xss = (xssLib ?? xssNs) as unknown as XssLib;
+const { FilterXSS, getDefaultWhiteList } = xss;
 
 // Image attrs: extend defaults to include perf attrs + inline style for bio headshots.
 const imgAllowedAttrs = [
