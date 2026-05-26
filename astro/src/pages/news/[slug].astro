@@ -1,0 +1,127 @@
+---
+// astro/src/pages/news/[slug].astro
+//
+// Dynamic post detail page — one route per Strapi post slug.
+// getStaticPaths fetches the full post list (already loaded in the build cache
+// from news/index.astro) and maps each post to a { params, props } entry.
+//
+// Phase 5a will replace the inline splash <img> with an optimised <Image>
+// from the cms-image-manifest.  Phase 5b may add a TOC sidebar.
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_POST_LIST } from '~/lib/queries';
+import { PostListResponseSchema } from '~/lib/schemas';
+import { renderMarkdown } from '~/lib/markdown';
+import { formatDate } from '~/lib/dates';
+
+export async function getStaticPaths() {
+  const raw = await strapiFetch(QUERY_POST_LIST);
+  const parsed = PostListResponseSchema.parse(raw);
+  return parsed.posts.data.map((post) => ({
+    params: { slug: post.attributes.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const attr = post.attributes;
+
+// Date precedence: dateOverride > createdAt
+const displayDate = attr.dateOverride ?? attr.createdAt ?? null;
+const dateStr = formatDate(displayDate, 'long');
+
+const { html } = renderMarkdown(attr.body);
+
+// Splash image — Strapi v4 nested under data.attributes
+const splashAttr = attr.splash?.data?.attributes;
+const splashUrl = splashAttr?.formats
+  ? (splashAttr.formats as Record<string, { url?: string }>)?.['medium']?.url
+    ? `https://infonet.icjia-api.cloud${(splashAttr.formats as Record<string, { url?: string }>)['medium'].url}`
+    : splashAttr.url
+      ? `https://infonet.icjia-api.cloud${splashAttr.url}`
+      : null
+  : null;
+const splashAlt = splashAttr?.caption ?? splashAttr?.alternativeText ?? `${attr.title ?? ''} — article splash image`;
+
+const description = attr.summary ?? attr.title ?? '';
+---
+<BaseLayout
+  title={attr.title ?? 'News'}
+  description={description}
+  ogImage={splashUrl ?? undefined}
+  breadcrumbTitle="News & Updates"
+>
+  <article class="post-detail">
+    <header class="post-header">
+      <h1>{attr.title}</h1>
+      {dateStr && (
+        <p class="post-meta">
+          Published: <time datetime={displayDate ?? undefined}>{dateStr}</time>
+          {attr.category && (
+            <span class="post-category"> | {attr.category.toUpperCase()}</span>
+          )}
+        </p>
+      )}
+    </header>
+
+    {splashUrl && (
+      <figure class="post-splash">
+        <img
+          src={splashUrl}
+          alt={splashAlt}
+          loading="eager"
+          decoding="async"
+          width="1200"
+          height="550"
+          style="width:100%;height:auto;display:block;object-fit:cover;max-height:550px;"
+        />
+        {splashAttr?.caption && (
+          <figcaption>{splashAttr.caption}</figcaption>
+        )}
+      </figure>
+    )}
+
+    <div class="markdown-body" set:html={html}></div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-detail {
+    max-width: 800px;
+    padding: 0 1rem 3rem;
+  }
+
+  .post-header h1 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 900;
+    line-height: 1.2;
+    color: #0d4270;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .post-meta {
+    font-size: 0.875rem;
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .post-category {
+    font-weight: 400;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .post-splash {
+    margin: 0 0 2rem;
+  }
+
+  .post-splash figcaption {
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 700;
+    margin-top: 0.25rem;
+    padding-left: 0.25rem;
+  }
+</style>
