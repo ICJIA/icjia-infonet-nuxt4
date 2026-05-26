@@ -1,0 +1,64 @@
+---
+// astro/src/pages/[...slug].astro
+//
+// Strapi "pages" catch-all — generates one static route per CMS page whose
+// slug is NOT in siteConfig.reservedSlugs.
+//
+// reservedSlugs prevents this catch-all from generating a route that collides
+// with a dedicated static route already registered in Wave A:
+//   /, /news/, /faqs/, /contact/, /translate/, /search/, /debug/,
+//   /data-and-publications/, /meetings/, /tabs/
+//
+// Phase 5b may add a TOC sidebar for pages with showTableOfContents: true.
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_PAGE_LIST } from '~/lib/queries';
+import { PageListResponseSchema } from '~/lib/schemas';
+import { renderMarkdown } from '~/lib/markdown';
+import { siteConfig } from '~/lib/siteConfig';
+
+export async function getStaticPaths() {
+  const raw = await strapiFetch(QUERY_PAGE_LIST);
+  const parsed = PageListResponseSchema.parse(raw);
+
+  // Filter out slugs that are handled by dedicated static routes.
+  return parsed.pages.data
+    .filter((page) => !siteConfig.reservedSlugs.includes(page.attributes.slug))
+    .map((page) => ({
+      params: { slug: page.attributes.slug },
+      props: { page },
+    }));
+}
+
+const { page } = Astro.props;
+const attr = page.attributes;
+
+const { html } = renderMarkdown(attr.body);
+
+const description = attr.summary ?? attr.title ?? '';
+---
+<BaseLayout
+  title={attr.title ?? 'Page'}
+  description={description}
+  breadcrumbTitle={attr.title ?? undefined}
+>
+  <article class="page-detail">
+    <h1>{attr.title?.toUpperCase()}</h1>
+    <div class="markdown-body" set:html={html}></div>
+  </article>
+</BaseLayout>
+
+<style>
+  .page-detail {
+    max-width: 800px;
+    padding: 0 1rem 3rem;
+  }
+
+  .page-detail h1 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 900;
+    line-height: 1.2;
+    color: #0d4270;
+    margin-bottom: 1.5rem;
+  }
+</style>
