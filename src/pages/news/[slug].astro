@@ -20,32 +20,6 @@ import { QUERY_POST_LIST } from '~/lib/queries';
 import { PostListResponseSchema } from '~/lib/schemas';
 import { renderMarkdown } from '~/lib/markdown';
 
-// ---------------------------------------------------------------------------
-// MDC detection helper
-// ---------------------------------------------------------------------------
-function detectMdcComponent(body: string | null | undefined): { name: string; props: Record<string, string> } | null {
-  if (!body) return null;
-  // Block form: ::ComponentName\n---\nprop: value\n---\n::
-  const blockMatch = body.trim().match(/^::([A-Z][a-zA-Z]+)\n---\n((?:.|\n)*?)\n---\n::$/);
-  if (blockMatch) {
-    const props: Record<string, string> = {};
-    if (blockMatch[2]) {
-      for (const line of blockMatch[2].split('\n')) {
-        const colonIdx = line.indexOf(':');
-        if (colonIdx === -1) continue;
-        const k = line.slice(0, colonIdx).trim();
-        const v = line.slice(colonIdx + 1).trim().replace(/^"(.*)"$/, '$1');
-        if (k) props[k] = v;
-      }
-    }
-    return { name: blockMatch[1], props };
-  }
-  // Inline form: :ComponentName as the entire body
-  const inlineMatch = body.trim().match(/^:([A-Z][a-zA-Z]+)$/);
-  if (inlineMatch) return { name: inlineMatch[1], props: {} };
-  return null;
-}
-
 export async function getStaticPaths() {
   const raw = await strapiFetch(QUERY_POST_LIST);
   const parsed = PostListResponseSchema.parse(raw);
@@ -61,8 +35,7 @@ const attr = post.attributes;
 // Date precedence: dateOverride > createdAt
 const displayDate = attr.dateOverride ?? attr.createdAt ?? null;
 
-const mdc = detectMdcComponent(attr.body);
-const { html, headings } = mdc ? { html: '', headings: [] } : renderMarkdown(attr.body);
+const { html, headings, mdcRefs } = renderMarkdown(attr.body);
 
 // Splash image — Strapi v4 nested under data.attributes
 const splashAttr = attr.splash?.data?.attributes;
@@ -117,15 +90,14 @@ const description = attr.summary ?? attr.title ?? '';
       </figure>
     )}
 
-    {mdc ? (
-      mdc.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
-      mdc.name === 'Partners' ? <Partners /> :
-      mdc.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={mdc.props.sectionID ?? 'screenshots'} /> :
-      mdc.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={mdc.props.sectionID ?? 'users'} /> :
-      <div class="markdown-body" set:html={html}></div>
-    ) : (
-      <div class="markdown-body" set:html={html}></div>
-    )}
+    {html && <div class="markdown-body" set:html={html}></div>}
+    {mdcRefs.map(ref => (
+      ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+      ref.name === 'Partners' ? <Partners /> :
+      ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
+      ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
+      null
+    ))}
 
     {showUpdated && (
       <LastUpdated date={attr.updatedAt} />
