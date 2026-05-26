@@ -5,6 +5,10 @@
 // pattern, Plausible bare script, URL normalizer, astro-seo + canonical.
 import { SEO } from 'astro-seo';
 import { siteConfig } from '~/lib/siteConfig';
+import AppNav from '~/components/AppNav.astro';
+import AppSidebar from '~/components/AppSidebar.astro';
+import AppFooter from '~/components/AppFooter.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
 import '~/styles/global.css';
 
 interface Props {
@@ -13,6 +17,7 @@ interface Props {
   ogImage?: string;
   noindex?: boolean;
   canonicalOverride?: string;
+  breadcrumbTitle?: string;
 }
 
 const {
@@ -21,6 +26,7 @@ const {
   ogImage,
   noindex = false,
   canonicalOverride,
+  breadcrumbTitle = undefined,
 } = Astro.props;
 
 // Canonical URL — strip /index.html / .html (Astro static format edge case);
@@ -104,14 +110,18 @@ const mainTopPad = isHome ? 64 : 96;
   <body>
     <nav class="skip-links" aria-label="Skip links">
       <a href="#main-content" class="skip-link">Skip to main content</a>
-      {/* "Skip to navigation" link reintroduced in Phase 2 when AppNav
-          lands with id="main-navigation". A link pointing to a missing
-          target fails Lighthouse's skip-link best-practice (A11y < 100). */}
+      <a href="#main-navigation" class="skip-link">Skip to navigation</a>
     </nav>
+
+    <AppNav />
+    <AppSidebar />
+    <Breadcrumb title={breadcrumbTitle} />
 
     <main id="main-content" style={`padding-top: ${mainTopPad}px`}>
       <slot />
     </main>
+
+    <AppFooter />
 
     <style is:global>
       .skip-link,
@@ -138,5 +148,9 @@ const mainTopPad = isHome ? 64 : 96;
         left: 8px;
       }
     </style>
+
+    <script>
+      import '~/scripts/alpine-entry';
+    </script>
   </body>
 </html>
