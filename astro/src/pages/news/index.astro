@@ -1,33 +1,39 @@
 ---
 // astro/src/pages/news/index.astro
 //
-// 22 posts from Strapi rendered as SimpleCard list.
-// Already sorted createdAt:desc by QUERY_POST_LIST.
-// Date precedence: dateOverride > createdAt (per schema comment in queries.ts).
+// News listing: featured SplashNews card for the newest post, then InfoCard
+// grid for the rest. Replaced SimpleCard (Phase 5a).
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import SimpleCard from '~/components/SimpleCard.astro';
+import SplashNews from '~/components/SplashNews.astro';
+import InfoCard from '~/components/InfoCard.astro';
 import { strapiFetch } from '~/lib/strapi';
 import { QUERY_POST_LIST } from '~/lib/queries';
 import { PostListResponseSchema } from '~/lib/schemas';
 
 const raw = await strapiFetch(QUERY_POST_LIST);
 const parsed = PostListResponseSchema.parse(raw);
-const posts = parsed.posts.data;
+const posts = parsed.posts.data.sort((a, b) =>
+  new Date(b.attributes.createdAt ?? 0).getTime() - new Date(a.attributes.createdAt ?? 0).getTime()
+);
+const [first, ...rest] = posts;
 ---
 <BaseLayout title="News" breadcrumbTitle="News & Updates">
   <h1>News &amp; Updates</h1>
-  <p style="color:#666;font-size:0.875rem;margin-bottom:24px;">
-    {posts.length} item{posts.length !== 1 ? 's' : ''}
-  </p>
 
-  <div style="max-width: 720px;">
-    {posts.map((post) => (
-      <SimpleCard
-        href={`/news/${post.attributes.slug}/`}
-        title={post.attributes.title ?? '(untitled)'}
-        date={post.attributes.dateOverride ?? post.attributes.createdAt ?? null}
-        summary={post.attributes.summary ?? (post.attributes.body ? post.attributes.body.slice(0, 200) : null)}
-      />
-    ))}
-  </div>
+  {first && <SplashNews post={first} />}
+
+  {rest.length > 0 && (
+    <div class="news-grid">
+      {rest.map((p) => <InfoCard post={p} />)}
+    </div>
+  )}
 </BaseLayout>
+
+<style>
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 8px;
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+// astro/src/components/EventCard.astro
+//
+// Date-prominent card for meeting/event listings. Shipped for parity even
+// though Infonet currently has no active event entity in Strapi. When a
+// meetings/events data source is introduced, wire this on the meetings page.
+//
+// Props mirror IFVCC EventCard.astro — name + start/end dates + optional type.
+import { formatDate } from '~/lib/dates';
+
+interface Props {
+  href: string;
+  name: string;
+  summary?: string | null;
+  start?: string | null;
+  end?: string | null;
+  type?: string | null;
+  readMoreText?: string;
+}
+
+const {
+  href,
+  name,
+  summary,
+  start,
+  end,
+  type,
+  readMoreText = 'View details',
+} = Astro.props;
+
+const startDate = formatDate(start, 'short');
+const endDate = formatDate(end, 'short');
+const showEndDate = endDate && endDate !== startDate;
+
+// Truncate summary to ~200 chars.
+function truncate(s: string | null | undefined, max = 200): string {
+  if (!s) return '';
+  const cleaned = s.replace(/\s+/g, ' ').trim();
+  if (cleaned.length <= max) return cleaned;
+  const cut = cleaned.slice(0, max - 3);
+  const sp = cut.lastIndexOf(' ');
+  return cut.slice(0, sp > max * 0.6 ? sp : max - 3) + '…';
+}
+
+const truncated = truncate(summary);
+---
+<article class="event-card">
+  <a href={href} class="event-card__link">
+    {type?.trim() && (
+      <div class="event-card__type" aria-hidden="true">{type.trim().toUpperCase()}</div>
+    )}
+    <h2 class="event-card__name">{name}</h2>
+    {startDate && (
+      <div class="event-card__when">
+        <time datetime={start ?? undefined}>{startDate}</time>
+        {showEndDate && (
+          <>
+            <span class="event-card__when-sep">{' '}–{' '}</span>
+            <time datetime={end ?? undefined}>{endDate}</time>
+          </>
+        )}
+      </div>
+    )}
+    {truncated && <p class="event-card__summary">{truncated}</p>}
+    <span class="event-card__more">{readMoreText} →</span>
+  </a>
+</article>
+
+<style>
+  .event-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: box-shadow 200ms ease, transform 200ms ease;
+  }
+  .event-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .event-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .event-card__link:focus-visible {
+    outline: 2px solid #0d4270;
+    outline-offset: 2px;
+  }
+
+  .event-card__type {
+    background: #0d4270;
+    color: #fff;
+    padding: 6px 16px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .event-card__name {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #0d4270;
+    margin: 0;
+    padding: 12px 16px 4px;
+  }
+
+  .event-card__when {
+    font-size: 0.8125rem;
+    color: #555;
+    padding: 0 16px 8px;
+    font-weight: 700;
+  }
+  .event-card__when-sep {
+    color: #333;
+  }
+
+  .event-card__summary {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #444;
+    margin: 0;
+    padding: 0 16px 12px;
+  }
+
+  .event-card__more {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #0d4270;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0 16px 16px;
+  }
+</style>
