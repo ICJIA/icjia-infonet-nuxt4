@@ -1,0 +1,252 @@
+---
+// src/components/mdc/DvAwarenessMonth.astro
+//
+// Ported from v1-final app/components/content/DvAwarenessMonth.vue.
+// SFY25 Domestic Violence Awareness Month callout cards.
+// Uses inline SVG icons (no @mdi/font), plain HTML/CSS (no Vuetify).
+// 2-column layout at desktop (icon ~15% left, content ~85% right).
+---
+
+<div class="dv-awareness-month">
+  <!-- Header Section -->
+  <section class="dv-header">
+    <p class="dv-body-text">
+      October is
+      <a
+        href="https://www.thehotline.org/stakeholders/domestic-violence-awareness-month/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dv-text-link"
+      >Domestic Violence Awareness Month</a>.
+      InfoNet data show that in state fiscal year 2025, domestic violence
+      agencies statewide provided over
+      <strong>half a million</strong> (621,130) direct service hours to
+      <strong>52,191</strong> domestic violence survivors.
+    </p>
+  </section>
+
+  <!-- Cards -->
+  <div class="dv-cards">
+
+    <!-- Card 1: Demographics (purple) -->
+    <div class="dv-card demographics-card">
+      <div class="dv-card-icon demographics-bg">
+        <!-- mdi-account-multiple -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3m-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3m0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13m8 0c-.29 0-.62.02-.97.05C16.19 13.89 17 15.02 17 16.5V19h6v-2.5C23 14.17 18.33 13 16 13z"/>
+        </svg>
+      </div>
+      <div class="dv-card-content demographics-content">
+        <h2 class="dv-card-title">Domestic Violence Client Demographics</h2>
+        <ul class="dv-bullet-list">
+          <li>Most clients identified as female (83%). Other clients identified as male (16%) and transgender, gender non-conforming, or another gender identity (&lt;1%).</li>
+          <li>Over half of clients (55%) identified as people of color.</li>
+          <li>Among adult clients who disclosed their sexual orientation, nearly 7% identified as gay/lesbian, bisexual, queer, or a different identity not listed.</li>
+          <li>Forty percent of adult clients had annual incomes of $12,000 or less.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 2: Direct Services (blue) -->
+    <div class="dv-card direct-services-card">
+      <div class="dv-card-icon direct-services-bg">
+        <!-- mdi-handshake -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M11 6H9L7 4H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l2 2h10c1.1 0 2-.9 2-2v-3.05c.6-.35 1-.99 1-1.73V8.78c0-.74-.4-1.38-1-1.73V4c0-1.1-.9-2-2-2h-6c-1.1 0-2 .9-2 2v2zm8 14h-9.18l-1.41-1.41L8 18H3V6h3.18L8 7.82 9.41 9.23 9 9.64V14l2 2h3l4-4h1v8zm0-10h-1l-5 5h-2v-1.36l4-4 .72-.72L18 7h1v3zM9 4h6v2h-6V4z"/>
+        </svg>
+      </div>
+      <div class="dv-card-content direct-services-content">
+        <h2 class="dv-card-title">Direct Services</h2>
+        <ul class="dv-bullet-list">
+          <li>Agencies provided almost a million (970,426) direct service contacts.</li>
+          <li>Domestic violence clients most commonly received in-person counseling services (50%) and civil legal assistance (45%).</li>
+          <li>Nearly 1 in 5 clients (9,324) received emergency shelter or transitional housing services.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 3: Training & Public Awareness (purple) -->
+    <div class="dv-card training-card">
+      <div class="dv-card-icon training-bg">
+        <!-- mdi-presentation-play -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M2 3h20v14H13v2h3v2H8v-2h3v-2H2V3zm11 12h7V5H4v10h7V9l5 3-3 3z"/>
+        </svg>
+      </div>
+      <div class="dv-card-content training-content">
+        <h2 class="dv-card-title">Training &amp; Public Awareness</h2>
+        <ul class="dv-bullet-list">
+          <li>Agencies provided professional training to 29,125 individuals from community partner organizations.</li>
+          <li>Agencies reached 286,634 individuals through public awareness efforts among community organizations, including civic and faith-based organizations, companies, and schools.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 4: Turnaways (blue) -->
+    <div class="dv-card turnaways-card">
+      <div class="dv-card-icon turnaways-bg">
+        <!-- mdi-door-closed -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 20v2H4v-2h1V4H4V2h16v2h-1v16h1v2h-4v-2h1V4H8v16h.01M12 11h2v2h-2v-2z"/>
+        </svg>
+      </div>
+      <div class="dv-card-content turnaways-content">
+        <h2 class="dv-card-title">Turnaways</h2>
+        <ul class="dv-bullet-list">
+          <li>11,092 individuals, including 4,829 children, were turned away from domestic violence emergency shelters due to lack of bed spaces.</li>
+          <li>This represents a 25% increase in shelter turnaways compared to SFY 2024.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /dv-cards -->
+</div>
+
+<style>
+  .dv-awareness-month {
+    padding: 2rem 0;
+  }
+
+  /* Header */
+  .dv-header {
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 600px)  { .dv-header { padding: 0 2rem; } }
+  @media (min-width: 960px)  { .dv-header { padding: 0 4rem; } }
+  @media (min-width: 1280px) { .dv-header { padding: 0 6rem; } }
+
+  .dv-body-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+  }
+
+  .dv-text-link {
+    color: #1976d2;
+    text-decoration: underline;
+  }
+  .dv-text-link:hover { color: #1565c0; }
+  .dv-text-link:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+  }
+
+  /* Cards container */
+  .dv-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 600px)  { .dv-cards { padding: 0 2rem; } }
+  @media (min-width: 960px)  { .dv-cards { padding: 0 4rem; } }
+  @media (min-width: 1280px) { .dv-cards { padding: 0 6rem; } }
+
+  /* Individual card */
+  .dv-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    transition: box-shadow 0.3s ease;
+  }
+  .dv-card:hover { box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+  .dv-card:focus-within {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+  }
+
+  @media (min-width: 600px) {
+    .dv-card { flex-direction: row; }
+  }
+
+  /* Icon column (~15%) */
+  .dv-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    min-height: 100px;
+  }
+
+  @media (min-width: 600px) {
+    .dv-card-icon {
+      flex: 0 0 15%;
+      min-height: 160px;
+      border-radius: 12px 0 0 12px;
+    }
+  }
+
+  .dv-card-icon svg {
+    width: 80px;
+    height: 80px;
+    color: white;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  }
+
+  @media (min-width: 600px) {
+    .dv-card-icon svg { width: 100px; height: 100px; }
+  }
+
+  /* Content column (~85%) */
+  .dv-card-content {
+    flex: 1;
+    padding: 1.5rem;
+  }
+
+  .dv-card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1a237e;
+    margin: 0 0 0.75rem;
+  }
+
+  .dv-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dv-bullet-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #333;
+  }
+  .dv-bullet-list li:last-child { margin-bottom: 0; }
+  .dv-bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #1a237e;
+    font-weight: bold;
+  }
+
+  /* Background colors */
+  .demographics-bg  { background: linear-gradient(135deg, #7b68a6 0%, #8b78b6 100%); }
+  .direct-services-bg { background: linear-gradient(135deg, #4a5f8f 0%, #5a6fa0 100%); }
+  .training-bg      { background: linear-gradient(135deg, #7b68a6 0%, #8b78b6 100%); }
+  .turnaways-bg     { background: linear-gradient(135deg, #4a5f8f 0%, #5a6fa0 100%); }
+
+  .demographics-content  { background-color: #f3e5f5; }
+  .direct-services-content { background-color: #f5f5f5; }
+  .training-content      { background-color: #f3e5f5; }
+  .turnaways-content     { background-color: #f5f5f5; }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .dv-card { transition: none; }
+  }
+
+  @media (prefers-contrast: more) {
+    .dv-card { border: 2px solid #000; }
+    .dv-text-link { font-weight: bold; }
+  }
+</style>
