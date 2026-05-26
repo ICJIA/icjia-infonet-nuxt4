@@ -1,0 +1,33 @@
+---
+// astro/src/pages/news/index.astro
+//
+// 22 posts from Strapi rendered as SimpleCard list.
+// Already sorted createdAt:desc by QUERY_POST_LIST.
+// Date precedence: dateOverride > createdAt (per schema comment in queries.ts).
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import SimpleCard from '~/components/SimpleCard.astro';
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_POST_LIST } from '~/lib/queries';
+import { PostListResponseSchema } from '~/lib/schemas';
+
+const raw = await strapiFetch(QUERY_POST_LIST);
+const parsed = PostListResponseSchema.parse(raw);
+const posts = parsed.posts.data;
+---
+<BaseLayout title="News" breadcrumbTitle="News & Updates">
+  <h1>News &amp; Updates</h1>
+  <p style="color:#666;font-size:0.875rem;margin-bottom:24px;">
+    {posts.length} item{posts.length !== 1 ? 's' : ''}
+  </p>
+
+  <div style="max-width: 720px;">
+    {posts.map((post) => (
+      <SimpleCard
+        href={`/news/${post.attributes.slug}/`}
+        title={post.attributes.title ?? '(untitled)'}
+        date={post.attributes.dateOverride ?? post.attributes.createdAt ?? null}
+        summary={post.attributes.summary ?? (post.attributes.body ? post.attributes.body.slice(0, 200) : null)}
+      />
+    ))}
+  </div>
+</BaseLayout>
