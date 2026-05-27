@@ -1,17 +1,353 @@
 ---
-// astro/src/pages/404.astro — 404 with min-h to avoid CLS
+// astro/src/pages/404.astro
+//
+// Stylish, on-brand 404 with quick search + curated nav.
+// - noindex (never want this in crawlers' indexes).
+// - Hero band matches the home page (#f2f2f2 light gray + navy #0d4270 type).
+// - Tailwind utilities for responsive layout (per v6.2 hard rule). Vuetify md
+//   parity at min-[960px]: ensures the 2-col card grid switches at the same
+//   breakpoint the rest of the site uses.
+// - Search form submits to /search/?q=… (Pagefind deep-link supports this).
+// - prefers-reduced-motion honored.
 import BaseLayout from '~/layouts/BaseLayout.astro';
+
+interface LinkCard {
+  href: string;
+  title: string;
+  blurb: string;
+}
+
+const quickLinks: LinkCard[] = [
+  { href: '/', title: 'Home', blurb: 'Overview, news, and quick links' },
+  { href: '/about/', title: 'About InfoNet', blurb: 'Background, mission, and history' },
+  { href: '/news/', title: 'News & Updates', blurb: 'Recent data releases and announcements' },
+  { href: '/data-and-publications/', title: 'Data & Publications', blurb: 'Research reports and data spotlights' },
+  { href: '/partners/', title: 'Partners', blurb: 'Coalition partners (ICASA, ICADV, others)' },
+  { href: '/contact/', title: 'Contact', blurb: 'Reach the ICJIA InfoNet team' },
+];
 ---
 <BaseLayout
-  title="Not Found"
-  description="The page you were looking for doesn't exist."
+  title="Page Not Found"
+  description="The page you were looking for could not be found on InfoNet."
   noindex={true}
 >
-  <div style="min-height: 40vh">
-    <h1>Page Not Found</h1>
-    <p>The page you were looking for doesn't exist.</p>
-    <p>
-      <a href="/">Return home</a>
-    </p>
-  </div>
+  <!-- ── Hero band ──────────────────────────────────────────────── -->
+  <section class="not-found-hero w-full bg-[#f2f2f2] px-6 min-[960px]:px-12 pt-12 pb-16">
+    <div class="mx-auto max-w-[1100px]">
+      <div class="not-found-number" aria-hidden="true">404</div>
+      <h1 class="not-found-title">We couldn&rsquo;t find that page</h1>
+      <p class="not-found-lede">
+        The link may have moved, the URL may be slightly off, or the content may
+        have been retired. Try a search below, or jump to one of the main sections.
+      </p>
+
+      <form
+        role="search"
+        action="/search/"
+        method="get"
+        class="not-found-search"
+        aria-label="Search InfoNet"
+      >
+        <label for="not-found-q" class="sr-only">Search InfoNet</label>
+        <input
+          id="not-found-q"
+          type="search"
+          name="q"
+          placeholder="Search news, reports, agencies&hellip;"
+          autocomplete="off"
+          class="not-found-search__input"
+        />
+        <button type="submit" class="not-found-search__btn">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <span>Search</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── Quick links grid ────────────────────────────────────────── -->
+  <section class="not-found-links px-6 min-[960px]:px-12 py-12">
+    <div class="mx-auto max-w-[1100px]">
+      <h2 class="not-found-links__heading">Or jump to a main section</h2>
+      <div class="grid grid-cols-1 min-[960px]:grid-cols-2 gap-4">
+        {quickLinks.map((link) => (
+          <a href={link.href} class="not-found-card">
+            <div class="not-found-card__inner">
+              <div class="not-found-card__text">
+                <h3 class="not-found-card__title">{link.title}</h3>
+                <p class="not-found-card__blurb">{link.blurb}</p>
+              </div>
+              <svg
+                class="not-found-card__arrow"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <p class="not-found-help">
+        Still can&rsquo;t find what you&rsquo;re looking for?
+        <a href="/contact/">Contact the InfoNet team</a>.
+      </p>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  /* ── Hero ─────────────────────────────────────────────────────── */
+  .not-found-hero {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .not-found-number {
+    font-family: 'Raleway', 'Raleway fallback', sans-serif;
+    font-weight: 900;
+    font-size: clamp(6rem, 18vw, 12rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: #0d4270;
+    background: linear-gradient(180deg, #0d4270 0%, #1e6bb8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 0.5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .not-found-number {
+      animation: notFoundFade 0.6s ease-out both;
+    }
+    @keyframes notFoundFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  .not-found-title {
+    font-family: 'Raleway', 'Raleway fallback', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    line-height: 1.2;
+    color: #0d4270;
+    margin: 0 0 0.75rem;
+    text-transform: none;
+  }
+
+  .not-found-lede {
+    font-family: 'Lato', sans-serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.0625rem);
+    line-height: 1.55;
+    color: #333;
+    max-width: 640px;
+    margin: 0 0 1.75rem;
+  }
+
+  /* ── Search form ──────────────────────────────────────────────── */
+  .not-found-search {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 560px;
+  }
+  @media (min-width: 480px) {
+    .not-found-search {
+      flex-direction: row;
+      gap: 0;
+    }
+  }
+
+  .not-found-search__input {
+    flex: 1;
+    min-width: 0;
+    height: 48px;
+    padding: 0 16px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    color: #222;
+    background: #fff;
+    border: 2px solid #0d4270;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  @media (min-width: 480px) {
+    .not-found-search__input {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: 0;
+    }
+  }
+  .not-found-search__input::placeholder {
+    color: #888;
+    font-style: italic;
+  }
+  .not-found-search__input:focus-visible {
+    border-color: #1e6bb8;
+    box-shadow: 0 0 0 3px rgba(30,107,184,0.25);
+  }
+
+  .not-found-search__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    padding: 0 22px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: #fff;
+    background: #0d4270;
+    border: 2px solid #0d4270;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  @media (min-width: 480px) {
+    .not-found-search__btn {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .not-found-search__btn { transition: none; }
+  }
+  .not-found-search__btn:hover,
+  .not-found-search__btn:focus-visible {
+    background: #1e6bb8;
+    border-color: #1e6bb8;
+  }
+  .not-found-search__btn:focus-visible {
+    outline: 3px solid rgba(30,107,184,0.35);
+    outline-offset: 2px;
+  }
+
+  /* ── Quick links grid ─────────────────────────────────────────── */
+  .not-found-links__heading {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #0d4270;
+    margin: 0 0 1.5rem;
+  }
+
+  .not-found-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    border: 1px solid #d8d8d8;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .not-found-card { transition: none; }
+  }
+  .not-found-card:hover,
+  .not-found-card:focus-visible {
+    border-color: #0d4270;
+    box-shadow: 0 4px 12px rgba(13,66,112,0.12);
+    transform: translateY(-1px);
+  }
+  .not-found-card:focus-visible {
+    outline: 3px solid rgba(30,107,184,0.35);
+    outline-offset: 2px;
+  }
+
+  .not-found-card__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 22px;
+  }
+
+  .not-found-card__title {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: 1.0625rem;
+    color: #0d4270;
+    margin: 0 0 4px;
+    text-transform: none;
+  }
+  .not-found-card__blurb {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: #555;
+    margin: 0;
+  }
+
+  .not-found-card__arrow {
+    flex-shrink: 0;
+    color: #0d4270;
+    transition: transform 0.15s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .not-found-card__arrow { transition: none; }
+  }
+  .not-found-card:hover .not-found-card__arrow,
+  .not-found-card:focus-visible .not-found-card__arrow {
+    transform: translateX(4px);
+  }
+
+  .not-found-help {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9375rem;
+    color: #444;
+    margin: 2rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e5e5;
+  }
+  .not-found-help a {
+    color: #0d4270;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .not-found-help a:hover,
+  .not-found-help a:focus-visible {
+    color: #1e6bb8;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

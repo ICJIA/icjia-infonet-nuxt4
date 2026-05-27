@@ -2,6 +2,36 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.11] - 2026-05-27 — Surface /sitemap.xml + stylish 404 redesign
+
+### `netlify.toml` — `/sitemap.xml` rewrite
+
+`@astrojs/sitemap` emits `sitemap-index.xml` (with a `sitemap-0.xml` shard) and robots.txt correctly points to that URL. But the conventional `/sitemap.xml` (and the trailing-slash variant `/sitemap.xml/` that some tools auto-generate) both returned **404** — many SEO scanners and AI crawlers probe the conventional name without reading robots.txt first. Added two Netlify rewrites with `status = 200` (NOT 301) so the URL change is invisible to scanners that count redirects (per the SiteImprove redirect-avoidance pattern):
+
+```toml
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 200
+
+[[redirects]]
+  from = "/sitemap.xml/"
+  to = "/sitemap-index.xml"
+  status = 200
+```
+
+### `src/pages/404.astro` — stylish, on-brand 404
+
+The previous 404 was three lines of unstyled text. Replaced with a designed page that:
+
+- **Hero band** matching the home page (#f2f2f2 light gray background + navy `#0d4270`). Big `404` numeral using Raleway 900 with a subtle navy-to-blue gradient via `background-clip: text`. Friendly headline "We couldn't find that page" + a brief explanatory lede.
+- **Pagefind search form** that submits to `/search/?q=…` — the existing search page already supports `?q=` deep-link, so the form hands off seamlessly. Joined input + button on ≥480 px, stacked on narrow phones. Navy focus ring, italic placeholder, 48 px target height (touch-friendly).
+- **Quick-link grid** with 6 curated cards (Home, About, News, Data & Publications, Partners, Contact) — same six destinations as `llms.txt`. 1-column mobile → 2-column at `min-[960px]:` (Vuetify md parity per the v6.2 hard rule). Hover state: subtle navy border + 1 px lift + arrow translateX. `prefers-reduced-motion: reduce` honored throughout (transitions and the 404-fade keyframe both opt-out).
+- **Fallback help line** with a "Contact the InfoNet team" link below the cards.
+- A11y: `noindex={true}`, the big 404 numeral is `aria-hidden="true"` (it's decorative; the h1 carries the announcement), search form has `role="search"` + `aria-label`, all SVGs are `aria-hidden`, focus-visible outlines on every interactive element.
+
+Verified built `dist/404.html` (40 KB): h1 + h2 in place, search form action and `name="q"` correct, 6 quick-link cards emitted.
+
 ## [3.2.10] - 2026-05-27 — AI readiness pass 2: per-entry @type + freshness on every page
 
 Second pass on the AI Readiness Assessment after 3.2.9. Two issues remained when the assessor re-scanned the home:
