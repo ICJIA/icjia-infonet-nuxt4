@@ -119,7 +119,6 @@ const articlesJson = JSON.stringify(
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${article.title} — opens in new window`}
             class="dap-card-link"
             x-show={`isVisible(${idx})`}
           >
@@ -145,7 +144,7 @@ const articlesJson = JSON.stringify(
                   {displayDate && <span class="dap-card-sep"> | </span>}
                   <span class="dap-card-type">{pubType}</span>
                 </div>
-                <h3 class="dap-card-title">{article.title}</h3>
+                <h2 class="dap-card-title">{article.title}</h2>
                 {abstract && (
                   <p class="dap-card-abstract">{abstract}</p>
                 )}

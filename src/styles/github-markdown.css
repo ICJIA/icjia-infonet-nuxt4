@@ -254,9 +254,12 @@
 }
 
 .markdown-body a {
-    /* WCAG SC 1.4.6 (AAA): 7.55:1 contrast on white (was #0366d6 at 5.42:1) */
+    /* WCAG SC 1.4.6 (AAA): 7.55:1 contrast on white (was #0366d6 at 5.42:1).
+       SC 1.4.1 (A): links in body text MUST be distinguishable by something
+       other than colour alone, so underline by default (was: text-decoration
+       none, which Lighthouse flags as link-in-text-block). */
     color: #0353a4;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .markdown-body a:hover {
