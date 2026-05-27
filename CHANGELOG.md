@@ -2,6 +2,34 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.0] - 2026-05-27 — Edge-to-edge home layout + a11y zero-issue sweep
+
+### Home layout — edge-to-edge above and below
+
+Restores the legacy Vuetify `v-container fluid` + `cols=12 md=6` behaviour after `3.1.0` had inadvertently capped the home sections at 1200 px wide:
+
+- **Hero + chart row:** `.home-section-inner` no longer applies `max-width: 1200 px` — the row now spans the full viewport width. Info text occupies the left half, chart the right half (`1fr 1fr` grid at ≥960 px, stacked below). `.home-hero-inner` 640 px cap also removed.
+- **News + FAQs row:** `.home-news-faqs` strips the 2 rem outer padding and column gap so each card column reaches the viewport edge.
+- **Gutters:** `.home-section` keeps a small 2 rem horizontal padding for breathing room around the hero copy; the news/faqs section runs flush.
+- **Top white strip:** kept the 3.1.0 fix where the home route gets `mainTopPad: 0` so the gray hero abuts the fixed nav.
+
+### Accessibility — production now reports **0 violations AND 0 needs-review**
+
+axe-core AA audited across `/`, `/about/`, `/screenshots/`, `/faqs/`, `/news/`, `/contact/`, `/data-and-publications/`, `/news/<slug>/`:
+
+- **`/data-and-publications/`** card CTA was `#1976d2` on a `#fafafa` card = 4.28 : 1 (fails AA 4.5 : 1 for small bold text). Bumped to `#0d47a1` (~6.6 : 1, passes AA + AAA).
+- **FAQ + home FAQ chevrons** used the Unicode `▾` (`U+25BE`), which made axe-core report `nonBmp` ("Element content contains only non-text characters") as a *needs-review* result. Swapped to inline SVG paths with `currentColor` fill — axe excludes SVG from color-contrast entirely. Visually identical.
+
+### Responsive — narrow-viewport overflow eliminated
+
+The screen-reader-only fallback table on `HomeBarGraph` was a `position: absolute; clip: rect(0,0,0,0); white-space: nowrap` block. The clip hides it visually, but its absolute-positioned children still contributed ~64 px to `document.scrollWidth`, causing a stray horizontal scrollbar on every page that embeds the chart at viewports under ~520 px. Anchored at `left: -10000 px` so its natural-width content sits fully off-canvas. Verified via Chrome DevTools at multiple viewport widths.
+
+### Pixel-perfect — `/about/` Partners section
+
+The legacy `:Partners` component had `.partners-body { padding: 0 4rem }` plus a `.partners-indent { margin-left: 25 px }`, double-indenting it relative to sibling sections (`InfoNet team`, `InfoNet User Agencies`). Stripped both — Partners now aligns flush-left with its h2 like every other CMS section.
+
+---
+
 ## [3.1.0] - 2026-05-27 — Pixel-perfect polish + Lighthouse 96-100 on every page
 
 Follow-up to the 3.0.0 cutover. Same tech stack, same look — fixes the remaining drift the team identified during branch review, plus a perf + Best Practices sweep so every audited route lands in the 96-100 band on both mobile and desktop.
