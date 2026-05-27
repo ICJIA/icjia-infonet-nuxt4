@@ -113,6 +113,21 @@ html { font-size: var(--font-size-root); }
 .markdown-body ol ol ol { list-style-type: lower-roman; }
 .markdown-body li > p { margin: 0; }
 
+/* Video embeds inside CMS markdown bodies (e.g. /about/ National Webinar):
+   constrain to ~legacy 560px max-width, force 16:9 aspect, and center the
+   block within the column. Override Strapi-authored width/height attrs. */
+.markdown-body iframe[src*="youtube"],
+.markdown-body iframe[src*="youtube-nocookie"] {
+  display: block;
+  max-width: 560px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  margin: 1.5rem auto;
+  border: 0;
+  border-radius: 4px;
+}
+
 /* Alpine x-cloak prevents flash-of-unhydrated content (CLS protection) */
 [x-cloak] { display: none !important; }
 

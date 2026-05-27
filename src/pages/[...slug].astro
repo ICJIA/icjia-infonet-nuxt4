@@ -21,7 +21,7 @@ import TabsUserInfoAccessible from '~/components/mdc/TabsUserInfoAccessible.astr
 import { strapiFetch } from '~/lib/strapi';
 import { QUERY_PAGE_LIST } from '~/lib/queries';
 import { PageListResponseSchema } from '~/lib/schemas';
-import { renderMarkdown } from '~/lib/markdown';
+import { renderMarkdown, splitMdcPlaceholders } from '~/lib/markdown';
 import { siteConfig } from '~/lib/siteConfig';
 
 export async function getStaticPaths() {
@@ -41,6 +41,7 @@ const { page } = Astro.props;
 const attr = page.attributes;
 
 const { html, headings, mdcRefs } = renderMarkdown(attr.body);
+const segments = splitMdcPlaceholders(html);
 
 const description = attr.summary ?? attr.title ?? '';
 
@@ -55,14 +56,30 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
 >
   <article class="page-detail">
     <h1 class="page-h1">{attr.title?.toUpperCase()}</h1>
-    {html && <div class="markdown-body" set:html={html}></div>}
-    {mdcRefs.map(ref => (
-      ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
-      ref.name === 'Partners' ? <Partners /> :
-      ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
-      ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
-      null
-    ))}
+    {segments.length > 0 ? (
+      <div class="markdown-body">
+        {segments.map(seg => {
+          if ('html' in seg) return <Fragment set:html={seg.html} />;
+          const ref = mdcRefs[seg.refIndex];
+          if (!ref) return null;
+          return (
+            ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+            ref.name === 'Partners' ? <Partners /> :
+            ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
+            ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
+            null
+          );
+        })}
+      </div>
+    ) : (
+      mdcRefs.map(ref => (
+        ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+        ref.name === 'Partners' ? <Partners /> :
+        ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
+        ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
+        null
+      ))
+    )}
   </article>
 </BaseLayout>
 

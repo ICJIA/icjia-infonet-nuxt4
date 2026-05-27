@@ -221,16 +221,59 @@ function stripMdcBlocks(src: string): { cleaned: string; mdcRefs: MdcRef[] } {
   // Sort by position in source.
   entries.sort((a, b) => a.index - b.index);
 
-  // Replace every matched string with empty string (strip from markdown).
+  // Replace each matched block with a placeholder token at its position, so
+  // the calling template can interleave rendered MDC components inline with
+  // the surrounding markdown (matches legacy MDC inline placement). The
+  // token is a sentinel string that markdown-it and xss both pass through
+  // verbatim — see splitMdcPlaceholders() in this module for the consumer.
   let cleaned = src;
-  for (const entry of entries) {
-    cleaned = cleaned.split(entry.fullMatch).join('');
+  for (let i = 0; i < entries.length; i++) {
+    cleaned = cleaned.split(entries[i].fullMatch).join(
+      `\n\n${MDC_PLACEHOLDER_PREFIX}${i}${MDC_PLACEHOLDER_SUFFIX}\n\n`,
+    );
   }
-  // Collapse sequences of blank lines that stripping may leave behind.
   cleaned = cleaned.replace(/\n{3,}/g, '\n\n').trim();
 
   const mdcRefs = entries.map((e) => e.ref);
   return { cleaned, mdcRefs };
+}
+
+// Unique sentinel that markdown-it wraps in <p>…</p> and xss leaves alone.
+// Consumers (templates) split the rendered HTML on this token and inject
+// the matching component at each split boundary.
+export const MDC_PLACEHOLDER_PREFIX = 'MDCREFPLACEHOLDER_';
+export const MDC_PLACEHOLDER_SUFFIX = '_MDCREFEND';
+const MDC_PLACEHOLDER_RX = new RegExp(
+  // Markdown-it wraps lone text on its own line in <p>…</p>; we strip that
+  // wrapper too so the injected component isn't trapped inside an empty <p>.
+  `(?:<p>\\s*)?${MDC_PLACEHOLDER_PREFIX}(\\d+)${MDC_PLACEHOLDER_SUFFIX}(?:\\s*<\\/p>)?`,
+  'g',
+);
+
+/**
+ * Split rendered markdown HTML at every MDC placeholder, returning an
+ * alternating list of HTML chunks and ref-indexes. The template walks
+ * the segments and renders the corresponding component between chunks.
+ *
+ * Example output (5 entries — 3 HTML, 2 refs):
+ *   [{ html: '<h2>A</h2>' }, { refIndex: 0 }, { html: '<p>B</p>' },
+ *    { refIndex: 1 }, { html: '<h2>C</h2>' }]
+ */
+export type MdcSegment = { html: string } | { refIndex: number };
+export function splitMdcPlaceholders(html: string): MdcSegment[] {
+  const segments: MdcSegment[] = [];
+  let last = 0;
+  let m: RegExpExecArray | null;
+  MDC_PLACEHOLDER_RX.lastIndex = 0;
+  while ((m = MDC_PLACEHOLDER_RX.exec(html)) !== null) {
+    const before = html.slice(last, m.index);
+    if (before) segments.push({ html: before });
+    segments.push({ refIndex: parseInt(m[1], 10) });
+    last = m.index + m[0].length;
+  }
+  const tail = html.slice(last);
+  if (tail) segments.push({ html: tail });
+  return segments;
 }
 
 // ---------------------------------------------------------------------------
