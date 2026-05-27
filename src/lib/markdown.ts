@@ -289,6 +289,24 @@ function rewriteImages(html: string): string {
   });
 }
 
+// Swap any YouTube iframe src for the no-cookie / privacy-enhanced domain
+// and ensure lazy loading. Strapi authors paste plain youtube.com/embed/
+// URLs; the standard domain triggers DoubleClick/ad-tracking calls which
+// Lighthouse surfaces as "inspector-issues" in Best Practices.
+function rewriteYouTubeIframes(html: string): string {
+  return html.replace(
+    /<iframe([^>]*?)\bsrc\s*=\s*"(https?:)?\/\/(?:www\.)?youtube\.com\/embed\/([^"]+)"([^>]*)>/gi,
+    (_full, pre: string, _proto: string | undefined, path: string, post: string) => {
+      const all = `${pre} ${post}`;
+      let extra = '';
+      if (!/\bloading\s*=/i.test(all))  extra += ' loading="lazy"';
+      if (!/\ballow\s*=/i.test(all))    extra += ' allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"';
+      if (!/\btitle\s*=/i.test(all))    extra += ' title="YouTube video"';
+      return `<iframe${pre} src="https://www.youtube-nocookie.com/embed/${path}"${post}${extra}>`;
+    },
+  );
+}
+
 function rewriteExternalLinks(html: string): string {
   return html.replace(EXT_LINK_RX, (_full, pre: string, href: string, post: string) => {
     const hasTarget = /\btarget\s*=/i.test(pre + post);
@@ -357,9 +375,10 @@ export function renderMarkdown(
 
   const rendered  = md.render(cleaned);
   const safe      = filter.process(rendered);
-  const withImgs  = rewriteImages(safe);
-  const withLinks = rewriteExternalLinks(withImgs);
-  const html      = injectHeadingIds(withLinks);
+  const withImgs    = rewriteImages(safe);
+  const withIframes = rewriteYouTubeIframes(withImgs);
+  const withLinks   = rewriteExternalLinks(withIframes);
+  const html        = injectHeadingIds(withLinks);
   const headings  = extractHeadings(html);
 
   return { html, headings, mdcRefs };
