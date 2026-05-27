@@ -2,6 +2,16 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.7] - 2026-05-27 — Perf: switch @fontsource imports to `latin-` subset only
+
+Home page mobile audit was Perf 98 with 430 ms of "Render-blocking resources" savings available — the dominant blocker was `BaseLayout.css` at **90.7 KB** (uncompressed). Audited the bundle: 54+ `@font-face` declarations across nine `@fontsource/<family>/<weight>.css` imports, each shipping six to seven Unicode subsets (latin, latin-ext, cyrillic, cyrillic-ext, greek, greek-ext, vietnamese). Infonet content is English-only and `latin` already covers em-dashes, smart quotes, the euro sign, and the trademark glyph (U+2000-206F is in the latin subset's unicode-range), so the other five subsets are pure dead weight.
+
+Swapped all nine imports in `src/styles/global.css` from `@import '@fontsource/<family>/<weight>.css'` → `@import '@fontsource/<family>/latin-<weight>.css'`. Per-file shrinkage: Lato -71%, Raleway -87%, Roboto -95% (Roboto in particular ships a huge cyrillic+greek+vietnamese surface).
+
+**Bundle impact:** `BaseLayout.css` 90.7 KB → **34.5 KB** (-62%). All three preload hashes for the woff2 files are byte-identical to the pre-change build (Vite content-hashes by file content, not import path), so the preload tags from 3.2.5 still match what the `@font-face` rules request. `@font-face` declarations went from 54+ → 10 (9 latin-only weights + 1 octicons-link from `github-markdown.css`).
+
+**Risk:** if a future CMS author pastes Czech / Polish / Vietnamese / Cyrillic content into Strapi, those characters fall back to the system font for that one glyph. Zero impact on English-only production content. Confirmed all three font-family stacks (Lato, Raleway, Roboto) still resolve in the rebuilt bundle.
+
 ## [3.2.6] - 2026-05-27 — Docs: capture preload-first font-CLS lesson; defer size-adjust
 
 Post-3.2.5 re-audit confirmed `/partners/` mobile Perf **95 → 100** with CLS dropped off the failure list site-wide. The planned follow-up (Capsize-tuned `size-adjust`/`ascent-override` fallback `@font-face`) was reviewed and **skipped** — preload alone got CLS into the green band, so size-adjust would yield zero measurable Lighthouse improvement while introducing visual-drift risk on edge cases (long unbroken words, italic runs, narrow viewports). Documented the full pattern in `docs/astro-conversion-checklist-v6.2.md` under the "Infonet post-cutover" section: the `?url`-import preload technique, why it dedupes with the `@fontsource` `@import` chain (Vite content-hashes by file content), the "highest-impact 2–3 weights only" heuristic to avoid stealing bandwidth from CSS/HTML, and the explicit rule **"preload first → measure → size-adjust fallback only if CLS still > 0.1"** so the next migration doesn't reach for the heavier fix prematurely.

@@ -8,20 +8,22 @@
 
 /* Lato — Infonet body font (legacy variables.scss: $body-font-family: "Lato").
    Trimmed to weights actually used (Phase 5a CSS-bundle-shrink lesson).
-   Re-add 100/300 if a future phase ships designs using thin/light weights. */
-@import '@fontsource/lato/400.css';
-@import '@fontsource/lato/700.css';
-@import '@fontsource/lato/900.css';
+   Re-add 100/300 if a future phase ships designs using thin/light weights.
+   `latin-` subset only — full English-only content; cyrillic/greek/vietnamese
+   subsets cut ~23 KiB of @font-face CSS from the render-blocking bundle. */
+@import '@fontsource/lato/latin-400.css';
+@import '@fontsource/lato/latin-700.css';
+@import '@fontsource/lato/latin-900.css';
 
 /* Raleway — heading font (AppNav INFONET 900, h1-h6 use 700/900) */
-@import '@fontsource/raleway/400.css';
-@import '@fontsource/raleway/700.css';
-@import '@fontsource/raleway/900.css';
+@import '@fontsource/raleway/latin-400.css';
+@import '@fontsource/raleway/latin-700.css';
+@import '@fontsource/raleway/latin-900.css';
 
 /* Roboto — Vuetify default fallback per legacy link tag (nav dropdown items) */
-@import '@fontsource/roboto/400.css';
-@import '@fontsource/roboto/700.css';
-@import '@fontsource/roboto/900.css';
+@import '@fontsource/roboto/latin-400.css';
+@import '@fontsource/roboto/latin-700.css';
+@import '@fontsource/roboto/latin-900.css';
 
 /* Material Design Icons — REMOVED in Phase 4 (88 KiB unused CSS).
    All icons in AppNav / AppSidebar / AppFooter / SimpleCard use INLINE SVG,
