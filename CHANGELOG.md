@@ -2,6 +2,23 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.2] - 2026-05-27 — Revert inlineStylesheets to 'auto'
+
+Re-audit after `3.2.1` shipped showed the `inlineStylesheets: 'always'` flip was a net regression for browse traffic:
+
+| Page | 3.2.0 (auto) | 3.2.1 (always) | Δ |
+|---|---:|---:|---:|
+| / mobile (FCP) | 1.4 s | 2.0 s | **−600 ms** |
+| / desktop perf | 99 | 96 | −3 |
+| /screenshots/ mobile perf | 97 | 94 | −3 |
+| /about/ desktop perf | 89 | 99 | +10 |
+
+The asymmetry is **text-LCP vs image-LCP**: `/about/` is a CMS markdown page where the LCP element is text inside `.markdown-body`, which can't paint until the stylesheet has been parsed — render-blocking CSS hurt it disproportionately. `/screenshots/` (and to a lesser extent the home and DAP) are image-LCP pages where the LCP image fetch races the CSS in parallel, so inlining 35 KiB of CSS into the HTML just delayed image discovery without a compensating gain. On mobile the cost is amplified because the bigger HTML pushes past a single TCP round-trip on throttled connections.
+
+Reverted to `'auto'`. The /about/ desktop score returns to the 89-93 variance band but warm-cache navigations across the rest of the site get the cached CSS bundle (~280 KiB of redundant inlined CSS bytes avoided over an 8-page browse), and mobile FCP returns to 1.4 s on the homepage. A11y/BP/SEO unaffected.
+
+---
+
 ## [3.2.1] - 2026-05-27 — Post-deploy Lighthouse polish
 
 Three targeted fixes triggered by the post-`8a655e2` audit re-run:
