@@ -332,20 +332,32 @@ function rewriteImages(html: string): string {
   });
 }
 
-// Swap any YouTube iframe src for the no-cookie / privacy-enhanced domain
-// and ensure lazy loading. Strapi authors paste plain youtube.com/embed/
-// URLs; the standard domain triggers DoubleClick/ad-tracking calls which
-// Lighthouse surfaces as "inspector-issues" in Best Practices.
+// Replace any CMS-embedded YouTube iframe with a "lite facade": a clickable
+// thumbnail placeholder. Three wins over rendering the iframe directly:
+//   1. Best Practices: no third-party YouTube cookies are set until the
+//      user actually clicks play (Lighthouse flags cookie issues otherwise).
+//   2. Performance: YouTube's ~500 KiB player bundle is deferred — only the
+//      thumbnail JPEG loads on page view.
+//   3. Privacy: matches the legacy site's lazy-load behaviour and respects
+//      visitors who never play the video.
+// The swap is wired by initYtFacades() in BaseLayout — on click, the facade
+// element is replaced with a real <iframe src="youtube-nocookie.com/embed/<id>?autoplay=1">.
 function rewriteYouTubeIframes(html: string): string {
   return html.replace(
-    /<iframe([^>]*?)\bsrc\s*=\s*"(https?:)?\/\/(?:www\.)?youtube\.com\/embed\/([^"]+)"([^>]*)>/gi,
-    (_full, pre: string, _proto: string | undefined, path: string, post: string) => {
-      const all = `${pre} ${post}`;
-      let extra = '';
-      if (!/\bloading\s*=/i.test(all))  extra += ' loading="lazy"';
-      if (!/\ballow\s*=/i.test(all))    extra += ' allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"';
-      if (!/\btitle\s*=/i.test(all))    extra += ' title="YouTube video"';
-      return `<iframe${pre} src="https://www.youtube-nocookie.com/embed/${path}"${post}${extra}>`;
+    /<iframe([^>]*?)\bsrc\s*=\s*"(https?:)?\/\/(?:www\.)?(?:youtube(?:-nocookie)?\.com)\/embed\/([^"?&"]+)([^"]*)"([^>]*)>(?:[\s\S]*?<\/iframe>)?/gi,
+    (_full, _pre: string, _proto: string | undefined, videoId: string, _query: string, _post: string) => {
+      const safeId = videoId.replace(/[^A-Za-z0-9_-]/g, '');
+      if (!safeId) return _full;
+      const thumb = `https://i.ytimg.com/vi/${safeId}/hqdefault.jpg`;
+      const watchUrl = `https://www.youtube.com/watch?v=${safeId}`;
+      return [
+        `<div class="yt-facade" data-yt-id="${safeId}">`,
+          `<a class="yt-facade__link" href="${watchUrl}" target="_blank" rel="noopener noreferrer" aria-label="Play YouTube video">`,
+            `<img class="yt-facade__thumb" src="${thumb}" alt="YouTube video thumbnail" loading="lazy" decoding="async" width="480" height="360">`,
+            `<span class="yt-facade__play" aria-hidden="true"></span>`,
+          `</a>`,
+        `</div>`,
+      ].join('');
     },
   );
 }
