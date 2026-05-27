@@ -282,6 +282,8 @@ const articlesJson = JSON.stringify(
     margin-top: 10px;
     font-size: 0.75rem;
     font-weight: 900;
-    color: #1976d2;
+    /* WCAG AA: #1976d2 on #fafafa is 4.28:1 (fails 4.5:1 for small bold).
+       #0d47a1 (Blue 900) reaches ~6.6:1 — passes AA and AAA for normal text. */
+    color: #0d47a1;
   }
 </style>

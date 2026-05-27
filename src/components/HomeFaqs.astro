@@ -119,6 +119,10 @@ const faqs = parsed.faqs.data
   }
 
   .home-faq-item__summary {
+    /* Explicit white background so axe can fully resolve contrast of the
+       inner ▾ chevron (#0d4270) — otherwise axe flags "needs review"
+       because nested backgrounds aren't sampled. Actual ratio ~12:1. */
+    background: #fff;
     padding: 12px 16px;
     cursor: pointer;
     font-weight: 700;

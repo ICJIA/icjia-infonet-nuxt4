@@ -192,6 +192,10 @@ const tocHeadings: Heading[] = [
   }
 
   .faq-summary {
+    /* Explicit white background so axe can resolve the ▾ chevron's
+       contrast against a known colour (was flagged "needs review"
+       because nested transparent backgrounds aren't sampled). */
+    background: #fff;
     padding: 12px 16px;
     cursor: pointer;
     font-weight: 700;
