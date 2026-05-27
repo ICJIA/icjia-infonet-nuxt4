@@ -19,6 +19,9 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 import PageHeader from '~/components/PageHeader.astro';
 import { formatDate } from '~/lib/dates';
 import pubData from '~/data/dataAndPublications.json';
+import splashManifest from '~/data/dap-splash-manifest.json';
+type SplashEntry = { src: string; srcset: string; width: number; height: number };
+const splashes = splashManifest.items as Record<string, SplashEntry>;
 
 // Sort by date descending; items with no date go to bottom.
 const articles = [...pubData].sort((a, b) => {
@@ -110,6 +113,7 @@ const articlesJson = JSON.stringify(
         const abstract = article.abstract
           ? (article.abstract.length > 350 ? article.abstract.slice(0, 350) + '...' : article.abstract)
           : '';
+        const splash = splashes[String(article._id)];
         return (
           <a
             href={href}
@@ -120,21 +124,36 @@ const articlesJson = JSON.stringify(
             x-show={`isVisible(${idx})`}
           >
             <article class="dap-card">
-              <div class="dap-card-meta">
-                {displayDate && (
-                  <span class="dap-card-date">{displayDate}</span>
-                )}
-                {displayDate && <span class="dap-card-sep"> | </span>}
-                <span class="dap-card-type">{pubType}</span>
-              </div>
-              <h3 class="dap-card-title">{article.title}</h3>
-              {abstract && (
-                <p class="dap-card-abstract">{abstract}</p>
+              {splash && (
+                <img
+                  src={splash.src}
+                  srcset={splash.srcset}
+                  sizes="(min-width: 960px) 500px, 100vw"
+                  width={splash.width}
+                  height={splash.height}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class="dap-card-splash"
+                />
               )}
-              <div class="dap-card-cta">
-                {article.source === 'hub'
-                  ? 'Read Article (Web) »'
-                  : `Read ${pubType} (${article.ext ?? 'link'}) »`}
+              <div class="dap-card-body">
+                <div class="dap-card-meta">
+                  {displayDate && (
+                    <span class="dap-card-date">{displayDate}</span>
+                  )}
+                  {displayDate && <span class="dap-card-sep"> | </span>}
+                  <span class="dap-card-type">{pubType}</span>
+                </div>
+                <h3 class="dap-card-title">{article.title}</h3>
+                {abstract && (
+                  <p class="dap-card-abstract">{abstract}</p>
+                )}
+                <div class="dap-card-cta">
+                  {article.source === 'hub'
+                    ? 'Read Article (Web) »'
+                    : `Read ${pubType} (${article.ext ?? 'link'}) »`}
+                </div>
               </div>
             </article>
           </a>
@@ -223,11 +242,25 @@ const articlesJson = JSON.stringify(
   .dap-card {
     border: 1px solid #e0e0e0;
     border-radius: 4px;
-    padding: 16px 20px;
     background: #fafafa;
     height: 100%;
     box-sizing: border-box;
     transition: box-shadow 0.2s ease;
+    overflow: hidden;
+  }
+
+  .dap-card-splash {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: #eee;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .dap-card-body {
+    padding: 16px 20px;
   }
 
   .dap-card-link:hover .dap-card {

@@ -27,3 +27,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .claude/
+
+public/_cms-img/dap/
+src/data/dap-splash-manifest.json

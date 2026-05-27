@@ -20,7 +20,10 @@ const { title, subtitle } = Astro.props;
 
 <style>
   .page-header {
-    margin-bottom: 1.5rem;
+    /* Center the page title and give content below room to breathe. */
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
   }
 
   .page-header h1 {
@@ -29,7 +32,6 @@ const { title, subtitle } = Astro.props;
     text-transform: uppercase;
     color: #222;
     margin: 0 0 0.5rem;
-    /* No underline on h1 per legacy — only h2 section headings have hairlines */
   }
 
   .page-subtitle {

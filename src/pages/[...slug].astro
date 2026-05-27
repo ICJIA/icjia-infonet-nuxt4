@@ -122,15 +122,16 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
     }
   }
 
-  /* h1: dark text (not brand blue), uppercase, with hairline separator below */
+  /* h1: dark text, uppercase, centered with breathing room below. */
   .page-h1 {
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     font-weight: 900;
     line-height: 1.2;
     color: #222;
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
-    /* No underline on h1 per legacy — only h2 section headings have hairlines */
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 2.5rem;
   }
 
   /* Two-column layout at desktop: article ~70%, Toc sidebar ~30% */
