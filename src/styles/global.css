@@ -116,6 +116,15 @@ html { font-size: var(--font-size-root); }
 /* Alpine x-cloak prevents flash-of-unhydrated content (CLS protection) */
 [x-cloak] { display: none !important; }
 
+/* Page container — used by non-home pages to center content within a max-width
+   wrapper. Home uses its own .home-section / .home-section-inner pattern with
+   full-bleed background sections. */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
 /* Drawer-open lock: prevents body scroll while sidebar drawer is open */
 body.drawer-open { overflow: hidden; }
 

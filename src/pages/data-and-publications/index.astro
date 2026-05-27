@@ -81,7 +81,7 @@ const articlesJson = JSON.stringify(
 >
   <PageHeader title="InfoNet &amp; Other Victim Services Research" />
 
-  <div class="dap-page" x-data={`dapFilter(${articlesJson})`}>
+  <div class="dap-page page-container" x-data={`dapFilter(${articlesJson})`}>
     <!-- Tag filter chips -->
     <div class="tag-filters" role="group" aria-label="Filter by topic">
       {filterChips.map((chip) => (
