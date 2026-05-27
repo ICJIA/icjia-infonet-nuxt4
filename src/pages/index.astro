@@ -20,8 +20,47 @@ import HomeFaqs from '~/components/HomeFaqs.astro';
 const description =
   'InfoNet is a web-based data collection and reporting system used by victim service providers ' +
   'in Illinois to facilitate standardized statewide data collection.';
+
+// Home gets combined WebSite + GovernmentOrganization JSON-LD so AI crawlers
+// have explicit publisher identity + searchAction surface.
+const homeJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'InfoNet',
+    alternateName: 'ICJIA InfoNet',
+    url: 'https://infonet.icjia.illinois.gov',
+    description,
+    inLanguage: 'en-US',
+    publisher: { '@id': 'https://icjia.illinois.gov#icjia' },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://infonet.icjia.illinois.gov/search/?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'GovernmentOrganization',
+    '@id': 'https://icjia.illinois.gov#icjia',
+    name: 'Illinois Criminal Justice Information Authority',
+    alternateName: 'ICJIA',
+    url: 'https://icjia.illinois.gov',
+    logo: 'https://infonet.icjia.illinois.gov/icjia-logo.png',
+    parentOrganization: { '@type': 'GovernmentOrganization', name: 'State of Illinois' },
+    sameAs: [
+      'https://www.facebook.com/ICJIA/',
+      'https://www.youtube.com/c/illinoiscriminaljusticeinformationauthority',
+      'https://www.instagram.com/icjia_illinois/',
+      'https://www.linkedin.com/company/icjia/',
+    ],
+  },
+];
 ---
-<BaseLayout title="Home" description={description}>
+<BaseLayout title="Home" description={description} jsonLd={homeJsonLd}>
   <!-- Hero + chart row: full-bleed gray, 2-col grid at ≥960 px (Vuetify md).
        Tailwind utilities mirror legacy Vuetify <v-row><v-col cols=12 md=6>.
        Arbitrary breakpoint min-[960px]: matches legacy Vuetify exactly

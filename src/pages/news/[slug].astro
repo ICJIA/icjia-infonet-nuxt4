@@ -57,6 +57,11 @@ function daysDiff(a: string | null | undefined, b: string | null | undefined): n
 const showUpdated = daysDiff(attr.createdAt, attr.updatedAt) > 1;
 
 const description = attr.summary ?? attr.title ?? '';
+
+// NewsArticle structured data + article:published_time/modified_time meta.
+// Date precedence mirrors the visible PostedMeta: dateOverride > publishedAt > createdAt.
+const datePublished = attr.dateOverride ?? attr.publishedAt ?? attr.createdAt ?? '';
+const dateModified = attr.updatedAt ?? datePublished;
 ---
 <BaseLayout
   title={attr.title ?? 'News'}
@@ -65,6 +70,13 @@ const description = attr.summary ?? attr.title ?? '';
   breadcrumbTitle="News"
   breadcrumbTitleHref="/news/"
   breadcrumbCurrent={attr.title ?? undefined}
+  newsArticle={{
+    headline: attr.title ?? 'News',
+    description,
+    datePublished,
+    dateModified,
+    image: splashUrl ?? undefined,
+  }}
 >
   <ReadProgress />
   <article class="post-detail">

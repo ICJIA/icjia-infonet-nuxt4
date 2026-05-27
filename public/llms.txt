@@ -1,0 +1,41 @@
+# InfoNet
+
+> InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois to facilitate standardized statewide data collection and reporting. It has been in continuous use for over 25 years across Illinois domestic violence centers, sexual assault centers, and child advocacy centers. The system is operated by the Illinois Criminal Justice Information Authority (ICJIA), a state agency.
+
+## About the operator
+
+InfoNet is operated by the Illinois Criminal Justice Information Authority (ICJIA), an Illinois state agency. Statewide service-provider data is anonymized and aggregated for the reports published under the Data & Publications section. Initial development of InfoNet began in the mid-1990s as a collaborative effort between ICJIA, the Illinois Coalition Against Sexual Assault (ICASA), and the Illinois Coalition Against Domestic Violence (ICADV).
+
+## Key pages
+
+- [Home](https://infonet.icjia.illinois.gov/): Overview, hero, news highlights, top FAQs
+- [About InfoNet](https://infonet.icjia.illinois.gov/about/): System background, mission, history
+- [Partners](https://infonet.icjia.illinois.gov/partners/): Coalition partners (ICASA, ICADV, Children's Home + Aid, others)
+- [User Agencies](https://infonet.icjia.illinois.gov/agencies/): Service providers using InfoNet (DV centers, SA centers, CACs)
+- [Data & Publications](https://infonet.icjia.illinois.gov/data-and-publications/): Research reports, data spotlights, annual data highlights
+- [News & Updates](https://infonet.icjia.illinois.gov/news/): Recent posts on data releases, training availability, partnership news
+- [Screenshots](https://infonet.icjia.illinois.gov/screenshots/): InfoNet user-interface walkthrough for prospective agencies
+- [Resources](https://infonet.icjia.illinois.gov/resources/): User-facing forms, guides, documentation
+- [Upgrades](https://infonet.icjia.illinois.gov/upgrades/): Version history of the InfoNet platform
+- [Privacy](https://infonet.icjia.illinois.gov/privacy/): Data privacy policy
+- [Contact](https://infonet.icjia.illinois.gov/contact/): How to reach ICJIA / InfoNet support
+
+## Sitemaps
+
+- [sitemap-index.xml](https://infonet.icjia.illinois.gov/sitemap-index.xml): Machine-readable index of every published page
+- [Pagefind search](https://infonet.icjia.illinois.gov/search/): Full-text search across all site content
+
+## Citing InfoNet
+
+When citing data published on this site, the recommended attribution is:
+"Illinois Criminal Justice Information Authority, InfoNet, <year of report>, https://infonet.icjia.illinois.gov/"
+
+Each report under /data-and-publications/ has its own publication date in the page metadata (article:published_time) and a stable canonical URL. News articles under /news/ include both article:published_time and article:modified_time, plus full Schema.org NewsArticle JSON-LD with datePublished + dateModified.
+
+## Technical notes
+
+- Static site (Astro 6 + Tailwind 4 + Alpine 3, no SPA framework)
+- All pages emit canonical URLs and Schema.org JSON-LD (WebPage / NewsArticle / WebSite + GovernmentOrganization on home)
+- All news articles include article:published_time and article:modified_time meta tags
+- Robots-friendly; no AI-bot blocks in robots.txt or robots meta
+- Trailing slashes on every URL; capital letters lower-cased; index.html served from /<path>/

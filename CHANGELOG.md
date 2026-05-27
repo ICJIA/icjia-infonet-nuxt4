@@ -2,6 +2,40 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.9] - 2026-05-27 — AI readiness: JSON-LD + article meta + llms.txt
+
+Closed the three "FAIL" items reported by the AI Readiness Assessment (JSON-LD Structured Data, Content Freshness, llms.txt). All three are now site-wide, page-type-aware, and emitted at build time.
+
+### `src/layouts/BaseLayout.astro` — page-type-aware JSON-LD + article meta tags
+
+Added two new optional props:
+
+- `newsArticle?: { headline, description, datePublished, dateModified, image? }` — emits `<meta property="article:published_time">` + `<meta property="article:modified_time">` and a full Schema.org `NewsArticle` JSON-LD block with author/publisher (ICJIA GovernmentOrganization), `mainEntityOfPage`, language, and image array.
+- `jsonLd?: object | object[]` — explicit override (used by the home page for combined `WebSite` + `GovernmentOrganization` schema).
+
+Schema selection precedence inside the layout: `jsonLd` (explicit override) → `newsArticle` (built NewsArticle schema) → default `WebPage` schema. Every page now emits at least a baseline `WebPage` JSON-LD with canonical URL, language, description, and ICJIA publisher.
+
+### `src/pages/index.astro` — home `WebSite` + `GovernmentOrganization` JSON-LD
+
+Home now ships a two-object `@graph` covering:
+- `WebSite` with `potentialAction` → `SearchAction` pointing at `/search/?q={search_term_string}` (Pagefind), explicit `inLanguage: en-US`, and a publisher reference to the org `@id`.
+- `GovernmentOrganization` for ICJIA with logo, parent organization (State of Illinois), and `sameAs` social profile links (Facebook, YouTube, Instagram, LinkedIn).
+
+### `src/pages/news/[slug].astro` — NewsArticle schema with full Strapi dates
+
+Date precedence mirrors the visible `PostedMeta` byline: `dateOverride > publishedAt > createdAt` for `datePublished`; `updatedAt > <published>` for `dateModified`. Verified in the built output — sample article ships `article:published_time="2024-06-28"` and `article:modified_time="2025-03-21T16:32:48.668Z"` from Strapi.
+
+### `public/llms.txt` — llmstxt.org-compliant site description
+
+New file at `public/llms.txt` → served as `/llms.txt`. Contains: H1 site name, blockquote site description (history, operator, scope), `## About the operator` (ICJIA + ICASA/ICADV history), `## Key pages` (11 curated links: home, about, partners, agencies, DAP, news, screenshots, resources, upgrades, privacy, contact), `## Sitemaps` (sitemap-index.xml + Pagefind search URL), `## Citing InfoNet` (recommended attribution + pointer to article:published_time meta for date discovery), `## Technical notes` (stack summary + AI-friendly disclaimers).
+
+### Verification (built output)
+
+- Home: emits `[{"@type":"WebSite",...},{"@type":"GovernmentOrganization",...}]` JSON-LD array
+- News article (`/news/lgbtq-adult-victims.../`): `<meta property="article:published_time" content="2024-06-28">` + `<meta property="article:modified_time" content="2025-03-21T16:32:48.668Z">` + `"@type":"NewsArticle"` JSON-LD
+- Static page (`/partners/`): default `"@type":"WebPage"` JSON-LD
+- `dist/llms.txt`: 3.4 KB file, llmstxt.org-spec-compliant structure
+
 ## [3.2.8] - 2026-05-27 — Docs: latin-subset CSS win + mobile perf stopping criteria
 
 Documented two related lessons in `docs/astro-conversion-checklist-v6.2.md` under the Infonet post-cutover section, both surfaced during the 3.2.5–3.2.7 perf-tuning cycle:
