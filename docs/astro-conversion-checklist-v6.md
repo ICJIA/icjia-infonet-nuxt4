@@ -3981,3 +3981,488 @@ For v6 sites, the right inflection point to optimize this is Phase 7 (post-Pagef
 
 Many Strapi sites have fields like `splash.data` or `featuredImage.data` defined in the schema but unpopulated by editors. CmsImage / SplashNews / InfoCard must render gracefully without images (text-only). Don't assume every post has a splash; design the card with a no-image fallback.
 
+
+### Infonet (2026-05-27) — post-cutover Lighthouse polish (v6.2 increment)
+
+Lessons captured after Infonet landed in `main`, during the post-deploy audit + iteration cycle (releases 3.0.0 → 3.2.2).
+
+#### **HARD RULE — Tailwind utility classes for ALL responsive layout (especially flex/grid)**
+
+Every layout that mirrors a legacy Vuetify `<v-row><v-col>`, `<v-container>`, or `d-flex`/`d-grid` pattern **must** be ported to Tailwind utility classes — NOT to handwritten scoped CSS grids or hardcoded media queries. Reasons, in priority order:
+
+1. **Responsivity is non-negotiable.** The flagship + every ICJIA site is consumed on mobile (320–414 px), tablet (768–960 px), small desktop (960–1280 px), and ultrawide (1280–1920+ px). Tailwind's responsive prefixes (`sm:` 640, `md:` 768, `lg:` 1024, `xl:` 1280, `2xl:` 1536) make the breakpoint chain visible at the markup level. Scoped CSS hides breakpoints inside `<style>` blocks where they get out of sync as layouts evolve.
+2. **Pixel-perfect parity is the cutover gate.** The pixel-perfect mandate (Hard Rule #4) means every layout must match legacy at every breakpoint. Tailwind utilities make the breakpoint declarations explicit and auditable — a single grep finds every place a column count changes.
+3. **`min-[960px]:` arbitrary breakpoint matches Vuetify md.** Vuetify's `md` breakpoint is **960 px**, not Tailwind's default 768 px. Use the arbitrary-value syntax for any layout that has to switch at the same threshold legacy used. This is the single most common pixel-perfect drift source if missed.
+4. **Migration velocity.** When the next dev (or LLM) reads `grid grid-cols-1 min-[960px]:grid-cols-2 gap-5 items-start`, they read the entire responsive contract in one line. Scoped CSS requires reading a `<style>` block + matching the class name + reading media queries. Multi-step parsing slows every future edit.
+
+**Canonical patterns to memorize:**
+
+```html
+<!-- v-row + v-col cols=12 md=6 → 1 col below 960px, 2 cols at/above -->
+<div class="grid grid-cols-1 min-[960px]:grid-cols-2 gap-5">
+  <div>left col</div>
+  <div>right col</div>
+</div>
+
+<!-- v-row + v-col cols=12 md=6 lg=4 → 1/2/3 cols at breakpoints -->
+<div class="grid grid-cols-1 min-[960px]:grid-cols-2 min-[1264px]:grid-cols-3 gap-6">
+  <div>card</div><div>card</div><div>card</div>
+</div>
+
+<!-- v-row align="center" justify="space-between" → flex with responsive stack -->
+<div class="flex flex-col min-[960px]:flex-row items-start min-[960px]:items-center justify-between gap-4">
+  <h2>title left</h2>
+  <a class="btn">cta right</a>
+</div>
+
+<!-- v-container fluid → no max-width constraint (legacy default for ICJIA) -->
+<section class="w-full px-4 min-[960px]:px-8 py-8">…</section>
+
+<!-- v-container (constrained) → 1200 px cap, centered, padded -->
+<section class="mx-auto max-w-[1200px] px-4 min-[960px]:px-8 py-8">…</section>
+
+<!-- Span all columns inside a multi-col grid (for page h2 above a 2-col body) -->
+<div class="grid grid-cols-1 min-[960px]:grid-cols-2">
+  <h2 class="col-span-full">spans both columns</h2>
+  <div>left</div>
+  <div>right</div>
+</div>
+```
+
+**What stays in scoped `<style>`:** per-component typography (font-size, line-height, color when it deviates from `@theme`), hover/focus states unique to one component, background colors / borders unique to one card variant. *Structure* → utilities. *Expression* → scoped CSS.
+
+**Verification gate:** after porting each component, do a viewcap diff at **five viewport widths** (375, 768, 1024, 1280, 1920) against the legacy URL. If any breakpoint differs by more than 1–2 px in layout, the utility classes are wrong. Common fixes:
+- Used `md:` (768) where you should have used `min-[960px]:` (matches legacy Vuetify md)
+- Forgot `gap-N` (Vuetify v-row default gutter is 12 px = `gap-3`)
+- Used `flex` for what should be `grid` (or vice versa); Vuetify v-row → grid when cols are equal-width, flex when content-driven
+- Missed `items-start` (Vuetify defaults to top-aligned, Tailwind grid stretches by default)
+
+**Anti-pattern (do not ship):**
+
+```astro
+<!-- BAD: hidden breakpoints, hidden gutter, will drift -->
+<div class="home-grid">
+  <div>left</div>
+  <div>right</div>
+</div>
+<style>
+  .home-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 960px) {
+    .home-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+```
+
+```astro
+<!-- GOOD: every responsive decision visible in markup -->
+<div class="grid grid-cols-1 min-[960px]:grid-cols-2 gap-5 items-start">
+  <div>left</div>
+  <div>right</div>
+</div>
+```
+
+If a layout genuinely cannot be expressed in Tailwind utilities (rare — usually only true for `position: sticky` interactions with z-index layering or complex `grid-template-areas`), document the exception inline with a comment explaining WHY utilities don't fit.
+
+#### `inlineStylesheets: 'always'` is a text-LCP vs image-LCP trade-off
+
+Astro's `build.inlineStylesheets` default `'auto'` inlines stylesheets under ~4 KiB and externalizes everything bigger. Flipping to `'always'` inlines the entire bundled CSS (~35 KiB for Infonet) into every page's `<head>`, eliminating the render-blocking `<link rel="stylesheet">` request.
+
+**This is a per-page win or loss depending on the LCP candidate.**
+
+| LCP shape | Effect of `'always'` |
+|---|---|
+| **Text** (markdown body, h1, paragraph) | **+5 to +10 perf** — text can't paint until CSS applies, so eliminating the CSS round-trip moves LCP closer to FCP. /about/ desktop went 89 → 99. |
+| **Image** (splash, hero img, photo gallery) | **−3 to −5 perf on mobile, neutral on desktop** — the image fetch races CSS in parallel, so render-blocking CSS isn't on the critical path. Inlining 35 KiB of CSS grows the HTML, pushing it past a single TCP slow-start window on throttled mobile, which delays the byte at which the browser discovers the `<img>` tag. /screenshots/ mobile went 97 → 94; / mobile FCP regressed 1.4 s → 2.0 s. |
+
+**Default: `'auto'`.** It's the right call for browse traffic — the bundle is cached once across navigations, and warm-cache hits cost zero bytes. Only flip to `'always'` if EVERY major route is text-LCP and you've measured a net gain.
+
+If a single text-LCP page (e.g. /about/) is the only laggard, the right scoped fix is per-page critical CSS extraction, not a global inline flip. Treat critical CSS as a Phase 7 polish task — don't chase it earlier.
+
+#### Build chain: two-pass `astro build` for any CMS image manifest
+
+For Tier 2 image manifests (Sharp-resampled CMS images written to `public/_cms-img/`), the page templates import the manifest JSON. **Vite resolves these imports at bundle time — the file must EXIST as a committed JSON file before the first `astro build` runs**, or the build fails with `Could not resolve "~/data/<name>.json"`.
+
+The fix: commit a manifest stub (or last good manifest), let the build chain regenerate it between two `astro build` passes, then dual-write to `dist/` at the end.
+
+```jsonc
+// package.json scripts.build
+"build": "astro build && node scripts/fetch-cms-images.mjs && node scripts/fetch-<custom>.mjs && astro build && pnpm pagefind && pnpm og:image && pnpm <custom>:dist"
+```
+
+The fetch script writes both `public/_cms-img/...` (for next dev `pnpm build`) and `dist/_cms-img/...` (for current deploy) when `dist/` already exists. The `og:image` + `pagefind` final passes piggyback on the same pattern. Add a `# Note: <manifest>.json IS committed` block to `.gitignore` so the next dev knows why a "generated" file is in the repo.
+
+#### Eager + `fetchpriority="high"` on the first card image in any above-fold listing
+
+Lighthouse's `lcp-discovery-insight` flags listing pages where the LCP candidate image has `loading="lazy"`. Default-lazy is correct for cards below the fold, but the first card (often the LCP candidate on mobile single-column layouts) needs explicit eager loading.
+
+```astro
+{articles.map((article, idx) => {
+  const isLcp = idx === 0;
+  return (
+    <img
+      src={...}
+      loading={isLcp ? 'eager' : 'lazy'}
+      fetchpriority={isLcp ? 'high' : 'auto'}
+      decoding="async"
+    />
+  );
+})}
+```
+
+**Verify in production HTML, not source.** Use `curl https://<site>/<page>/ | grep -oE '<img[^>]*loading[^>]*>'` to confirm the eager attribute survived bundling.
+
+#### YouTube facade pattern — Best-Practices 100 + zero third-party cookies on initial load
+
+A real `<iframe src="https://www.youtube.com/embed/<id>">` ships YouTube's cookie set immediately on page load and Lighthouse Best Practices drops to 96. Replace with a clickable thumbnail facade that swaps in the real iframe on first click. Pattern: `markdown.ts` rewrites every YouTube iframe to a `<div class="yt-facade" data-yt-id="...">` containing the `i.ytimg.com` thumbnail; `alpine-entry.ts` attaches a click handler that replaces the facade with a fresh `<iframe>` pointing at `youtube-nocookie.com`.
+
+**CSP requirements:** add `https://i.ytimg.com` to `img-src` (thumbnails). The on-demand iframe load needs `frame-src https://www.youtube-nocookie.com` (already in v6 §11 baseline).
+
+**Impact (Infonet /about/):** Best Practices 96 → 100, zero third-party cookies on initial page load.
+
+#### `label-content-name-mismatch` is the most common axe-AA failure on chrome anchors
+
+axe-core rule `label-content-name-mismatch` fails when an element has BOTH visible text AND an `aria-label`, and the visible text isn't contained in the aria-label as a substring. The accessible name (aria-label) "wins" over visible text, leaving screen-reader users hearing something different from sighted users.
+
+**Common offenders found during Infonet audit:**
+
+| Element | Visible | aria-label (bad) | Fix |
+|---|---|---|---|
+| `.home-box` cards | "Interested in using InfoNet?" | "Request information about using InfoNet" | Remove aria-label; h3 + p compute the accessible name from visible content |
+| "All News »" button | "All News »" | "All News & Updates" | Remove aria-label |
+| Desktop nav title | "INFONET ∣ DATA COLLECTION & REPORTING SYSTEM" | "INFONET — go to homepage" | Remove aria-label; three inline spans compute the accessible name |
+
+**Rule:** if the visible text is descriptive (the h3 inside an anchor, the button text), DO NOT add aria-label. Only add aria-label when:
+1. The element has no visible text (icon-only buttons), OR
+2. The visible text is ambiguous out of context ("Click here", "Read more →") AND the aria-label INCLUDES the visible text as a prefix.
+
+#### axe-core `nonBmp` ("needs review") on Unicode glyphs in cards
+
+Unicode characters outside the Basic Multilingual Plane (or non-text glyphs like `▾` U+25BE, `›` U+203A) can't be color-contrast-checked by axe. Result: a `nonBmp` *needs-review* entry on every page that uses them as visual decoration (FAQ chevrons, news "Read more →" arrows).
+
+**Fix:** swap the glyph for an inline SVG with `currentColor` fill. axe excludes SVG from color-contrast entirely.
+
+```html
+<button>Toggle
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" width="16" height="16">
+    <path fill="currentColor" d="M2 4l6 7 6-7z"/>
+  </svg>
+</button>
+```
+
+#### `sr-only-table` with `white-space: nowrap` can blow `scrollWidth`
+
+A screen-reader-accessible data table for a chart is typically `position: absolute; clip: rect(0,0,0,0)`. **But absolute-positioned children with `white-space: nowrap` still contribute to `document.scrollWidth`** even when clipped — causing a phantom horizontal scrollbar on viewports under ~520 px.
+
+**Fix:** add `left: -10000px` so the natural-width content sits fully off-canvas.
+
+```css
+.sr-only-table {
+  position: absolute;
+  left: -10000px;   /* push off-canvas — clip alone isn't enough */
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+```
+
+Verify in DevTools at 320 / 375 / 414 / 480 / 520 px: `document.documentElement.scrollWidth` must equal `clientWidth`.
+
+#### Chart.js lazy-load via IntersectionObserver
+
+Chart.js is ~67 KiB gzipped — bundling it eagerly costs ~200 ms of mobile parse time on every page that imports it, even if the chart is below the fold. Lazy-load via dynamic `import()` triggered by IntersectionObserver with `rootMargin: '200px'`. **Impact (Infonet home, mobile):** Perf 96 → 99. JS bundle shrunk ~50 KiB on first load.
+
+#### MDC components: sentinel placeholder pattern for inline rendering
+
+When Strapi markdown bodies embed MDC components (e.g., `::TabsScreenshots`, `::Carousel`), the simplest port — strip MDC blocks and render at end of article — visually works only if there's one MDC tag at the bottom. If the editor placed the tag mid-article, the rendered position is wrong.
+
+**Fix:** insert a sentinel token at the original position during stripping (e.g., `MDCREFPLACEHOLDER_0_MDCREFEND`), then split the rendered HTML on the sentinel and interleave the MDC component back inline in the page template. The token survives markdown-it + xss filtering intact because it's plain alphanumeric text. Test with `console.log(stripped)` mid-pipeline to verify the placeholder didn't get HTML-escaped.
+
+#### Sharp-resampled card splash images via Strapi v3 base64 GraphQL field
+
+Strapi v3 sites (e.g., ICJIA Research Hub) sometimes store splash thumbnails as base64 data URLs inside a `splash` field on the entity. Don't render the base64 inline (huge HTML, no responsive variants) — pipe through Sharp to responsive WebP at build time.
+
+Pattern: GraphQL query fetches `{ _id slug splash }`, the script matches the base64 data URL (`/^data:image\/(\w+);base64,(.+)$/`), decodes to a Buffer, resamples via Sharp at multiple widths, writes `<id>-<width>.webp` files plus a manifest keyed by entity id. The page template imports the manifest and renders `<img src srcset sizes>` keyed off `String(article._id)`.
+
+**Manifest write order matters:** this script runs BETWEEN the two `astro build` passes. The first pass needs a committed stub manifest to resolve the import; this script overwrites it; the second pass bundles the real content. See `scripts/fetch-dap-splash.mjs` for the production reference (Strapi v3 / researchhub.icjia-api.cloud).
+
+#### Sitemap canonical-link mitigation against SiteImprove 301 dings
+
+Default Astro `trailingSlash: 'always'` + Netlify default behavior produces a 301 from `/about` → `/about/`. Stack the four layers in v6 §10a to push all variants to status=200 rewrites instead.
+
+For Infonet at scale (45 routes): 12 explicit redirect rules in `netlify.toml` + 1 catch-all for CMS pages. Verify via curl loop that every no-slash URL returns 200, not 301.
+
+#### Centered page headers + content offset standard
+
+Ship a single `<PageHeader>` component used by every catch-all CMS page + listings. Standard:
+
+```css
+.page-h1 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+}
+```
+
+Prevents random offset drift between pages — the `1rem` top + `2.5rem` bottom rhythm is uniform across every CMS-driven route.
+
+
+---
+
+## Flagship (`icjia.illinois.gov`) — scale-specific guidance (v6.2+)
+
+> **Scale jump:** Infonet shipped ~45 pages on Vue 2 + Strapi v4 (technically Nuxt 4 + Strapi v4 for Infonet). The flagship is **2000+ pages on Vue 2 / Vuetify 2 + Strapi v3**. The categorical concerns below come from scaling the patterns in this checklist; they are not validated yet — they are predictions to test in the spike pass (see "Before tackling `icjia.illinois.gov`" earlier in this doc).
+
+### Tailwind utility classes are MORE critical at scale, not less
+
+The "use Tailwind for flex/grid layouts" rule from the v6.2 Infonet increment compounds in importance at flagship scale. With 2000+ pages drawing from a handful of shared layout components, a single mistuned breakpoint creates 2000+ broken pages. Implications:
+
+1. **Audit every Vuetify class in the legacy source before Phase 1.** `grep -rohE 'v-(row|col|container)\s*[^>]*' legacy/src/**/*.vue | sort | uniq -c | sort -rn` — gives you the top 50 layout patterns. Each maps to one canonical Tailwind utility string (catalog in your team's `docs/layout-patterns.md`).
+2. **Build a `<LayoutGrid>` Astro component** that encapsulates the common Vuetify v-row → grid translation. Take `cols`, `mdCols`, `lgCols`, `gap` props. Renders the Tailwind class string. Avoids 2000 pages each open-coding `grid grid-cols-1 min-[960px]:grid-cols-2 gap-6`.
+3. **viewcap diff at five viewport widths** (375/768/1024/1280/1920) for at least three representative templates per route type before opening Phase 4. Catch pixel-perfect drift before it propagates across 2000 pages.
+
+### Spike-pass priorities (extends the existing 7-item spike at line 471)
+
+#### 1. Build-time budget — page count × Sharp time × Strapi fetch time
+
+Wall-clock estimate for 2000+ pages on a clean cache:
+
+| Stage | Time |
+|---|---|
+| Strapi v3 GraphQL fetch (cold) | 60–180 s |
+| Astro page render (first pass) | 4–8 min |
+| Sharp image resampling (2000 splashes × multiple widths) | 8–15 min |
+| Astro page render (second pass for manifest) | 4–8 min |
+| Pagefind indexing (2000 pages) | 30–90 s |
+| **Total cold build** | **~20–40 min** |
+
+**Netlify free tier hard-caps builds at 15 minutes.** Decide one of:
+1. **Upgrade Netlify tier** (Pro = 25 min builds; Business = unlimited).
+2. **Warm-cache builds**: commit `.cache/strapi/*.json` snapshots (already pattern in v6), warm Sharp + Astro caches between builds via Netlify's `NETLIFY_CACHE_DIR`.
+3. **Incremental Strapi fetch**: cache by entity `updated_at`; only re-fetch changed entities.
+4. **Sharp concurrency pool**: 4–8 workers via `Promise.all(chunk.map(processOne))` cuts the image phase ~50%.
+
+**Validate early in the spike pass:** scaffold a minimal Astro repo, generate 2000 dummy pages, time `pnpm build`. Decide tier + caching strategy BEFORE Phase 1.
+
+#### 2. Strapi v3 GraphQL response shape (different from v4)
+
+ICJIA Research Hub and the flagship use Strapi **v3**. v3 responses are flat:
+
+```js
+// Strapi v3
+{ data: { articles: [ { id, slug, title, body, splash } ] } }
+
+// Strapi v4 (Infonet, IFVCC)
+{ data: { articles: { data: [ { id, attributes: { slug, title, body, splash } } ] } } }
+```
+
+**Implications:**
+- Zod schemas must be v3-shaped: `articles: z.array(z.object({ id, slug, ... }))`.
+- Image fields: v3 returns the asset URL directly (`splash: "https://..."`); v4 wraps it in `splash.data.attributes.url`. The `fetch-cms-images.mjs` URL-extraction logic must probe both shapes.
+
+**Existing reference:** `scripts/fetch-dap-splash.mjs` in this repo talks to a Strapi **v3** instance and is the closest live example.
+
+#### 3. Listings pagination strategy
+
+Infonet has ~30 news posts (no pagination). The flagship has 500–1500 news posts plus similar counts for publications, events, datasets. Use Astro's `paginate()` helper:
+
+```astro
+---
+// pages/news/[...page].astro
+export async function getStaticPaths({ paginate }) {
+  const posts = await fetchAllPosts();
+  return paginate(posts, { pageSize: 20 });
+}
+const { page } = Astro.props;
+---
+```
+
+Emits `/news/`, `/news/2/`, `/news/3/`, etc. Set `<link rel="canonical">` on each paginated page to ITSELF (not page 1). Modern Google treats paginated series as separate URLs since 2019; `rel=prev/next` is deprecated.
+
+**Avoid infinite scroll for SEO-relevant lists.** Googlebot doesn't fire scroll events on most pages; static pagination indexes cleanly.
+
+#### 4. Sitemap chunking + sitemap index
+
+`@astrojs/sitemap` auto-chunks at 45000 URLs (Google's 50k limit with margin). For 2000+ pages this isn't strictly needed, but worth knowing the config:
+
+```ts
+sitemap({
+  entryLimit: 45000,  // default — fine for the flagship
+})
+```
+
+Submit `sitemap-index.xml` (not individual `sitemap-N.xml`) to Search Console.
+
+#### 5. Vue 2 SPA → Astro: `vue-router` route inventory before Phase 1
+
+Dump every legacy route:
+
+```sh
+grep -oE "path: ['\"]([^'\"]+)['\"]" legacy/src/router/**/*.{js,ts} | sort -u
+```
+
+Categorize each route:
+
+| Route type | Astro target |
+|---|---|
+| Static (`/about`, `/contact`) | `.astro` file in `src/pages/` |
+| Dynamic by slug (`/news/:slug`) | `[slug].astro` + `getStaticPaths` |
+| Catch-all CMS (`/:slug`) | `[...slug].astro` + RESERVED_SLUGS filter (v6 §4) |
+| Hash-routed (`/#/foo`) | `_redirects` rewrite `/#/foo /foo 301!` |
+| Authenticated dashboard | Hybrid output OR exclude from migration |
+
+The flagship probably has ~100 unique route patterns. Build the inventory once, treat it as source of truth.
+
+#### 6. Vuex state — what's truly client state vs what's actually CMS content
+
+Many Vuex stores in legacy Vue 2 SPAs hold "client state for content that's actually static." Audit each store namespace:
+
+| Vuex state | Reality | Migration target |
+|---|---|---|
+| `newsList: []` | CMS content | Build-time Strapi fetch |
+| `filterOpen: false` | UI state | Alpine `$store.ui` |
+| `formStep: 1` | UI state | Alpine `x-data` (per-form) |
+| `searchResults: []` | Search index | Drop entirely; Pagefind handles it |
+| `userPrefs: {}` | Personalization | Alpine `$store.userPrefs` + localStorage |
+
+The Vuex-replacement Alpine `$store` pattern (Adultredeploy, IFVCC):
+
+```js
+document.addEventListener('alpine:init', () => {
+  Alpine.store('ui', {
+    drawerOpen: false,
+    toggle() { this.drawerOpen = !this.drawerOpen; },
+  });
+});
+```
+
+```html
+<button x-on:click="$store.ui.toggle()">Menu</button>
+<aside x-show="$store.ui.drawerOpen">...</aside>
+```
+
+**Rule:** any Vuex state that doesn't change after the build is content, not state. Port it to Strapi + build-time fetch.
+
+#### 7. PDF + document URL stability
+
+The flagship hosts hundreds of PDFs (publications, reports, forms). PDF URLs are linked from external sites + Google Scholar + government registries — **breaking them is a permanent SEO + accessibility cost**.
+
+**Mitigation:**
+1. Mirror every PDF path 1:1 from legacy `public/` → Astro `public/`. URL stays `https://icjia.illinois.gov/<path>/<file>.pdf`.
+2. If Strapi serves PDFs from `https://strapi-host/uploads/<file>.pdf`, write a `scripts/mirror-strapi-pdfs.mjs` that downloads each linked PDF into `public/uploads/` and rewrites markdown body links accordingly. Same pattern as `fetch-cms-images.mjs`.
+3. Lighthouse + axe both ignore PDFs; the failure mode is silent. Audit post-build by diffing legacy sitemap PDFs vs `find dist -name '*.pdf'`.
+
+#### 8. Third-party integrations — catalog every external script BEFORE Phase 1
+
+The flagship likely loads more than Plausible. Likely offenders:
+
+| Script | Likely purpose | Migration target |
+|---|---|---|
+| Google Analytics / GTM | Analytics | Drop → Plausible (already in v6) |
+| Google Translate widget | i18n | Either drop (use Astro i18n) or whitelist its iframe domains |
+| Hotjar / FullStory | Session replay | Drop or self-host |
+| ChatBot / Drift | Live chat | Whitelist + lazy load on click |
+| Twitter / X embeds | Inline tweets in CMS body | Replace with facade pattern |
+| Mapbox / Leaflet | Maps | Keep, lazy-load via IntersectionObserver |
+| `dap.digitalgov.gov` | Federal compliance? | Verify legally required; if yes, whitelist in CSP |
+
+**Spike output:** a predicted CSP allow-list. Each origin must be justified by a real, current need. Anything in the legacy CSP that no current page consumes is dropped.
+
+#### 9. i18n / Spanish content
+
+If the flagship has Spanish-language pages, plan Astro's i18n config from Phase 1:
+
+```ts
+i18n: {
+  defaultLocale: 'en',
+  locales: ['en', 'es'],
+  routing: { prefixDefaultLocale: false },  // emits /, /es/, /about/, /es/about/
+}
+```
+
+**Strapi v3 i18n shape:** typically a `lang` enum on each entity, or duplicate entries keyed by locale. Build a `loadEntityByLocale(slug, locale)` helper.
+
+**SEO:** every page needs `<link rel="alternate" hreflang="<lang>" href="<URL>">` pointing to its translation siblings. `astro-seo` doesn't emit hreflang automatically — write a `<HreflangAlternates>` helper component.
+
+#### 10. Real User Monitoring (RUM) at flagship scale
+
+Lighthouse is synthetic — it doesn't tell you what users at slow connections in central Illinois actually experience. Add web-vitals to Plausible custom events:
+
+```js
+import { onCLS, onINP, onLCP } from 'web-vitals';
+function send(metric) {
+  if (typeof window.plausible !== 'function') return;
+  window.plausible('Web Vitals', {
+    props: { name: metric.name, value: Math.round(metric.value), rating: metric.rating },
+  });
+}
+onCLS(send); onINP(send); onLCP(send);
+```
+
+Plausible's "Custom Events" feature then exposes CLS / INP / LCP percentiles by page over time — what users actually feel. Worth adding to Infonet too as a v6.2.1 increment if scope allows.
+
+#### 11. Build artifact size — `dist/` at 2000+ pages
+
+Each `.html` page at ~30 KiB plus per-route Astro shell produces a `dist/` directory in the 200–400 MB range. Implications:
+
+- **Netlify deploy upload time**: 5–15 min for fresh deploys. Use `[build] ignore = "git diff --quiet HEAD^ HEAD ./astro/src ./astro/scripts"` to skip rebuilds when only docs change.
+- **CDN propagation**: 60–120 s edge propagation for 2000+ files. Plan deploys outside peak traffic windows.
+- **Local `astro dev` cold-start**: 30–60 s to compile the first page request at full scale. Use a stub dataset of 200 pages for dev iteration speed; full dataset for CI builds.
+
+#### 12. Cutover risk mitigation at scale
+
+Per v6 §13, the cutover is a single atomic commit. At 2000+ pages the blast radius of a bad cutover is high. Layer safety:
+
+1. **Deploy preview must be live 48–72 hours** before cutover. Catches CDN-region-specific issues a local audit misses.
+2. **Run a full SiteImprove crawl on the preview URL** before cutover. SiteImprove finds dead links + a11y issues across all 2000 pages in a way no single Lighthouse audit can.
+3. **DNS rollback plan**: legacy hosting stays warm for 2–4 weeks post-cutover. Netlify DNS for the apex has a 60 s TTL, so a bad cutover can be reverted in <2 min via the Netlify dashboard.
+4. **301 audit**: diff legacy sitemap vs new sitemap before cutover; every URL in the legacy sitemap not present in the new sitemap needs a 301 in `netlify.toml` or `_redirects`. Run via `comm -23` on sorted URL lists.
+
+#### 13. Search index size at scale
+
+Pagefind for 2000+ pages produces an index in the 5–20 MB range, chunked into ~50 KB files loaded on demand. Risks:
+
+1. **First-load latency**: Pagefind UI's IIFE bundle is ~30 KB but the initial keyword query fetches 200–500 KB of index chunks. On 3G this is 2–5 s before first result. Pre-warm via `<link rel="prefetch" href="/pagefind/pagefind.js">` on the search page.
+2. **Stale index after content edits**: Pagefind rebuilds with every `pnpm build`. For high-edit-volume sites, schedule a nightly Netlify build webhook OR a Strapi → Netlify build trigger.
+3. **Result-quality tuning**: with 2000+ pages, default scoring may surface tangentially relevant pages. Use `data-pagefind-meta` aggressively to boost important fields (title, summary, tags). Use `data-pagefind-weight="10"` on the H1 to make title matches dominate.
+
+#### 14. Content audit — "what to NOT migrate"
+
+At 2000+ pages, some pages are dead weight. Before Phase 4: cross-reference legacy URLs against Plausible page-view counts for the last 90 days. **Decision rubric:**
+- If page receives organic traffic (any inbound from Google) → migrate
+- If page is linked from current navigation or footer → migrate
+- If page has 0 inbound links AND 0 visits in 90 days → archive (move to `/archive/<year>/` with `<meta name="robots" content="noindex">`)
+
+A 2000-page site often reduces to 1200–1500 actively-maintained pages after this audit. The trimmed scope makes every subsequent decision easier.
+
+#### 15. Print stylesheets
+
+Government users print pages (regulators, archivists, FOIA responders). Verify `@media print` rules are ported from legacy:
+
+```css
+@media print {
+  .skip-links, nav, footer, .sidebar { display: none !important; }
+  .markdown-body { font-size: 12pt; line-height: 1.4; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #666; }
+  h1, h2, h3 { page-break-after: avoid; }
+  table { page-break-inside: avoid; }
+}
+```
+
+Test by `Cmd-P` on three representative pages before cutover.
+
+#### 16. Compliance pages — verbatim copy + stable anchor IDs
+
+State agencies have specific copy that legally must remain verbatim — accessibility statements, ADA compliance pages, privacy policies, terms of use, Section 508 declarations. These often have specific anchor IDs that external auditors link to.
+
+**Workflow:**
+1. Inventory pages under `/accessibility/`, `/compliance/`, `/privacy/`, `/terms/`, `/section508/`.
+2. Copy source markdown verbatim from Strapi (or HTML if non-CMS).
+3. Verify every anchor link still resolves: `curl -sL https://icjia.illinois.gov/accessibility/ | grep 'id="statement"'`.
+4. Match URL slugs EXACTLY — do not "improve" naming.
+
+These pages are usually 5–10 routes max, but breaking them is higher-severity than breaking a news post.
+

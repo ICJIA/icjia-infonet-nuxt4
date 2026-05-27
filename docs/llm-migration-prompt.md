@@ -2,7 +2,7 @@
 
 > **Purpose:** A copy-paste prompt for kicking off any future ICJIA Vue → Astro migration with an LLM (Claude, GPT, etc.). Captures the canonical workflow, hard rules, reference migrations, and required reading.
 >
-> **Provenance:** Distilled from the IFVCC migration (2026-05-25 → 2026-05-26) which produced the v5 checklist, then revised to v6 after IFVCC's post-cutover lessons landed (SEO/OG-image canonical pipeline, listing-page bucketing, legacy-source deletion). Includes patterns validated across i2i, sfs, dvfr, r3, adultredeploy, ifvcc.
+> **Provenance:** Distilled from the IFVCC migration (2026-05-25 → 2026-05-26) which produced the v5 checklist, then revised to v6 after IFVCC's post-cutover lessons landed (SEO/OG-image canonical pipeline, listing-page bucketing, legacy-source deletion). **Updated 2026-05-27 with v6.2 increment from the Infonet migration** (Tailwind utility classes for all flex/grid layouts, `inlineStylesheets` text-LCP vs image-LCP trade-off, eager+fetchpriority on first card image, YouTube facade pattern, `label-content-name-mismatch` removal of redundant aria-labels, MDC placeholder sentinel pattern, Strapi v3 base64 splash pipeline) **plus a flagship-scale pre-flight section** for the icjia.illinois.gov migration. Includes patterns validated across i2i, sfs, dvfr, r3, adultredeploy, ifvcc, infonet.
 
 ---
 
@@ -48,15 +48,22 @@ When you need to see "how was X done before," go to these repos. Each is a compl
 | R3 | github.com/ICJIA/icjia-r3-2024 | Nuxt 3 + Vuetify | v3 follow-on | Reuse of v3 patterns |
 | DVFR | github.com/ICJIA/icjia-dvfr-nuxt4 | Nuxt 4 + Nuxt UI 4 | v4 source | First Nuxt UI port; nested-landmark a11y patterns |
 | Adultredeploy | github.com/ICJIA/adult-redeploy-client-next | Vue 2 SPA + Vuetify | v1 / Vue 2 lineage start | First Vue 2 → Astro; Alpine $store pattern |
-| **IFVCC** (this repo) | github.com/ICJIA/icjia-ifvcc-2021 | Vue 2 SPA + Vuetify | **v6 source — most recent + most complete** | Pagefind, manifest-driven CmsImage, 7 phases shipped, post-cutover SEO/OG-image canonical pipeline |
+| **IFVCC** | github.com/ICJIA/icjia-ifvcc-2021 | Vue 2 SPA + Vuetify | v6 source | Pagefind, manifest-driven CmsImage, 7 phases shipped, post-cutover SEO/OG-image canonical pipeline |
+| **Infonet** (this repo) | github.com/ICJIA/icjia-infonet-nuxt4 | Nuxt 4 + Vuetify 3 + Strapi v4 + Strapi v3 (researchhub) | **v6.2 source — most recent + most complete** | Tailwind utility grids, YouTube facade, Chart.js lazy-load, Sharp+base64 Strapi v3 splash pipeline, label-content-name-mismatch sweep, inlineStylesheets trade-off doc |
+
+**For a new Nuxt SSG migration, Infonet is the closest reference.** Copy patterns from `astro/src/` directly when in doubt.
 
 **For a new Vue 2 SPA migration, IFVCC is the closest reference.** Copy patterns from `astro/src/` directly when in doubt.
+
+**For the flagship migration (Vue 2 + Strapi v3 + 2000+ pages), read the "Flagship-specific concerns" section below + the "Flagship guidance" section of `astro-conversion-checklist-v6.md`.**
 
 **For a new Nuxt SSG migration, DVFR is closest.**
 
 ## Hard rules (non-negotiable)
 
 These rules cannot be relaxed. They come from accumulated audit findings, not opinion.
+
+0. **Tailwind utility classes for EVERY responsive layout, especially flex/grid.** Vuetify `<v-row><v-col>`, `<v-container>`, and `d-flex`/`d-grid` patterns port to Tailwind utilities — NOT to scoped CSS grids with handwritten media queries. Reasons: (a) responsivity is the #1 cutover gate (375/768/960/1280/1920 px must all match legacy), (b) `min-[960px]:` arbitrary breakpoint is the ONLY way to match Vuetify md=960 px (Tailwind default md=768 px would switch 192 px early — pixel-perfect break), (c) breakpoint declarations belong in markup where they're auditable via grep, not buried in `<style>` blocks. Build a `<LayoutGrid cols mdCols lgCols gap>` Astro helper for the top 3-5 patterns at flagship scale. See v6 §"Infonet (2026-05-27)" for the canonical patterns.
 
 1. **No Vue runtime.** Do NOT use `@astrojs/vue` integration. Port every component to native `.astro` + Alpine.js islands. The runtime budget difference is ~50 KB JS and a permanent CSP `'unsafe-eval'` requirement.
 
@@ -181,6 +188,76 @@ If the LLM tries to skip any of these, push back. Each one was a lesson paid for
 
 ---
 
+## Flagship-specific concerns (icjia.illinois.gov, 2000+ pages)
+
+> **Read the full "Flagship (`icjia.illinois.gov`) — scale-specific guidance" section in `astro-conversion-checklist-v6.md`.** Below is the short list to surface in the kickoff LLM session.
+
+The flagship is **categorically different** from every prior migration:
+
+| Dimension | Prior (Infonet, IFVCC, DVFR) | Flagship |
+|---|---|---|
+| Page count | 30–60 | **2000+** |
+| CMS | Strapi v4 (or none) | **Strapi v3 (flat response shape)** |
+| Stack source | Nuxt 3/4 + Vuetify 3 OR Vue 2 + Vuetify 2 | **Vue 2 + Vuetify 2 (Vuex stores)** |
+| Build time | 30 s – 3 min | **20–40 min cold** (likely exceeds Netlify free tier 15 min cap) |
+| Listings | No pagination needed | **Astro `paginate()` mandatory** for news/publications/events |
+| i18n | English only | **Likely Spanish translations** |
+| Third-party scripts | 1 (Plausible) | **Likely 4–8** (GA/GTM/Translate/Maps/etc.) |
+| PDF assets | A few dozen | **Hundreds**; URL stability is a permanent SEO obligation |
+| Compliance pages | Standard ADA boilerplate | **State-required verbatim copy** + stable anchor IDs |
+
+### Mandatory spike pre-work (4–8 hours BEFORE Phase 1)
+
+1. **Route inventory.** Dump every `vue-router` path from legacy. Categorize: static / dynamic / catch-all CMS / hash-routed / authenticated. Ship a routes spreadsheet.
+2. **Vuex audit.** For each store namespace, decide: build-time content, Alpine `$store`, Alpine `x-data`, or drop entirely.
+3. **Build-time benchmark.** Scaffold 2000 dummy pages in a minimal Astro repo. Time `pnpm build`. Decide Netlify tier upgrade vs `.cache/strapi/` warming strategy.
+4. **Strapi v3 schema dump.** GraphQL introspection on the production endpoint. Document every entity + every field. Identify which fields are inline base64 (Sharp pipeline) vs URLs (mirror script) vs free text.
+5. **PDF inventory.** `find legacy/public -name "*.pdf"` + scrape Strapi for any `*.pdf` references in markdown bodies. Decide mirror script vs in-place keep.
+6. **Third-party script CSP audit.** Every `<script src=...>` in legacy HTML. Decide drop, self-host, or whitelist.
+7. **Content audit.** Cross-reference legacy URLs against Plausible page-views last 90 days. Identify the 25–40% of pages that are candidates for `/archive/` with noindex.
+8. **i18n decision.** If Spanish content exists, decide Astro i18n config from Phase 1 (`prefixDefaultLocale: false`, locale routing strategy).
+
+### Tailwind utility grids — flagship-scale playbook
+
+The "Hard Rule #0" + v6.2 increment apply with **higher** stakes at 2000+ pages. A single wrong breakpoint = 2000 broken pages. Recommendations:
+
+1. **Pre-Phase-1 layout audit.** `grep -rohE 'v-(row|col|container)\s*[^>]*' legacy/src/**/*.vue | sort | uniq -c | sort -rn` — top 50 layout patterns become a canonical translation table in `docs/layout-patterns.md`.
+2. **`<LayoutGrid>` Astro helper component.** Encapsulates the common v-row → grid translation. Props: `cols mdCols lgCols gap`. Avoids 2000 pages each open-coding the same Tailwind class string.
+3. **viewcap diff at 5 viewport widths** (375 / 768 / 1024 / 1280 / 1920) for at least 3 representative templates per route type **before** opening Phase 4. Pixel-perfect drift caught now prevents 2000-page propagation.
+4. **Use `min-[960px]:` for every Vuetify md breakpoint.** Tailwind default `md:` (768 px) does NOT match Vuetify md (960 px). One project-wide grep before cutover: `grep -rn 'md:' src/ | grep -v 'min-\[' | grep -v 'mdCols' | grep grid-cols` should return empty.
+
+### Two-pass build for the manifest pipeline (already in Infonet; SCALES at flagship)
+
+The `astro build && fetch-cms-images && fetch-pdfs && astro build && pagefind && og:image` chain — exhibited in Infonet — is even more important at 2000+ pages because (a) Sharp processing time scales linearly, (b) the manifest stub committed in repo prevents first-build failures, (c) the final `pagefind` step indexes the fully-built dist/. Plan the chain in Phase 1, not Phase 5.
+
+### Cutover at scale — DNS rollback, SiteImprove crawl, 301 diff
+
+Single-commit cutover (v6 §13) is the canonical approach, but at 2000+ pages add three pre-cutover layers:
+
+1. **48–72 hour preview window.** Deploy preview must be live + audited for at least 2 days before flipping `netlify.toml [build]`.
+2. **Full SiteImprove crawl of preview URL.** SiteImprove finds dead links + a11y issues across all 2000 pages — a single Lighthouse audit can't.
+3. **Sitemap diff.** `comm -23 <(legacy sitemap URLs) <(new sitemap URLs)` produces a list of URLs that need 301 redirects. Every line must have a `_redirects` entry or `netlify.toml` rule before cutover.
+
+### Plausible custom events for Real User Monitoring (NEW for flagship)
+
+Lighthouse is synthetic. The flagship's traffic profile (government users, rural Illinois connections, mixed device mix) needs Real User Monitoring. Ship from Phase 5 onward:
+
+```js
+// alpine-entry.ts
+import { onCLS, onINP, onLCP } from 'web-vitals';
+function send(metric) {
+  if (typeof window.plausible !== 'function') return;
+  window.plausible('Web Vitals', {
+    props: { name: metric.name, value: Math.round(metric.value), rating: metric.rating },
+  });
+}
+onCLS(send); onINP(send); onLCP(send);
+```
+
+Plausible's "Custom Events" tab then exposes CLS / INP / LCP percentiles by page — what users actually feel.
+
+---
+
 ## Companion docs (read in order, end-to-end)
 
 1. [`docs/astro-conversion-checklist-v6.md`](./astro-conversion-checklist-v6.md) — the playbook
@@ -200,6 +277,6 @@ Update this section as new migrations ship. Each row links to its repo + audit l
 | SFS | ✅ shipped | Nuxt 3 + Vuetify | All 7 | v3 source |
 | R3 | ✅ shipped | Nuxt 3 + Vuetify | All 7 | v3 follow-on |
 | DVFR | ✅ shipped | Nuxt 4 + Nuxt UI 4 | All 7 | v4 source |
-| **IFVCC** | ✅ shipped 2026-05 | Vue 2 SPA + Vuetify | All 7 + cutover + post-cutover SEO/bucketing pass | **v6 source — most current** |
-| Infonet | ⏳ next | Nuxt 4 | — | DVFR playbook applies directly |
-| icjia.illinois.gov (flagship) | ⏳ last | Vue 2 SPA | — | Spike first; harvest IFVCC + adultredeploy lessons |
+| **IFVCC** | ✅ shipped 2026-05 | Vue 2 SPA + Vuetify | All 7 + cutover + post-cutover SEO/bucketing pass | v6 source |
+| **Infonet** | ✅ shipped 2026-05-27 | Nuxt 4 + Vuetify 3 + Strapi v4 (+ Strapi v3 researchhub) | All 7 + cutover + 3.2.x post-cutover Lighthouse polish | **v6.2 source — most current** |
+| icjia.illinois.gov (flagship) | ⏳ next | Vue 2 SPA + Vuetify 2 + Strapi v3, 2000+ pages | — | **Spike first** (4–8 hr); harvest IFVCC + Infonet + adultredeploy lessons; see flagship-specific section below |

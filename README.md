@@ -94,9 +94,9 @@ Full migration plan + per-phase audit logs are preserved under [`docs/`](./docs/
 - [`docs/superpowers/specs/2026-05-26-astro-migration-design.md`](./docs/superpowers/specs/2026-05-26-astro-migration-design.md) — design spec
 - [`docs/superpowers/plans/2026-05-26-astro-migration-phase{1..7}.md`](./docs/superpowers/plans/) — phase plans
 - [`docs/perf/phase{0..7}-<sha>.md`](./docs/perf/) — phase audit logs
-- [`docs/astro-conversion-checklist-v6.md`](./docs/astro-conversion-checklist-v6.md) — canonical ICJIA migration playbook (also updated with Infonet-specific lessons)
-- [`docs/icjia-strapi-cheatsheet.md`](./docs/icjia-strapi-cheatsheet.md) — Strapi reference (with Infonet-specific findings appended)
-- [`docs/llm-migration-prompt.md`](./docs/llm-migration-prompt.md) — bootstrap prompt for the next ICJIA migration
+- [`docs/astro-conversion-checklist-v6.md`](./docs/astro-conversion-checklist-v6.md) — canonical ICJIA migration playbook. **v6.2 (2026-05-27) increment** adds Infonet post-cutover lessons (Tailwind utility grids for flex/grid layouts, `inlineStylesheets` text-LCP vs image-LCP trade-off, YouTube facade, MDC sentinel placeholders, Strapi v3 base64 splash pipeline) plus a full **Flagship (icjia.illinois.gov) scale-specific guidance** section for the upcoming 2000+-page Vue 2 + Strapi v3 migration.
+- [`docs/icjia-strapi-cheatsheet.md`](./docs/icjia-strapi-cheatsheet.md) — Strapi reference (Infonet findings appended)
+- [`docs/llm-migration-prompt.md`](./docs/llm-migration-prompt.md) — bootstrap prompt for the next ICJIA migration. **Updated 2026-05-27** with Hard Rule #0 (Tailwind utility classes for all flex/grid layouts) and a flagship-specific concerns section (build budget at scale, Strapi v3 vs v4 response shape, listings pagination, PDF URL stability, RUM via Plausible).
 
 Rollback point: git tag `v1-final` preserves the final pre-cutover legacy state.
 

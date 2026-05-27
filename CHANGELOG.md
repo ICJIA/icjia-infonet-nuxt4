@@ -2,6 +2,60 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.3] - 2026-05-27 — Docs: v6.2 increment + flagship pre-flight
+
+Documentation-only release capturing the Infonet post-cutover lessons and adding scale-specific guidance for the upcoming `icjia.illinois.gov` flagship migration (2000+ pages on Vue 2 / Vuetify 2 + Strapi v3).
+
+### `docs/astro-conversion-checklist-v6.md` — v6.2 increment
+
+Added a full **"Infonet (2026-05-27) — post-cutover Lighthouse polish (v6.2 increment)"** section under the existing Infonet phase lessons, plus a new top-level **"Flagship (icjia.illinois.gov) — scale-specific guidance"** section. Key additions:
+
+- **Hard rule: Tailwind utility classes for ALL responsive layout (especially flex/grid).** Canonical translation patterns for Vuetify `<v-row><v-col>`, `<v-container>`, `d-flex`/`d-grid` → Tailwind utilities. Mandates `min-[960px]:` arbitrary breakpoint (not default `md:` 768px) to match Vuetify md=960px exactly. viewcap diff at 5 viewport widths (375/768/1024/1280/1920) as the verification gate.
+- **`inlineStylesheets: 'always'` text-LCP vs image-LCP trade-off** documented. Text-LCP pages can gain +10 perf; image-LCP pages lose 3-5 on mobile. Default `'auto'` is correct for browse traffic.
+- **Two-pass build chain pattern** for any CMS image manifest (Vite resolves imports at bundle time → manifest stub must be committed).
+- **Eager + fetchpriority="high" on the first card image** in above-fold listings.
+- **YouTube facade pattern** for Best-Practices 100 + zero third-party cookies on initial load.
+- **`label-content-name-mismatch` removal of redundant aria-labels** with a table of common offenders (home cards, "All News" buttons, desktop nav title).
+- **axe-core `nonBmp` swap** Unicode glyphs (e.g. `▾`) for inline SVG paths with `currentColor` fill.
+- **`sr-only-table` off-canvas via `left: -10000px`** to avoid blowing `scrollWidth` on narrow viewports.
+- **Chart.js lazy-load via IntersectionObserver** with `rootMargin: '200px'`.
+- **MDC component placeholder sentinel pattern** for inline rendering (vs always-appending at the end of an article).
+- **Sharp-resampled splash images from Strapi v3 base64 GraphQL fields** (the researchhub `splash` field pattern).
+- **Centered page header standard** (`text-align: center; margin-top: 1rem; margin-bottom: 2.5rem`).
+
+### `docs/astro-conversion-checklist-v6.md` — flagship guidance section
+
+New top-level section anticipating the 2000+-page flagship migration:
+
+- **Build budget arithmetic** (20-40 min cold) + Netlify free-tier 15-min cap implications + 4 mitigation strategies (tier upgrade, warm cache, incremental Strapi fetch, Sharp concurrency pool).
+- **Strapi v3 vs v4 response shape** with code probes for compatibility detection.
+- **Listings pagination** via Astro's `paginate()` helper.
+- **Sitemap chunking** at `entryLimit: 45000`.
+- **`vue-router` route inventory pre-Phase-1** with categorization table (static / dynamic / catch-all / hash-routed / authenticated).
+- **Vuex → Alpine `$store`** decision table (what's truly state vs what's actually content).
+- **PDF + document URL stability** mirror script pattern.
+- **Third-party script CSP audit** template with likely offenders.
+- **i18n / Spanish content** Astro config + hreflang emission strategy.
+- **Real User Monitoring via Plausible custom events** (web-vitals → onCLS/onINP/onLCP).
+- **`dist/` build artifact size** at 2000+ pages (200-400 MB) + Netlify deploy-upload time + CDN propagation considerations.
+- **Cutover risk mitigation** (48-72hr preview, SiteImprove crawl, sitemap diff for 301s).
+- **Pagefind index size at scale** + pre-warm strategy.
+- **Content audit** ("what to NOT migrate") with decision rubric.
+- **Print stylesheets** + compliance pages (verbatim copy + stable anchor IDs).
+
+### `docs/llm-migration-prompt.md` — Hard Rule #0 + flagship section
+
+- **Hard Rule #0 added** explicitly mandating Tailwind utility classes for ALL responsive layout, calling out `min-[960px]:` arbitrary breakpoint vs Tailwind default `md:`.
+- **Reference migrations table** updated: Infonet is now the v6.2 source for new Nuxt SSG migrations; IFVCC remains the source for Vue 2 SPA migrations.
+- **Migration tracker** updated: Infonet ✅ shipped 2026-05-27; flagship ⏳ next with "Spike first (4-8 hr)" note.
+- **New "Flagship-specific concerns" section** with: dimensional comparison table (prior migrations vs flagship), mandatory 4-8hr spike pre-work checklist (route inventory, Vuex audit, build-time benchmark, Strapi v3 schema dump, PDF inventory, third-party CSP audit, content audit, i18n decision), Tailwind utility grids flagship-scale playbook (LayoutGrid helper + viewcap-diff-at-5-widths discipline), two-pass build pipeline reminder, cutover-at-scale layers (preview window, SiteImprove crawl, sitemap diff), and Plausible RUM custom events.
+
+### `README.md` updates
+
+Links to `docs/astro-conversion-checklist-v6.md` and `docs/llm-migration-prompt.md` now describe the v6.2 increment + flagship section so future devs see the changes from the entry point.
+
+---
+
 ## [3.2.2] - 2026-05-27 — Revert inlineStylesheets to 'auto'
 
 Re-audit after `3.2.1` shipped showed the `inlineStylesheets: 'always'` flip was a net regression for browse traffic:
