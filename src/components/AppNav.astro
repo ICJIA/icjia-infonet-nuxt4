@@ -356,6 +356,27 @@ const pathname = Astro.url.pathname;
       btn.setAttribute('aria-label', expanded ? 'Open navigation menu' : 'Close navigation menu');
     });
   }
+
+  // Accordion behavior: when one nav <details> dropdown opens, close any other
+  // open siblings. Native <details> elements don't do this automatically.
+  // Also click-outside-to-close.
+  const dropdowns = document.querySelectorAll('.nav-dropdown');
+  dropdowns.forEach((d) => {
+    d.addEventListener('toggle', () => {
+      if (d.open) {
+        dropdowns.forEach((other) => {
+          if (other !== d && other.open) other.open = false;
+        });
+      }
+    });
+  });
+  // Close any open dropdown when clicking outside the nav header
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (!(target instanceof Element)) return;
+    if (target.closest('.nav-dropdown')) return;
+    dropdowns.forEach((d) => { if (d.open) d.open = false; });
+  });
 </script>
 
 <style>
