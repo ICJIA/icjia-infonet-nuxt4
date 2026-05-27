@@ -22,11 +22,13 @@ const description =
   'in Illinois to facilitate standardized statewide data collection.';
 ---
 <BaseLayout title="Home" description={description}>
-  <!-- Hero + chart row: full-bleed gray background with centered inner container -->
-  <section class="home-section home-section--gray">
-    <div class="home-section-inner">
-      <div class="home-grid">
-        <div class="home-hero-inner">
+  <!-- Hero + chart row: full-bleed gray, 2-col grid at ≥960 px (Vuetify md).
+       Tailwind utilities mirror legacy Vuetify <v-row><v-col cols=12 md=6>.
+       Arbitrary breakpoint min-[960px]: matches legacy Vuetify exactly
+       (Tailwind default md=768px would switch too early). -->
+  <section class="w-full bg-[#f2f2f2] px-8 pt-8 pb-12">
+    <div class="grid grid-cols-1 min-[960px]:grid-cols-2 gap-8 items-start">
+      <div class="home-hero-inner">
           <div class="home-badge">
             Illinois Criminal Justice Information Authority
           </div>
@@ -58,20 +60,18 @@ const description =
         </div>
 
         <HomeBarGraph />
-      </div>
     </div>
   </section>
 
   <!-- HomeBoxes: full-bleed dark blue, no inner container constraint -->
   <HomeBoxes />
 
-  <!-- News + FAQs section: full-bleed white with centered inner container -->
-  <section class="home-section">
-    <div class="home-section-inner">
-      <div class="home-news-faqs">
-        <HomePosts />
-        <HomeFaqs />
-      </div>
+  <!-- News + FAQs row: edge-to-edge gray, 2-col at ≥960 px (Vuetify md).
+       Tailwind utilities mirror legacy <v-row><v-col cols=12 md=6>. -->
+  <section class="w-full bg-[#f2f2f2]">
+    <div class="grid grid-cols-1 min-[960px]:grid-cols-2">
+      <HomePosts />
+      <HomeFaqs />
     </div>
   </section>
 </BaseLayout>
@@ -80,38 +80,10 @@ const description =
   /* Import Raleway for the INFONET title — matches legacy headingHomeMain class. */
   @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;900&display=swap');
 
-  /* Full-bleed sections — span entire viewport width.
-     Inner container centers content with max-width 1200px. */
-  .home-section {
-    width: 100%;
-    padding: 2rem 2rem 3rem;
-  }
-  .home-section--gray {
-    background: #f2f2f2;
-  }
-  /* Above-the-fold hero+chart spans the full viewport (no 1200 px cap)
-     — info text occupies the left half, the chart the right half. */
-  .home-section-inner {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  /* 2-column desktop layout: hero + chart side-by-side */
-  .home-grid {
-    display: block; /* mobile: stacked */
-  }
-
-  @media (min-width: 960px) {
-    .home-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: start;
-    }
-  }
-
+  /* Hero typography only — section/grid/column layout is now driven by
+     Tailwind utilities inline (grid-cols-1 md:grid-cols-2 etc.) so the
+     responsive behaviour mirrors the legacy Vuetify <v-row><v-col>. */
   .home-hero-inner {
-    /* Full-width left column — chart sits in the right column. */
     max-width: 100%;
   }
 
@@ -183,22 +155,4 @@ const description =
     color: #0d4270;
   }
 
-  /* News & FAQs two-column section — full viewport width, no inner cap.
-     Matches the hero+chart row above: edge-to-edge background, content
-     occupies left half (news) / right half (FAQs) at md+ breakpoints. */
-  .home-news-faqs {
-    display: block;
-    background: #f2f2f2;
-    padding: 0;
-    margin-top: 0;
-  }
-
-  @media (min-width: 960px) {
-    .home-news-faqs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      padding: 0;
-    }
-  }
 </style>

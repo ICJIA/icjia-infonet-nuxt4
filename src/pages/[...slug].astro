@@ -91,17 +91,23 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
   }
 
   /* /agencies/ — long list of victim-service providers organized under three
-     h2 sections. Legacy site rendered each section in a 2-column flow.
-     CSS multi-column with break-before-column on h2 lets each section's
-     names flow across two columns naturally on desktop, stacking on mobile. */
-  @media (min-width: 768px) {
+     h2 sections (Domestic Violence, Sexual Assault, Child Advocacy Centers).
+     Legacy site rendered each section in a 2-column flow. CSS multi-column
+     with column-span: all on h2 keeps each section heading full-width
+     across both columns and lets agency entries flow underneath. Switches
+     to 2-col at ≥960 px to match legacy Vuetify md breakpoint. */
+  @media (min-width: 960px) {
     .page-detail--agencies .markdown-body {
       column-count: 2;
+      -webkit-column-count: 2;
       column-gap: 2.5rem;
+      -webkit-column-gap: 2.5rem;
     }
     .page-detail--agencies .markdown-body h2 {
+      -webkit-column-span: all;
       column-span: all;
-      margin-top: 2rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
     }
     .page-detail--agencies .markdown-body h2:first-child {
       margin-top: 0;
@@ -111,6 +117,8 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
     .page-detail--agencies .markdown-body p,
     .page-detail--agencies .markdown-body li {
       break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      page-break-inside: avoid;
     }
   }
 
