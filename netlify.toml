@@ -14,22 +14,23 @@
 
 # --- Rewrites ---
 #
-# `@astrojs/sitemap` emits `sitemap-index.xml` (with a `sitemap-0.xml` shard).
-# robots.txt points there correctly, but many SEO tools and AI crawlers probe
-# the conventional `/sitemap.xml` first without reading robots.txt. Serve the
-# index under the conventional name via HTTP 200 rewrite (NOT a 301) so the
-# URL is invisible to scanners that count redirects (SiteImprove, etc.).
+# `@astrojs/sitemap` always emits a `sitemap-index.xml` (pointing at one or
+# more `sitemap-N.xml` shards) — that's the protocol's recommended layout for
+# large sites. For a 43-URL site the index is pure indirection, and crawlers
+# probing `/sitemap.xml` should see the actual URL list, not a one-entry index.
+# Point the rewrite at the flat shard so `/sitemap.xml` returns all 43 URLs
+# directly. HTTP 200 (NOT 301) so scanners that count redirects don't see one.
 # Two rules cover both `/sitemap.xml` and the trailing-slash variant some
 # tools auto-generate.
 
 [[redirects]]
   from = "/sitemap.xml"
-  to = "/sitemap-index.xml"
+  to = "/sitemap-0.xml"
   status = 200
 
 [[redirects]]
   from = "/sitemap.xml/"
-  to = "/sitemap-index.xml"
+  to = "/sitemap-0.xml"
   status = 200
 
 # --- Headers ---

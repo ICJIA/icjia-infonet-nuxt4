@@ -22,7 +22,7 @@ InfoNet is operated by the Illinois Criminal Justice Information Authority (ICJI
 
 ## Sitemaps
 
-- [sitemap-index.xml](https://infonet.icjia.illinois.gov/sitemap-index.xml): Machine-readable index of every published page
+- [sitemap.xml](https://infonet.icjia.illinois.gov/sitemap.xml): Machine-readable list of every published page (~43 URLs, full set)
 - [Pagefind search](https://infonet.icjia.illinois.gov/search/): Full-text search across all site content
 
 ## Citing InfoNet

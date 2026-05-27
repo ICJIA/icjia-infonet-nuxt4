@@ -2,6 +2,18 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.12] - 2026-05-27 — Point `/sitemap.xml` at the flat shard, not the index
+
+3.2.11 made `/sitemap.xml` resolve, but it served the one-entry `sitemap-index.xml` (which only references `sitemap-0.xml`) rather than the actual URL list. Crawlers handle the indirection fine, but humans/tools visiting `/sitemap.xml` saw an empty-looking index — confusing UX with no benefit at this site size.
+
+`@astrojs/sitemap` always emits an `index + N shards` layout (it's the sitemaps.org-recommended structure for sites that may grow past 50k URLs); there's no flag to skip the index. For a 43-URL site the shard is the only useful payload, so:
+
+- **`netlify.toml`** — flipped both rewrites from `to = "/sitemap-index.xml"` → `to = "/sitemap-0.xml"`. `/sitemap.xml` (and trailing-slash variant) now serve the actual `<urlset>` directly. Still HTTP 200 (no 301).
+- **`public/robots.txt`** — `Sitemap:` line now points at the conventional `/sitemap.xml` instead of `/sitemap-index.xml`. Crawlers follow the rewrite transparently.
+- **`public/llms.txt`** — same swap. Updated the description to "Machine-readable list of every published page (~43 URLs, full set)" to make clear it's the flat URL list, not an index.
+
+`/sitemap-index.xml` and `/sitemap-0.xml` remain reachable at their literal paths for any tool that's hard-wired to them. Verified built `dist/sitemap-0.xml` still emits 43 `<loc>` entries.
+
 ## [3.2.11] - 2026-05-27 — Surface /sitemap.xml + stylish 404 redesign
 
 ### `netlify.toml` — `/sitemap.xml` rewrite
