@@ -2,6 +2,19 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.13] - 2026-05-27 — Docs: capture `/sitemap.xml` routing pattern
+
+Added a new sub-section "**`/sitemap.xml` routing — rewrite to the flat shard, not the index**" to `docs/astro-conversion-checklist-v6.2.md` in the Infonet post-cutover increment area. Captures:
+
+- **Why `/sitemap.xml` returns 404 by default** — `@astrojs/sitemap` always emits `sitemap-index.xml` + `sitemap-N.xml` shards (no flag to skip the index even when only one shard exists).
+- **The "naive rewrite" footgun** — pointing `/sitemap.xml` → `/sitemap-index.xml` makes the URL resolve but shows humans/tools a confusing one-entry meta-file.
+- **The fix** — two Netlify `status = 200` rewrites pointing at `/sitemap-0.xml` (the flat shard), covering both `/sitemap.xml` and the trailing-slash variant. HTTP 200 (not 301) so SiteImprove and similar scanners don't dock DCI points.
+- **`robots.txt` + `llms.txt` updates** — point at the conventional `/sitemap.xml` so crawlers follow the rewrite transparently.
+- **`curl` verification snippet** — assert the response is a `<urlset>`, not a `<sitemapindex>`.
+- **Flagship-scale decision rubric** — at 2000+ pages with multiple shards, point `/sitemap.xml` → `/sitemap-index.xml` instead. **Flat shard if one file fits, index if multiple shards are emitted.**
+
+No code changes in this release — docs-only.
+
 ## [3.2.12] - 2026-05-27 — Point `/sitemap.xml` at the flat shard, not the index
 
 3.2.11 made `/sitemap.xml` resolve, but it served the one-entry `sitemap-index.xml` (which only references `sitemap-0.xml`) rather than the actual URL list. Crawlers handle the indirection fine, but humans/tools visiting `/sitemap.xml` saw an empty-looking index — confusing UX with no benefit at this site size.

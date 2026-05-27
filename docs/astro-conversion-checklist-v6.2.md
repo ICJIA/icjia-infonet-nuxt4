@@ -4145,6 +4145,53 @@ When the home page sits at mobile Perf 97-98 with: FCP ~1.6s, LCP ~2.1s (under G
 
 If all five are checked, ship and stop. Further work crosses the line from "engineering" to "metric chasing."
 
+#### `/sitemap.xml` routing — rewrite to the flat shard, not the index
+
+`@astrojs/sitemap` always emits **two files**: `dist/sitemap-index.xml` (a one-entry meta-file pointing at the shards) + one or more `dist/sitemap-N.xml` shards (the actual `<urlset>` with all the URLs). The index/shard split is sitemaps.org's recommended layout for sites that may exceed Google's 50,000-URL-per-file limit. The package has **no configuration flag** to skip the index when only one shard exists — it ships both regardless of site size.
+
+This creates two distinct breakage modes that aren't obvious until someone (a user, an SEO scanner, an AI crawler) tries to fetch the conventional `/sitemap.xml`:
+
+1. **`/sitemap.xml` returns 404.** Astro doesn't emit a file at that path — only `sitemap-index.xml` and `sitemap-0.xml`. `robots.txt` (which `@astrojs/sitemap` does NOT auto-update; you must hand-edit it) gives the long name, but tools that probe the conventional URL without reading robots.txt first get a 404.
+2. **`/sitemap.xml` (via a naive rewrite) shows what looks like an empty sitemap.** If you rewrite `/sitemap.xml → /sitemap-index.xml`, the response is a one-entry XML file pointing at `sitemap-0.xml`. Crawlers handle the indirection silently, but humans/tools see a confusing near-empty document. The user-visible effect is "the sitemap is broken" even though it's not.
+
+The **fix** is two Netlify `status = 200` rewrites in `netlify.toml` that point at the flat shard:
+
+```toml
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-0.xml"
+  status = 200
+
+[[redirects]]
+  from = "/sitemap.xml/"
+  to = "/sitemap-0.xml"
+  status = 200
+```
+
+The trailing-slash variant covers tools that auto-append `/` to URLs (some link checkers do this). HTTP 200 (NOT 301) is mandatory — per the SiteImprove pattern in §10a, 301s cost DCI points. The rewrite is invisible to scanners that count redirects.
+
+Then update `public/robots.txt` to point at the conventional URL:
+
+```
+Sitemap: https://<site>/sitemap.xml
+```
+
+…and any AI-readiness files (`llms.txt`, etc.) similarly. Crawlers follow the rewrite transparently, humans see the URL list directly, and the canonical sitemap URL is the conventional one.
+
+**Verification post-deploy:**
+
+```bash
+# /sitemap.xml should return 200 with a <urlset> directly (not <sitemapindex>)
+curl -sS https://<site>/sitemap.xml | head -5
+# expect: <?xml version="1.0" encoding="UTF-8"?>
+#         <urlset xmlns="...">
+#           <url><loc>https://<site>/</loc>...
+```
+
+The original literal paths (`/sitemap-index.xml` and `/sitemap-0.xml`) remain reachable for any tool hard-wired to them. No redirects, no breakage — just two surfacing rewrites.
+
+**At flagship scale (icjia.illinois.gov, 2000+ pages):** the index/shard split becomes meaningful — `entryLimit: 45000` in `astro.config.ts`'s sitemap integration keeps everything in `sitemap-0.xml`, but if you bump above 45k (or split intentionally for crawler-budget reasons), you'd have `sitemap-0.xml`, `sitemap-1.xml`, … and `sitemap-index.xml` is the canonical entry point. **At that scale, point `/sitemap.xml` → `/sitemap-index.xml`** (and let crawlers follow the indirection); the index becomes useful again. Decision rubric: **flat shard if one file fits, index if multiple shards are emitted.**
+
 #### Build chain: two-pass `astro build` for any CMS image manifest
 
 For Tier 2 image manifests (Sharp-resampled CMS images written to `public/_cms-img/`), the page templates import the manifest JSON. **Vite resolves these imports at bundle time — the file must EXIST as a committed JSON file before the first `astro build` runs**, or the build fails with `Could not resolve "~/data/<name>.json"`.
