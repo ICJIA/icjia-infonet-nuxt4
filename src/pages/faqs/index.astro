@@ -106,7 +106,7 @@ const tocHeadings: Heading[] = [
                   <details class="faq-item">
                     <summary class="faq-summary">
                       <span>{f.attributes.question ?? '(untitled)'}</span>
-                      <span aria-hidden="true" class="faq-chevron">&#x25BE;</span>
+                      <svg aria-hidden="true" focusable="false" class="faq-chevron" viewBox="0 0 16 16" width="20" height="20"><path fill="currentColor" d="M2 4l6 7 6-7z"/></svg>
                     </summary>
                     <div class="markdown-body faq-body" set:html={html} />
                   </details>
@@ -210,14 +210,10 @@ const tocHeadings: Heading[] = [
   }
 
   .faq-chevron {
-    font-size: 1.25rem;
     color: #0d4270;
-    /* Explicit background so axe-core samples contrast on the span
-       itself (without it, axe walks up the DOM through transparent
-       parents and downgrades to needs-review). True ratio ~12:1. */
-    background: #fff;
     flex-shrink: 0;
     margin-left: 8px;
+    display: block;
   }
 
   .faq-body {

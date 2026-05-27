@@ -49,7 +49,7 @@ const faqs = parsed.faqs.data
         <details class="home-faq-item">
           <summary class="home-faq-item__summary">
             <span>{f.attributes.question ?? '(untitled)'}</span>
-            <span aria-hidden="true" class="home-faq-item__arrow">&#x25BE;</span>
+            <svg aria-hidden="true" focusable="false" class="home-faq-item__arrow" viewBox="0 0 16 16" width="16" height="16"><path fill="currentColor" d="M2 4l6 7 6-7z"/></svg>
           </summary>
           <div class="home-faq-item__body markdown-body" set:html={html} />
         </details>
@@ -142,14 +142,10 @@ const faqs = parsed.faqs.data
   }
 
   .home-faq-item__arrow {
-    font-size: 1.25rem;
     color: #0d4270;
-    /* Explicit background so axe-core can sample the chevron's contrast
-       directly on the span (without it, axe walks up the DOM and falls
-       back to "needs review" — actual ratio is ~12:1, AAA-safe). */
-    background: #fff;
     flex-shrink: 0;
     margin-left: 8px;
+    display: block;
   }
 
   .home-faq-item__body {
