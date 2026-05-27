@@ -60,7 +60,15 @@ const faqs = parsed.faqs.data
 
 <style>
   .home-faqs {
-    margin-bottom: 2rem;
+    /* Internal column padding so the heading + 'All FAQs »' badge don't
+       butt up against the News column to its left (or the viewport edge
+       on mobile). Outer .home-news-faqs section remains full-bleed. */
+    padding: 2rem 2rem 2rem;
+  }
+  @media (min-width: 960px) {
+    .home-faqs {
+      padding: 2rem 2rem 2rem 1.5rem;
+    }
   }
 
   .home-faqs__header {
