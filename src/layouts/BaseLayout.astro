@@ -49,9 +49,11 @@ const fullTitle = title
 
 // Conditional <main> top-padding: home gets 64px; other pages get 96px.
 const isHome = rawPath === '/';
-/* Legacy measured gap from breadcrumb-bottom to h1-top = 32px on non-home;
-   home has no breadcrumb so 32px works too. Astro was 96px (too much). */
-const mainTopPad = isHome ? 32 : 32;
+/* Legacy measured gap from breadcrumb-bottom to h1-top = 32px on non-home.
+   Home renders the gray .home-section--gray hero edge-to-edge, so it needs
+   ZERO top padding — otherwise a white strip shows between the nav and the
+   gray background. */
+const mainTopPad = isHome ? 0 : 32;
 ---
 <!DOCTYPE html>
 <html lang="en">
