@@ -2,6 +2,15 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.8] - 2026-05-27 — Docs: latin-subset CSS win + mobile perf stopping criteria
+
+Documented two related lessons in `docs/astro-conversion-checklist-v6.2.md` under the Infonet post-cutover section, both surfaced during the 3.2.5–3.2.7 perf-tuning cycle:
+
+1. **`@fontsource` subset-only imports cut the render-blocking CSS bundle in half.** Switching nine `@import '@fontsource/<fam>/<weight>.css'` → `latin-<weight>.css` dropped `BaseLayout.css` 90.7 KB → 34.5 KB (-62%). The win is desktop-shaped: home Perf went 96 → 100 on desktop (CSS download was the binding constraint at low-latency desktop bandwidth) but stayed 97-98 on mobile (RTT-bound, not byte-bound). Per-file shrinkage table included (Lato -71%, Raleway -87%, Roboto -95%). Compatibility note for non-English-content authors.
+2. **Diminishing returns at mobile 97-98 — stop before critical-CSS extraction.** When home shows FCP ~1.6s, LCP ~2.1s, CLS 0, TBT 0ms with the only failures being `render-blocking-insight` + `unused-javascript`, the remaining gap is the slow-4G RTT floor (~750 ms simulated), not bytes or JS. Three reasons critical-CSS extraction shouldn't be the next move: it's fragile (drifts on any above-fold component change), Alpine core is irreducible, and 1-2 points isn't worth the breakage risk. Includes a 5-item **stopping criteria checklist** (Perf ≥ 97, LCP < 2.5s, CLS < 0.1, TBT < 200ms, A11y/BP/SEO 100) — if all checked, ship and stop.
+
+No code changes in this release — docs-only.
+
 ## [3.2.7] - 2026-05-27 — Perf: switch @fontsource imports to `latin-` subset only
 
 Home page mobile audit was Perf 98 with 430 ms of "Render-blocking resources" savings available — the dominant blocker was `BaseLayout.css` at **90.7 KB** (uncompressed). Audited the bundle: 54+ `@font-face` declarations across nine `@fontsource/<family>/<weight>.css` imports, each shipping six to seven Unicode subsets (latin, latin-ext, cyrillic, cyrillic-ext, greek, greek-ext, vietnamese). Infonet content is English-only and `latin` already covers em-dashes, smart quotes, the euro sign, and the trademark glyph (U+2000-206F is in the latin subset's unicode-range), so the other five subsets are pure dead weight.

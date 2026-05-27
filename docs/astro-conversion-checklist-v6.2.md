@@ -4105,6 +4105,46 @@ import robotoRegularUrl from '@fontsource/roboto/files/roboto-latin-400-normal.w
 
 **When NOT to also add `size-adjust` / `ascent-override` fallback `@font-face`:** the original plan was to follow this with Capsize-tuned fallback fonts. Skipped after measuring — preload alone got CLS into the green band, so the size-adjust work would yield zero measurable Lighthouse improvement while introducing visual-drift risk (slightly off size-adjust values cause subtle text reflow on edge cases: long unbroken words, italic runs, narrow viewports). **Reach for size-adjust fallback only if preload doesn't get you to CLS ≤ 0.1.** Order is: preload first → measure → size-adjust only if still failing.
 
+#### `@fontsource` subset-only imports cut the render-blocking CSS bundle in half
+
+`@fontsource/<family>/<weight>.css` ships SIX-to-SEVEN Unicode subsets (latin, latin-ext, cyrillic, cyrillic-ext, greek, greek-ext, vietnamese). Each subset is an independent `@font-face` rule with its own `unicode-range`. For an English-only site, only `latin` is exercised — the rest is dead weight that bloats the render-blocking CSS bundle without ever being requested by the browser (unmatched `unicode-range` rules don't trigger font downloads, but the CSS bytes still ship and parse).
+
+The `latin` subset's `unicode-range` already covers em-dashes, smart quotes (U+2000-206F: General Punctuation), euro sign, trademark, basic Latin-1 Supplement — everything a US-English gov site needs.
+
+**Switch:** `@import '@fontsource/<fam>/<weight>.css'` → `@import '@fontsource/<fam>/latin-<weight>.css'`.
+
+**Infonet measured impact (2026-05-27, 3.2.7):**
+
+| File | Before | After | Δ |
+|---|---:|---:|---:|
+| `@fontsource/lato/400.css` (single weight raw) | 882 B | 250 B | -71% |
+| `@fontsource/raleway/400.css` (single weight raw) | 2,055 B | 262 B | -87% |
+| `@fontsource/roboto/400.css` (single weight raw) | 5,431 B | 258 B | -95% |
+| **`BaseLayout.css` bundle (9 weights × 3 families)** | **90.7 KB** | **34.5 KB** | **-62%** |
+
+Roboto in particular ships a massive cyrillic+greek+vietnamese surface — cutting it back is the biggest single byte win.
+
+**Score impact:** desktop home Perf **96 → 100** (the CSS download was the binding constraint at low-latency desktop bandwidth). Mobile home stayed at 97-98 — the binding constraint on slow-4G is the TCP/RTT-driven render-blocking floor, not bytes. **The lesson: subsetting helps desktop scores meaningfully; mobile scores are gated by network RTT, not bundle size.** Both still benefit from a smaller parse cost.
+
+**Compatibility note:** if a CMS author pastes Czech/Polish/Vietnamese/Cyrillic content into Strapi after the switch, those glyphs fall back to the system font. Document this in the project's content-author guide if multi-language content is planned; otherwise ship.
+
+#### Diminishing returns at mobile 97-98 — stop before critical-CSS extraction
+
+When the home page sits at mobile Perf 97-98 with: FCP ~1.6s, LCP ~2.1s (under Google's 2.5s "good" threshold), CLS 0, TBT 0ms, and the only Lighthouse-flagged issues are `render-blocking-insight` (~440 ms estimated savings) + `unused-javascript` (~35 KiB), **stop**. The remaining gap is the Lighthouse mobile scoring band's natural floor, not a fixable byte/JS problem. Three reasons:
+
+1. **Render-blocking is RTT-bound, not byte-bound.** The 56 KB CSS shrink from latin-subsetting moved the "render-blocking savings" estimate from 430 ms → 440 ms — i.e. it didn't move. Slow-4G simulation gives ~1.6 Mbps + ~750 ms RTT, and the bulk of the "blocking" time is the TCP+TLS handshake to the CSS origin, not transfer. You can't optimize away an RTT.
+2. **Unused JS is Alpine core.** The 35 KiB figure stays constant whether you `latin-`-subset CSS or not because it's the Alpine.js bundle that every page ships. Splitting the `@alpinejs/focus` plugin out gains ~5 KiB and breaks the mobile sidebar focus trap on first open (race between plugin load and click handler).
+3. **Critical-CSS extraction is fragile.** Extracting above-fold CSS for inlining is the textbook next step but adds a per-route critical bundle that drifts whenever any above-fold component changes (a new HomeBox row, an additional HomeBarGraph header, a Breadcrumb tweak). The win is 1-2 points; the breakage shows up as FOUC. Treat critical-CSS as a Phase 7-or-later polish task and only if the user-research case for "mobile home perf 100" outweighs the maintenance cost.
+
+**Stopping criteria checklist** for mobile home perf optimization:
+- [x] Perf ≥ 97 (in scoring band's natural variance for image-light pages)
+- [x] LCP < 2.5s (Google "good")
+- [x] CLS < 0.1 (Google "good")
+- [x] TBT < 200ms (Google "good")
+- [x] A11y 100, BP 100, SEO 100
+
+If all five are checked, ship and stop. Further work crosses the line from "engineering" to "metric chasing."
+
 #### Build chain: two-pass `astro build` for any CMS image manifest
 
 For Tier 2 image manifests (Sharp-resampled CMS images written to `public/_cms-img/`), the page templates import the manifest JSON. **Vite resolves these imports at bundle time — the file must EXIST as a committed JSON file before the first `astro build` runs**, or the build fails with `Could not resolve "~/data/<name>.json"`.
