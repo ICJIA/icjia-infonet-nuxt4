@@ -1,0 +1,287 @@
+---
+// astro/src/pages/data-and-publications/index.astro
+//
+// Port of app/pages/data-and-publications/index.vue (450 lines).
+//
+// Data source: app/data/dataAndPublications.json, copied to astro/src/data/.
+// The JSON is a merged array of 'hub' articles (ICJIA Research Hub) and
+// 'publist' items (PDFs from archive.icjia-api.cloud).
+//
+// Link logic:
+//   source === 'hub'     → https://icjia.illinois.gov/researchhub/articles/<slug>
+//   source === 'publist' → article.fileURL (PDF/external)
+// Both open in a new window (external content).
+//
+// Tag filter chips: client-side Alpine.js chip-group. Tags are derived from
+// the top-level `tags` array present on every item in dataAndPublications.json.
+// Only high-value tags are surfaced in the chip bar (matching legacy chip-group).
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHeader from '~/components/PageHeader.astro';
+import { formatDate } from '~/lib/dates';
+import pubData from '~/data/dataAndPublications.json';
+
+// Sort by date descending; items with no date go to bottom.
+const articles = [...pubData].sort((a, b) => {
+  const da = a.date ?? '';
+  const db = b.date ?? '';
+  return da > db ? -1 : da < db ? 1 : 0;
+});
+
+function getPublicationType(type: string | null | undefined): string {
+  const map: Record<string, string> = {
+    researchReport: 'Research Report',
+    researchBulletin: 'Research Bulletin',
+    researchAtAGlance: 'Research At A Glance',
+    trendsAndIssuesUpdate: 'Trends and Issues Update',
+    motorVehicleTheftPublications: 'Motor Vehicle Theft Publication',
+    barj: 'BARJ',
+    compiler: 'Compiler',
+    dataset: 'Dataset',
+    getTheFacts: 'GET THE FACTS',
+    programEvaluationSummary: 'Program Evaluation Summary',
+    megProfiles: 'MEG Profiles',
+    annualReport: 'Annual Report',
+    article: 'Article',
+    report: 'Report',
+    evaluation: 'Evaluation',
+    toolkit: 'Toolkit',
+    onGoodAuthority: 'On Good Authority',
+    application: 'Application',
+  };
+  return type ? (map[type] ?? 'Publication') : 'Publication';
+}
+
+function getArticleHref(article: typeof articles[0]): string {
+  if (article.source === 'hub') {
+    return `https://icjia.illinois.gov/researchhub/articles/${article.slug}`;
+  }
+  return article.fileURL ?? '#';
+}
+
+// Curated tag chips that appear in the filter bar (matches legacy chip-group order).
+const filterChips = [
+  { label: 'All Research', value: 'all' },
+  { label: 'InfoNet', value: 'infonet' },
+  { label: 'Domestic Violence', value: 'domestic violence' },
+  { label: 'Sexual Assault', value: 'sexual assault' },
+  { label: 'Human Trafficking', value: 'human trafficking' },
+  { label: 'Victim Services', value: 'victim services' },
+];
+
+// Serialize articles with their tags so Alpine can filter client-side.
+const articlesJson = JSON.stringify(
+  articles.map((a) => ({
+    tags: (a as any).tags ?? [],
+  })),
+);
+---
+<BaseLayout
+  title="InfoNet & Other Victim Services Research"
+  breadcrumbTitle="Data and Publications"
+>
+  <PageHeader title="InfoNet &amp; Other Victim Services Research" />
+
+  <div class="dap-page page-container" x-data={`dapFilter(${articlesJson})`}>
+    <!-- Tag filter chips -->
+    <div class="tag-filters" role="group" aria-label="Filter by topic">
+      {filterChips.map((chip) => (
+        <button
+          type="button"
+          class="tag-chip"
+          :class={`{ active: activeTag === ${JSON.stringify(chip.value)} }`}
+          x-on:click={`activeTag = ${JSON.stringify(chip.value)}`}
+        >
+          {chip.label}
+        </button>
+      ))}
+    </div>
+
+    <p class="dap-count">
+      <span x-text="visibleCount"></span>
+      <span x-text="visibleCount === 1 ? ' item' : ' items'"></span>
+    </p>
+
+    <div class="dap-grid">
+      {articles.map((article, idx) => {
+        const href = getArticleHref(article);
+        const pubType = getPublicationType(article.pubType);
+        const displayDate = formatDate(article.date, 'short');
+        const abstract = article.abstract
+          ? (article.abstract.length > 350 ? article.abstract.slice(0, 350) + '...' : article.abstract)
+          : '';
+        return (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${article.title} — opens in new window`}
+            class="dap-card-link"
+            x-show={`isVisible(${idx})`}
+          >
+            <article class="dap-card">
+              <div class="dap-card-meta">
+                {displayDate && (
+                  <span class="dap-card-date">{displayDate}</span>
+                )}
+                {displayDate && <span class="dap-card-sep"> | </span>}
+                <span class="dap-card-type">{pubType}</span>
+              </div>
+              <h3 class="dap-card-title">{article.title}</h3>
+              {abstract && (
+                <p class="dap-card-abstract">{abstract}</p>
+              )}
+              <div class="dap-card-cta">
+                {article.source === 'hub'
+                  ? 'Read Article (Web) »'
+                  : `Read ${pubType} (${article.ext ?? 'link'}) »`}
+              </div>
+            </article>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    // @ts-ignore
+    window.Alpine.data('dapFilter', (items: { tags: string[] }[]) => ({
+      activeTag: 'all' as string,
+      items,
+
+      get visibleCount(): number {
+        if (this.activeTag === 'all') return this.items.length;
+        return this.items.filter((item) =>
+          item.tags.includes(this.activeTag),
+        ).length;
+      },
+
+      isVisible(idx: number): boolean {
+        if (this.activeTag === 'all') return true;
+        return this.items[idx]?.tags?.includes(this.activeTag) ?? false;
+      },
+    }));
+  });
+</script>
+
+<style>
+  .dap-page {
+    max-width: 1100px;
+  }
+
+  /* Tag filter chip bar */
+  .tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .tag-chip {
+    background: #f0f4f8;
+    color: #0d4270;
+    border: 1px solid #c5d5e8;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .tag-chip:hover {
+    background: #dce8f5;
+  }
+
+  .tag-chip.active {
+    background: #0d4270;
+    color: #fff;
+    border-color: #0d4270;
+  }
+
+  .dap-count {
+    color: #666;
+    font-size: 0.875rem;
+    margin-bottom: 16px;
+  }
+
+  /* 2-col grid at ≥960px */
+  .dap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  @media (max-width: 959px) {
+    .dap-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .dap-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .dap-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 16px 20px;
+    background: #fafafa;
+    height: 100%;
+    box-sizing: border-box;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .dap-card-link:hover .dap-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .dap-card-meta {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+  }
+
+  .dap-card-date {
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+  }
+
+  .dap-card-sep {
+    color: #999;
+  }
+
+  .dap-card-type {
+    color: #555;
+    text-transform: uppercase;
+  }
+
+  .dap-card-title {
+    margin: 0 0 10px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: #0d4270;
+  }
+
+  .dap-card-abstract {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #444;
+    line-height: 1.55;
+  }
+
+  .dap-card-cta {
+    text-align: right;
+    margin-top: 10px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #1976d2;
+  }
+</style>

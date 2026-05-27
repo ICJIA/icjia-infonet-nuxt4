@@ -1,0 +1,76 @@
+---
+// astro/src/components/ReadProgress.astro
+//
+// Port of legacy src/components/ReadProgress.vue (IFVCC pattern).
+// Fixed top progress bar that fills 0→100% as the user scrolls.
+// Alpine data factory `readProgress()` handles scroll tracking.
+// Uses CSS custom property --read-progress to drive bar width via
+// ::after pseudo-element (avoids style recalculation on every frame).
+//
+// Positioned at top: 0 with z-index 51 (above AppNav at z-index 50).
+// prefers-reduced-motion: transition is disabled so bar still tracks
+// scroll position but jumps instantly rather than animating.
+---
+
+<div
+  class="read-progress"
+  role="progressbar"
+  aria-label="Reading progress"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuenow="0"
+  x-data="readProgress()"
+></div>
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    // @ts-ignore
+    window.Alpine.data('readProgress', () => ({
+      pct: 0,
+
+      init() {
+        const update = () => {
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          this.pct = docHeight > 0
+            ? Math.min(100, Math.round((window.scrollY / docHeight) * 100))
+            : 0;
+          // Drive width via CSS custom property to avoid layout thrashing.
+          this.$el.style.setProperty('--read-progress', this.pct + '%');
+          this.$el.setAttribute('aria-valuenow', String(this.pct));
+        };
+
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+      },
+    }));
+  });
+</script>
+
+<style>
+  .read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 51; /* above AppNav (z-index 50) */
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .read-progress::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: var(--read-progress, 0%);
+    background: #1976d2; /* primary blue */
+    transition: width 0.05s linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .read-progress::after {
+      transition: none;
+    }
+  }
+</style>

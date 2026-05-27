@@ -1,0 +1,59 @@
+---
+// astro/src/pages/news/index.astro
+//
+// News listing: uniform 2-column grid of NewsCard components.
+// Sorted by dateOverride ?? createdAt descending. Matches legacy news/index.vue.
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import NewsCard from '~/components/NewsCard.astro';
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_POST_LIST } from '~/lib/queries';
+import { PostListResponseSchema } from '~/lib/schemas';
+
+const raw = await strapiFetch(QUERY_POST_LIST);
+const parsed = PostListResponseSchema.parse(raw);
+
+const displayDate = (p: (typeof parsed.posts.data)[number]) =>
+  p.attributes.dateOverride ?? p.attributes.createdAt ?? null;
+
+const posts = parsed.posts.data.sort(
+  (a, b) => new Date(displayDate(b) ?? 0).getTime() - new Date(displayDate(a) ?? 0).getTime()
+);
+---
+<BaseLayout title="News" breadcrumbTitle="News">
+  <div class="news-page page-container">
+    <h1 class="news-page__heading">News &amp; Updates</h1>
+    <div class="news-page__rule"></div>
+
+    <div class="news-grid">
+      {posts.map((p) => <NewsCard post={p} />)}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .news-page__heading {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    padding: 0;
+    color: #222;
+    border: none;
+  }
+
+  .news-page__rule {
+    border-top: 1px solid #222;
+    margin-bottom: 1.5rem;
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 960px) {
+    .news-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

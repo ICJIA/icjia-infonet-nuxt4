@@ -1,0 +1,65 @@
+---
+// astro/src/pages/search.astro
+//
+// Pagefind UI search page. Pagefind assets are generated during `pnpm build`
+// (pagefind --site dist) and served from /pagefind/. The UI is initialised
+// client-side via is:inline script tags to avoid Vite bundling issues.
+// ?q= deep-link: reads the URL search param and sets the Pagefind input value
+// after the UI registers (~100 ms timeout lets it bind its event listeners).
+//
+// Legacy: app/pages/search.vue used Fuse.js against /api/search endpoint —
+// replaced by Pagefind for static-site full-text search.
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import PageHeader from '~/components/PageHeader.astro';
+---
+<BaseLayout title="Search" breadcrumbTitle="Search">
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+
+  <div class="search-wrapper">
+    <PageHeader title="Search" />
+    <div id="pagefind-ui"></div>
+  </div>
+
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    (function () {
+      new PagefindUI({ element: '#pagefind-ui', showImages: false });
+
+      // ?q= deep-link: pre-fill query from URL params and trigger search.
+      var params = new URLSearchParams(window.location.search);
+      var q = params.get('q');
+      if (q) {
+        // Wait ~100 ms so Pagefind UI can bind its own event listeners first.
+        setTimeout(function () {
+          var input = document.querySelector('#pagefind-ui input[type="text"]');
+          if (input) {
+            input.value = q;
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }, 100);
+      }
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .search-wrapper {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1rem 3rem;
+  }
+
+  /* Override Pagefind UI defaults to blend with site typography */
+  :global(#pagefind-ui .pagefind-ui__search-input) {
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  :global(#pagefind-ui .pagefind-ui__search-clear) {
+    color: #555;
+  }
+
+  :global(#pagefind-ui .pagefind-ui__result-link) {
+    color: var(--color-primary, #2a4d6e);
+  }
+</style>

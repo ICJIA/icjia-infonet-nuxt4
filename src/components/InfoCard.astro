@@ -1,0 +1,162 @@
+---
+// astro/src/components/InfoCard.astro
+//
+// Secondary news card — used for all posts after the first (SplashNews) on
+// the /news/ listing. Smaller image (lazy), title, date, summary, read more.
+//
+// Props: { post: Post } — full Strapi Post entity from schemas.ts
+import CmsImage from '~/components/CmsImage.astro';
+import { formatDate } from '~/lib/dates';
+import type { Post } from '~/lib/schemas';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const attr = post.attributes;
+const href = `/news/${attr.slug}/`;
+
+const displayDate = attr.dateOverride ?? attr.createdAt ?? null;
+const dateStr = formatDate(displayDate, 'short');
+
+// Splash image — nested under data.attributes per Strapi v4 schema.
+const splashAttr = attr.splash?.data?.attributes;
+const splashUrl = splashAttr?.url
+  ? (splashAttr.url.startsWith('http') ? splashAttr.url : `https://infonet.icjia-api.cloud${splashAttr.url}`)
+  : null;
+const splashAlt = splashAttr?.alternativeText?.trim()
+  || splashAttr?.caption?.trim()
+  || (attr.title ? `${attr.title} — image` : 'Article image');
+
+// Truncate summary to ~200 chars.
+function truncate(s: string | null | undefined, max = 200): string {
+  if (!s) return '';
+  const cleaned = s.replace(/\s+/g, ' ').trim();
+  if (cleaned.length <= max) return cleaned;
+  const cut = cleaned.slice(0, max - 3);
+  const sp = cut.lastIndexOf(' ');
+  return cut.slice(0, sp > max * 0.6 ? sp : max - 3) + '…';
+}
+
+const summary = truncate(attr.summary);
+---
+<article class="info-card">
+  <a href={href} class="info-card__link">
+    {dateStr && (
+      <time class="info-card__date" datetime={displayDate ?? undefined}>{dateStr}</time>
+    )}
+    <h2 class="info-card__title">{attr.title ?? '(untitled)'}</h2>
+    {splashUrl && (
+      <CmsImage
+        src={splashUrl}
+        alt={splashAlt}
+        sizes="(min-width: 960px) 33vw, (min-width: 600px) 50vw, 100vw"
+        class="info-card__splash"
+      />
+    )}
+    {summary && (
+      <p class="info-card__summary">{summary}</p>
+    )}
+    <div class="info-card__more-wrap">
+      <span class="info-card__more">
+        Read more
+        <svg class="info-card__more-icon" aria-hidden="true" viewBox="0 0 24 24" width="14" height="14">
+          <path fill="currentColor" d="M10 17l5-5-5-5v10z"/>
+        </svg>
+      </span>
+    </div>
+  </a>
+</article>
+
+<style>
+  /* Legacy v-card outlined: white background, 1px border, 12px padding */
+  .info-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    transition: box-shadow 200ms ease, transform 200ms ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .info-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.01);
+  }
+
+  .info-card__link {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 12px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .info-card__link:focus-visible {
+    outline: 2px solid #0d4270;
+    outline-offset: -2px;
+  }
+
+  .info-card__date {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    margin: 0 0 4px 15px;
+  }
+
+  .info-card__title {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 1.2;
+    margin: -4px 0 12px 15px;
+    color: #0d4270;
+  }
+
+  .info-card__splash {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin: 0 0 16px;
+    border: 1px solid #fafafa;
+  }
+
+  .info-card__summary {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #444;
+    margin: 0 15px 16px;
+    flex: 1 1 auto;
+  }
+
+  .info-card__more-wrap {
+    text-align: right;
+    padding: 0 12px 4px;
+  }
+
+  .info-card__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border: 1px solid #888;
+    border-radius: 2px;
+    color: #555;
+    background: transparent;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    transition: background 150ms ease;
+  }
+  .info-card__link:hover .info-card__more {
+    background: #f0f0f0;
+  }
+
+  .info-card__more-icon {
+    flex: 0 0 auto;
+  }
+</style>

@@ -1,0 +1,116 @@
+---
+// astro/src/components/Breadcrumb.astro
+//
+// Port of legacy app/components/content/TheBreadcrumbBar.vue.
+// Visual spec:
+//   - Background #0d4474 (dark blue)
+//   - Font Roboto, 13px
+//   - Text: "HOME » <CURRENT_PAGE>" (» = U+00BB right double angle quotation mark)
+//   - Truncates derived/passed title to 30 chars with "..."
+//   - Hidden on "/" and paths starting with "/debug"
+//
+// Supports up to 3 breadcrumb levels:
+//   1. HOME (always)
+//   2. breadcrumbTitle  — link when breadcrumbTitleHref is provided, else span
+//   3. breadcrumbCurrent — non-linked tail; only rendered when provided
+//
+// Structural template: IFVCC Breadcrumb.astro (prop-driven `title`, WAI-ARIA <ol> pattern).
+
+interface Props {
+  /** Page title / middle-level label. When omitted the component derives a label from the URL path. */
+  title?: string;
+  /** Optional href for the middle-level entry (turns it into a link). */
+  breadcrumbTitleHref?: string;
+  /** Optional third-level label (current page, not a link). Truncated to 30 chars. */
+  breadcrumbCurrent?: string | null;
+}
+
+const { title, breadcrumbTitleHref, breadcrumbCurrent } = Astro.props;
+
+const pathname = Astro.url.pathname;
+
+// Hide on home and debug routes (exact legacy rule from app.vue watchEffect).
+const isHome  = pathname === '/';
+const isDebug = pathname === '/debug' || pathname.startsWith('/debug/');
+const hidden  = isHome || isDebug;
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+/** Convert a URL path segment like "/my-page/sub-page" into "My Page Sub Page". */
+function pathToTitle(path: string): string {
+  // Strip leading slash, then split on slashes.
+  const slug = path.replace(/^\/+/, '').replace(/\/+$/, '');
+  if (!slug) return '';
+  // Take only the last segment (deepest path component) to mirror legacy behaviour.
+  const lastSegment = slug.split('/').pop() ?? slug;
+  // Convert kebab/underscore to space and title-case each word.
+  return lastSegment
+    .replace(/[-_]/g, ' ')
+    .replace(/\w\S*/g, (w) => w.charAt(0).toUpperCase() + w.slice(1));
+}
+
+/** Truncate to `num` chars with "..." — matches legacy truncateString(str, 30). */
+function truncate(str: string, num = 30): string {
+  if (str.length <= num) return str;
+  return str.slice(0, num) + '...';
+}
+
+// When breadcrumbCurrent is provided: middle level is the section (not current page).
+// When not provided: middle level IS the current page (2-level breadcrumb).
+const middleLabel = truncate(title ?? pathToTitle(pathname));
+const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
+---
+
+{!hidden && (
+  <nav
+    aria-label="Breadcrumb"
+    style="background:#0d4474;border-bottom:1px solid #aaa;font-size:13px;font-family:'Roboto',sans-serif;z-index:99999;"
+    class="text-left pr-5 pl-5 py-1"
+  >
+    <ol
+      style="margin:0;padding:0;list-style:none;display:flex;align-items:center;flex-wrap:wrap;"
+    >
+      {/* Level 1: HOME */}
+      <li>
+        <a
+          href="/"
+          style="color:#fff;font-family:'Roboto',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
+          aria-label="Home"
+        >HOME</a>
+      </li>
+      <li aria-hidden="true" style="color:#fff;font-weight:900;margin:0 6px;">
+        &raquo;
+      </li>
+
+      {/* Level 2: section / page title */}
+      <li>
+        {breadcrumbTitleHref && currentLabel ? (
+          <a
+            href={breadcrumbTitleHref}
+            style="color:#fff;font-family:'Roboto',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
+          >{middleLabel}</a>
+        ) : (
+          <span
+            aria-current={currentLabel ? undefined : 'page'}
+            style="color:#fff;font-weight:400;text-transform:uppercase;"
+          >{middleLabel}</span>
+        )}
+      </li>
+
+      {/* Level 3: current page (optional) */}
+      {currentLabel && (
+        <>
+          <li aria-hidden="true" style="color:#fff;font-weight:900;margin:0 6px;">
+            &raquo;
+          </li>
+          <li>
+            <span
+              aria-current="page"
+              style="color:#fff;font-weight:400;text-transform:uppercase;"
+            >{currentLabel}</span>
+          </li>
+        </>
+      )}
+    </ol>
+  </nav>
+)}

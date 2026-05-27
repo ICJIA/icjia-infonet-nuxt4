@@ -1,0 +1,88 @@
+---
+// astro/src/pages/tabs/[...slug].astro
+//
+// Strapi "tabs" catch-all — generates one static route per CMS tab.
+// Tabs are sub-pages within DV, SA, and CAC sections (the sectionID field
+// identifies which section each tab belongs to).
+//
+// QUERY_TAB_LIST (added in Phase 3 queries.ts) fetches all tab slugs
+// for build-time static path generation.
+// Phase 7: MDC detection wired for completeness (tab bodies are unlikely to
+// contain top-level MDC refs, but handled consistently).
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import DvAwarenessMonth from '~/components/mdc/DvAwarenessMonth.astro';
+import Partners from '~/components/mdc/Partners.astro';
+import TabsScreenshotsAccessible from '~/components/mdc/TabsScreenshotsAccessible.astro';
+import TabsUserInfoAccessible from '~/components/mdc/TabsUserInfoAccessible.astro';
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_TAB_LIST } from '~/lib/queries';
+import { TabListResponseSchema } from '~/lib/schemas';
+import { renderMarkdown } from '~/lib/markdown';
+
+export async function getStaticPaths() {
+  const raw = await strapiFetch(QUERY_TAB_LIST);
+  const parsed = TabListResponseSchema.parse(raw);
+
+  // Filter out tabs with null/undefined slugs — they cannot be routed.
+  return parsed.tabs.data
+    .filter((tab) => Boolean(tab.attributes.slug))
+    .map((tab) => ({
+      params: { slug: tab.attributes.slug! },
+      props: { tab },
+    }));
+}
+
+const { tab } = Astro.props;
+const attr = tab.attributes;
+
+const { html, mdcRefs } = renderMarkdown(attr.body);
+
+const description = attr.summary ?? attr.title ?? '';
+---
+<BaseLayout
+  title={attr.title ?? 'Tab'}
+  description={description}
+  breadcrumbTitle={attr.title ?? undefined}
+>
+  <article class="tab-detail">
+    {attr.sectionID && (
+      <p class="tab-section-label" aria-label="Section">
+        {attr.sectionID.toUpperCase()}
+      </p>
+    )}
+    <h1>{attr.title}</h1>
+    {html && <div class="markdown-body" set:html={html}></div>}
+    {mdcRefs.map(ref => (
+      ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+      ref.name === 'Partners' ? <Partners /> :
+      ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
+      ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
+      null
+    ))}
+  </article>
+</BaseLayout>
+
+<style>
+  .tab-detail {
+    max-width: 800px;
+    padding: 0 1rem 3rem;
+  }
+
+  .tab-section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  .tab-detail h1 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 900;
+    line-height: 1.2;
+    color: #0d4270;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+  }
+</style>

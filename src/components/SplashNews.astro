@@ -1,0 +1,185 @@
+---
+// astro/src/components/SplashNews.astro
+//
+// Featured news card — renders the most recent post prominently at the top
+// of the /news/ listing. Large image (eager loading), big title, summary,
+// "Read more →" link.
+//
+// If no splash image is available, renders a text-only featured card.
+//
+// Props: { post: Post } — full Strapi Post entity from schemas.ts
+import CmsImage from '~/components/CmsImage.astro';
+import { formatDate } from '~/lib/dates';
+import type { Post } from '~/lib/schemas';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const attr = post.attributes;
+const href = `/news/${attr.slug}/`;
+
+const displayDate = attr.dateOverride ?? attr.createdAt ?? null;
+const dateStr = formatDate(displayDate, 'long');
+
+// Splash image — nested under data.attributes per Strapi v4 schema.
+const splashAttr = attr.splash?.data?.attributes;
+const splashUrl = splashAttr?.url
+  ? (splashAttr.url.startsWith('http') ? splashAttr.url : `https://infonet.icjia-api.cloud${splashAttr.url}`)
+  : null;
+const splashAlt = splashAttr?.alternativeText?.trim()
+  || splashAttr?.caption?.trim()
+  || (attr.title ? `${attr.title} — feature image` : 'Feature image');
+
+// Truncate summary to ~280 chars for the splash card.
+function truncate(s: string | null | undefined, max = 280): string {
+  if (!s) return '';
+  const cleaned = s.replace(/\s+/g, ' ').trim();
+  if (cleaned.length <= max) return cleaned;
+  const cut = cleaned.slice(0, max - 3);
+  const sp = cut.lastIndexOf(' ');
+  return cut.slice(0, sp > max * 0.6 ? sp : max - 3) + '…';
+}
+
+const summary = truncate(attr.summary);
+---
+<article class="splash-news">
+  {splashUrl && (
+    <div class="splash-news__image-wrap">
+      <a href={href} tabindex="-1" aria-hidden="true">
+        <CmsImage
+          src={splashUrl}
+          alt={splashAlt}
+          loading="eager"
+          fetchpriority="high"
+          sizes="(min-width: 1264px) 700px, (min-width: 768px) 50vw, 100vw"
+          class="splash-news__img"
+        />
+      </a>
+    </div>
+  )}
+  <div class="splash-news__content">
+    {dateStr && (
+      <time class="splash-news__date" datetime={displayDate ?? undefined}>{dateStr}</time>
+    )}
+    <h2 class="splash-news__title">
+      <a href={href}>{attr.title ?? '(untitled)'}</a>
+    </h2>
+    {summary && (
+      <p class="splash-news__summary">{summary}</p>
+    )}
+    <a href={href} class="splash-news__cta">
+      Read more <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .splash-news {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 32px;
+    overflow: hidden;
+    transition: box-shadow 200ms ease;
+  }
+  .splash-news:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+  @media (min-width: 768px) {
+    .splash-news {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .splash-news__image-wrap {
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+  .splash-news__img {
+    display: block;
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    transition: transform 300ms ease;
+  }
+  @media (min-width: 768px) {
+    .splash-news__img {
+      height: 100%;
+      min-height: 260px;
+      max-height: 400px;
+    }
+  }
+  .splash-news__image-wrap:hover .splash-news__img {
+    transform: scale(1.02);
+  }
+
+  .splash-news__content {
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .splash-news__date {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .splash-news__title {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    line-height: 1.2;
+    color: #0d4270;
+    margin: 0 0 12px;
+    text-transform: uppercase;
+  }
+  .splash-news__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .splash-news__title a:hover {
+    text-decoration: underline;
+  }
+
+  .splash-news__summary {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: #333;
+    margin: 0 0 16px;
+    flex: 1 1 auto;
+  }
+
+  .splash-news__cta {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    border: 2px solid #0d4270;
+    border-radius: 2px;
+    color: #0d4270;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: background 150ms ease, color 150ms ease;
+  }
+  .splash-news__cta:hover {
+    background: #0d4270;
+    color: #fff;
+  }
+  .splash-news__cta:focus-visible {
+    outline: 2px solid #0d4270;
+    outline-offset: 2px;
+  }
+</style>

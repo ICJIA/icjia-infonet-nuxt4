@@ -1,0 +1,151 @@
+---
+// astro/src/components/Toc.astro
+//
+// Table of contents with IntersectionObserver scroll-spy.
+// Accepts `headings: Heading[]` from ~/lib/markdown (extracted at
+// build time by renderMarkdown). Alpine.js data factory `toc()` tracks
+// which heading is currently visible and marks the matching TOC link
+// with aria-current="location".
+//
+// Scroll-spy uses the v2.3.9 fix (commit 5fc29d0): rootMargin of
+// "-100px 0px -50% 0px" triggers on the upper half of the viewport so
+// the active item updates before the heading scrolls out of view.
+//
+// Only h2–h4 headings are shown (h1 is the page title).
+// TOC is hidden entirely when there are fewer than 2 visible headings.
+
+import type { Heading } from '~/lib/markdown';
+
+interface Props {
+  headings: Heading[];
+  /** Heading shown above the TOC. Defaults to "On this page". */
+  tocHeading?: string;
+}
+
+const { headings, tocHeading = 'On this page' } = Astro.props;
+
+// Only show h2–h4; skip h1 (page title) and h5/h6 (too deep).
+const visibleHeadings = headings.filter((h) => h.level >= 2 && h.level <= 4);
+---
+
+{visibleHeadings.length >= 2 && (
+  <nav
+    class="toc"
+    aria-labelledby="toc-heading"
+    x-data="toc()"
+  >
+    <h2 id="toc-heading" class="toc__heading">{tocHeading}</h2>
+    <ol class="toc__list">
+      {visibleHeadings.map((h) => (
+        <li class={`toc__item toc__item--h${h.level}`}>
+          <a
+            href={`#${h.id}`}
+            class="toc__link"
+            data-toc-target={h.id}
+            x-bind:aria-current={`current === '${h.id}' ? 'location' : null`}
+            x-bind:class={`current === '${h.id}' ? 'toc__link toc__link--active' : 'toc__link'`}
+          >
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<script>
+  document.addEventListener('alpine:init', () => {
+    // @ts-ignore
+    window.Alpine.data('toc', () => ({
+      current: '',
+
+      init() {
+        // Observe all heading elements within <main> that have an id.
+        const headings = Array.from(
+          document.querySelectorAll('main h2[id], main h3[id], main h4[id]'),
+        );
+        if (!headings.length) return;
+
+        // v2.3.9 fix (commit 5fc29d0):
+        // rootMargin "-100px 0px -50% 0px" means an entry is "intersecting"
+        // only while it is in the upper ~50% of the viewport (below 100px
+        // from the top). When the user scrolls down past a heading, it
+        // leaves the intersection zone and the next heading enters — which
+        // correctly advances the active TOC item.
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visible = entries.filter((e) => e.isIntersecting);
+            if (visible.length > 0) {
+              this.current = visible[0].target.id;
+            }
+          },
+          { rootMargin: '-100px 0px -50% 0px', threshold: 0 },
+        );
+
+        headings.forEach((h) => observer.observe(h));
+      },
+    }));
+  });
+</script>
+
+<style>
+  .toc {
+    margin: 0 0 24px;
+    padding: 16px 20px;
+    background: #f5f5f5;
+    border-left: 4px solid #0d4270;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .toc__heading {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: #0a3050;
+    margin: 0 0 12px;
+    letter-spacing: 0.04em;
+    border: none;
+  }
+
+  .toc__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .toc__item {
+    margin: 4px 0;
+  }
+
+  .toc__item--h3 {
+    margin-left: 16px;
+    font-size: 0.9rem;
+  }
+
+  .toc__item--h4 {
+    margin-left: 32px;
+    font-size: 0.875rem;
+  }
+
+  .toc__link {
+    color: #0a3050;
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+
+  .toc__link:hover {
+    color: #0d4270;
+    text-decoration: underline;
+  }
+
+  .toc__link:focus-visible {
+    outline: 2px solid #0d4270;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .toc__link--active {
+    font-weight: 700;
+    color: #0d4270;
+  }
+</style>

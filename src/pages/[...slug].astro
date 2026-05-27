@@ -1,0 +1,134 @@
+---
+// astro/src/pages/[...slug].astro
+//
+// Strapi "pages" catch-all — generates one static route per CMS page whose
+// slug is NOT in siteConfig.reservedSlugs.
+//
+// reservedSlugs prevents this catch-all from generating a route that collides
+// with a dedicated static route already registered in Wave A:
+//   /, /news/, /faqs/, /contact/, /translate/, /search/, /debug/,
+//   /data-and-publications/, /meetings/, /tabs/
+//
+// Phase 5b may add a TOC sidebar for pages with showTableOfContents: true.
+// Phase 7: MDC component detection — renders DvAwarenessMonth/Partners/Tabs
+//           components when body is a bare MDC reference.
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Toc from '~/components/Toc.astro';
+import DvAwarenessMonth from '~/components/mdc/DvAwarenessMonth.astro';
+import Partners from '~/components/mdc/Partners.astro';
+import TabsScreenshotsAccessible from '~/components/mdc/TabsScreenshotsAccessible.astro';
+import TabsUserInfoAccessible from '~/components/mdc/TabsUserInfoAccessible.astro';
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_PAGE_LIST } from '~/lib/queries';
+import { PageListResponseSchema } from '~/lib/schemas';
+import { renderMarkdown, splitMdcPlaceholders } from '~/lib/markdown';
+import { siteConfig } from '~/lib/siteConfig';
+
+export async function getStaticPaths() {
+  const raw = await strapiFetch(QUERY_PAGE_LIST);
+  const parsed = PageListResponseSchema.parse(raw);
+
+  // Filter out slugs that are handled by dedicated static routes.
+  return parsed.pages.data
+    .filter((page) => !siteConfig.reservedSlugs.includes(page.attributes.slug))
+    .map((page) => ({
+      params: { slug: page.attributes.slug },
+      props: { page },
+    }));
+}
+
+const { page } = Astro.props;
+const attr = page.attributes;
+
+const { html, headings, mdcRefs } = renderMarkdown(attr.body);
+const segments = splitMdcPlaceholders(html);
+
+const description = attr.summary ?? attr.title ?? '';
+
+// Breadcrumb label: slug-based (uppercase slug, not full page title).
+// e.g. /about/ → "ABOUT", /partners/ → "PARTNERS" — matches legacy behaviour.
+const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
+---
+<BaseLayout
+  title={attr.title ?? 'Page'}
+  description={description}
+  breadcrumbTitle={breadcrumbLabel || (attr.title ?? undefined)}
+>
+  <article class="page-detail">
+    <h1 class="page-h1">{attr.title?.toUpperCase()}</h1>
+    {segments.length > 0 ? (
+      <div class="markdown-body">
+        {segments.map(seg => {
+          if ('html' in seg) return <Fragment set:html={seg.html} />;
+          const ref = mdcRefs[seg.refIndex];
+          if (!ref) return null;
+          return (
+            ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+            ref.name === 'Partners' ? <Partners /> :
+            ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
+            ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
+            null
+          );
+        })}
+      </div>
+    ) : (
+      mdcRefs.map(ref => (
+        ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+        ref.name === 'Partners' ? <Partners /> :
+        ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
+        ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
+        null
+      ))
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .page-detail {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem 3rem;
+  }
+
+  /* h1: dark text (not brand blue), uppercase, with hairline separator below */
+  .page-h1 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 900;
+    line-height: 1.2;
+    color: #222;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    /* No underline on h1 per legacy — only h2 section headings have hairlines */
+  }
+
+  /* Two-column layout at desktop: article ~70%, Toc sidebar ~30% */
+  .page-content-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 1rem;
+  }
+
+  .page-content-body {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .page-toc-sidebar {
+    flex: 0 0 260px;
+    position: sticky;
+    top: 170px;
+  }
+
+  @media (max-width: 768px) {
+    .page-content-layout {
+      flex-direction: column;
+    }
+
+    .page-toc-sidebar {
+      flex: none;
+      position: static;
+      width: 100%;
+    }
+  }
+</style>

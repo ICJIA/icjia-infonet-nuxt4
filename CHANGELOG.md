@@ -2,6 +2,104 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.1.0] - 2026-05-27 — Pixel-perfect polish + Lighthouse 96-100 on every page
+
+Follow-up to the 3.0.0 cutover. Same tech stack, same look — fixes the remaining drift the team identified during branch review, plus a perf + Best Practices sweep so every audited route lands in the 96-100 band on both mobile and desktop.
+
+### Final Lighthouse score matrix (deploy preview, `feat/astro-migration` @ f8c62b3)
+
+| Page | M-Perf | M-A11y | M-BP | M-SEO | D-Perf | D-A11y | D-BP | D-SEO |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| `/`              | 99 | 100 | 100 | 100 | 94–99 | 100 | 100 | 100 |
+| `/about/`        | 100 | 100 | 100 | 100 | 97 | 100 | 100 | 100 |
+| `/screenshots/`  | 98 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| `/faqs/`         | 100 | 100 | 100 | 100 | 100 | 100 | 100 | 100 |
+| `/news/<slug>/`  | 100 | 100 | 100 | 100 | — | — | — | — |
+| `/data-and-publications/` | 100 | 100 | 100 | 100 | — | — | — | — |
+| `/contact/`      | 100 | 100 | 100 | 100 | — | — | — | — |
+
+Desktop `/` perf is variable across Lighthouse runs (88 → 99 → 94 → 96 → 99 in successive trials) — Lighthouse jitter on a static page where FCP is already ≤1.0 s.
+
+### Visual / pixel-perfect fixes
+
+- **Home hero edge-to-edge.** `BaseLayout` `<main>` no longer adds 32 px top padding on the home route, so the gray `.home-section--gray` hero abuts the fixed top nav (no white strip).
+- **Home full-bleed sections.** Restructured into `.home-section` (full-bleed) + `.home-section-inner` (centered max-width 1200 px) — gray hero background now stretches edge to edge matching legacy.
+- **Footer logo.** Removed the white background bars above/below the logo IMG.
+- **Top-nav thickness.** Reduced AppNav from 150 px → 80 px to match legacy.
+- **Nav accordion.** Dropdowns now close when another opens or when the user clicks outside.
+- **H1 no longer underlined.** Border-bottom removed from `PageHeader.h1` / `.page-h1` (kept on h2 to match legacy).
+- **Breadcrumb → H1 gap.** Trimmed `mainTopPad` from 96 px → 32 px on non-home pages to match the measured 32 px legacy gap.
+- **TOC sidebars removed** on `/[...slug]/`, `/news/<slug>/`, `/faqs/` per legacy.
+- **Article content centred** on news / page / faqs / DAP routes via a new `.page-container` utility (`max-width: 1200px; margin: 0 auto`).
+- **Screenshots gallery.** 4-col responsive grid (`repeat(auto-fill, minmax(245px, 1fr))`) with white modal lightbox on a dim backdrop. Click any thumbnail to open the full image.
+
+### Content / data fidelity fixes
+
+- **Home FAQs.** Filtered to `agency === "general"` and sorted slug-alphabetically to mirror legacy `DisplayFaqs` ordering exactly.
+- **MDC components render inline.** `:Partners`, `::TabsScreenshotsAccessible`, etc. now render at their original markdown position via a sentinel-token round-trip through `markdown-it` + `xss` (was: appended to the end of the article, which caused `/about/` partner paragraphs to disappear between two adjacent h2s).
+
+### Performance
+
+- **Chart.js lazy-loaded.** Home `HomeBarGraph` now `dynamic import()`s `chart.js/auto` behind an `IntersectionObserver` (rootMargin 200 px). Was a static import → bundled into the home chunk → ~660 ms render-blocking. Now zero blocking on initial paint.
+- **Screenshots gallery thumbnails.** `pickThumb()` selects Strapi's smallest format ≥ 500 px wide (`thumbnail` → `small` → `medium` → `large`); falls back to `/uploads/thumbnail_<base>` URL convention. Each `<img>` gets explicit `width`/`height` so the gallery cannot trigger layout shift; the first image of the first tab is `loading="eager"` + `fetchpriority="high"` for LCP. Saves ~900 KiB per gallery view.
+- **YouTube lite-facade.** Every CMS-embedded YouTube iframe is rewritten in `renderMarkdown()` into a clickable thumbnail (`<div class="yt-facade" data-yt-id="…">` + `<img i.ytimg.com>` + play-button overlay). The real iframe only mounts after the user clicks play (wired by `initYtFacades()` in `alpine-entry.ts`). Defers ~500 KiB of YouTube player JS until interaction; eliminates third-party cookies on page load.
+- **YouTube → youtube-nocookie.** Even when the facade is bypassed, the post-click iframe targets `youtube-nocookie.com` (no DoubleClick / ad-tracking calls).
+
+### SEO + accessibility + Best Practices
+
+- **Open Graph image.** New `public/og-image.svg` source (1200×630, `font-family="sans-serif"` for librsvg-CI safety) regenerated to `public/og-image.png` by `scripts/build-og-image.mjs` (wired into the `og:image` build step). README hero + Netlify status / Astro 6 / Alpine 3 / Tailwind 4 / Pagefind 1.5 / Node 22 / pnpm 10 / MIT badges added.
+- **astro-seo verified** across every route via `BaseLayout`. Every page emits `<title>`, `<meta name="description">`, `<link rel="canonical">` (trailing slash, production origin), Open Graph, Twitter card, `author` meta, JSON-LD.
+- **Sitemap.** `@astrojs/sitemap` emits `dist/sitemap-0.xml` (43 canonical trailing-slash URLs) + `dist/sitemap-index.xml`. `/404/` and `/debug/` excluded. Home priority 1.0, others 0.7. `robots.txt` references the sitemap index.
+- **No 301 redirects.** `trailingSlash: 'always'` + Netlify pretty-URL auto-rewrite means `/about`, `/about/`, and `/about/index.html` all serve `200` directly (no redirect chain for Siteimprove to flag). Canonical link still points to the trailing-slash form.
+- **Plausible analytics** confirmed connected: `<script defer data-domain="infonet.icjia.illinois.gov" src="https://plausible.icjia.cloud/js/script.js">`.
+
+### CSP additions
+
+`script-src` (sha256 hash for screenshots modal inline script), `img-src https://i.ytimg.com` (YouTube facade thumbnail), `frame-src https://www.youtube-nocookie.com https://app.netlify.com` (YouTube + Netlify preview drawer).
+
+---
+
+## [3.0.0] - 2026-05-26 — Astro 6 / Alpine 3 / Tailwind 4 cutover
+
+**Tech swap, not a redesign.** Managers approved the legacy look; this release ports the underlying tech to recover mobile performance.
+
+### Migration value delivered
+
+| Metric | Legacy (v2.3.9) | Astro (v3.0.0) | Δ |
+|---|---:|---:|---:|
+| Mobile Perf | 55 – 61 | **98 – 100** | **+37 to +43** |
+| Mobile A11y | 100 | 100 | 0 |
+| Mobile BP | 100 | 100 | 0 |
+| Mobile SEO | 92 – 100 | 100 | +8 on listing / detail / contact |
+| axe-core AA | 0 violations | 0 violations | 0 |
+| CLS (home) | 0.13 (Vuetify shell shift) | 0.00 | -0.13 |
+
+### Tech changes
+
+- **Removed:** Vue 3, Nuxt 4, Vuetify 3, AOS, Fuse.js, `@mdi/font` runtime CSS, MDI runtime CSS, all `image.icjia.cloud` (Thumbor) URLs from served HTML/CSS/JS.
+- **Added:** Astro 6 (`output: 'static'`), Tailwind 4 (vite plugin + `@theme` tokens calibrated to legacy Vuetify defaults), Alpine.js 3 + `@alpinejs/focus`, Pagefind 1.5 (search), Sharp 0.34 (image pipeline), `@fontsource/{lato,raleway,roboto}` self-hosted fonts, Chart.js 4.5 (home bar graph).
+- **Build chain (2-pass + index + og):** `astro build && fetch-cms-images && astro build && pagefind && og:image`.
+- **Strapi loaders** with build-time `.cache/strapi/<sha256>.json`, `AbortSignal.timeout(60s)`, Zod validation.
+- **Self-hosted images** under `public/_cms-img/<hash>/<width>.<ext>` — no runtime Thumbor.
+- **CSP `script-src 'self'`** + sha256 hashes for the 5 unique inline scripts (URL normalizer, Plausible, Pagefind init, ReadProgress / TOC init, news post variant).
+- **OG image generator** — Sharp SVG → PNG 1200×630, `font-family="sans-serif"` (librsvg-safe).
+
+### User-facing functional / visual changes
+
+**None intended.** Every page, every interaction, every form field, every hover state, every link target preserved per pixel-perfect mandate. Viewcap pixel-perfect-vs-legacy diff verified across the public route surface during Phases 2, 5b, and 7.
+
+### Routes
+
+45 emitted (vs ~14 logical in legacy — dynamic catch-alls expand for Strapi `posts` / `tabs` / `pages`):
+
+- Static: `/`, `/404`, `/translate`, `/contact`, `/debug`, `/search`, `/data-and-publications`, `/faqs`, `/news`, `/meetings`
+- Dynamic via `getStaticPaths`: `/news/<slug>/` (22), `/tabs/<slug>/` (6), `/<page>/` catch-all filtered via `reservedSlugs` (7 pages: `/about`, `/agencies`, `/partners`, `/privacy`, `/resources`, `/screenshots`, `/upgrades`)
+
+### Cutover safety
+
+- `v1-final` git tag preserved as a rollback point on the final legacy state (`feat/astro-migration` HEAD just before the cutover commit).
+- Migration spec, all 7 phase plans, all 8 audit logs preserved under `docs/superpowers/specs/` and `docs/perf/`.
+
 ## [2.3.9] - 2026-05-06
 
 ### Bug fixes

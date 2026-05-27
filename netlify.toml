@@ -1,11 +1,35 @@
+# netlify.toml
+#
+# Post-cutover (v3.0.0): production builds the Astro 6 / Alpine 3 / Tailwind 4
+# site from the repo root. The legacy Nuxt 4 source has been removed.
+
+[build]
+  base = "."
+  command = "pnpm build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22.22.2"
+  PNPM_VERSION = "10.33.0"
+
+# --- Headers ---
+
 [[headers]]
   for = "/*"
   [headers.values]
-   ## X-Frame-Options = "SAMEORIGIN"
-   ## X-XSS-Protection = "1; mode=block"
-  ##  Referrer-Policy = "no-referrer"
-  ##  X-Content-Type-Options = "nosniff"
-   
     Access-Control-Allow-Origin = "*"
     X-Greeting = "Hello from Chicago!"
-   
+    # CSP — see scripts/csp-hashes.mjs. Re-run after any inline-script change.
+    # Inline scripts: URL normalizer (BaseLayout), Plausible, Pagefind init,
+    # ReadProgress / TOC init, news post variant.
+    #
+    # 'unsafe-eval' is required by Alpine.js 3 — it uses runtime eval() to
+    # evaluate x-show / x-data / x-on directives. Without it, every Alpine
+    # expression fails and reactive components (drawer, dropdowns, filters)
+    # stay in their initial DOM state. Legacy Nuxt+Vue also requires runtime
+    # eval (Vue template compilation), so this matches legacy security
+    # posture. Future hardening: migrate to @alpinejs/csp build that
+    # pre-compiles expressions; requires per-directive refactor.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'sha256-0GEXQXbX4Ty5Tg6K7e8GdROTUXHbFOL/QU8sxXcM9Ic=' 'sha256-4IFvRuHeqInbPM4aN98R5iYEMAHUtmzb/C7EtynuMKU=' 'sha256-GvWUUdHUwmNl2+Rf2qXqwukwz938FFUXs/+KgJvHH2Q=' 'sha256-TETLPxwYreIF/Skse4Fss+ckYiL1JK4qabttEwV56tc=' 'sha256-bmb2y0bUGL0Hm0OYO1Tr75036AzQt1CVprLk0KxYjNI=' 'sha256-mGhkZOJ2G63NJ6hKuOJod9nrWFUveMlI5snsLCwyrPk=' https://plausible.icjia.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://infonet.icjia-api.cloud https://i.ytimg.com; connect-src 'self' https://plausible.icjia.cloud https://infonet.icjia-api.cloud; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://app.netlify.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://mail.icjia.cloud"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "cross-origin"

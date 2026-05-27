@@ -1,0 +1,100 @@
+---
+// astro/src/components/HomePosts.astro
+//
+// Home page "News & Updates" section.
+// Port of the news section in legacy app/pages/index.vue.
+//
+// Fetches the 3 most recent posts (by dateOverride ?? createdAt desc) and
+// renders them using the shared NewsCard component. Matches legacy behavior:
+// no separate "Read more" button — the entire card is the link.
+//
+// Section header: h2 "News & Updates" + right-aligned "All News »" button.
+// Hairline border-top below header row.
+import NewsCard from '~/components/NewsCard.astro';
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_POST_LIST } from '~/lib/queries';
+import { PostListResponseSchema } from '~/lib/schemas';
+
+const raw = await strapiFetch(QUERY_POST_LIST);
+const parsed = PostListResponseSchema.parse(raw);
+
+const displayDate = (p: (typeof parsed.posts.data)[number]) =>
+  p.attributes.dateOverride ?? p.attributes.createdAt ?? null;
+
+const posts = parsed.posts.data
+  .sort(
+    (a, b) =>
+      new Date(displayDate(b) ?? 0).getTime() -
+      new Date(displayDate(a) ?? 0).getTime(),
+  )
+  .slice(0, 2);  // legacy app/pages/index.vue: const limit = ref(2)
+---
+
+<section class="home-posts">
+  <div class="home-posts__header">
+    <h2 class="home-posts__heading">News &amp; Updates</h2>
+    <a href="/news/" class="home-posts__all-btn" aria-label="All News &amp; Updates">
+      All News&nbsp;&raquo;
+    </a>
+  </div>
+  <div class="home-posts__rule"></div>
+
+  <div class="home-posts__list">
+    {posts.map((post) => <NewsCard post={post} />)}
+  </div>
+</section>
+
+<style>
+  .home-posts {
+    margin-bottom: 2rem;
+  }
+
+  .home-posts__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0;
+  }
+
+  .home-posts__heading {
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .home-posts__all-btn {
+    display: inline-block;
+    background: #0D4474;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    text-decoration: none;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-bottom: 4px;
+  }
+
+  .home-posts__all-btn:hover,
+  .home-posts__all-btn:focus {
+    background: #0a3560;
+    text-decoration: none;
+  }
+
+  .home-posts__rule {
+    border-top: 1px solid #222;
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+
+  .home-posts__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+</style>

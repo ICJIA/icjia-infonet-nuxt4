@@ -1,0 +1,526 @@
+---
+// src/components/mdc/TabsScreenshotsAccessible.astro
+//
+// Ported from v1-final app/components/content/TabsScreenshotsAccessible.vue.
+// Renders accessible tabs (ARIA tablist pattern + Alpine.js for state/keyboard nav)
+// for screenshots sections. Fetches tabs filtered by sectionID at build time,
+// renders images from Strapi CDN.
+//
+// Props:
+//   sectionID — filters which tabs to display (e.g., "screenshots")
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_TAB_LIST_BY_SECTION } from '~/lib/queries';
+import { TabListBySectionResponseSchema } from '~/lib/schemas';
+import { renderMarkdown } from '~/lib/markdown';
+
+interface Props {
+  sectionID: string;
+}
+
+const { sectionID = 'screenshots' } = Astro.props;
+
+const STRAPI_BASE = 'https://infonet.icjia-api.cloud';
+
+const raw = await strapiFetch(QUERY_TAB_LIST_BY_SECTION, { sectionID });
+const parsed = TabListBySectionResponseSchema.parse(raw);
+const tabs = parsed.tabs.data;
+
+// Sort images by filename (matches legacy sortImagesByFilename).
+type TabImageData = NonNullable<NonNullable<typeof tabs[0]['attributes']['images']>['data']>;
+function sortByFilename(images: TabImageData | null | undefined): TabImageData {
+  if (!images) return [];
+  return [...images].sort((a, b) => {
+    const an = a.attributes?.name ?? '';
+    const bn = b.attributes?.name ?? '';
+    return an < bn ? -1 : an > bn ? 1 : 0;
+  });
+}
+
+// Pick the smallest Strapi-generated format ≥ thumbWidthPx so we don't ship
+// the full-resolution master (saves ~900 KiB on the screenshots gallery).
+// Strapi `formats` shape: { thumbnail|small|medium|large: { url, width, height } }
+// Fallback: Strapi also exposes every image at /uploads/thumbnail_<basename>
+// (the "_thumbnail" convention) — we use it when the formats blob is missing.
+type StrapiFormat = { url?: string; width?: number; height?: number };
+function thumbnailPrefixUrl(fullUrl: string): string {
+  const idx = fullUrl.lastIndexOf('/');
+  if (idx < 0) return fullUrl;
+  return fullUrl.slice(0, idx + 1) + 'thumbnail_' + fullUrl.slice(idx + 1);
+}
+function pickThumb(
+  formats: unknown,
+  fullUrl: string,
+  fullW: number | null | undefined,
+  fullH: number | null | undefined,
+  thumbWidthPx = 500,
+): { url: string; width: number; height: number } {
+  const fallbackW = fullW ?? 800;
+  const fallbackH = fullH ?? 480;
+  if (formats && typeof formats === 'object') {
+    const order = ['thumbnail', 'small', 'medium', 'large'] as const;
+    const byName = formats as Record<string, StrapiFormat>;
+    let best: StrapiFormat | null = null;
+    for (const key of order) {
+      const f = byName[key];
+      if (!f || !f.url || !f.width) continue;
+      if (f.width >= thumbWidthPx) { best = f; break; }
+      best = f;
+    }
+    if (best && best.url && best.width && best.height) {
+      return { url: best.url, width: best.width, height: best.height };
+    }
+  }
+  // Construct Strapi's thumbnail_ URL — preserves aspect ratio, max 245px.
+  const scale = Math.min(1, 245 / fallbackW);
+  return {
+    url: thumbnailPrefixUrl(fullUrl),
+    width: Math.round(fallbackW * scale),
+    height: Math.round(fallbackH * scale),
+  };
+}
+
+// Rendered markdown per tab.
+const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
+---
+
+{tabs.length === 0 ? (
+  <p class="ts-no-tabs">No screenshots available for section "{sectionID}".</p>
+) : (
+  <div
+    class="ts-wrapper"
+    x-data={`{
+      activeTab: 0,
+      setTab(i) {
+        this.activeTab = i;
+        this.$nextTick(() => {
+          const btn = this.$el.querySelector('[role=tab][data-index="' + i + '"]');
+          if (btn) btn.focus();
+        });
+      },
+      handleKey(e, i) {
+        const total = ${tabs.length};
+        let next = i;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp')  { e.preventDefault(); next = i > 0 ? i - 1 : total - 1; }
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); next = i < total - 1 ? i + 1 : 0; }
+        if (e.key === 'Home') { e.preventDefault(); next = 0; }
+        if (e.key === 'End')  { e.preventDefault(); next = total - 1; }
+        if (next !== i) this.setTab(next);
+      }
+    }`}
+  >
+    <p class="ts-hint">Click tab to view agency info.</p>
+
+    <div class="ts-card">
+      <!-- Tab list -->
+      <div role="tablist" class="ts-tablist" aria-label="Agency screenshots">
+        {tabs.map((tab, i) => (
+          <button
+            role="tab"
+            class="ts-tab"
+            :class={`{ 'ts-tab--active': activeTab === ${i} }`}
+            :aria-selected={`activeTab === ${i}`}
+            :tabindex={`activeTab === ${i} ? 0 : -1`}
+            :id={`'ts-tab-' + ${i}`}
+            :aria-controls={`'ts-panel-' + ${i}`}
+            data-index={i}
+            @click={`setTab(${i})`}
+            @keydown={`handleKey($event, ${i})`}
+          >
+            {tab.attributes.title ?? tab.attributes.agency ?? `Tab ${i + 1}`}
+          </button>
+        ))}
+      </div>
+
+      <!-- Tab panels -->
+      <div class="ts-panels">
+        {tabs.map((tab, i) => {
+          const images = sortByFilename(tab.attributes.images?.data);
+          const { html: bodyHtml } = renderedBodies[i]!;
+          return (
+            <div
+              role="tabpanel"
+              class="ts-panel"
+              :id={`'ts-panel-' + ${i}`}
+              :aria-labelledby={`'ts-tab-' + ${i}`}
+              x-show={`activeTab === ${i}`}
+              x-transition:enter="ts-fade-enter"
+              x-transition:enter-start="ts-fade-start"
+              x-transition:enter-end="ts-fade-end"
+              tabindex="0"
+            >
+              <p class="ts-mock-note">Note: All displays contain mock data.</p>
+
+              {bodyHtml && (
+                <div class="ts-body markdown-body" set:html={bodyHtml}></div>
+              )}
+
+              {images.length > 0 && (
+                <div class="ts-gallery">
+                  {images.map((img, imgIdx) => {
+                    const fullUrlRaw = img.attributes?.url ?? null;
+                    if (!fullUrlRaw) return null;
+                    const fullUrl = fullUrlRaw.startsWith('http')
+                      ? fullUrlRaw
+                      : `${STRAPI_BASE}${fullUrlRaw}`;
+
+                    // Thumbnail: ~500w (covers 2x DPR for the 245px grid cell).
+                    const thumb = pickThumb(
+                      img.attributes?.formats,
+                      fullUrl,
+                      img.attributes?.width,
+                      img.attributes?.height,
+                      500,
+                    );
+                    const thumbUrl = thumb.url.startsWith('http')
+                      ? thumb.url
+                      : `${STRAPI_BASE}${thumb.url}`;
+
+                    const alt = img.attributes?.alternativeText?.trim()
+                      || img.attributes?.caption?.trim()
+                      || img.attributes?.name?.replace(/\.\w+$/, '').replace(/_/g, ' ')
+                      || 'Screenshot';
+                    const caption = img.attributes?.caption?.trim() || null;
+                    // First image of the first tab is the visible LCP candidate —
+                    // load eagerly + high priority. Everything else lazy.
+                    const isLcp = i === 0 && imgIdx === 0;
+                    return (
+                      <figure class="ts-figure">
+                        <button
+                          type="button"
+                          class="ts-img-link"
+                          data-screenshot-src={fullUrl}
+                          data-screenshot-alt={alt}
+                          data-screenshot-caption={caption ?? ''}
+                          aria-label={`View full screenshot: ${alt}`}
+                        >
+                          <img
+                            src={thumbUrl}
+                            alt={alt}
+                            width={thumb.width}
+                            height={thumb.height}
+                            loading={isLcp ? 'eager' : 'lazy'}
+                            fetchpriority={isLcp ? 'high' : 'auto'}
+                            decoding="async"
+                            class="ts-img"
+                          />
+                        </button>
+                        {caption && <figcaption class="ts-caption">{caption}</figcaption>}
+                      </figure>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal lightbox: shared across all tabs/screenshots -->
+  <div
+    id="ts-modal"
+    class="ts-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ts-modal-caption"
+    data-open="false"
+  >
+    <div class="ts-modal__inner">
+      <button type="button" class="ts-modal__close" id="ts-modal-close" aria-label="Close screenshot">&times;</button>
+      <img id="ts-modal-img" class="ts-modal__img" src="" alt="" />
+      <div id="ts-modal-caption" class="ts-modal__caption"></div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('ts-modal');
+    const modalImg = document.getElementById('ts-modal-img');
+    const modalCap = document.getElementById('ts-modal-caption');
+    const modalClose = document.getElementById('ts-modal-close');
+    const triggers = document.querySelectorAll('button.ts-img-link');
+    let lastFocused = null;
+    function openModal(src, alt, caption) {
+      if (!modal || !(modalImg instanceof HTMLImageElement)) return;
+      lastFocused = document.activeElement;
+      modalImg.src = src;
+      modalImg.alt = alt;
+      if (modalCap) modalCap.textContent = caption || alt;
+      modal.setAttribute('data-open', 'true');
+      document.body.style.overflow = 'hidden';
+      if (modalClose instanceof HTMLButtonElement) modalClose.focus();
+    }
+    function closeModal() {
+      if (!modal) return;
+      modal.setAttribute('data-open', 'false');
+      document.body.style.overflow = '';
+      if (lastFocused instanceof HTMLElement) lastFocused.focus();
+    }
+    triggers.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const src = btn.getAttribute('data-screenshot-src') || '';
+        const alt = btn.getAttribute('data-screenshot-alt') || '';
+        const caption = btn.getAttribute('data-screenshot-caption') || '';
+        if (src) openModal(src, alt, caption);
+      });
+    });
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modal) modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.getAttribute('data-open') === 'true') closeModal();
+    });
+  </script>
+)}
+
+<style>
+  .ts-wrapper {
+    width: 100%;
+    margin: 0 0 2rem;
+  }
+
+  .ts-hint {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 900;
+    color: #525252;
+    margin-bottom: 0.75rem;
+  }
+
+  .ts-card {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow:
+      0 2px 4px -1px rgba(0,0,0,.2),
+      0 4px 5px 0 rgba(0,0,0,.14),
+      0 1px 10px 0 rgba(0,0,0,.12);
+    overflow: hidden;
+  }
+
+  /* Tab list */
+  .ts-tablist {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #424242;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Individual tabs */
+  .ts-tab {
+    flex: 1 1 auto;
+    background-color: transparent;
+    border: none;
+    color: rgba(255,255,255,0.85);
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.0892857143em;
+    padding: 12px 16px;
+    min-height: 48px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.5;
+    overflow: visible;
+  }
+
+  .ts-tab:hover {
+    background-color: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.9);
+  }
+
+  .ts-tab:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+    z-index: 1;
+  }
+
+  .ts-tab--active {
+    color: #fff;
+    background-color: #555;
+  }
+
+  .ts-tab--active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #fff;
+  }
+
+  /* Tab panels */
+  .ts-panels {
+    background: #fafafa;
+    min-height: 20vh;
+  }
+
+  .ts-panel {
+    padding: 16px;
+  }
+
+  /* Alpine transition helpers */
+  .ts-fade-enter { }
+  .ts-fade-start { opacity: 0; }
+  .ts-fade-end   { opacity: 1; }
+
+  .ts-mock-note {
+    text-align: center;
+    margin: 2rem 0 1.25rem;
+    font-weight: 700;
+    color: blue;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+
+  .ts-body {
+    padding: 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  /* Image gallery — responsive thumbnail grid matching legacy layout.
+     auto-fill with min ~245px lets 4 cols fit at wide viewports (1280px+),
+     3 cols at mid (~900-1280px), 2 cols on tablet (~600-900px), 1 mobile. */
+  .ts-gallery {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+    gap: 2rem 1.5rem;
+  }
+
+  .ts-figure {
+    margin: 0;
+    text-align: center;
+  }
+
+  .ts-img-link {
+    display: block;
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: zoom-in;
+  }
+
+  .ts-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    transition: opacity 0.15s;
+  }
+  .ts-img-link:hover .ts-img,
+  .ts-img-link:focus-visible .ts-img {
+    opacity: 0.85;
+    outline: 2px solid #0d4270;
+    outline-offset: 2px;
+  }
+
+  .ts-caption {
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    padding: 0.5rem 0.25rem 0;
+    color: #333;
+  }
+
+  /* Modal (lightbox) — matches legacy: white modal box on semi-dim backdrop */
+  .ts-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 2rem;
+  }
+  .ts-modal[data-open="true"] { display: flex; }
+  .ts-modal__inner {
+    position: relative;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    max-width: 1100px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .ts-modal__img {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    object-fit: contain;
+    display: block;
+    background: #fff;
+  }
+  .ts-modal__caption {
+    color: #fff;
+    margin-top: 0.75rem;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    /* Caption sits in the modal backdrop area below the white box (per legacy) */
+    position: absolute;
+    bottom: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  .ts-modal__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  .ts-modal__close:hover,
+  .ts-modal__close:focus-visible {
+    background: rgba(0, 0, 0, 0.35);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ts-img { transition: none; }
+  }
+
+  .ts-no-tabs {
+    color: #888;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .ts-tab {
+      font-size: 12px;
+      padding: 10px 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ts-tab { transition: none; }
+  }
+</style>

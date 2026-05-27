@@ -1,0 +1,142 @@
+---
+// astro/src/pages/news/[slug].astro
+//
+// Dynamic post detail page — one route per Strapi post slug.
+// Phase 5a: uses CmsImage for optimised splash + PostedMeta/LastUpdated.
+// Phase 7: MDC component detection — renders DvAwarenessMonth/Partners/Tabs
+//           components when body is a bare MDC reference.
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import CmsImage from '~/components/CmsImage.astro';
+import PostedMeta from '~/components/PostedMeta.astro';
+import LastUpdated from '~/components/LastUpdated.astro';
+import ReadProgress from '~/components/ReadProgress.astro';
+import Toc from '~/components/Toc.astro';
+import DvAwarenessMonth from '~/components/mdc/DvAwarenessMonth.astro';
+import Partners from '~/components/mdc/Partners.astro';
+import TabsScreenshotsAccessible from '~/components/mdc/TabsScreenshotsAccessible.astro';
+import TabsUserInfoAccessible from '~/components/mdc/TabsUserInfoAccessible.astro';
+import { strapiFetch } from '~/lib/strapi';
+import { QUERY_POST_LIST } from '~/lib/queries';
+import { PostListResponseSchema } from '~/lib/schemas';
+import { renderMarkdown } from '~/lib/markdown';
+
+export async function getStaticPaths() {
+  const raw = await strapiFetch(QUERY_POST_LIST);
+  const parsed = PostListResponseSchema.parse(raw);
+  return parsed.posts.data.map((post) => ({
+    params: { slug: post.attributes.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const attr = post.attributes;
+
+// Date precedence: dateOverride > createdAt
+const displayDate = attr.dateOverride ?? attr.createdAt ?? null;
+
+const { html, headings, mdcRefs } = renderMarkdown(attr.body);
+
+// Splash image — Strapi v4 nested under data.attributes
+const splashAttr = attr.splash?.data?.attributes;
+const splashUrl = splashAttr?.url
+  ? (splashAttr.url.startsWith('http') ? splashAttr.url : `https://infonet.icjia-api.cloud${splashAttr.url}`)
+  : null;
+const splashAlt = splashAttr?.alternativeText?.trim()
+  || splashAttr?.caption?.trim()
+  || `${attr.title ?? ''} — article splash image`;
+
+// Show "Updated" note only when updatedAt is meaningfully different (>1 day).
+function daysDiff(a: string | null | undefined, b: string | null | undefined): number {
+  if (!a || !b) return 0;
+  const da = new Date(a).getTime();
+  const db = new Date(b).getTime();
+  if (Number.isNaN(da) || Number.isNaN(db)) return 0;
+  return Math.abs(db - da) / 86_400_000;
+}
+const showUpdated = daysDiff(attr.createdAt, attr.updatedAt) > 1;
+
+const description = attr.summary ?? attr.title ?? '';
+---
+<BaseLayout
+  title={attr.title ?? 'News'}
+  description={description}
+  ogImage={splashUrl ?? undefined}
+  breadcrumbTitle="News"
+  breadcrumbTitleHref="/news/"
+  breadcrumbCurrent={attr.title ?? undefined}
+>
+  <ReadProgress />
+  <article class="post-detail">
+    <header class="post-header">
+      <h1>{attr.title}</h1>
+      <PostedMeta date={displayDate} author={attr.category ?? undefined} />
+    </header>
+
+    {splashUrl && (
+      <figure class="post-splash">
+        <CmsImage
+          src={splashUrl}
+          alt={splashAlt}
+          loading="eager"
+          fetchpriority="high"
+          sizes="(min-width: 960px) 800px, 100vw"
+          class="post-splash__img"
+        />
+        {splashAttr?.caption?.trim() && (
+          <figcaption>{splashAttr.caption.trim()}</figcaption>
+        )}
+      </figure>
+    )}
+
+    {html && <div class="markdown-body" set:html={html}></div>}
+    {mdcRefs.map(ref => (
+      ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+      ref.name === 'Partners' ? <Partners /> :
+      ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
+      ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
+      null
+    ))}
+
+    {showUpdated && (
+      <LastUpdated date={attr.updatedAt} />
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .post-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem 3rem;
+  }
+
+  .post-header h1 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 900;
+    line-height: 1.2;
+    color: #0d4270;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .post-splash {
+    margin: 0 0 2rem;
+  }
+
+  .post-splash__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 550px;
+  }
+
+  .post-splash figcaption {
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 700;
+    margin-top: 0.25rem;
+    padding-left: 0.25rem;
+  }
+</style>

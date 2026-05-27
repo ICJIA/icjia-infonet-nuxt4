@@ -1,0 +1,169 @@
+---
+// astro/src/layouts/BaseLayout.astro
+//
+// Single layout used by every page. Per v6 checklist: skip-link off-screen
+// pattern, Plausible bare script, URL normalizer, astro-seo + canonical.
+import { SEO } from 'astro-seo';
+import { siteConfig } from '~/lib/siteConfig';
+import AppNav from '~/components/AppNav.astro';
+import AppSidebar from '~/components/AppSidebar.astro';
+import AppFooter from '~/components/AppFooter.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import '~/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  canonicalOverride?: string;
+  breadcrumbTitle?: string;
+  /** Optional href for the middle breadcrumb entry (makes it a link). */
+  breadcrumbTitleHref?: string;
+  /** Optional current-page label for 3-level breadcrumb. */
+  breadcrumbCurrent?: string | null;
+}
+
+const {
+  title,
+  description = siteConfig.defaultDescription,
+  ogImage,
+  noindex = false,
+  canonicalOverride,
+  breadcrumbTitle = undefined,
+  breadcrumbTitleHref = undefined,
+  breadcrumbCurrent = undefined,
+} = Astro.props;
+
+// Canonical URL — strip /index.html / .html (Astro static format edge case);
+// always end in trailing slash. Subdomain mount: no base path stripping needed.
+const rawPath = Astro.url.pathname
+  .replace(/\/index\.html$/, '/')
+  .replace(/\.html$/, '');
+const canonical = canonicalOverride
+  ?? new URL(rawPath, Astro.site ?? siteConfig.siteOrigin).toString();
+
+const fullTitle = title
+  ? `ICJIA | ${title}`
+  : siteConfig.siteName;
+
+// Conditional <main> top-padding: home gets 64px; other pages get 96px.
+const isHome = rawPath === '/';
+/* Legacy measured gap from breadcrumb-bottom to h1-top = 32px on non-home.
+   Home renders the gray .home-section--gray hero edge-to-edge, so it needs
+   ZERO top padding — otherwise a white strip shows between the nav and the
+   gray background. */
+const mainTopPad = isHome ? 0 : 32;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <SEO
+      title={fullTitle}
+      description={description}
+      canonical={canonical}
+      noindex={noindex}
+      openGraph={{
+        basic: {
+          title: fullTitle,
+          type: 'website',
+          image: ogImage ?? siteConfig.og.image,
+          url: canonical,
+        },
+        optional: {
+          description,
+          siteName: siteConfig.siteName,
+          locale: 'en_US',
+        },
+      }}
+      twitter={{
+        card: 'summary_large_image',
+        image: ogImage ?? siteConfig.og.image,
+        imageAlt: siteConfig.siteName,
+      }}
+      extend={{
+        meta: [
+          { name: 'author', content: siteConfig.author },
+          ...(siteConfig.og.fbAppId
+            ? [{ property: 'fb:app_id', content: siteConfig.og.fbAppId }]
+            : []),
+        ],
+      }}
+    />
+
+    {/* URL normalizer — runs before deferred Plausible. */}
+    <script is:inline>
+      if (location.pathname !== '/' && !location.pathname.endsWith('/')) {
+        history.replaceState(
+          null,
+          '',
+          location.pathname + '/' + location.search + location.hash,
+        );
+      }
+    </script>
+
+    {/* Plausible — bare script tag with data-domain. */}
+    <script
+      is:inline
+      defer
+      data-domain={siteConfig.plausible.domain}
+      src={siteConfig.plausible.scriptSrc}
+    ></script>
+  </head>
+
+  <body>
+    <nav class="skip-links" aria-label="Skip links">
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+      <a href="#main-navigation" class="skip-link">Skip to navigation</a>
+    </nav>
+
+    <AppNav />
+    <AppSidebar />
+    <Breadcrumb title={breadcrumbTitle} breadcrumbTitleHref={breadcrumbTitleHref} breadcrumbCurrent={breadcrumbCurrent} />
+
+    <main id="main-content" data-pagefind-body style={`padding-top: ${mainTopPad}px; min-height: 70vh;`}>
+      <slot />
+    </main>
+
+    <AppFooter />
+
+    <style is:global>
+      /* Clear the fixed AppNav (80px tall) — content + Breadcrumb start below */
+      body { padding-top: 80px; }
+
+      .skip-link,
+      .skip-links {
+        position: absolute;
+        top: -100px;
+      }
+      .skip-link {
+        background: #000;
+        color: #fff;
+        padding: 8px 16px;
+        left: 8px;
+        border: 2px solid #fff;
+        border-radius: 4px;
+        z-index: 10001;
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .skip-link { transition: top 0.3s ease; }
+      }
+      .skip-link:focus,
+      .skip-link:active {
+        position: fixed;
+        top: 8px;
+        left: 8px;
+      }
+    </style>
+
+    <script>
+      import '~/scripts/alpine-entry';
+    </script>
+  </body>
+</html>

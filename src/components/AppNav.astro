@@ -1,0 +1,469 @@
+---
+// astro/src/components/AppNav.astro
+//
+// Port of legacy app/components/content/TheNav.vue.
+// Visual spec:
+//   - <nav id="main-navigation"> landmark — skip-link target in BaseLayout
+//   - Height 150px (legacy v-app-bar size="150px"), z-index 50
+//   - Background white, drop-shadow (elevation 3)
+//   - Mobile/tablet (< 1280px): hamburger + "INFONET" abbreviated title + search icon
+//   - Desktop (≥ 1280px): full title + topNav links (dropdown via <details>) + utility ⋮ dropdown
+//
+// Hamburger pattern: dispatches CustomEvent('drawer-toggle') on window.
+//   AppSidebar listens with @drawer-toggle.window.
+//   No Alpine state needed in the nav itself — just a <button> with a small inline script.
+//
+// Title font spec (from TheNav.vue inline styles):
+//   - Font: Raleway, 28px desktop / 28px mobile
+//   - "INFONET" in #0d4270 font-weight 900
+//   - " | DATA COLLECTION & REPORTING SYSTEM" in #000 font-weight 300
+//
+// Dropdown items: native <details><summary> (no Alpine state — full keyboard a11y).
+// Active route: <a aria-current="page"> when pathname matches.
+//
+// Breakpoint: desktop nav (brand subtitle + topNav links + ⋮) appears at ≥960px.
+// This matches legacy behaviour at 1072px viewport (desktop nav shown, not hamburger).
+
+import { topNav, utilityLinks } from '~/lib/menu';
+const pathname = Astro.url.pathname;
+---
+
+<header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 50; background: #fff; box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);">
+  <nav
+    id="main-navigation"
+    aria-label="Main"
+    tabindex="-1"
+    style="
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 80px;
+      padding: 0 20px;
+      box-sizing: border-box;
+    "
+  >
+    <!-- ── Hamburger (mobile/tablet, < 960px) ───────────────────────── -->
+    <button
+      type="button"
+      id="nav-hamburger"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-navigation"
+      class="nav-hamburger md-hide"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        min-width: 44px;
+        min-height: 44px;
+        color: rgba(0,0,0,0.87);
+      "
+    >
+      <!-- Hamburger icon — MDI menu path -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2"/>
+      </svg>
+      <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.04em;">MENU</span>
+    </button>
+
+    <!-- ── Spacer (mobile only) ──────────────────────────────────────── -->
+    <div class="md-hide" style="flex: 1;"></div>
+
+    <!-- ── Title (desktop) ──────────────────────────────────────────── -->
+    <a
+      href="/"
+      class="md-show"
+      aria-label="INFONET — go to homepage"
+      style="text-decoration: none;"
+    >
+      <span style="
+        font-weight: 900;
+        font-size: 28px;
+        font-family: 'Raleway', 'Raleway fallback', sans-serif;
+        letter-spacing: 0em;
+        color: #0d4270;
+        white-space: nowrap;
+      ">INFONET</span>
+      <span style="
+        font-weight: 900;
+        font-size: 28px;
+        font-family: 'Raleway', 'Raleway fallback', sans-serif;
+        color: #0d4270;
+        margin: 0 6px;
+      ">&nbsp;|&nbsp;</span>
+      <span style="
+        font-weight: 300;
+        font-size: 26px;
+        font-family: 'Raleway', 'Raleway fallback', sans-serif;
+        letter-spacing: 0px;
+        color: #000;
+        white-space: nowrap;
+      ">DATA COLLECTION &amp; REPORTING SYSTEM</span>
+    </a>
+
+    <!-- ── Title (mobile — abbreviated) ────────────────────────────── -->
+    <a
+      href="/"
+      class="md-hide"
+      aria-label="INFONET — go to homepage"
+      style="text-decoration: none;"
+    >
+      <span style="
+        font-weight: 900;
+        font-size: 28px;
+        font-family: 'Raleway', 'Raleway fallback', sans-serif;
+        letter-spacing: 0.004em;
+        color: #0d4270;
+      ">INFONET</span>
+    </a>
+
+    <!-- ── Spacer (desktop — pushes nav items right) ────────────────── -->
+    <div style="flex: 1;"></div>
+
+    <!-- ── Desktop nav items
+         Plain links: visible at md+ (≥ 960px) — matches legacy `hidden-sm-and-down`
+         Dropdowns:  visible at lg+ (≥ 1280px) — matches legacy `hidden-md-and-down`
+         The wrapper is md-show; per-item class adjusts further for dropdown items. -->
+    <span class="md-show" style="align-items: center; gap: 0;">
+      {topNav.map((menu) => (
+        <span class={menu.children ? 'lg-only' : ''} style="display: inline-flex; align-items: center;">
+          {menu.children ? (
+            <details class="nav-dropdown">
+              <summary
+                class="nav-item-btn"
+                aria-label={menu.main}
+                aria-haspopup="true"
+                style="
+                  font-weight: 900;
+                  font-size: 18px;
+                  font-family: 'Roboto', sans-serif;
+                  color: #333;
+                  cursor: pointer;
+                  min-height: 44px;
+                  min-width: 44px;
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 0 8px;
+                  background: transparent;
+                  border: none;
+                  list-style: none;
+                "
+              >
+                {menu.main}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-left: 2px;">
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </summary>
+              <ul class="nav-dropdown-menu" role="menu" style="
+                position: absolute;
+                background: #fff;
+                border-radius: 4px;
+                box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12);
+                min-width: 160px;
+                list-style: none;
+                margin: 0;
+                padding: 8px 0;
+                z-index: 51;
+              ">
+                {menu.children.map((child) => {
+                  if (child.divider) {
+                    return (
+                      <li role="separator" style="margin: 4px 0;">
+                        <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.12); margin: 0;" />
+                      </li>
+                    );
+                  }
+                  if (child.section) {
+                    return (
+                      <li style="
+                        padding: 8px 16px 4px;
+                        font-weight: 900;
+                        font-size: 12px;
+                        color: #555;
+                        font-family: 'Roboto', sans-serif;
+                      ">
+                        {child.section}
+                      </li>
+                    );
+                  }
+                  if (child.link) {
+                    return (
+                      <li role="none">
+                        <a
+                          href={child.link}
+                          role="menuitem"
+                          aria-current={pathname === child.link ? 'page' : undefined}
+                          style="
+                            display: block;
+                            padding: 8px 16px;
+                            font-size: 12px;
+                            font-weight: 700;
+                            color: rgba(0,0,0,0.87);
+                            text-decoration: none;
+                            font-family: 'Roboto', sans-serif;
+                          "
+                          class="nav-dropdown-item"
+                          {...(child.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                        >
+                          {child.title}
+                        </a>
+                      </li>
+                    );
+                  }
+                  return null;
+                })}
+              </ul>
+            </details>
+          ) : (
+            <a
+              href={menu.link}
+              aria-label={menu.main}
+              aria-current={pathname === menu.link ? 'page' : undefined}
+              class="nav-item-btn"
+              style="
+                font-weight: 900;
+                font-size: 18px;
+                font-family: 'Roboto', sans-serif;
+                color: #333;
+                text-decoration: none;
+                min-height: 44px;
+                min-width: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 8px;
+              "
+              {...(menu.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              {menu.main}
+            </a>
+          )}
+        </span>
+      ))}
+
+      <!-- ⋮ utility dropdown (Search / Translate / Contact) -->
+      <span style="display: inline-flex; align-items: center;">
+        <details class="nav-dropdown">
+          <summary
+            aria-label="More options"
+            title="More options"
+            aria-haspopup="true"
+            style="
+              min-height: 44px;
+              min-width: 44px;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              background: transparent;
+              border: none;
+              list-style: none;
+              padding: 0 4px;
+              color: rgba(0,0,0,0.87);
+            "
+          >
+            <!-- MDI dots-vertical -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+          </summary>
+          <ul class="nav-dropdown-menu" role="menu" style="
+            position: absolute;
+            right: 0;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12);
+            min-width: 140px;
+            list-style: none;
+            margin: 0;
+            padding: 8px 0;
+            z-index: 51;
+          ">
+            {utilityLinks.map((item, i) => (
+              <>
+                {i > 0 && i === utilityLinks.length - 1 && (
+                  <li role="separator" style="margin: 4px 0;">
+                    <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.12); margin: 0;" />
+                  </li>
+                )}
+                <li role="none">
+                  <a
+                    href={item.link}
+                    role="menuitem"
+                    aria-current={pathname === item.link ? 'page' : undefined}
+                    class="nav-dropdown-item"
+                    style="
+                      display: block;
+                      padding: 8px 16px;
+                      font-size: 16px;
+                      font-weight: 700;
+                      color: rgba(0,0,0,0.87);
+                      text-decoration: none;
+                      font-family: 'Roboto', sans-serif;
+                    "
+                  >
+                    {item.main}
+                  </a>
+                </li>
+              </>
+            ))}
+          </ul>
+        </details>
+      </span>
+    </span>
+
+    <!-- ── Mobile/tablet search icon (< 960px) ─────────────────────── -->
+    <a
+      href="/search/"
+      class="md-hide"
+      aria-label="Search"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        text-decoration: none;
+        color: rgba(0,0,0,0.87);
+        padding: 8px;
+      "
+    >
+      <!-- MDI magnify -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      </svg>
+      <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.04em;">SEARCH</span>
+    </a>
+  </nav>
+</header>
+
+<!-- Hamburger click → dispatch drawer-toggle event on window -->
+<script>
+  const btn = document.getElementById('nav-hamburger');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      window.dispatchEvent(new CustomEvent('drawer-toggle'));
+      // Toggle aria-expanded for accessibility
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      btn.setAttribute('aria-label', expanded ? 'Open navigation menu' : 'Close navigation menu');
+    });
+  }
+
+  // Accordion behavior: when one nav <details> dropdown opens, close any other
+  // open siblings. Native <details> elements don't do this automatically.
+  // Also click-outside-to-close.
+  const dropdowns = document.querySelectorAll('.nav-dropdown');
+  dropdowns.forEach((d) => {
+    d.addEventListener('toggle', () => {
+      if (d.open) {
+        dropdowns.forEach((other) => {
+          if (other !== d && other.open) other.open = false;
+        });
+      }
+    });
+  });
+  // Close any open dropdown when clicking outside the nav header
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (!(target instanceof Element)) return;
+    if (target.closest('.nav-dropdown')) return;
+    dropdowns.forEach((d) => { if (d.open) d.open = false; });
+  });
+</script>
+
+<style>
+/* ── Responsive show/hide ─────────────────────────────────────────────── */
+/* lg = 960px — matches legacy responsive behaviour: desktop nav (brand
+   subtitle + topNav items + ⋮) shows at 1072px viewport, not just 1280px. */
+
+/* Desktop-only elements */
+.md-show {
+  display: none !important;
+}
+@media (min-width: 960px) {
+  .md-show {
+    display: inline-flex !important;
+    align-items: center;
+  }
+  .md-hide {
+    display: none !important;
+  }
+}
+
+/* Dropdown items (About / Resources) hide on md (960-1264px), show on lg+
+   Matches legacy Vuetify `hidden-md-and-down` class on dropdown nav items. */
+.lg-only {
+  display: none !important;
+}
+@media (min-width: 1264px) {
+  .lg-only {
+    display: inline-flex !important;
+    align-items: center;
+  }
+}
+
+/* ── Nav item buttons ─────────────────────────────────────────────────── */
+.nav-item-btn {
+  transition: background-color 0.2s;
+  border-radius: 4px;
+}
+.nav-item-btn:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.nav-item-btn:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+}
+.nav-item-btn[aria-current="page"] {
+  color: #1976d2 !important;
+}
+
+/* ── Dropdown (native <details>) ────────────────────────────────────── */
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+/* Remove default <summary> marker */
+.nav-dropdown > summary {
+  list-style: none;
+}
+.nav-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+.nav-dropdown > summary:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+}
+
+/* Dropdown items hover */
+.nav-dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.nav-dropdown-item:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: -2px;
+}
+.nav-dropdown-item[aria-current="page"] {
+  background-color: rgba(25, 118, 210, 0.12);
+  color: #1976d2 !important;
+}
+
+/* ── Hamburger button hover ──────────────────────────────────────────── */
+#nav-hamburger:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+}
+#nav-hamburger:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+}
+</style>

@@ -1,0 +1,199 @@
+---
+// astro/src/pages/index.astro
+//
+// Home page — static parts only.
+// Dynamic widgets (HomeBarGraph, HomeBoxes, HomePosts, HomeEvents,
+// InfoNet Research carousel) land in Phase 5b.
+//
+// Static content ported from:
+//   - Legacy app/pages/index.vue (badge, INFONET title, tagline, body, partners link)
+//   - Strapi "index" page body (slug: 'index') for the description paragraph
+//
+// Font: Raleway 900 for the large INFONET title (same weight / color as nav).
+// Color: #0d4270 (nav brand color, confirmed in AppNav.astro / legacy CSS).
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import HomeBoxes from '~/components/HomeBoxes.astro';
+import HomeBarGraph from '~/components/HomeBarGraph.astro';
+import HomePosts from '~/components/HomePosts.astro';
+import HomeFaqs from '~/components/HomeFaqs.astro';
+
+const description =
+  'InfoNet is a web-based data collection and reporting system used by victim service providers ' +
+  'in Illinois to facilitate standardized statewide data collection.';
+---
+<BaseLayout title="Home" description={description}>
+  <!-- Hero + chart row: full-bleed gray background with centered inner container -->
+  <section class="home-section home-section--gray">
+    <div class="home-section-inner">
+      <div class="home-grid">
+        <div class="home-hero-inner">
+          <div class="home-badge">
+            Illinois Criminal Justice Information Authority
+          </div>
+
+          <h1 class="infonet-title">INFONET</h1>
+
+          <p class="infonet-tagline">
+            Illinois&rsquo; victim service data resource for over 25 years
+          </p>
+
+          <div class="home-lead">
+            <p>
+              InfoNet is a web-based data collection and reporting system used by
+              victim service providers in Illinois. The system is nationally
+              recognized for facilitating standardized data collection and reporting
+              at the statewide level. Initial development of InfoNet began in the
+              mid-90s as a collaborative effort between the Illinois Criminal Justice
+              Information Authority, the Illinois Coalition Against Sexual Assault,
+              and the Illinois Coalition Against Domestic Violence. Since then,
+              InfoNet has grown to include partnerships with the Illinois Department
+              of Human Services and the Chicago Department of Family &amp; Support
+              Services.
+            </p>
+          </div>
+
+          <p class="home-partners-link">
+            <a href="/partners/">List of Partners&nbsp;&raquo;</a>
+          </p>
+        </div>
+
+        <HomeBarGraph />
+      </div>
+    </div>
+  </section>
+
+  <!-- HomeBoxes: full-bleed dark blue, no inner container constraint -->
+  <HomeBoxes />
+
+  <!-- News + FAQs section: full-bleed white with centered inner container -->
+  <section class="home-section">
+    <div class="home-section-inner">
+      <div class="home-news-faqs">
+        <HomePosts />
+        <HomeFaqs />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Import Raleway for the INFONET title — matches legacy headingHomeMain class. */
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;900&display=swap');
+
+  /* Full-bleed sections — span entire viewport width.
+     Inner container centers content with max-width 1200px. */
+  .home-section {
+    width: 100%;
+    padding: 2rem 1rem 3rem;
+  }
+  .home-section--gray {
+    background: #f2f2f2;
+  }
+  .home-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* 2-column desktop layout: hero + chart side-by-side */
+  .home-grid {
+    display: block; /* mobile: stacked */
+  }
+
+  @media (min-width: 960px) {
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+  }
+
+  .home-hero-inner {
+    max-width: 640px;
+  }
+
+  /* Match legacy rendered dimensions (measured 2026-05-26):
+     badge: font-size 12.8px (0.8em × 16px root), margin-top 35px
+     h1:    font-size 75px, line-height 1.5, color #0b3a62, margin-top 8px
+     h2:    font-size 18px, line-height 1.25, margin -10px 0 32px */
+  .home-badge {
+    display: inline-block;
+    font-weight: 900;
+    font-size: 0.8em;          /* 12.8px at 16px root */
+    color: #fff;
+    background: #0d4474;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-top: 35px;
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+
+  .infonet-title {
+    font-family: 'Raleway', 'Arial Black', sans-serif;
+    font-weight: 900;
+    font-size: 75px;            /* legacy renders at 75px */
+    line-height: 1.5;            /* legacy 112.5px / 75px = 1.5 */
+    color: #0b3a62;              /* legacy color (slightly different blue) */
+    margin: 8px 0 0;
+    padding: 0;
+    border: none;
+  }
+
+  .infonet-tagline {
+    font-size: 18px;            /* matches legacy exactly */
+    font-weight: 400;
+    line-height: 1.25;           /* legacy 22.5px / 18px = 1.25 */
+    color: #222;
+    margin-top: -5px;
+    margin-bottom: 2rem;
+    padding-left: 2px;
+    border: none;
+  }
+
+  .home-lead {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #333;
+  }
+
+  .home-lead p {
+    margin: 0 0 1rem;
+  }
+
+  .home-partners-link {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .home-partners-link a {
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+  }
+
+  .home-partners-link a:hover,
+  .home-partners-link a:focus {
+    text-decoration: underline;
+    color: #0d4270;
+  }
+
+  /* News & FAQs two-column section */
+  .home-news-faqs {
+    display: block;
+    background: #f2f2f2;
+    padding: 2rem 1rem;
+    margin-top: 0;
+  }
+
+  @media (min-width: 960px) {
+    .home-news-faqs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 2rem;
+    }
+  }
+</style>
