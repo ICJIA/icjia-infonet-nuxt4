@@ -212,6 +212,10 @@ const tocHeadings: Heading[] = [
   .faq-chevron {
     font-size: 1.25rem;
     color: #0d4270;
+    /* Explicit background so axe-core samples contrast on the span
+       itself (without it, axe walks up the DOM through transparent
+       parents and downgrades to needs-review). True ratio ~12:1. */
+    background: #fff;
     flex-shrink: 0;
     margin-left: 8px;
   }
