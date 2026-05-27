@@ -55,23 +55,14 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
 >
   <article class="page-detail">
     <h1 class="page-h1">{attr.title?.toUpperCase()}</h1>
-    <div class="page-content-layout">
-      <div class="page-content-body">
-        {html && <div class="markdown-body" set:html={html}></div>}
-        {mdcRefs.map(ref => (
-          ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
-          ref.name === 'Partners' ? <Partners /> :
-          ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
-          ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
-          null
-        ))}
-      </div>
-      {headings.length >= 2 && (
-        <aside class="page-toc-sidebar">
-          <Toc headings={headings} tocHeading="Navigation" />
-        </aside>
-      )}
-    </div>
+    {html && <div class="markdown-body" set:html={html}></div>}
+    {mdcRefs.map(ref => (
+      ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+      ref.name === 'Partners' ? <Partners /> :
+      ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
+      ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
+      null
+    ))}
   </article>
 </BaseLayout>
 
@@ -90,8 +81,7 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
     color: #222;
     text-transform: uppercase;
     margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #ddd;
+    /* No underline on h1 per legacy — only h2 section headings have hairlines */
   }
 
   /* Two-column layout at desktop: article ~70%, Toc sidebar ~30% */

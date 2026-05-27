@@ -49,7 +49,9 @@ const fullTitle = title
 
 // Conditional <main> top-padding: home gets 64px; other pages get 96px.
 const isHome = rawPath === '/';
-const mainTopPad = isHome ? 64 : 96;
+/* Legacy measured gap from breadcrumb-bottom to h1-top = 32px on non-home;
+   home has no breadcrumb so 32px works too. Astro was 96px (too much). */
+const mainTopPad = isHome ? 32 : 32;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +125,7 @@ const mainTopPad = isHome ? 64 : 96;
     <AppSidebar />
     <Breadcrumb title={breadcrumbTitle} breadcrumbTitleHref={breadcrumbTitleHref} breadcrumbCurrent={breadcrumbCurrent} />
 
-    <main id="main-content" data-pagefind-body style={`padding-top: ${mainTopPad}px; min-height: 70vh;`}>
+    <main id="main-content" data-pagefind-body style={`padding-top: ${mainTopPad}px; min-height: 70vh; max-width: 1200px; margin: 0 auto;`}>
       <slot />
     </main>
 

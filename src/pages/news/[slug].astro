@@ -72,7 +72,6 @@ const description = attr.summary ?? attr.title ?? '';
       <h1>{attr.title}</h1>
       <PostedMeta date={displayDate} author={attr.category ?? undefined} />
     </header>
-    {headings.length >= 2 && <Toc headings={headings} />}
 
     {splashUrl && (
       <figure class="post-splash">
