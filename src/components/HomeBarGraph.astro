@@ -133,10 +133,10 @@
   }
 
   .home-bar-graph__canvas-wrap {
-    /* Fixed height matches legacy chart canvas area (~360px including bottom padding).
-       Chart.js with maintainAspectRatio:false fills container; without a fixed
-       height, the canvas was rendering ~110px taller than legacy (599 vs 491). */
-    height: 360px;
+    /* Measured: legacy chart wrapper renders at 491px tall. With 360px
+       canvas-wrap Astro was 519px (28px over). Reducing to 332px brings
+       the chart wrapper to ~491px to match legacy exactly. */
+    height: 332px;
     position: relative;
     padding-bottom: 40px;
   }
