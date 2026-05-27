@@ -61,47 +61,71 @@
 </div>
 
 <script>
-  import { Chart } from 'chart.js/auto';
-
+  // Chart.js is ~200 KB. Lazy-import it via dynamic import + IntersectionObserver
+  // so it never blocks FCP/LCP. The hero text (true LCP) renders in the first
+  // paint; the chart canvas just sits empty until it scrolls into range.
   const canvas = document.getElementById('home-bar-graph-canvas');
   if (canvas instanceof HTMLCanvasElement) {
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches;
-
-    new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-        datasets: [
-          {
-            label: 'Victims who received services',
-            backgroundColor: '#0D4471',
-            data: [70133, 72905, 60717, 61857, 61259, 63211, 63557],
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: prefersReducedMotion ? false : { duration: 800 },
-        plugins: {
-          legend: { display: false },
-          title: { display: false },
+    const initChart = async () => {
+      const { Chart } = await import('chart.js/auto');
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches;
+      new Chart(canvas, {
+        type: 'bar',
+        data: {
+          labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+          datasets: [
+            {
+              label: 'Victims who received services',
+              backgroundColor: '#0D4471',
+              data: [70133, 72905, 60717, 61857, 61259, 63211, 63557],
+            },
+          ],
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: (value) =>
-                typeof value === 'number'
-                  ? value.toLocaleString()
-                  : value,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: prefersReducedMotion ? false : { duration: 800 },
+          plugins: {
+            legend: { display: false },
+            title: { display: false },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: (value) =>
+                  typeof value === 'number'
+                    ? value.toLocaleString()
+                    : value,
+              },
             },
           },
         },
-      },
-    });
+      });
+    };
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries, obs) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            obs.disconnect();
+            initChart();
+            break;
+          }
+        }
+      }, { rootMargin: '200px' });
+      io.observe(canvas);
+    } else {
+      // Fallback for very old browsers: defer to idle / load.
+      const start = () => initChart();
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(start, { timeout: 2000 });
+      } else {
+        window.addEventListener('load', start, { once: true });
+      }
+    }
   }
 </script>
 

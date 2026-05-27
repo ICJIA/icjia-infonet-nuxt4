@@ -11,14 +11,14 @@ import sharp from 'sharp';
 import { promises as fs } from 'node:fs';
 import { existsSync } from 'node:fs';
 
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#0d4270"/>
-  <text x="600" y="280" text-anchor="middle" font-family="sans-serif" font-size="120" font-weight="900" fill="#ffffff">INFONET</text>
-  <text x="600" y="360" text-anchor="middle" font-family="sans-serif" font-size="32" font-weight="400" fill="#ffffff">Data Collection &amp; Reporting System</text>
-  <text x="600" y="420" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="400" fill="#ffffff" opacity="0.85">Illinois&apos; victim service data resource for over 25 years</text>
-</svg>`;
+// Read SVG source from public/og-image.svg so designers can edit the artwork
+// without touching this script. (Previously inlined here.)
+const svg = await fs.readFile('public/og-image.svg', 'utf8');
 
-const png = await sharp(Buffer.from(svg)).png().toBuffer();
+const png = await sharp(Buffer.from(svg), { density: 96 })
+  .resize(1200, 630, { fit: 'cover' })
+  .png({ compressionLevel: 9 })
+  .toBuffer();
 
 // Write to public/ so next dev build picks it up
 await fs.mkdir('public', { recursive: true });

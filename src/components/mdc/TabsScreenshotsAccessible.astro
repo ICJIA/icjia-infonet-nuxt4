@@ -36,6 +36,49 @@ function sortByFilename(images: TabImageData | null | undefined): TabImageData {
   });
 }
 
+// Pick the smallest Strapi-generated format ≥ thumbWidthPx so we don't ship
+// the full-resolution master (saves ~900 KiB on the screenshots gallery).
+// Strapi `formats` shape: { thumbnail|small|medium|large: { url, width, height } }
+// Fallback: Strapi also exposes every image at /uploads/thumbnail_<basename>
+// (the "_thumbnail" convention) — we use it when the formats blob is missing.
+type StrapiFormat = { url?: string; width?: number; height?: number };
+function thumbnailPrefixUrl(fullUrl: string): string {
+  const idx = fullUrl.lastIndexOf('/');
+  if (idx < 0) return fullUrl;
+  return fullUrl.slice(0, idx + 1) + 'thumbnail_' + fullUrl.slice(idx + 1);
+}
+function pickThumb(
+  formats: unknown,
+  fullUrl: string,
+  fullW: number | null | undefined,
+  fullH: number | null | undefined,
+  thumbWidthPx = 500,
+): { url: string; width: number; height: number } {
+  const fallbackW = fullW ?? 800;
+  const fallbackH = fullH ?? 480;
+  if (formats && typeof formats === 'object') {
+    const order = ['thumbnail', 'small', 'medium', 'large'] as const;
+    const byName = formats as Record<string, StrapiFormat>;
+    let best: StrapiFormat | null = null;
+    for (const key of order) {
+      const f = byName[key];
+      if (!f || !f.url || !f.width) continue;
+      if (f.width >= thumbWidthPx) { best = f; break; }
+      best = f;
+    }
+    if (best && best.url && best.width && best.height) {
+      return { url: best.url, width: best.width, height: best.height };
+    }
+  }
+  // Construct Strapi's thumbnail_ URL — preserves aspect ratio, max 245px.
+  const scale = Math.min(1, 245 / fallbackW);
+  return {
+    url: thumbnailPrefixUrl(fullUrl),
+    width: Math.round(fallbackW * scale),
+    height: Math.round(fallbackH * scale),
+  };
+}
+
 // Rendered markdown per tab.
 const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
 ---
@@ -113,30 +156,50 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
 
               {images.length > 0 && (
                 <div class="ts-gallery">
-                  {images.map((img) => {
-                    const src = img.attributes?.url
-                      ? (img.attributes.url.startsWith('http') ? img.attributes.url : `${STRAPI_BASE}${img.attributes.url}`)
-                      : null;
+                  {images.map((img, imgIdx) => {
+                    const fullUrlRaw = img.attributes?.url ?? null;
+                    if (!fullUrlRaw) return null;
+                    const fullUrl = fullUrlRaw.startsWith('http')
+                      ? fullUrlRaw
+                      : `${STRAPI_BASE}${fullUrlRaw}`;
+
+                    // Thumbnail: ~500w (covers 2x DPR for the 245px grid cell).
+                    const thumb = pickThumb(
+                      img.attributes?.formats,
+                      fullUrl,
+                      img.attributes?.width,
+                      img.attributes?.height,
+                      500,
+                    );
+                    const thumbUrl = thumb.url.startsWith('http')
+                      ? thumb.url
+                      : `${STRAPI_BASE}${thumb.url}`;
+
                     const alt = img.attributes?.alternativeText?.trim()
                       || img.attributes?.caption?.trim()
                       || img.attributes?.name?.replace(/\.\w+$/, '').replace(/_/g, ' ')
                       || 'Screenshot';
                     const caption = img.attributes?.caption?.trim() || null;
-                    if (!src) return null;
+                    // First image of the first tab is the visible LCP candidate —
+                    // load eagerly + high priority. Everything else lazy.
+                    const isLcp = i === 0 && imgIdx === 0;
                     return (
                       <figure class="ts-figure">
                         <button
                           type="button"
                           class="ts-img-link"
-                          data-screenshot-src={src}
+                          data-screenshot-src={fullUrl}
                           data-screenshot-alt={alt}
                           data-screenshot-caption={caption ?? ''}
                           aria-label={`View full screenshot: ${alt}`}
                         >
                           <img
-                            src={src}
+                            src={thumbUrl}
                             alt={alt}
-                            loading="lazy"
+                            width={thumb.width}
+                            height={thumb.height}
+                            loading={isLcp ? 'eager' : 'lazy'}
+                            fetchpriority={isLcp ? 'high' : 'auto'}
                             decoding="async"
                             class="ts-img"
                           />
