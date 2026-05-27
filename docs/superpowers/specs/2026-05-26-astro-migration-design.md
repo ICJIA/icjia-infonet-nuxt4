@@ -347,7 +347,7 @@ If any drift > font-aliasing-noise appears in viewcap, the phase does not exit. 
    e. viewcap pixel-perfect diff per §7 scope for this phase
 6. If any gate fails → fix forward, re-audit. Phase does not exit.
 7. Commit + write docs/perf/phase<N>-<sha>.md
-8. Update docs/astro-conversion-checklist-v6.md with any new abstractable lesson
+8. Update docs/astro-conversion-checklist-v6.2.md with any new abstractable lesson
 9. Present results to user, get go-ahead for Phase N+1.
 ```
 
@@ -361,7 +361,7 @@ Wave size: 3–5 grouped tasks per subagent. Group by same-subdirectory creates 
 - **Per-phase plans:** `docs/superpowers/plans/2026-05-26-astro-migration-phase{1..7}.md` (7 files — `5a`/`5b` may split per IFVCC convention)
 - **Per-phase audit logs:** `docs/perf/phase{1..7}-<sha>.md` (Phase 0 already complete: `phase0-baseline-d725000.md`)
 - **Astro source:** `astro/src/`, `astro/scripts/`, `astro/public/` (built at Phase 1, moved to repo root at cutover)
-- **v6 checklist updates:** any new abstractable lesson appended to `docs/astro-conversion-checklist-v6.md`
+- **v6 checklist updates:** any new abstractable lesson appended to `docs/astro-conversion-checklist-v6.2.md`
 - **Git tags:** `v1-final` (pre-cutover safety), `v3.0.0` (cutover commit)
 - **Final commit:** atomic cutover on `feat/astro-migration`, merged to `main` only after explicit user authorization
 
@@ -381,7 +381,7 @@ Wave size: 3–5 grouped tasks per subagent. Group by same-subdirectory creates 
 ## 14. Companion Documents
 
 - `docs/llm-migration-prompt.md` — copy-paste prompt that bootstrapped this design
-- `docs/astro-conversion-checklist-v6.md` — canonical playbook
+- `docs/astro-conversion-checklist-v6.2.md` — canonical playbook
 - `docs/icjia-strapi-cheatsheet.md` — Strapi field renames, response-shape detection
 - `docs/perf/phase0-baseline-d725000.md` — legacy site baseline (gap to target)
 - IFVCC reference: `/Volumes/satechi/webdev/icjia-ifvcc-2021/astro/` (v6 source — copy patterns)

@@ -21,7 +21,7 @@
 
 **Companion docs:**
 - Spec: `docs/superpowers/specs/2026-05-26-astro-migration-design.md`
-- Checklist: `docs/astro-conversion-checklist-v6.md` (§§1, 2, 6, 8, 9, 10, 10a, 11, 12, 12a, 18)
+- Checklist: `docs/astro-conversion-checklist-v6.2.md` (§§1, 2, 6, 8, 9, 10, 10a, 11, 12, 12a, 18)
 - Strapi cheatsheet: `docs/icjia-strapi-cheatsheet.md`
 - Baseline: `docs/perf/phase0-baseline-d725000.md`
 - IFVCC reference Phase 1 plan: `/Volumes/satechi/webdev/icjia-ifvcc-2021/docs/superpowers/plans/2026-05-25-astro-migration-phase1.md`

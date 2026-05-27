@@ -22,7 +22,7 @@
 
 **Companion docs:**
 - Spec: `docs/superpowers/specs/2026-05-26-astro-migration-design.md`
-- v6 checklist: `docs/astro-conversion-checklist-v6.md` (especially the Phase 1 lesson re: skip-link forward-reference)
+- v6 checklist: `docs/astro-conversion-checklist-v6.2.md` (especially the Phase 1 lesson re: skip-link forward-reference)
 - Phase 1 audit log: `docs/perf/phase1-9915671.md` (Lighthouse insights to address — `@mdi/font` 92 KiB unused CSS deferred to Phase 7)
 
 **Exit criteria:**

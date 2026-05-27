@@ -17,7 +17,7 @@ You are helping migrate the ICJIA `{{SITE_NAME}}` site from Vue 2/3 + Vuetify/Nu
 
 Read these in order. Each is the source of truth for its domain.
 
-1. **`docs/astro-conversion-checklist-v6.md`** — the canonical migration playbook. Contains:
+1. **`docs/astro-conversion-checklist-v6.2.md`** — the canonical migration playbook. Contains:
    - Hard rules (pnpm only, no Thumbor, no @astrojs/vue, pixel-perfect mandate)
    - Per-phase audit gates (mobile Lighthouse Perf ≥ 98, A11y 100, axe-core 0 violations, contrastcap 0 failures)
    - 100+ abstracted lessons from prior migrations grouped by topic
@@ -55,9 +55,7 @@ When you need to see "how was X done before," go to these repos. Each is a compl
 
 **For a new Vue 2 SPA migration, IFVCC is the closest reference.** Copy patterns from `astro/src/` directly when in doubt.
 
-**For the flagship migration (Vue 2 + Strapi v3 + 2000+ pages), read the "Flagship-specific concerns" section below + the "Flagship guidance" section of `astro-conversion-checklist-v6.md`.**
-
-**For a new Nuxt SSG migration, DVFR is closest.**
+**For the flagship migration (Vue 2 + Strapi v3 + 2000+ pages), read the "Flagship-specific concerns" section below + the "Flagship guidance" section of `astro-conversion-checklist-v6.2.md`.**
 
 ## Hard rules (non-negotiable)
 
@@ -139,7 +137,7 @@ The IFVCC migration ran ~25 implementer subagent dispatches + ~25 reviewer dispa
 
 ## What to do first
 
-1. Read `docs/astro-conversion-checklist-v6.md` end-to-end.
+1. Read `docs/astro-conversion-checklist-v6.2.md` end-to-end.
 2. Read `docs/icjia-strapi-cheatsheet.md`.
 3. Skim IFVCC's `astro/src/` to see real, production code (~30 files).
 4. Read the IFVCC Phase 1 plan + Phase 1 audit log to see how a phase starts.
@@ -190,7 +188,7 @@ If the LLM tries to skip any of these, push back. Each one was a lesson paid for
 
 ## Flagship-specific concerns (icjia.illinois.gov, 2000+ pages)
 
-> **Read the full "Flagship (`icjia.illinois.gov`) — scale-specific guidance" section in `astro-conversion-checklist-v6.md`.** Below is the short list to surface in the kickoff LLM session.
+> **Read the full "Flagship (`icjia.illinois.gov`) — scale-specific guidance" section in `astro-conversion-checklist-v6.2.md`.** Below is the short list to surface in the kickoff LLM session.
 
 The flagship is **categorically different** from every prior migration:
 
@@ -260,7 +258,7 @@ Plausible's "Custom Events" tab then exposes CLS / INP / LCP percentiles by page
 
 ## Companion docs (read in order, end-to-end)
 
-1. [`docs/astro-conversion-checklist-v6.md`](./astro-conversion-checklist-v6.md) — the playbook
+1. [`docs/astro-conversion-checklist-v6.2.md`](./astro-conversion-checklist-v6.2.md) — the playbook
 2. [`docs/icjia-strapi-cheatsheet.md`](./icjia-strapi-cheatsheet.md) — Strapi specifics
 3. [`docs/superpowers/specs/2026-05-25-astro-migration-design.md`](./superpowers/specs/2026-05-25-astro-migration-design.md) — IFVCC design spec (template)
 4. [`docs/superpowers/plans/2026-05-25-astro-migration-phase1.md`](./superpowers/plans/2026-05-25-astro-migration-phase1.md) through `phase7.md` — IFVCC plans (templates)

@@ -2,11 +2,19 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.4] - 2026-05-27 — Rename checklist file to v6.2
+
+Renamed `docs/astro-conversion-checklist-v6.md` → `docs/astro-conversion-checklist-v6.2.md` (git-rename, history preserved) so the filename signals the post-Infonet increment shipped in 3.2.3. Updated all 18 cross-references in `README.md`, `CHANGELOG.md`, `docs/llm-migration-prompt.md`, `docs/perf/phase1-*.md`, `docs/superpowers/plans/*.md`, `docs/superpowers/specs/*.md`, and inside the checklist itself (title + bookkeeping note + section link). Removed a stale "Nuxt SSG → DVFR" reference line in `llm-migration-prompt.md` that conflicted with the new "Nuxt SSG → Infonet" reference for v6.2.
+
+The v6.0 ancestor (IFVCC era) remains accessible in git history at `7493e3f^:docs/astro-conversion-checklist-v6.md`.
+
+---
+
 ## [3.2.3] - 2026-05-27 — Docs: v6.2 increment + flagship pre-flight
 
 Documentation-only release capturing the Infonet post-cutover lessons and adding scale-specific guidance for the upcoming `icjia.illinois.gov` flagship migration (2000+ pages on Vue 2 / Vuetify 2 + Strapi v3).
 
-### `docs/astro-conversion-checklist-v6.md` — v6.2 increment
+### `docs/astro-conversion-checklist-v6.2.md` — v6.2 increment
 
 Added a full **"Infonet (2026-05-27) — post-cutover Lighthouse polish (v6.2 increment)"** section under the existing Infonet phase lessons, plus a new top-level **"Flagship (icjia.illinois.gov) — scale-specific guidance"** section. Key additions:
 
@@ -23,7 +31,7 @@ Added a full **"Infonet (2026-05-27) — post-cutover Lighthouse polish (v6.2 in
 - **Sharp-resampled splash images from Strapi v3 base64 GraphQL fields** (the researchhub `splash` field pattern).
 - **Centered page header standard** (`text-align: center; margin-top: 1rem; margin-bottom: 2.5rem`).
 
-### `docs/astro-conversion-checklist-v6.md` — flagship guidance section
+### `docs/astro-conversion-checklist-v6.2.md` — flagship guidance section
 
 New top-level section anticipating the 2000+-page flagship migration:
 
@@ -52,7 +60,7 @@ New top-level section anticipating the 2000+-page flagship migration:
 
 ### `README.md` updates
 
-Links to `docs/astro-conversion-checklist-v6.md` and `docs/llm-migration-prompt.md` now describe the v6.2 increment + flagship section so future devs see the changes from the entry point.
+Links to `docs/astro-conversion-checklist-v6.2.md` and `docs/llm-migration-prompt.md` now describe the v6.2 increment + flagship section so future devs see the changes from the entry point.
 
 ---
 
