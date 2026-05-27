@@ -114,6 +114,10 @@ const articlesJson = JSON.stringify(
           ? (article.abstract.length > 350 ? article.abstract.slice(0, 350) + '...' : article.abstract)
           : '';
         const splash = splashes[String(article._id)];
+        // First card's splash is the LCP candidate above the fold —
+        // eager-load with high priority to win Lighthouse's LCP-discovery
+        // and image-delivery insights (was lazy → ~150 ms LCP penalty).
+        const isLcpCandidate = idx === 0;
         return (
           <a
             href={href}
@@ -131,7 +135,8 @@ const articlesJson = JSON.stringify(
                   width={splash.width}
                   height={splash.height}
                   alt=""
-                  loading="lazy"
+                  loading={isLcpCandidate ? 'eager' : 'lazy'}
+                  fetchpriority={isLcpCandidate ? 'high' : 'auto'}
                   decoding="async"
                   class="dap-card-splash"
                 />

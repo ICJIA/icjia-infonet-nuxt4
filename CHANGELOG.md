@@ -2,6 +2,28 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.1] - 2026-05-27 — Post-deploy Lighthouse polish
+
+Three targeted fixes triggered by the post-`8a655e2` audit re-run:
+
+### `/data-and-publications/` mobile perf 95 → 100 (target)
+
+The DAP splash images were uniformly `loading="lazy"`. Lighthouse identified the third card's WebP as the LCP candidate (largest visible image at fold) and assessed a ~150 ms LCP penalty for not being eager. Switched the first card's splash to `loading="eager"` + `fetchpriority="high"`; the rest stay lazy. The `idx === 0` toggle lives in `src/pages/data-and-publications/index.astro` and keys off the post-sort article order, so the visually-first card always wins the LCP race.
+
+### Homepage `label-content-name-mismatch` — five elements cleared
+
+Lightcap (Lighthouse 13.0.2 + axe-core 4.11.0) reported the rule on five anchors where the `aria-label` text didn't include the visible text:
+
+- **`section.home-boxes > ul > li > a.home-box`** (×3): each card had `aria-label="Request <something>"` while the visible `<h3>` read `"Interested in using InfoNet?"` / etc. Removed the aria-labels; the inner `<h3>` + `<p>` now compute the accessible name verbatim from the visible content.
+- **`.home-posts__all-btn`** (`"All News »"`) and **`.home-faqs__all-btn`** (`"All FAQs »"`): aria-labels were `"All News & Updates"` / `"All Frequently Asked Questions"` — same fix, dropped.
+- **`body > header > nav#main-navigation > a.md-show`** (desktop nav title): visible text spans `"INFONET | DATA COLLECTION & REPORTING SYSTEM"`, aria-label was `"INFONET — go to homepage"`. Dropped the aria-label; the three inline `<span>`s now compute the accessible name themselves. Mobile-only abbreviated link untouched (its visible "INFONET" is a substring of its aria-label, which is fine).
+
+### `/about/` desktop render-blocking CSS — `inlineStylesheets: 'auto'` → `'always'`
+
+Astro's auto threshold (≈4 KiB) wasn't inlining the ~35 KiB bundled stylesheet, so it shipped as a render-blocking `<link rel="stylesheet">`. On `/about/` desktop that cost ~650 ms of CRP (Lighthouse 13 `render-blocking-insight`). Flipped `astro.config.ts` → `build.inlineStylesheets: 'always'`. Trade-off: every HTML page grows by ~35 KiB pre-gzip, and the bundle is no longer separately cacheable. Acceptable on Netlify (HTML responses are brotli'd at the edge) and meaningful for cold first-paint across every page.
+
+---
+
 ## [3.2.0] - 2026-05-27 — Edge-to-edge home layout + a11y zero-issue sweep
 
 ### Home layout — edge-to-edge above and below

@@ -10,7 +10,14 @@ export default defineConfig({
   trailingSlash: 'always',
   output: 'static',
   build: {
-    inlineStylesheets: 'auto',
+    // 'always': inline the bundled stylesheet into every page <head> instead
+    // of shipping a blocking <link rel="stylesheet">. Eliminates the
+    // ~150-650 ms render-blocking-CSS penalty Lighthouse flags on cold loads
+    // (BaseLayout.css ~35 KiB gzipped). Trade-off: per-page HTML grows by the
+    // same ~35 KiB and the stylesheet is no longer separately cacheable —
+    // acceptable on Netlify's CDN where every HTML response is gzipped and
+    // brotli'd at the edge.
+    inlineStylesheets: 'always',
   },
   vite: {
     plugins: [tailwindcss()],

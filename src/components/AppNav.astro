@@ -75,10 +75,12 @@ const pathname = Astro.url.pathname;
     <div class="md-hide" style="flex: 1;"></div>
 
     <!-- ── Title (desktop) ──────────────────────────────────────────── -->
+    <!-- No aria-label: the three inline <span>s compute the accessible name
+         "INFONET | DATA COLLECTION & REPORTING SYSTEM", which axe 4.11 wants
+         to match the visible text exactly (rule: label-content-name-mismatch). -->
     <a
       href="/"
       class="md-show"
-      aria-label="INFONET — go to homepage"
       style="text-decoration: none;"
     >
       <span style="
