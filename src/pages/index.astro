@@ -22,53 +22,77 @@ const description =
   'in Illinois to facilitate standardized statewide data collection.';
 ---
 <BaseLayout title="Home" description={description}>
-  <div class="home-grid">
-    <section class="home-hero">
-      <div class="home-hero-inner">
-        <div class="home-badge">
-          Illinois Criminal Justice Information Authority
-        </div>
+  <!-- Hero + chart row: full-bleed gray background with centered inner container -->
+  <section class="home-section home-section--gray">
+    <div class="home-section-inner">
+      <div class="home-grid">
+        <div class="home-hero-inner">
+          <div class="home-badge">
+            Illinois Criminal Justice Information Authority
+          </div>
 
-        <h1 class="infonet-title">INFONET</h1>
+          <h1 class="infonet-title">INFONET</h1>
 
-        <p class="infonet-tagline">
-          Illinois&rsquo; victim service data resource for over 25 years
-        </p>
+          <p class="infonet-tagline">
+            Illinois&rsquo; victim service data resource for over 25 years
+          </p>
 
-        <div class="home-lead">
-          <p>
-            InfoNet is a web-based data collection and reporting system used by
-            victim service providers in Illinois. The system is nationally
-            recognized for facilitating standardized data collection and reporting
-            at the statewide level. Initial development of InfoNet began in the
-            mid-90s as a collaborative effort between the Illinois Criminal Justice
-            Information Authority, the Illinois Coalition Against Sexual Assault,
-            and the Illinois Coalition Against Domestic Violence. Since then,
-            InfoNet has grown to include partnerships with the Illinois Department
-            of Human Services and the Chicago Department of Family &amp; Support
-            Services.
+          <div class="home-lead">
+            <p>
+              InfoNet is a web-based data collection and reporting system used by
+              victim service providers in Illinois. The system is nationally
+              recognized for facilitating standardized data collection and reporting
+              at the statewide level. Initial development of InfoNet began in the
+              mid-90s as a collaborative effort between the Illinois Criminal Justice
+              Information Authority, the Illinois Coalition Against Sexual Assault,
+              and the Illinois Coalition Against Domestic Violence. Since then,
+              InfoNet has grown to include partnerships with the Illinois Department
+              of Human Services and the Chicago Department of Family &amp; Support
+              Services.
+            </p>
+          </div>
+
+          <p class="home-partners-link">
+            <a href="/partners/">List of Partners&nbsp;&raquo;</a>
           </p>
         </div>
 
-        <p class="home-partners-link">
-          <a href="/partners/">List of Partners&nbsp;&raquo;</a>
-        </p>
+        <HomeBarGraph />
       </div>
-    </section>
+    </div>
+  </section>
 
-    <HomeBarGraph />
-  </div>
+  <!-- HomeBoxes: full-bleed dark blue, no inner container constraint -->
   <HomeBoxes />
 
-  <section class="home-news-faqs">
-    <HomePosts />
-    <HomeFaqs />
+  <!-- News + FAQs section: full-bleed white with centered inner container -->
+  <section class="home-section">
+    <div class="home-section-inner">
+      <div class="home-news-faqs">
+        <HomePosts />
+        <HomeFaqs />
+      </div>
+    </div>
   </section>
 </BaseLayout>
 
 <style>
   /* Import Raleway for the INFONET title — matches legacy headingHomeMain class. */
   @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;900&display=swap');
+
+  /* Full-bleed sections — span entire viewport width.
+     Inner container centers content with max-width 1200px. */
+  .home-section {
+    width: 100%;
+    padding: 2rem 1rem 3rem;
+  }
+  .home-section--gray {
+    background: #f2f2f2;
+  }
+  .home-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
   /* 2-column desktop layout: hero + chart side-by-side */
   .home-grid {
@@ -82,11 +106,6 @@ const description =
       gap: 2rem;
       align-items: start;
     }
-  }
-
-  .home-hero {
-    background: #f2f2f2;
-    padding: 2rem 1rem 3rem;
   }
 
   .home-hero-inner {

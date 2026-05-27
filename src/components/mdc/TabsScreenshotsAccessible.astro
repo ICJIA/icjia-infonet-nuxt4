@@ -122,22 +122,25 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
                       || img.attributes?.name?.replace(/\.\w+$/, '').replace(/_/g, ' ')
                       || 'Screenshot';
                     const caption = img.attributes?.caption?.trim() || null;
-                    const w = img.attributes?.width;
-                    const h = img.attributes?.height;
                     if (!src) return null;
                     return (
                       <figure class="ts-figure">
-                        <a href={src} target="_blank" rel="noopener noreferrer" class="ts-img-link" aria-label={`View full screenshot: ${alt}`}>
+                        <button
+                          type="button"
+                          class="ts-img-link"
+                          data-screenshot-src={src}
+                          data-screenshot-alt={alt}
+                          data-screenshot-caption={caption ?? ''}
+                          aria-label={`View full screenshot: ${alt}`}
+                        >
                           <img
                             src={src}
                             alt={alt}
                             loading="lazy"
                             decoding="async"
                             class="ts-img"
-                            {...(w ? { width: w } : {})}
-                            {...(h ? { height: h } : {})}
                           />
-                        </a>
+                        </button>
                         {caption && <figcaption class="ts-caption">{caption}</figcaption>}
                       </figure>
                     );
@@ -150,6 +153,62 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
       </div>
     </div>
   </div>
+
+  <!-- Modal lightbox: shared across all tabs/screenshots -->
+  <div
+    id="ts-modal"
+    class="ts-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ts-modal-caption"
+    data-open="false"
+  >
+    <div class="ts-modal__inner">
+      <button type="button" class="ts-modal__close" id="ts-modal-close" aria-label="Close screenshot">&times;</button>
+      <img id="ts-modal-img" class="ts-modal__img" src="" alt="" />
+      <div id="ts-modal-caption" class="ts-modal__caption"></div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('ts-modal');
+    const modalImg = document.getElementById('ts-modal-img');
+    const modalCap = document.getElementById('ts-modal-caption');
+    const modalClose = document.getElementById('ts-modal-close');
+    const triggers = document.querySelectorAll('button.ts-img-link');
+    let lastFocused = null;
+    function openModal(src, alt, caption) {
+      if (!modal || !(modalImg instanceof HTMLImageElement)) return;
+      lastFocused = document.activeElement;
+      modalImg.src = src;
+      modalImg.alt = alt;
+      if (modalCap) modalCap.textContent = caption || alt;
+      modal.setAttribute('data-open', 'true');
+      document.body.style.overflow = 'hidden';
+      if (modalClose instanceof HTMLButtonElement) modalClose.focus();
+    }
+    function closeModal() {
+      if (!modal) return;
+      modal.setAttribute('data-open', 'false');
+      document.body.style.overflow = '';
+      if (lastFocused instanceof HTMLElement) lastFocused.focus();
+    }
+    triggers.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const src = btn.getAttribute('data-screenshot-src') || '';
+        const alt = btn.getAttribute('data-screenshot-alt') || '';
+        const caption = btn.getAttribute('data-screenshot-caption') || '';
+        if (src) openModal(src, alt, caption);
+      });
+    });
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modal) modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.getAttribute('data-open') === 'true') closeModal();
+    });
+  </script>
 )}
 
 <style>
@@ -267,17 +326,32 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     font-size: 0.9375rem;
   }
 
-  /* Image gallery */
+  /* Image gallery — 3-col thumbnail grid (matches legacy InfoNet Screenshots layout) */
   .ts-gallery {
-    margin-top: 3rem;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem 1.5rem;
+  }
+  @media (max-width: 900px) {
+    .ts-gallery { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .ts-gallery { grid-template-columns: 1fr; }
   }
 
   .ts-figure {
-    margin: 0 0 1.5rem;
+    margin: 0;
+    text-align: center;
   }
 
   .ts-img-link {
     display: block;
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: zoom-in;
   }
 
   .ts-img {
@@ -285,15 +359,82 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     height: auto;
     display: block;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 2px;
+    transition: opacity 0.15s;
+  }
+  .ts-img-link:hover .ts-img,
+  .ts-img-link:focus-visible .ts-img {
+    opacity: 0.85;
+    outline: 2px solid #0d4270;
+    outline-offset: 2px;
   }
 
   .ts-caption {
-    font-size: 11px;
-    font-weight: 900;
+    font-size: 12px;
+    font-weight: 700;
     text-align: center;
     padding: 0.5rem 0.25rem 0;
-    color: #555;
+    color: #333;
+  }
+
+  /* Modal (lightbox) */
+  .ts-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 2rem;
+  }
+  .ts-modal[data-open="true"] { display: flex; }
+  .ts-modal__inner {
+    position: relative;
+    max-width: 95vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ts-modal__img {
+    max-width: 100%;
+    max-height: 80vh;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    background: #fff;
+  }
+  .ts-modal__caption {
+    color: #fff;
+    margin-top: 0.75rem;
+    font-size: 14px;
+    text-align: center;
+    max-width: 800px;
+  }
+  .ts-modal__close {
+    position: absolute;
+    top: -2.5rem;
+    right: -0.5rem;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ts-modal__close:hover,
+  .ts-modal__close:focus-visible {
+    background: rgba(255, 255, 255, 0.15);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ts-img { transition: none; }
   }
 
   .ts-no-tabs {
