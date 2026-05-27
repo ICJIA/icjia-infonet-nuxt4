@@ -24,7 +24,8 @@ const posts = parsed.posts.data.sort(
     <h1 class="news-page__heading">News &amp; Updates</h1>
     <div class="news-page__rule"></div>
 
-    <div class="news-grid">
+    <!-- 2-col card grid at ≥960 px (Vuetify md), stacked below. -->
+    <div class="grid grid-cols-1 min-[960px]:grid-cols-2 gap-6">
       {posts.map((p) => <NewsCard post={p} />)}
     </div>
   </div>
@@ -45,15 +46,7 @@ const posts = parsed.posts.data.sort(
     margin-bottom: 1.5rem;
   }
 
-  .news-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 960px) {
-    .news-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
+  /* News grid: replaced by Tailwind utilities inline
+     (grid grid-cols-1 min-[960px]:grid-cols-2 gap-6) — mirrors
+     legacy Vuetify <v-row><v-col cols=12 md=6>. */
 </style>
