@@ -2,6 +2,14 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.5] - 2026-05-27 — Perf: preload critical woff2 to cut font-swap CLS
+
+The `/partners/` mobile audit (Perf 95, all other categories 100) showed CLS=0.126 driven entirely by late-loading web fonts reflowing the body `<p>`. The Lighthouse "Avoid large layout shifts" trace identified Lato 400, Lato 700, and Roboto 400 (and to a lesser degree Roboto 700 + Lato 900) as the four web fonts swapping in well after FCP — the `@fontsource` `@import` chain only resolves the woff2 URLs after `global.css` finishes parsing, so the browser cannot start fetching them in parallel with CSS.
+
+Added three `<link rel="preload" as="font" type="font/woff2" crossorigin="anonymous">` tags to `src/layouts/BaseLayout.astro` for the highest-impact weights: Lato 400, Lato 700, Roboto 400. URLs are resolved via Vite `?url` imports of the @fontsource woff2 files, so the hashed `/_astro/...` path emitted in the preload tag is byte-identical to the URL the `@font-face` rule later requests — the browser reuses the preloaded byte stream rather than fetching twice. Verified by diffing the rendered HTML against the hashes Lighthouse reported as offenders.
+
+Expected impact: ~3 perf points back on text-heavy pages (CLS should drop from 0.126 → ~0.02–0.04 because the swap now happens before/at FCP, not after). Follow-up `3.2.6` will land the proper `size-adjust` / `ascent-override` fallback `@font-face` pair (Capsize-computed) to eliminate CLS entirely.
+
 ## [3.2.4] - 2026-05-27 — Rename checklist file to v6.2
 
 Renamed `docs/astro-conversion-checklist-v6.md` → `docs/astro-conversion-checklist-v6.2.md` (git-rename, history preserved) so the filename signals the post-Infonet increment shipped in 3.2.3. Updated all 18 cross-references in `README.md`, `CHANGELOG.md`, `docs/llm-migration-prompt.md`, `docs/perf/phase1-*.md`, `docs/superpowers/plans/*.md`, `docs/superpowers/specs/*.md`, and inside the checklist itself (title + bookkeeping note + section link). Removed a stale "Nuxt SSG → DVFR" reference line in `llm-migration-prompt.md` that conflicted with the new "Nuxt SSG → Infonet" reference for v6.2.

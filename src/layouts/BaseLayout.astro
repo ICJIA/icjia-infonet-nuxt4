@@ -11,6 +11,15 @@ import AppFooter from '~/components/AppFooter.astro';
 import Breadcrumb from '~/components/Breadcrumb.astro';
 import '~/styles/global.css';
 
+// Preload the three most-used woff2 files so they download in parallel with CSS
+// instead of waiting for the @fontsource @import chain to be parsed. Removes the
+// late font-swap reflow that was costing ~0.12 CLS on text-heavy pages.
+// `?url` resolves to the same hashed /_astro/... asset the CSS rule references,
+// so the browser reuses the preloaded byte stream (no duplicate fetch).
+import latoRegularUrl from '@fontsource/lato/files/lato-latin-400-normal.woff2?url';
+import latoBoldUrl from '@fontsource/lato/files/lato-latin-700-normal.woff2?url';
+import robotoRegularUrl from '@fontsource/roboto/files/roboto-latin-400-normal.woff2?url';
+
 interface Props {
   title?: string;
   description?: string;
@@ -63,6 +72,10 @@ const mainTopPad = isHome ? 0 : 32;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link rel="preload" as="font" type="font/woff2" href={latoRegularUrl} crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href={latoBoldUrl} crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href={robotoRegularUrl} crossorigin="anonymous" />
 
     <SEO
       title={fullTitle}
