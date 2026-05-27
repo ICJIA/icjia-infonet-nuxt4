@@ -165,15 +165,21 @@
     padding-bottom: 40px;
   }
 
-  /* Visually hidden — screen-reader only, NOT collapsible */
+  /* Visually hidden — screen-reader only, NOT collapsible.
+     `left: -10000px` pushes the table fully off-canvas so its natural
+     content width can't expand document.scrollWidth on narrow viewports
+     (was causing ~64 px horizontal overflow at <520 px before the fix). */
   .sr-only-table {
     position: absolute;
+    left: -10000px;
+    top: auto;
     width: 1px;
     height: 1px;
     padding: 0;
     margin: -1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
     white-space: nowrap;
     border: 0;
   }
