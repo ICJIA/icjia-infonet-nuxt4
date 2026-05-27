@@ -93,34 +93,40 @@ const description =
     max-width: 640px;
   }
 
+  /* Match legacy rendered dimensions (measured 2026-05-26):
+     badge: font-size 12.8px (0.8em × 16px root), margin-top 35px
+     h1:    font-size 75px, line-height 1.5, color #0b3a62, margin-top 8px
+     h2:    font-size 18px, line-height 1.25, margin -10px 0 32px */
   .home-badge {
     display: inline-block;
     font-weight: 900;
-    font-size: 0.8em;
+    font-size: 0.8em;          /* 12.8px at 16px root */
     color: #fff;
     background: #0d4474;
     padding: 5px 10px;
     border-radius: 3px;
-    margin-bottom: 6px;
+    margin-top: 35px;
+    margin-bottom: 5px;
     line-height: 1.4;
   }
 
   .infonet-title {
     font-family: 'Raleway', 'Arial Black', sans-serif;
     font-weight: 900;
-    font-size: clamp(60px, 10vw, 100px);
-    line-height: 1.05;
-    color: #0d4270;
-    margin: 0;
+    font-size: 75px;            /* legacy renders at 75px */
+    line-height: 1.5;            /* legacy 112.5px / 75px = 1.5 */
+    color: #0b3a62;              /* legacy color (slightly different blue) */
+    margin: 8px 0 0;
     padding: 0;
     border: none;
   }
 
   .infonet-tagline {
-    font-size: 1.125rem;   /* 18px */
+    font-size: 18px;            /* matches legacy exactly */
     font-weight: 400;
+    line-height: 1.25;           /* legacy 22.5px / 18px = 1.25 */
     color: #222;
-    margin-top: -4px;
+    margin-top: -5px;
     margin-bottom: 2rem;
     padding-left: 2px;
     border: none;

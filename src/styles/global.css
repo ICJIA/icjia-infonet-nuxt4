@@ -79,11 +79,16 @@
   --font-sans: 'Lato', sans-serif;
   --font-heading: 'Raleway', sans-serif;
 
-  /* WCAG SC 1.4.8 (AAA) — 112.5% root font-size per legacy variables.scss */
-  --font-size-root: 112.5%;
+  /* Root font-size = 16px (browser default). Legacy variables.scss has
+     $font-size-root: 112.5% as a Sass variable for Vuetify's Material
+     typography scale, but Vuetify does NOT propagate it to the rendered
+     <html> font-size. Verified via getComputedStyle on legacy production:
+     every rendered text element uses 16px base, not 18px. Setting 100%
+     here matches that. */
+  --font-size-root: 100%;
 }
 
-/* Root font-size — legacy WCAG AAA hook */
+/* Root font-size — match legacy rendered base (16px) */
 html { font-size: var(--font-size-root); }
 
 /* Vuetify accessibility override carried over — legacy app.css:226
