@@ -54,7 +54,7 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
   description={description}
   breadcrumbTitle={breadcrumbLabel || (attr.title ?? undefined)}
 >
-  <article class="page-detail">
+  <article class:list={["page-detail", `page-detail--${attr.slug}`]}>
     <h1 class="page-h1">{attr.title?.toUpperCase()}</h1>
     {segments.length > 0 ? (
       <div class="markdown-body">
@@ -88,6 +88,30 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 1rem 3rem;
+  }
+
+  /* /agencies/ — long list of victim-service providers organized under three
+     h2 sections. Legacy site rendered each section in a 2-column flow.
+     CSS multi-column with break-before-column on h2 lets each section's
+     names flow across two columns naturally on desktop, stacking on mobile. */
+  @media (min-width: 768px) {
+    .page-detail--agencies .markdown-body {
+      column-count: 2;
+      column-gap: 2.5rem;
+    }
+    .page-detail--agencies .markdown-body h2 {
+      column-span: all;
+      margin-top: 2rem;
+    }
+    .page-detail--agencies .markdown-body h2:first-child {
+      margin-top: 0;
+    }
+    /* Keep an agency entry (paragraph or list-item) from being split across
+       columns mid-name. */
+    .page-detail--agencies .markdown-body p,
+    .page-detail--agencies .markdown-body li {
+      break-inside: avoid;
+    }
   }
 
   /* h1: dark text (not brand blue), uppercase, with hairline separator below */
