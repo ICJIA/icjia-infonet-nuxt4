@@ -2,6 +2,12 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.6] - 2026-05-27 — Docs: capture preload-first font-CLS lesson; defer size-adjust
+
+Post-3.2.5 re-audit confirmed `/partners/` mobile Perf **95 → 100** with CLS dropped off the failure list site-wide. The planned follow-up (Capsize-tuned `size-adjust`/`ascent-override` fallback `@font-face`) was reviewed and **skipped** — preload alone got CLS into the green band, so size-adjust would yield zero measurable Lighthouse improvement while introducing visual-drift risk on edge cases (long unbroken words, italic runs, narrow viewports). Documented the full pattern in `docs/astro-conversion-checklist-v6.2.md` under the "Infonet post-cutover" section: the `?url`-import preload technique, why it dedupes with the `@fontsource` `@import` chain (Vite content-hashes by file content), the "highest-impact 2–3 weights only" heuristic to avoid stealing bandwidth from CSS/HTML, and the explicit rule **"preload first → measure → size-adjust fallback only if CLS still > 0.1"** so the next migration doesn't reach for the heavier fix prematurely.
+
+No code changes in this release — docs-only.
+
 ## [3.2.5] - 2026-05-27 — Perf: preload critical woff2 to cut font-swap CLS
 
 The `/partners/` mobile audit (Perf 95, all other categories 100) showed CLS=0.126 driven entirely by late-loading web fonts reflowing the body `<p>`. The Lighthouse "Avoid large layout shifts" trace identified Lato 400, Lato 700, and Roboto 400 (and to a lesser degree Roboto 700 + Lato 900) as the four web fonts swapping in well after FCP — the `@fontsource` `@import` chain only resolves the woff2 URLs after `global.css` finishes parsing, so the browser cannot start fetching them in parallel with CSS.

@@ -4080,6 +4080,31 @@ Astro's `build.inlineStylesheets` default `'auto'` inlines stylesheets under ~4 
 
 If a single text-LCP page (e.g. /about/) is the only laggard, the right scoped fix is per-page critical CSS extraction, not a global inline flip. Treat critical CSS as a Phase 7 polish task — don't chase it earlier.
 
+#### Preload critical `@fontsource` woff2 to eliminate font-swap CLS on text-heavy pages
+
+`@fontsource/*` packages are imported via `@import '@fontsource/<family>/<weight>.css'` in `src/styles/global.css`. Each of those CSS files defines a `@font-face` rule whose `url(./files/...woff2)` is rewritten by Vite to a hashed `/_astro/<family>-latin-<weight>-normal.<hash>.woff2`. The catch: the browser doesn't discover these URLs until it parses the bundled `global.css`. Result: on text-heavy pages, web fonts arrive well after FCP, swap in via `font-display: swap`, and reflow the body — CLS lands around **0.12–0.13** (above the "good" threshold of 0.1) and costs ~4–5 mobile perf points.
+
+The fix is three `<link rel="preload">` tags in `BaseLayout.astro` using Vite `?url` imports of the same woff2 files the `@font-face` rules reference:
+
+```astro
+---
+import latoRegularUrl from '@fontsource/lato/files/lato-latin-400-normal.woff2?url';
+import latoBoldUrl from '@fontsource/lato/files/lato-latin-700-normal.woff2?url';
+import robotoRegularUrl from '@fontsource/roboto/files/roboto-latin-400-normal.woff2?url';
+---
+<link rel="preload" as="font" type="font/woff2" href={latoRegularUrl} crossorigin="anonymous" />
+<link rel="preload" as="font" type="font/woff2" href={latoBoldUrl} crossorigin="anonymous" />
+<link rel="preload" as="font" type="font/woff2" href={robotoRegularUrl} crossorigin="anonymous" />
+```
+
+**Why this dedupes with the @fontsource @import chain:** Vite content-hashes assets by file content, so `?url` resolves to the byte-identical `/_astro/lato-latin-400-normal.<hash>.woff2` the CSS rule later requests. The `crossorigin="anonymous"` attribute matches the request mode the CSS-driven font fetch uses (fonts always go anonymous CORS). Browser sees the preload link in `<head>`, starts fetching in parallel with CSS, then when the `@font-face` rule resolves it finds the response already cached — one fetch, no duplicate, font available before/at FCP.
+
+**Pick the highest-impact 2–3 weights only.** Preloading every weight steals bandwidth from CSS/HTML and regresses FCP. The heuristic: read Lighthouse's "Avoid large layout shifts" trace — every `cause: "Web font loaded"` URL is a candidate. Preload the 2–3 most cited, leave the rest to fall back gracefully. For Infonet that was Lato 400 (UI body), Lato 700 (heading), Roboto 400 (markdown body). Lato 900 (h1 only) and Roboto 700 (markdown bold) shifted less and weren't worth the bandwidth.
+
+**Impact (Infonet `/partners/` 2026-05-27):** mobile Perf **95 → 100**, CLS dropped off the failure list entirely. `/news/` mobile 100, `/data-and-publications/` 99 (image-LCP issue, unrelated), `/` mobile 98 (render-blocking + unused JS, unrelated). No regression on any audited route.
+
+**When NOT to also add `size-adjust` / `ascent-override` fallback `@font-face`:** the original plan was to follow this with Capsize-tuned fallback fonts. Skipped after measuring — preload alone got CLS into the green band, so the size-adjust work would yield zero measurable Lighthouse improvement while introducing visual-drift risk (slightly off size-adjust values cause subtle text reflow on edge cases: long unbroken words, italic runs, narrow viewports). **Reach for size-adjust fallback only if preload doesn't get you to CLS ≤ 0.1.** Order is: preload first → measure → size-adjust only if still failing.
+
 #### Build chain: two-pass `astro build` for any CMS image manifest
 
 For Tier 2 image manifests (Sharp-resampled CMS images written to `public/_cms-img/`), the page templates import the manifest JSON. **Vite resolves these imports at bundle time — the file must EXIST as a committed JSON file before the first `astro build` runs**, or the build fails with `Could not resolve "~/data/<name>.json"`.
