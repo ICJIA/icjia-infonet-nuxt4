@@ -326,18 +326,14 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     font-size: 0.9375rem;
   }
 
-  /* Image gallery — 3-col thumbnail grid (matches legacy InfoNet Screenshots layout) */
+  /* Image gallery — responsive thumbnail grid matching legacy layout.
+     auto-fill with min ~245px lets 4 cols fit at wide viewports (1280px+),
+     3 cols at mid (~900-1280px), 2 cols on tablet (~600-900px), 1 mobile. */
   .ts-gallery {
     margin-top: 2rem;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
     gap: 2rem 1.5rem;
-  }
-  @media (max-width: 900px) {
-    .ts-gallery { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 600px) {
-    .ts-gallery { grid-template-columns: 1fr; }
   }
 
   .ts-figure {
@@ -377,11 +373,11 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     color: #333;
   }
 
-  /* Modal (lightbox) */
+  /* Modal (lightbox) — matches legacy: white modal box on semi-dim backdrop */
   .ts-modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.55);
     display: none;
     align-items: center;
     justify-content: center;
@@ -391,47 +387,59 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
   .ts-modal[data-open="true"] { display: flex; }
   .ts-modal__inner {
     position: relative;
-    max-width: 95vw;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    max-width: 1100px;
+    width: 100%;
     max-height: 90vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    overflow: hidden;
   }
   .ts-modal__img {
-    max-width: 100%;
-    max-height: 80vh;
-    border: 1px solid #ddd;
-    border-radius: 2px;
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    object-fit: contain;
+    display: block;
     background: #fff;
   }
   .ts-modal__caption {
     color: #fff;
     margin-top: 0.75rem;
     font-size: 14px;
+    font-weight: 700;
     text-align: center;
-    max-width: 800px;
+    /* Caption sits in the modal backdrop area below the white box (per legacy) */
+    position: absolute;
+    bottom: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
   }
   .ts-modal__close {
     position: absolute;
-    top: -2.5rem;
-    right: -0.5rem;
-    background: transparent;
-    border: 2px solid #fff;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
     color: #fff;
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    font-size: 24px;
+    font-size: 22px;
     line-height: 1;
     cursor: pointer;
     font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
   }
   .ts-modal__close:hover,
   .ts-modal__close:focus-visible {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.35);
   }
   @media (prefers-reduced-motion: reduce) {
     .ts-img { transition: none; }
