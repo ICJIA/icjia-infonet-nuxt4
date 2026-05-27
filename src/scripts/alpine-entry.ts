@@ -17,8 +17,8 @@ Alpine.plugin(focus);
 // Without this defer, `Alpine.data('foo', ...)` registrations in page
 // scripts race with Alpine.start() and lose — Alpine reports
 // "foo is not defined" when it tries to evaluate x-data.
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => Alpine.start());
-} else {
-  Alpine.start();
-}
+// Hard-defer to next event loop tick so per-page `<script>` blocks that
+// register `Alpine.data` via the `alpine:init` event run BEFORE Alpine
+// boots. With same-tick start, the data factory in the page bundle
+// races and loses.
+setTimeout(() => Alpine.start(), 0);
