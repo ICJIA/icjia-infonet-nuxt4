@@ -1,8 +1,27 @@
 # ICJIA InfoNet
 
+<p align="center">
+  <a href="https://infonet.icjia.illinois.gov">
+    <img src="./public/og-image.png" alt="InfoNet — statewide victim-services data collection &amp; reporting system" width="800">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://app.netlify.com/sites/icjia-infonet/deploys"><img alt="Netlify status" src="https://api.netlify.com/api/v1/badges/f9b9ef26-d98b-4df5-8d10-77c1a2b72189/deploy-status"></a>
+  <img alt="Astro" src="https://img.shields.io/badge/Astro-6-FF5D01?logo=astro&logoColor=white">
+  <img alt="Alpine.js" src="https://img.shields.io/badge/Alpine.js-3-77C1D2?logo=alpine.js&logoColor=white">
+  <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-4-38BDF8?logo=tailwindcss&logoColor=white">
+  <img alt="Pagefind" src="https://img.shields.io/badge/Pagefind-1.5-7C3AED">
+  <img alt="Node" src="https://img.shields.io/badge/Node-22%20LTS-339933?logo=node.js&logoColor=white">
+  <img alt="pnpm" src="https://img.shields.io/badge/pnpm-10-F69220?logo=pnpm&logoColor=white">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-green">
+</p>
+
 Production source for [infonet.icjia.illinois.gov](https://infonet.icjia.illinois.gov).
 
 **Stack:** Astro 6 · Alpine.js 3 · Tailwind 4 · Pagefind · Sharp · Strapi v4 GraphQL
+
+The hero artwork above is generated from [`public/og-image.svg`](./public/og-image.svg) — edit the SVG and run `pnpm og:image` to regenerate the 1200×630 PNG used for Open Graph / Twitter cards.
 
 InfoNet is a web-based data collection and reporting system used by victim service providers in Illinois to facilitate standardized statewide data collection. This repo is the public website, migrated to Astro from Nuxt 4 + Vuetify in v3.0.0 (2026-05-26).
 
