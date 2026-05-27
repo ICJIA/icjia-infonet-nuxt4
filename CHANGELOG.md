@@ -2,6 +2,23 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.14] - 2026-05-27 — 404 content centered + checklist note
+
+### `src/pages/404.astro` — center every text element in the main column
+
+The 3.2.11 redesign was left-aligned (defaults inherited from `<main>`). Added `text-align: center` to `.not-found-hero` (cascade source) plus explicit leaf-element rules — `.not-found-number`, `.not-found-title`, `.not-found-lede`, `.not-found-links__heading`, `.not-found-help` — and `margin-left/right: auto` on `.not-found-search` (a flex box, so the wrapper centers via margins rather than text-align). Leaf-level `text-align: center` is intentional belt-and-suspenders: if a future utility/reset clobbers the parent's `text-align`, the leaves still center. Cards themselves keep their internal flex layout (text left, arrow right — natural reading order); only the card *grid* is centered via the existing `mx-auto max-w-[1100px]` container.
+
+### `docs/astro-conversion-checklist-v6.2.md` — 404 page as a reusable pattern
+
+Added a new sub-section "**404 page — stylish, on-brand, content centered in the main column**" to the Infonet post-cutover increment area. Captures the full pattern as a reusable template for the flagship + future ICJIA migrations:
+
+- **5 required ingredients** (`BaseLayout` + `noindex`, hero band matching the home, Pagefind deep-link search form, 4-6 quick-link cards in a `min-[960px]:grid-cols-2` grid, fallback "contact us" help line)
+- **Why every text leaf gets explicit `text-align: center`** (belt-and-suspenders against future utility/reset overrides)
+- **What stays left-aligned inside cards** (natural reading order — text left, arrow right)
+- **A11y discipline** (`aria-hidden` on decorative SVGs, `prefers-reduced-motion` opt-out on every transition + keyframe, `:focus-visible` halos)
+- **Post-deploy verification checklist** (viewcap diff at 5 widths, manual 404 trigger, search hand-off test, Lighthouse a11y/bp/seo)
+- **Reusability note** — same pattern fits `/search-no-results/`, maintenance pages, any "this isn't the content you wanted" exit point
+
 ## [3.2.13] - 2026-05-27 — Docs: capture `/sitemap.xml` routing pattern
 
 Added a new sub-section "**`/sitemap.xml` routing — rewrite to the flat shard, not the index**" to `docs/astro-conversion-checklist-v6.2.md` in the Infonet post-cutover increment area. Captures:

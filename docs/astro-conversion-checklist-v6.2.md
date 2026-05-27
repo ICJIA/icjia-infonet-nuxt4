@@ -4192,6 +4192,48 @@ The original literal paths (`/sitemap-index.xml` and `/sitemap-0.xml`) remain re
 
 **At flagship scale (icjia.illinois.gov, 2000+ pages):** the index/shard split becomes meaningful — `entryLimit: 45000` in `astro.config.ts`'s sitemap integration keeps everything in `sitemap-0.xml`, but if you bump above 45k (or split intentionally for crawler-budget reasons), you'd have `sitemap-0.xml`, `sitemap-1.xml`, … and `sitemap-index.xml` is the canonical entry point. **At that scale, point `/sitemap.xml` → `/sitemap-index.xml`** (and let crawlers follow the indirection); the index becomes useful again. Decision rubric: **flat shard if one file fits, index if multiple shards are emitted.**
 
+#### 404 page — stylish, on-brand, content centered in the main column
+
+The default Astro `src/pages/404.astro` is three lines of unstyled text inside `<main>`. On a polished gov site that becomes a UX cliff the moment any link rots — visitors land on what looks like a broken page. Replace with a designed, helpful 404 in the same visual language as the rest of the site.
+
+**Required ingredients** (Infonet pattern, verified):
+
+1. **`BaseLayout` wrap with `noindex={true}` + `title="Page Not Found"`.** The layout's existing JSON-LD default (`WebPage` with `noindex` honored via the SEO component) is fine — a 404 doesn't need a custom schema. `noindex` keeps the page out of crawler indexes; some scanners flag indexed 404s as soft-404s.
+2. **Hero band matching the home** (`bg-[#f2f2f2]` + navy `#0d4270` Raleway 900 type). The big `404` numeral as the visual anchor, `aria-hidden="true"` (decorative; the `<h1>` carries the announcement). `background-clip: text` with a navy-to-blue gradient gives depth without an image asset.
+3. **Pagefind deep-link search form** submitting to `/search/?q=…` via `method="get"`. The existing `/search/` page already reads `?q=` from `URLSearchParams` and pre-fills the Pagefind input, so the hand-off is seamless. Joined input+button at ≥480 px, stacked on narrow phones. Navy focus ring, 48 px target height (touch-friendly). `role="search"` + `aria-label="Search InfoNet"`.
+4. **Quick-link grid** with 4–6 cards covering the top sections (Home, About, News, Data & Publications, Partners, Contact). **Cards: 1-col mobile → 2-col at `min-[960px]:`** (Vuetify md parity per the Hard Rule). Each card is a single `<a>` wrap with `<h3>` + blurb + arrow icon — no `aria-label` override (per the v6.2 `label-content-name-mismatch` lesson).
+5. **Fallback help line** below the grid: "Still can't find what you're looking for? Contact the InfoNet team." Anchored to `/contact/`.
+
+**Content centered in the main column.** Default Astro `<main>` has no horizontal centering — content butts up against the left edge. For the 404, **explicitly center every text-bearing element** so the page reads as a deliberate composition rather than a default-stylesheet leftover:
+
+```css
+.not-found-hero            { text-align: center; }   /* cascades to children */
+.not-found-number          { text-align: center; }   /* explicit, in case of override */
+.not-found-title           { text-align: center; }
+.not-found-lede            { margin: 0 auto 1.75rem; text-align: center; }   /* + max-width centers the box */
+.not-found-search          { margin-left: auto; margin-right: auto; }        /* form is a flex box */
+.not-found-links__heading  { text-align: center; }
+.not-found-help            { text-align: center; }
+```
+
+The cards themselves keep their **internal flex** layout (text left, arrow right) — that's natural reading order; centering card content makes it feel uncertain. The card *grid* is already centered via the outer `mx-auto max-w-[1100px]` container.
+
+**Why explicit `text-align: center` on every leaf rule (vs only on `.not-found-hero`):** the hero section inherits, but as soon as a Tailwind utility or component-scoped reset clobbers `text-align` (e.g. a future `prose` class addition), only the leaf rules survive. Belt + suspenders for a page that should remain centered forever.
+
+**A11y + motion:**
+- All decorative SVGs (`aria-hidden="true"`).
+- `prefers-reduced-motion: reduce` opt-out on every transition AND the 404-fade keyframe (reduced-motion users get the same layout with no animation).
+- `:focus-visible` outline (3 px navy halo) on every interactive element.
+- The big `404` numeral is `aria-hidden`; the `<h1>` ("We couldn't find that page") is what assistive tech announces.
+
+**Verification post-deploy:**
+- viewcap diff at 5 widths (375, 768, 1024, 1280, 1920) vs the design intent — content stays centered at every width.
+- Click an intentionally-broken URL → 404 renders with the new design (Netlify serves `dist/404.html` automatically for unmatched paths).
+- Search form: typing "InfoNet" + Enter lands on `/search/?q=InfoNet` with the Pagefind input pre-filled and results visible.
+- Lighthouse mobile audit on the 404 itself: A11y 100, BP 100, SEO 100 (Perf is irrelevant — it's a 404).
+
+**Reusability:** the same pattern (`BaseLayout` + hero band + Pagefind form + curated grid + help line) is the right shape for `/search-no-results/` pages, maintenance pages, and any other "this isn't the content you wanted" exit point. Treat the 404 as a template; copy-paste-rename for the next dead-end.
+
 #### Build chain: two-pass `astro build` for any CMS image manifest
 
 For Tier 2 image manifests (Sharp-resampled CMS images written to `public/_cms-img/`), the page templates import the manifest JSON. **Vite resolves these imports at bundle time — the file must EXIST as a committed JSON file before the first `astro build` runs**, or the build fails with `Could not resolve "~/data/<name>.json"`.
