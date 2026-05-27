@@ -28,5 +28,9 @@ pnpm-debug.log*
 .idea/
 .claude/
 
-public/_cms-img/dap/
-src/data/dap-splash-manifest.json
+# Note: public/_cms-img/dap/ is already covered by `public/_cms-img/` above.
+# Note: src/data/dap-splash-manifest.json IS committed so the first
+# `astro build` pass can resolve the import in
+# src/pages/data-and-publications/index.astro.
+# fetch-dap-splash.mjs regenerates the manifest between the two build
+# passes (same pattern as src/lib/cms-image-manifest.json).
