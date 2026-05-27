@@ -125,10 +125,13 @@ const pathname = Astro.url.pathname;
     <!-- ── Spacer (desktop — pushes nav items right) ────────────────── -->
     <div style="flex: 1;"></div>
 
-    <!-- ── Desktop nav items (≥ 960px) ─────────────────────────────── -->
+    <!-- ── Desktop nav items
+         Plain links: visible at md+ (≥ 960px) — matches legacy `hidden-sm-and-down`
+         Dropdowns:  visible at lg+ (≥ 1280px) — matches legacy `hidden-md-and-down`
+         The wrapper is md-show; per-item class adjusts further for dropdown items. -->
     <span class="md-show" style="align-items: center; gap: 0;">
       {topNav.map((menu) => (
-        <span style="display: inline-flex; align-items: center;">
+        <span class={menu.children ? 'lg-only' : ''} style="display: inline-flex; align-items: center;">
           {menu.children ? (
             <details class="nav-dropdown">
               <summary
@@ -371,6 +374,18 @@ const pathname = Astro.url.pathname;
   }
   .md-hide {
     display: none !important;
+  }
+}
+
+/* Dropdown items (About / Resources) hide on md (960-1264px), show on lg+
+   Matches legacy Vuetify `hidden-md-and-down` class on dropdown nav items. */
+.lg-only {
+  display: none !important;
+}
+@media (min-width: 1264px) {
+  .lg-only {
+    display: inline-flex !important;
+    align-items: center;
   }
 }
 
