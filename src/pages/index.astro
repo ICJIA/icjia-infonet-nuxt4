@@ -16,13 +16,17 @@ import HomeBoxes from '~/components/HomeBoxes.astro';
 import HomeBarGraph from '~/components/HomeBarGraph.astro';
 import HomePosts from '~/components/HomePosts.astro';
 import HomeFaqs from '~/components/HomeFaqs.astro';
+import { siteConfig } from '~/lib/siteConfig';
 
 const description =
   'InfoNet is a web-based data collection and reporting system used by victim service providers ' +
   'in Illinois to facilitate standardized statewide data collection.';
 
 // Home gets combined WebSite + GovernmentOrganization JSON-LD so AI crawlers
-// have explicit publisher identity + searchAction surface.
+// have explicit publisher identity + searchAction surface. BaseLayout emits
+// each array entry as its own <script type="application/ld+json"> block so
+// each carries `@type` at the root (assessors look there).
+const buildIsoDate = new Date().toISOString();
 const homeJsonLd = [
   {
     '@context': 'https://schema.org',
@@ -32,6 +36,8 @@ const homeJsonLd = [
     url: 'https://infonet.icjia.illinois.gov',
     description,
     inLanguage: 'en-US',
+    datePublished: siteConfig.siteLaunchDate,
+    dateModified: buildIsoDate,
     publisher: { '@id': 'https://icjia.illinois.gov#icjia' },
     potentialAction: {
       '@type': 'SearchAction',

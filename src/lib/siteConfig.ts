@@ -9,6 +9,10 @@ export const siteConfig = {
   siteOrigin: 'https://infonet.icjia.illinois.gov',
   siteName: 'InfoNet',
   siteShortName: 'InfoNet',
+  /** v3 cutover date (Astro/Alpine/Tailwind launch). Used as `datePublished`
+   *  for static pages in JSON-LD output. `dateModified` is captured at build
+   *  time via `new Date().toISOString()` inside BaseLayout. */
+  siteLaunchDate: '2026-05-26',
   titleTemplate: 'ICJIA | %s',
   defaultDescription:
     'InfoNet is a web-based data collection and reporting system used by ' +

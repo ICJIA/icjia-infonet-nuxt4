@@ -2,6 +2,27 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.10] - 2026-05-27 — AI readiness pass 2: per-entry @type + freshness on every page
+
+Second pass on the AI Readiness Assessment after 3.2.9. Two issues remained when the assessor re-scanned the home:
+
+1. **JSON-LD WARN — "JSON-LD present but missing @type"**: 3.2.9 emitted the home schema as a single `<script type="application/ld+json">` containing a JSON ARRAY `[{WebSite}, {GovernmentOrganization}]`. The assessor `JSON.parse()`s the script body and looks for `.@type` at the top level — arrays don't have `@type` (only their members do). Fix: `BaseLayout.astro` now coerces `effectiveJsonLd` to an array and emits **one `<script>` per entry**, so each block has `@type` at the JSON root.
+2. **Content Freshness FAIL on static pages**: 3.2.9 added `datePublished`/`dateModified` to news articles only. Static pages (home, about, partners, etc.) had no dates. Added two fields to every default JSON-LD output:
+   - `datePublished` = `siteConfig.siteLaunchDate` (new constant set to `2026-05-26`, the v3 Astro cutover date)
+   - `dateModified` = `new Date().toISOString()` captured at build time (every deploy refreshes the freshness signal)
+
+   Applied uniformly to: the default `WebPage` schema in `BaseLayout.astro` (covers all static pages) AND the home `WebSite` entry in `src/pages/index.astro`. News articles continue to use Strapi's `dateOverride > publishedAt > createdAt` / `updatedAt` chain.
+
+### Verification (built output)
+
+- Home `dist/index.html` now emits TWO separate `<script type="application/ld+json">` blocks:
+  - Block 1: `{"@type":"WebSite",...,"datePublished":"2026-05-26","dateModified":"2026-05-27T20:24:45.594Z",...}`
+  - Block 2: `{"@type":"GovernmentOrganization",...}` (organizations don't need a date)
+- `dist/partners/index.html` (representative static page): `{"@type":"WebPage",...,"datePublished":"2026-05-26","dateModified":"2026-05-27T20:24:45.617Z",...}`
+- News articles unchanged: `{"@type":"NewsArticle",...,"datePublished":"2024-06-28","dateModified":"2025-03-21T16:32:48.668Z",...}` + `article:published_time`/`article:modified_time` meta
+
+Expected re-scan: all three previously failing/warning items flip to PASS.
+
 ## [3.2.9] - 2026-05-27 — AI readiness: JSON-LD + article meta + llms.txt
 
 Closed the three "FAIL" items reported by the AI Readiness Assessment (JSON-LD Structured Data, Content Freshness, llms.txt). All three are now site-wide, page-type-aware, and emitted at build time.

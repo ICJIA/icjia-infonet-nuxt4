@@ -92,6 +92,12 @@ const newsArticleJsonLd = newsArticle && {
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
 };
 
+// Build-time timestamp — captured when Astro renders the page (static output,
+// so this is the deploy time). Used as `dateModified` for static pages so AI
+// crawlers see a fresh freshness signal on every deploy. Pair with
+// `siteConfig.siteLaunchDate` as `datePublished` for static pages.
+const buildIsoDate = new Date().toISOString();
+
 const defaultWebPageJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -99,6 +105,8 @@ const defaultWebPageJsonLd = {
   name: fullTitle,
   description,
   inLanguage: 'en-US',
+  datePublished: siteConfig.siteLaunchDate,
+  dateModified: buildIsoDate,
   isPartOf: {
     '@type': 'WebSite',
     name: siteConfig.siteName,
@@ -111,7 +119,13 @@ const defaultWebPageJsonLd = {
   },
 };
 
+// Coerce to an array of entries so each gets its own <script> tag with
+// `@type` at the root — AI-readiness scanners that JSON.parse() the script
+// content look for `result.@type` and fail on raw arrays.
 const effectiveJsonLd = jsonLd ?? newsArticleJsonLd ?? defaultWebPageJsonLd;
+const jsonLdEntries: Array<Record<string, unknown>> = Array.isArray(effectiveJsonLd)
+  ? effectiveJsonLd
+  : [effectiveJsonLd];
 
 // Conditional <main> top-padding: home gets 64px; other pages get 96px.
 const isHome = rawPath === '/';
@@ -174,7 +188,9 @@ const mainTopPad = isHome ? 0 : 32;
       </>
     )}
 
-    <script type="application/ld+json" set:html={JSON.stringify(effectiveJsonLd)} />
+    {jsonLdEntries.map((entry) => (
+      <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+    ))}
 
     {/* URL normalizer — runs before deferred Plausible. */}
     <script is:inline>
