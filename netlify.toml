@@ -22,6 +22,14 @@
     # CSP — see scripts/csp-hashes.mjs. Re-run after any inline-script change.
     # Inline scripts: URL normalizer (BaseLayout), Plausible, Pagefind init,
     # ReadProgress / TOC init, news post variant.
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-0GEXQXbX4Ty5Tg6K7e8GdROTUXHbFOL/QU8sxXcM9Ic=' 'sha256-G0Dp5UGj6QBfhhdXh7ZDZxAJFYG4q+ofBO2wVq9W9nQ=' 'sha256-TETLPxwYreIF/Skse4Fss+ckYiL1JK4qabttEwV56tc=' 'sha256-dqb/A1cZzRV+FyrA8bd5jomPVslUsWJY0MridsYksIA=' 'sha256-mGhkZOJ2G63NJ6hKuOJod9nrWFUveMlI5snsLCwyrPk=' https://plausible.icjia.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://infonet.icjia-api.cloud; connect-src 'self' https://plausible.icjia.cloud https://infonet.icjia-api.cloud; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://mail.icjia.cloud"
+    #
+    # 'unsafe-eval' is required by Alpine.js 3 — it uses runtime eval() to
+    # evaluate x-show / x-data / x-on directives. Without it, every Alpine
+    # expression fails and reactive components (drawer, dropdowns, filters)
+    # stay in their initial DOM state. Legacy Nuxt+Vue also requires runtime
+    # eval (Vue template compilation), so this matches legacy security
+    # posture. Future hardening: migrate to @alpinejs/csp build that
+    # pre-compiles expressions; requires per-directive refactor.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'sha256-0GEXQXbX4Ty5Tg6K7e8GdROTUXHbFOL/QU8sxXcM9Ic=' 'sha256-G0Dp5UGj6QBfhhdXh7ZDZxAJFYG4q+ofBO2wVq9W9nQ=' 'sha256-TETLPxwYreIF/Skse4Fss+ckYiL1JK4qabttEwV56tc=' 'sha256-dqb/A1cZzRV+FyrA8bd5jomPVslUsWJY0MridsYksIA=' 'sha256-mGhkZOJ2G63NJ6hKuOJod9nrWFUveMlI5snsLCwyrPk=' https://plausible.icjia.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://infonet.icjia-api.cloud; connect-src 'self' https://plausible.icjia.cloud https://infonet.icjia-api.cloud; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://mail.icjia.cloud"
     Cross-Origin-Opener-Policy = "same-origin"
     Cross-Origin-Resource-Policy = "cross-origin"
