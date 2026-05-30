@@ -2,6 +2,16 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.2.15] - 2026-05-30 — Typo fix + SiteImprove hidden-focusable a11y fix on /contact
+
+### `src/components/HomeBoxes.astro` — spelling fix on the home page
+
+The first "InfoNet Information Request" box on the home page rendered "Click to request more **infomation**" (missing "r"). Source-only fix — the string lives in the `boxes` array in `HomeBoxes.astro`, not in Strapi, so no CMS edit needed. Strapi only powers the per-route description body (the `body` field on the `page` collection); the static action-card array is static TypeScript in the component.
+
+### `src/pages/contact.astro` — `:inert` bindings on form + success state
+
+SiteImprove "Hidden element has focusable content" (WCAG 2.1) flagged `/contact` with 1 occurrence. The Alpine `x-show="submitted"` block applies `display: none` to the post-submit success `<div>` while it's hidden, but the `<a href="/">Back to home</a>` inside is still discoverable by static analyzers that look at the DOM after Alpine init. Fix: add `:inert="!submitted"` to the success div and `:inert="submitted"` to the form, so each container's focusable children are inert exactly when the container is hidden. `inert` is the modern web-standard mechanism that communicates the "not interactive" intent to assistive tech and crawlers — strictly better than `display: none` alone.
+
 ## [3.2.14] - 2026-05-27 — 404 content centered + checklist note
 
 ### `src/pages/404.astro` — center every text element in the main column
