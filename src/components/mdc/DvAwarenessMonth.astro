@@ -103,7 +103,19 @@
 </div>
 
 <style>
+  /* Component-scoped awareness-month palette (plan rule 4): these purples/
+     slates/lavender are unique to this component, so they stay out of the
+     global @theme namespace. The dark phase can re-map --dv-* from a `.dark`
+     scope later. Literals with global-token values (ink, primary, surface)
+     use the global tokens below instead. */
   .dv-awareness-month {
+    --dv-purple: #8b78b6;
+    --dv-purple-deep: #7b68a6;
+    --dv-slate: #5a6fa0;
+    --dv-slate-deep: #4a5f8f;
+    --dv-lavender-bg: #f3e5f5;
+    --dv-icon-shadow: rgba(0, 0, 0, 0.1);
+    --dv-on-accent: var(--color-on-dark);
     padding: 2rem 0;
   }
 
@@ -120,17 +132,17 @@
   .dv-body-text {
     font-size: 1rem;
     line-height: 1.6;
-    color: #333;
+    color: var(--color-ink-body);
     margin: 0;
   }
 
   .dv-text-link {
-    color: #1976d2;
+    color: var(--color-primary);
     text-decoration: underline;
   }
-  .dv-text-link:hover { color: #1565c0; }
+  .dv-text-link:hover { color: var(--color-input-focus); }
   .dv-text-link:focus {
-    outline: 2px solid #1976d2;
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
   }
 
@@ -152,12 +164,12 @@
     flex-direction: column;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    box-shadow: 0 2px 6px var(--overlay-divider); /* (legacy rgba(0,0,0,0.12)) */
     transition: box-shadow 0.3s ease;
   }
-  .dv-card:hover { box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+  .dv-card:hover { box-shadow: 0 8px 16px var(--overlay-scrim); /* (legacy rgba(0,0,0,0.15)) */ }
   .dv-card:focus-within {
-    outline: 2px solid #1976d2;
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
   }
 
@@ -185,8 +197,8 @@
   .dv-card-icon svg {
     width: 80px;
     height: 80px;
-    color: white;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    color: var(--dv-on-accent);
+    filter: drop-shadow(0 2px 4px var(--dv-icon-shadow));
   }
 
   @media (min-width: 600px) {
@@ -202,7 +214,7 @@
   .dv-card-title {
     font-size: 1.125rem;
     font-weight: 700;
-    color: #1a237e;
+    color: var(--color-accent-indigo);
     margin: 0 0 0.75rem;
   }
 
@@ -218,27 +230,27 @@
     margin-bottom: 0.75rem;
     font-size: 0.95rem;
     line-height: 1.5;
-    color: #333;
+    color: var(--color-ink-body);
   }
   .dv-bullet-list li:last-child { margin-bottom: 0; }
   .dv-bullet-list li::before {
     content: "•";
     position: absolute;
     left: 0;
-    color: #1a237e;
+    color: var(--color-accent-indigo);
     font-weight: bold;
   }
 
   /* Background colors */
-  .demographics-bg  { background: linear-gradient(135deg, #7b68a6 0%, #8b78b6 100%); }
-  .direct-services-bg { background: linear-gradient(135deg, #4a5f8f 0%, #5a6fa0 100%); }
-  .training-bg      { background: linear-gradient(135deg, #7b68a6 0%, #8b78b6 100%); }
-  .turnaways-bg     { background: linear-gradient(135deg, #4a5f8f 0%, #5a6fa0 100%); }
+  .demographics-bg  { background: linear-gradient(135deg, var(--dv-purple-deep) 0%, var(--dv-purple) 100%); }
+  .direct-services-bg { background: linear-gradient(135deg, var(--dv-slate-deep) 0%, var(--dv-slate) 100%); }
+  .training-bg      { background: linear-gradient(135deg, var(--dv-purple-deep) 0%, var(--dv-purple) 100%); }
+  .turnaways-bg     { background: linear-gradient(135deg, var(--dv-slate-deep) 0%, var(--dv-slate) 100%); }
 
-  .demographics-content  { background-color: #f3e5f5; }
-  .direct-services-content { background-color: #f5f5f5; }
-  .training-content      { background-color: #f3e5f5; }
-  .turnaways-content     { background-color: #f5f5f5; }
+  .demographics-content  { background-color: var(--dv-lavender-bg); }
+  .direct-services-content { background-color: var(--color-surface-soft); }
+  .training-content      { background-color: var(--dv-lavender-bg); }
+  .turnaways-content     { background-color: var(--color-surface-soft); }
 
   /* Accessibility */
   @media (prefers-reduced-motion: reduce) {
@@ -246,7 +258,7 @@
   }
 
   @media (prefers-contrast: more) {
-    .dv-card { border: 2px solid #000; }
+    .dv-card { border: 2px solid var(--color-ink-max); }
     .dv-text-link { font-weight: bold; }
   }
 </style>

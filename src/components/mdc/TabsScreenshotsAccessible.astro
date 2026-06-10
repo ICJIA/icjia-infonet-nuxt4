@@ -274,17 +274,14 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     text-align: center;
     font-size: 12px;
     font-weight: 900;
-    color: #525252;
+    color: var(--color-ink-label);
     margin-bottom: 0.75rem;
   }
 
   .ts-card {
-    background: #fff;
+    background: var(--color-surface);
     border-radius: 4px;
-    box-shadow:
-      0 2px 4px -1px rgba(0,0,0,.2),
-      0 4px 5px 0 rgba(0,0,0,.14),
-      0 1px 10px 0 rgba(0,0,0,.12);
+    box-shadow: var(--shadow-elevation-4); /* (legacy .2/.14/.12 shorthand) */
     overflow: hidden;
   }
 
@@ -292,7 +289,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
   .ts-tablist {
     display: flex;
     flex-wrap: wrap;
-    background-color: #424242;
+    background-color: var(--color-chrome);
     margin: 0;
     padding: 0;
   }
@@ -302,7 +299,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     flex: 1 1 auto;
     background-color: transparent;
     border: none;
-    color: rgba(255,255,255,0.85);
+    color: var(--color-on-dark-soft);
     font-family: "Lato", sans-serif;
     font-size: 14px;
     font-weight: 900;
@@ -325,19 +322,19 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
   }
 
   .ts-tab:hover {
-    background-color: rgba(255,255,255,0.08);
-    color: rgba(255,255,255,0.9);
+    background-color: var(--color-on-dark-hover-bg);
+    color: var(--color-on-dark-strong);
   }
 
   .ts-tab:focus-visible {
-    outline: 2px solid #fff;
+    outline: 2px solid var(--color-on-dark);
     outline-offset: -2px;
     z-index: 1;
   }
 
   .ts-tab--active {
-    color: #fff;
-    background-color: #555;
+    color: var(--color-on-dark);
+    background-color: var(--color-chrome-active);
   }
 
   .ts-tab--active::after {
@@ -347,12 +344,12 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     left: 0;
     right: 0;
     height: 2px;
-    background-color: #fff;
+    background-color: var(--color-on-dark);
   }
 
   /* Tab panels */
   .ts-panels {
-    background: #fafafa;
+    background: var(--color-surface-faint);
     min-height: 20vh;
   }
 
@@ -369,7 +366,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     text-align: center;
     margin: 2rem 0 1.25rem;
     font-weight: 700;
-    color: blue;
+    color: var(--color-note);
     text-transform: uppercase;
     font-size: 0.85rem;
   }
@@ -407,14 +404,14 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     width: 100%;
     height: auto;
     display: block;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-border-mid);
     border-radius: 2px;
     transition: opacity 0.15s;
   }
   .ts-img-link:hover .ts-img,
   .ts-img-link:focus-visible .ts-img {
     opacity: 0.85;
-    outline: 2px solid #0d4270;
+    outline: 2px solid var(--color-brand);
     outline-offset: 2px;
   }
 
@@ -423,7 +420,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     font-weight: 700;
     text-align: center;
     padding: 0.5rem 0.25rem 0;
-    color: #333;
+    color: var(--color-ink-body);
   }
 
   /* Modal (lightbox) — matches legacy: white modal box on semi-dim backdrop.
@@ -432,7 +429,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
   .ts-modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
+    background: var(--overlay-backdrop-modal);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -441,9 +438,9 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
   }
   .ts-modal__inner {
     position: relative;
-    background: #fff;
+    background: var(--color-surface);
     border-radius: 4px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px var(--overlay-shadow-modal); /* (legacy rgba(0,0,0,0.3)) */
     max-width: 1100px;
     width: 100%;
     max-height: 90vh;
@@ -457,10 +454,10 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     max-height: 85vh;
     object-fit: contain;
     display: block;
-    background: #fff;
+    background: var(--color-surface);
   }
   .ts-modal__caption {
-    color: #fff;
+    color: var(--color-on-dark);
     margin-top: 0.75rem;
     font-size: 14px;
     font-weight: 700;
@@ -476,9 +473,9 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    background: rgba(0, 0, 0, 0.15);
+    background: var(--overlay-scrim);
     border: none;
-    color: #fff;
+    color: var(--color-on-dark);
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -493,14 +490,14 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
   }
   .ts-modal__close:hover,
   .ts-modal__close:focus-visible {
-    background: rgba(0, 0, 0, 0.35);
+    background: var(--overlay-scrim-deep);
   }
   @media (prefers-reduced-motion: reduce) {
     .ts-img { transition: none; }
   }
 
   .ts-no-tabs {
-    color: #888;
+    color: var(--color-ink-faint);
     font-style: italic;
   }
 

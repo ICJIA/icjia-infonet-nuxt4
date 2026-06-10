@@ -106,17 +106,14 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     text-align: center;
     font-size: 12px;
     font-weight: 900;
-    color: #525252;
+    color: var(--color-ink-label);
     margin-bottom: 0.75rem;
   }
 
   .tui-card {
-    background: #fff;
+    background: var(--color-surface);
     border-radius: 4px;
-    box-shadow:
-      0 2px 4px -1px rgba(0,0,0,.2),
-      0 4px 5px 0 rgba(0,0,0,.14),
-      0 1px 10px 0 rgba(0,0,0,.12);
+    box-shadow: var(--shadow-elevation-4); /* (legacy .2/.14/.12 shorthand) */
     overflow: hidden;
   }
 
@@ -124,7 +121,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
   .tui-tablist {
     display: flex;
     flex-wrap: wrap;
-    background-color: #424242;
+    background-color: var(--color-chrome);
     margin: 0;
     padding: 0;
   }
@@ -134,7 +131,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     flex: 1 1 auto;
     background-color: transparent;
     border: none;
-    color: rgba(255,255,255,0.85);
+    color: var(--color-on-dark-soft);
     font-family: "Lato", sans-serif;
     font-size: 14px;
     font-weight: 900;
@@ -157,19 +154,19 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
   }
 
   .tui-tab:hover {
-    background-color: rgba(255,255,255,0.08);
-    color: rgba(255,255,255,0.9);
+    background-color: var(--color-on-dark-hover-bg);
+    color: var(--color-on-dark-strong);
   }
 
   .tui-tab:focus-visible {
-    outline: 2px solid #fff;
+    outline: 2px solid var(--color-on-dark);
     outline-offset: -2px;
     z-index: 1;
   }
 
   .tui-tab--active {
-    color: #fff;
-    background-color: #555;
+    color: var(--color-on-dark);
+    background-color: var(--color-chrome-active);
   }
 
   .tui-tab--active::after {
@@ -179,7 +176,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     left: 0;
     right: 0;
     height: 2px;
-    background-color: #fff;
+    background-color: var(--color-on-dark);
     animation: tui-slide-in 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -190,7 +187,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
 
   /* Tab panels */
   .tui-panels {
-    background: #fbfbfb;
+    background: var(--color-surface-fainter);
     min-height: 20vh;
   }
 
@@ -214,13 +211,13 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
   }
 
   .tui-empty {
-    color: #888;
+    color: var(--color-ink-faint);
     font-style: italic;
     padding: 1rem;
   }
 
   .tui-no-tabs {
-    color: #888;
+    color: var(--color-ink-faint);
     font-style: italic;
   }
 

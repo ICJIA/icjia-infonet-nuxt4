@@ -163,7 +163,9 @@
   --overlay-divider: rgba(0, 0, 0, 0.12);
   --overlay-scrim: rgba(0, 0, 0, 0.15);
   --overlay-scrim-mid: rgba(0, 0, 0, 0.2);  /* InfoCard hover shadow — added Task 5 (rule 5 drift) */
+  --overlay-scrim-deep: rgba(0, 0, 0, 0.35); /* lightbox close-btn hover — added Task 7 (rule 5 drift) */
   --overlay-brand-shadow: rgba(13, 66, 112, 0.12); /* 404 card hover shadow (brand-tinted) — added Task 6 (rule 5 drift) */
+  --overlay-shadow-modal: rgba(0, 0, 0, 0.3); /* lightbox modal inner shadow — added Task 7 (rule 5 drift) */
   --overlay-backdrop: rgba(0, 0, 0, 0.5);   /* drawer backdrop */
   --overlay-backdrop-modal: rgba(0, 0, 0, 0.55); /* lightbox backdrop */
 
