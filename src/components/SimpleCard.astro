@@ -30,31 +30,32 @@ const displayDate = date ? formatDate(date, 'short') : null;
   href={href ?? '#'}
   style="display:block;text-decoration:none;color:inherit;"
 >
+  {/* onmouseover hover shadow color: var(--overlay-divider) (legacy rgba(0,0,0,0.12)) */}
   <article
     style="
-      border: 1px solid #e0e0e0;
+      border: 1px solid var(--color-border);
       border-radius: 4px;
       padding: 16px 20px;
       margin-bottom: 16px;
-      background: #fafafa;
+      background: var(--color-surface-faint);
       transition: box-shadow 0.2s ease;
     "
-    onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.12)'"
+    onmouseover="this.style.boxShadow='0 4px 12px var(--overlay-divider)'"
     onmouseout="this.style.boxShadow='none'"
   >
     {displayDate && (
       <time
         datetime={date ?? ''}
-        style="font-size: 0.75rem; font-weight: 700; color: #555; text-transform: uppercase; display: block; margin-bottom: 6px;"
+        style="font-size: 0.75rem; font-weight: 700; color: var(--color-ink-soft); text-transform: uppercase; display: block; margin-bottom: 6px;"
       >
         {displayDate}
       </time>
     )}
-    <h2 style="margin: 0 0 8px; font-size: 1rem; font-weight: 700; color: #0d4270;">
+    <h2 style="margin: 0 0 8px; font-size: 1rem; font-weight: 700; color: var(--color-brand);">
       {title}
     </h2>
     {summary && (
-      <p style="margin: 0; font-size: 0.875rem; color: #444; line-height: 1.5;">
+      <p style="margin: 0; font-size: 0.875rem; color: var(--color-ink-mid); line-height: 1.5;">
         {summary}
       </p>
     )}

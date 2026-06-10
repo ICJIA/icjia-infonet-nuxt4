@@ -92,8 +92,8 @@ const visibleHeadings = headings.filter((h) => h.level >= 2 && h.level <= 4);
   .toc {
     margin: 0 0 24px;
     padding: 16px 20px;
-    background: #f5f5f5;
-    border-left: 4px solid #0d4270;
+    background: var(--color-surface-soft);
+    border-left: 4px solid var(--color-brand);
     border-radius: 0 4px 4px 0;
   }
 
@@ -101,7 +101,7 @@ const visibleHeadings = headings.filter((h) => h.level >= 2 && h.level <= 4);
     text-transform: uppercase;
     font-size: 0.85rem;
     font-weight: 900;
-    color: #0a3050;
+    color: var(--color-brand-hover);
     margin: 0 0 12px;
     letter-spacing: 0.04em;
     border: none;
@@ -128,24 +128,24 @@ const visibleHeadings = headings.filter((h) => h.level >= 2 && h.level <= 4);
   }
 
   .toc__link {
-    color: #0a3050;
+    color: var(--color-brand-hover);
     text-decoration: none;
     transition: color 200ms ease;
   }
 
   .toc__link:hover {
-    color: #0d4270;
+    color: var(--color-brand);
     text-decoration: underline;
   }
 
   .toc__link:focus-visible {
-    outline: 2px solid #0d4270;
+    outline: 2px solid var(--color-brand);
     outline-offset: 2px;
     border-radius: 2px;
   }
 
   .toc__link--active {
     font-weight: 700;
-    color: #0d4270;
+    color: var(--color-brand);
   }
 </style>

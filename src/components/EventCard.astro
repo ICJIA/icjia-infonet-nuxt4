@@ -68,14 +68,14 @@ const truncated = truncate(summary);
 
 <style>
   .event-card {
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 4px;
     overflow: hidden;
     transition: box-shadow 200ms ease, transform 200ms ease;
   }
   .event-card:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px var(--overlay-scrim); /* (legacy rgba(0,0,0,0.15)) */
     transform: translateY(-2px);
   }
 
@@ -85,13 +85,13 @@ const truncated = truncate(summary);
     color: inherit;
   }
   .event-card__link:focus-visible {
-    outline: 2px solid #0d4270;
+    outline: 2px solid var(--color-brand);
     outline-offset: 2px;
   }
 
   .event-card__type {
-    background: #0d4270;
-    color: #fff;
+    background: var(--color-brand);
+    color: var(--color-on-dark);
     padding: 6px 16px;
     font-size: 0.75rem;
     font-weight: 900;
@@ -103,25 +103,25 @@ const truncated = truncate(summary);
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
     font-size: 1.125rem;
-    color: #0d4270;
+    color: var(--color-brand);
     margin: 0;
     padding: 12px 16px 4px;
   }
 
   .event-card__when {
     font-size: 0.8125rem;
-    color: #555;
+    color: var(--color-ink-soft);
     padding: 0 16px 8px;
     font-weight: 700;
   }
   .event-card__when-sep {
-    color: #333;
+    color: var(--color-ink-body);
   }
 
   .event-card__summary {
     font-size: 0.875rem;
     line-height: 1.5;
-    color: #444;
+    color: var(--color-ink-mid);
     margin: 0;
     padding: 0 16px 12px;
   }
@@ -130,7 +130,7 @@ const truncated = truncate(summary);
     display: inline-block;
     font-size: 0.8125rem;
     font-weight: 700;
-    color: #0d4270;
+    color: var(--color-brand);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     padding: 0 16px 16px;

@@ -187,17 +187,17 @@ const tocHeadings: Heading[] = [
   .section-heading {
     font-size: 1.25rem;
     font-weight: 900;
-    color: #0d4270;
+    color: var(--color-brand);
     margin: 0 0 0.5rem;
     padding-bottom: 0.4rem;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--color-border);
     text-transform: uppercase;
     letter-spacing: 0.03em;
   }
 
   .section-intro,
   .section-count {
-    color: #666;
+    color: var(--color-ink-muted);
     font-size: 0.875rem;
     margin: 0 0 12px;
   }
@@ -212,12 +212,12 @@ const tocHeadings: Heading[] = [
   }
 
   .downloads-list a {
-    color: #0d4270;
+    color: var(--color-brand);
     font-weight: 700;
   }
 
   .faq-item {
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--color-border);
     border-radius: 4px;
     margin-bottom: 8px;
   }
@@ -241,7 +241,7 @@ const tocHeadings: Heading[] = [
     /* Explicit white background so axe can resolve the ▾ chevron's
        contrast against a known colour (was flagged "needs review"
        because nested transparent backgrounds aren't sampled). */
-    background: #fff;
+    background: var(--color-surface);
     padding: 12px 16px;
     cursor: pointer;
     font-weight: 700;
@@ -256,7 +256,7 @@ const tocHeadings: Heading[] = [
   }
 
   .faq-chevron {
-    color: #0d4270;
+    color: var(--color-brand);
     flex-shrink: 0;
     margin-left: 8px;
     display: block;

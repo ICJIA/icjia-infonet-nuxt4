@@ -72,8 +72,8 @@ const summary = truncate(attr.summary);
 <style>
   /* Legacy v-card outlined: white background, 1px border, 12px padding */
   .info-card {
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     overflow: hidden;
     transition: box-shadow 200ms ease, transform 200ms ease;
     height: 100%;
@@ -81,7 +81,7 @@ const summary = truncate(attr.summary);
     flex-direction: column;
   }
   .info-card:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px var(--overlay-scrim-mid); /* (legacy rgba(0,0,0,0.2)) */
     transform: scale(1.01);
   }
 
@@ -94,14 +94,14 @@ const summary = truncate(attr.summary);
     color: inherit;
   }
   .info-card__link:focus-visible {
-    outline: 2px solid #0d4270;
+    outline: 2px solid var(--color-brand);
     outline-offset: -2px;
   }
 
   .info-card__date {
     display: block;
     font-size: 0.75rem;
-    color: #666;
+    color: var(--color-ink-muted);
     margin: 0 0 4px 15px;
   }
 
@@ -111,7 +111,7 @@ const summary = truncate(attr.summary);
     font-size: 1.125rem;
     line-height: 1.2;
     margin: -4px 0 12px 15px;
-    color: #0d4270;
+    color: var(--color-brand);
   }
 
   .info-card__splash {
@@ -120,13 +120,13 @@ const summary = truncate(attr.summary);
     height: 180px;
     object-fit: cover;
     margin: 0 0 16px;
-    border: 1px solid #fafafa;
+    border: 1px solid var(--color-surface-faint); /* (legacy #fafafa) */
   }
 
   .info-card__summary {
     font-size: 0.875rem;
     line-height: 1.5;
-    color: #444;
+    color: var(--color-ink-mid);
     margin: 0 15px 16px;
     flex: 1 1 auto;
   }
@@ -141,9 +141,9 @@ const summary = truncate(attr.summary);
     align-items: center;
     gap: 4px;
     padding: 2px 10px;
-    border: 1px solid #888;
+    border: 1px solid var(--color-ink-faint);
     border-radius: 2px;
-    color: #555;
+    color: var(--color-ink-soft);
     background: transparent;
     font-size: 0.6875rem;
     font-weight: 700;
@@ -153,7 +153,7 @@ const summary = truncate(attr.summary);
     transition: background 150ms ease;
   }
   .info-card__link:hover .info-card__more {
-    background: #f0f0f0;
+    background: var(--color-surface-hover);
   }
 
   .info-card__more-icon {

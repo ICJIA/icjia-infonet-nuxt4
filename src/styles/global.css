@@ -162,6 +162,7 @@
   --overlay-hover: rgba(0, 0, 0, 0.04);
   --overlay-divider: rgba(0, 0, 0, 0.12);
   --overlay-scrim: rgba(0, 0, 0, 0.15);
+  --overlay-scrim-mid: rgba(0, 0, 0, 0.2);  /* InfoCard hover shadow — added Task 5 (rule 5 drift) */
   --overlay-backdrop: rgba(0, 0, 0, 0.5);   /* drawer backdrop */
   --overlay-backdrop-modal: rgba(0, 0, 0, 0.55); /* lightbox backdrop */
 

@@ -110,6 +110,7 @@ Append inside the existing `@theme { … }` in `src/styles/global.css`, after th
   --overlay-hover: rgba(0, 0, 0, 0.04);
   --overlay-divider: rgba(0, 0, 0, 0.12);
   --overlay-scrim: rgba(0, 0, 0, 0.15);
+  --overlay-scrim-mid: rgba(0, 0, 0, 0.2);  /* InfoCard hover shadow — added in Task 5 (rule 5 drift: value had no token) */
   --overlay-backdrop: rgba(0, 0, 0, 0.5);   /* drawer backdrop */
   --overlay-backdrop-modal: rgba(0, 0, 0, 0.55); /* lightbox backdrop */
 
@@ -384,6 +385,12 @@ defining the dark palette:
 - `src/components/SplashNews.astro` — `box-shadow: 0 4px 16px var(--overlay-divider)` (shadow color using the divider token)
 - `src/components/AppSidebar.astro` — drawer `box-shadow: 2px 0 8px var(--overlay-scrim)` (shadow color using the scrim token)
 - `src/components/HomeBarGraph.astro` — `border: 1px solid var(--color-surface-press)` (border using a surface token; consider a `--color-border-press` alias in phase 2)
+- `src/components/NewsCard.astro` — `border: 1px solid var(--color-surface-press)` (border using a surface token, same pair as HomeBarGraph)
+- `src/components/NewsCard.astro` — `box-shadow: 0 2px 10px var(--overlay-divider)` (shadow color using the divider token)
+- `src/components/EventCard.astro` — `box-shadow: 0 4px 16px var(--overlay-scrim)` (shadow color using the scrim token)
+- `src/components/InfoCard.astro` — `box-shadow: 0 0 15px var(--overlay-scrim-mid)` (shadow color using an overlay token; `--overlay-scrim-mid` added in Task 5 via rule 5 — rgba(0,0,0,0.2) had no token)
+- `src/components/InfoCard.astro` — `border: 1px solid var(--color-surface-faint)` (image hairline border using a surface token)
+- `src/components/SimpleCard.astro` — inline `onmouseover` shadow `0 4px 12px var(--overlay-divider)` (shadow color using the divider token, set via `el.style` in an inline handler)
 
 Rule for remaining tasks: non-elevation box-shadow colors map to the
 value-matching overlay token + legacy comment AND get a row added here.
