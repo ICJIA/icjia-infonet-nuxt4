@@ -82,6 +82,98 @@
      every rendered text element uses 16px base, not 18px. Setting 100%
      here matches that. */
   --font-size-root: 100%;
+
+  /* ──────────────────────────────────────────────────────────────────
+     Semantic color tokens — dark-mode phase 1 (2026-06-10 plan).
+     Light values are the site's existing literals, captured 1:1.
+     Phase 2 re-maps these under a `.dark` scope; until then this block
+     must produce ZERO visual change. Naming: role, not value.
+     ────────────────────────────────────────────────────────────────── */
+
+  /* Brand blues — four near-identical values ported verbatim from legacy.
+     Kept distinct on purpose (zero-visual-change rule); a future cleanup
+     may collapse brand-deep/brand-footer after a viewcap diff. */
+  --color-brand: #0d4270;            /* INFONET wordmark, buttons, links, chevrons */
+  --color-brand-hover: #0a3050;      /* button hover */
+  --color-brand-pressed: #0a3560;    /* darker hover variant (404 cards) */
+  --color-brand-deep: #0d4474;       /* breadcrumb bar, home badge, home box 1 */
+  --color-brand-footer: #0d4471;     /* footer band, home chart bars */
+  --color-brand-home-title: #0b3a62; /* 75px INFONET home title */
+  --color-brand-box-2: #1c5183;      /* home action box 2 */
+  --color-brand-box-3: #3a5571;      /* home action box 3 */
+
+  /* Links & focus */
+  --color-link-strong: #0d47a1;      /* AA-safe blue on shaded fills (DAP CTA, search results) */
+  --color-link-alt: #1e6bb8;         /* 404-page link blue */
+  --color-link-alt-tint-25: rgba(30, 107, 184, 0.25);
+  --color-link-alt-tint-35: rgba(30, 107, 184, 0.35);
+  --color-link-deep: #0353a4;
+  --color-accent-indigo: #1a237e;
+  --color-input-focus: #1565c0;      /* contact field focus underline */
+  --color-primary-tint: rgba(25, 118, 210, 0.12); /* aria-current row background */
+  /* focus rings / aria-current text reuse the EXISTING --color-primary (#1976d2) */
+
+  /* Ink (text) scale — distinct values kept distinct */
+  --color-ink-max: #000;
+  --color-ink-near: #111;
+  --color-ink: #222;
+  --color-ink-body: #333;
+  --color-ink-mid: #444;
+  --color-ink-soft: #555;
+  --color-ink-muted: #666;
+  --color-ink-faint: #888;
+  --color-ink-hint: #999;
+  --color-ink-label: #525252;        /* tabs hint text */
+  --color-ink-87: rgba(0, 0, 0, 0.87);
+
+  /* Text/icons sitting on dark backgrounds (diverges from surface in dark mode) */
+  --color-on-dark: #fff;
+  --color-on-dark-strong: rgba(255, 255, 255, 0.9);
+  --color-on-dark-soft: rgba(255, 255, 255, 0.85);
+  --color-on-dark-hover-bg: rgba(255, 255, 255, 0.08);
+
+  /* Surfaces */
+  --color-surface: #fff;             /* page/card/panel backgrounds (NOT on-dark text) */
+  --color-surface-faint: #fafafa;
+  --color-surface-fainter: #fbfbfb;
+  --color-surface-soft: #f5f5f5;     /* form fields, noscript nav, debug pre */
+  --color-surface-band: #f2f2f2;     /* home full-bleed gray bands */
+  --color-surface-card: #f7f7f9;     /* search result cards (DVFR treatment) */
+  --color-surface-hover: #f0f0f0;
+  --color-surface-press: #eee;       /* (+ #eeeeee alias) */
+  --color-surface-dim: #d8d8d8;
+  --color-surface-chip: #f0f4f8;     /* DAP chips, btn-clear hover */
+  --color-surface-chip-hover: #dce8f5;
+
+  /* Borders */
+  --color-border: #e0e0e0;
+  --color-border-soft: #e5e5e5;      /* chart gridlines */
+  --color-border-mid: #ddd;
+  --color-border-input: #ccc;
+  --color-border-strong: #aaa;       /* breadcrumb underline */
+  --color-border-faint: #bdbdbd;     /* chart zero-axis */
+  --color-border-card: #e2e2e8;      /* search result card hairline */
+  --color-border-chip: #c5d5e8;
+
+  /* Dark chrome (tabs components) */
+  --color-chrome: #424242;           /* tablist background (same value as --color-secondary, distinct role) */
+  --color-chrome-active: #555;       /* active tab background */
+
+  /* Overlays */
+  --overlay-hover: rgba(0, 0, 0, 0.04);
+  --overlay-divider: rgba(0, 0, 0, 0.12);
+  --overlay-scrim: rgba(0, 0, 0, 0.15);
+  --overlay-backdrop: rgba(0, 0, 0, 0.5);   /* drawer backdrop */
+  --overlay-backdrop-modal: rgba(0, 0, 0, 0.55); /* lightbox backdrop */
+
+  /* States */
+  --color-error-text: #c62828;
+  --color-error-deep: #8e1f1a;
+  --color-error-bg: #fdecea;
+  --color-success-deep: #2e7d32;
+  --color-mark: #fde68a;             /* search highlight */
+  --color-note: blue;                /* tabs "mock data" note (legacy keyword) */
+  --color-yt-play: #ff0000;          /* YouTube facade hover — brand red, stays in dark */
 }
 
 /* Root font-size — match legacy rendered base (16px) */
