@@ -10,7 +10,7 @@
 //   - Strapi "index" page body (slug: 'index') for the description paragraph
 //
 // Font: Raleway 900 for the large INFONET title (same weight / color as nav).
-// Color: #0d4270 (nav brand color, confirmed in AppNav.astro / legacy CSS).
+// Color: var(--color-brand) (legacy #0d4270) — nav brand color, confirmed in AppNav.astro / legacy CSS.
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import HomeBoxes from '~/components/HomeBoxes.astro';
 import HomeBarGraph from '~/components/HomeBarGraph.astro';
@@ -71,7 +71,7 @@ const homeJsonLd = [
        Tailwind utilities mirror legacy Vuetify <v-row><v-col cols=12 md=6>.
        Arbitrary breakpoint min-[960px]: matches legacy Vuetify exactly
        (Tailwind default md=768px would switch too early). -->
-  <section class="w-full bg-[#f2f2f2] px-8 pt-8 pb-12">
+  <section class="w-full bg-(--color-surface-band) px-8 pt-8 pb-12">
     <div class="grid grid-cols-1 min-[960px]:grid-cols-2 gap-8 items-start">
       <div class="home-hero-inner">
           <div class="home-badge">
@@ -113,7 +113,7 @@ const homeJsonLd = [
 
   <!-- News + FAQs row: edge-to-edge gray, 2-col at ≥960 px (Vuetify md).
        Tailwind utilities mirror legacy <v-row><v-col cols=12 md=6>. -->
-  <section class="w-full bg-[#f2f2f2]">
+  <section class="w-full bg-(--color-surface-band)">
     <div class="grid grid-cols-1 min-[960px]:grid-cols-2">
       <HomePosts />
       <HomeFaqs />
@@ -136,14 +136,14 @@ const homeJsonLd = [
 
   /* Match legacy rendered dimensions (measured 2026-05-26):
      badge: font-size 12.8px (0.8em × 16px root), margin-top 35px
-     h1:    font-size 75px, line-height 1.5, color #0b3a62, margin-top 8px
+     h1:    font-size 75px, line-height 1.5, color var(--color-brand-home-title) (legacy #0b3a62), margin-top 8px
      h2:    font-size 18px, line-height 1.25, margin -10px 0 32px */
   .home-badge {
     display: inline-block;
     font-weight: 900;
     font-size: 0.8em;          /* 12.8px at 16px root */
-    color: #fff;
-    background: #0d4474;
+    color: var(--color-on-dark);
+    background: var(--color-brand-deep);
     padding: 5px 10px;
     border-radius: 3px;
     margin-top: 35px;
@@ -156,7 +156,7 @@ const homeJsonLd = [
     font-weight: 900;
     font-size: 75px;            /* legacy renders at 75px */
     line-height: 1.5;            /* legacy 112.5px / 75px = 1.5 */
-    color: #0b3a62;              /* legacy color (slightly different blue) */
+    color: var(--color-brand-home-title); /* legacy #0b3a62 (slightly different blue) */
     margin: 8px 0 0;
     padding: 0;
     border: none;
@@ -166,7 +166,7 @@ const homeJsonLd = [
     font-size: 18px;            /* matches legacy exactly */
     font-weight: 400;
     line-height: 1.25;           /* legacy 22.5px / 18px = 1.25 */
-    color: #222;
+    color: var(--color-ink);
     margin-top: -5px;
     margin-bottom: 2rem;
     padding-left: 2px;
@@ -176,7 +176,7 @@ const homeJsonLd = [
   .home-lead {
     font-size: 1rem;
     line-height: 1.65;
-    color: #333;
+    color: var(--color-ink-body);
   }
 
   .home-lead p {
@@ -190,7 +190,7 @@ const homeJsonLd = [
 
   .home-partners-link a {
     font-weight: 700;
-    color: #000;
+    color: var(--color-ink-max);
     text-decoration: none;
     font-size: 0.95rem;
     text-transform: uppercase;
@@ -199,7 +199,7 @@ const homeJsonLd = [
   .home-partners-link a:hover,
   .home-partners-link a:focus {
     text-decoration: underline;
-    color: #0d4270;
+    color: var(--color-brand);
   }
 
 </style>

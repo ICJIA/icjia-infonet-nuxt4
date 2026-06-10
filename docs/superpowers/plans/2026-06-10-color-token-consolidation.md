@@ -374,6 +374,22 @@ git commit -m "refactor(tokens): complete color-token consolidation (dark-mode p
 
 ---
 
+## Phase-2 retheme hazards (role-mismatched value matches)
+
+Phase 1 maps by VALUE; these spots use a token whose ROLE will diverge in dark
+mode (shadows stay black while dividers/surfaces flip). Each carries a
+`(legacy …)` comment inline; this list is the greppable set to revisit when
+defining the dark palette:
+
+- `src/components/SplashNews.astro` — `box-shadow: 0 4px 16px var(--overlay-divider)` (shadow color using the divider token)
+- `src/components/AppSidebar.astro` — drawer `box-shadow: 2px 0 8px var(--overlay-scrim)` (shadow color using the scrim token)
+- `src/components/HomeBarGraph.astro` — `border: 1px solid var(--color-surface-press)` (border using a surface token; consider a `--color-border-press` alias in phase 2)
+
+Rule for remaining tasks: non-elevation box-shadow colors map to the
+value-matching overlay token + legacy comment AND get a row added here.
+
+---
+
 ## Out of scope (phase 2 — separate plan)
 
 - The `.dark` palette values, the `@custom-variant dark` wiring, the toggle component (+ localStorage + `prefers-color-scheme` default + FOUC-prevention inline script, which WILL add a CSP hash), dark `markdown-body` prose skin, dark Pagefind values, and the full dark-mode AA contrast audit.
