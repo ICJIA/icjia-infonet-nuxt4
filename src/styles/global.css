@@ -45,7 +45,6 @@
   --color-text: #212121;
   --color-text-secondary: rgba(0, 0, 0, 0.87); /* legacy a11y override: on-surface-variant */
   --color-background: #ffffff;
-  --color-surface: #ffffff;
 
   /* Breakpoints — Vuetify 3 (Material Design 2 breakpoints) */
   --breakpoint-sm: 600px;

@@ -3,7 +3,7 @@
 //
 // Port of legacy app/components/content/TheFooter.vue.
 // Visual spec:
-//   - Background #0d4471 (dark blue)
+//   - Background var(--color-brand-footer) (legacy #0d4471)
 //   - Centered layout; full-width
 //   - ICJIA logo 150×150 (from /icjia-logo.png)
 //   - Social icons: Facebook, YouTube, Instagram, LinkedIn — inline SVG (NOT @mdi/font)
@@ -52,7 +52,7 @@ const socialLinks = [
 >
   <div
     class="text-center pb-4"
-    style="background:#0d4471;width:100%;color:#fff;"
+    style="background:var(--color-brand-footer);width:100%;color:var(--color-on-dark);"
   >
     <div style="max-width:960px;margin:0 auto;padding:16px 16px 0;">
 
@@ -83,7 +83,7 @@ const socialLinks = [
             target="_blank"
             rel="noopener noreferrer"
             aria-label={s.label}
-            style="color:#fff;font-size:20px;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;text-decoration:none;margin:0 2px;"
+            style="color:var(--color-on-dark);font-size:20px;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;text-decoration:none;margin:0 2px;"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -102,27 +102,27 @@ const socialLinks = [
       <!-- Copyright + nav links -->
       <nav aria-label="Footer" style="font-size:12px;font-weight:400;">
         <strong>
-          &#169; {currentYear}
+          &copy; {currentYear}
           <a
             href="https://icjia.illinois.gov"
             target="_blank"
             rel="noopener noreferrer"
-            style="color:#fff;"
+            style="color:var(--color-on-dark);"
           >Illinois Criminal Justice Information Authority</a>
         </strong>
 
         <span aria-hidden="true">&nbsp;|&nbsp;</span>
         <strong>
-          <a href="/privacy/" style="color:#fff;">Privacy</a>
+          <a href="/privacy/" style="color:var(--color-on-dark);">Privacy</a>
         </strong>
 
         <span aria-hidden="true">&nbsp;|&nbsp;</span>
-        <a href="/contact/" style="color:#fff;background:none;">Contact</a>
+        <a href="/contact/" style="color:var(--color-on-dark);background:none;">Contact</a>
 
         <span aria-hidden="true">&nbsp;|&nbsp;</span>
         <a
           href="/translate/"
-          style="color:#fff;background:none;cursor:pointer;"
+          style="color:var(--color-on-dark);background:none;cursor:pointer;"
         >Translate</a>
       </nav>
 

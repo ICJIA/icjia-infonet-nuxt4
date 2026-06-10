@@ -3,7 +3,7 @@
 //
 // Port of legacy app/components/content/TheBreadcrumbBar.vue.
 // Visual spec:
-//   - Background #0d4474 (dark blue)
+//   - Background var(--color-brand-deep) (legacy #0d4474)
 //   - Font Lato (was Roboto), 13px
 //   - Text: "HOME » <CURRENT_PAGE>" (» = U+00BB right double angle quotation mark)
 //   - Truncates derived/passed title to 30 chars with "..."
@@ -64,7 +64,7 @@ const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
 {!hidden && (
   <nav
     aria-label="Breadcrumb"
-    style="background:#0d4474;border-bottom:1px solid #aaa;font-size:13px;font-family:'Lato',sans-serif;z-index:99999;"
+    style="background:var(--color-brand-deep);border-bottom:1px solid var(--color-border-strong);font-size:13px;font-family:'Lato',sans-serif;z-index:99999;"
     class="text-left pr-5 pl-5 py-1"
   >
     <ol
@@ -74,11 +74,11 @@ const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
       <li>
         <a
           href="/"
-          style="color:#fff;font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
+          style="color:var(--color-on-dark);font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
           aria-label="Home"
         >HOME</a>
       </li>
-      <li aria-hidden="true" style="color:#fff;font-weight:900;margin:0 6px;">
+      <li aria-hidden="true" style="color:var(--color-on-dark);font-weight:900;margin:0 6px;">
         &raquo;
       </li>
 
@@ -87,12 +87,12 @@ const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
         {breadcrumbTitleHref && currentLabel ? (
           <a
             href={breadcrumbTitleHref}
-            style="color:#fff;font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
+            style="color:var(--color-on-dark);font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
           >{middleLabel}</a>
         ) : (
           <span
             aria-current={currentLabel ? undefined : 'page'}
-            style="color:#fff;font-weight:400;text-transform:uppercase;"
+            style="color:var(--color-on-dark);font-weight:400;text-transform:uppercase;"
           >{middleLabel}</span>
         )}
       </li>
@@ -100,13 +100,13 @@ const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
       {/* Level 3: current page (optional) */}
       {currentLabel && (
         <>
-          <li aria-hidden="true" style="color:#fff;font-weight:900;margin:0 6px;">
+          <li aria-hidden="true" style="color:var(--color-on-dark);font-weight:900;margin:0 6px;">
             &raquo;
           </li>
           <li>
             <span
               aria-current="page"
-              style="color:#fff;font-weight:400;text-transform:uppercase;"
+              style="color:var(--color-on-dark);font-weight:400;text-transform:uppercase;"
             >{currentLabel}</span>
           </li>
         </>
