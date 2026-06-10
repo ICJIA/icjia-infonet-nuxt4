@@ -111,6 +111,7 @@ Append inside the existing `@theme { … }` in `src/styles/global.css`, after th
   --overlay-divider: rgba(0, 0, 0, 0.12);
   --overlay-scrim: rgba(0, 0, 0, 0.15);
   --overlay-scrim-mid: rgba(0, 0, 0, 0.2);  /* InfoCard hover shadow — added in Task 5 (rule 5 drift: value had no token) */
+  --overlay-brand-shadow: rgba(13, 66, 112, 0.12); /* 404 card hover shadow (brand-tinted) — added in Task 6 (rule 5 drift: value had no token) */
   --overlay-backdrop: rgba(0, 0, 0, 0.5);   /* drawer backdrop */
   --overlay-backdrop-modal: rgba(0, 0, 0, 0.55); /* lightbox backdrop */
 
@@ -391,6 +392,12 @@ defining the dark palette:
 - `src/components/InfoCard.astro` — `box-shadow: 0 0 15px var(--overlay-scrim-mid)` (shadow color using an overlay token; `--overlay-scrim-mid` added in Task 5 via rule 5 — rgba(0,0,0,0.2) had no token)
 - `src/components/InfoCard.astro` — `border: 1px solid var(--color-surface-faint)` (image hairline border using a surface token)
 - `src/components/SimpleCard.astro` — inline `onmouseover` shadow `0 4px 12px var(--overlay-divider)` (shadow color using the divider token, set via `el.style` in an inline handler)
+- `src/pages/search.astro` — result card `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token)
+- `src/pages/search.astro` — result card hover `box-shadow: 0 4px 8px var(--overlay-divider)` (shadow color using the divider token)
+- `src/pages/404.astro` — search input `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token)
+- `src/pages/404.astro` — quick-link card resting `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token)
+- `src/pages/404.astro` — quick-link card hover `box-shadow: 0 4px 12px var(--overlay-brand-shadow)` (brand-tinted shadow; `--overlay-brand-shadow` added in Task 6 via rule 5 — rgba(13,66,112,0.12) had no token)
+- `src/pages/data-and-publications/index.astro` — card hover `box-shadow: 0 4px 12px var(--overlay-divider)` (shadow color using the divider token)
 
 Rule for remaining tasks: non-elevation box-shadow colors map to the
 value-matching overlay token + legacy comment AND get a row added here.

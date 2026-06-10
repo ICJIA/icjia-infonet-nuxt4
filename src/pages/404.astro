@@ -32,7 +32,7 @@ const quickLinks: LinkCard[] = [
   noindex={true}
 >
   <!-- ── Hero band ──────────────────────────────────────────────── -->
-  <section class="not-found-hero w-full bg-[#f2f2f2] px-6 min-[960px]:px-12 pt-12 pb-16">
+  <section class="not-found-hero w-full bg-(--color-surface-band) px-6 min-[960px]:px-12 pt-12 pb-16">
     <div class="mx-auto max-w-[1100px]">
       <div class="not-found-number" aria-hidden="true">404</div>
       <h1 class="not-found-title">We couldn&rsquo;t find that page</h1>
@@ -121,7 +121,7 @@ const quickLinks: LinkCard[] = [
 <style>
   /* ── Hero ─────────────────────────────────────────────────────── */
   .not-found-hero {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid var(--color-border-soft);
     text-align: center;
   }
 
@@ -131,8 +131,8 @@ const quickLinks: LinkCard[] = [
     font-size: clamp(6rem, 18vw, 12rem);
     line-height: 0.95;
     letter-spacing: -0.04em;
-    color: #0d4270;
-    background: linear-gradient(180deg, #0d4270 0%, #1e6bb8 100%);
+    color: var(--color-brand);
+    background: linear-gradient(180deg, var(--color-brand) 0%, var(--color-link-alt) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -155,7 +155,7 @@ const quickLinks: LinkCard[] = [
     font-weight: 900;
     font-size: clamp(1.5rem, 3.5vw, 2.25rem);
     line-height: 1.2;
-    color: #0d4270;
+    color: var(--color-brand);
     margin: 0 0 0.75rem;
     text-transform: none;
     text-align: center;
@@ -165,7 +165,7 @@ const quickLinks: LinkCard[] = [
     font-family: 'Lato', sans-serif;
     font-size: clamp(0.95rem, 1.6vw, 1.0625rem);
     line-height: 1.55;
-    color: #333;
+    color: var(--color-ink-body);
     max-width: 640px;
     margin: 0 auto 1.75rem;
     text-align: center;
@@ -194,12 +194,12 @@ const quickLinks: LinkCard[] = [
     padding: 0 16px;
     font-family: 'Lato', sans-serif;
     font-size: 1rem;
-    color: #222;
-    background: #fff;
-    border: 2px solid #0d4270;
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 2px solid var(--color-brand);
     border-radius: 4px;
     outline: none;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 2px var(--overlay-hover); /* (legacy rgba(0,0,0,0.04)) */
   }
   @media (min-width: 480px) {
     .not-found-search__input {
@@ -209,12 +209,12 @@ const quickLinks: LinkCard[] = [
     }
   }
   .not-found-search__input::placeholder {
-    color: #888;
+    color: var(--color-ink-faint);
     font-style: italic;
   }
   .not-found-search__input:focus-visible {
-    border-color: #1e6bb8;
-    box-shadow: 0 0 0 3px rgba(30,107,184,0.25);
+    border-color: var(--color-link-alt);
+    box-shadow: 0 0 0 3px var(--color-link-alt-tint-25);
   }
 
   .not-found-search__btn {
@@ -228,9 +228,9 @@ const quickLinks: LinkCard[] = [
     font-weight: 700;
     font-size: 0.95rem;
     letter-spacing: 0.02em;
-    color: #fff;
-    background: #0d4270;
-    border: 2px solid #0d4270;
+    color: var(--color-on-dark);
+    background: var(--color-brand);
+    border: 2px solid var(--color-brand);
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.15s ease;
@@ -246,11 +246,11 @@ const quickLinks: LinkCard[] = [
   }
   .not-found-search__btn:hover,
   .not-found-search__btn:focus-visible {
-    background: #1e6bb8;
-    border-color: #1e6bb8;
+    background: var(--color-link-alt);
+    border-color: var(--color-link-alt);
   }
   .not-found-search__btn:focus-visible {
-    outline: 3px solid rgba(30,107,184,0.35);
+    outline: 3px solid var(--color-link-alt-tint-35);
     outline-offset: 2px;
   }
 
@@ -261,7 +261,7 @@ const quickLinks: LinkCard[] = [
     font-size: 1.125rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #0d4270;
+    color: var(--color-brand);
     margin: 0 0 1.5rem;
     text-align: center;
   }
@@ -270,10 +270,10 @@ const quickLinks: LinkCard[] = [
     display: block;
     text-decoration: none;
     color: inherit;
-    background: #fff;
-    border: 1px solid #d8d8d8;
+    background: var(--color-surface);
+    border: 1px solid var(--color-surface-dim);
     border-radius: 6px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 2px var(--overlay-hover); /* (legacy rgba(0,0,0,0.04)) */
     transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -281,12 +281,12 @@ const quickLinks: LinkCard[] = [
   }
   .not-found-card:hover,
   .not-found-card:focus-visible {
-    border-color: #0d4270;
-    box-shadow: 0 4px 12px rgba(13,66,112,0.12);
+    border-color: var(--color-brand);
+    box-shadow: 0 4px 12px var(--overlay-brand-shadow); /* (legacy rgba(13,66,112,0.12)) */
     transform: translateY(-1px);
   }
   .not-found-card:focus-visible {
-    outline: 3px solid rgba(30,107,184,0.35);
+    outline: 3px solid var(--color-link-alt-tint-35);
     outline-offset: 2px;
   }
 
@@ -302,7 +302,7 @@ const quickLinks: LinkCard[] = [
     font-family: 'Raleway', sans-serif;
     font-weight: 900;
     font-size: 1.0625rem;
-    color: #0d4270;
+    color: var(--color-brand);
     margin: 0 0 4px;
     text-transform: none;
   }
@@ -310,13 +310,13 @@ const quickLinks: LinkCard[] = [
     font-family: 'Lato', sans-serif;
     font-size: 0.875rem;
     line-height: 1.45;
-    color: #555;
+    color: var(--color-ink-soft);
     margin: 0;
   }
 
   .not-found-card__arrow {
     flex-shrink: 0;
-    color: #0d4270;
+    color: var(--color-brand);
     transition: transform 0.15s ease;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -330,21 +330,21 @@ const quickLinks: LinkCard[] = [
   .not-found-help {
     font-family: 'Lato', sans-serif;
     font-size: 0.9375rem;
-    color: #444;
+    color: var(--color-ink-mid);
     margin: 2rem 0 0;
     padding-top: 1.5rem;
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid var(--color-border-soft);
     text-align: center;
   }
   .not-found-help a {
-    color: #0d4270;
+    color: var(--color-brand);
     font-weight: 700;
     text-decoration: underline;
     text-underline-offset: 2px;
   }
   .not-found-help a:hover,
   .not-found-help a:focus-visible {
-    color: #1e6bb8;
+    color: var(--color-link-alt);
   }
 
   .sr-only {

@@ -208,9 +208,9 @@ const articlesJson = JSON.stringify(
   }
 
   .tag-chip {
-    background: #f0f4f8;
-    color: #0d4270;
-    border: 1px solid #c5d5e8;
+    background: var(--color-surface-chip);
+    color: var(--color-brand);
+    border: 1px solid var(--color-border-chip);
     border-radius: 20px;
     padding: 4px 14px;
     font-size: 0.8125rem;
@@ -223,17 +223,17 @@ const articlesJson = JSON.stringify(
   }
 
   .tag-chip:hover {
-    background: #dce8f5;
+    background: var(--color-surface-chip-hover);
   }
 
   .tag-chip.active {
-    background: #0d4270;
-    color: #fff;
-    border-color: #0d4270;
+    background: var(--color-brand);
+    color: var(--color-on-dark);
+    border-color: var(--color-brand);
   }
 
   .dap-count {
-    color: #666;
+    color: var(--color-ink-muted);
     font-size: 0.875rem;
     margin-bottom: 16px;
   }
@@ -249,9 +249,9 @@ const articlesJson = JSON.stringify(
   }
 
   .dap-card {
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--color-border);
     border-radius: 4px;
-    background: #fafafa;
+    background: var(--color-surface-faint);
     height: 100%;
     box-sizing: border-box;
     transition: box-shadow 0.2s ease;
@@ -264,8 +264,8 @@ const articlesJson = JSON.stringify(
     height: auto;
     aspect-ratio: 4 / 3;
     object-fit: cover;
-    background: #eee;
-    border-bottom: 1px solid #e0e0e0;
+    background: var(--color-surface-press);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .dap-card-body {
@@ -273,7 +273,7 @@ const articlesJson = JSON.stringify(
   }
 
   .dap-card-link:hover .dap-card {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px var(--overlay-divider); /* (legacy rgba(0,0,0,0.12)) */
   }
 
   .dap-card-meta {
@@ -283,16 +283,16 @@ const articlesJson = JSON.stringify(
 
   .dap-card-date {
     font-weight: 700;
-    color: #000;
+    color: var(--color-ink-max);
     text-transform: uppercase;
   }
 
   .dap-card-sep {
-    color: #999;
+    color: var(--color-ink-hint);
   }
 
   .dap-card-type {
-    color: #555;
+    color: var(--color-ink-soft);
     text-transform: uppercase;
   }
 
@@ -300,13 +300,13 @@ const articlesJson = JSON.stringify(
     margin: 0 0 10px;
     font-size: 1rem;
     font-weight: 900;
-    color: #0d4270;
+    color: var(--color-brand);
   }
 
   .dap-card-abstract {
     margin: 0;
     font-size: 0.875rem;
-    color: #444;
+    color: var(--color-ink-mid);
     line-height: 1.55;
   }
 
@@ -317,6 +317,6 @@ const articlesJson = JSON.stringify(
     font-weight: 900;
     /* WCAG AA: #1976d2 on #fafafa is 4.28:1 (fails 4.5:1 for small bold).
        #0d47a1 (Blue 900) reaches ~6.6:1 — passes AA and AAA for normal text. */
-    color: #0d47a1;
+    color: var(--color-link-strong);
   }
 </style>
