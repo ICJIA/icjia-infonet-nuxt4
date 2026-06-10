@@ -5,12 +5,13 @@
 // Sorted by dateOverride ?? createdAt descending. Matches legacy news/index.vue.
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import NewsCard from '~/components/NewsCard.astro';
-import { strapiFetch } from '~/lib/strapi';
+import { strapiFetch, assertNoTruncation } from '~/lib/strapi';
 import { QUERY_POST_LIST } from '~/lib/queries';
 import { PostListResponseSchema } from '~/lib/schemas';
 
 const raw = await strapiFetch(QUERY_POST_LIST);
 const parsed = PostListResponseSchema.parse(raw);
+assertNoTruncation('posts (news listing)', parsed.posts.data.length, parsed.posts.meta?.pagination?.total);
 
 const displayDate = (p: (typeof parsed.posts.data)[number]) =>
   p.attributes.dateOverride ?? p.attributes.createdAt ?? null;

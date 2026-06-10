@@ -3,15 +3,20 @@
 //
 // Mobile navigation drawer. Port of legacy TheSidebar.vue.
 //
-// State pattern: Alpine.js LOCAL x-data per component (NOT global $store).
-//   - "open" boolean drives visibility.
-//   - Hamburger in AppNav dispatches CustomEvent('drawer-toggle') on window;
-//     this component listens with @drawer-toggle.window.
-//   - body.drawer-open class applied when open; removed when closed.
-//   - Focus trap via x-trap.noscroll.inert="open" (@alpinejs/focus).
+// State pattern: Alpine.store('drawer') — registered in scripts/alpine-entry.ts.
+//   - $store.drawer.open drives visibility; the AppNav hamburger toggles the
+//     same store and binds its aria-expanded/aria-label to it, so EVERY close
+//     path below keeps the button in sync (the old CustomEvent + local x-data
+//     pattern let the hamburger's state invert permanently).
+//   - body.drawer-open class follows the store via one x-effect (scroll lock).
+//   - Focus trap via x-trap.noscroll.inert (@alpinejs/focus).
 //   - Escape key closes drawer globally.
 //   - Backdrop click closes drawer.
-//   - Every nav link clicks close the drawer.
+//   - Every nav link click closes the drawer.
+//
+// No-JS fallback: the drawer (x-cloak) and hamburger are dead without JS and
+// the desktop nav is display:none below 960px — so a <noscript> link list
+// renders in normal flow for mobile users with JavaScript disabled.
 //
 // Visual spec matches legacy Vuetify v-navigation-drawer:
 //   - Width 280px, slide-in from left
@@ -22,18 +27,52 @@
 
 import { sidebarMenu, utilityLinks } from '~/lib/menu';
 const pathname = Astro.url.pathname;
+
+// Flat link list for the <noscript> fallback nav: top-level links, every
+// child link, then the utility links. Sections/dividers are skipped.
+const noscriptLinks = [
+  ...sidebarMenu.flatMap((menu) =>
+    menu.children
+      ? menu.children
+          .filter((c) => c.title && c.link)
+          .map((c) => ({ title: c.title!, link: c.link!, external: c.external }))
+      : menu.link
+        ? [{ title: menu.main, link: menu.link, external: menu.external }]
+        : [],
+  ),
+  ...utilityLinks.map((item) => ({ title: item.main, link: item.link, external: undefined })),
+];
 ---
 
+<!-- No-JS mobile navigation (hidden ≥960px where the desktop <details> nav,
+     which works without JS, is visible). Renders in normal document flow. -->
+<noscript>
+  <nav class="noscript-nav" aria-label="Site navigation">
+    <ul>
+      {noscriptLinks.map((item) => (
+        <li>
+          <a
+            href={item.link}
+            {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {item.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</noscript>
+
 <aside
-  x-data="{ open: false }"
-  @drawer-toggle.window="open = !open; document.body.classList.toggle('drawer-open', open)"
-  @keydown.escape.window="if (open) { open = false; document.body.classList.remove('drawer-open'); }"
+  x-data
+  x-effect="document.body.classList.toggle('drawer-open', $store.drawer.open)"
+  @keydown.escape.window="$store.drawer.close()"
   aria-label="Mobile navigation"
   style="display: contents;"
 >
   <!-- Backdrop -->
   <div
-    x-show="open"
+    x-show="$store.drawer.open"
     x-cloak
     x-transition:enter="transition-opacity duration-200 ease-out"
     x-transition:enter-start="opacity-0"
@@ -41,7 +80,7 @@ const pathname = Astro.url.pathname;
     x-transition:leave="transition-opacity duration-200 ease-in"
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
-    @click="open = false; document.body.classList.remove('drawer-open');"
+    @click="$store.drawer.close()"
     aria-hidden="true"
     style="
       position: fixed;
@@ -54,9 +93,9 @@ const pathname = Astro.url.pathname;
   <!-- Drawer panel -->
   <nav
     id="mobile-navigation"
-    x-show="open"
+    x-show="$store.drawer.open"
     x-cloak
-    x-trap.noscroll.inert="open"
+    x-trap.noscroll.inert="$store.drawer.open"
     x-transition:enter="transition-transform duration-250 ease-out"
     x-transition:enter-start="-translate-x-full"
     x-transition:enter-end="translate-x-0"
@@ -118,7 +157,7 @@ const pathname = Astro.url.pathname;
                       <a
                         href={child.link}
                         aria-current={pathname === child.link ? 'page' : undefined}
-                        @click="open = false; document.body.classList.remove('drawer-open');"
+                        @click="$store.drawer.close()"
                         class="sidebar-child-link"
                         style="
                           display: block;
@@ -143,7 +182,7 @@ const pathname = Astro.url.pathname;
             <a
               href={menu.link}
               aria-current={pathname === menu.link ? 'page' : undefined}
-              @click="open = false; document.body.classList.remove('drawer-open');"
+              @click="$store.drawer.close()"
               class="sidebar-link"
               style="
                 font-weight: 900;
@@ -169,7 +208,7 @@ const pathname = Astro.url.pathname;
           <a
             href={item.link}
             aria-current={pathname === item.link ? 'page' : undefined}
-            @click="open = false; document.body.classList.remove('drawer-open');"
+            @click="$store.drawer.close()"
             class="sidebar-link sidebar-link--utility"
             style="
               font-weight: 400;
@@ -186,12 +225,41 @@ const pathname = Astro.url.pathname;
 </aside>
 
 <style>
+/* No-JS fallback nav — visible only when scripting is off (and hidden at
+   ≥960px, where the JS-free desktop <details> nav takes over). */
+.noscript-nav {
+  background: #f5f5f5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 8px 16px;
+}
+.noscript-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+.noscript-nav a {
+  display: inline-block;
+  padding: 6px 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0d4270;
+}
+@media (min-width: 960px) {
+  .noscript-nav {
+    display: none;
+  }
+}
+
 /* Shared link base */
 .sidebar-link {
   display: flex;
   align-items: center;
   padding: 8px 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif;
   font-size: 0.875rem;
   min-height: 40px;
   line-height: 1.5;

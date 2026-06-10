@@ -1,8 +1,8 @@
 /* astro/src/styles/global.css
    Entry point — imported once from BaseLayout.astro.
-   Order matters: tailwindcss first, then fontsource (Lato/Raleway/Roboto),
-   then MDI, then github-markdown (must come after tailwind so preflight
-   resets don't override the .markdown-body rules). */
+   Order matters: tailwindcss first, then fontsource (Lato/Raleway), then
+   github-markdown (must come after tailwind so preflight resets don't
+   override the .markdown-body rules). */
 
 @import 'tailwindcss';
 
@@ -20,16 +20,10 @@
 @import '@fontsource/raleway/latin-700.css';
 @import '@fontsource/raleway/latin-900.css';
 
-/* Roboto — Vuetify default fallback per legacy link tag (nav dropdown items) */
-@import '@fontsource/roboto/latin-400.css';
-@import '@fontsource/roboto/latin-700.css';
-@import '@fontsource/roboto/latin-900.css';
-
-/* Material Design Icons — REMOVED in Phase 4 (88 KiB unused CSS).
-   All icons in AppNav / AppSidebar / AppFooter / SimpleCard use INLINE SVG,
-   so @mdi/font's icon-font CSS isn't needed. Re-introduce only if a future
-   phase needs the .mdi-* font-class style hooks. */
-/* @import '@mdi/font/css/materialdesignicons.css'; */
+/* Roboto — REMOVED. It existed only for nav micro-text (dropdown items,
+   breadcrumb at 13px) where it is visually indistinguishable from Lato;
+   dropping the family saves three font files per page that rendered it.
+   Material Design Icons (@mdi/font) also removed — all icons are inline SVG. */
 
 /* Prose styling for CMS markdown bodies */
 @import './github-markdown.css';

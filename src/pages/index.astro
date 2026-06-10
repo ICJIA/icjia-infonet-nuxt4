@@ -26,7 +26,8 @@ const description =
 // have explicit publisher identity + searchAction surface. BaseLayout emits
 // each array entry as its own <script type="application/ld+json"> block so
 // each carries `@type` at the root (assessors look there).
-const buildIsoDate = new Date().toISOString();
+// No dateModified: stamping the build time claimed the page changed on every
+// deploy, which teaches crawlers to distrust the site's freshness signals.
 const homeJsonLd = [
   {
     '@context': 'https://schema.org',
@@ -37,7 +38,6 @@ const homeJsonLd = [
     description,
     inLanguage: 'en-US',
     datePublished: siteConfig.siteLaunchDate,
-    dateModified: buildIsoDate,
     publisher: { '@id': 'https://icjia.illinois.gov#icjia' },
     potentialAction: {
       '@type': 'SearchAction',
@@ -122,8 +122,10 @@ const homeJsonLd = [
 </BaseLayout>
 
 <style>
-  /* Import Raleway for the INFONET title — matches legacy headingHomeMain class. */
-  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;900&display=swap');
+  /* Raleway is self-hosted via @fontsource (global.css) — the old Google
+     Fonts @import here was redundant, render-blocking, and leaked visitor
+     IPs to Google; it was also the only thing keeping fonts.googleapis.com
+     in the CSP. */
 
   /* Hero typography only — section/grid/column layout is now driven by
      Tailwind utilities inline (grid-cols-1 md:grid-cols-2 etc.) so the

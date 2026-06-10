@@ -24,7 +24,9 @@ const displayDate = formatDate(date, 'short');
 <style>
   .last-updated {
     font-size: 0.8125rem;
-    color: #777;
+    /* #666 = 5.74:1 on white — #777 was 4.48:1, just under the 4.5:1 AA
+       minimum (axe color-contrast, WCAG 1.4.3). */
+    color: #666;
     margin-top: 2rem;
     border-top: 1px solid #e0e0e0;
     padding-top: 0.75rem;

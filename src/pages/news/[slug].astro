@@ -15,7 +15,7 @@ import DvAwarenessMonth from '~/components/mdc/DvAwarenessMonth.astro';
 import Partners from '~/components/mdc/Partners.astro';
 import TabsScreenshotsAccessible from '~/components/mdc/TabsScreenshotsAccessible.astro';
 import TabsUserInfoAccessible from '~/components/mdc/TabsUserInfoAccessible.astro';
-import { strapiFetch } from '~/lib/strapi';
+import { strapiFetch, assertNoTruncation } from '~/lib/strapi';
 import { QUERY_POST_LIST } from '~/lib/queries';
 import { PostListResponseSchema } from '~/lib/schemas';
 import { renderMarkdown } from '~/lib/markdown';
@@ -23,6 +23,7 @@ import { renderMarkdown } from '~/lib/markdown';
 export async function getStaticPaths() {
   const raw = await strapiFetch(QUERY_POST_LIST);
   const parsed = PostListResponseSchema.parse(raw);
+  assertNoTruncation('posts', parsed.posts.data.length, parsed.posts.meta?.pagination?.total);
   return parsed.posts.data.map((post) => ({
     params: { slug: post.attributes.slug },
     props: { post },
@@ -66,6 +67,7 @@ const dateModified = attr.updatedAt ?? datePublished;
 <BaseLayout
   title={attr.title ?? 'News'}
   description={description}
+  searchable={!attr.hideFromSearch}
   ogImage={splashUrl ?? undefined}
   breadcrumbTitle="News"
   breadcrumbTitleHref="/news/"

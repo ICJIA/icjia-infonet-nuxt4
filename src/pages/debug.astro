@@ -6,6 +6,11 @@
 // This version adds build-time env info for diagnostics.
 import BaseLayout from '~/layouts/BaseLayout.astro';
 
+// Dev/preview tool only: production builds publish a bare redirect stub so
+// build internals aren't advertised at a guessable URL. (Static output turns
+// this into a meta-refresh page at /debug/.)
+if (import.meta.env.PROD) return Astro.redirect('/404/');
+
 const buildEnv = {
   site: import.meta.env.SITE ?? '(not set)',
   mode: import.meta.env.MODE,

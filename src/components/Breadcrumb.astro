@@ -4,7 +4,7 @@
 // Port of legacy app/components/content/TheBreadcrumbBar.vue.
 // Visual spec:
 //   - Background #0d4474 (dark blue)
-//   - Font Roboto, 13px
+//   - Font Lato (was Roboto), 13px
 //   - Text: "HOME » <CURRENT_PAGE>" (» = U+00BB right double angle quotation mark)
 //   - Truncates derived/passed title to 30 chars with "..."
 //   - Hidden on "/" and paths starting with "/debug"
@@ -64,7 +64,7 @@ const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
 {!hidden && (
   <nav
     aria-label="Breadcrumb"
-    style="background:#0d4474;border-bottom:1px solid #aaa;font-size:13px;font-family:'Roboto',sans-serif;z-index:99999;"
+    style="background:#0d4474;border-bottom:1px solid #aaa;font-size:13px;font-family:'Lato',sans-serif;z-index:99999;"
     class="text-left pr-5 pl-5 py-1"
   >
     <ol
@@ -74,7 +74,7 @@ const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
       <li>
         <a
           href="/"
-          style="color:#fff;font-family:'Roboto',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
+          style="color:#fff;font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
           aria-label="Home"
         >HOME</a>
       </li>
@@ -87,7 +87,7 @@ const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
         {breadcrumbTitleHref && currentLabel ? (
           <a
             href={breadcrumbTitleHref}
-            style="color:#fff;font-family:'Roboto',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
+            style="color:#fff;font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
           >{middleLabel}</a>
         ) : (
           <span

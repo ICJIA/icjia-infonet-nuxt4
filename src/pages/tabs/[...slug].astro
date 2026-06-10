@@ -14,7 +14,7 @@ import DvAwarenessMonth from '~/components/mdc/DvAwarenessMonth.astro';
 import Partners from '~/components/mdc/Partners.astro';
 import TabsScreenshotsAccessible from '~/components/mdc/TabsScreenshotsAccessible.astro';
 import TabsUserInfoAccessible from '~/components/mdc/TabsUserInfoAccessible.astro';
-import { strapiFetch } from '~/lib/strapi';
+import { strapiFetch, assertNoTruncation } from '~/lib/strapi';
 import { QUERY_TAB_LIST } from '~/lib/queries';
 import { TabListResponseSchema } from '~/lib/schemas';
 import { renderMarkdown } from '~/lib/markdown';
@@ -22,6 +22,7 @@ import { renderMarkdown } from '~/lib/markdown';
 export async function getStaticPaths() {
   const raw = await strapiFetch(QUERY_TAB_LIST);
   const parsed = TabListResponseSchema.parse(raw);
+  assertNoTruncation('tabs', parsed.tabs.data.length, parsed.tabs.meta?.pagination?.total);
 
   // Filter out tabs with null/undefined slugs — they cannot be routed.
   return parsed.tabs.data
@@ -39,9 +40,14 @@ const { html, mdcRefs } = renderMarkdown(attr.body);
 
 const description = attr.summary ?? attr.title ?? '';
 ---
+{/* noindex: these standalone tab pages duplicate content already rendered on
+    /screenshots/ and /resources/ via the MDC components, and nothing links to
+    them — keep them out of search engines (and, via the searchable default,
+    out of Pagefind). They are also excluded from the sitemap in astro.config. */}
 <BaseLayout
   title={attr.title ?? 'Tab'}
   description={description}
+  noindex={true}
   breadcrumbTitle={attr.title ?? undefined}
 >
   <article class="tab-detail">

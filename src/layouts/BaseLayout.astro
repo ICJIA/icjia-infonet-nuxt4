@@ -14,17 +14,26 @@ import '~/styles/global.css';
 // Preload the three most-used woff2 files so they download in parallel with CSS
 // instead of waiting for the @fontsource @import chain to be parsed. Removes the
 // late font-swap reflow that was costing ~0.12 CLS on text-heavy pages.
+// Raleway 900 is the brand font ("INFONET" in the fixed header, above the fold
+// on every page); Lato 400/700 cover body text. Roboto was dropped site-wide.
 // `?url` resolves to the same hashed /_astro/... asset the CSS rule references,
 // so the browser reuses the preloaded byte stream (no duplicate fetch).
 import latoRegularUrl from '@fontsource/lato/files/lato-latin-400-normal.woff2?url';
 import latoBoldUrl from '@fontsource/lato/files/lato-latin-700-normal.woff2?url';
-import robotoRegularUrl from '@fontsource/roboto/files/roboto-latin-400-normal.woff2?url';
+import ralewayBlackUrl from '@fontsource/raleway/files/raleway-latin-900-normal.woff2?url';
 
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
   noindex?: boolean;
+  /**
+   * Whether Pagefind may index this page (`data-pagefind-body` on <main>).
+   * Defaults to `!noindex`, so 404/debug/tabs pages drop out of site search
+   * automatically; pages can also opt out explicitly (search page, CMS
+   * entries with `hideFromSearch`).
+   */
+  searchable?: boolean;
   canonicalOverride?: string;
   breadcrumbTitle?: string;
   /** Optional href for the middle breadcrumb entry (makes it a link). */
@@ -48,6 +57,7 @@ const {
   description = siteConfig.defaultDescription,
   ogImage,
   noindex = false,
+  searchable = !noindex,
   canonicalOverride,
   breadcrumbTitle = undefined,
   breadcrumbTitleHref = undefined,
@@ -92,12 +102,9 @@ const newsArticleJsonLd = newsArticle && {
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
 };
 
-// Build-time timestamp — captured when Astro renders the page (static output,
-// so this is the deploy time). Used as `dateModified` for static pages so AI
-// crawlers see a fresh freshness signal on every deploy. Pair with
-// `siteConfig.siteLaunchDate` as `datePublished` for static pages.
-const buildIsoDate = new Date().toISOString();
-
+// No `dateModified` on static pages: stamping the build time claimed every
+// page changed on every deploy, which teaches crawlers to ignore the site's
+// freshness signals entirely. News articles carry real CMS dates instead.
 const defaultWebPageJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -106,7 +113,6 @@ const defaultWebPageJsonLd = {
   description,
   inLanguage: 'en-US',
   datePublished: siteConfig.siteLaunchDate,
-  dateModified: buildIsoDate,
   isPartOf: {
     '@type': 'WebSite',
     name: siteConfig.siteName,
@@ -127,6 +133,12 @@ const jsonLdEntries: Array<Record<string, unknown>> = Array.isArray(effectiveJso
   ? effectiveJsonLd
   : [effectiveJsonLd];
 
+// JSON.stringify does NOT escape `<`, and `set:html` is raw insertion — a CMS
+// title containing `</script>` would otherwise break out of the JSON-LD block
+// into <head>. `<` is valid JSON, so parsers are unaffected.
+const toJsonLdHtml = (entry: Record<string, unknown>) =>
+  JSON.stringify(entry).replace(/</g, '\\u003c');
+
 // Conditional <main> top-padding: home gets 64px; other pages get 96px.
 const isHome = rawPath === '/';
 /* Legacy measured gap from breadcrumb-bottom to h1-top = 32px on non-home.
@@ -141,12 +153,13 @@ const mainTopPad = isHome ? 0 : 32;
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
+    {/* Permissions-Policy is sent as a real response header (netlify.toml) —
+        the directive is header-only, so a <meta http-equiv> version is inert. */}
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <link rel="preload" as="font" type="font/woff2" href={latoRegularUrl} crossorigin="anonymous" />
     <link rel="preload" as="font" type="font/woff2" href={latoBoldUrl} crossorigin="anonymous" />
-    <link rel="preload" as="font" type="font/woff2" href={robotoRegularUrl} crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href={ralewayBlackUrl} crossorigin="anonymous" />
 
     <SEO
       title={fullTitle}
@@ -156,7 +169,7 @@ const mainTopPad = isHome ? 0 : 32;
       openGraph={{
         basic: {
           title: fullTitle,
-          type: 'website',
+          type: newsArticle ? 'article' : 'website',
           image: ogImage ?? siteConfig.og.image,
           url: canonical,
         },
@@ -189,7 +202,7 @@ const mainTopPad = isHome ? 0 : 32;
     )}
 
     {jsonLdEntries.map((entry) => (
-      <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+      <script is:inline type="application/ld+json" set:html={toJsonLdHtml(entry)} />
     ))}
 
     {/* URL normalizer — runs before deferred Plausible. */}
@@ -222,7 +235,7 @@ const mainTopPad = isHome ? 0 : 32;
     <AppSidebar />
     <Breadcrumb title={breadcrumbTitle} breadcrumbTitleHref={breadcrumbTitleHref} breadcrumbCurrent={breadcrumbCurrent} />
 
-    <main id="main-content" data-pagefind-body style={`padding-top: ${mainTopPad}px; min-height: 70vh;`}>
+    <main id="main-content" data-pagefind-body={searchable ? '' : undefined} style={`padding-top: ${mainTopPad}px; min-height: 70vh;`}>
       <slot />
     </main>
 

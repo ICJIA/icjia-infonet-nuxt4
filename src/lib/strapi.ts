@@ -36,6 +36,28 @@ export class StrapiError extends Error {
   }
 }
 
+/**
+ * Build-time truncation guard. Every list query hardcodes a one-shot
+ * pagination limit (pages 200, posts 200, faqs 500, tabs 100) and also
+ * selects `meta.pagination.total` — call this after parsing so the build
+ * fails LOUDLY the day a collection outgrows its limit. Without it, post
+ * #201 would silently lose its built page (sorted desc, so the oldest
+ * entries' URLs go 404 while the deploy stays green).
+ */
+export function assertNoTruncation(
+  label: string,
+  returnedCount: number,
+  total: number | null | undefined,
+): void {
+  if (typeof total === 'number' && total > returnedCount) {
+    throw new StrapiError(
+      `${label}: Strapi returned ${returnedCount} of ${total} records — ` +
+        `the query's pagination limit is too low; raise it in src/lib/queries.ts`,
+      siteConfig.api.baseGraphQL,
+    );
+  }
+}
+
 export async function strapiFetch<T = unknown>(
   query: string,
   variables: Record<string, unknown> = {},

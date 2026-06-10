@@ -7,9 +7,9 @@
 // and description. Pure CSS grid — no client-side JavaScript.
 //
 // Colors ported verbatim from legacy HomeBoxes.vue:
-//   #0D4474 — Interested in using InfoNet?  → /contact?subject=InfoNet Information Request
-//   #1c5183 — Request InfoNet Data          → /contact?subject=InfoNet Data Request
-//   #3a5571 — Request Technical Assistance  → /contact?subject=InfoNet Technical Assistance Request
+//   #0D4474 — Interested in using InfoNet?  → /contact/?subject=InfoNet Information Request
+//   #1c5183 — Request InfoNet Data          → /contact/?subject=InfoNet Data Request
+//   #3a5571 — Request Technical Assistance  → /contact/?subject=InfoNet Technical Assistance Request
 
 interface Box {
   title: string;
@@ -27,7 +27,7 @@ interface Box {
 const boxes: Box[] = [
   {
     title: 'Interested in using InfoNet?',
-    href: '/contact?subject=InfoNet%20Information%20Request',
+    href: '/contact/?subject=InfoNet%20Information%20Request',
     body: 'Click to request more information',
     color: '#0D4474',
     // MDI account-group (3-person icon — exact path from pictogrammers.com)
@@ -36,7 +36,7 @@ const boxes: Box[] = [
   },
   {
     title: 'Request InfoNet Data',
-    href: '/contact?subject=InfoNet%20Data%20Request',
+    href: '/contact/?subject=InfoNet%20Data%20Request',
     body: 'Request InfoNet data',
     color: '#1c5183',
     // MDI pencil-ruler (exact path from pictogrammers.com)
@@ -45,7 +45,7 @@ const boxes: Box[] = [
   },
   {
     title: 'Request Technical Assistance',
-    href: '/contact?subject=InfoNet%20Technical%20Assistance%20Request',
+    href: '/contact/?subject=InfoNet%20Technical%20Assistance%20Request',
     body: 'For current InfoNet users',
     color: '#3a5571',
     // MDI home (house outline — exact path from pictogrammers.com)

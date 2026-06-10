@@ -12,7 +12,8 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PageHeader from '~/components/PageHeader.astro';
 ---
-<BaseLayout title="Search" breadcrumbTitle="Search">
+{/* searchable={false}: the search page must not appear in its own results. */}
+<BaseLayout title="Search" breadcrumbTitle="Search" searchable={false}>
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
 
   <div class="search-wrapper">
@@ -23,7 +24,10 @@ import PageHeader from '~/components/PageHeader.astro';
   <script is:inline src="/pagefind/pagefind-ui.js"></script>
   <script is:inline>
     (function () {
-      new PagefindUI({ element: '#pagefind-ui', showImages: false });
+      // showSubResults: result cards list per-section hits (split on ids in
+      // the indexed page), so an FAQ match links to /faqs/#faq-<slug> and
+      // the faqs page script opens that accordion on arrival.
+      new PagefindUI({ element: '#pagefind-ui', showImages: false, showSubResults: true });
 
       // ?q= deep-link: pre-fill query from URL params and trigger search.
       var params = new URLSearchParams(window.location.search);
@@ -55,11 +59,45 @@ import PageHeader from '~/components/PageHeader.astro';
     border: 1px solid #ccc;
   }
 
+  /* Result cards — subtle shaded treatment matching dvfr.illinois.gov's
+     search-result-card: #f7f7f9 fill, hairline border, soft shadow, gentle
+     shadow lift on hover. Replaces Pagefind's default border-top dividers. */
+  :global(#pagefind-ui .pagefind-ui__result) {
+    border-top: none;
+    margin: 16px 0;
+    padding: 20px 24px;
+    border: 1px solid #e2e2e8;
+    border-radius: 4px;
+    background: #f7f7f9;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.2s ease-in-out;
+  }
+
+  :global(#pagefind-ui .pagefind-ui__result:hover) {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  :global(#pagefind-ui .pagefind-ui__result mark) {
+    background: #fde68a;
+    color: inherit;
+    padding: 0 1px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(#pagefind-ui .pagefind-ui__result) {
+      transition: none;
+    }
+  }
+
   :global(#pagefind-ui .pagefind-ui__search-clear) {
     color: #555;
   }
 
   :global(#pagefind-ui .pagefind-ui__result-link) {
-    color: var(--color-primary, #2a4d6e);
+    /* #0d47a1 (Blue 900, same as the DAP card CTA): ~6.3:1 on the #f7f7f9
+       card fill. The old var(--color-primary) #1976d2 was 4.36:1 there —
+       under the 4.5:1 AA minimum once the shaded cards landed. */
+    color: #0d47a1;
   }
 </style>

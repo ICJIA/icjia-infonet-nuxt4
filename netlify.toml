@@ -33,16 +33,31 @@
   to = "/sitemap-0.xml"
   status = 200
 
+# --- Build plugins ---
+#
+# Persist the CMS image pipeline between deploys: `.cache/cms-img` holds the
+# raw downloads (keyed by sha256 of the upload path — Strapi filenames carry
+# content hashes, so entries never go stale) and `public/_cms-img` holds the
+# Sharp-encoded variants (fetch-cms-images.mjs skips work that already
+# exists). Without this every deploy re-downloads and re-encodes every image.
+# NOTE: `.cache/strapi` (CMS *data*) is intentionally NOT cached — the build
+# script clears it so every deploy renders fresh content.
+
+[[plugins]]
+  package = "netlify-plugin-cache"
+  [plugins.inputs]
+    paths = [".cache/cms-img", "public/_cms-img"]
+
 # --- Headers ---
 
 [[headers]]
   for = "/*"
   [headers.values]
-    Access-Control-Allow-Origin = "*"
     X-Greeting = "Hello from Chicago!"
     # CSP — see scripts/csp-hashes.mjs. Re-run after any inline-script change.
-    # Inline scripts: URL normalizer (BaseLayout), Plausible, Pagefind init,
-    # ReadProgress / TOC init, news post variant.
+    # Inline scripts: URL normalizer (BaseLayout), AppNav dropdown script
+    # (Astro auto-inlines small bundles), Pagefind init, ReadProgress / TOC
+    # init news variant, DAP filter init, FAQ deep-link opener (faqs page).
     #
     # 'unsafe-eval' is required by Alpine.js 3 — it uses runtime eval() to
     # evaluate x-show / x-data / x-on directives. Without it, every Alpine
@@ -51,6 +66,33 @@
     # eval (Vue template compilation), so this matches legacy security
     # posture. Future hardening: migrate to @alpinejs/csp build that
     # pre-compiles expressions; requires per-directive refactor.
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'sha256-0GEXQXbX4Ty5Tg6K7e8GdROTUXHbFOL/QU8sxXcM9Ic=' 'sha256-4IFvRuHeqInbPM4aN98R5iYEMAHUtmzb/C7EtynuMKU=' 'sha256-GvWUUdHUwmNl2+Rf2qXqwukwz938FFUXs/+KgJvHH2Q=' 'sha256-TETLPxwYreIF/Skse4Fss+ckYiL1JK4qabttEwV56tc=' 'sha256-bmb2y0bUGL0Hm0OYO1Tr75036AzQt1CVprLk0KxYjNI=' 'sha256-mGhkZOJ2G63NJ6hKuOJod9nrWFUveMlI5snsLCwyrPk=' https://plausible.icjia.cloud; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://infonet.icjia-api.cloud https://i.ytimg.com; connect-src 'self' https://plausible.icjia.cloud https://infonet.icjia-api.cloud; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://app.netlify.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://mail.icjia.cloud"
+    #
+    # connect-src must include mail.icjia.cloud — the contact form submits
+    # via Alpine fetch() (@submit.prevent), which is governed by connect-src,
+    # not form-action. Google Fonts hosts removed: all fonts are self-hosted
+    # via @fontsource.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'sha256-0GEXQXbX4Ty5Tg6K7e8GdROTUXHbFOL/QU8sxXcM9Ic=' 'sha256-bmb2y0bUGL0Hm0OYO1Tr75036AzQt1CVprLk0KxYjNI=' 'sha256-jp0mCjKxE5BrRkzzxClITvlcgYxTMtleQ+j7b1umXSQ=' 'sha256-mGhkZOJ2G63NJ6hKuOJod9nrWFUveMlI5snsLCwyrPk=' 'sha256-sRs1fNmOR8Cn2Vt+sR+k9YSYlpIlmBZXV2vp/7/8sA4=' 'sha256-xCybCFc4fwdwyxXVE7TB2FUhQzAPREyaw9SYYo7MCjM=' https://plausible.icjia.cloud; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://infonet.icjia-api.cloud https://i.ytimg.com; connect-src 'self' https://plausible.icjia.cloud https://infonet.icjia-api.cloud https://mail.icjia.cloud; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://app.netlify.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
     Cross-Origin-Opener-Policy = "same-origin"
     Cross-Origin-Resource-Policy = "cross-origin"
+    # An *.illinois.gov property should never be reachable over plain HTTP.
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Astro content-hashes everything under /_astro/ (JS, CSS, fonts), so these
+# files can be cached forever — a changed file gets a new URL.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# CMS images. The sha256-keyed variant dirs are effectively immutable, but
+# /_cms-img/dap/* reuses filenames (<articleId>-<width>.webp) when content
+# changes, and Netlify gives no documented precedence for overlapping header
+# rules — so one conservative rule covers the whole tree instead of an
+# immutable rule plus a dap/* override.
+[[headers]]
+  for = "/_cms-img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

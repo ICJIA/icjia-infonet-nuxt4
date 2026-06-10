@@ -2,13 +2,17 @@
 // src/components/mdc/TabsUserInfoAccessible.astro
 //
 // Ported from v1-final app/components/content/TabsUserInfoAccessible.vue.
-// Renders accessible tabs (ARIA tablist + Alpine.js) for user info sections.
+// Renders accessible tabs (ARIA tablist + the shared `a11yTabs` Alpine.data
+// factory from scripts/alpine-entry.ts) for user info sections.
 // The legacy fetched 3 hard-coded slugs from Nuxt Content; this version
 // queries Strapi tabs filtered by sectionID at build time.
 //
+// ids are prefixed with a per-instance uid derived from sectionID so two
+// tabs blocks on one CMS page can't emit duplicate ids.
+//
 // Props:
 //   sectionID — filters which tabs to display (e.g., "users")
-import { strapiFetch } from '~/lib/strapi';
+import { strapiFetch, assertNoTruncation } from '~/lib/strapi';
 import { QUERY_TAB_LIST_BY_SECTION } from '~/lib/queries';
 import { TabListBySectionResponseSchema } from '~/lib/schemas';
 import { renderMarkdown } from '~/lib/markdown';
@@ -21,7 +25,10 @@ const { sectionID = 'users' } = Astro.props;
 
 const raw = await strapiFetch(QUERY_TAB_LIST_BY_SECTION, { sectionID });
 const parsed = TabListBySectionResponseSchema.parse(raw);
+assertNoTruncation(`tabs (section ${sectionID})`, parsed.tabs.data.length, parsed.tabs.meta?.pagination?.total);
 const tabs = parsed.tabs.data;
+
+const uid = `tui-${sectionID.replace(/[^a-zA-Z0-9_-]/g, '')}`;
 
 // Rendered markdown per tab.
 const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
@@ -32,25 +39,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
 ) : (
   <div
     class="tui-wrapper"
-    x-data={`{
-      activeTab: 0,
-      setTab(i) {
-        this.activeTab = i;
-        this.$nextTick(() => {
-          const btn = this.$el.querySelector('[role=tab][data-index="' + i + '"]');
-          if (btn) btn.focus();
-        });
-      },
-      handleKey(e, i) {
-        const total = ${tabs.length};
-        let next = i;
-        if (e.key === 'ArrowLeft')  { e.preventDefault(); next = i > 0 ? i - 1 : total - 1; }
-        if (e.key === 'ArrowRight') { e.preventDefault(); next = i < total - 1 ? i + 1 : 0; }
-        if (e.key === 'Home') { e.preventDefault(); next = 0; }
-        if (e.key === 'End')  { e.preventDefault(); next = total - 1; }
-        if (next !== i) this.setTab(next);
-      }
-    }`}
+    x-data={`a11yTabs(${tabs.length})`}
   >
     <p class="tui-hint">Click tab to view agency info.</p>
 
@@ -60,12 +49,14 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
         {tabs.map((tab, i) => (
           <button
             role="tab"
-            class="tui-tab"
+            class:list={['tui-tab', i === 0 && 'tui-tab--active']}
+            id={`${uid}-tab-${i}`}
+            aria-controls={`${uid}-panel-${i}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
             :class={`{ 'tui-tab--active': activeTab === ${i} }`}
             :aria-selected={`activeTab === ${i}`}
             :tabindex={`activeTab === ${i} ? 0 : -1`}
-            :id={`'tui-tab-' + ${i}`}
-            :aria-controls={`'tui-panel-' + ${i}`}
             data-index={i}
             @click={`setTab(${i})`}
             @keydown={`handleKey($event, ${i})`}
@@ -83,9 +74,10 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
             <div
               role="tabpanel"
               class="tui-panel"
-              :id={`'tui-panel-' + ${i}`}
-              :aria-labelledby={`'tui-tab-' + ${i}`}
+              id={`${uid}-panel-${i}`}
+              aria-labelledby={`${uid}-tab-${i}`}
               x-show={`activeTab === ${i}`}
+              x-cloak={i > 0 ? '' : undefined}
               x-transition:enter="tui-fade-enter"
               x-transition:enter-start="tui-fade-start"
               x-transition:enter-end="tui-fade-end"

@@ -9,16 +9,23 @@
 //   - Mobile/tablet (< 1280px): hamburger + "INFONET" abbreviated title + search icon
 //   - Desktop (≥ 1280px): full title + topNav links (dropdown via <details>) + utility ⋮ dropdown
 //
-// Hamburger pattern: dispatches CustomEvent('drawer-toggle') on window.
-//   AppSidebar listens with @drawer-toggle.window.
-//   No Alpine state needed in the nav itself — just a <button> with a small inline script.
+// Hamburger pattern: drawer state lives in Alpine.store('drawer') (registered
+//   in scripts/alpine-entry.ts). The hamburger toggles the store and binds
+//   aria-expanded / aria-label to it, so every close path (Escape, backdrop,
+//   nav-link click in AppSidebar) keeps the button in sync — the old
+//   CustomEvent pattern let the button's state invert permanently.
 //
 // Title font spec (from TheNav.vue inline styles):
 //   - Font: Raleway, 28px desktop / 28px mobile
 //   - "INFONET" in #0d4270 font-weight 900
-//   - " | DATA COLLECTION & REPORTING SYSTEM" in #000 font-weight 300
+//   - " | DATA COLLECTION & REPORTING SYSTEM" in #000 (visually light;
+//     rendered at 400 — Raleway 300 is not shipped, so browsers substituted
+//     400 anyway and the explicit 400 just makes that honest)
 //
-// Dropdown items: native <details><summary> (no Alpine state — full keyboard a11y).
+// Dropdown items: native <details><summary> disclosure (no Alpine state — full
+// keyboard a11y). Deliberately NO role="menu"/"menuitem": ARIA menus promise
+// arrow-key/typeahead behavior we don't implement, and the APG recommends
+// plain disclosure semantics for navigation links.
 // Active route: <a aria-current="page"> when pathname matches.
 //
 // Breakpoint: desktop nav (brand subtitle + topNav links + ⋮) appears at ≥960px.
@@ -46,9 +53,13 @@ const pathname = Astro.url.pathname;
     <button
       type="button"
       id="nav-hamburger"
+      x-data
       aria-label="Open navigation menu"
       aria-expanded="false"
       aria-controls="mobile-navigation"
+      :aria-expanded="$store.drawer.open"
+      :aria-label="$store.drawer.open ? 'Close navigation menu' : 'Open navigation menu'"
+      @click="$store.drawer.toggle()"
       class="nav-hamburger md-hide"
       style="
         display: flex;
@@ -86,7 +97,7 @@ const pathname = Astro.url.pathname;
       <span style="
         font-weight: 900;
         font-size: 28px;
-        font-family: 'Raleway', 'Raleway fallback', sans-serif;
+        font-family: 'Raleway', sans-serif;
         letter-spacing: 0em;
         color: #0d4270;
         white-space: nowrap;
@@ -94,14 +105,14 @@ const pathname = Astro.url.pathname;
       <span style="
         font-weight: 900;
         font-size: 28px;
-        font-family: 'Raleway', 'Raleway fallback', sans-serif;
+        font-family: 'Raleway', sans-serif;
         color: #0d4270;
         margin: 0 6px;
       ">&nbsp;|&nbsp;</span>
       <span style="
-        font-weight: 300;
+        font-weight: 400;
         font-size: 26px;
-        font-family: 'Raleway', 'Raleway fallback', sans-serif;
+        font-family: 'Raleway', sans-serif;
         letter-spacing: 0px;
         color: #000;
         white-space: nowrap;
@@ -118,7 +129,7 @@ const pathname = Astro.url.pathname;
       <span style="
         font-weight: 900;
         font-size: 28px;
-        font-family: 'Raleway', 'Raleway fallback', sans-serif;
+        font-family: 'Raleway', sans-serif;
         letter-spacing: 0.004em;
         color: #0d4270;
       ">INFONET</span>
@@ -139,11 +150,10 @@ const pathname = Astro.url.pathname;
               <summary
                 class="nav-item-btn"
                 aria-label={menu.main}
-                aria-haspopup="true"
                 style="
                   font-weight: 900;
                   font-size: 18px;
-                  font-family: 'Roboto', sans-serif;
+                  font-family: 'Lato', sans-serif;
                   color: #333;
                   cursor: pointer;
                   min-height: 44px;
@@ -162,7 +172,7 @@ const pathname = Astro.url.pathname;
                   <path d="M7 10l5 5 5-5z"/>
                 </svg>
               </summary>
-              <ul class="nav-dropdown-menu" role="menu" style="
+              <ul class="nav-dropdown-menu" style="
                 position: absolute;
                 background: #fff;
                 border-radius: 4px;
@@ -176,7 +186,7 @@ const pathname = Astro.url.pathname;
                 {menu.children.map((child) => {
                   if (child.divider) {
                     return (
-                      <li role="separator" style="margin: 4px 0;">
+                      <li style="margin: 4px 0;">
                         <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.12); margin: 0;" />
                       </li>
                     );
@@ -188,7 +198,7 @@ const pathname = Astro.url.pathname;
                         font-weight: 900;
                         font-size: 12px;
                         color: #555;
-                        font-family: 'Roboto', sans-serif;
+                        font-family: 'Lato', sans-serif;
                       ">
                         {child.section}
                       </li>
@@ -196,10 +206,9 @@ const pathname = Astro.url.pathname;
                   }
                   if (child.link) {
                     return (
-                      <li role="none">
+                      <li>
                         <a
                           href={child.link}
-                          role="menuitem"
                           aria-current={pathname === child.link ? 'page' : undefined}
                           style="
                             display: block;
@@ -208,7 +217,7 @@ const pathname = Astro.url.pathname;
                             font-weight: 700;
                             color: rgba(0,0,0,0.87);
                             text-decoration: none;
-                            font-family: 'Roboto', sans-serif;
+                            font-family: 'Lato', sans-serif;
                           "
                           class="nav-dropdown-item"
                           {...(child.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
@@ -231,7 +240,7 @@ const pathname = Astro.url.pathname;
               style="
                 font-weight: 900;
                 font-size: 18px;
-                font-family: 'Roboto', sans-serif;
+                font-family: 'Lato', sans-serif;
                 color: #333;
                 text-decoration: none;
                 min-height: 44px;
@@ -255,7 +264,6 @@ const pathname = Astro.url.pathname;
           <summary
             aria-label="More options"
             title="More options"
-            aria-haspopup="true"
             style="
               min-height: 44px;
               min-width: 44px;
@@ -275,7 +283,7 @@ const pathname = Astro.url.pathname;
               <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
             </svg>
           </summary>
-          <ul class="nav-dropdown-menu" role="menu" style="
+          <ul class="nav-dropdown-menu" style="
             position: absolute;
             right: 0;
             background: #fff;
@@ -290,14 +298,13 @@ const pathname = Astro.url.pathname;
             {utilityLinks.map((item, i) => (
               <>
                 {i > 0 && i === utilityLinks.length - 1 && (
-                  <li role="separator" style="margin: 4px 0;">
+                  <li style="margin: 4px 0;">
                     <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.12); margin: 0;" />
                   </li>
                 )}
-                <li role="none">
+                <li>
                   <a
                     href={item.link}
-                    role="menuitem"
                     aria-current={pathname === item.link ? 'page' : undefined}
                     class="nav-dropdown-item"
                     style="
@@ -307,7 +314,7 @@ const pathname = Astro.url.pathname;
                       font-weight: 700;
                       color: rgba(0,0,0,0.87);
                       text-decoration: none;
-                      font-family: 'Roboto', sans-serif;
+                      font-family: 'Lato', sans-serif;
                     "
                   >
                     {item.main}
@@ -346,23 +353,22 @@ const pathname = Astro.url.pathname;
   </nav>
 </header>
 
-<!-- Hamburger click → dispatch drawer-toggle event on window -->
-<script>
-  const btn = document.getElementById('nav-hamburger');
-  if (btn) {
-    btn.addEventListener('click', () => {
-      window.dispatchEvent(new CustomEvent('drawer-toggle'));
-      // Toggle aria-expanded for accessibility
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      btn.setAttribute('aria-label', expanded ? 'Open navigation menu' : 'Close navigation menu');
-    });
-  }
+<!-- The hamburger is JS-only (it drives the Alpine drawer); without JS the
+     <noscript> fallback nav in AppSidebar provides mobile navigation, so
+     hide the dead button rather than present a control that does nothing. -->
+<noscript>
+  <style>
+    #nav-hamburger { display: none !important; }
+  </style>
+</noscript>
 
+<!-- Drawer toggling lives on the button itself via Alpine ($store.drawer);
+     this script only manages the native <details> dropdowns. -->
+<script>
   // Accordion behavior: when one nav <details> dropdown opens, close any other
   // open siblings. Native <details> elements don't do this automatically.
-  // Also click-outside-to-close.
-  const dropdowns = document.querySelectorAll('.nav-dropdown');
+  // Also click-outside-to-close and Escape-to-close.
+  const dropdowns = document.querySelectorAll<HTMLDetailsElement>('.nav-dropdown');
   dropdowns.forEach((d) => {
     d.addEventListener('toggle', () => {
       if (d.open) {
@@ -378,6 +384,17 @@ const pathname = Astro.url.pathname;
     if (!(target instanceof Element)) return;
     if (target.closest('.nav-dropdown')) return;
     dropdowns.forEach((d) => { if (d.open) d.open = false; });
+  });
+  // Escape closes an open dropdown; if focus was inside it, return focus to
+  // its <summary> so keyboard users aren't dropped at the document root.
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    dropdowns.forEach((d) => {
+      if (!d.open) return;
+      const hadFocus = d.contains(document.activeElement);
+      d.open = false;
+      if (hadFocus) d.querySelector('summary')?.focus();
+    });
   });
 </script>
 

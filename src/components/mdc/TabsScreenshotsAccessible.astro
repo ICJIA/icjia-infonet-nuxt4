@@ -2,16 +2,24 @@
 // src/components/mdc/TabsScreenshotsAccessible.astro
 //
 // Ported from v1-final app/components/content/TabsScreenshotsAccessible.vue.
-// Renders accessible tabs (ARIA tablist pattern + Alpine.js for state/keyboard nav)
-// for screenshots sections. Fetches tabs filtered by sectionID at build time,
-// renders images from Strapi CDN.
+// Renders accessible tabs (ARIA tablist pattern + the shared `a11yTabs`
+// Alpine.data factory from scripts/alpine-entry.ts) for screenshots sections.
+// Fetches tabs filtered by sectionID at build time.
+//
+// Images resolve through the local cms-image pipeline (lookupCmsImage) when
+// the manifest has an entry — same-origin, resized, immutable-cached — and
+// fall back to the Strapi origin otherwise. Hotlinking put a third-party
+// connection on the LCP path for /screenshots/.
+//
+// ids are prefixed with a per-instance uid derived from sectionID so two
+// tabs blocks on one CMS page can't emit duplicate ids.
 //
 // Props:
 //   sectionID — filters which tabs to display (e.g., "screenshots")
-import { strapiFetch } from '~/lib/strapi';
+import { strapiFetch, assertNoTruncation } from '~/lib/strapi';
 import { QUERY_TAB_LIST_BY_SECTION } from '~/lib/queries';
 import { TabListBySectionResponseSchema } from '~/lib/schemas';
-import { renderMarkdown } from '~/lib/markdown';
+import { renderMarkdown, lookupCmsImage } from '~/lib/markdown';
 
 interface Props {
   sectionID: string;
@@ -23,7 +31,10 @@ const STRAPI_BASE = 'https://infonet.icjia-api.cloud';
 
 const raw = await strapiFetch(QUERY_TAB_LIST_BY_SECTION, { sectionID });
 const parsed = TabListBySectionResponseSchema.parse(raw);
+assertNoTruncation(`tabs (section ${sectionID})`, parsed.tabs.data.length, parsed.tabs.meta?.pagination?.total);
 const tabs = parsed.tabs.data;
+
+const uid = `ts-${sectionID.replace(/[^a-zA-Z0-9_-]/g, '')}`;
 
 // Sort images by filename (matches legacy sortImagesByFilename).
 type TabImageData = NonNullable<NonNullable<typeof tabs[0]['attributes']['images']>['data']>;
@@ -79,6 +90,42 @@ function pickThumb(
   };
 }
 
+// Resolve one screenshot to its display + lightbox sources. Local pipeline
+// first (same-origin /_cms-img/* variants with srcset); remote Strapi formats
+// only when the manifest has no entry for the upload.
+type Resolved = {
+  src: string;
+  srcset?: string;
+  sizes?: string;
+  width: number;
+  height: number;
+  fullSrc: string;
+};
+function resolveScreenshot(img: TabImageData[number]): Resolved | null {
+  const rel = img.attributes?.url ?? null;
+  if (!rel) return null;
+  const remoteFull = rel.startsWith('http') ? rel : `${STRAPI_BASE}${rel}`;
+  const localThumb = lookupCmsImage(rel, 640);
+  if (localThumb) {
+    const localFull = lookupCmsImage(rel, 1280);
+    return {
+      src: localThumb.src,
+      srcset: localThumb.srcset,
+      sizes: '(min-width: 600px) 280px, 92vw',
+      width: localThumb.width,
+      height: localThumb.height,
+      fullSrc: localFull?.src ?? remoteFull,
+    };
+  }
+  const t = pickThumb(img.attributes?.formats, remoteFull, img.attributes?.width, img.attributes?.height, 500);
+  return {
+    src: t.url.startsWith('http') ? t.url : `${STRAPI_BASE}${t.url}`,
+    width: t.width,
+    height: t.height,
+    fullSrc: remoteFull,
+  };
+}
+
 // Rendered markdown per tab.
 const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
 ---
@@ -88,25 +135,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
 ) : (
   <div
     class="ts-wrapper"
-    x-data={`{
-      activeTab: 0,
-      setTab(i) {
-        this.activeTab = i;
-        this.$nextTick(() => {
-          const btn = this.$el.querySelector('[role=tab][data-index="' + i + '"]');
-          if (btn) btn.focus();
-        });
-      },
-      handleKey(e, i) {
-        const total = ${tabs.length};
-        let next = i;
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp')  { e.preventDefault(); next = i > 0 ? i - 1 : total - 1; }
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); next = i < total - 1 ? i + 1 : 0; }
-        if (e.key === 'Home') { e.preventDefault(); next = 0; }
-        if (e.key === 'End')  { e.preventDefault(); next = total - 1; }
-        if (next !== i) this.setTab(next);
-      }
-    }`}
+    x-data={`a11yTabs(${tabs.length})`}
   >
     <p class="ts-hint">Click tab to view agency info.</p>
 
@@ -116,12 +145,14 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
         {tabs.map((tab, i) => (
           <button
             role="tab"
-            class="ts-tab"
+            class:list={['ts-tab', i === 0 && 'ts-tab--active']}
+            id={`${uid}-tab-${i}`}
+            aria-controls={`${uid}-panel-${i}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
             :class={`{ 'ts-tab--active': activeTab === ${i} }`}
             :aria-selected={`activeTab === ${i}`}
             :tabindex={`activeTab === ${i} ? 0 : -1`}
-            :id={`'ts-tab-' + ${i}`}
-            :aria-controls={`'ts-panel-' + ${i}`}
             data-index={i}
             @click={`setTab(${i})`}
             @keydown={`handleKey($event, ${i})`}
@@ -140,9 +171,10 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
             <div
               role="tabpanel"
               class="ts-panel"
-              :id={`'ts-panel-' + ${i}`}
-              :aria-labelledby={`'ts-tab-' + ${i}`}
+              id={`${uid}-panel-${i}`}
+              aria-labelledby={`${uid}-tab-${i}`}
               x-show={`activeTab === ${i}`}
+              x-cloak={i > 0 ? '' : undefined}
               x-transition:enter="ts-fade-enter"
               x-transition:enter-start="ts-fade-start"
               x-transition:enter-end="ts-fade-end"
@@ -157,23 +189,8 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
               {images.length > 0 && (
                 <div class="ts-gallery">
                   {images.map((img, imgIdx) => {
-                    const fullUrlRaw = img.attributes?.url ?? null;
-                    if (!fullUrlRaw) return null;
-                    const fullUrl = fullUrlRaw.startsWith('http')
-                      ? fullUrlRaw
-                      : `${STRAPI_BASE}${fullUrlRaw}`;
-
-                    // Thumbnail: ~500w (covers 2x DPR for the 245px grid cell).
-                    const thumb = pickThumb(
-                      img.attributes?.formats,
-                      fullUrl,
-                      img.attributes?.width,
-                      img.attributes?.height,
-                      500,
-                    );
-                    const thumbUrl = thumb.url.startsWith('http')
-                      ? thumb.url
-                      : `${STRAPI_BASE}${thumb.url}`;
+                    const shot = resolveScreenshot(img);
+                    if (!shot) return null;
 
                     const alt = img.attributes?.alternativeText?.trim()
                       || img.attributes?.caption?.trim()
@@ -188,16 +205,19 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
                         <button
                           type="button"
                           class="ts-img-link"
-                          data-screenshot-src={fullUrl}
+                          data-screenshot-src={shot.fullSrc}
                           data-screenshot-alt={alt}
                           data-screenshot-caption={caption ?? ''}
                           aria-label={`View full screenshot: ${alt}`}
+                          @click={`$dispatch('ts-lightbox', { uid: '${uid}', src: $el.dataset.screenshotSrc, alt: $el.dataset.screenshotAlt, caption: $el.dataset.screenshotCaption })`}
                         >
                           <img
-                            src={thumbUrl}
+                            src={shot.src}
+                            srcset={shot.srcset}
+                            sizes={shot.sizes}
                             alt={alt}
-                            width={thumb.width}
-                            height={thumb.height}
+                            width={shot.width}
+                            height={shot.height}
                             loading={isLcp ? 'eager' : 'lazy'}
                             fetchpriority={isLcp ? 'high' : 'auto'}
                             decoding="async"
@@ -217,61 +237,31 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     </div>
   </div>
 
-  <!-- Modal lightbox: shared across all tabs/screenshots -->
+  <!-- Modal lightbox, one per component instance (uid-scoped event so two
+       instances on a page can't open each other's modal). Alpine-managed:
+       x-trap contains Tab focus while open — the old vanilla version set
+       aria-modal="true" but never trapped focus, so keyboard users walked
+       into background content screen readers said didn't exist. x-trap also
+       restores focus to the trigger on close; .noscroll locks body scroll. -->
   <div
-    id="ts-modal"
     class="ts-modal"
+    x-data="{ open: false, src: '', alt: '', caption: '' }"
+    x-show="open"
+    x-cloak
+    x-trap.noscroll="open"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="ts-modal-caption"
-    data-open="false"
+    aria-labelledby={`${uid}-modal-caption`}
+    @ts-lightbox.window={`if ($event.detail.uid === '${uid}') { src = $event.detail.src; alt = $event.detail.alt; caption = $event.detail.caption || $event.detail.alt; open = true }`}
+    @keydown.escape.window="open = false"
+    @click.self="open = false"
   >
     <div class="ts-modal__inner">
-      <button type="button" class="ts-modal__close" id="ts-modal-close" aria-label="Close screenshot">&times;</button>
-      <img id="ts-modal-img" class="ts-modal__img" src="" alt="" />
-      <div id="ts-modal-caption" class="ts-modal__caption"></div>
+      <button type="button" class="ts-modal__close" aria-label="Close screenshot" @click="open = false">&times;</button>
+      <img class="ts-modal__img" :src="src" :alt="alt" />
+      <div id={`${uid}-modal-caption`} class="ts-modal__caption" x-text="caption"></div>
     </div>
   </div>
-
-  <script>
-    const modal = document.getElementById('ts-modal');
-    const modalImg = document.getElementById('ts-modal-img');
-    const modalCap = document.getElementById('ts-modal-caption');
-    const modalClose = document.getElementById('ts-modal-close');
-    const triggers = document.querySelectorAll('button.ts-img-link');
-    let lastFocused = null;
-    function openModal(src, alt, caption) {
-      if (!modal || !(modalImg instanceof HTMLImageElement)) return;
-      lastFocused = document.activeElement;
-      modalImg.src = src;
-      modalImg.alt = alt;
-      if (modalCap) modalCap.textContent = caption || alt;
-      modal.setAttribute('data-open', 'true');
-      document.body.style.overflow = 'hidden';
-      if (modalClose instanceof HTMLButtonElement) modalClose.focus();
-    }
-    function closeModal() {
-      if (!modal) return;
-      modal.setAttribute('data-open', 'false');
-      document.body.style.overflow = '';
-      if (lastFocused instanceof HTMLElement) lastFocused.focus();
-    }
-    triggers.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const src = btn.getAttribute('data-screenshot-src') || '';
-        const alt = btn.getAttribute('data-screenshot-alt') || '';
-        const caption = btn.getAttribute('data-screenshot-caption') || '';
-        if (src) openModal(src, alt, caption);
-      });
-    });
-    if (modalClose) modalClose.addEventListener('click', closeModal);
-    if (modal) modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal?.getAttribute('data-open') === 'true') closeModal();
-    });
-  </script>
 )}
 
 <style>
@@ -436,18 +426,19 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     color: #333;
   }
 
-  /* Modal (lightbox) — matches legacy: white modal box on semi-dim backdrop */
+  /* Modal (lightbox) — matches legacy: white modal box on semi-dim backdrop.
+     Visibility is Alpine-driven (x-show + x-cloak), so the base display must
+     be flex — x-show toggles inline display:none on top of it. */
   .ts-modal {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.55);
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
     padding: 2rem;
   }
-  .ts-modal[data-open="true"] { display: flex; }
   .ts-modal__inner {
     position: relative;
     background: #fff;

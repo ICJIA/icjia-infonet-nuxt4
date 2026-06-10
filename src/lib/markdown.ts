@@ -12,6 +12,8 @@
 //        identity URL when manifest has no entry — manifest is populated by
 //        Phase 5a's scripts/fetch-cms-images.mjs)
 //      - Add id="<slug>" to every <h1..h6>
+//      - Normalize internal links (prod/dev-origin absolute URLs → relative;
+//        trailing slash added to extensionless page paths)
 //      - Add target="_blank" rel="noopener noreferrer" to external links
 //        (href starting with http, not matching siteOrigin)
 //   4. Extract headings into a separate return value for TOC support.
@@ -72,7 +74,15 @@ try {
   cmsImageManifest = {};
 }
 
-function lookupCmsImage(src: string): ResolvedImage | null {
+/**
+ * Resolve a Strapi /uploads/* URL to the local optimised pipeline output.
+ * Exported for components (e.g. TabsScreenshotsAccessible) that render CMS
+ * images outside markdown bodies — hotlinking the Strapi origin from those
+ * components put a third-party connection on the LCP path and bypassed the
+ * pipeline entirely. `preferredWidth` picks the smallest variant at least
+ * that wide (falling back to the largest available).
+ */
+export function lookupCmsImage(src: string, preferredWidth = 960): ResolvedImage | null {
   // Canonicalise to bare /uploads/... path.
   const relPath = src.startsWith('http')
     ? src.replace(siteConfig.api.base, '')
@@ -84,9 +94,9 @@ function lookupCmsImage(src: string): ResolvedImage | null {
   const entry = cmsImageManifest[hash];
   if (!entry || !entry.sources || entry.sources.length === 0) return null;
 
-  // Use the 960-wide source as the primary src (mid-resolution representative),
-  // falling back to the largest available.
-  const preferred = entry.sources.find((s) => s.width === 960)
+  // Sources are sorted ascending by width — first one >= preferredWidth,
+  // else the largest available.
+  const preferred = entry.sources.find((s) => s.width >= preferredWidth)
     ?? entry.sources[entry.sources.length - 1];
   const srcset = entry.sources.map((s) => `${s.src} ${s.width}w`).join(', ');
 
@@ -373,6 +383,59 @@ function rewriteExternalLinks(html: string): string {
   });
 }
 
+// Internal-link normalizer — runs BEFORE rewriteExternalLinks so normalized
+// links are recognized as internal. Fixes two CMS-authoring patterns:
+//   1. Absolute URLs on the prod origin or the legacy dev origin
+//      (https://infonet.icjia.dev/faqs) → relative paths, so links follow
+//      the current origin instead of sending visitors to the dev site in a
+//      new tab.
+//   2. Relative page links missing the trailing slash (/about) → /about/,
+//      avoiding a Netlify 301 hop per click under trailingSlash: 'always'.
+// File-like hrefs (a dot in the last path segment, e.g. .pdf) keep their
+// exact path; only page routes get the trailing slash.
+const INTERNAL_LINK_HOSTS = new Set([
+  new URL(siteConfig.siteOrigin).hostname,
+  'infonet.icjia.dev',
+]);
+
+const ANY_LINK_RX = /<a\b([^>]*?)href="([^"]+)"([^>]*)>/gi;
+
+function normalizeInternalHref(href: string): string | null {
+  let path: string;
+  let suffix: string;
+  const isAbsolute = /^https?:\/\//i.test(href);
+  if (isAbsolute) {
+    let url: URL;
+    try {
+      url = new URL(href);
+    } catch {
+      return null;
+    }
+    if (!INTERNAL_LINK_HOSTS.has(url.hostname)) return null;
+    path = url.pathname;
+    suffix = url.search + url.hash;
+  } else if (href.startsWith('/') && !href.startsWith('//')) {
+    const splitAt = href.search(/[?#]/);
+    path = splitAt === -1 ? href : href.slice(0, splitAt);
+    suffix = splitAt === -1 ? '' : href.slice(splitAt);
+  } else {
+    return null; // anchors, mailto:, protocol-relative, etc.
+  }
+
+  const lastSegment = path.split('/').pop() ?? '';
+  if (!lastSegment.includes('.') && !path.endsWith('/')) path += '/';
+
+  const normalized = path + suffix;
+  return normalized === href ? null : normalized;
+}
+
+function normalizeInternalLinks(html: string): string {
+  return html.replace(ANY_LINK_RX, (full, pre: string, href: string, post: string) => {
+    const normalized = normalizeInternalHref(href);
+    return normalized ? `<a${pre}href="${normalized}"${post}>` : full;
+  });
+}
+
 function injectHeadingIds(html: string): string {
   return html.replace(HEADING_RX, (full, level: string, attrs: string | undefined, text: string) => {
     // Skip headings that already have an id attribute.
@@ -430,10 +493,11 @@ export function renderMarkdown(
 
   const rendered  = md.render(cleaned);
   const safe      = filter.process(rendered);
-  const withImgs    = rewriteImages(safe);
-  const withIframes = rewriteYouTubeIframes(withImgs);
-  const withLinks   = rewriteExternalLinks(withIframes);
-  const html        = injectHeadingIds(withLinks);
+  const withImgs     = rewriteImages(safe);
+  const withIframes  = rewriteYouTubeIframes(withImgs);
+  const withInternal = normalizeInternalLinks(withIframes);
+  const withLinks    = rewriteExternalLinks(withInternal);
+  const html         = injectHeadingIds(withLinks);
   const headings  = extractHeadings(html);
 
   return { html, headings, mdcRefs };

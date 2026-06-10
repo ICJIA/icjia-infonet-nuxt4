@@ -29,7 +29,11 @@ const MANIFEST_PATH      = join(root, 'src/data/dap-splash-manifest.json');
 const OUT_DIR_PUBLIC     = join(root, 'public/_cms-img/dap');
 const OUT_DIR_DIST       = join(root, 'dist/_cms-img/dap');
 const GRAPHQL_ENDPOINT   = 'https://researchhub.icjia-api.cloud/graphql';
-const THUMB_WIDTHS       = [400, 800];
+// 512 sits between the card's ~500px rendered width (sizes: "(min-width:
+// 960px) 500px") and the 800w retina variant — without it, 1x desktop
+// browsers pulled the 800w files (~430 KiB of over-delivery across the
+// first screen of cards per Lighthouse).
+const THUMB_WIDTHS       = [400, 512, 800];
 
 const articles = JSON.parse(await readFile(DAP_JSON_PATH, 'utf8'));
 const hubSlugs = articles.filter(a => a.source === 'hub').map(a => a.slug);
@@ -37,12 +41,12 @@ console.log(`DAP splash: ${hubSlugs.length} hub articles to fetch`);
 
 const fetchedAt = new Date().toISOString();
 
-// Reset output dirs (deterministic builds).
-for (const d of [OUT_DIR_PUBLIC, OUT_DIR_DIST]) {
-  if (existsSync(d)) await rm(d, { recursive: true, force: true });
-}
-await mkdir(OUT_DIR_PUBLIC, { recursive: true });
-
+// Fetch and validate BEFORE touching any existing output. This script used to
+// rm-rf its output dirs first and exit 0 on HTTP errors — when the final build
+// step ran against an already-populated dist/, a researchhub 500 at that moment
+// deleted the images and still deployed HTML referencing them. Failing loudly
+// keeps the previous (working) deploy live instead.
+//
 // researchhub's Strapi-v3 GraphQL paginates poorly; fetch all 261 and filter
 // by slug locally (legacy createHubImages.mjs did the same).
 const query = `query { articles(limit: 999, sort: "date:desc", where: { status: "published" }) { _id slug splash } }`;
@@ -50,15 +54,32 @@ const res = await fetch(GRAPHQL_ENDPOINT, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ query }),
+  signal: AbortSignal.timeout(30_000),
 });
 if (!res.ok) {
-  console.error(`researchhub GraphQL ${res.status} — skipping splash fetch`);
-  await writeFile(MANIFEST_PATH, JSON.stringify({ generatedAt: fetchedAt, items: {} }, null, 2));
-  process.exit(0);
+  console.error(`researchhub GraphQL ${res.status} — failing build; existing splash output left untouched`);
+  process.exit(1);
 }
 const payload = await res.json();
-const all = payload?.data?.articles ?? [];
+if (payload?.errors?.length) {
+  console.error('researchhub GraphQL errors — failing build:', JSON.stringify(payload.errors));
+  process.exit(1);
+}
+const all = payload?.data?.articles;
+if (!Array.isArray(all)) {
+  console.error('researchhub GraphQL returned an unexpected shape (data.articles is not an array) — failing build');
+  process.exit(1);
+}
+if (all.length >= 999) {
+  console.warn('researchhub returned exactly the query limit (999) — results may be truncated; raise the limit');
+}
 const bySlug = new Map(all.map(a => [a.slug, a]));
+
+// Reset output dirs (deterministic builds) — only after a validated fetch.
+for (const d of [OUT_DIR_PUBLIC, OUT_DIR_DIST]) {
+  if (existsSync(d)) await rm(d, { recursive: true, force: true });
+}
+await mkdir(OUT_DIR_PUBLIC, { recursive: true });
 
 const manifest = { generatedAt: fetchedAt, items: {} };
 let written = 0;

@@ -18,7 +18,7 @@ import DvAwarenessMonth from '~/components/mdc/DvAwarenessMonth.astro';
 import Partners from '~/components/mdc/Partners.astro';
 import TabsScreenshotsAccessible from '~/components/mdc/TabsScreenshotsAccessible.astro';
 import TabsUserInfoAccessible from '~/components/mdc/TabsUserInfoAccessible.astro';
-import { strapiFetch } from '~/lib/strapi';
+import { strapiFetch, assertNoTruncation } from '~/lib/strapi';
 import { QUERY_PAGE_LIST } from '~/lib/queries';
 import { PageListResponseSchema } from '~/lib/schemas';
 import { renderMarkdown, splitMdcPlaceholders } from '~/lib/markdown';
@@ -27,6 +27,7 @@ import { siteConfig } from '~/lib/siteConfig';
 export async function getStaticPaths() {
   const raw = await strapiFetch(QUERY_PAGE_LIST);
   const parsed = PageListResponseSchema.parse(raw);
+  assertNoTruncation('pages', parsed.pages.data.length, parsed.pages.meta?.pagination?.total);
 
   // Filter out slugs that are handled by dedicated static routes.
   return parsed.pages.data
@@ -52,6 +53,7 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
 <BaseLayout
   title={attr.title ?? 'Page'}
   description={description}
+  searchable={!attr.hideFromSearch}
   breadcrumbTitle={breadcrumbLabel || (attr.title ?? undefined)}
 >
   <article class:list={["page-detail", `page-detail--${attr.slug}`]}>

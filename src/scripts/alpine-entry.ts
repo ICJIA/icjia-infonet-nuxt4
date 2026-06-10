@@ -11,6 +11,55 @@ declare global {
 window.Alpine = Alpine;
 Alpine.plugin(focus);
 
+// Global drawer state — the single source of truth shared by the AppNav
+// hamburger (:aria-expanded / :aria-label / @click) and the AppSidebar panel
+// (x-show / x-trap / backdrop). Previously the same boolean lived in three
+// places (local x-data, the button's attributes, body.drawer-open) and
+// drifted whenever the drawer closed via Escape / backdrop / nav-link click.
+type DrawerStore = { open: boolean; toggle(): void; close(): void };
+const drawerStore: DrawerStore = {
+  open: false,
+  toggle() {
+    this.open = !this.open;
+  },
+  close() {
+    this.open = false;
+  },
+};
+Alpine.store('drawer', drawerStore);
+
+// Shared WAI-ARIA tabs behavior (roving tabindex + arrow keys) used by the
+// TabsScreenshotsAccessible / TabsUserInfoAccessible MDC components — the
+// two components previously carried near-identical inline x-data factories
+// that had drifted apart (one hijacked ArrowUp/Down, which the APG reserves
+// for vertical tablists; these are horizontal). Left/Right/Home/End only.
+// `this.$el` is the component wrapper, so instances stay independent.
+type TabsThis = {
+  activeTab: number;
+  $el: HTMLElement;
+  $nextTick(cb: () => void): void;
+  setTab(i: number): void;
+};
+Alpine.data('a11yTabs', (total = 0) => ({
+  activeTab: 0,
+  setTab(this: TabsThis, i: number) {
+    this.activeTab = i;
+    this.$nextTick(() => {
+      const btn = this.$el.querySelector<HTMLElement>(`[role=tab][data-index="${i}"]`);
+      btn?.focus();
+    });
+  },
+  handleKey(this: TabsThis, e: KeyboardEvent, i: number) {
+    const count = Number(total);
+    let next = i;
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); next = i > 0 ? i - 1 : count - 1; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); next = i < count - 1 ? i + 1 : 0; }
+    if (e.key === 'Home') { e.preventDefault(); next = 0; }
+    if (e.key === 'End')  { e.preventDefault(); next = count - 1; }
+    if (next !== i) this.setTab(next);
+  },
+}));
+
 // Defer Alpine.start() to DOMContentLoaded so per-page `alpine:init`
 // listeners (registered in <script> blocks lower in the document) have
 // a chance to attach BEFORE Alpine evaluates `x-data` expressions.

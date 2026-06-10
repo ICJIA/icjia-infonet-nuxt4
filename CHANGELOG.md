@@ -2,6 +2,62 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.3.0] - 2026-06-10 — Full-codebase review sweep: security, a11y, SEO, build robustness, perf + FAQ search deep-links
+
+Large coordinated change set from a five-dimension codebase review (security, data layer, accessibility, routing/SEO, build/perf). Verified post-change: axe-core WCAG 2.1 AA clean on all 45 pages, Lighthouse 100/100/100/100 on all audited pages (the only sub-100 was intentional `noindex` on /tabs/* + 404).
+
+### Critical fixes
+
+- **`/contact/` actually works now** (`contact.astro`, `netlify.toml`): the email POST to mail.icjia.cloud was blocked by our own CSP (`fetch()` is governed by `connect-src`, which lacked the host — the `form-action` entry never applied); `sanitize()` stripped `@`/`+` from the email address (new `sanitizeEmail()`); success message showed unconditionally (now gated on `response.ok`, with a visible failure banner + busy state). Bonus: home CTA `?subject=` deep links now use the trailing-slash URL and actually pre-fill the subject field.
+- **JSON-LD escaping** (`BaseLayout.astro`): `set:html={JSON.stringify(entry)}` left `<` unescaped — a CMS title containing `</script>` could break into `<head>` (and `script-src 'unsafe-eval'` makes injected Alpine attributes executable). Serialized output now escapes `<` as `<`.
+- **Deploy-safety in `fetch-dap-splash.mjs`**: the script rm-rf'd its output dirs *before* fetching and exited 0 on HTTP errors — the (removed) final `dap:splash:dist` build step could wipe `dist/_cms-img/dap/` and deploy green with broken images. Now: fetch + validate payload first, fail loudly (exit 1), 30s timeout.
+- **Hamburger `aria-expanded` desync** (`AppNav`, `AppSidebar`, `alpine-entry.ts`): drawer state moved to a single `Alpine.store('drawer')` — closing via Escape/backdrop/nav-link previously left the button permanently inverted.
+
+### Build pipeline & data layer
+
+- `package.json` `build`: clears `.cache/strapi` (fresh CMS content every build — the .gitignore comment is finally true), gates on `smoke:strapi` (empty/broken CMS now fails the deploy instead of publishing a hollow site), drops the redundant double-fetch `dap:splash:dist` step.
+- `fetch-cms-images.mjs`: skips Strapi `formats` derivatives (`thumbnail_/small_/medium_/large_` — 255 URLs that nothing renders), prunes stale output dirs, retries once then warns per-image instead of failing the whole deploy (misses fall back to hotlinking). **Deploy went 24 MB → 13 MB.**
+- `netlify.toml`: `netlify-plugin-cache` persists `.cache/cms-img` + `public/_cms-img` across builds (was: every deploy re-downloaded and re-encoded every image).
+- New `assertNoTruncation()` guard (`strapi.ts`) at all 9 list consumers — the day a collection outgrows its hardcoded pagination limit, the build fails loudly instead of silently 404ing the oldest entries.
+- `pnpm check` works now (`@astrojs/check` + `typescript` were never installed); type errors fixed.
+
+### Security headers (`netlify.toml`)
+
+- `connect-src` + mail.icjia.cloud; Google Fonts hosts removed (self-hosted via @fontsource — the one stray `@import` on the home page is gone, which also stops leaking visitor IPs to Google); `Access-Control-Allow-Origin: *` removed; added HSTS (2y, preload), `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, real `Permissions-Policy` header (the `<meta http-equiv>` version was inert and removed); `Cache-Control: immutable` for `/_astro/*`, 1-day for `/_cms-img/*`.
+
+### Accessibility
+
+- Screenshot lightbox rebuilt as an Alpine `x-trap` dialog (it claimed `aria-modal="true"` but never trapped focus); per-instance uid-scoped ids + events.
+- Nav dropdowns: dropped `role="menu"/"menuitem"` (APG: disclosure pattern for nav links — the menu roles promised arrow-key behavior that didn't exist); Escape now closes dropdowns with focus restore.
+- No-JS mobile nav: `<noscript>` link list (the drawer + hamburger are JS-only and the desktop nav is hidden <960px).
+- Tabs components: static `id`/`aria-controls`/`aria-selected` in the HTML (were Alpine-only), `x-cloak` on inactive panels (kills the pre-hydration all-panels-stacked CLS), shared `a11yTabs` Alpine.data factory replaces two drifted inline copies (and drops the ArrowUp/Down hijack on a horizontal tablist).
+- DAP filter chips: `aria-pressed` + live-region result count. `/contact/` success no longer flashes pre-hydration (`x-cloak`).
+- `LastUpdated` timestamp: #777 → #666 (was 4.48:1, under the AA 4.5:1 line — the one real axe violation on the site, visible on 4 news articles).
+
+### SEO
+
+- Pagefind no longer indexes 404/debug/search/tabs pages (`data-pagefind-body` now conditional via a `searchable` prop).
+- CMS `hideFromSearch` / `hideFromSitemap` flags are finally honored (sitemap exclusions resolve at config load from the same cached query the build uses).
+- Orphan `/tabs/*` duplicate-content pages: `noindex` + excluded from sitemap.
+- News articles emit `og:type: article` (was `website` alongside `article:published_time`).
+- Freshness-signal inflation removed: no more `lastmod: new Date()` in the sitemap or build-time `dateModified` in JSON-LD.
+- `renderMarkdown` normalizes internal CMS links: dev-origin absolute URLs (`infonet.icjia.dev/...`) → relative, trailing slashes added to extensionless page paths (kills a Netlify 301 per click).
+- `/debug/` is a bare redirect stub in production builds (was shipping build-env info).
+
+### Performance
+
+- Chart.js (71 KB gz) replaced with a build-time SVG bar chart — same visuals, native `<title>` tooltips, zero JS; dependency removed.
+- Roboto dropped entirely (nav micro-text → Lato, visually identical at those sizes); Raleway 900 (the brand font, above the fold on every page) is now preloaded; phantom `'Raleway fallback'` family removed; `@mdi/font` dependency removed (was never shipped).
+- `/screenshots/` images route through the local `/_cms-img` pipeline with srcset (was hotlinking 128 images from the Strapi origin, including the LCP candidate).
+- DAP card thumbnails: added a 512w variant (1× desktop pulled 800w files — ~430 KiB over-delivery per Lighthouse).
+
+### New feature: FAQ search deep-links + DVFR-style result cards
+
+- Each FAQ question on `/faqs/` is now an `h3` with `id="faq-<slug>"` inside its `<summary>` (spec-permitted; Tailwind preflight keeps the visual identical). Pagefind builds sub-results from headings with ids, so search now offers per-question links like `/faqs/#faq-how-is-the-system-structured-and-secured`; a small script on the FAQ page opens the targeted accordion and scrolls it under the fixed nav (130px scroll-margin). `showSubResults: true` in the Pagefind UI init. Home-page FAQ accordions are `data-pagefind-ignore`d (they duplicated /faqs/ content in results).
+- Search result cards restyled to match dvfr.illinois.gov: `#f7f7f9` fill, hairline `#e2e2e8` border, soft shadow, gentle hover, amber `mark` highlights. Result-link blue darkened to `#0d47a1` (the lighter `--color-primary` fell to 4.36:1 on the shaded fill).
+
+CSP inline-script hashes regenerated (`pnpm csp-hashes`) — the AppNav dropdown script changed, the old lightbox script is gone, and the Pagefind init + FAQ deep-link scripts are new.
+
 ## [3.2.15] - 2026-05-30 — Typo fix + SiteImprove hidden-focusable a11y fix on /contact
 
 ### `src/components/HomeBoxes.astro` — spelling fix on the home page

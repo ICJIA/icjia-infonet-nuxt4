@@ -85,13 +85,17 @@ const articlesJson = JSON.stringify(
   <PageHeader title="InfoNet &amp; Other Victim Services Research" />
 
   <div class="dap-page page-container" x-data={`dapFilter(${articlesJson})`}>
-    <!-- Tag filter chips -->
+    <!-- Tag filter chips. aria-pressed mirrors the visual .active state so
+         AT users can tell which filter is applied (toggle-button pattern);
+         the static attribute carries the pre-hydration default ("all"). -->
     <div class="tag-filters" role="group" aria-label="Filter by topic">
       {filterChips.map((chip) => (
         <button
           type="button"
           class="tag-chip"
+          aria-pressed={chip.value === 'all' ? 'true' : 'false'}
           :class={`{ active: activeTag === ${JSON.stringify(chip.value)} }`}
+          :aria-pressed={`activeTag === ${JSON.stringify(chip.value)}`}
           x-on:click={`activeTag = ${JSON.stringify(chip.value)}`}
         >
           {chip.label}
@@ -99,7 +103,8 @@ const articlesJson = JSON.stringify(
       ))}
     </div>
 
-    <p class="dap-count">
+    <!-- aria-live so filter changes announce the new result count. -->
+    <p class="dap-count" aria-live="polite">
       <span x-text="visibleCount"></span>
       <span x-text="visibleCount === 1 ? ' item' : ' items'"></span>
     </p>

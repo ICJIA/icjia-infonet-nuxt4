@@ -15,13 +15,14 @@
 //
 // Section header: h2 "Frequently Asked Questions" + right-aligned "All FAQs »" button.
 // Hairline border-top below header row.
-import { strapiFetch } from '~/lib/strapi';
+import { strapiFetch, assertNoTruncation } from '~/lib/strapi';
 import { QUERY_FAQ_LIST } from '~/lib/queries';
 import { FaqListResponseSchema } from '~/lib/schemas';
 import { renderMarkdown } from '~/lib/markdown';
 
 const raw = await strapiFetch(QUERY_FAQ_LIST);
 const parsed = FaqListResponseSchema.parse(raw);
+assertNoTruncation('faqs (home)', parsed.faqs.data.length, parsed.faqs.meta?.pagination?.total);
 // Sort order matches legacy DisplayFaqs RENDER (not the source).
 // Legacy source chained three .sort() calls; Nuxt Content's queryContent
 // .sort() replaces prior calls instead of chaining, so only the FINAL sort
@@ -33,7 +34,11 @@ const faqs = parsed.faqs.data
   .sort((a, b) => a.attributes.slug.localeCompare(b.attributes.slug));
 ---
 
-<section class="home-faqs">
+{/* data-pagefind-ignore: these accordions duplicate the "general" FAQs that
+    /faqs/ already indexes (with per-question deep-link sub-results) — letting
+    the home page index them too produced duplicate search hits pointing at
+    accordions with no open-on-hash behavior. */}
+<section class="home-faqs" data-pagefind-ignore>
   <div class="home-faqs__header">
     <h2 class="home-faqs__heading">Frequently Asked Questions</h2>
     <a href="/faqs/" class="home-faqs__all-btn">

@@ -13,7 +13,7 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PageHeader from '~/components/PageHeader.astro';
 import Toc from '~/components/Toc.astro';
-import { strapiFetch } from '~/lib/strapi';
+import { strapiFetch, assertNoTruncation } from '~/lib/strapi';
 import { QUERY_FAQ_LIST } from '~/lib/queries';
 import { FaqListResponseSchema } from '~/lib/schemas';
 import { renderMarkdown } from '~/lib/markdown';
@@ -21,6 +21,7 @@ import type { Heading } from '~/lib/markdown';
 
 const raw = await strapiFetch(QUERY_FAQ_LIST);
 const parsed = FaqListResponseSchema.parse(raw);
+assertNoTruncation('faqs', parsed.faqs.data.length, parsed.faqs.meta?.pagination?.total);
 const allFaqs = [...parsed.faqs.data].sort((a, b) => {
   const ar = a.attributes.ranking ?? 9999;
   const br = b.attributes.ranking ?? 9999;
@@ -102,10 +103,20 @@ const tocHeadings: Heading[] = [
             <div>
               {faqs.map((f) => {
                 const { html } = renderMarkdown(f.attributes.answer);
+                const slug = f.attributes.slug;
                 return (
                   <details class="faq-item">
+                    {/* The question is an h3 WITH an id: Pagefind builds its
+                        search sub-results from headings that carry ids, so
+                        each FAQ becomes its own search result linking to
+                        /faqs/#faq-<slug> (the page script below opens the
+                        accordion on arrival). Heading content inside
+                        <summary> is spec-permitted; Tailwind preflight
+                        resets h3 styling so it inherits the summary look. */}
                     <summary class="faq-summary">
-                      <span>{f.attributes.question ?? '(untitled)'}</span>
+                      <h3 class="faq-question" id={slug ? `faq-${slug}` : undefined}>
+                        {f.attributes.question ?? '(untitled)'}
+                      </h3>
                       <svg aria-hidden="true" focusable="false" class="faq-chevron" viewBox="0 0 16 16" width="20" height="20"><path fill="currentColor" d="M2 4l6 7 6-7z"/></svg>
                     </summary>
                     <div class="markdown-body faq-body" set:html={html} />
@@ -120,6 +131,26 @@ const tocHeadings: Heading[] = [
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  // Deep-link support: /faqs/#faq-<slug> (e.g. from Pagefind search
+  // sub-results). The browser scrolls to the <details> anchor, but a closed
+  // accordion would leave the answer hidden — open it, then re-scroll once
+  // layout has settled so the question lands below the fixed nav.
+  function openFaqFromHash(): void {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    const details =
+      target instanceof HTMLDetailsElement ? target : target.closest('details');
+    if (!(details instanceof HTMLDetailsElement)) return;
+    details.open = true;
+    requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+  }
+  openFaqFromHash();
+  window.addEventListener('hashchange', openFaqFromHash);
+</script>
 
 <style>
   .faqs-layout {
@@ -189,6 +220,21 @@ const tocHeadings: Heading[] = [
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     margin-bottom: 8px;
+  }
+
+  .faq-question {
+    /* Inherit the summary's typography (Tailwind preflight already strips
+       default h3 sizing); the heading exists for Pagefind sub-results and
+       document outline, not for visual hierarchy. */
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+    border: none;
+    /* Deep-link anchor landing position: clear the 80px fixed nav +
+       breadcrumb bar when the browser scrolls to #faq-<slug>. */
+    scroll-margin-top: 130px;
   }
 
   .faq-summary {

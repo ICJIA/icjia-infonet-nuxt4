@@ -29,11 +29,33 @@ const MANIFEST_PATH = path.resolve('src/lib/cms-image-manifest.json');
 const WIDTHS = [320, 640, 960, 1280];
 const QUALITY = 82;
 const FETCH_TIMEOUT_MS = 30_000;
+const RETRY_DELAY_MS = 2_000;
+
+/** One retry with a short pause — rides out transient CMS 5xx/timeouts. */
+async function withRetry(fn, label) {
+  try {
+    return await fn();
+  } catch (err) {
+    console.warn(`[fetch-cms-images] retrying ${label} after error: ${err.message}`);
+    await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
+    return fn();
+  }
+}
 
 // Match /uploads/<path>.<ext> anywhere in the cached JSON — JSON-string-quoted
 // fields AND markdown link/image syntax embedded inside body strings.
 // Case-insensitive — content has both .jpg and .PNG extensions in the wild.
 const UPLOAD_RX = /\/uploads\/[A-Za-z0-9_./-]+\.(?:jpg|jpeg|png|gif|webp)/gi;
+
+// Strapi v4 media objects embed a `formats` blob (thumbnail_/small_/medium_/
+// large_ derivatives) alongside every original upload. Downloading those
+// multiplied the pipeline ~5× — hundreds of files and Sharp encodes that
+// nothing rendered, ~16 MB of dead weight per deploy. Every consumer
+// (markdown rewriter, CmsImage, tabs screenshots) keys off the ORIGINAL
+// upload path and picks a width from OUR resized variants, so derivatives
+// are skipped. A CMS body that hotlinks a derivative directly just falls
+// back to the remote URL (img-src allows the Strapi origin).
+const DERIVATIVE_RX = /\/uploads\/(?:thumbnail|small|medium|large)_[^/]*$/i;
 
 function sha256(s) {
   return crypto.createHash('sha256').update(s).digest('hex');
@@ -69,7 +91,13 @@ async function collectAllUrls() {
     const text = await fs.readFile(path.join(STRAPI_CACHE_DIR, f), 'utf8');
     for (const u of extractUrlsFromText(text)) urls.add(u);
   }
-  return [...urls].sort();
+  const all = [...urls];
+  const originals = all.filter((u) => !DERIVATIVE_RX.test(u));
+  const droppedDerivatives = all.length - originals.length;
+  if (droppedDerivatives > 0) {
+    console.log(`[fetch-cms-images] skipping ${droppedDerivatives} Strapi formats derivative(s) (thumbnail_/small_/medium_/large_)`);
+  }
+  return originals.sort();
 }
 
 /** Derive the canonical absolute URL from a relative /uploads/... path. */
@@ -164,31 +192,49 @@ async function main() {
 
   const manifest = {};
   let processed = 0;
-  let skipped = 0;
   let errors = 0;
 
   for (const relPath of relPaths) {
     const hash = sha256(relPath);
     try {
-      const entry = await processOne(relPath);
+      const entry = await withRetry(() => processOne(relPath), relPath);
       manifest[hash] = entry;
       processed += 1;
       if (processed % 5 === 0 || processed === relPaths.length) {
         console.log(`[fetch-cms-images] processed ${processed}/${relPaths.length}`);
       }
     } catch (err) {
+      // Retry-then-warn, never fail the deploy: an image with no manifest
+      // entry falls back to hotlinking the Strapi original (CmsImage and the
+      // markdown rewriter both handle the miss), which beats blocking the
+      // whole site over one deleted upload or transient 5xx.
       errors += 1;
       console.warn(`[fetch-cms-images] SKIP ${relPath}: ${err.message}`);
-      skipped += 1;
     }
   }
 
   await fs.writeFile(MANIFEST_PATH, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
+
+  // Prune output dirs whose source URL is no longer in the manifest. Without
+  // this, formerly-emitted variants (e.g. the formats derivatives we now
+  // skip) live in public/_cms-img forever, ship in every deploy, and are
+  // resurrected indefinitely by netlify-plugin-cache. Only sha256-named dirs
+  // are touched — dap/ belongs to fetch-dap-splash.mjs.
+  const keep = new Set(Object.keys(manifest));
+  let pruned = 0;
+  for (const entry of await fs.readdir(OUT_DIR, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    if (!/^[0-9a-f]{64}$/.test(entry.name)) continue;
+    if (keep.has(entry.name)) continue;
+    await fs.rm(path.join(OUT_DIR, entry.name), { recursive: true, force: true });
+    pruned += 1;
+  }
+  if (pruned > 0) console.log(`[fetch-cms-images] pruned ${pruned} stale variant dir(s)`);
+
   console.log(
-    `[fetch-cms-images] done: processed ${processed} images, skipped ${skipped}, errors ${errors}`,
+    `[fetch-cms-images] done: processed ${processed} images, errors ${errors}${errors > 0 ? ' (failed images will hotlink the CMS original)' : ''}`,
   );
   console.log(`[fetch-cms-images] manifest → ${MANIFEST_PATH}`);
-  if (errors > 0) process.exitCode = 1;
 }
 
 main().catch((e) => {

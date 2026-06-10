@@ -4,11 +4,12 @@
 // Port of app/pages/contact.vue (308 lines, Vuetify-free).
 //
 // Form submission wires:
-//   POST https://infonet.icjia-api.cloud/api/forms  (DB insert)
-//   POST https://mail.icjia.cloud/internet/infonet   (email)
-// Both endpoints are called via Alpine.js fetch() on submit.
-// TODO: Phase 4 follow-up — add proper error UI and retry logic if either
-//       endpoint fails (currently mirrors legacy behaviour: console.log only).
+//   POST https://infonet.icjia-api.cloud/api/forms  (DB insert, best-effort archive)
+//   POST https://mail.icjia.cloud/internet/infonet   (email — the POST that matters)
+// Both endpoints are called via Alpine.js fetch() on submit, so BOTH must be
+// allowed by the CSP `connect-src` directive in netlify.toml (fetch() is not
+// governed by form-action). Success is only shown when the email POST returns
+// ok; otherwise a visible error banner asks the user to retry.
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PageHeader from '~/components/PageHeader.astro';
 ---
@@ -25,7 +26,13 @@ import PageHeader from '~/components/PageHeader.astro';
       phone: '',
       message: '',
       submitted: false,
+      submitting: false,
+      failed: false,
       errors: {},
+      init() {
+        const s = new URLSearchParams(window.location.search).get('subject');
+        if (s) this.subject = s.slice(0, 200);
+      },
       validate() {
         this.errors = {};
         if (!this.subject.trim()) this.errors.subject = 'Subject is required';
@@ -40,14 +47,19 @@ import PageHeader from '~/components/PageHeader.astro';
       sanitize(str) {
         return str.replace(/[^a-z0-9áéíóúñü .,_-]/gim, '').trim();
       },
+      sanitizeEmail(str) {
+        return str.replace(/[^a-z0-9@+._-]/gim, '').trim();
+      },
       async submitForm() {
         if (!this.validate()) return;
+        this.submitting = true;
+        this.failed = false;
         const form = {
           type: 'InfoNet Contact',
           subject: this.sanitize(this.subject),
           firstname: this.sanitize(this.firstname),
           lastname: this.sanitize(this.lastname),
-          email: this.sanitize(this.email),
+          email: this.sanitizeEmail(this.email),
           phone: this.sanitize(this.phone),
           message: this.sanitize(this.message),
         };
@@ -57,20 +69,25 @@ import PageHeader from '~/components/PageHeader.astro';
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ data: { type: form.type, email: form.email, subject: form.subject, form } }),
           });
-        } catch(e) { console.log('db insert failure', e); }
+        } catch(e) { console.error('db insert failure', e); }
         try {
-          await fetch('https://mail.icjia.cloud/internet/infonet', {
+          const res = await fetch('https://mail.icjia.cloud/internet/infonet', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(form),
           });
-        } catch(e) { console.log('email failure', e); }
-        this.submitted = true;
+          if (!res.ok) throw new Error('mail endpoint returned ' + res.status);
+          this.submitted = true;
+        } catch(e) {
+          console.error('email failure', e);
+          this.failed = true;
+        }
+        this.submitting = false;
       },
       clearForm() {
         this.subject = ''; this.firstname = ''; this.lastname = '';
         this.email = ''; this.phone = ''; this.message = '';
-        this.errors = {}; this.submitted = false;
+        this.errors = {}; this.submitted = false; this.failed = false;
       }
     }"
     style="max-width: 720px;"
@@ -178,8 +195,18 @@ import PageHeader from '~/components/PageHeader.astro';
         <span id="err-message" x-show="errors.message" x-text="errors.message" class="field-error" role="alert"></span>
       </div>
 
+      <!-- Failure state: shown when the email POST does not return ok. -->
+      <div
+        x-cloak
+        x-show="failed"
+        role="alert"
+        class="form-error-banner"
+      >
+        Sorry &mdash; your message could not be submitted. Please try again in a few minutes.
+      </div>
+
       <div class="form-actions">
-        <button type="submit" class="btn-submit">Submit</button>
+        <button type="submit" class="btn-submit" :disabled="submitting" x-text="submitting ? 'Submitting…' : 'Submit'">Submit</button>
         <button type="reset" @click="clearForm" class="btn-clear">Clear</button>
       </div>
     </form>
@@ -188,6 +215,7 @@ import PageHeader from '~/components/PageHeader.astro';
     <!-- :inert="!submitted" keeps the inner <a> non-focusable while hidden
          (SiteImprove "Hidden element has focusable content" — WCAG 2.1). -->
     <div
+      x-cloak
       x-show="submitted"
       :inert="!submitted"
       role="alert"
@@ -250,6 +278,20 @@ import PageHeader from '~/components/PageHeader.astro';
     color: #c62828;
     font-size: 0.8rem;
     margin-top: 4px;
+  }
+
+  .form-error-banner {
+    background: #fdecea;
+    border-left: 4px solid #c62828;
+    color: #8e1f1a;
+    font-weight: 700;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.6;
+    cursor: default;
   }
 
   /* .field-row layout now comes from Tailwind utilities inline
