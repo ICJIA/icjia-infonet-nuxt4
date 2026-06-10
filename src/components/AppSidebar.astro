@@ -85,7 +85,7 @@ const noscriptLinks = [
     style="
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: var(--overlay-backdrop);
       z-index: 199;
     "
   ></div>
@@ -109,10 +109,10 @@ const noscriptLinks = [
       left: 0;
       width: 280px;
       height: 100%;
-      background: #ffffff;
+      background: var(--color-surface);
       z-index: 200;
       overflow-y: auto;
-      box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+      box-shadow: 2px 0 8px var(--overlay-scrim);
     "
   >
     <ul style="list-style: none; margin: 0; padding: 0;">
@@ -122,7 +122,7 @@ const noscriptLinks = [
             <details class="sidebar-group">
               <summary
                 class="sidebar-link sidebar-link--parent"
-                style="font-weight: 900; color: rgba(0,0,0,0.87); cursor: pointer;"
+                style="font-weight: 900; color: var(--color-ink-87); cursor: pointer;"
               >
                 {menu.main}
                 <svg
@@ -145,13 +145,13 @@ const noscriptLinks = [
                         class="sidebar-section-label"
                         role="heading"
                         aria-level={4}
-                        style="display: block; padding: 8px 16px; font-weight: 900; font-size: 0.875rem; color: #555;"
+                        style="display: block; padding: 8px 16px; font-weight: 900; font-size: 0.875rem; color: var(--color-ink-soft);"
                       >
                         {child.section}
                       </span>
                     )}
                     {child.divider && (
-                      <hr style="margin: 0; border: none; border-top: 1px solid rgba(0,0,0,0.12);" />
+                      <hr style="margin: 0; border: none; border-top: 1px solid var(--overlay-divider);" />
                     )}
                     {child.title && child.link && (
                       <a
@@ -164,7 +164,7 @@ const noscriptLinks = [
                           padding: 8px 16px 8px 40px;
                           font-weight: 400;
                           font-size: 0.875rem;
-                          color: #555;
+                          color: var(--color-ink-soft);
                           text-decoration: none;
                           min-height: 40px;
                           line-height: 1.5;
@@ -186,7 +186,7 @@ const noscriptLinks = [
               class="sidebar-link"
               style="
                 font-weight: 900;
-                color: rgba(0,0,0,0.87);
+                color: var(--color-ink-87);
                 text-decoration: none;
               "
               {...(menu.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
@@ -199,7 +199,7 @@ const noscriptLinks = [
 
       <!-- Separator -->
       <li aria-hidden="true">
-        <hr style="margin: 12px 0; border: none; border-top: 1px solid rgba(0,0,0,0.12);" />
+        <hr style="margin: 12px 0; border: none; border-top: 1px solid var(--overlay-divider);" />
       </li>
 
       <!-- Utility links: Search / Translate / Contact -->
@@ -212,7 +212,7 @@ const noscriptLinks = [
             class="sidebar-link sidebar-link--utility"
             style="
               font-weight: 400;
-              color: rgba(0,0,0,0.87);
+              color: var(--color-ink-87);
               text-decoration: none;
             "
           >
@@ -228,8 +228,8 @@ const noscriptLinks = [
 /* No-JS fallback nav — visible only when scripting is off (and hidden at
    ≥960px, where the JS-free desktop <details> nav takes over). */
 .noscript-nav {
-  background: #f5f5f5;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--color-surface-soft);
+  border-bottom: 1px solid var(--overlay-divider);
   padding: 8px 16px;
 }
 .noscript-nav ul {
@@ -246,7 +246,7 @@ const noscriptLinks = [
   font-family: 'Lato', sans-serif;
   font-size: 0.875rem;
   font-weight: 700;
-  color: #0d4270;
+  color: var(--color-brand);
 }
 @media (min-width: 960px) {
   .noscript-nav {
@@ -266,28 +266,28 @@ const noscriptLinks = [
   transition: background-color 0.2s;
 }
 .sidebar-link:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: var(--overlay-hover);
 }
 .sidebar-link:focus {
-  outline: 2px solid #1976d2;
+  outline: 2px solid var(--color-primary);
   outline-offset: -2px;
 }
 .sidebar-link[aria-current="page"] {
-  background-color: rgba(25, 118, 210, 0.12);
-  color: #1976d2 !important;
+  background-color: var(--color-primary-tint);
+  color: var(--color-primary) !important;
 }
 
 /* Child links — indented */
 .sidebar-child-link:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: var(--overlay-hover);
 }
 .sidebar-child-link:focus {
-  outline: 2px solid #1976d2;
+  outline: 2px solid var(--color-primary);
   outline-offset: -2px;
 }
 .sidebar-child-link[aria-current="page"] {
-  background-color: rgba(25, 118, 210, 0.12);
-  color: #1976d2 !important;
+  background-color: var(--color-primary-tint);
+  color: var(--color-primary) !important;
 }
 
 /* <details> group — reset browser default marker */

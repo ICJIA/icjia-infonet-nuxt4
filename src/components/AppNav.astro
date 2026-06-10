@@ -17,8 +17,8 @@
 //
 // Title font spec (from TheNav.vue inline styles):
 //   - Font: Raleway, 28px desktop / 28px mobile
-//   - "INFONET" in #0d4270 font-weight 900
-//   - " | DATA COLLECTION & REPORTING SYSTEM" in #000 (visually light;
+//   - "INFONET" in var(--color-brand) (legacy #0d4270) font-weight 900
+//   - " | DATA COLLECTION & REPORTING SYSTEM" in var(--color-ink-max) (legacy #000) (visually light;
 //     rendered at 400 — Raleway 300 is not shipped, so browsers substituted
 //     400 anyway and the explicit 400 just makes that honest)
 //
@@ -35,7 +35,7 @@ import { topNav, utilityLinks } from '~/lib/menu';
 const pathname = Astro.url.pathname;
 ---
 
-<header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 50; background: #fff; box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);">
+<header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 50; background: var(--color-surface); box-shadow: var(--shadow-elevation-6);">
   <nav
     id="main-navigation"
     aria-label="Main"
@@ -72,7 +72,7 @@ const pathname = Astro.url.pathname;
         padding: 8px;
         min-width: 44px;
         min-height: 44px;
-        color: rgba(0,0,0,0.87);
+        color: var(--color-ink-87);
       "
     >
       <!-- Hamburger icon — MDI menu path -->
@@ -99,14 +99,14 @@ const pathname = Astro.url.pathname;
         font-size: 28px;
         font-family: 'Raleway', sans-serif;
         letter-spacing: 0em;
-        color: #0d4270;
+        color: var(--color-brand);
         white-space: nowrap;
       ">INFONET</span>
       <span style="
         font-weight: 900;
         font-size: 28px;
         font-family: 'Raleway', sans-serif;
-        color: #0d4270;
+        color: var(--color-brand);
         margin: 0 6px;
       ">&nbsp;|&nbsp;</span>
       <span style="
@@ -114,7 +114,7 @@ const pathname = Astro.url.pathname;
         font-size: 26px;
         font-family: 'Raleway', sans-serif;
         letter-spacing: 0px;
-        color: #000;
+        color: var(--color-ink-max);
         white-space: nowrap;
       ">DATA COLLECTION &amp; REPORTING SYSTEM</span>
     </a>
@@ -131,7 +131,7 @@ const pathname = Astro.url.pathname;
         font-size: 28px;
         font-family: 'Raleway', sans-serif;
         letter-spacing: 0.004em;
-        color: #0d4270;
+        color: var(--color-brand);
       ">INFONET</span>
     </a>
 
@@ -154,7 +154,7 @@ const pathname = Astro.url.pathname;
                   font-weight: 900;
                   font-size: 18px;
                   font-family: 'Lato', sans-serif;
-                  color: #333;
+                  color: var(--color-ink-body);
                   cursor: pointer;
                   min-height: 44px;
                   min-width: 44px;
@@ -174,9 +174,9 @@ const pathname = Astro.url.pathname;
               </summary>
               <ul class="nav-dropdown-menu" style="
                 position: absolute;
-                background: #fff;
+                background: var(--color-surface);
                 border-radius: 4px;
-                box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12);
+                box-shadow: var(--shadow-elevation-2);
                 min-width: 160px;
                 list-style: none;
                 margin: 0;
@@ -187,7 +187,7 @@ const pathname = Astro.url.pathname;
                   if (child.divider) {
                     return (
                       <li style="margin: 4px 0;">
-                        <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.12); margin: 0;" />
+                        <hr style="border: none; border-top: 1px solid var(--overlay-divider); margin: 0;" />
                       </li>
                     );
                   }
@@ -197,7 +197,7 @@ const pathname = Astro.url.pathname;
                         padding: 8px 16px 4px;
                         font-weight: 900;
                         font-size: 12px;
-                        color: #555;
+                        color: var(--color-ink-soft);
                         font-family: 'Lato', sans-serif;
                       ">
                         {child.section}
@@ -215,7 +215,7 @@ const pathname = Astro.url.pathname;
                             padding: 8px 16px;
                             font-size: 12px;
                             font-weight: 700;
-                            color: rgba(0,0,0,0.87);
+                            color: var(--color-ink-87);
                             text-decoration: none;
                             font-family: 'Lato', sans-serif;
                           "
@@ -241,7 +241,7 @@ const pathname = Astro.url.pathname;
                 font-weight: 900;
                 font-size: 18px;
                 font-family: 'Lato', sans-serif;
-                color: #333;
+                color: var(--color-ink-body);
                 text-decoration: none;
                 min-height: 44px;
                 min-width: 44px;
@@ -275,7 +275,7 @@ const pathname = Astro.url.pathname;
               border: none;
               list-style: none;
               padding: 0 4px;
-              color: rgba(0,0,0,0.87);
+              color: var(--color-ink-87);
             "
           >
             <!-- MDI dots-vertical -->
@@ -286,9 +286,9 @@ const pathname = Astro.url.pathname;
           <ul class="nav-dropdown-menu" style="
             position: absolute;
             right: 0;
-            background: #fff;
+            background: var(--color-surface);
             border-radius: 4px;
-            box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12);
+            box-shadow: var(--shadow-elevation-2);
             min-width: 140px;
             list-style: none;
             margin: 0;
@@ -299,7 +299,7 @@ const pathname = Astro.url.pathname;
               <>
                 {i > 0 && i === utilityLinks.length - 1 && (
                   <li style="margin: 4px 0;">
-                    <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.12); margin: 0;" />
+                    <hr style="border: none; border-top: 1px solid var(--overlay-divider); margin: 0;" />
                   </li>
                 )}
                 <li>
@@ -312,7 +312,7 @@ const pathname = Astro.url.pathname;
                       padding: 8px 16px;
                       font-size: 16px;
                       font-weight: 700;
-                      color: rgba(0,0,0,0.87);
+                      color: var(--color-ink-87);
                       text-decoration: none;
                       font-family: 'Lato', sans-serif;
                     "
@@ -340,7 +340,7 @@ const pathname = Astro.url.pathname;
         min-width: 44px;
         min-height: 44px;
         text-decoration: none;
-        color: rgba(0,0,0,0.87);
+        color: var(--color-ink-87);
         padding: 8px;
       "
     >
@@ -435,14 +435,14 @@ const pathname = Astro.url.pathname;
   border-radius: 4px;
 }
 .nav-item-btn:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: var(--overlay-hover);
 }
 .nav-item-btn:focus {
-  outline: 2px solid #1976d2;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 .nav-item-btn[aria-current="page"] {
-  color: #1976d2 !important;
+  color: var(--color-primary) !important;
 }
 
 /* ── Dropdown (native <details>) ────────────────────────────────────── */
@@ -459,30 +459,30 @@ const pathname = Astro.url.pathname;
   display: none;
 }
 .nav-dropdown > summary:focus {
-  outline: 2px solid #1976d2;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
 /* Dropdown items hover */
 .nav-dropdown-item:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: var(--overlay-hover);
 }
 .nav-dropdown-item:focus {
-  outline: 2px solid #1976d2;
+  outline: 2px solid var(--color-primary);
   outline-offset: -2px;
 }
 .nav-dropdown-item[aria-current="page"] {
-  background-color: rgba(25, 118, 210, 0.12);
-  color: #1976d2 !important;
+  background-color: var(--color-primary-tint);
+  color: var(--color-primary) !important;
 }
 
 /* ── Hamburger button hover ──────────────────────────────────────────── */
 #nav-hamburger:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: var(--overlay-hover);
   border-radius: 4px;
 }
 #nav-hamburger:focus {
-  outline: 2px solid #1976d2;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 </style>
