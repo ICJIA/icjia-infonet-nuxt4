@@ -112,6 +112,7 @@ Append inside the existing `@theme { … }` in `src/styles/global.css`, after th
   --overlay-scrim: rgba(0, 0, 0, 0.15);
   --overlay-scrim-mid: rgba(0, 0, 0, 0.2);  /* InfoCard hover shadow — added in Task 5 (rule 5 drift: value had no token) */
   --overlay-scrim-deep: rgba(0, 0, 0, 0.35); /* lightbox close-btn hover — added in Task 7 (rule 5 drift: value had no token) */
+  --overlay-scrim-strong: rgba(0, 0, 0, 0.7); /* yt-facade play-button scrim — added in Task 8 (rule 5 drift: value had no token) */
   --overlay-brand-shadow: rgba(13, 66, 112, 0.12); /* 404 card hover shadow (brand-tinted) — added in Task 6 (rule 5 drift: value had no token) */
   --overlay-shadow-modal: rgba(0, 0, 0, 0.3); /* lightbox modal inner shadow — added in Task 7 (rule 5 drift: value had no token) */
   --overlay-backdrop: rgba(0, 0, 0, 0.5);   /* drawer backdrop */
@@ -403,6 +404,7 @@ defining the dark palette:
 - `src/components/mdc/TabsScreenshotsAccessible.astro` — modal inner `box-shadow: 0 8px 32px var(--overlay-shadow-modal)` (shadow color using an overlay token; `--overlay-shadow-modal` added in Task 7 via rule 5 — rgba(0,0,0,0.3) had no token)
 - `src/components/mdc/DvAwarenessMonth.astro` — card resting `box-shadow: 0 2px 6px var(--overlay-divider)` (shadow color using the divider token)
 - `src/components/mdc/DvAwarenessMonth.astro` — card hover `box-shadow: 0 8px 16px var(--overlay-scrim)` (shadow color using the scrim token)
+- Partners.astro / DvAwarenessMonth.astro — link color uses var(--color-input-focus) (#1565c0 value-match; rename or alias to a link token in phase 2)
 
 Rule for remaining tasks: non-elevation box-shadow colors map to the
 value-matching overlay token + legacy comment AND get a row added here.

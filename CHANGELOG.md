@@ -2,6 +2,18 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.3.1] - 2026-06-10 — Color-token consolidation (dark-mode phase 1)
+
+Every color literal in `src/` now flows through semantic CSS custom properties in the Tailwind 4 `@theme` block in `src/styles/global.css` (~80 tokens: the four near-identical brand blues kept distinct, a full ink scale, surfaces, borders, overlays, the on-dark family, and state colors). Groundwork only — the `.dark` palette and theme toggle are phase 2.
+
+- **Zero visual change by construction**: every mapping is value-exact (token value = the literal it replaced), verified per task with byte-identical screenshot comparison; this final task adds an axe AA pass (0 violations) on a 7-page spot set and a visual sanity check.
+- **Role-aware mapping** so dark mode can re-map cleanly: `#fff` split into `--color-surface` (backgrounds) vs `--color-on-dark` (text/icons/borders on dark fills); `#555` split into `--color-ink-soft` (text) vs `--color-chrome-active` (active-tab fill); `#424242` into `--color-secondary` vs `--color-chrome`.
+- **Component-scoped `--dv-*` palette** for `DvAwarenessMonth.astro` — its purples/slates/lavender are unique to that component and stay out of the global namespace (re-mappable from a `.dark` scope later).
+- **Pagefind UI variables** (`--pagefind-ui-*` on `/search/`) now point at the global tokens instead of repeating hex.
+- **`github-markdown.css` deliberately untouched** (vendor file — phase 2 overlays it with token-based rules rather than forking it).
+- **"Phase-2 retheme hazards" list** in `docs/superpowers/plans/2026-06-10-color-token-consolidation.md` tracks every role-mismatched value match (e.g. box-shadows using overlay/divider tokens, borders using surface tokens, links using `--color-input-focus`) for revisit when the dark palette is defined.
+- Remaining literals in `src/` exist only inside comments (legacy-value annotations), the `@theme` token definitions themselves, and the scoped `--dv-*` definitions.
+
 ## [3.3.0] - 2026-06-10 — Full-codebase review sweep: security, a11y, SEO, build robustness, perf + FAQ search deep-links
 
 Large coordinated change set from a five-dimension codebase review (security, data layer, accessibility, routing/SEO, build/perf). Verified post-change: axe-core WCAG 2.1 AA clean on all 45 pages, Lighthouse 100/100/100/100 on all audited pages (the only sub-100 was intentional `noindex` on /tabs/* + 404).
