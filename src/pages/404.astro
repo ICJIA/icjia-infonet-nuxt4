@@ -253,6 +253,17 @@ const quickLinks: LinkCard[] = [
     outline: 3px solid var(--color-link-alt-tint-35);
     outline-offset: 2px;
   }
+  /* Dark: --color-brand flips to a light text-blue, which would put the
+     white label on a light fill (axe: 2.2:1). The solid CTA re-uses the
+     bg-role button tokens (same split as the contact submit); the brand
+     border stays so the joined input+button outline reads as one control. */
+  :global(.dark) .not-found-search__btn {
+    background: var(--color-button-bg);
+  }
+  :global(.dark) .not-found-search__btn:hover,
+  :global(.dark) .not-found-search__btn:focus-visible {
+    background: var(--color-button-bg-hover);
+  }
 
   /* ── Quick links grid ─────────────────────────────────────────── */
   .not-found-links__heading {

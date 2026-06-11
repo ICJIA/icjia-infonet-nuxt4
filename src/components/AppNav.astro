@@ -528,6 +528,17 @@ const pathname = Astro.url.pathname;
   color: var(--color-primary) !important;
 }
 
+/* Dark: the black elevation shadow that separates the white menu from the
+   white page in light mode is invisible on a near-black page, so the open
+   menu merged with the content behind it. Lift the panel to the soft
+   surface and add a hairline border. The inline `background:
+   var(--color-surface)` resolves against this scoped re-map, so no
+   !important is needed. Dark-only; light is untouched. */
+:global(.dark) .nav-dropdown-menu {
+  --color-surface: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+}
+
 /* ── Hamburger button hover ──────────────────────────────────────────── */
 #nav-hamburger:hover {
   background-color: var(--overlay-hover);
