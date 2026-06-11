@@ -6,10 +6,13 @@
 // in Illinois, 2018-2024", rendered as a BUILD-TIME SVG. The data is a
 // hardcoded constant, so shipping Chart.js (~71 KB gz) to draw seven
 // rectangles was pure client cost — the SVG is computed here at build time
-// for zero JS. Native <title> elements give hover tooltips; the sr-only
-// table below remains the accessible representation (the SVG is
-// aria-hidden, which also resolves the old canvas's contradictory
-// role="img" + aria-hidden combination).
+// for zero JS. Hovering a bar shows an instant Chart.js-style tooltip
+// ("2019: 72,905") rendered as a per-bar SVG group toggled by CSS :hover —
+// native <title> tooltips were tried first but their ~1s delay and tiny
+// browser styling read as "the chart went static". The sr-only table below
+// remains the accessible representation (the SVG is aria-hidden — which is
+// also why the bars must NOT get tabindex; mouse-only hover matches the old
+// Chart.js behavior, and AT users get the table).
 //
 // Structure (matches legacy):
 //   h2  — chart title (font-size 18px, border none)
@@ -46,13 +49,25 @@ const yTicks = Array.from({ length: yMax / yStep + 1 }, (_, i) => i * yStep);
 
 const slot = plotW / data.length;
 const barW = slot * 0.72;
-const bars = data.map((d, i) => ({
-  ...d,
-  x: M.left + i * slot + (slot - barW) / 2,
-  y: M.top + plotH * (1 - d.value / yMax),
-  h: plotH * (d.value / yMax),
-  cx: M.left + i * slot + slot / 2,
-}));
+
+// Hover tooltip box — shows ONLY the formatted total ("72,905"); the year
+// already labels each bar on the axis. Sized for 13px bold + padding,
+// deliberately roomy for legibility. Clamped so the tallest bar's tooltip
+// stays inside the viewBox.
+const TIP_W = 78;
+const TIP_H = 26;
+const bars = data.map((d, i) => {
+  const y = M.top + plotH * (1 - d.value / yMax);
+  return {
+    ...d,
+    x: M.left + i * slot + (slot - barW) / 2,
+    y,
+    h: plotH * (d.value / yMax),
+    cx: M.left + i * slot + slot / 2,
+    tipY: Math.max(2, y - TIP_H - 6),
+    label: d.value.toLocaleString('en-US'),
+  };
+});
 ---
 
 <div class="home-bar-graph">
@@ -92,11 +107,33 @@ const bars = data.map((d, i) => ({
           </>
         );
       })}
-      {/* bar fill: --color-chart-bar (light = brand-footer value #0d4471; splits so bars can lighten in dark while the footer stays navy) */}
+      {/* bar fill: --color-chart-bar (light = brand-footer value #0d4471; splits so bars can lighten in dark while the footer stays navy).
+          Each bar + its tooltip live in one <g> so CSS :hover on the group
+          shows the tooltip instantly (no native-<title> delay). */}
       {bars.map((bar) => (
-        <rect x={bar.x} y={bar.y} width={barW} height={bar.h} style="fill: var(--color-chart-bar)">
-          <title>{`${bar.year}: ${bar.value.toLocaleString('en-US')} victims who received services`}</title>
-        </rect>
+        <g class="hbg-bar">
+          <rect x={bar.x} y={bar.y} width={barW} height={bar.h} style="fill: var(--color-chart-bar)" />
+          <g class="hbg-tip">
+            <rect
+              x={bar.cx - TIP_W / 2}
+              y={bar.tipY}
+              width={TIP_W}
+              height={TIP_H}
+              rx="4"
+              class="hbg-tip__bg"
+            />
+            <text
+              x={bar.cx}
+              y={bar.tipY + 18}
+              text-anchor="middle"
+              font-size="13"
+              font-weight="700"
+              class="hbg-tip__text"
+            >
+              {bar.label}
+            </text>
+          </g>
+        </g>
       ))}
       {bars.map((bar) => (
         <text
@@ -177,6 +214,33 @@ const bars = data.map((d, i) => ({
     display: block;
     width: 100%;
     height: 100%;
+  }
+
+  /* Bar hover tooltip — instant, Chart.js-style. The tooltip group ignores
+     pointer events so it can't flicker the :hover state it depends on.
+     Tokens invert it per theme: light = near-black box / white text,
+     dark = near-white box / near-black text (readable on the dark card). */
+  .hbg-tip {
+    opacity: 0;
+    transition: opacity 0.12s ease;
+    pointer-events: none;
+  }
+
+  .hbg-bar:hover .hbg-tip {
+    opacity: 1;
+  }
+
+  .hbg-bar:hover > rect {
+    fill-opacity: 0.85;
+  }
+
+  .hbg-tip__bg {
+    fill: var(--color-ink-max);
+    fill-opacity: 0.92;
+  }
+
+  .hbg-tip__text {
+    fill: var(--color-surface);
   }
 
   /* Visually hidden — screen-reader only, NOT collapsible.

@@ -2,6 +2,43 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.4.1] - 2026-06-11 — Chart hover tooltips, skip-link a11y fixes, contact form recentered
+
+### Home chart: instant hover tooltips restored
+
+The v3.3.0 Chart.js → build-time-SVG swap kept tooltips only as native SVG
+`<title>` elements, whose ~1 second hover delay and unstyled browser rendering
+read as "the chart went static." Each bar now carries a pre-rendered SVG
+tooltip group toggled instantly by CSS `:hover` — still zero JavaScript. Per
+review feedback the tooltip shows ONLY the formatted total ("72,905" — the
+year already labels each bar) at 13px bold in a roomier 78×26 box. It uses
+theme tokens (`--color-ink-max` box / `--color-surface` text), so it renders
+Chart.js-style black-on-white in light mode and inverts to a light box with
+dark text in dark mode; the hovered bar also dims slightly for feedback. The
+native `<title>` elements were removed to avoid a delayed double tooltip.
+Mouse-only hover matches the old Chart.js behavior; screen-reader users keep
+the sr-only data table, and the SVG stays `aria-hidden` with no focusable
+children.
+
+### Skip links: dark-mode visibility + programmatic focus (keyboard a11y audit)
+
+- **Dark mode rendered the focused skip link white-on-white**: the chip
+  background `--color-ink-max` flips near-white in dark, but its text/border
+  used `--color-on-dark` (constant white). Text/border now use
+  `--color-surface`, which flips opposite the chip — max contrast in both
+  themes. Static screenshot sweeps can't catch this (skip links only render
+  while keyboard-focused).
+- **"Skip to main content" now moves real focus**: `<main id="main-content">`
+  gained `tabindex="-1"` (matching `#main-navigation`) so activating the link
+  relocates `document.activeElement` for screen readers instead of leaving it
+  on `<body>`; the programmatic-focus outline is suppressed (`#main-content`
+  is not in the tab order).
+
+### Contact form recentered
+
+The 720px form wrapper sat flush-left inside the 1200px page container;
+`margin: 0 auto` restores the centered column layout.
+
 ## [3.4.0] - 2026-06-10 — Light/dark theme toggle (dark-mode phase 2)
 
 A theme toggle in the nav (left of the ⋮ utility dots on desktop; left of SEARCH with a THEME micro-label on mobile) switches the whole site between the standard light look and a dark palette. **Light remains the default for everyone — dark is a pure opt-in** (explicit decision: no `prefers-color-scheme` sniffing), persisted in `localStorage`, with a non-persisted `?theme=dark|light` URL override for testing/support.

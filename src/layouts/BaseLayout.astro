@@ -256,7 +256,11 @@ const mainTopPad = isHome ? 0 : 32;
     <AppSidebar />
     <Breadcrumb title={breadcrumbTitle} breadcrumbTitleHref={breadcrumbTitleHref} breadcrumbCurrent={breadcrumbCurrent} />
 
-    <main id="main-content" data-pagefind-body={searchable ? '' : undefined} style={`padding-top: ${mainTopPad}px; min-height: 70vh;`}>
+    {/* tabindex="-1": the "Skip to main content" link must move PROGRAMMATIC
+        focus here — without it, activeElement stays on <body> and screen
+        readers aren't relocated (matches #main-navigation, which already
+        carries it). Not in the tab order; outline suppressed below. */}
+    <main id="main-content" tabindex="-1" data-pagefind-body={searchable ? '' : undefined} style={`padding-top: ${mainTopPad}px; min-height: 70vh;`}>
       <slot />
     </main>
 
@@ -273,12 +277,24 @@ const mainTopPad = isHome ? 0 : 32;
       }
       .skip-link {
         background: var(--color-ink-max);
-        color: var(--color-on-dark);
+        /* color/border use --color-surface (NOT --color-on-dark): the chip
+           background is --color-ink-max, which flips near-white in dark
+           mode — on-dark text would be white-on-white there. surface flips
+           opposite (white in light, near-black in dark), so the chip stays
+           max-contrast in both themes. Found by a keyboard-focus audit;
+           static screenshots never show focused skip links. */
+        color: var(--color-surface);
         padding: 8px 16px;
         left: 8px;
-        border: 2px solid var(--color-on-dark);
+        border: 2px solid var(--color-surface);
         border-radius: 4px;
         z-index: 10001;
+      }
+
+      /* Programmatic-focus target only (tabindex="-1", not tabbable) — the
+         default outline would draw a ring around the entire page column. */
+      #main-content:focus {
+        outline: none;
       }
       @media (prefers-reduced-motion: no-preference) {
         .skip-link { transition: top 0.3s ease; }
