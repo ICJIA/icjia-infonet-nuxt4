@@ -30,7 +30,7 @@ const displayDate = date ? formatDate(date, 'short') : null;
   href={href ?? '#'}
   style="display:block;text-decoration:none;color:inherit;"
 >
-  {/* onmouseover hover shadow color: var(--overlay-divider) (legacy rgba(0,0,0,0.12)) */}
+  {/* onmouseover hover shadow color: var(--shadow-color-soft) (legacy rgba(0,0,0,0.12) — shadow stays black in dark; resolved phase-2 hazard) */}
   <article
     style="
       border: 1px solid var(--color-border);
@@ -40,7 +40,7 @@ const displayDate = date ? formatDate(date, 'short') : null;
       background: var(--color-surface-faint);
       transition: box-shadow 0.2s ease;
     "
-    onmouseover="this.style.boxShadow='0 4px 12px var(--overlay-divider)'"
+    onmouseover="this.style.boxShadow='0 4px 12px var(--shadow-color-soft)'"
     onmouseout="this.style.boxShadow='none'"
   >
     {displayDate && (

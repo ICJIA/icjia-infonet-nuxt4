@@ -164,10 +164,10 @@
     flex-direction: column;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 6px var(--overlay-divider); /* (legacy rgba(0,0,0,0.12)) */
+    box-shadow: 0 2px 6px var(--shadow-color-soft); /* (legacy rgba(0,0,0,0.12) — shadow stays black in dark; resolved phase-2 hazard) */
     transition: box-shadow 0.3s ease;
   }
-  .dv-card:hover { box-shadow: 0 8px 16px var(--overlay-scrim); /* (legacy rgba(0,0,0,0.15)) */ }
+  .dv-card:hover { box-shadow: 0 8px 16px var(--shadow-color); /* (legacy rgba(0,0,0,0.15) — shadow stays black in dark; resolved phase-2 hazard) */ }
   .dv-card:focus-within {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
@@ -260,5 +260,16 @@
   @media (prefers-contrast: more) {
     .dv-card { border: 2px solid var(--color-ink-max); }
     .dv-text-link { font-weight: bold; }
+  }
+
+  /* Dark palette (phase 2) — re-maps the component-scoped --dv-* tokens;
+     --dv-slate, --dv-icon-shadow, and --dv-on-accent stay. `.dark` lives on
+     <html> (outside this component), so it needs :global() to escape Astro's
+     per-compound scoping. */
+  :global(.dark) .dv-awareness-month {
+    --dv-purple: #8d7cc0;
+    --dv-purple-deep: #6d5a9e;
+    --dv-slate-deep: #46598a;
+    --dv-lavender-bg: #262033;
   }
 </style>

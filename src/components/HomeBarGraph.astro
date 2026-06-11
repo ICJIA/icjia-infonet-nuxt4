@@ -92,8 +92,9 @@ const bars = data.map((d, i) => ({
           </>
         );
       })}
+      {/* bar fill: --color-chart-bar (light = brand-footer value #0d4471; splits so bars can lighten in dark while the footer stays navy) */}
       {bars.map((bar) => (
-        <rect x={bar.x} y={bar.y} width={barW} height={bar.h} style="fill: var(--color-brand-footer)">
+        <rect x={bar.x} y={bar.y} width={barW} height={bar.h} style="fill: var(--color-chart-bar)">
           <title>{`${bar.year}: ${bar.value.toLocaleString('en-US')} victims who received services`}</title>
         </rect>
       ))}

@@ -227,9 +227,9 @@ const articlesJson = JSON.stringify(
   }
 
   .tag-chip.active {
-    background: var(--color-brand);
+    background: var(--color-button-bg); /* (legacy #0d4270 — button-bg split from --color-brand so it stays navy under white label in dark) */
     color: var(--color-on-dark);
-    border-color: var(--color-brand);
+    border-color: var(--color-button-bg);
   }
 
   .dap-count {

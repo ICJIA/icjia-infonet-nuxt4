@@ -112,7 +112,7 @@ const noscriptLinks = [
       background: var(--color-surface);
       z-index: 200;
       overflow-y: auto;
-      box-shadow: 2px 0 8px var(--overlay-scrim);
+      box-shadow: 2px 0 8px var(--shadow-color); /* (legacy rgba(0,0,0,0.15) — shadow stays black in dark; resolved phase-2 hazard) */
     "
   >
     <ul style="list-style: none; margin: 0; padding: 0;">

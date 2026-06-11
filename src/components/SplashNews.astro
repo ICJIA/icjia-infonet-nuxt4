@@ -87,7 +87,7 @@ const summary = truncate(attr.summary);
     transition: box-shadow 200ms ease;
   }
   .splash-news:hover {
-    box-shadow: 0 4px 16px var(--overlay-divider); /* (legacy rgba(0,0,0,0.12)) */
+    box-shadow: 0 4px 16px var(--shadow-color-soft); /* (legacy rgba(0,0,0,0.12) — shadow stays black in dark; resolved phase-2 hazard) */
   }
   @media (min-width: 768px) {
     .splash-news {

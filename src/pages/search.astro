@@ -88,7 +88,7 @@ import PageHeader from '~/components/PageHeader.astro';
 
   :global(#pagefind-ui .pagefind-ui__result mark) {
     background: var(--color-mark);
-    color: inherit;
+    color: var(--color-mark-ink); /* (legacy: inherited #222 via --pagefind-ui-text — amber highlight needs dark text in BOTH modes) */
     padding: 0 1px;
     border-radius: 2px;
   }

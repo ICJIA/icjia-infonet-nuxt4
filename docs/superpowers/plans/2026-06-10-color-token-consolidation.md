@@ -49,6 +49,11 @@ Append inside the existing `@theme { … }` in `src/styles/global.css`, after th
   --color-brand-box-2: #1c5183;      /* home action box 2 */
   --color-brand-box-3: #3a5571;      /* home action box 3 */
 
+  /* Phase 2 role splits — light values identical to current rendering. */
+  --color-chart-bar: #0d4471;        /* was --color-brand-footer on the home SVG bars; bars need a LIGHT blue in dark mode while the footer band stays navy */
+  --color-button-bg: #0d4270;        /* solid-navy button backgrounds (contact submit, active DAP chip) — stays navy in dark (white label), while --color-brand flips light-blue for text */
+  --color-button-bg-hover: #0a3050;
+
   /* Links & focus */
   --color-link-strong: #0d47a1;      /* AA-safe blue on shaded fills (DAP CTA, search results) */
   --color-link-alt: #1e6bb8;         /* 404-page link blue */
@@ -118,12 +123,20 @@ Append inside the existing `@theme { … }` in `src/styles/global.css`, after th
   --overlay-backdrop: rgba(0, 0, 0, 0.5);   /* drawer backdrop */
   --overlay-backdrop-modal: rgba(0, 0, 0, 0.55); /* lightbox backdrop */
 
+  /* Shadow colors — constant across modes (shadows stay black on dark
+     surfaces); replaces the hazard-listed shadow uses of overlay tokens so
+     --overlay-divider/-hover can flip to white-alpha in .dark. */
+  --shadow-color-soft: rgba(0, 0, 0, 0.12);
+  --shadow-color: rgba(0, 0, 0, 0.15);
+  --shadow-color-mid: rgba(0, 0, 0, 0.2);
+
   /* States */
   --color-error-text: #c62828;
   --color-error-deep: #8e1f1a;
   --color-error-bg: #fdecea;
   --color-success-deep: #2e7d32;
   --color-mark: #fde68a;             /* search highlight */
+  --color-mark-ink: #222;            /* text inside <mark> — constant; amber highlight needs dark text in BOTH modes */
   --color-note: blue;                /* tabs "mock data" note (legacy keyword) */
   --color-yt-play: #ff0000;          /* YouTube facade hover — brand red, stays in dark */
 ```
@@ -386,15 +399,15 @@ mode (shadows stay black while dividers/surfaces flip). Each carries a
 `(legacy …)` comment inline; this list is the greppable set to revisit when
 defining the dark palette:
 
-- `src/components/SplashNews.astro` — `box-shadow: 0 4px 16px var(--overlay-divider)` (shadow color using the divider token)
-- `src/components/AppSidebar.astro` — drawer `box-shadow: 2px 0 8px var(--overlay-scrim)` (shadow color using the scrim token)
+- `src/components/SplashNews.astro` — `box-shadow: 0 4px 16px var(--overlay-divider)` (shadow color using the divider token) — resolved phase 2 → `--shadow-color-soft`
+- `src/components/AppSidebar.astro` — drawer `box-shadow: 2px 0 8px var(--overlay-scrim)` (shadow color using the scrim token) — resolved phase 2 → `--shadow-color`
 - `src/components/HomeBarGraph.astro` — `border: 1px solid var(--color-surface-press)` (border using a surface token; consider a `--color-border-press` alias in phase 2)
 - `src/components/NewsCard.astro` — `border: 1px solid var(--color-surface-press)` (border using a surface token, same pair as HomeBarGraph)
-- `src/components/NewsCard.astro` — `box-shadow: 0 2px 10px var(--overlay-divider)` (shadow color using the divider token)
-- `src/components/EventCard.astro` — `box-shadow: 0 4px 16px var(--overlay-scrim)` (shadow color using the scrim token)
-- `src/components/InfoCard.astro` — `box-shadow: 0 0 15px var(--overlay-scrim-mid)` (shadow color using an overlay token; `--overlay-scrim-mid` added in Task 5 via rule 5 — rgba(0,0,0,0.2) had no token)
+- `src/components/NewsCard.astro` — `box-shadow: 0 2px 10px var(--overlay-divider)` (shadow color using the divider token) — resolved phase 2 → `--shadow-color-soft`
+- `src/components/EventCard.astro` — `box-shadow: 0 4px 16px var(--overlay-scrim)` (shadow color using the scrim token) — resolved phase 2 → `--shadow-color`
+- `src/components/InfoCard.astro` — `box-shadow: 0 0 15px var(--overlay-scrim-mid)` (shadow color using an overlay token; `--overlay-scrim-mid` added in Task 5 via rule 5 — rgba(0,0,0,0.2) had no token) — resolved phase 2 → `--shadow-color-mid`
 - `src/components/InfoCard.astro` — `border: 1px solid var(--color-surface-faint)` (image hairline border using a surface token)
-- `src/components/SimpleCard.astro` — inline `onmouseover` shadow `0 4px 12px var(--overlay-divider)` (shadow color using the divider token, set via `el.style` in an inline handler)
+- `src/components/SimpleCard.astro` — inline `onmouseover` shadow `0 4px 12px var(--overlay-divider)` (shadow color using the divider token, set via `el.style` in an inline handler) — resolved phase 2 → `--shadow-color-soft`
 - `src/pages/search.astro` — result card `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token)
 - `src/pages/search.astro` — result card hover `box-shadow: 0 4px 8px var(--overlay-divider)` (shadow color using the divider token)
 - `src/pages/404.astro` — search input `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token)
@@ -402,8 +415,8 @@ defining the dark palette:
 - `src/pages/404.astro` — quick-link card hover `box-shadow: 0 4px 12px var(--overlay-brand-shadow)` (brand-tinted shadow; `--overlay-brand-shadow` added in Task 6 via rule 5 — rgba(13,66,112,0.12) had no token)
 - `src/pages/data-and-publications/index.astro` — card hover `box-shadow: 0 4px 12px var(--overlay-divider)` (shadow color using the divider token)
 - `src/components/mdc/TabsScreenshotsAccessible.astro` — modal inner `box-shadow: 0 8px 32px var(--overlay-shadow-modal)` (shadow color using an overlay token; `--overlay-shadow-modal` added in Task 7 via rule 5 — rgba(0,0,0,0.3) had no token)
-- `src/components/mdc/DvAwarenessMonth.astro` — card resting `box-shadow: 0 2px 6px var(--overlay-divider)` (shadow color using the divider token)
-- `src/components/mdc/DvAwarenessMonth.astro` — card hover `box-shadow: 0 8px 16px var(--overlay-scrim)` (shadow color using the scrim token)
+- `src/components/mdc/DvAwarenessMonth.astro` — card resting `box-shadow: 0 2px 6px var(--overlay-divider)` (shadow color using the divider token) — resolved phase 2 → `--shadow-color-soft`
+- `src/components/mdc/DvAwarenessMonth.astro` — card hover `box-shadow: 0 8px 16px var(--overlay-scrim)` (shadow color using the scrim token) — resolved phase 2 → `--shadow-color`
 - Partners.astro / DvAwarenessMonth.astro — link color uses var(--color-input-focus) (#1565c0 value-match; rename or alias to a link token in phase 2)
 
 Rule for remaining tasks: non-elevation box-shadow colors map to the

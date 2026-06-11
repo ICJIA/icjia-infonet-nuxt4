@@ -75,7 +75,7 @@ const truncated = truncate(summary);
     transition: box-shadow 200ms ease, transform 200ms ease;
   }
   .event-card:hover {
-    box-shadow: 0 4px 16px var(--overlay-scrim); /* (legacy rgba(0,0,0,0.15)) */
+    box-shadow: 0 4px 16px var(--shadow-color); /* (legacy rgba(0,0,0,0.15) — shadow stays black in dark; resolved phase-2 hazard) */
     transform: translateY(-2px);
   }
 

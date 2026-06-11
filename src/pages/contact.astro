@@ -309,7 +309,7 @@ import PageHeader from '~/components/PageHeader.astro';
   }
 
   .btn-submit {
-    background: var(--color-brand);
+    background: var(--color-button-bg); /* (legacy #0d4270 — button-bg split from --color-brand so it stays navy under white label in dark) */
     color: var(--color-on-dark);
     border: none;
     border-radius: 4px;
@@ -321,7 +321,7 @@ import PageHeader from '~/components/PageHeader.astro';
   }
 
   .btn-submit:hover {
-    background: var(--color-brand-hover);
+    background: var(--color-button-bg-hover); /* (legacy #0a3050) */
   }
 
   .btn-clear {
