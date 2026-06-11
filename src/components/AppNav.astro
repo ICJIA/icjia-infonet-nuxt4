@@ -404,12 +404,13 @@ const pathname = Astro.url.pathname;
   </nav>
 </header>
 
-<!-- The hamburger is JS-only (it drives the Alpine drawer); without JS the
-     <noscript> fallback nav in AppSidebar provides mobile navigation, so
-     hide the dead button rather than present a control that does nothing. -->
+<!-- The hamburger and theme toggles are JS-only (Alpine drawer / theme
+     store); without JS the <noscript> fallback nav in AppSidebar provides
+     mobile navigation and the theme stays light, so hide the dead controls
+     rather than present buttons that do nothing. -->
 <noscript>
   <style>
-    #nav-hamburger { display: none !important; }
+    #nav-hamburger, .theme-toggle { display: none !important; }
   </style>
 </noscript>
 

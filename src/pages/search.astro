@@ -60,6 +60,10 @@ import PageHeader from '~/components/PageHeader.astro';
     --pagefind-ui-background: var(--color-surface);
     --pagefind-ui-border: var(--color-border-input);
     --pagefind-ui-primary: var(--color-link-strong);
+    /* result-tag chips (unused today — no tags/filters indexed). Light value
+       #eee matches Pagefind's #eeeeee default exactly; mapped so any future
+       tag rendering follows the dark palette instead of glowing light. */
+    --pagefind-ui-tag: var(--color-surface-press);
   }
 
   /* Override Pagefind UI defaults to blend with site typography */

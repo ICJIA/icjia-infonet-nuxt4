@@ -288,6 +288,43 @@
   /* --color-mark stays amber; --color-mark-ink stays #222 (dark text on amber) */
 }
 
+/* ── Dark prose skin ────────────────────────────────────────────────────
+   github-markdown.css (vendored, light-only) stays untouched; this overlay
+   re-skins CMS prose under .dark. Images keep their white background from
+   the vendor CSS — screenshots read as intentionally "framed" on dark.
+   Specificity: `.dark .markdown-body X` (0,2,1) beats every vendor rule it
+   targets (max (0,1,1) for element rules); the vendor's (0,2,n) selectors
+   (.highlight pre, table tr:nth-child(2n), .meetingCard h2, pre>code) are
+   matched or out-specified below — no !important needed.               */
+.dark .markdown-body {
+  color: var(--color-ink-body);
+  background-color: transparent;
+}
+.dark .markdown-body h1, .dark .markdown-body h2, .dark .markdown-body h3,
+.dark .markdown-body h4, .dark .markdown-body h5, .dark .markdown-body h6 {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-border);
+}
+.dark .markdown-body a { color: var(--color-link-strong); }
+.dark .markdown-body hr {
+  background-color: var(--color-border);
+  border-bottom-color: var(--color-border); /* vendor re-sets #eee late; width is 0 today but keep it dark-safe */
+}
+.dark .markdown-body blockquote { color: var(--color-ink-muted); border-left-color: var(--color-border-mid); }
+.dark .markdown-body code, .dark .markdown-body kbd { background-color: var(--color-surface-press); color: var(--color-ink-body); }
+.dark .markdown-body kbd {
+  /* vendor kbd: light borders + light inset shadow — would glow on the dark chip */
+  border-color: var(--color-border-input);
+  border-bottom-color: var(--color-border-strong);
+  box-shadow: inset 0 -1px 0 var(--color-border-strong);
+}
+.dark .markdown-body pre { background-color: var(--color-surface-soft); color: var(--color-ink-body); }
+.dark .markdown-body pre code { background-color: transparent; }
+.dark .markdown-body table th, .dark .markdown-body table td { border-color: var(--color-border-mid); }
+.dark .markdown-body table tr { background-color: transparent; border-top-color: var(--color-border-mid); }
+.dark .markdown-body table tr:nth-child(2n) { background-color: var(--color-surface-faint); }
+.dark .markdown-body img { background-color: #fff; } /* keep vendor behavior explicit */
+
 /* Root font-size — match legacy rendered base (16px) */
 html { font-size: var(--font-size-root); }
 
