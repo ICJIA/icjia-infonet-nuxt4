@@ -2,6 +2,17 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.4.0] - 2026-06-10 — Light/dark theme toggle (dark-mode phase 2)
+
+A theme toggle in the nav (left of the ⋮ utility dots on desktop; left of SEARCH with a THEME micro-label on mobile) switches the whole site between the standard light look and a dark palette. **Light remains the default for everyone — dark is a pure opt-in** (explicit decision: no `prefers-color-scheme` sniffing), persisted in `localStorage`, with a non-persisted `?theme=dark|light` URL override for testing/support.
+
+- **Implementation: a `.dark` class on `<html>`** re-maps the phase-1 tokens (~60 dark values in `global.css`): surfaces go near-black blue-gray, the ink scale inverts, and text-role brand blues lighten for contrast while navy bands/buttons stay navy via new role-split tokens (`--color-chart-bar`, `--color-button-bg`).
+- **Pre-paint theme-init**: a tiny hashed inline `<head>` script applies `.dark` before first render (no flash) and swaps the `theme-color` meta; the CSP `script-src` allowlist in `netlify.toml` gains a 7th hash.
+- **Dark skins for third-party surfaces**: a `.dark .markdown-body` overlay re-skins CMS prose (the vendored `github-markdown.css` stays untouched), and the Pagefind UI on `/search/` follows via its `--pagefind-ui-*` variables.
+- **All 19 phase-1 "retheme hazards" resolved**: box-shadows moved to constant `--shadow-color-*` tokens (shadows stay black in dark) before the hover/divider overlays flipped to white-alpha; the remaining role-mismatches are covered by dark values for their tokens.
+- **Accessible + JS-safe**: toggle state exposed via `aria-pressed` and a swapped `aria-label`; with JavaScript disabled the site stays light and the inert toggles are hidden (`<noscript>` rule).
+- **Verified**: dark passes axe WCAG 2.1 AA with 0 violations on all 13 audited page types; light verified unchanged after the token re-points (byte-identical screenshots) and re-gated at release with an axe AA pass (0 violations) on 7 representative pages — the toggle button is the only new element in light mode.
+
 ## [3.3.1] - 2026-06-10 — Color-token consolidation (dark-mode phase 1)
 
 Every color literal in `src/` now flows through semantic CSS custom properties in the Tailwind 4 `@theme` block in `src/styles/global.css` (~80 tokens: the four near-identical brand blues kept distinct, a full ink scale, surfaces, borders, overlays, the on-dark family, and state colors). Groundwork only — the `.dark` palette and theme toggle are phase 2.

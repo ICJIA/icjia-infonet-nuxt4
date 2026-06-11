@@ -196,7 +196,8 @@
 
 /* ── Dark palette (phase 2) ─────────────────────────────────────────────
    Applied via class on <html> by the theme-init script in BaseLayout
-   (localStorage → OS preference → ?theme= test override). Light values
+   (?theme= test override → localStorage → LIGHT default; deliberately no
+   OS-preference sniffing — dark is a pure opt-in). Light values
    live in @theme above and are unchanged. Values chosen for ≥4.5:1 text
    contrast on their usage surfaces — verified by the dark axe sweep.    */
 :root { color-scheme: light; }
