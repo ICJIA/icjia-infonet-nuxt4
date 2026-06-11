@@ -153,6 +153,27 @@ const mainTopPad = isHome ? 0 : 32;
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    {/* Theme init — applies .dark before first paint. Order: ?theme= test
+        override (not persisted) → localStorage 'theme' → LIGHT default.
+        Deliberately NO prefers-color-scheme sniffing: the site defaults to
+        its standard light look for everyone; dark is an explicit opt-in
+        (user decision 2026-06-10). Inline + hashed in the CSP (netlify.toml)
+        — re-run pnpm csp-hashes after ANY edit to this script. */}
+    <script is:inline>
+      (function () {
+        try {
+          var p = new URLSearchParams(location.search).get('theme');
+          var s = localStorage.getItem('theme');
+          var t = p === 'dark' || p === 'light' ? p : s;
+          if (t === 'dark') {
+            document.documentElement.classList.add('dark');
+            var m = document.querySelector('meta[name="theme-color"]');
+            if (m) m.setAttribute('content', '#14171c');
+          }
+        } catch (e) {}
+      })();
+    </script>
     {/* Permissions-Policy is sent as a real response header (netlify.toml) —
         the directive is header-only, so a <meta http-equiv> version is inert. */}
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />

@@ -28,6 +28,26 @@ const drawerStore: DrawerStore = {
 };
 Alpine.store('drawer', drawerStore);
 
+// Theme state — the head script in BaseLayout applies .dark pre-paint;
+// this store mirrors that state for the nav toggle and persists choices.
+type ThemeStore = { dark: boolean; toggle(): void };
+const themeStore: ThemeStore = {
+  dark: document.documentElement.classList.contains('dark'),
+  toggle() {
+    this.dark = !this.dark;
+    document.documentElement.classList.toggle('dark', this.dark);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', this.dark ? '#14171c' : '#ffffff');
+    try {
+      localStorage.setItem('theme', this.dark ? 'dark' : 'light');
+    } catch {
+      // private-mode storage failures: theme still applies for this page
+    }
+  },
+};
+Alpine.store('theme', themeStore);
+
 // Shared WAI-ARIA tabs behavior (roving tabindex + arrow keys) used by the
 // TabsScreenshotsAccessible / TabsUserInfoAccessible MDC components — the
 // two components previously carried near-identical inline x-data factories

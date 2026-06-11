@@ -178,6 +178,7 @@
   /* Shadow colors — constant across modes (shadows stay black on dark
      surfaces); replaces the hazard-listed shadow uses of overlay tokens so
      --overlay-divider/-hover can flip to white-alpha in .dark. */
+  --shadow-color-faint: rgba(0, 0, 0, 0.04);
   --shadow-color-soft: rgba(0, 0, 0, 0.12);
   --shadow-color: rgba(0, 0, 0, 0.15);
   --shadow-color-mid: rgba(0, 0, 0, 0.2);

@@ -55,9 +55,10 @@
   [headers.values]
     X-Greeting = "Hello from Chicago!"
     # CSP — see scripts/csp-hashes.mjs. Re-run after any inline-script change.
-    # Inline scripts: URL normalizer (BaseLayout), AppNav dropdown script
-    # (Astro auto-inlines small bundles), Pagefind init, ReadProgress / TOC
-    # init news variant, DAP filter init, FAQ deep-link opener (faqs page).
+    # Inline scripts: theme init (BaseLayout), URL normalizer (BaseLayout),
+    # AppNav dropdown script (Astro auto-inlines small bundles), Pagefind
+    # init, ReadProgress / TOC init news variant, DAP filter init, FAQ
+    # deep-link opener (faqs page).
     #
     # 'unsafe-eval' is required by Alpine.js 3 — it uses runtime eval() to
     # evaluate x-show / x-data / x-on directives. Without it, every Alpine
@@ -71,7 +72,7 @@
     # via Alpine fetch() (@submit.prevent), which is governed by connect-src,
     # not form-action. Google Fonts hosts removed: all fonts are self-hosted
     # via @fontsource.
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'sha256-0GEXQXbX4Ty5Tg6K7e8GdROTUXHbFOL/QU8sxXcM9Ic=' 'sha256-bmb2y0bUGL0Hm0OYO1Tr75036AzQt1CVprLk0KxYjNI=' 'sha256-jp0mCjKxE5BrRkzzxClITvlcgYxTMtleQ+j7b1umXSQ=' 'sha256-mGhkZOJ2G63NJ6hKuOJod9nrWFUveMlI5snsLCwyrPk=' 'sha256-sRs1fNmOR8Cn2Vt+sR+k9YSYlpIlmBZXV2vp/7/8sA4=' 'sha256-xCybCFc4fwdwyxXVE7TB2FUhQzAPREyaw9SYYo7MCjM=' https://plausible.icjia.cloud; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://infonet.icjia-api.cloud https://i.ytimg.com; connect-src 'self' https://plausible.icjia.cloud https://infonet.icjia-api.cloud https://mail.icjia.cloud; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://app.netlify.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'sha256-0GEXQXbX4Ty5Tg6K7e8GdROTUXHbFOL/QU8sxXcM9Ic=' 'sha256-bAlkXU/tAYGPzS8XJLfX9q1YPYebkBEema1LSPLUEI0=' 'sha256-bmb2y0bUGL0Hm0OYO1Tr75036AzQt1CVprLk0KxYjNI=' 'sha256-jp0mCjKxE5BrRkzzxClITvlcgYxTMtleQ+j7b1umXSQ=' 'sha256-mGhkZOJ2G63NJ6hKuOJod9nrWFUveMlI5snsLCwyrPk=' 'sha256-sRs1fNmOR8Cn2Vt+sR+k9YSYlpIlmBZXV2vp/7/8sA4=' 'sha256-xCybCFc4fwdwyxXVE7TB2FUhQzAPREyaw9SYYo7MCjM=' https://plausible.icjia.cloud; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://infonet.icjia-api.cloud https://i.ytimg.com; connect-src 'self' https://plausible.icjia.cloud https://infonet.icjia-api.cloud https://mail.icjia.cloud; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://app.netlify.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
     Cross-Origin-Opener-Policy = "same-origin"
     Cross-Origin-Resource-Policy = "cross-origin"
     # An *.illinois.gov property should never be reachable over plain HTTP.

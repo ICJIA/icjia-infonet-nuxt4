@@ -126,6 +126,7 @@ Append inside the existing `@theme { … }` in `src/styles/global.css`, after th
   /* Shadow colors — constant across modes (shadows stay black on dark
      surfaces); replaces the hazard-listed shadow uses of overlay tokens so
      --overlay-divider/-hover can flip to white-alpha in .dark. */
+  --shadow-color-faint: rgba(0, 0, 0, 0.04);
   --shadow-color-soft: rgba(0, 0, 0, 0.12);
   --shadow-color: rgba(0, 0, 0, 0.15);
   --shadow-color-mid: rgba(0, 0, 0, 0.2);
@@ -408,12 +409,12 @@ defining the dark palette:
 - `src/components/InfoCard.astro` — `box-shadow: 0 0 15px var(--overlay-scrim-mid)` (shadow color using an overlay token; `--overlay-scrim-mid` added in Task 5 via rule 5 — rgba(0,0,0,0.2) had no token) — resolved phase 2 → `--shadow-color-mid`
 - `src/components/InfoCard.astro` — `border: 1px solid var(--color-surface-faint)` (image hairline border using a surface token)
 - `src/components/SimpleCard.astro` — inline `onmouseover` shadow `0 4px 12px var(--overlay-divider)` (shadow color using the divider token, set via `el.style` in an inline handler) — resolved phase 2 → `--shadow-color-soft`
-- `src/pages/search.astro` — result card `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token)
-- `src/pages/search.astro` — result card hover `box-shadow: 0 4px 8px var(--overlay-divider)` (shadow color using the divider token)
-- `src/pages/404.astro` — search input `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token)
-- `src/pages/404.astro` — quick-link card resting `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token)
+- `src/pages/search.astro` — result card `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token) — resolved phase 2 → `--shadow-color-faint`
+- `src/pages/search.astro` — result card hover `box-shadow: 0 4px 8px var(--overlay-divider)` (shadow color using the divider token) — resolved phase 2 → `--shadow-color-soft`
+- `src/pages/404.astro` — search input `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token) — resolved phase 2 → `--shadow-color-faint`
+- `src/pages/404.astro` — quick-link card resting `box-shadow: 0 1px 2px var(--overlay-hover)` (shadow color using the hover-overlay token) — resolved phase 2 → `--shadow-color-faint`
 - `src/pages/404.astro` — quick-link card hover `box-shadow: 0 4px 12px var(--overlay-brand-shadow)` (brand-tinted shadow; `--overlay-brand-shadow` added in Task 6 via rule 5 — rgba(13,66,112,0.12) had no token)
-- `src/pages/data-and-publications/index.astro` — card hover `box-shadow: 0 4px 12px var(--overlay-divider)` (shadow color using the divider token)
+- `src/pages/data-and-publications/index.astro` — card hover `box-shadow: 0 4px 12px var(--overlay-divider)` (shadow color using the divider token) — resolved phase 2 → `--shadow-color-soft`
 - `src/components/mdc/TabsScreenshotsAccessible.astro` — modal inner `box-shadow: 0 8px 32px var(--overlay-shadow-modal)` (shadow color using an overlay token; `--overlay-shadow-modal` added in Task 7 via rule 5 — rgba(0,0,0,0.3) had no token)
 - `src/components/mdc/DvAwarenessMonth.astro` — card resting `box-shadow: 0 2px 6px var(--overlay-divider)` (shadow color using the divider token) — resolved phase 2 → `--shadow-color-soft`
 - `src/components/mdc/DvAwarenessMonth.astro` — card hover `box-shadow: 0 8px 16px var(--overlay-scrim)` (shadow color using the scrim token) — resolved phase 2 → `--shadow-color`
