@@ -2,6 +2,54 @@
 
 All notable changes to the ICJIA InfoNet website are documented in this file.
 
+## [3.4.2] - 2026-07-05 — Full-site a11y audit: last two automated findings fixed
+
+A comprehensive automated accessibility audit of every page in the build —
+axe-core WCAG 2.1 A/AA on all 46 pages at desktop AND mobile viewports,
+Lighthouse accessibility on all 23 unique templates (100/100 everywhere, both
+viewports), and WCAG AA contrast on every page in BOTH themes (light + the
+`?theme=dark` override) — surfaced exactly two fixable findings. Both are
+fixed and re-verified to zero violations; the production build now has no
+known automated WCAG A/AA failures on any page.
+
+### `/debug/` no longer ships a WCAG-failing redirect stub in prod
+
+Production builds published Astro's static redirect stub for `/debug/`
+(`Astro.redirect('/404/')` → `<meta http-equiv="refresh" content="2;url=/404/">`
+on a bare `<html>`): the 2-second timed refresh fails WCAG 2.2.1 Timing
+Adjustable (only 0-second refreshes are exempt) and the missing `lang` fails
+3.1.1 Language of Page. The page is now a dynamic route
+(`src/pages/debug/[...slug].astro`) whose `getStaticPaths` emits **nothing**
+in `PROD` — prod `/debug/` falls through to the fully compliant 404 page
+(real 404 status), build internals stay unadvertised at a guessable URL, and
+the build drops from 46 to 45 pages. The dev-mode diagnostics page is
+unchanged (verified on `astro dev`).
+
+### DAP filter chips: default chip's active state is now server-rendered
+
+On `/data-and-publications/` the default "All Research" chip shipped as plain
+`class="tag-chip"` and only gained `.active` when Alpine hydrated, so its
+150ms background/color transition fired on every page load — a visible
+restyle flash that axe deterministically sampled mid-transition as a ~1.5:1
+contrast failure (the steady state is 10.3:1 light / 9.2:1 dark). The default
+chip now pre-renders the class via `class:list` (matching its already
+pre-rendered `aria-pressed="true"`), so nothing changes at hydration. Alpine's
+`:class` object syntax removes statically-rendered classes when falsy, so
+filter toggling is unaffected — browser-verified (active + aria-pressed move
+to a clicked chip and back). Re-audit: axe 0 violations at both viewports;
+contrast 217/217 elements pass in both themes.
+
+### Audit false positives documented (no code change)
+
+The only other tool flags were verified against real token values and
+dismissed: contrastcap misreads the home chart's inline-SVG axis labels in
+both themes (it compares the element's *unused* computed `color` against
+pixel samples of the glyphs' own `fill` ink — the real pairs are #666 on #fff
+= 5.74:1 and #939ca6 on #14171c = 6.5:1, both passing), and the 404 page's
+giant numeral is `aria-hidden` decorative gradient text, exempt under 1.4.3.
+One transient mobile-only axe flake on `/resources/` (pre-hydration window
+under parallel-audit load) re-ran clean three times.
+
 ## [3.4.1] - 2026-06-11 — Chart hover tooltips, skip-link a11y fixes, contact form recentered
 
 ### Home chart: instant hover tooltips restored

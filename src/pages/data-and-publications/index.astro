@@ -87,12 +87,17 @@ const articlesJson = JSON.stringify(
   <div class="dap-page page-container" x-data={`dapFilter(${articlesJson})`}>
     <!-- Tag filter chips. aria-pressed mirrors the visual .active state so
          AT users can tell which filter is applied (toggle-button pattern);
-         the static attribute carries the pre-hydration default ("all"). -->
+         the static attribute carries the pre-hydration default ("all").
+         The default chip's `active` class is ALSO server-rendered: if only
+         Alpine adds it at hydration, the 150ms background/color transition
+         fires on every load (visible flash; axe samples it mid-transition as
+         a ~1.5:1 contrast fail). Alpine's :class object syntax still removes
+         the class when another filter is chosen, even though it's static. -->
     <div class="tag-filters" role="group" aria-label="Filter by topic">
       {filterChips.map((chip) => (
         <button
           type="button"
-          class="tag-chip"
+          class:list={['tag-chip', { active: chip.value === 'all' }]}
           aria-pressed={chip.value === 'all' ? 'true' : 'false'}
           :class={`{ active: activeTag === ${JSON.stringify(chip.value)} }`}
           :aria-pressed={`activeTag === ${JSON.stringify(chip.value)}`}

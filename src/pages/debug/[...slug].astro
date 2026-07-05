@@ -1,15 +1,19 @@
 ---
-// astro/src/pages/debug.astro
+// astro/src/pages/debug/[...slug].astro
 //
 // Minimal debug page — excluded from sitemap by astro.config.ts filter.
 // Legacy: app/pages/debug.vue had two external link samples.
 // This version adds build-time env info for diagnostics.
 import BaseLayout from '~/layouts/BaseLayout.astro';
 
-// Dev/preview tool only: production builds publish a bare redirect stub so
-// build internals aren't advertised at a guessable URL. (Static output turns
-// this into a meta-refresh page at /debug/.)
-if (import.meta.env.PROD) return Astro.redirect('/404/');
+// Dev/preview tool only. Dynamic route so getStaticPaths can emit NOTHING in
+// production builds: prod /debug/ falls through to the 404 page and build
+// internals aren't advertised at a guessable URL. (The previous
+// `Astro.redirect('/404/')` published Astro's meta-refresh stub, which failed
+// WCAG 2.2.1 — 2s timed refresh — and 3.1.1 — bare <html> without lang.)
+export function getStaticPaths() {
+  return import.meta.env.PROD ? [] : [{ params: { slug: undefined } }];
+}
 
 const buildEnv = {
   site: import.meta.env.SITE ?? '(not set)',
