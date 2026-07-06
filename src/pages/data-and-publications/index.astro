@@ -293,7 +293,10 @@ const articlesJson = JSON.stringify(
   }
 
   .dap-card-sep {
-    color: var(--color-ink-hint);
+    /* WCAG AA: ink-hint (#999) on surface-faint (#fafafa) is 2.73:1 — SiteImprove's
+       sia-r69 checks punctuation-only text nodes (axe skips them), so the "|" must
+       pass 4.5:1 like any text. ink-muted is 5.5:1 light / 6.0:1 dark. */
+    color: var(--color-ink-muted);
   }
 
   .dap-card-type {
