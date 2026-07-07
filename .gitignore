@@ -28,8 +28,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# jetbrains setting folder
+# editor setting folders
 .idea/
+.vscode/
 .claude/
 
 # Note: public/_cms-img/dap/ is already covered by `public/_cms-img/` above.
