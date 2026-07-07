@@ -5,6 +5,7 @@
 // Sorted by dateOverride ?? createdAt descending. Matches legacy news/index.vue.
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import NewsCard from '~/components/NewsCard.astro';
+import { gitLastModifiedISO } from '~/lib/gitDates';
 import { strapiFetch, assertNoTruncation } from '~/lib/strapi';
 import { QUERY_POST_LIST } from '~/lib/queries';
 import { PostListResponseSchema } from '~/lib/schemas';
@@ -20,7 +21,7 @@ const posts = parsed.posts.data.sort(
   (a, b) => new Date(displayDate(b) ?? 0).getTime() - new Date(displayDate(a) ?? 0).getTime()
 );
 ---
-<BaseLayout title="News" breadcrumbTitle="News">
+<BaseLayout title="News" breadcrumbTitle="News" dateModified={gitLastModifiedISO('src/pages/news/index.astro')}>
   <div class="news-page page-container">
     <h1 class="news-page__heading">News &amp; Updates</h1>
     <div class="news-page__rule"></div>

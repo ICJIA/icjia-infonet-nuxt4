@@ -55,6 +55,8 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
   description={description}
   searchable={!attr.hideFromSearch}
   breadcrumbTitle={breadcrumbLabel || (attr.title ?? undefined)}
+  datePublished={attr.publishedAt ?? attr.createdAt}
+  dateModified={attr.updatedAt}
 >
   <article class:list={["page-detail", `page-detail--${attr.slug}`]}>
     <h1 class="page-h1">{attr.title?.toUpperCase()}</h1>

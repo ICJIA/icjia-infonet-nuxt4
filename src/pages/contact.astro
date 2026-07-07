@@ -12,8 +12,9 @@
 // ok; otherwise a visible error banner asks the user to retry.
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PageHeader from '~/components/PageHeader.astro';
+import { gitLastModifiedISO } from '~/lib/gitDates';
 ---
-<BaseLayout title="Contact" breadcrumbTitle="Contact">
+<BaseLayout title="Contact" breadcrumbTitle="Contact" dateModified={gitLastModifiedISO('src/pages/contact.astro')}>
   <div class="page-container">
   <PageHeader title="Contact InfoNet" />
 

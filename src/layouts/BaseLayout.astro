@@ -48,6 +48,14 @@ interface Props {
     dateModified: string;
     image?: string;
   };
+  /** WebPage JSON-LD `datePublished` (non-news pages). Defaults to the site
+   *  launch date; CMS pages pass their real Strapi publishedAt/createdAt
+   *  (nullable — null falls back to the launch date). */
+  datePublished?: string | null;
+  /** WebPage JSON-LD `dateModified` (non-news pages). Omitted when null/absent —
+   *  CMS pages pass Strapi updatedAt; hand-authored pages pass their source
+   *  file's git last-commit date (see ~/lib/gitDates). Never a build stamp. */
+  dateModified?: string | null;
   /** Explicit JSON-LD override (used by the home page for combined WebSite + Organization schema). */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
@@ -63,6 +71,8 @@ const {
   breadcrumbTitleHref = undefined,
   breadcrumbCurrent = undefined,
   newsArticle,
+  datePublished,
+  dateModified,
   jsonLd,
 } = Astro.props;
 
@@ -102,9 +112,12 @@ const newsArticleJsonLd = newsArticle && {
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
 };
 
-// No `dateModified` on static pages: stamping the build time claimed every
-// page changed on every deploy, which teaches crawlers to ignore the site's
-// freshness signals entirely. News articles carry real CMS dates instead.
+// `dateModified` is sourced honestly, never build-stamped (a build-time stamp
+// makes every page look changed on every deploy, teaching crawlers to ignore
+// the site's freshness signals): CMS pages pass Strapi updatedAt, hand-authored
+// pages pass their source file's git last-commit date (~/lib/gitDates), and it
+// is omitted entirely when neither is available rather than faked. datePublished
+// likewise defaults to the launch date only when a page has no real date.
 const defaultWebPageJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -112,7 +125,8 @@ const defaultWebPageJsonLd = {
   name: fullTitle,
   description,
   inLanguage: 'en-US',
-  datePublished: siteConfig.siteLaunchDate,
+  datePublished: datePublished ?? siteConfig.siteLaunchDate,
+  ...(dateModified ? { dateModified } : {}),
   isPartOf: {
     '@type': 'WebSite',
     name: siteConfig.siteName,

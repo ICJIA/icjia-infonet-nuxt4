@@ -49,6 +49,8 @@ const description = attr.summary ?? attr.title ?? '';
   description={description}
   noindex={true}
   breadcrumbTitle={attr.title ?? undefined}
+  datePublished={attr.publishedAt ?? attr.createdAt}
+  dateModified={attr.updatedAt}
 >
   <article class="tab-detail">
     {attr.sectionID && (

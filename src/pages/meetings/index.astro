@@ -10,8 +10,9 @@
 // Skip meetings/[slug].astro — no slugs to generate.
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PageHeader from '~/components/PageHeader.astro';
+import { gitLastModifiedISO } from '~/lib/gitDates';
 ---
-<BaseLayout title="Meetings" breadcrumbTitle="Meetings">
+<BaseLayout title="Meetings" breadcrumbTitle="Meetings" dateModified={gitLastModifiedISO('src/pages/meetings/index.astro')}>
   <div class="page-container">
     <PageHeader title="Meetings" />
     <p>No meetings to display.</p>

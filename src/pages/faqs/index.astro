@@ -18,6 +18,7 @@ import { QUERY_FAQ_LIST } from '~/lib/queries';
 import { FaqListResponseSchema } from '~/lib/schemas';
 import { renderMarkdown } from '~/lib/markdown';
 import type { Heading } from '~/lib/markdown';
+import { gitLastModifiedISO } from '~/lib/gitDates';
 
 const raw = await strapiFetch(QUERY_FAQ_LIST);
 const parsed = FaqListResponseSchema.parse(raw);
@@ -60,7 +61,7 @@ const tocHeadings: Heading[] = [
     .map((s) => ({ level: 2, text: s.label, id: s.id })),
 ];
 ---
-<BaseLayout title="FAQs" breadcrumbTitle="FAQs">
+<BaseLayout title="FAQs" breadcrumbTitle="FAQs" dateModified={gitLastModifiedISO('src/pages/faqs/index.astro')}>
   <PageHeader title="Frequently Asked Questions" />
 
   <div class="faqs-layout page-container">

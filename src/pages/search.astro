@@ -11,9 +11,10 @@
 // replaced by Pagefind for static-site full-text search.
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PageHeader from '~/components/PageHeader.astro';
+import { gitLastModifiedISO } from '~/lib/gitDates';
 ---
 {/* searchable={false}: the search page must not appear in its own results. */}
-<BaseLayout title="Search" breadcrumbTitle="Search" searchable={false}>
+<BaseLayout title="Search" breadcrumbTitle="Search" searchable={false} dateModified={gitLastModifiedISO('src/pages/search.astro')}>
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
 
   <div class="search-wrapper">

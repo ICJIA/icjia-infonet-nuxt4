@@ -9,9 +9,10 @@ export const siteConfig = {
   siteOrigin: 'https://infonet.icjia.illinois.gov',
   siteName: 'InfoNet',
   siteShortName: 'InfoNet',
-  /** v3 cutover date (Astro/Alpine/Tailwind launch). Used as `datePublished`
-   *  for static pages in JSON-LD output. `dateModified` is captured at build
-   *  time via `new Date().toISOString()` inside BaseLayout. */
+  /** v3 cutover date (Astro/Alpine/Tailwind launch). Fallback `datePublished`
+   *  for hand-authored static pages with no CMS date. `dateModified` is NOT
+   *  build-stamped — CMS pages emit Strapi updatedAt, hand-authored pages emit
+   *  their source file's git last-commit date (see ~/lib/gitDates). */
   siteLaunchDate: '2026-05-26',
   titleTemplate: 'ICJIA | %s',
   defaultDescription:
