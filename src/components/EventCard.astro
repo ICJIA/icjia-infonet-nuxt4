@@ -47,7 +47,7 @@ const truncated = truncate(summary);
 <article class="event-card">
   <a href={href} class="event-card__link">
     {type?.trim() && (
-      <div class="event-card__type" aria-hidden="true">{type.trim().toUpperCase()}</div>
+      <div class="event-card__type" aria-hidden="true">{type.trim()}</div>
     )}
     <h2 class="event-card__name">{name}</h2>
     {startDate && (

@@ -46,9 +46,13 @@ const segments = splitMdcPlaceholders(html);
 
 const description = attr.summary ?? attr.title ?? '';
 
-// Breadcrumb label: slug-based (uppercase slug, not full page title).
-// e.g. /about/ → "ABOUT", /partners/ → "PARTNERS" — matches legacy behaviour.
-const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
+// Breadcrumb label: slug-based, not the full page title.
+// e.g. /about/ → "About", /partners/ → "Partners". Breadcrumb.astro uppercases it
+// for display; the DOM text stays title-case so assistive tech reads it as a word
+// rather than spelling it out (Siteimprove "Text in all caps").
+const breadcrumbLabel = (attr.slug ?? '')
+  .replace(/[-_]/g, ' ')
+  .replace(/\w\S*/g, (w) => w.charAt(0).toUpperCase() + w.slice(1));
 ---
 <BaseLayout
   title={attr.title ?? 'Page'}
@@ -59,7 +63,7 @@ const breadcrumbLabel = (attr.slug ?? '').toUpperCase();
   dateModified={attr.updatedAt}
 >
   <article class:list={["page-detail", `page-detail--${attr.slug}`]}>
-    <h1 class="page-h1">{attr.title?.toUpperCase()}</h1>
+    <h1 class="page-h1">{attr.title}</h1>
     {segments.length > 0 ? (
       <div class="markdown-body">
         {segments.map(seg => {

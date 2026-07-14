@@ -70,13 +70,13 @@ const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
     <ol
       style="margin:0;padding:0;list-style:none;display:flex;align-items:center;flex-wrap:wrap;"
     >
-      {/* Level 1: HOME */}
+      {/* Level 1: Home — title-case in the DOM, uppercased by CSS above. */}
       <li>
         <a
           href="/"
           style="color:var(--color-on-dark);font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
           aria-label="Home"
-        >HOME</a>
+        >Home</a>
       </li>
       <li aria-hidden="true" style="color:var(--color-on-dark);font-weight:900;margin:0 6px;">
         &raquo;
