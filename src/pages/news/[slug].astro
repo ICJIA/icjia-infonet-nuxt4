@@ -18,7 +18,7 @@ import TabsUserInfoAccessible from '~/components/mdc/TabsUserInfoAccessible.astr
 import { strapiFetch, assertNoTruncation } from '~/lib/strapi';
 import { QUERY_POST_LIST } from '~/lib/queries';
 import { PostListResponseSchema } from '~/lib/schemas';
-import { renderMarkdown } from '~/lib/markdown';
+import { renderMarkdown, splitMdcPlaceholders } from '~/lib/markdown';
 
 export async function getStaticPaths() {
   const raw = await strapiFetch(QUERY_POST_LIST);
@@ -37,6 +37,10 @@ const attr = post.attributes;
 const displayDate = attr.dateOverride ?? attr.createdAt ?? null;
 
 const { html, headings, mdcRefs } = renderMarkdown(attr.body);
+// Interleave MDC components at their authored position. Without this the raw
+// MDCREFPLACEHOLDER_n_MDCREFEND sentinel renders as visible body text and the
+// component lands at the foot of the article instead of where the author put it.
+const segments = splitMdcPlaceholders(html);
 
 // Splash image — Strapi v4 nested under data.attributes
 const splashAttr = attr.splash?.data?.attributes;
@@ -103,14 +107,30 @@ const dateModified = attr.updatedAt ?? datePublished;
       </figure>
     )}
 
-    {html && <div class="markdown-body" set:html={html}></div>}
-    {mdcRefs.map(ref => (
-      ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
-      ref.name === 'Partners' ? <Partners /> :
-      ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
-      ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
-      null
-    ))}
+    {segments.length > 0 ? (
+      <div class="markdown-body">
+        {segments.map(seg => {
+          if ('html' in seg) return <Fragment set:html={seg.html} />;
+          const ref = mdcRefs[seg.refIndex];
+          if (!ref) return null;
+          return (
+            ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+            ref.name === 'Partners' ? <Partners /> :
+            ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
+            ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
+            null
+          );
+        })}
+      </div>
+    ) : (
+      mdcRefs.map(ref => (
+        ref.name === 'DvAwarenessMonth' ? <DvAwarenessMonth /> :
+        ref.name === 'Partners' ? <Partners /> :
+        ref.name === 'TabsScreenshotsAccessible' ? <TabsScreenshotsAccessible sectionID={ref.props.sectionID ?? 'screenshots'} /> :
+        ref.name === 'TabsUserInfoAccessible' ? <TabsUserInfoAccessible sectionID={ref.props.sectionID ?? 'users'} /> :
+        null
+      ))
+    )}
 
     {showUpdated && (
       <LastUpdated date={attr.updatedAt} />
