@@ -76,7 +76,12 @@ const posts = parsed.posts.data
   }
 
   .home-posts__all-btn {
-    display: inline-block;
+    /* 2.5.5 (AAA): pointer targets ≥44px */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
     background: var(--color-brand-deep);
     color: var(--color-on-dark);
     font-weight: 700;

@@ -24,9 +24,9 @@ const displayDate = formatDate(date, 'short');
 <style>
   .last-updated {
     font-size: 0.8125rem;
-    /* #666 = 5.74:1 on white — #777 was 4.48:1, just under the 4.5:1 AA
-       minimum (axe color-contrast, WCAG 1.4.3). */
-    color: var(--color-ink-muted);
+    /* ink-soft #555 = 7.46:1 on white — clears the 7:1 AAA enhanced-contrast
+       bar (1.4.6); ink-muted #666 was 5.74:1 (AA-only). */
+    color: var(--color-ink-soft);
     margin-top: 2rem;
     border-top: 1px solid var(--color-border);
     padding-top: 0.75rem;

@@ -163,9 +163,11 @@ const homeJsonLd = [
   }
 
   .infonet-tagline {
-    font-size: 18px;            /* matches legacy exactly */
+    /* 1.125rem = legacy 18px; unit + line-height changed for AAA paragraph
+       rules (sia-r74 no absolute units, sia-r73 lh ≥ 1.5 — was 1.25) */
+    font-size: 1.125rem;
     font-weight: 400;
-    line-height: 1.25;           /* legacy 22.5px / 18px = 1.25 */
+    line-height: 1.5;
     color: var(--color-ink);
     margin-top: -5px;
     margin-bottom: 2rem;
@@ -194,6 +196,11 @@ const homeJsonLd = [
     text-decoration: none;
     font-size: 0.95rem;
     text-transform: uppercase;
+    /* 2.5.5 (AAA): solo link in its own paragraph gets no inline exemption */
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 44px;
   }
 
   .home-partners-link a:hover,

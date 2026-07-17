@@ -74,7 +74,7 @@ const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
       <li>
         <a
           href="/"
-          style="color:var(--color-on-dark);font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
+          style="color:var(--color-on-dark);font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;"
           aria-label="Home"
         >Home</a>
       </li>
@@ -87,7 +87,7 @@ const currentLabel = breadcrumbCurrent ? truncate(breadcrumbCurrent, 30) : null;
         {breadcrumbTitleHref && currentLabel ? (
           <a
             href={breadcrumbTitleHref}
-            style="color:var(--color-on-dark);font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;"
+            style="color:var(--color-on-dark);font-family:'Lato',sans-serif;text-decoration:none;font-weight:700;text-transform:uppercase;display:inline-flex;align-items:center;min-height:44px;min-width:44px;"
           >{middleLabel}</a>
         ) : (
           <span

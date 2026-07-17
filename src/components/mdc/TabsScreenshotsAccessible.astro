@@ -137,7 +137,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
     class="ts-wrapper"
     x-data={`a11yTabs(${tabs.length})`}
   >
-    <p class="ts-hint">Click tab to view agency info.</p>
+    <p class="ts-hint">Click tab to view agency info.</p><!-- keep as p: no uppercase, relative font-size -->
 
     <div class="ts-card">
       <!-- Tab list -->
@@ -180,7 +180,9 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
               x-transition:enter-end="ts-fade-end"
               tabindex="0"
             >
-              <p class="ts-mock-note">Note: All displays contain mock data.</p>
+              {/* div, not p: sia-r72 (AAA) fails paragraphs with computed
+                  text-transform: uppercase */}
+              <div class="ts-mock-note">Note: All displays contain mock data.</div>
 
               {bodyHtml && (
                 <div class="ts-body markdown-body" set:html={bodyHtml}></div>
@@ -272,7 +274,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
 
   .ts-hint {
     text-align: center;
-    font-size: 12px;
+    font-size: 0.75rem; /* sia-r74 (AAA): no absolute units on paragraphs */
     font-weight: 900;
     color: var(--color-ink-label);
     margin-bottom: 0.75rem;

@@ -363,6 +363,20 @@ body { background-color: var(--color-surface); color: var(--color-ink-max); }
 .markdown-body ol ol ol { list-style-type: lower-roman; }
 .markdown-body li > p { margin: 0; }
 
+/* Solo links in list items (agency contact lines, download/video lists):
+   sia-r111 / 2.5.5 (AAA) gives no inline exemption when the list item holds
+   no text besides the link, so the link itself must offer a ≥44px pointer
+   target. Both markdown list shapes need covering — loose items wrap the
+   link in a <p>, tight items put the <a> directly in the <li>. Links inside
+   sentences keep their inline exemption and are untouched. */
+.markdown-body li > p > a:only-child,
+.markdown-body li > a:only-child {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+}
+
 /* Video embeds inside CMS markdown bodies (e.g. /about/ National Webinar):
    constrain to ~legacy 560px max-width, force 16:9 aspect, and center the
    block within the column. Override Strapi-authored width/height attrs.

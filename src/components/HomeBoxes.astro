@@ -137,10 +137,12 @@ const boxes: Box[] = [
   }
 
   .home-box__text {
-    font-size: 20px;
+    /* 1.25rem (= legacy 20px) + lh 1.5: sia-r74 bans absolute units and
+       sia-r73 wants ≥1.5 line-height on paragraphs (both AAA) */
+    font-size: 1.25rem;
     color: var(--color-on-dark);
     margin: 0;
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   .sr-only {

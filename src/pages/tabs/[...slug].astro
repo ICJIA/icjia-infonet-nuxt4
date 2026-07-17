@@ -53,10 +53,14 @@ const description = attr.summary ?? attr.title ?? '';
   dateModified={attr.updatedAt}
 >
   <article class="tab-detail">
+    {/* div, not p: sia-r72 (AAA) fails any paragraph whose computed
+        text-transform is uppercase — an eyebrow label isn't a paragraph.
+        (The old aria-label was dropped: naming is ARIA-prohibited on
+        paragraph/generic roles alike.) */}
     {attr.sectionID && (
-      <p class="tab-section-label" aria-label="Section">
+      <div class="tab-section-label">
         {attr.sectionID}
-      </p>
+      </div>
     )}
     <h1>{attr.title}</h1>
     {html && <div class="markdown-body" set:html={html}></div>}
@@ -80,7 +84,7 @@ const description = attr.summary ?? attr.title ?? '';
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: var(--color-ink-muted);
+    color: var(--color-ink-soft); /* 7.46:1 — 1.4.6 (AAA) needs 7:1 */
     text-transform: uppercase;
     margin-bottom: 0.25rem;
   }

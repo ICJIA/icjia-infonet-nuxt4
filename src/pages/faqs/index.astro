@@ -198,7 +198,7 @@ const tocHeadings: Heading[] = [
 
   .section-intro,
   .section-count {
-    color: var(--color-ink-muted);
+    color: var(--color-ink-soft); /* 7.46:1 — 1.4.6 (AAA) needs 7:1 */
     font-size: 0.875rem;
     margin: 0 0 12px;
   }
@@ -215,6 +215,11 @@ const tocHeadings: Heading[] = [
   .downloads-list a {
     color: var(--color-brand);
     font-weight: 700;
+    /* 2.5.5 (AAA): solo link per list item — no inline exemption */
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 44px;
   }
 
   .faq-item {

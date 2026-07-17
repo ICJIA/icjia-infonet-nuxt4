@@ -94,7 +94,7 @@ const pathname = Astro.url.pathname;
     <a
       href="/"
       class="md-show"
-      style="text-decoration: none;"
+      style="text-decoration: none; min-height: 44px;"
     >
       <span style="
         font-weight: 900;
@@ -497,7 +497,9 @@ const pathname = Astro.url.pathname;
   outline-offset: 2px;
 }
 .nav-item-btn[aria-current="page"] {
-  color: var(--color-primary) !important;
+  /* link-deep, not primary: 18px/900 is below the 18.66px bold large-text
+     cutoff, so 1.4.6 (AAA) wants 7:1 — #1976d2 is only 4.6:1 on white */
+  color: var(--color-link-deep) !important;
 }
 
 /* ── Dropdown (native <details>) ────────────────────────────────────── */
@@ -528,7 +530,7 @@ const pathname = Astro.url.pathname;
 }
 .nav-dropdown-item[aria-current="page"] {
   background-color: var(--color-primary-tint);
-  color: var(--color-primary) !important;
+  color: var(--color-link-deep) !important;
 }
 
 /* Dark: the black elevation shadow that separates the white menu from the

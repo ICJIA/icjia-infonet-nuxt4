@@ -272,6 +272,11 @@ const bars = data.map((d, i) => {
     color: var(--color-ink-max);
     text-decoration: none;
     font-size: 0.875rem;
+    /* 2.5.5 (AAA): standalone link, no inline exemption */
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 44px;
   }
 
   .home-bar-graph__more-link:hover,

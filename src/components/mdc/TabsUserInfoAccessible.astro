@@ -104,7 +104,7 @@ const renderedBodies = tabs.map((tab) => renderMarkdown(tab.attributes.body));
 
   .tui-hint {
     text-align: center;
-    font-size: 12px;
+    font-size: 0.75rem; /* sia-r74 (AAA): no absolute units on paragraphs */
     font-weight: 900;
     color: var(--color-ink-label);
     margin-bottom: 0.75rem;

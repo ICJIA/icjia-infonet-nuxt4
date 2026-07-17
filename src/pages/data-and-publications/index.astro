@@ -218,8 +218,14 @@ const articlesJson = JSON.stringify(
     background: var(--color-surface-chip);
     color: var(--color-brand);
     border: 1px solid var(--color-border-chip);
-    border-radius: 20px;
+    border-radius: 22px;
     padding: 4px 14px;
+    /* 2.5.5 (AAA): pointer targets ≥44px — chips were 30px tall */
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.8125rem;
     font-weight: 700;
     cursor: pointer;
@@ -240,7 +246,7 @@ const articlesJson = JSON.stringify(
   }
 
   .dap-count {
-    color: var(--color-ink-muted);
+    color: var(--color-ink-soft); /* 7.46:1 — 1.4.6 (AAA) needs 7:1 */
     font-size: 0.875rem;
     margin-bottom: 16px;
   }
@@ -295,10 +301,10 @@ const articlesJson = JSON.stringify(
   }
 
   .dap-card-sep {
-    /* WCAG AA: ink-hint (#999) on surface-faint (#fafafa) is 2.73:1 — SiteImprove's
-       sia-r69 checks punctuation-only text nodes (axe skips them), so the "|" must
-       pass 4.5:1 like any text. ink-muted is 5.5:1 light / 6.0:1 dark. */
-    color: var(--color-ink-muted);
+    /* SiteImprove checks punctuation-only text nodes (axe skips them) — the "|"
+       must pass like any text. sia-r69 (AA) wanted 4.5:1; sia-r66 (AAA) wants
+       7:1, so ink-soft: 7.1:1 on #fafafa light / 7.9:1 dark. */
+    color: var(--color-ink-soft);
   }
 
   .dap-card-type {
