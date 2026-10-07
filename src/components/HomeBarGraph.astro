@@ -3,8 +3,8 @@
 //
 // Port of legacy app/components/content/HomeBarGraph.vue.
 // Bar chart: "Domestic and Sexual Violence Victims Who Received Services
-// in Illinois, 2018-2024", rendered as a BUILD-TIME SVG. The data is a
-// hardcoded constant, so shipping Chart.js (~71 KB gz) to draw seven
+// in Illinois, 2018-2025", rendered as a BUILD-TIME SVG. The data is a
+// hardcoded constant, so shipping Chart.js (~71 KB gz) to draw a handful of
 // rectangles was pure client cost — the SVG is computed here at build time
 // for zero JS. Hovering a bar shows an instant Chart.js-style tooltip
 // ("2019: 72,905") rendered as a per-bar SVG group toggled by CSS :hover —
@@ -21,9 +21,10 @@
 //   sr-only table — visually hidden, screen-reader accessible only (NOT a <details>)
 //   "More about InfoNet »" — text link below chart
 //
-// Dataset ported verbatim from legacy HomeBarGraph.vue:
-//   2018: 70,133 | 2019: 72,905 | 2020: 60,717 | 2021: 61,857
-//   2022: 61,259 | 2023: 63,211 | 2024: 63,557
+// Dataset: 2018-2024 ported verbatim from legacy HomeBarGraph.vue; 2025
+// added 2026-10-07 from ICJIA's "InfoNet HOME page chart.xlsx" (62,242 =
+// DV 51,763 + SA 9,754 + CAC 725). To add a year, append it to `data` —
+// the title's year range, the caption, and the sr-only table derive from it.
 
 const data = [
   { year: '2018', value: 70133 },
@@ -33,7 +34,9 @@ const data = [
   { year: '2022', value: 61259 },
   { year: '2023', value: 63211 },
   { year: '2024', value: 63557 },
+  { year: '2025', value: 62242 },
 ];
+const yearRange = `${data[0].year}-${data[data.length - 1].year}`;
 
 // Chart geometry — mirrors the Chart.js defaults the canvas version used:
 // y axis from 0 to a "nice" 80,000 max in 10,000 steps, light gridlines,
@@ -72,7 +75,7 @@ const bars = data.map((d, i) => {
 
 <div class="home-bar-graph">
   <h2 class="home-bar-graph__title">
-    Domestic and Sexual Violence Victims Who Received Services in Illinois, 2018-2024
+    Domestic and Sexual Violence Victims Who Received Services in Illinois, {yearRange}
   </h2>
   <h3 class="home-bar-graph__source">Source: InfoNet System</h3>
 
@@ -151,7 +154,7 @@ const bars = data.map((d, i) => {
 
   <!-- Screen reader accessible data table (visually hidden — NOT collapsible) -->
   <table class="sr-only-table">
-    <caption>Domestic and Sexual Violence Victims Who Received Services, 2018-2024</caption>
+    <caption>Domestic and Sexual Violence Victims Who Received Services, {yearRange}</caption>
     <thead>
       <tr>
         <th scope="col">Year</th>
@@ -159,13 +162,9 @@ const bars = data.map((d, i) => {
       </tr>
     </thead>
     <tbody>
-      <tr><td>2018</td><td>70,133</td></tr>
-      <tr><td>2019</td><td>72,905</td></tr>
-      <tr><td>2020</td><td>60,717</td></tr>
-      <tr><td>2021</td><td>61,857</td></tr>
-      <tr><td>2022</td><td>61,259</td></tr>
-      <tr><td>2023</td><td>63,211</td></tr>
-      <tr><td>2024</td><td>63,557</td></tr>
+      {bars.map((bar) => (
+        <tr><td>{bar.year}</td><td>{bar.label}</td></tr>
+      ))}
     </tbody>
   </table>
 
