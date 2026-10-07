@@ -37,15 +37,21 @@ pnpm check            # astro check (type + diagnostics)
 
 ### Build chain
 
-`pnpm build` runs four sequential phases:
+`pnpm build` runs these phases in order:
 
-1. **First Astro build** — seeds `.cache/strapi/<sha256>.json` with GraphQL responses
-2. **`fetch-cms-images`** — Sharp resamples Strapi attachments → `public/_cms-img/<hash>/<width>.<ext>` + `src/lib/cms-image-manifest.json`
-3. **Second Astro build** — emits final HTML using the manifest for `<img srcset>` (zero Thumbor at runtime)
-4. **`pagefind --site dist`** — generates search index under `dist/pagefind/`
-5. **`og:image`** — Sharp SVG → 1200×630 PNG, dual-write `public/og-image.png` + `dist/og-image.png`
+1. **`fetch-dap-data`** — refetches the `/data-and-publications/` list from the Research Hub + publist APIs → `src/data/dataAndPublications.json` (selection rules in the script header; any API error fails the build)
+2. **First Astro build** — seeds `.cache/strapi/<sha256>.json` with GraphQL responses
+3. **`fetch-cms-images`** — Sharp resamples Strapi attachments → `public/_cms-img/<hash>/<width>.<ext>` + `src/lib/cms-image-manifest.json`
+4. **`fetch-dap-splash`** — Sharp resamples Research Hub splash images for the DAP cards → `public/_cms-img/dap/` + `src/data/dap-splash-manifest.json`
+5. **Second Astro build** — emits final HTML using the manifest for `<img srcset>` (zero Thumbor at runtime)
+6. **`pagefind --site dist`** — generates search index under `dist/pagefind/`
+7. **`og:image`** — Sharp SVG → 1200×630 PNG, dual-write `public/og-image.png` + `dist/og-image.png`
 
-For dev iteration, `pnpm build:fast` skips the image fetch / pagefind / og steps.
+For dev iteration, `pnpm build:fast` skips the data/image fetch, pagefind, and og steps.
+
+### Scheduled rebuild
+
+[`netlify/functions/scheduled-rebuild.mjs`](./netlify/functions/scheduled-rebuild.mjs) is a Netlify scheduled function that triggers a production build at 09:00 UTC every third day (72 h apart; shorter across a month end), so newly tagged Research Hub / publist items reach `/data-and-publications/` without a commit. Each rebuild also publishes any pending Strapi edits. The build hook URL lives in Netlify as the `SCHEDULED_REBUILD_HOOK_URL` env var (Functions scope), never in this public repo. Change the cadence via `config.schedule` (cron, UTC).
 
 ## Project layout
 
@@ -61,7 +67,9 @@ For dev iteration, `pnpm build:fast` skips the image fetch / pagefind / og steps
 │   ├── scripts/          # alpine-entry.ts (bundled Alpine + focus plugin)
 │   └── styles/           # global.css (@theme, fonts, github-markdown.css)
 ├── scripts/              # build-og-image.mjs, csp-hashes.mjs, fetch-cms-images.mjs,
+│                         # fetch-dap-data.mjs, fetch-dap-splash.mjs,
 │                         # smoke-strapi.mjs, smoke-no-legacy.mjs
+├── netlify/functions/    # scheduled-rebuild.mjs (72-hour production rebuild)
 ├── public/               # favicon, robots.txt, og-image.png, _cms-img/<hash>/...
 ├── docs/                 # Migration spec + per-phase plans + audit logs
 └── netlify.toml          # Build config + CSP headers

@@ -1,6 +1,18 @@
 {
-  "generatedAt": "2026-07-14T15:55:26.176Z",
+  "generatedAt": "2026-10-07T16:11:45.303Z",
   "items": {
+    "6a1dc844e609ef22d5ce36ee": {
+      "src": "/_cms-img/dap/6a1dc844e609ef22d5ce36ee-400.webp",
+      "srcset": "/_cms-img/dap/6a1dc844e609ef22d5ce36ee-400.webp 400w, /_cms-img/dap/6a1dc844e609ef22d5ce36ee-512.webp 512w, /_cms-img/dap/6a1dc844e609ef22d5ce36ee-800.webp 800w",
+      "width": 400,
+      "height": 267
+    },
+    "6a01c885035ff60e84b7d8cf": {
+      "src": "/_cms-img/dap/6a01c885035ff60e84b7d8cf-400.webp",
+      "srcset": "/_cms-img/dap/6a01c885035ff60e84b7d8cf-400.webp 400w, /_cms-img/dap/6a01c885035ff60e84b7d8cf-512.webp 512w, /_cms-img/dap/6a01c885035ff60e84b7d8cf-800.webp 800w",
+      "width": 400,
+      "height": 267
+    },
     "69dd001f035ff60e84b7d883": {
       "src": "/_cms-img/dap/69dd001f035ff60e84b7d883-400.webp",
       "srcset": "/_cms-img/dap/69dd001f035ff60e84b7d883-400.webp 400w, /_cms-img/dap/69dd001f035ff60e84b7d883-512.webp 512w, /_cms-img/dap/69dd001f035ff60e84b7d883-800.webp 800w",

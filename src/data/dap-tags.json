@@ -1,0 +1,9 @@
+[
+  { "tag": "all research", "label": "All Research" },
+  { "tag": "infonet", "label": "InfoNet" },
+  { "tag": "domestic violence", "label": "Domestic Violence" },
+  { "tag": "sexual assault", "label": "Sexual Assault" },
+  { "tag": "exposure to violence", "label": "Exposure to Violence" },
+  { "tag": "victimization", "label": "Victimization" },
+  { "tag": "victim services", "label": "Victim Services" }
+]

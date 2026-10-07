@@ -3,23 +3,27 @@
 //
 // Port of app/pages/data-and-publications/index.vue (450 lines).
 //
-// Data source: app/data/dataAndPublications.json, copied to astro/src/data/.
-// The JSON is a merged array of 'hub' articles (ICJIA Research Hub) and
-// 'publist' items (PDFs from archive.icjia-api.cloud).
+// Data source: src/data/dataAndPublications.json, regenerated at the start of
+// every full build by scripts/fetch-dap-data.mjs (which documents the
+// selection rules). The JSON is a merged array of 'hub' articles (ICJIA
+// Research Hub) and 'publist' items (PDFs from archive.icjia-api.cloud).
 //
 // Link logic:
 //   source === 'hub'     → https://icjia.illinois.gov/researchhub/articles/<slug>
 //   source === 'publist' → article.fileURL (PDF/external)
 // Both open in a new window (external content).
 //
-// Tag filter chips: client-side Alpine.js chip-group. Tags are derived from
-// the top-level `tags` array present on every item in dataAndPublications.json.
-// Only high-value tags are surfaced in the chip bar (matching legacy chip-group).
+// Tag filter chips: client-side Alpine.js chip-group, matched exactly against
+// each item's `tags` array. One chip per tag in src/data/dap-tags.json — the
+// same list fetch-dap-data.mjs selects Research Hub articles by — so the chip
+// bar can't drift from what the page includes (legacy built both from
+// tags.json the same way).
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PageHeader from '~/components/PageHeader.astro';
 import { formatDate } from '~/lib/dates';
 import { gitLastModifiedISO } from '~/lib/gitDates';
 import pubData from '~/data/dataAndPublications.json';
+import dapTags from '~/data/dap-tags.json';
 import splashManifest from '~/data/dap-splash-manifest.json';
 type SplashEntry = { src: string; srcset: string; width: number; height: number };
 const splashes = splashManifest.items as Record<string, SplashEntry>;
@@ -62,15 +66,12 @@ function getArticleHref(article: typeof articles[0]): string {
   return article.fileURL ?? '#';
 }
 
-// Curated tag chips that appear in the filter bar (matches legacy chip-group order).
-const filterChips = [
-  { label: 'All Research', value: 'all' },
-  { label: 'InfoNet', value: 'infonet' },
-  { label: 'Domestic Violence', value: 'domestic violence' },
-  { label: 'Sexual Assault', value: 'sexual assault' },
-  { label: 'Human Trafficking', value: 'human trafficking' },
-  { label: 'Victim Services', value: 'victim services' },
-];
+// Filter bar chips, in dap-tags.json order. "all research" is the
+// show-everything chip, so it maps to the 'all' sentinel dapFilter expects.
+const filterChips = dapTags.map(({ tag, label }) => ({
+  label,
+  value: tag === 'all research' ? 'all' : tag,
+}));
 
 // Serialize articles with their tags so Alpine can filter client-side.
 const articlesJson = JSON.stringify(

@@ -17,9 +17,10 @@
   "scripts": {
     "dev": "astro dev --port 4321",
     "start": "astro dev --port 4321",
-    "build": "node -e \"require('fs').rmSync('.cache/strapi',{recursive:true,force:true})\" && pnpm smoke:strapi && astro build && node scripts/fetch-cms-images.mjs && node scripts/fetch-dap-splash.mjs && astro build && pnpm pagefind && pnpm og:image",
+    "build": "node -e \"require('fs').rmSync('.cache/strapi',{recursive:true,force:true})\" && pnpm smoke:strapi && node scripts/fetch-dap-data.mjs && astro build && node scripts/fetch-cms-images.mjs && node scripts/fetch-dap-splash.mjs && astro build && pnpm pagefind && pnpm og:image",
     "pagefind": "pagefind --site dist",
     "og:image": "node scripts/build-og-image.mjs",
+    "dap:data": "node scripts/fetch-dap-data.mjs",
     "dap:splash": "node scripts/fetch-dap-splash.mjs",
     "build:fast": "astro build",
     "preview": "astro preview --port 4322",
