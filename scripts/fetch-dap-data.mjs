@@ -7,7 +7,8 @@
 // mergeHubAndPublistPublications.mjs; `git show e1ede55:creators/<file>`):
 //
 //   1. Research Hub articles (researchhub.icjia-api.cloud): published and
-//      tagged with ANY tag in src/data/dap-tags.json. Strapi v3 ORs the
+//      tagged with ANY tag in src/data/dap-tags.json, or one of its spelling
+//      aliases (e.g. "victim service" for "victim services"). Strapi v3 ORs the
 //      `tags_contains` array, each entry a case-insensitive substring match
 //      (verified against the live API, 2026-10-07).
 //   2. Publist publications (agency.icjia-api.cloud): tagged "infonet", minus
@@ -65,10 +66,16 @@ async function fetchList(endpoint, field, query) {
   return rows;
 }
 
-const tags = JSON.parse(await readFile(DAP_TAGS_PATH, 'utf8')).map((t) => t.tag);
+// The Hub query matches every spelling; normalizeTags() then folds each alias
+// into its canonical tag so the page's chips (exact match) find the article.
+const dapTags = JSON.parse(await readFile(DAP_TAGS_PATH, 'utf8'));
+const tagAliases = new Map(
+  dapTags.flatMap(({ tag, aliases = [] }) => aliases.map((alias) => [alias, tag])),
+);
+const queryTags = [...dapTags.map((t) => t.tag), ...tagAliases.keys()];
 
 const hub = await fetchList(HUB_ENDPOINT, 'articles', `query {
-  articles(limit: ${LIMIT}, sort: "date:desc", where: { status: "published", tags_contains: ${JSON.stringify(tags)} }) {
+  articles(limit: ${LIMIT}, sort: "date:desc", where: { status: "published", tags_contains: ${JSON.stringify(queryTags)} }) {
     _id title date tags abstract slug
   }
 }`);
@@ -81,7 +88,9 @@ const publist = await fetchList(PUBLIST_ENDPOINT, 'publications', `query {
   }
 }`);
 
-const lower = (tagList) => (tagList ?? []).map((t) => t.toLowerCase());
+const normalizeTags = (tagList) => [
+  ...new Set((tagList ?? []).map((t) => t.toLowerCase()).map((t) => tagAliases.get(t) ?? t)),
+];
 
 // The Hub's `date` is a calendar date the CMS serializes as UTC midnight
 // ("2026-04-17T00:00:00.000Z"); formatted as an instant in America/Chicago it
@@ -102,13 +111,13 @@ function isWebUrl(value) {
 }
 
 // One shape for both sources: the fields the DAP page reads (fetch-dap-splash
-// also keys on source/slug/_id). Tags are lowercased so the page's filter
-// chips can match them exactly.
+// also keys on source/slug/_id). Tags are lowercased and alias-folded so the
+// page's filter chips can match them exactly.
 const hubItems = hub.map((a) => ({
   _id: a._id,
   title: a.title,
   date: calendarDate(a.date),
-  tags: lower(a.tags),
+  tags: normalizeTags(a.tags),
   abstract: a.abstract,
   slug: a.slug,
   pubType: 'article',
@@ -128,7 +137,7 @@ for (const p of publist) {
     _id: p._id,
     title: p.title,
     date: calendarDate(p.date),
-    tags: lower(p.tags),
+    tags: normalizeTags(p.tags),
     abstract: p.abstract,
     slug: p.slug,
     pubType: p.pubType,

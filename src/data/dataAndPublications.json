@@ -449,7 +449,7 @@
     "date": "2019-10-17",
     "tags": [
       "domestic violence",
-      "victim service",
+      "victim services",
       "victimization",
       "infonet"
     ],
@@ -483,7 +483,7 @@
     "date": "2019-09-19",
     "tags": [
       "victimization",
-      "victim service"
+      "victim services"
     ],
     "abstract": "The Illinois Criminal Justice Information Authority was awarded a grant from the Office for Victims of Crime for the Illinois Helping Everyone Access Linked Systems (Illinois HEALS) initiative. The six-year initiative seeks to improve the identification, connection, and service engagement of children, youth, and families impacted by violence in Illinois. Researchers analyzed documents and artifacts from series of 29 meetings for the Illinois HEALS initiative with representatives from several service domains (i.e., child welfare, education, healthcare, family and civil court, justice, social services, and victim services) in Illinois. Findings suggest that providers throughout the state are facing challenges in recognizing victimization experiences of children and youth, connecting young persons to appropriate and accessible resources, and engaging them in meaningful services. This article presents recommendations that explore strategies to build capacity in recognizing signs of victimization, broadening screening and assessment practices, supporting the well-being of staff, and fostering collaborations.",
     "slug": "provider-reported-challenges-and-opportunities-in-supporting-young-victims-of-crime",
@@ -497,7 +497,7 @@
     "title": "How Illinois Service Providers Support Young Victims of Crime: Findings from an Illinois HEALS Survey",
     "date": "2019-09-03",
     "tags": [
-      "victim service",
+      "victim services",
       "victimization",
       "service need"
     ],
@@ -561,7 +561,7 @@
     "date": "2018-08-27",
     "tags": [
       "infonet",
-      "victim service",
+      "victim services",
       "sexual assault",
       "domestic violence"
     ],
@@ -573,11 +573,27 @@
     "ext": "html"
   },
   {
+    "_id": "5da0c0e23bb01c36d66f68da",
+    "title": "Trauma Types and Promising Approaches to Assist Survivors",
+    "date": "2018-04-10",
+    "tags": [
+      "trauma",
+      "ptsd",
+      "victim services"
+    ],
+    "abstract": "Traumatic experiences and exposure to violence can leave a lifelong impact on an individual, especially when left untreated. Public health officials have recognized the need for comprehensive victim-centered approaches to understanding and addressing the impact of trauma. One such approach is trauma-informed care, which seeks to create a safe environment where individuals do not experience further trauma or harm in the process of receiving services and support, which may occur when providers engage in practices that are not sensitive to the impacts of trauma. This article provides an overview of trauma and traumatic stress reactions and how implementing a trauma-informed approach benefits both individuals with trauma histories and victim service providers in a multitude of settings.",
+    "slug": "trauma-types-and-promising-approaches-to-assist-survivors",
+    "pubType": "article",
+    "source": "hub",
+    "fileURL": null,
+    "ext": "html"
+  },
+  {
     "_id": "5da0c0e03bb01c36d66f68b9",
     "title": "Victim Service Delivery: Illinois Providers' Perspectives on Victim Service Barriers and Agency Capacity",
     "date": "2018-01-30",
     "tags": [
-      "victim service",
+      "victim services",
       "barrier",
       "victimization"
     ],
@@ -589,11 +605,44 @@
     "ext": "html"
   },
   {
+    "_id": "5da0c0e23bb01c36d66f68d4",
+    "title": "Comprehensive Legal Services for Victims of Crime",
+    "date": "2017-12-13",
+    "tags": [
+      "legal service",
+      "victim services",
+      "victim need",
+      "barrier"
+    ],
+    "abstract": "Illinois victims and victim service providers indicate that legal services are needed post-victimization, and for many victims in the state this need is left unmet. Meeting a victim's legal needs is key to ensuring their safety and security and enabling them to continue to recover from their victimization experience. Crime victims can directly benefit from access to comprehensive legal services, including legal advocacy, civil legal services and victim rights enforcement. Numerous legal avenues are open to victims of crime, and legal advocates and attorneys are well-positioned to assist victims as they engage either the criminal justice or civil legal systems. This article explores types of victim legal services, the roles of legal service providers, the needs and potential remedies available to victims by crime type, and barriers to legal service access and delivery. Implications for both providers and funders to ensure comprehensive legal services to victims of crime also are discussed.",
+    "slug": "comprehensive-legal-services-for-victims-of-crime",
+    "pubType": "article",
+    "source": "hub",
+    "fileURL": null,
+    "ext": "html"
+  },
+  {
+    "_id": "5da0c0e03bb01c36d66f68b6",
+    "title": "Victim Need Report: Service Providers' Perspectives on the Needs of Crime Victims and Service Gaps",
+    "date": "2017-11-03",
+    "tags": [
+      "victim need",
+      "victim services",
+      "service gap"
+    ],
+    "abstract": "Researchers conducted a statewide study to better understand crime victim needs, identify service gaps, and measure the capacity of Illinois victim service providers. Victim service providers from across Illinois identified the needs of violent crime victims. Providers also highlighted service gaps, or ways in which current service availability was unable to satisfy victim need. Study findings have policy and practice implications for funders, victim service providers, and other service agencies that interact with victims in Illinois.",
+    "slug": "victim-need-report-service-providers-perspectives-on-the-needs-of-crime-victims-and-service-gaps",
+    "pubType": "article",
+    "source": "hub",
+    "fileURL": null,
+    "ext": "html"
+  },
+  {
     "_id": "5da0c0de3bb01c36d66f689f",
     "title": "A Comprehensive Model for Underserved Victims of Violent Crime: Trauma Recovery Centers",
     "date": "2017-08-04",
     "tags": [
-      "victim service",
+      "victim services",
       "trauma",
       "victimization"
     ],
@@ -610,7 +659,7 @@
     "date": "2017-01-31",
     "tags": [
       "strategic planning",
-      "victim service",
+      "victim services",
       "victimization",
       "infonet"
     ],

@@ -5,5 +5,5 @@
   { "tag": "sexual assault", "label": "Sexual Assault" },
   { "tag": "exposure to violence", "label": "Exposure to Violence" },
   { "tag": "victimization", "label": "Victimization" },
-  { "tag": "victim services", "label": "Victim Services" }
+  { "tag": "victim services", "label": "Victim Services", "aliases": ["victim service"] }
 ]
