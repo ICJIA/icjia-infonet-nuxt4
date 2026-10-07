@@ -83,6 +83,13 @@ const publist = await fetchList(PUBLIST_ENDPOINT, 'publications', `query {
 
 const lower = (tagList) => (tagList ?? []).map((t) => t.toLowerCase());
 
+// The Hub's `date` is a calendar date the CMS serializes as UTC midnight
+// ("2026-04-17T00:00:00.000Z"); formatted as an instant in America/Chicago it
+// lands on the previous day. Keep just the date — formatDate renders
+// "YYYY-MM-DD" as entered. Real timestamps pass through untouched.
+const calendarDate = (value) =>
+  /^\d{4}-\d{2}-\d{2}T00:00:00(?:\.000)?Z$/.test(value ?? '') ? value.slice(0, 10) : value;
+
 // A publist fileURL becomes the card's href verbatim, and this data now ships
 // unreviewed on every rebuild — so accept only absolute http(s) URLs, never
 // javascript:/data: or relative junk.
@@ -100,7 +107,7 @@ function isWebUrl(value) {
 const hubItems = hub.map((a) => ({
   _id: a._id,
   title: a.title,
-  date: a.date,
+  date: calendarDate(a.date),
   tags: lower(a.tags),
   abstract: a.abstract,
   slug: a.slug,
@@ -120,7 +127,7 @@ for (const p of publist) {
   publistItems.push({
     _id: p._id,
     title: p.title,
-    date: p.date,
+    date: calendarDate(p.date),
     tags: lower(p.tags),
     abstract: p.abstract,
     slug: p.slug,
