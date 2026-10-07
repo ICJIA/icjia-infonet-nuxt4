@@ -83,6 +83,17 @@ const publist = await fetchList(PUBLIST_ENDPOINT, 'publications', `query {
 
 const lower = (tagList) => (tagList ?? []).map((t) => t.toLowerCase());
 
+// A publist fileURL becomes the card's href verbatim, and this data now ships
+// unreviewed on every rebuild — so accept only absolute http(s) URLs, never
+// javascript:/data: or relative junk.
+function isWebUrl(value) {
+  try {
+    return ['https:', 'http:'].includes(new URL(value).protocol);
+  } catch {
+    return false;
+  }
+}
+
 // One shape for both sources: the fields the DAP page reads (fetch-dap-splash
 // also keys on source/slug/_id). Tags are lowercased so the page's filter
 // chips can match them exactly.
@@ -102,8 +113,8 @@ const hubItems = hub.map((a) => ({
 const publistItems = [];
 for (const p of publist) {
   if (p.articleURL) continue;
-  if (!p.fileURL) {
-    console.warn(`DAP data: skipping publist "${p.title}" — no fileURL to link to`);
+  if (!isWebUrl(p.fileURL)) {
+    console.warn(`DAP data: skipping publist "${p.title}" — no http(s) fileURL to link to`);
     continue;
   }
   publistItems.push({
