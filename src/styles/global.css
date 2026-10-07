@@ -105,6 +105,7 @@
   --color-chart-bar: #0d4471;        /* was --color-brand-footer on the home SVG bars; bars need a LIGHT blue in dark mode while the footer band stays navy */
   --color-button-bg: #0d4270;        /* solid-navy button backgrounds (contact submit, active DAP chip) — stays navy in dark (white label), while --color-brand flips light-blue for text */
   --color-button-bg-hover: #0a3050;
+  --color-chip-ink: #0d4270;         /* labels on the chip fills (DAP chips, contact btn-clear hover) — was --color-brand, whose dark value is only 6.68:1 on surface-chip (AAA needs 7:1) */
 
   /* Links & focus */
   --color-link-strong: #0d47a1;      /* AA-safe blue on shaded fills (DAP CTA, search results) */
@@ -218,6 +219,7 @@
   --color-chart-bar: #6aa5d8;
   --color-button-bg: #1f4a73;
   --color-button-bg-hover: #2a5d8f;
+  --color-chip-ink: #a8cdf2;         /* = brand-hover; 8.79:1 on surface-chip, 7.22:1 on surface-chip-hover (AAA) */
 
   /* Links & focus */
   --color-link-strong: #8ab4f0;
